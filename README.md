@@ -27,3 +27,19 @@ The crate is pinned by private Git tag for consumers; GitHub authorization to `P
 ## Remaining stack work
 
 In-process PDF parser integration, legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit remain open. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
+
+## Benchmark suite docs
+
+The Ptyktos benchmark suite spans four repos. Canonical setup /
+run / eval / report guides live here in `docs/`:
+
+- [`docs/SETUP.md`](docs/SETUP.md) — prerequisites, clone + build, layout
+- [`docs/RUN.md`](docs/RUN.md) — get the data, run the backend, read the report
+- [`docs/EVAL.md`](docs/EVAL.md) — adding adapters, recording results
+- [`docs/REPORT.md`](docs/REPORT.md) — three-column shape + BLAKE3 regression gate
+
+| repo | what it benchmarks | unified harness |
+|---|---|---|
+| `Ptyktos/agent-evals` | agents / code / reasoning / safety / vision / medical / financial / ops | `./target/release/agent_evals --list` |
+| `Ptyktos/memorybench` | memory / retrieval / long-context | `./target/release/memorybench --list` |
+| `Ptyktos/decision-bench` | decision / routing / intent / guardrails / NLI / LLM-as-judge | `reservoir_baseline`, `guardfold_direct`, `verdict_engine`, `score_capture`, `compare_backends` |
