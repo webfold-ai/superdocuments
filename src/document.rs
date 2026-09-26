@@ -2131,11 +2131,34 @@ mod tests {
         assert_eq!(convert_bytes("odt", &odf).unwrap(), "## Title\n\nBody");
         let sheet = package(&[("content.xml", "<office:document><table:table table:name=\"Data\"><table:table-row><table:table-cell office:value=\"42\"/></table:table-row></table:table></office:document>")]);
         assert!(convert_bytes("ods", &sheet).unwrap().contains("| 42 |"));
+
+        let macro_doc = package(&[(
+            "word/document.xml",
+            "<w:document><w:p><w:t>Macro doc</w:t></w:p></w:document>",
+        )]);
+        assert!(convert_bytes("docm", &macro_doc)
+            .unwrap()
+            .contains("Macro doc"));
+        assert!(convert_bytes("odp", &odf).unwrap().contains("Body"));
+        assert!(convert_bytes("xlsm", &book)
+            .unwrap()
+            .contains("| Name | 42 |"));
+        let epub = package(&[(
+            "OPS/chapter.xhtml",
+            "<html><body><h1>Chapter</h1></body></html>",
+        )]);
+        assert!(convert_bytes("epub", &epub).unwrap().contains("Chapter"));
+        let xlsb = package(&[("xl/worksheets/sheet1.bin", "")]);
+        assert!(convert_bytes("xlsb", &xlsb).unwrap().contains("Sheet 1"));
+        assert!(convert_bytes("html", b"<h1>HTML</h1>")
+            .unwrap()
+            .contains("HTML"));
     }
 
     #[test]
     fn binary_format_failure_is_explicit() {
         assert!(convert_bytes("xlsb", b"binary").is_err());
+        assert!(convert_bytes("docx", b"not a zip").is_err());
     }
 
     #[test]
