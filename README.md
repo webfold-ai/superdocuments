@@ -8,9 +8,10 @@ Private Ptyktos crate for reusable document parsing and conversion. It has no We
 - Structured XLSX/XLSM sheet names and cell rows via `superdocuments::xlsx::read_sheet` (including sparse-cell preservation).
 - Streaming conversion and the existing document-fold cache APIs.
 - Structured HTML blocks with Markdown, stable signatures, and extracted links via `superdocuments::html::parse`, independent of fetching and URL acquisition.
+- In-process PDF-to-Markdown parsing through the existing pinned Transcode `doc::pdf` parser (`superdocuments::pdf::extract_markdown` / `extract_file`), with bounded input and panic containment.
 - Optional Transcode image/audio/video codec re-export (`media-codecs` feature), sharing the same pinned revision used by Framefold.
 
-Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. PDF now has a shared process adapter (`superdocuments::pdf`) for `PDFFOLD_BIN`, a configured Cargo manifest, or `pdffold` on `PATH`; the actual parser remains external because its source/API is not available in this workspace. Framefold is now an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
+Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. The PDF parser is the self-contained implementation already present in the pinned Transcode revision; `superdocuments::pdf` exposes it in-process and retains the process adapter for explicit legacy overrides. Image-only PDFs are not OCR'd, and unusual PDF structures need broader fixtures before claiming full-format parity. Framefold is an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
 
 ## Migration boundary
 
@@ -26,7 +27,7 @@ The crate is pinned by private Git tag for consumers; GitHub authorization to `P
 
 ## Remaining stack work
 
-In-process PDF parser integration, legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit remain open. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
+PDF parser integration is in place; real-world PDF fixtures, malformed-input/resource-limit coverage, and OCR remain open, as do legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
 
 ## Benchmark suite docs
 
