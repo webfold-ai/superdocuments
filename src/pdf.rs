@@ -11,6 +11,7 @@ use std::time::{Duration, Instant};
 /// Bound parser input before scanning attacker-controlled bytes.
 pub const MAX_PDF_BYTES: usize = 256 * 1024 * 1024;
 const MAX_OCR_TOTAL_BYTES: usize = 16 * 1024 * 1024;
+const MAX_OCR_RENDER_BYTES: u64 = 512 * 1024 * 1024;
 
 /// Read and parse a PDF file without spawning a process.
 pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
@@ -109,6 +110,16 @@ impl OcrOptions {
                 "OCR image dimension must be 256..=4000",
             ));
         }
+        let render_bound = u64::from(self.max_pages)
+            .saturating_mul(u64::from(self.max_image_dimension))
+            .saturating_mul(u64::from(self.max_image_dimension))
+            .saturating_mul(4);
+        if render_bound > MAX_OCR_RENDER_BYTES {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "OCR page and pixel limits exceed the rendered-data budget",
+            ));
+        }
         if self.timeout.is_zero() || self.timeout > Duration::from_secs(600) {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
@@ -192,6 +203,16 @@ pub fn tesseract_ocr(path: impl AsRef<Path>, options: &OcrOptions) -> io::Result
         pages.push((number, path));
     }
     pages.sort_by_key(|(number, _)| *number);
+    let rendered_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
+        path.metadata()
+            .map(|metadata| total.saturating_add(metadata.len()))
+    })?;
+    if rendered_bytes > MAX_OCR_RENDER_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "rendered PDF pages exceed the disk-space limit",
+        ));
+    }
     if pages.is_empty() {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
@@ -476,6 +497,13 @@ mod tests {
         options.max_pages = 0;
         assert_eq!(
             options.validate().unwrap_err().kind(),
+            io::ErrorKind::InvalidInput
+        );
+        let mut oversized_render = OcrOptions::default();
+        oversized_render.max_pages = 100;
+        oversized_render.max_image_dimension = 4_000;
+        assert_eq!(
+            oversized_render.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput
         );
 
