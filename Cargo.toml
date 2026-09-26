@@ -1,6 +1,6 @@
 [package]
 name = "superdocuments"
-version = "0.4.0"
+version = "0.5.0"
 edition = "2021"
 rust-version = "1.85"
 license-file = "LICENSE"
@@ -10,9 +10,11 @@ description = "Ptyktos shared document parsing and conversion APIs"
 default = []
 framefold = ["dep:framefold"]
 framefold-js = ["framefold", "framefold/js"]
+media-codecs = ["dep:transcode_media"]
 
 [dependencies]
 framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5447aca9839709cd110ce7ba3b5ddb001233031d", default-features = false, optional = true }
+transcode_media = { package = "transcode", git = "https://github.com/Ptyktos/transcode", rev = "f855e4217105863354f58c1d1c840685fff6e44b", optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }

@@ -677,13 +677,14 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "superdocuments"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "encoding_rs",
  "framefold",
  "hashtrinity",
  "quick-xml",
  "transcode 0.1.0",
+ "transcode 0.2.0",
  "zip",
 ]
 
@@ -926,10 +927,10 @@ dependencies = [
 ]
 
 [[patch.unused]]
+name = "sangdb"
+version = "0.1.0"
+
+[[patch.unused]]
 name = "ruler"
 version = "0.1.0"
 source = "git+https://gitlab.tas.twn.network/twn/ptyktos/ruler.git?branch=main#bb42d5e698d03cdea5f91f9a2a3e308ed7cb1673"
-
-[[patch.unused]]
-name = "sangdb"
-version = "0.1.0"
