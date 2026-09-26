@@ -93,3 +93,17 @@ If a repo's `docs/` is missing the canonical `RUN.md` / `EVAL.md` /
 `REPORT.md`, they live here in superdocuments and the per-repo
 README points back at them. (Ptyktos convention — superdocuments is
 the documentation home for the bench suite.)
+
+## Related work — peer agents and benchmarks
+
+These projects complement the Ptyktos bench suite; not benchmarks we
+adopt directly, but peer agent implementations whose eval surfaces
+are worth knowing about.
+
+- **[synthetic-sciences/openscience](https://github.com/synthetic-sciences/openscience)** —
+  the open-source AI workbench for scientific research. Bundled
+  skills across biology / chemistry / physics / ML, connectors to
+  ChEMBL / UniProt / PubMed / arXiv. The companion
+  `evals/science-harness/` ships a research-agent eval layer that
+  wraps Harbor 0.22.0 and runs against Terminal-Bench science tasks,
+  BixBench3, ResearchClawBench, and DrugDiscoveryBench.
