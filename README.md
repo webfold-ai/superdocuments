@@ -7,7 +7,7 @@ Private Ptyktos crate for reusable document parsing and conversion. It has no We
 - Bounded DOCX/DOCM, PPTX, XLSB, XLSX/XLSM, ODT/ODS/ODP, EPUB, RTF, CSV, text, and HTML-to-Markdown conversion.
 - Structured XLSX/XLSM sheet names and cell rows via `superdocuments::xlsx::read_sheet` (including sparse-cell preservation).
 - Streaming conversion and the existing document-fold cache APIs.
-- HTML-to-Markdown through the native `transcode` HTML parser, independent of fetching and URL acquisition.
+- Structured HTML blocks with Markdown, stable signatures, and extracted links via `superdocuments::html::parse`, independent of fetching and URL acquisition.
 - Optional Transcode image/audio/video codec re-export (`media-codecs` feature), sharing the same pinned revision used by Framefold.
 
 Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. PDF now has a shared process adapter (`superdocuments::pdf`) for `PDFFOLD_BIN`, a configured Cargo manifest, or `pdffold` on `PATH`; the actual parser remains external because its source/API is not available in this workspace. Framefold is now an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
