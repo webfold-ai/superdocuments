@@ -8,10 +8,10 @@ Private Ptyktos crate for reusable document parsing and conversion. It has no We
 - Structured XLSX/XLSM sheet names and cell rows via `superdocuments::xlsx::read_sheet` (including sparse-cell preservation).
 - Streaming conversion and the existing document-fold cache APIs.
 - Structured HTML blocks with Markdown, stable signatures, and extracted links via `superdocuments::html::parse`, independent of fetching and URL acquisition.
-- In-process PDF-to-Markdown parsing through the existing pinned Transcode `doc::pdf` parser (`superdocuments::pdf::extract_markdown` / `extract_file`), with bounded input and panic containment.
+- In-process PDF-to-Markdown parsing through the pinned Transcode `doc::pdf` parser (`extract_markdown` / `extract_file`), with bounded input and panic containment; empty/unsupported text layers fall back to Poppler + Tesseract via `extract_file_with_ocr`.
 - Optional Transcode image/audio/video codec re-export (`media-codecs` feature), sharing the same pinned revision used by Framefold.
 
-Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. The PDF parser is the self-contained implementation already present in the pinned Transcode revision; `superdocuments::pdf` exposes it in-process and retains the process adapter for explicit legacy overrides. Image-only PDFs are not OCR'd, and unusual PDF structures need broader fixtures before claiming full-format parity. Framefold is an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
+Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. The PDF parser is the self-contained implementation already present in the pinned Transcode revision; `superdocuments::pdf` exposes it in-process and retains the process adapter for explicit legacy overrides. OCR fallback uses the existing Tesseract backend and Poppler renderer from `PATH`, with configurable language, page/pixel caps, a shared deadline, and output limits. Modelfold's OCR examples are dataset-supervised research pipelines without a shipped general-purpose checkpoint, so they are not misrepresented as a runtime OCR engine. Mixed PDFs with both born-digital and scanned pages, unusual PDF filters, and encrypted/object-stream variants need broader parity coverage. Framefold is an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
 
 ## Migration boundary
 
@@ -27,7 +27,7 @@ The crate is pinned by private Git tag for consumers; GitHub authorization to `P
 
 ## Remaining stack work
 
-PDF parser integration is in place; real-world PDF fixtures, malformed-input/resource-limit coverage, and OCR remain open, as do legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
+PDF native extraction, malformed-input/resource-limit checks, and Tesseract fallback are implemented and tested with authored producer/scanned fixtures; broader real-world corpus parity and mixed-page OCR remain open, as do legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
 
 ## Benchmark suite docs
 
