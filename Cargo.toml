@@ -1,12 +1,18 @@
 [package]
 name = "superdocuments"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 rust-version = "1.85"
 license-file = "LICENSE"
 description = "Ptyktos shared document parsing and conversion APIs"
 
+[features]
+default = []
+framefold = ["dep:framefold"]
+framefold-js = ["framefold", "framefold/js"]
+
 [dependencies]
+framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5447aca9839709cd110ce7ba3b5ddb001233031d", default-features = false, optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }

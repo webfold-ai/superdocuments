@@ -5,6 +5,10 @@ pub mod document;
 pub mod html;
 pub mod xlsx;
 
+/// Optional native composition-to-frame/video renderer. Enable `framefold` to use it.
+#[cfg(feature = "framefold")]
+pub use framefold as frame_renderer;
+
 /// A parsed worksheet. `index` is zero-based in workbook order.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Worksheet {
