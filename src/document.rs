@@ -1339,7 +1339,7 @@ impl DocFormat {
     fn from_extension(ext: &str) -> Option<Self> {
         match ext.to_ascii_lowercase().as_str() {
             "xlsx" => Some(Self::Xlsx),
-            "xlsm" => Some(Self::Docm),
+            "xlsm" => Some(Self::Xlsx),
             "xlsb" => Some(Self::Xlsb),
             "xls" => Some(Self::Xls),
             "ods" => Some(Self::Ods),
@@ -1411,8 +1411,8 @@ pub struct LiftedDoc {
 /// The `u64` choice keeps the lookup path branch-free and the hashtable probe
 /// single-cycle; the only work in the hot path is `Table::get` + the render.
 pub struct DocumentCache {
-    lifted: hashtrinity::Table<u64, Arc<LiftedDoc>>,
-    rendered: hashtrinity::Table<u64, Arc<String>>,
+    lifted: hashtrinity::Table<(u64, u8), Arc<LiftedDoc>>,
+    rendered: hashtrinity::Table<(u64, u8), Arc<String>>,
     hits: u64,
     misses: u64,
 }
@@ -1456,22 +1456,24 @@ impl DocumentCache {
             .ok_or_else(|| format!("unsupported document extension: {extension}"))?;
 
         if format.is_streaming() {
-            if let Some(arc) = self.lifted.get(&identity) {
+            let key = (identity, format as u8);
+            if let Some(arc) = self.lifted.get(&key) {
                 self.hits += 1;
                 render_streaming(arc.as_ref(), out)
             } else {
                 self.misses += 1;
                 let arc = Arc::new(lift(format, data)?);
-                self.lifted.put(identity, arc.clone());
+                self.lifted.put(key, arc.clone());
                 render_streaming(arc.as_ref(), out)
             }
-        } else if let Some(cached) = self.rendered.get(&identity) {
+        } else if let Some(cached) = self.rendered.get(&(identity, format as u8)) {
             self.hits += 1;
             out.write_all(cached.as_bytes()).map_err(|e| e.to_string())
         } else {
             self.misses += 1;
             let rendered = Arc::new(convert_bytes(extension, data)?);
-            self.rendered.put(identity, rendered.clone());
+            self.rendered
+                .put((identity, format as u8), rendered.clone());
             out.write_all(rendered.as_bytes())
                 .map_err(|e| e.to_string())
         }
@@ -2202,33 +2204,22 @@ mod tests {
         assert_eq!(String::from_utf8_lossy(&cold), xlsx_md_baseline);
     }
 
-    /// Track D fold keying: same bytes + different extension produce different cache keys.
-    /// Cross-format hash collisions are impossible because the format byte is part of the key.
-    /// CSV is a streaming format; docx is also streaming; same bytes + different format byte
-    /// must produce two cache misses (the LiftedDoc Tables are not interchangeable).
+    /// Track D fold keying: a caller may reuse an identity across formats.
+    /// The format byte must therefore be part of the cache key; CSV and DOCX
+    /// use incompatible LiftedDoc representations and must not share an entry.
     #[test]
     fn streaming_fold_keys_on_format_discriminator() {
         let csv = b"a,b\n1,2\n";
-        // Two distinct DOCX packages: the lift succeeds for both, but their format byte is
-        // the same (docx == docx). The cache must hit on the second call (same key).
+        // Deliberately reuse one caller identity across formats: the format must
+        // participate in the cache key, otherwise one lift can poison the other.
         let doc_a = package(&[(
             "word/document.xml",
             "<w:document><w:p><w:t>A</w:t></w:p></w:document>",
         )]);
         let mut cache = DocumentCache::new();
-        let doc_id = fingerprint_bytes(&doc_a);
-        // First call: csv (streaming) — cold lift.
-        cache
-            .convert(fingerprint_bytes(csv), "csv", csv, &mut Vec::new())
-            .unwrap();
-        // Second call: docx with one package — cold lift (different identity).
-        cache
-            .convert(doc_id, "docx", &doc_a, &mut Vec::new())
-            .unwrap();
-        // Third call: same docx package — warm hit.
-        cache
-            .convert(doc_id, "docx", &doc_a, &mut Vec::new())
-            .unwrap();
+        cache.convert(7, "csv", csv, &mut Vec::new()).unwrap();
+        cache.convert(7, "docx", &doc_a, &mut Vec::new()).unwrap();
+        cache.convert(7, "docx", &doc_a, &mut Vec::new()).unwrap();
         assert_eq!(cache.misses(), 2);
         assert_eq!(cache.hits(), 1);
     }
