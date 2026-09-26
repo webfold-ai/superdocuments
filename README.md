@@ -9,7 +9,7 @@ Private Ptyktos crate for reusable document parsing and conversion. It has no We
 - Streaming conversion and the existing document-fold cache APIs.
 - HTML-to-Markdown through the native `transcode` HTML parser, independent of fetching and URL acquisition.
 
-Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. PDF extraction remains Webfold's existing `pdffold` process adapter because its parser source/API is not available in this workspace. Framefold is now an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
+Legacy binary XLS remains behind Webfold's compatibility adapter; Superdocuments deliberately does not introduce Calamine. PDF now has a shared process adapter (`superdocuments::pdf`) for `PDFFOLD_BIN`, a configured Cargo manifest, or `pdffold` on `PATH`; the actual parser remains external because its source/API is not available in this workspace. Framefold is now an optional sibling renderer (not a document parser), exposed as `superdocuments::frame_renderer` with the `framefold` feature; enable `framefold-js` only when GSAP timeline execution is needed. Its pinned Ruler and Transcode dependencies are portable Git revisions.
 
 ## Migration boundary
 
@@ -25,4 +25,4 @@ The crate is pinned by private Git tag for consumers; GitHub authorization to `P
 
 ## Remaining stack work
 
-PDF library integration, legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit remain open. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.
+In-process PDF parser integration, legacy XLS extraction, additional HTML parity fixtures/API ergonomics, and the full media-project/consumer audit remain open. Framefold is available as an opt-in sibling capability; do not treat this crate as a complete umbrella for every media project yet.

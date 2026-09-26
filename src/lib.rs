@@ -3,6 +3,7 @@
 
 pub mod document;
 pub mod html;
+pub mod pdf;
 pub mod xlsx;
 
 /// Optional native composition-to-frame/video renderer. Enable `framefold` to use it.
