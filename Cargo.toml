@@ -18,7 +18,7 @@ transcode_media = { package = "transcode", git = "https://github.com/Ptyktos/tra
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
-hashtrinity = { git = "https://gitlab.tas.twn.network/twn/ptyktos/hashtrinity.git" }
+hashtrinity = { git = "https://gitlab.tas.twn.network/twn/ptyktos/hashtrinity.git", features = ["syntax"] }
 transcode = { git = "https://github.com/Ptyktos/transcode", rev = "d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae" }
 
 [dev-dependencies]

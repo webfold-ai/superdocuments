@@ -3,6 +3,7 @@
 
 pub mod document;
 pub mod html;
+pub mod markdown;
 pub mod pdf;
 pub mod xlsx;
 

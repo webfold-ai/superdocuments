@@ -1,0 +1,201 @@
+{
+  "task": "Add a superdocuments::markdown module: hand-rolled docs-shaped markdown parser (headings, paragraphs, code fences, nested lists, links, images, GFM tables, blockquotes, inline emphasis/strong/code, YAML frontmatter) with parse() -> MarkdownDocument and to_html() -> String, informed by pulldown-cmark/comrak architecture but zero third-party markdown deps",
+  "repo_root": "/home/ctown/projects/superdocuments",
+  "created_by": "syndesi harness",
+  "phase": "Planning",
+  "constraints": [
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.env`",
+      "check": "path:.env"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.pem`",
+      "check": "path:.pem"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.key`",
+      "check": "path:.key"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.p12`",
+      "check": "path:.p12"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.pfx`",
+      "check": "path:.pfx"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `credentials`",
+      "check": "path:credentials"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `secrets/`",
+      "check": "path:secrets"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.ssh/`",
+      "check": "path:.ssh"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.aws/`",
+      "check": "path:.aws"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.gnupg/`",
+      "check": "path:.gnupg"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.git/`",
+      "check": "path:.git"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.claude/`",
+      "check": "path:.claude"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.agents/`",
+      "check": "path:.agents"
+    },
+    {
+      "id": "FLOOR",
+      "rank": 0,
+      "source": "machine floor",
+      "text": "Never edit/write anything whose path contains `.config/opencode`",
+      "check": "path:.config/opencode"
+    },
+    {
+      "id": "C1",
+      "rank": 2,
+      "source": "/home/ctown/.config/opencode/AGENTS.md",
+      "text": "If a guard ever passes something it should refuse, fix the guard — do not",
+      "check": null
+    },
+    {
+      "id": "C2",
+      "rank": 2,
+      "source": "/home/ctown/.config/opencode/AGENTS.md",
+      "text": "the work. Do not substitute a generic plan, a different checkout, or a",
+      "check": null
+    },
+    {
+      "id": "C3",
+      "rank": 0,
+      "source": "/home/ctown/.config/opencode/AGENTS.md",
+      "text": "A class of solution that failed once is never re-proposed; three failed",
+      "check": null
+    },
+    {
+      "id": "C4",
+      "rank": 0,
+      "source": "/home/ctown/.config/opencode/AGENTS.md",
+      "text": "Never run the heavy path when the cheap path answers the question.",
+      "check": null
+    },
+    {
+      "id": "C5",
+      "rank": 0,
+      "source": "/home/ctown/.config/opencode/AGENTS.md",
+      "text": "5. Secrets are never read, written, or committed",
+      "check": null
+    },
+    {
+      "id": "C6",
+      "rank": 0,
+      "source": "/home/ctown/.claude/CLAUDE.md",
+      "text": "step that is red means **REPLAN** — never retry blind, never continue",
+      "check": null
+    },
+    {
+      "id": "C7",
+      "rank": 0,
+      "source": "/home/ctown/.claude/CLAUDE.md",
+      "text": "Secrets are never read, written, or committed (`.env*`, keys, credentials,",
+      "check": null
+    },
+    {
+      "id": "C8",
+      "rank": 0,
+      "source": "/home/ctown/.claude/CLAUDE.md",
+      "text": "Destructive commands are never run (sudo, shutdown, mkfs, dd, force-push,",
+      "check": null
+    },
+    {
+      "id": "C9",
+      "rank": 0,
+      "source": "/home/ctown/.claude/CLAUDE.md",
+      "text": "The anti-loop rule: a class of solution that failed once is never",
+      "check": null
+    }
+  ],
+  "steps": [
+    {
+      "id": "V1",
+      "title": "rustfmt clean",
+      "cmd": "cargo fmt --all -- --check",
+      "blocking": false
+    },
+    {
+      "id": "V2",
+      "title": "clippy clean",
+      "cmd": "cargo clippy --all-targets -- -D warnings",
+      "blocking": false
+    },
+    {
+      "id": "V3",
+      "title": "tests pass",
+      "cmd": "cargo test --quiet",
+      "blocking": true
+    }
+  ],
+  "created_unix": 1790431361,
+  "task_hash": "b13648191c0690ee",
+  "sources": [
+    {
+      "path": "/home/ctown/.config/opencode/AGENTS.md",
+      "hash": "cf960b9d5e9d8ef8"
+    },
+    {
+      "path": "/home/ctown/.claude/CLAUDE.md",
+      "hash": "4272beddeb889ebd"
+    }
+  ]
+}
