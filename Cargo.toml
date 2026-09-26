@@ -1,0 +1,13 @@
+[package]
+name = "superdocuments"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license-file = "LICENSE"
+description = "Ptyktos shared document parsing and conversion APIs"
+
+[dependencies]
+quick-xml = "0.42"
+zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
