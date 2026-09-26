@@ -1,6 +1,8 @@
 //! Shared Ptyktos document parsing/conversion APIs. Parsers return structured data first;
 //! product-specific presentation and import policy belong to their callers.
 
+pub mod document;
+pub mod html;
 pub mod xlsx;
 
 /// A parsed worksheet. `index` is zero-based in workbook order.
