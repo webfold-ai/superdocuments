@@ -1,0 +1,1 @@
+{"markdown": "<!-- page 1 -->\n# Inference Benchmark Smoke\n\nA two-line fixture that every inference target must recover.\n\nLine two: the second line is what tests reading-order agreement.\n", "source_label": "ocr"}
