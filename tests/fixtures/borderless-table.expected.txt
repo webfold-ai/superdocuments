@@ -1,0 +1,6 @@
+Borderless Table Test
+Cells are distinguished by alignment only no visible borders
+Markdown output should still recover rows and cells in order
+Item Quantity Price
+Document review 2 617.25
+Translation 1 150.00

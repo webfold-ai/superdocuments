@@ -1,0 +1,4 @@
+Adversarial Fixture Mixed Native and Scanned
+This first page carries selectable text and is recovered by native extraction
+The second page is a rasterized scan only OCR recovers it
+Scanned raster page: OCR works on mixed documents.

@@ -1,0 +1,7 @@
+Invoice Fixture 2025
+Prepared for Example Research Ltd
+Invoice number INV-2048
+Payment is due within thirty days
+Total amount 1234.50
+Item Quantity Price
+Document review 2 617.25

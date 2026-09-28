@@ -2,6 +2,7 @@
 //! product-specific presentation and import policy belong to their callers.
 
 pub mod document;
+pub mod graph;
 pub mod html;
 pub mod markdown;
 pub mod pdf;
