@@ -17,6 +17,8 @@ the CPU baselines in
 | `portkey` | OpenAI-compat HTTP | `http://localhost:8787/v1` | Portkey-AI/gateway. |
 | `sglang-ocr` | OpenAI-compat HTTP | `http://localhost:30001/v1` | SGLang serving PaddleOCR-VL-1.6 via `sglang.launch_server`. |
 | `vllm-ocr` | OpenAI-compat HTTP | `http://localhost:30000/v1` | vLLM serving the same models via its OpenAI-compat server. |
+| `liteparse` | subprocess (`lit`) | — | [`run-llama/liteparse`](https://github.com/run-llama/liteparse) (12.7k★, Apache-2.0, Rust core + Python bindings). Drives the `lit` CLI; built-in Tesseract OCR; complexity detection routes native-only PDFs to the 2-5 ms/page path. Set `LITEPARSE_OCR=none` for pure native, `=tesseract` (default) for OCR-on, `=paddle` for the HTTP PaddleOCR server. |
+| `parse-bench` | subprocess (`parse-bench`) | — | [`run-llama/ParseBench`](https://github.com/run-llama/ParseBench) (591★, Apache-2.0, LlamaIndex). 5-dimension evaluation (Tables, Charts, Content Faithfulness, Semantic Formatting, Visual Grounding) across ~2,000 human-verified pages. The subprocess layer here currently invokes `parse-bench inference run` against the local fixture; full ParseBench-scored rows are a follow-up that wires parse-bench's own rules into our JSON output. |
 
 `target_available()` does a cheap `/v1/models` probe so unreachable gateways
 report `UNREACHABLE` rather than wasting a chat-completion budget.
@@ -190,15 +192,18 @@ gateway.
 
 | Layer | Status |
 |---|---|
-| Skeleton + 7 targets + CER + 3-dim graph-fidelity scoring | ✅ implemented |
+| Skeleton + 9 targets + CER + 3-dim graph-fidelity scoring | ✅ implemented |
 | TTFT/ITL lane via `guidellm` | ✅ implemented (`--ttft-requests N`) |
 | Candle text-completion stub (Qwen2.5-0.5B-Instruct) | ✅ implemented behind `--features candle` |
+| `liteparse` subprocess target | ✅ wired (gated on `lit` being on PATH) |
+| `parse-bench` subprocess target | ✅ wired (gated on `parse-bench` being on PATH) |
 | `Dockerfile.alpine` + `docker-compose.alpine.yml` | ✅ written, smoke builds clean on this host |
 | `Dockerfile.cuda-slim` + `docker-compose.gpu.yml` | ✅ written, builds on this host (no GPU here) |
 | `contrib/install-native.sh` + systemd unit | ✅ written |
 | Adversarial fixture corpus | ⏳ pending — `webfold-bench/bench/ocr-vs-incumbents/make_adversarial.py` already generates the same set we want here |
 | `candle-qwen2.5-vl` vision-tower port | ⏳ deferred — needs custom architecture in `candle-transformers`; multi-week |
 | GPU SGLang / vLLM serving PaddleOCR-VL / GLM-OCR / olmOCR | ⏳ blocked on GPU host (this host has no NVIDIA) |
+| Full `parse-bench` 5-dimension scoring against `text_content.jsonl` / `table.jsonl` rules | ⏳ follow-up — wire parse-bench's published rule files into our JSON output |
 
 ## What this is NOT
 
