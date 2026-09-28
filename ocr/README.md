@@ -22,6 +22,10 @@ the CPU baselines in
 | `marker` | subprocess (`marker_single`) | — | [`datalab-to/marker`](https://github.com/datalab-to/marker) (40k★, Apache-2.0 code / OpenRAIL-M weights). GPU PDF→Markdown. `MARKER_DISABLE_IMAGES=1` env var strips image extraction (we don't score images). First run downloads ~2 GB of model weights. |
 | `docling` | subprocess (`docling`) | — | [`docling-project/docling`](https://github.com/docling-project/docling) (68k★, MIT, IBM). Drives the `docling` CLI; output written to a tmp dir, we read the produced `<stem>.md`. Honors `DOCLING_DEVICE=cpu\|cuda`. First run downloads ~1.5 GB of weights. |
 | `surya-ocr` | subprocess (`surya_ocr`) | — | [`datalab-to/surya`](https://github.com/datalab-to/surya) (21k★, Apache-2.0 code / OpenRAIL-M weights). OCR + layout + reading order + tables in 90+ languages. First run downloads ~3 GB of weights and starts a vllm/llama-server. |
+| `candle-qwen-serve` | HTTP (`/v1/chat/completions`) | `http://localhost:38080/v1` | In-tree `services/candle-serve` (currently a deterministic echo stub; real Qwen2.5 model load deferred). Sub HTTP service per "eventually our own" — model lives in a separate process so the bench doesn't drag candle into its build. |
+| `llama-cpp-server` | HTTP (`/v1/chat/completions`) | `http://localhost:8081/v1` | Official `llama-server` binary from [ggerganov/llama.cpp](https://github.com/ggerganov/llama.cpp) (16k★, MIT). Run as `./llama-server -m model.gguf --port 8081`. Lightweight GGUF runtime. |
+| `peregrine-ng` | HTTP (`/v1/chat/completions`) | `http://localhost:38100/v1` | Ptyktos Rust-native GGUF inference engine extracted from Bedrock (`peregrine-ng` crate, MIT). Qwen2.5/Qwen3.5 family. |
+| `modelfold-serve` | HTTP (`/v1/chat/completions`) | `http://localhost:38200/v1` | Ptyktos ML primitives substrate (`modelfold` crate, FSL-1.1-ALv2) — GPU kernels + quantization + training fold. The companion server exposes checkpoints over OpenAI-compat. |
 
 `target_available()` does a cheap `/v1/models` probe so unreachable gateways
 report `UNREACHABLE` rather than wasting a chat-completion budget.

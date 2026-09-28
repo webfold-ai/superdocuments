@@ -114,6 +114,28 @@ enum Target {
     /// languages. Apache-2.0 code / OpenRAIL-M weights. Drives the `surya_ocr`
     /// Python CLI.
     SuryaOcr,
+    /// `candle-qwen-serve` — the in-tree `superdocuments-bench/services/candle-serve`
+    /// HTTP service. Loads Qwen2.5-0.5B-Instruct via candle-transformers and
+    /// exposes OpenAI-compat `/v1/chat/completions`. CPU-only, slow but zero
+    /// external deps beyond the model weights. Sub HTTP service per the
+    /// "eventually our own" directive; replaces the original candle subprocess
+    /// target so the model lives in a separate process and can be re-used
+    /// outside the bench.
+    CandleQwenServe,
+    /// `llama-cpp-server` — official llama.cpp server binary (`llama-server`).
+    /// OpenAI-compat HTTP API; run as `./llama-server -m model.gguf --port
+    /// 8081`. Lightweight GGUF runtime; benchmarks any GGUF model the local
+    /// harness has on disk. Endpoint defaults to `http://localhost:8081/v1`.
+    LlamaCppServer,
+    /// `peregrine-ng` — Ptyktos Rust-native GGUF inference engine. Invoked via
+    /// the `peregrine-serve` CLI (when wired) or the in-process library.
+    /// Qwen2.5/Qwen3.5 family; loads GGUF weights directly.
+    PeregrineNg,
+    /// `modelfold` — Ptyktos ML primitives substrate (GPU kernels,
+    /// quantization, training fold). For OCR/inference benches, used via the
+    /// `modelfold-serve` companion that loads a checkpoint and exposes
+    /// `/v1/chat/completions`. Subprocess when the binary is on PATH.
+    ModelfoldServe,
 }
 
 impl Target {
@@ -132,6 +154,10 @@ impl Target {
             Self::Marker => "marker",
             Self::Docling => "docling",
             Self::SuryaOcr => "surya-ocr",
+            Self::CandleQwenServe => "candle-qwen-serve",
+            Self::LlamaCppServer => "llama-cpp-server",
+            Self::PeregrineNg => "peregrine-ng",
+            Self::ModelfoldServe => "modelfold-serve",
         }
     }
 
@@ -145,6 +171,12 @@ impl Target {
             Self::Portkey => Some(("http://localhost:8787/v1", "mock-ocr")),
             Self::SglangOcr => Some(("http://localhost:30001/v1", "PaddlePaddle/PaddleOCR-VL-1.6")),
             Self::VllmOcr => Some(("http://localhost:30000/v1", "PaddlePaddle/PaddleOCR-VL-1.6")),
+            Self::CandleQwenServe => {
+                Some(("http://localhost:38080/v1", "Qwen/Qwen2.5-0.5B-Instruct"))
+            }
+            Self::LlamaCppServer => Some(("http://localhost:8081/v1", "local-gguf-model")),
+            Self::PeregrineNg => Some(("http://localhost:38100/v1", "peregrine-default")),
+            Self::ModelfoldServe => Some(("http://localhost:38200/v1", "modelfold-default")),
             Self::CandleQwen25Vl
             | Self::Liteparse
             | Self::ParseBench
@@ -159,7 +191,7 @@ impl Target {
         matches!(self, Self::CandleQwen25Vl)
     }
 
-    fn all() -> [Target; 13] {
+    fn all() -> [Target; 17] {
         [
             Self::CandleQwen25Vl,
             Self::AiGateway,
@@ -174,6 +206,10 @@ impl Target {
             Self::Marker,
             Self::Docling,
             Self::SuryaOcr,
+            Self::CandleQwenServe,
+            Self::LlamaCppServer,
+            Self::PeregrineNg,
+            Self::ModelfoldServe,
         ]
     }
 }
@@ -633,6 +669,15 @@ fn target_available(target: Target) -> bool {
             Target::Docling => command_on_path("docling"),
             // Surya — datalab-to/surya Python CLI (`pip install surya-ocr`).
             Target::SuryaOcr => command_on_path("surya_ocr"),
+            // HTTP endpoints — `target_available` already short-circuits to the
+            // `/v1/models` probe for any target with an `endpoint()`. The four
+            // Ptyktos + llama.cpp servers (candle-qwen-serve, llama-cpp-server,
+            // peregrine-ng, modelfold-serve) are not subprocess invocations;
+            // they're HTTP services the user runs separately.
+            Target::CandleQwenServe
+            | Target::LlamaCppServer
+            | Target::PeregrineNg
+            | Target::ModelfoldServe => false,
             _ => false,
         }
     }
@@ -1378,9 +1423,9 @@ mod tests {
 
     #[test]
     fn target_enumeration_includes_liteparse_and_parsebench() {
-        // The full target list is 13 entries. Adding/removing targets is a
+        // The full target list is 17 entries. Adding/removing targets is a
         // breaking change for downstream JSON consumers; this test guards that.
-        assert_eq!(Target::all().len(), 13);
+        assert_eq!(Target::all().len(), 17);
         let names: Vec<&str> = Target::all().iter().map(|t| t.name()).collect();
         assert!(names.contains(&"liteparse"));
         assert!(names.contains(&"parse-bench"));
@@ -1388,6 +1433,10 @@ mod tests {
         assert!(names.contains(&"docling"));
         assert!(names.contains(&"surya-ocr"));
         assert!(names.contains(&"tesseract-direct"));
+        assert!(names.contains(&"candle-qwen-serve"));
+        assert!(names.contains(&"llama-cpp-server"));
+        assert!(names.contains(&"peregrine-ng"));
+        assert!(names.contains(&"modelfold-serve"));
     }
 
     #[test]
