@@ -1498,7 +1498,9 @@ pub use crate::pdf::transcode_populator::{
 /// Default complexity function — prefers Transcode's per-page walker,
 /// falls back to the byte-level heuristic when Transcode can't parse the
 /// input (encrypted, malformed, etc).
-pub fn complexity(path: impl AsRef<std::path::Path>) -> std::io::Result<Vec<geometry::PageComplexityStats>> {
+pub fn complexity(
+    path: impl AsRef<std::path::Path>,
+) -> std::io::Result<Vec<geometry::PageComplexityStats>> {
     match complexity_from_transcode(path.as_ref()) {
         Ok(stats) if !stats.is_empty() => Ok(stats),
         _ => Ok(vec![page_complexity(path)?]),
