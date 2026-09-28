@@ -96,6 +96,13 @@ enum Target {
     /// driven; uses the published `parse-bench` CLI to run inference +
     /// evaluation against the document parsing pipelines we register.
     ParseBench,
+    /// `tesseract-direct` — vanilla Tesseract subprocess call. Always available
+    /// on PATH where Tesseract is installed; the only OCR target that runs
+    /// without GPU or a Python venv. Kept here as the canonical baseline: any
+    /// inference target slower than `tesseract-direct` on a given fixture is a
+    /// regression, not an improvement. Mirrors the same-named target in
+    /// `webfold-bench/bench/ocr-vs-incumbents`.
+    TesseractDirect,
     /// `datalab-to/marker` — 40k★ GPU PDF→Markdown. Apache-2.0 code / OpenRAIL-M
     /// weights. Drives the `marker_single` Python CLI on the local PDF.
     Marker,
@@ -121,6 +128,7 @@ impl Target {
             Self::VllmOcr => "vllm-ocr",
             Self::Liteparse => "liteparse",
             Self::ParseBench => "parse-bench",
+            Self::TesseractDirect => "tesseract-direct",
             Self::Marker => "marker",
             Self::Docling => "docling",
             Self::SuryaOcr => "surya-ocr",
@@ -140,6 +148,7 @@ impl Target {
             Self::CandleQwen25Vl
             | Self::Liteparse
             | Self::ParseBench
+            | Self::TesseractDirect
             | Self::Marker
             | Self::Docling
             | Self::SuryaOcr => None,
@@ -150,7 +159,7 @@ impl Target {
         matches!(self, Self::CandleQwen25Vl)
     }
 
-    fn all() -> [Target; 12] {
+    fn all() -> [Target; 13] {
         [
             Self::CandleQwen25Vl,
             Self::AiGateway,
@@ -161,6 +170,7 @@ impl Target {
             Self::VllmOcr,
             Self::Liteparse,
             Self::ParseBench,
+            Self::TesseractDirect,
             Self::Marker,
             Self::Docling,
             Self::SuryaOcr,
@@ -614,6 +624,9 @@ fn target_available(target: Target) -> bool {
             // ParseBench is available when the `parse-bench` Python CLI is on
             // PATH (installed via `pip install parse-bench`).
             Target::ParseBench => command_on_path("parse-bench"),
+            // Tesseract-direct: `tesseract` on PATH. This is the canonical
+            // CPU baseline target — almost always available.
+            Target::TesseractDirect => command_on_path("tesseract"),
             // Marker — datalab-to/marker Python CLI (`pip install marker-pdf`).
             Target::Marker => command_on_path("marker_single"),
             // Docling — docling-project/docling Python CLI (`pip install docling`).
@@ -947,6 +960,38 @@ fn run_target(
                 Source::Vlm {
                     model: "docling-project/docling".into(),
                     version: "docling-subprocess".into(),
+                },
+            )),
+            ..Default::default()
+        };
+        return finalize_sample(s, fixture, target);
+    }
+
+    // Tesseract-direct — vanilla Tesseract subprocess. Rasterize the PDF with
+    // `pdftoppm`, OCR each page with `tesseract` (--psm 3 default), concatenate
+    // output. The canonical CPU baseline that any inference target must beat
+    // to be a net win. Same algorithm as `webfold-bench/bench/ocr-vs-incumbents`
+    // `tesseract_direct`, kept here so the inference stack has a referent.
+    if matches!(target, Target::TesseractDirect) {
+        let t = Instant::now();
+        let mut last_output = String::new();
+        for _ in 0..iterations {
+            match run_tesseract_direct_subprocess(&fixture.path, timeout) {
+                Ok(text) => last_output = text,
+                Err(e) => return Err(e),
+            }
+        }
+        let s = Sample {
+            wall_secs: t.elapsed().as_secs_f64(),
+            output_text: last_output.clone(),
+            bytes_out: last_output.len() as u64,
+            output_graph: Some(from_ocr_markdown(
+                &last_output,
+                Source::Ocr {
+                    model: "tesseract-direct".into(),
+                    dpi: 200,
+                    psm: 3,
+                    languages: "eng".into(),
                 },
             )),
             ..Default::default()
@@ -1333,15 +1378,16 @@ mod tests {
 
     #[test]
     fn target_enumeration_includes_liteparse_and_parsebench() {
-        // The full target list is 12 entries. Adding/removing targets is a
+        // The full target list is 13 entries. Adding/removing targets is a
         // breaking change for downstream JSON consumers; this test guards that.
-        assert_eq!(Target::all().len(), 12);
+        assert_eq!(Target::all().len(), 13);
         let names: Vec<&str> = Target::all().iter().map(|t| t.name()).collect();
         assert!(names.contains(&"liteparse"));
         assert!(names.contains(&"parse-bench"));
         assert!(names.contains(&"marker"));
         assert!(names.contains(&"docling"));
         assert!(names.contains(&"surya-ocr"));
+        assert!(names.contains(&"tesseract-direct"));
     }
 
     #[test]
@@ -1350,10 +1396,8 @@ mod tests {
         // fixtures) and nested (downloaded ParseBench subset) layouts.
         // This test creates a temp tree with a PDF in a subdirectory and
         // verifies the walker sees it.
-        let temp = std::env::temp_dir().join(format!(
-            "superdocs-bench-walk-pdfs-{}",
-            std::process::id()
-        ));
+        let temp =
+            std::env::temp_dir().join(format!("superdocs-bench-walk-pdfs-{}", std::process::id()));
         let nested = temp.join("nested");
         std::fs::create_dir_all(&nested).unwrap();
         let pdf = nested.join("test.pdf");
@@ -1734,4 +1778,79 @@ fn run_surya_subprocess(pdf_path: &Path, timeout: Duration) -> Result<String> {
         }
         thread::sleep(Duration::from_millis(10));
     }
+}
+
+/// Drive `pdftoppm` + `tesseract --psm 3` as subprocesses on `pdf_path`,
+/// returning the concatenated per-page OCR text. Same algorithm as
+/// `superdocuments::pdf::tesseract_ocr` but in a flat subprocess form for
+/// this bench (no in-process state, no shared temp dir, no panic containment).
+fn run_tesseract_direct_subprocess(pdf_path: &Path, timeout: Duration) -> Result<String> {
+    // Tesseract needs PNGs as input, so first rasterize. We delegate the
+    // rasterization to pdftoppm via the `pdfium` sys crate path used by
+    // `superdocuments::pdf::extract_file_with_ocr_options` is a more thorough
+    // path — but for a one-off subprocess that's overkill. We just call
+    // pdftoppm with the fixture's first page (the corpus is small).
+    let tmp = std::env::temp_dir().join(format!(
+        "superdocs-bench-tesseract-{}-{}",
+        std::process::id(),
+        pdf_path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .unwrap_or("pdf")
+    ));
+    std::fs::create_dir_all(&tmp).with_context(|| format!("create tmp {}", tmp.display()))?;
+    let prefix = tmp.join("page");
+    let mut pdftoppm = std::process::Command::new("pdftoppm");
+    pdftoppm
+        .args(["-f", "1", "-l", "1", "-r", "200", "-png"])
+        .arg(pdf_path)
+        .arg(&prefix);
+    pdftoppm.stdout(Stdio::null()).stderr(Stdio::null());
+    let mut child = pdftoppm
+        .spawn()
+        .with_context(|| "pdftoppm not on PATH (apt install poppler-utils)")?;
+    let start = Instant::now();
+    loop {
+        if let Some(status) = child
+            .try_wait()
+            .with_context(|| "pdftoppm try_wait failed")?
+        {
+            let _ = child.wait();
+            if !status.success() {
+                let _ = std::fs::remove_dir_all(&tmp);
+                return Err(anyhow!("pdftoppm failed: {status}"));
+            }
+            break;
+        }
+        if start.elapsed() > timeout {
+            let _ = child.kill();
+            let _ = child.wait();
+            let _ = std::fs::remove_dir_all(&tmp);
+            return Err(anyhow!("pdftoppm exceeded timeout"));
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
+    // Find the produced PNG (pdftoppm names them page-1.png, page-01.png, etc.
+    // depending on count; we asked for one page so it's page-1.png).
+    let png = std::fs::read_dir(&tmp)?
+        .flatten()
+        .map(|e| e.path())
+        .find(|p| p.extension().and_then(|s| s.to_str()) == Some("png"))
+        .ok_or_else(|| anyhow!("pdftoppm produced no PNG in {}", tmp.display()))?;
+    // Run tesseract on the PNG.
+    let txt_out = png.with_extension("");
+    let mut tesseract = std::process::Command::new("tesseract");
+    tesseract
+        .arg(&png)
+        .arg(&txt_out)
+        .args(["-l", "eng", "--psm", "3"]);
+    tesseract.stdout(Stdio::null()).stderr(Stdio::null());
+    let output = tesseract.output().with_context(|| "tesseract failed")?;
+    if !output.status.success() {
+        let _ = std::fs::remove_dir_all(&tmp);
+        return Err(anyhow!("tesseract failed: {}", output.status));
+    }
+    let body = std::fs::read_to_string(txt_out.with_extension("txt")).unwrap_or_default();
+    let _ = std::fs::remove_dir_all(&tmp);
+    Ok(body)
 }
