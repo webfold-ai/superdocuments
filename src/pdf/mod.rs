@@ -13,6 +13,7 @@ use std::time::{Duration, Instant};
 pub mod acroform;
 pub mod geometry;
 pub mod page_walker;
+pub mod transcode_populator;
 
 /// Bound parser input before scanning attacker-controlled bytes.
 pub const MAX_PDF_BYTES: usize = 256 * 1024 * 1024;
@@ -1464,7 +1465,6 @@ use self::geometry::{
 /// a backend that surfaces the PDF `/Info` dict is wired in.
 pub fn document_metadata(path: impl AsRef<Path>) -> io::Result<DocumentMetadata> {
     let bytes = std::fs::read(path.as_ref())?;
-    let _ = bytes;
     // TODO(items 9, 10): surface `creation_date`, `mod_date`, `is_encrypted`,
     // `signature_count`, etc. from Transcode's info-dict walker once the
     // upstream exposes them. Today we report only the file size we can read.
@@ -1474,12 +1474,10 @@ pub fn document_metadata(path: impl AsRef<Path>) -> io::Result<DocumentMetadata>
     })
 }
 
-/// Document outline (PDF bookmarks). Empty until the geometry backend
-/// exposes the catalog's `/Outlines` tree.
+/// Document outline (PDF bookmarks). Walks the catalog's `/Outlines` tree
+/// via Transcode's object store; populated by `transcode_outline`.
 pub fn outline(path: impl AsRef<Path>) -> io::Result<Vec<OutlineTarget>> {
-    let _ = path;
-    // TODO(item 9): wire through `extract::extract_outline(document)`.
-    Ok(Vec::new())
+    transcode_outline(path)
 }
 
 /// Cheap "does this page need OCR?" predicate. Implementation lives in
@@ -1487,9 +1485,25 @@ pub fn outline(path: impl AsRef<Path>) -> io::Result<Vec<OutlineTarget>> {
 /// content-stream token density. Without PDFium we can't compute
 /// LiteParse's full image-coverage / vector-text / font-encoding signals,
 /// so the result is a coarse `PageComplexityStats` populated with `NoText`
-/// or `AnnotationText` reasons only.
+/// or `AnnotationText` reasons only. When a real PDF backend is available
+/// the transcode-backed `complexity_from_transcode` populator returns richer
+/// signals (SparseText + page-level thresholds).
 pub use crate::pdf::page_walker::page_complexity;
 pub use crate::pdf::page_walker::page_complexity_from_bytes;
+pub use crate::pdf::transcode_populator::{
+    complexity_from_transcode, geometry_from_transcode, transcode_extract_markdown_with_metadata,
+    transcode_outline,
+};
+
+/// Default complexity function — prefers Transcode's per-page walker,
+/// falls back to the byte-level heuristic when Transcode can't parse the
+/// input (encrypted, malformed, etc).
+pub fn complexity(path: impl AsRef<std::path::Path>) -> std::io::Result<Vec<geometry::PageComplexityStats>> {
+    match complexity_from_transcode(path.as_ref()) {
+        Ok(stats) if !stats.is_empty() => Ok(stats),
+        _ => Ok(vec![page_complexity(path)?]),
+    }
+}
 
 /// Extract text + per-page metadata, optionally as a different output format.
 ///
