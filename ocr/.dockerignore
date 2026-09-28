@@ -1,0 +1,9 @@
+target/
+**/target/
+results/
+ttft_raw/
+.git/
+.gitignore
+.dockerignore
+Dockerfile*
+docker-compose*.yml

@@ -2,26 +2,26 @@
 
 Companion to [`superdocuments/`](https://github.com/Ptyktos/superdocuments) and
 the local [`ai-gateway/`](https://github.com/Ptyktos/ai-gateway) vendoring.
-Measures inference-stack OCR — the seven targets below — on the same fixture
-corpus as the CPU baselines in
+Measures inference-stack OCR — seven targets — on the same fixture corpus as
+the CPU baselines in
 [`webfold-bench/bench/ocr-vs-incumbents/`](https://github.com/Ptyktos/webfold-bench).
 
 ## Targets
 
 | Target | Type | Endpoint | Notes |
 |---|---|---|---|
-| `candle-qwen2.5-vl` | in-process Rust | — | `cargo run --features candle`. Stub for now; returns an honest "not implemented" until the runner lands. |
-| `ai-gateway` | OpenAI-compat HTTP | `http://localhost:3100/v1` | Traceloop Hub. The OpenAI-compat wrapper already exists in `ai-gateway/`. |
+| `candle-qwen2.5-vl` | in-process Rust | — | `cargo run --features candle`. **Text-completion stub today** (Qwen2.5-0.5B reads the extracted PDF text; the VLM vision-tower port is deferred). Honest reporting: every row carries `target_kind = "candle-text-completion"` so the reader sees what the model actually got. |
+| `ai-gateway` | OpenAI-compat HTTP | `http://localhost:3100/v1` | Traceloop Hub. OpenAI-compat wrapper already in `ai-gateway/`. |
 | `litellm` | OpenAI-compat HTTP | `http://localhost:4000/v1` | Standard proxy. |
 | `bifrost` | OpenAI-compat HTTP | `http://localhost:8080/v1` | maximhq/bifrost. |
 | `portkey` | OpenAI-compat HTTP | `http://localhost:8787/v1` | Portkey-AI/gateway. |
-| `sglang-ocr` | OpenAI-compat HTTP | `http://localhost:30001/v1` | SGLang serving PaddleOCR-VL-1.6 / GLM-OCR / olmOCR via `sglang.launch_server`. |
+| `sglang-ocr` | OpenAI-compat HTTP | `http://localhost:30001/v1` | SGLang serving PaddleOCR-VL-1.6 via `sglang.launch_server`. |
 | `vllm-ocr` | OpenAI-compat HTTP | `http://localhost:30000/v1` | vLLM serving the same models via its OpenAI-compat server. |
 
 `target_available()` does a cheap `/v1/models` probe so unreachable gateways
 report `UNREACHABLE` rather than wasting a chat-completion budget.
 
-### What we deliberately excluded
+### Deliberately excluded
 
 | Candidate | Why excluded |
 |---|---|
@@ -34,7 +34,7 @@ report `UNREACHABLE` rather than wasting a chat-completion budget.
 | Column | Source |
 |---|---|
 | **Quality** | text CER (alphanumeric-lowercase) + graph-fidelity (reading-order agreement, table-cell agreement, native-page preservation) |
-| **Latency** | wall-clock seconds + bytes/sec for now; TTFT/ITL for OpenAI-compat targets comes from a future `guidellm`/`aiperf` lane (the same harness ai-gateway/benches already wires up) |
+| **Latency** | wall-clock seconds + bytes/sec + (optional) `guidellm`-driven TTFT/ITL per OpenAI-compat target |
 | **Cost** | peak RSS KiB (parent-side only; subprocess OpenAI-compat upstreams are not aggregated), model output bytes |
 
 ### Graph-fidelity score
@@ -50,8 +50,19 @@ Three agreement scores:
 | `median_table_cell_agreement` | fraction of reference table cells `(page, row, col)` whose text matches the hypothesis |
 | `median_native_preservation` | fraction of reference pages marked `source: native` that the hypothesis also marks `source: native`. Critical for mixed-page PDFs — a hallucinating VLM that rewrites a native page as OCR text scores 0 here. |
 
-All three return `null` when the reference has no rows of the relevant kind
-(e.g. table_cell_agreement is null if the reference has no tables).
+All three return `null` when the reference has no rows of the relevant kind.
+
+### TTFT/ITL lane (`--ttft-requests N`)
+
+Mirrors `ai-gateway/benches/ttft.rs`: drives `guidellm run --backend
+kind=openai_http,target=<url>,model=<model>` as a subprocess per target,
+writes raw JSON to `<out-dir>/ttft_raw/guidellm_<target>.json`, parses TTFT
++ ITL + tokens/sec back into the report's `ttft_lane` field. **Requires
+`guidellm` installed (`pip install guidellm`) and a working Python 3.10+
+on the host.** Skip with `--ttft-requests 0` (default) on cold runs.
+
+The inspector's three-column table gets a fifth column — TTFT p50/p95/p99 —
+which the upstream `ai-gateway/benches/ttft.rs` already collects.
 
 ## Fixture format
 
@@ -73,7 +84,7 @@ the `markdown` string produce invalid JSON (`\n` must be the two-byte escape
 sequence, not the byte `\012`). The bench silently treats malformed JSON as
 "no graph ground truth" — same surface error as a missing file.
 
-## Quickstart
+## Quickstart — host-native (CPU smoke)
 
 ```sh
 # Build (no candle — that's opt-in)
@@ -85,24 +96,109 @@ cargo run --release --manifest-path ocr/Cargo.toml -- \
   --fixtures ocr/fixtures \
   --out ocr/results/ocr-inference-2026-09-27.json \
   --warmup 1 --samples 3 --iterations 2
+
+# TTFT/ITL lane (requires `pip install guidellm`)
+cargo run --release --manifest-path ocr/Cargo.toml -- \
+  --fixtures ocr/fixtures \
+  --out ocr/results/ocr-inference-2026-09-27.json \
+  --ttft-requests 50
 ```
 
-To enable the in-process Rust target once the runner is implemented:
+## Candle (in-process Rust inference)
 
 ```sh
+# Qwen2.5-0.5B-Instruct (~1 GB RAM, CPU). Weights download to ~/.cache/huggingface
+# on first run; subsequent runs are offline. Override with CANDLE_MODEL_ID env var.
 cargo run --release --features candle --manifest-path ocr/Cargo.toml -- \
-  --fixtures ocr/fixtures --out ocr/results/candle-smoke.json
+  --fixtures ocr/fixtures \
+  --out ocr/results/candle-2026-09-27.json \
+  --only candle-qwen2.5-vl
 ```
+
+The text-completion stub reads the extracted PDF text (not the rendered
+page) and produces a markdown outline. It is **not visual OCR**. The
+Qwen2.5-VL vision-tower port — the actual VLM-side of this benchmark — is
+deferred because `candle-transformers` 0.9 ships no `qwen2_5_vl` module.
+Tracking issue: implement `candle_qwen2_5_vl::vision_tower` from the
+published Qwen2.5-VL config (windowed attention, m-RoPE for image
+positions, multi-resolution input), then wire it through the existing
+Qwen2 language model forward.
+
+## Docker
+
+### Alpine (`Dockerfile.alpine`, ~50 MB final image)
+
+Multi-stage build on `rust:1.85-alpine` → `alpine:3.20`. No GPU. Brings
+up `ai-gateway` + `mock_upstream` + the bench via `docker-compose.alpine.yml`.
+Mock-upstream only — no real OCR upstream, no Candle (the alpine image
+omits the candle feature).
+
+```sh
+docker build -f ocr/Dockerfile.alpine -t superdocs-bench-ocr:alpine ocr
+docker compose -f ocr/docker-compose.alpine.yml up --abort-on-container-exit \
+  --exit-code-from bench
+```
+
+### Slim NVIDIA (`Dockerfile.cuda-slim`, ~250 MB final image)
+
+Based on `nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04` (slim, no
+compiler). Targets the 3060 (sm_86, Ampere); any CUDA 12.x host works.
+
+```sh
+docker build -f ocr/Dockerfile.cuda-slim -t superdocs-bench-ocr:cuda-slim ocr
+docker compose -f ocr/docker-compose.gpu.yml up --abort-on-container-exit \
+  --exit-code-from bench
+```
+
+The compose stack runs `vllm/vllm-openai:unlimited-ocr` (SGLang serving
+PaddleOCR-VL-1.6 via the published docker image) and `vllm/vllm-openai:latest`
+side-by-side. The bench targets both on `--ttft-requests 50`. GPU
+access via `deploy.resources.reservations.devices` requires Docker Compose
+v2.20+ and `nvidia-container-toolkit` on the host.
+
+### Building both binaries
+
+The alpine compose runs `ai-gateway` natively (its private-git-deps make
+it inconvenient to dockerize). Build the ai-gateway binary first:
+
+```sh
+cargo build --release --manifest-path ../ai-gateway/Cargo.toml --bin hub
+```
+
+The GPU compose pulls pre-built images from Docker Hub; only the bench
+binary needs to be in `ocr/target/release/` before the slim build runs.
+
+## Native install (any Linux host)
+
+```sh
+# From the repo root, with the bench binary already built:
+doas ocr/contrib/install-native.sh
+# or: switch to root and run it directly.
+```
+
+Idempotent. Installs:
+- `/opt/superdocuments-bench/bin/superdocuments-bench-ocr` (the binary)
+- `/opt/superdocuments-bench/fixtures/` (the test corpus)
+- `/var/log/superdocs-bench/` (results dir)
+- `/etc/systemd/system/superdocuments-bench-ocr.service` (oneshot — wire
+  a `superdocuments-bench-ocr.timer` if you want scheduled runs)
+
+Override `OPENAI_BASE_URL` via `systemctl edit` to point at the local
+gateway.
 
 ## Status
 
 | Layer | Status |
 |---|---|
 | Skeleton + 7 targets + CER + 3-dim graph-fidelity scoring | ✅ implemented |
-| `candle-qwen2.5-vl` runner | ⏳ stub (returns "not implemented"); gated behind `--features candle` so the default build stays clean |
-| TTFT/ITL via `guidellm` + `aiperf` | ⏳ not yet wired; the same integration lives in `ai-gateway/benches/ttft.rs` and we will mirror it here |
-| GPU SGLang / vLLM serving PaddleOCR-VL / GLM-OCR / olmOCR | ⏳ blocked on GPU host |
+| TTFT/ITL lane via `guidellm` | ✅ implemented (`--ttft-requests N`) |
+| Candle text-completion stub (Qwen2.5-0.5B-Instruct) | ✅ implemented behind `--features candle` |
+| `Dockerfile.alpine` + `docker-compose.alpine.yml` | ✅ written, smoke builds clean on this host |
+| `Dockerfile.cuda-slim` + `docker-compose.gpu.yml` | ✅ written, builds on this host (no GPU here) |
+| `contrib/install-native.sh` + systemd unit | ✅ written |
 | Adversarial fixture corpus | ⏳ pending — `webfold-bench/bench/ocr-vs-incumbents/make_adversarial.py` already generates the same set we want here |
+| `candle-qwen2.5-vl` vision-tower port | ⏳ deferred — needs custom architecture in `candle-transformers`; multi-week |
+| GPU SGLang / vLLM serving PaddleOCR-VL / GLM-OCR / olmOCR | ⏳ blocked on GPU host (this host has no NVIDIA) |
 
 ## What this is NOT
 

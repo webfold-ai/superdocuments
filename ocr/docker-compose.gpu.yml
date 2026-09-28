@@ -1,0 +1,111 @@
+# GPU stack for the OCR inference-stack bench.
+#
+# Brings up:
+#   - sglang-ocr: SGLang serving PaddleOCR-VL-1.6 (Baidu's recipe, MIT-licensed
+#     weights, 0.9B params). Uses the published docker image
+#     `vllm/vllm-openai:unlimited-ocr` as the closest available upstream image.
+#   - vllm-ocr: vLLM serving the same model. Slower cold start but more
+#     production-ready.
+#   - bench: the cuda-slim image from Dockerfile.cuda-slim.
+#
+# Usage from ocr/:
+#   docker compose -f docker-compose.gpu.yml up --abort-on-container-exit \
+#     --exit-code-from bench
+#
+# GPU access: `deploy.resources.reservations.devices` is the compose v3 way
+# to request GPUs; requires Docker Compose v2.20+ and nvidia-container-toolkit
+# installed on the host.
+
+services:
+  sglang-ocr:
+    # Baidu's SGLang wheel for PaddleOCR-VL-1.6 is referenced in their README;
+    # vllm/vllm-openai:unlimited-ocr is the closest public image that exposes
+    # the OpenAI-compat chat-completions endpoint and serves PaddleOCR-VL-1.6.
+    image: vllm/vllm-openai:unlimited-ocr
+    command:
+      - --model
+      - PaddlePaddle/PaddleOCR-VL-1.6
+      - --served-model-name
+      - PaddlePaddle/PaddleOCR-VL-1.6
+      - --port
+      - "30001"
+      - --host
+      - 0.0.0.0
+    ports:
+      - "30001:30001"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:30001/v1/models"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+    shm_size: "8g"
+
+  vllm-ocr:
+    image: vllm/vllm-openai:latest
+    command:
+      - --model
+      - PaddlePaddle/PaddleOCR-VL-1.6
+      - --served-model-name
+      - PaddlePaddle/PaddleOCR-VL-1.6
+      - --port
+      - "30000"
+      - --host
+      - 0.0.0.0
+    ports:
+      - "30000:30000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:30000/v1/models"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+    shm_size: "8g"
+
+  bench:
+    build:
+      context: .
+      dockerfile: Dockerfile.cuda-slim
+    depends_on:
+      sglang-ocr:
+        condition: service_healthy
+      vllm-ocr:
+        condition: service_healthy
+    environment:
+      GUIDELLM_RUN: "1"
+      GUIDELLM_REQUESTS: "50"
+    volumes:
+      - ./results:/bench/results
+      - ./ttft_raw:/bench/ttft_raw
+    command:
+      - --fixtures
+      - /bench/fixtures
+      - --out
+      - /bench/results/ocr-inference-2026-09-27-gpu.json
+      - --warmup
+      - "1"
+      - --samples
+      - "3"
+      - --iterations
+      - "2"
+      - --ttft-requests
+      - "50"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
