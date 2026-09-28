@@ -181,16 +181,33 @@ struct Fixture {
 
 fn load_fixtures(root: &Path) -> Vec<Fixture> {
     let mut out = Vec::new();
-    let entries = match std::fs::read_dir(root) {
+    walk_pdfs(root, &mut out);
+    out.sort_by(|a, b| a.path.cmp(&b.path));
+    out
+}
+
+/// Walk `root` recursively, collecting every `*.pdf` plus its sidecar files.
+/// Both the shipped 9-fixture corpus (flat layout) and the downloaded
+/// ParseBench subset (nested `docs/{text,table,layout,chart}/`) Just Work
+/// because `walk_dir` recurses.
+fn walk_pdfs(dir: &Path, out: &mut Vec<Fixture>) {
+    let entries = match std::fs::read_dir(dir) {
         Ok(it) => it,
         Err(e) => {
-            eprintln!("could not read fixtures dir {}: {e}", root.display());
-            return out;
+            eprintln!("could not read fixtures dir {}: {e}", dir.display());
+            return;
         }
     };
     for item in entries.flatten() {
         let path = item.path();
-        if !path.is_file() {
+        let Ok(file_type) = item.file_type() else {
+            continue;
+        };
+        if file_type.is_dir() {
+            walk_pdfs(&path, out);
+            continue;
+        }
+        if !file_type.is_file() {
             continue;
         }
         if path
@@ -218,8 +235,6 @@ fn load_fixtures(root: &Path) -> Vec<Fixture> {
             graph_expected,
         });
     }
-    out.sort_by(|a, b| a.path.cmp(&b.path));
-    out
 }
 
 /// Parse the `.expected.json` ground truth. The file is a JSON object with
@@ -1327,6 +1342,27 @@ mod tests {
         assert!(names.contains(&"marker"));
         assert!(names.contains(&"docling"));
         assert!(names.contains(&"surya-ocr"));
+    }
+
+    #[test]
+    fn walk_pdfs_finds_pdfs_in_subdirectories() {
+        // The recursive walker handles both flat (shipped superdocuments
+        // fixtures) and nested (downloaded ParseBench subset) layouts.
+        // This test creates a temp tree with a PDF in a subdirectory and
+        // verifies the walker sees it.
+        let temp = std::env::temp_dir().join(format!(
+            "superdocs-bench-walk-pdfs-{}",
+            std::process::id()
+        ));
+        let nested = temp.join("nested");
+        std::fs::create_dir_all(&nested).unwrap();
+        let pdf = nested.join("test.pdf");
+        std::fs::write(&pdf, b"%PDF-1.4\n").unwrap();
+        let mut found = Vec::new();
+        super::walk_pdfs(&temp, &mut found);
+        assert_eq!(found.len(), 1, "expected exactly one PDF in temp tree");
+        assert!(found[0].path.ends_with("test.pdf"));
+        let _ = std::fs::remove_dir_all(&temp);
     }
 }
 

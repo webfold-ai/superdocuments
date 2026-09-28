@@ -1,0 +1,123 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 1
+/Kids [ 4 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Contents 5 0 R
+/MediaBox [ 0 0 612 792 ]
+/Resources <<
+/Font 6 0 R
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 418
+>>
+stream
+q
+0.96592583 0.25881905 -0.25881905 0.96592583 0.0 0.0 cm
+1 0 0 1 0 0 cm
+BT
+/F1 12 Tf
+14.4 TL
+ET
+q
+1 0 0 1 78 692 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 0 4 Tm
+/F2 18 Tf
+22 TL
+(Rotation Tilt Test) Tj
+T*
+ET
+Q
+Q
+q
+1 0 0 1 78 650 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 0 19 Tm
+/F1 11 Tf
+15 TL
+(This page is rotated fifteen degrees from the page MediaBox\056 Tesseract without orientation) Tj
+T*
+(detection will see skewed glyphs\056) Tj
+T*
+ET
+Q
+Q
+Q
+
+endstream
+endobj
+6 0 obj
+<<
+/F1 7 0 R
+/F2 8 0 R
+>>
+endobj
+7 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+8 0 obj
+<<
+/BaseFont /Helvetica-Bold
+/Encoding /WinAnsiEncoding
+/Name /F2
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000113 00000 n 
+0000000162 00000 n 
+0000000351 00000 n 
+0000000820 00000 n 
+0000000861 00000 n 
+0000000968 00000 n 
+trailer
+<<
+/Size 9
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+1080
+%%EOF

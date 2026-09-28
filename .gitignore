@@ -21,3 +21,13 @@ __pycache__/
 results/
 *.log
 *.prom
+
+# Downloaded on-demand benchmark subsets (OmniDocBench, ParseBench, getomni).
+# Use fixtures/fetch_public_benchmarks.sh to populate locally.
+**/fixtures/fetched/
+fixtures/fetched/
+
+# Stale download artefacts left over from previous runs.
+_stale/
+_docs.stale.dead/
+_fetched.stale.dead/

@@ -1,0 +1,3 @@
+Rotation Tilt Test
+This page is rotated fifteen degrees from the page MediaBox
+Tesseract without orientation detection will see skewed glyphs
