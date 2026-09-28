@@ -19,6 +19,9 @@ the CPU baselines in
 | `vllm-ocr` | OpenAI-compat HTTP | `http://localhost:30000/v1` | vLLM serving the same models via its OpenAI-compat server. |
 | `liteparse` | subprocess (`lit`) | — | [`run-llama/liteparse`](https://github.com/run-llama/liteparse) (12.7k★, Apache-2.0, Rust core + Python bindings). Drives the `lit` CLI; built-in Tesseract OCR; complexity detection routes native-only PDFs to the 2-5 ms/page path. Set `LITEPARSE_OCR=none` for pure native, `=tesseract` (default) for OCR-on, `=paddle` for the HTTP PaddleOCR server. |
 | `parse-bench` | subprocess (`parse-bench`) | — | [`run-llama/ParseBench`](https://github.com/run-llama/ParseBench) (591★, Apache-2.0, LlamaIndex). 5-dimension evaluation (Tables, Charts, Content Faithfulness, Semantic Formatting, Visual Grounding) across ~2,000 human-verified pages. The subprocess layer here currently invokes `parse-bench inference run` against the local fixture; full ParseBench-scored rows are a follow-up that wires parse-bench's own rules into our JSON output. |
+| `marker` | subprocess (`marker_single`) | — | [`datalab-to/marker`](https://github.com/datalab-to/marker) (40k★, Apache-2.0 code / OpenRAIL-M weights). GPU PDF→Markdown. `MARKER_DISABLE_IMAGES=1` env var strips image extraction (we don't score images). First run downloads ~2 GB of model weights. |
+| `docling` | subprocess (`docling`) | — | [`docling-project/docling`](https://github.com/docling-project/docling) (68k★, MIT, IBM). Drives the `docling` CLI; output written to a tmp dir, we read the produced `<stem>.md`. Honors `DOCLING_DEVICE=cpu\|cuda`. First run downloads ~1.5 GB of weights. |
+| `surya-ocr` | subprocess (`surya_ocr`) | — | [`datalab-to/surya`](https://github.com/datalab-to/surya) (21k★, Apache-2.0 code / OpenRAIL-M weights). OCR + layout + reading order + tables in 90+ languages. First run downloads ~3 GB of weights and starts a vllm/llama-server. |
 
 `target_available()` does a cheap `/v1/models` probe so unreachable gateways
 report `UNREACHABLE` rather than wasting a chat-completion budget.
@@ -192,11 +195,14 @@ gateway.
 
 | Layer | Status |
 |---|---|
-| Skeleton + 9 targets + CER + 3-dim graph-fidelity scoring | ✅ implemented |
+| Skeleton + 12 targets + CER + 3-dim graph-fidelity scoring | ✅ implemented |
 | TTFT/ITL lane via `guidellm` | ✅ implemented (`--ttft-requests N`) |
 | Candle text-completion stub (Qwen2.5-0.5B-Instruct) | ✅ implemented behind `--features candle` |
 | `liteparse` subprocess target | ✅ wired (gated on `lit` being on PATH) |
 | `parse-bench` subprocess target | ✅ wired (gated on `parse-bench` being on PATH) |
+| `marker` subprocess target | ✅ wired (gated on `marker_single` being on PATH) |
+| `docling` subprocess target | ✅ wired (gated on `docling` being on PATH) |
+| `surya-ocr` subprocess target | ✅ wired (gated on `surya_ocr` being on PATH) |
 | `Dockerfile.alpine` + `docker-compose.alpine.yml` | ✅ written, smoke builds clean on this host |
 | `Dockerfile.cuda-slim` + `docker-compose.gpu.yml` | ✅ written, builds on this host (no GPU here) |
 | `contrib/install-native.sh` + systemd unit | ✅ written |
@@ -204,6 +210,7 @@ gateway.
 | `candle-qwen2.5-vl` vision-tower port | ⏳ deferred — needs custom architecture in `candle-transformers`; multi-week |
 | GPU SGLang / vLLM serving PaddleOCR-VL / GLM-OCR / olmOCR | ⏳ blocked on GPU host (this host has no NVIDIA) |
 | Full `parse-bench` 5-dimension scoring against `text_content.jsonl` / `table.jsonl` rules | ⏳ follow-up — wire parse-bench's published rule files into our JSON output |
+| `nougat` / `olmocr` direct CLI targets | ⏳ skipped — both expect server/workspace patterns, not a single-file CLI. `sglang-ocr` and `vllm-ocr` cover the inference-side comparison. |
 
 ## What this is NOT
 

@@ -96,6 +96,17 @@ enum Target {
     /// driven; uses the published `parse-bench` CLI to run inference +
     /// evaluation against the document parsing pipelines we register.
     ParseBench,
+    /// `datalab-to/marker` — 40k★ GPU PDF→Markdown. Apache-2.0 code / OpenRAIL-M
+    /// weights. Drives the `marker_single` Python CLI on the local PDF.
+    Marker,
+    /// `docling-project/docling` — 68k★ MIT doc-AI framework. Drives the
+    /// `docling` Python CLI; output goes to a temp dir, we read the produced
+    /// `*.md` file.
+    Docling,
+    /// `datalab-to/surya` — 21k★ OCR + layout + reading order + tables in 90+
+    /// languages. Apache-2.0 code / OpenRAIL-M weights. Drives the `surya_ocr`
+    /// Python CLI.
+    SuryaOcr,
 }
 
 impl Target {
@@ -110,6 +121,9 @@ impl Target {
             Self::VllmOcr => "vllm-ocr",
             Self::Liteparse => "liteparse",
             Self::ParseBench => "parse-bench",
+            Self::Marker => "marker",
+            Self::Docling => "docling",
+            Self::SuryaOcr => "surya-ocr",
         }
     }
 
@@ -123,7 +137,12 @@ impl Target {
             Self::Portkey => Some(("http://localhost:8787/v1", "mock-ocr")),
             Self::SglangOcr => Some(("http://localhost:30001/v1", "PaddlePaddle/PaddleOCR-VL-1.6")),
             Self::VllmOcr => Some(("http://localhost:30000/v1", "PaddlePaddle/PaddleOCR-VL-1.6")),
-            Self::CandleQwen25Vl | Self::Liteparse | Self::ParseBench => None,
+            Self::CandleQwen25Vl
+            | Self::Liteparse
+            | Self::ParseBench
+            | Self::Marker
+            | Self::Docling
+            | Self::SuryaOcr => None,
         }
     }
 
@@ -131,7 +150,7 @@ impl Target {
         matches!(self, Self::CandleQwen25Vl)
     }
 
-    fn all() -> [Target; 9] {
+    fn all() -> [Target; 12] {
         [
             Self::CandleQwen25Vl,
             Self::AiGateway,
@@ -142,6 +161,9 @@ impl Target {
             Self::VllmOcr,
             Self::Liteparse,
             Self::ParseBench,
+            Self::Marker,
+            Self::Docling,
+            Self::SuryaOcr,
         ]
     }
 }
@@ -577,6 +599,12 @@ fn target_available(target: Target) -> bool {
             // ParseBench is available when the `parse-bench` Python CLI is on
             // PATH (installed via `pip install parse-bench`).
             Target::ParseBench => command_on_path("parse-bench"),
+            // Marker — datalab-to/marker Python CLI (`pip install marker-pdf`).
+            Target::Marker => command_on_path("marker_single"),
+            // Docling — docling-project/docling Python CLI (`pip install docling`).
+            Target::Docling => command_on_path("docling"),
+            // Surya — datalab-to/surya Python CLI (`pip install surya-ocr`).
+            Target::SuryaOcr => command_on_path("surya_ocr"),
             _ => false,
         }
     }
@@ -845,6 +873,95 @@ fn run_target(
                 Source::Vlm {
                     model: "run-llama/ParseBench".into(),
                     version: "parse-bench-subprocess".into(),
+                },
+            )),
+            ..Default::default()
+        };
+        return finalize_sample(s, fixture, target);
+    }
+
+    // Marker — `datalab-to/marker` 40k★ GPU PDF→Markdown. `marker_single`
+    // writes markdown to stdout (with `--output_format markdown`). The
+    // tool downloads ~2GB of model weights on first run; subsequent runs are
+    // cached under `~/.cache/datalab/`. We use `--disable_image_extraction`
+    // to skip image decoding (we don't score images) and emit markdown.
+    if matches!(target, Target::Marker) {
+        let t = Instant::now();
+        let mut last_output = String::new();
+        for _ in 0..iterations {
+            match run_marker_subprocess(&fixture.path, timeout) {
+                Ok(text) => last_output = text,
+                Err(e) => return Err(e),
+            }
+        }
+        let s = Sample {
+            wall_secs: t.elapsed().as_secs_f64(),
+            output_text: last_output.clone(),
+            bytes_out: last_output.len() as u64,
+            output_graph: Some(from_ocr_markdown(
+                &last_output,
+                Source::Vlm {
+                    model: "datalab-to/marker".into(),
+                    version: "marker_single-subprocess".into(),
+                },
+            )),
+            ..Default::default()
+        };
+        return finalize_sample(s, fixture, target);
+    }
+
+    // Docling — `docling-project/docling` 68k★ MIT doc-AI framework. The
+    // `docling` CLI writes a `<name>.md` next to the input file (or to
+    // `--output`); we read that back. Docling downloads its own model
+    // weights on first run (~1.5GB).
+    if matches!(target, Target::Docling) {
+        let t = Instant::now();
+        let mut last_output = String::new();
+        for _ in 0..iterations {
+            match run_docling_subprocess(&fixture.path, timeout) {
+                Ok(text) => last_output = text,
+                Err(e) => return Err(e),
+            }
+        }
+        let s = Sample {
+            wall_secs: t.elapsed().as_secs_f64(),
+            output_text: last_output.clone(),
+            bytes_out: last_output.len() as u64,
+            output_graph: Some(from_ocr_markdown(
+                &last_output,
+                Source::Vlm {
+                    model: "docling-project/docling".into(),
+                    version: "docling-subprocess".into(),
+                },
+            )),
+            ..Default::default()
+        };
+        return finalize_sample(s, fixture, target);
+    }
+
+    // Surya — `datalab-to/surya` 21k★ OCR + layout + reading order + tables
+    // in 90+ languages. The `surya_ocr` CLI requires a SuryaInferenceManager
+    // (auto-spawns vllm or llama-server); on first run it downloads model
+    // weights and starts a server. We surface whatever it emits as the model
+    // output. Honors SURYA_INFERENCE_BACKEND / SURYA_INFERENCE_URL env vars.
+    if matches!(target, Target::SuryaOcr) {
+        let t = Instant::now();
+        let mut last_output = String::new();
+        for _ in 0..iterations {
+            match run_surya_subprocess(&fixture.path, timeout) {
+                Ok(text) => last_output = text,
+                Err(e) => return Err(e),
+            }
+        }
+        let s = Sample {
+            wall_secs: t.elapsed().as_secs_f64(),
+            output_text: last_output.clone(),
+            bytes_out: last_output.len() as u64,
+            output_graph: Some(from_ocr_markdown(
+                &last_output,
+                Source::Vlm {
+                    model: "datalab-to/surya".into(),
+                    version: "surya_ocr-subprocess".into(),
                 },
             )),
             ..Default::default()
@@ -1201,12 +1318,15 @@ mod tests {
 
     #[test]
     fn target_enumeration_includes_liteparse_and_parsebench() {
-        // The full target list is 9 entries now. Adding/removing targets is a
+        // The full target list is 12 entries. Adding/removing targets is a
         // breaking change for downstream JSON consumers; this test guards that.
-        assert_eq!(Target::all().len(), 9);
+        assert_eq!(Target::all().len(), 12);
         let names: Vec<&str> = Target::all().iter().map(|t| t.name()).collect();
         assert!(names.contains(&"liteparse"));
         assert!(names.contains(&"parse-bench"));
+        assert!(names.contains(&"marker"));
+        assert!(names.contains(&"docling"));
+        assert!(names.contains(&"surya-ocr"));
     }
 }
 
@@ -1430,4 +1550,152 @@ fn run_parse_bench_subprocess(pdf_path: &Path, timeout: Duration) -> Result<Stri
         ));
     }
     Ok(String::from_utf8_lossy(&output.stdout).into_owned())
+}
+
+/// Drive `marker_single <pdf> --output_format markdown` as a subprocess.
+/// Returns the markdown the tool emitted. First call downloads ~2 GB of
+/// model weights into the datalab cache; subsequent calls are offline.
+fn run_marker_subprocess(pdf_path: &Path, timeout: Duration) -> Result<String> {
+    let mut cmd = std::process::Command::new("marker_single");
+    cmd.arg(pdf_path).arg("--output_format").arg("markdown");
+    if let Ok(disable_images) = std::env::var("MARKER_DISABLE_IMAGES") {
+        if disable_images == "1" {
+            cmd.arg("--disable_image_extraction");
+        }
+    }
+    cmd.stdout(Stdio::piped()).stderr(Stdio::null());
+    let mut child = cmd
+        .spawn()
+        .with_context(|| "marker_single not on PATH (pip install marker-pdf)")?;
+    let start = Instant::now();
+    loop {
+        if let Some(status) = child
+            .try_wait()
+            .with_context(|| "marker_single try_wait failed")?
+        {
+            let output = child
+                .wait_with_output()
+                .with_context(|| "marker_single wait_with_output failed")?;
+            if !status.success() {
+                return Err(anyhow!("marker_single failed: {status}"));
+            }
+            return Ok(String::from_utf8_lossy(&output.stdout).into_owned());
+        }
+        if start.elapsed() > timeout {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(anyhow!(
+                "marker_single exceeded timeout {}s",
+                timeout.as_secs_f64()
+            ));
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
+}
+
+/// Drive `docling <pdf> --output <tmpdir> --to md` and read back the produced
+/// `<pdf-stem>.md`. The `docling` CLI is heavy: first run downloads model
+/// weights (~1.5 GB) into the HF cache.
+fn run_docling_subprocess(pdf_path: &Path, timeout: Duration) -> Result<String> {
+    let tmp = std::env::temp_dir().join(format!(
+        "docling-{}-{}",
+        std::process::id(),
+        pdf_path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .unwrap_or("doc")
+    ));
+    std::fs::create_dir_all(&tmp).with_context(|| format!("create tmp {}", tmp.display()))?;
+    let mut cmd = std::process::Command::new("docling");
+    cmd.arg(pdf_path)
+        .arg("--output")
+        .arg(&tmp)
+        .arg("--to")
+        .arg("md")
+        .arg("--device")
+        .arg("cpu"); // CPU default; set DOCLING_DEVICE=cuda to override
+    cmd.stdout(Stdio::piped()).stderr(Stdio::null());
+    let mut child = cmd
+        .spawn()
+        .with_context(|| "docling not on PATH (pip install docling)")?;
+    let start = Instant::now();
+    let status_result: Result<bool> = loop {
+        if let Some(status) = child
+            .try_wait()
+            .with_context(|| "docling try_wait failed")?
+        {
+            // Drain the child's stdout/stderr so the pipe doesn't fill, but we
+            // don't need the bytes — docling writes the markdown to disk.
+            let _ = child
+                .wait_with_output()
+                .with_context(|| "docling wait_with_output failed")?;
+            break Ok(status.success());
+        }
+        if start.elapsed() > timeout {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(anyhow!(
+                "docling exceeded timeout {}s",
+                timeout.as_secs_f64()
+            ));
+        }
+        thread::sleep(Duration::from_millis(10));
+    };
+    let ok = status_result?;
+    if !ok {
+        return Err(anyhow!("docling failed"));
+    }
+    // Find the produced .md file. Docling writes `<pdf-stem>.md` into the output dir.
+    let stem = pdf_path
+        .file_stem()
+        .and_then(|s| s.to_str())
+        .unwrap_or("doc");
+    let md_path = tmp.join(format!("{stem}.md"));
+    if !md_path.exists() {
+        return Err(anyhow!(
+            "docling did not produce {} (expected markdown output)",
+            md_path.display()
+        ));
+    }
+    let body =
+        std::fs::read_to_string(&md_path).with_context(|| format!("read {}", md_path.display()))?;
+    let _ = std::fs::remove_dir_all(&tmp);
+    Ok(body)
+}
+
+/// Drive `surya_ocr <pdf>` as a subprocess. Surya spins up its own inference
+/// server (vllm or llama-server, controlled by `SURYA_INFERENCE_BACKEND` /
+/// `SURYA_INFERENCE_URL` env vars). Output is plain text. First run downloads
+/// model weights (~3 GB).
+fn run_surya_subprocess(pdf_path: &Path, timeout: Duration) -> Result<String> {
+    let mut cmd = std::process::Command::new("surya_ocr");
+    cmd.arg(pdf_path);
+    cmd.stdout(Stdio::piped()).stderr(Stdio::null());
+    let mut child = cmd
+        .spawn()
+        .with_context(|| "surya_ocr not on PATH (pip install surya-ocr)")?;
+    let start = Instant::now();
+    loop {
+        if let Some(status) = child
+            .try_wait()
+            .with_context(|| "surya_ocr try_wait failed")?
+        {
+            let output = child
+                .wait_with_output()
+                .with_context(|| "surya_ocr wait_with_output failed")?;
+            if !status.success() {
+                return Err(anyhow!("surya_ocr failed: {status}"));
+            }
+            return Ok(String::from_utf8_lossy(&output.stdout).into_owned());
+        }
+        if start.elapsed() > timeout {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(anyhow!(
+                "surya_ocr exceeded timeout {}s",
+                timeout.as_secs_f64()
+            ));
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
 }
