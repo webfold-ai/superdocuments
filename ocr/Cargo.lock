@@ -105,7 +105,7 @@ checksum = "330a5ed07fa54e4702c9d6c4174f74427fc0ef6e214bbd677ae50a5099946470"
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/lucas/apeiron.git?rev=da01485#da01485d24be8900824750431a70f19100bee200"
+source = "git+https://github.com/Ptyktos/apeiron.git?rev=a2b50938679888cba22e5174e8dce92dfb6414cc#a2b50938679888cba22e5174e8dce92dfb6414cc"
 
 [[package]]
 name = "arbitrary"
@@ -1041,7 +1041,7 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 [[package]]
 name = "hashtrinity"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/twn/ptyktos/hashtrinity.git#d656765b6ee7f85caff8c149e6a228df94fa7f80"
+source = "git+https://github.com/Ptyktos/hashtrinity?rev=2c36b995c82c073c71df7c28b14c62665d62cbf0#2c36b995c82c073c71df7c28b14c62665d62cbf0"
 dependencies = [
  "apeiron",
  "rustls",
@@ -2389,6 +2389,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "superdocuments"
 version = "0.8.1"
+source = "git+https://github.com/Ptyktos/superdocuments?rev=7fa4cdf47bc9436a1fe26d43bb5d1d88ed7c4be8#7fa4cdf47bc9436a1fe26d43bb5d1d88ed7c4be8"
 dependencies = [
  "encoding_rs",
  "hashtrinity",
@@ -2396,7 +2397,6 @@ dependencies = [
  "quick-xml",
  "serde",
  "serde_json",
- "transcode",
  "zip 2.4.2",
 ]
 
@@ -2719,14 +2719,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a"
 dependencies = [
  "once_cell",
-]
-
-[[package]]
-name = "transcode"
-version = "0.1.0"
-source = "git+https://github.com/Ptyktos/transcode?rev=d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae#d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae"
-dependencies = [
- "hashtrinity",
 ]
 
 [[package]]
@@ -3369,10 +3361,6 @@ dependencies = [
 ]
 
 [[patch.unused]]
-name = "sangdb"
-version = "0.1.0"
-
-[[patch.unused]]
 name = "ruler"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/twn/ptyktos/ruler.git?branch=main#bb42d5e698d03cdea5f91f9a2a3e308ed7cb1673"
+source = "git+https://gitlab.tas.twn.network/twn/ptyktos/ruler.git?rev=6994c74203641fecf16b0d7b147a950f0e1fae06#6994c74203641fecf16b0d7b147a950f0e1fae06"
