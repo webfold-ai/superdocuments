@@ -31,21 +31,34 @@ PDF native extraction, malformed-input/resource-limit checks, and Tesseract fall
 
 ## Where things live
 
-Superdocuments is one repo in a small set. Each kind of content has exactly one home:
+Superdocuments is one repo in a small set. Each kind of content has exactly one home.
+
+**Code**
 
 | Repo | Owns | Put here |
 |---|---|---|
-| [`webfold`](https://github.com/Ptyktos/webfold) | Web acquisition: fetch, crawl, headless browser + CDP server, SERP, proxy, `webfold` CLI and `webfold-mcp` | Anything that touches the network or a browser |
-| [`superdocuments`](https://github.com/Ptyktos/superdocuments) | Conversion: HTML → Markdown (`to_blocks`/`render`/`Template`), DOCX/PPTX/XLSX/ODF/EPUB/RTF/CSV, PDF parsing + OCR fallback, `DocumentGraph` | Any bytes → Markdown/structure code. Webfold re-exports it; only legacy XLS stays in webfold |
+| [`webfold`](https://github.com/Ptyktos/webfold) | Web acquisition: fetch, crawl, WARC, headless browser + CDP server, SERP/search, proxy, `webfold` CLI and `webfold-mcp` | Anything that touches the network, a browser or an archive |
+| [`superdocuments`](https://github.com/Ptyktos/superdocuments) | Conversion: HTML → Markdown (`to_blocks`/`render`/`Template`), DOCX/PPTX/XLSX/XLSB/ODF/EPUB/RTF/CSV, PDF parsing + OCR fallback, `DocumentGraph` | Any bytes → Markdown/structure code. Webfold re-exports it; only legacy XLS stays in webfold |
 | [`calamine-apeiron`](https://github.com/Ptyktos/calamine-apeiron) | Our calamine fork (Apeiron-backed workbook maps) | Spreadsheet-reader changes; used by webfold's XLS adapter |
 | [`hashtrinity`](https://github.com/Ptyktos/hashtrinity), [`apeiron`](https://github.com/Ptyktos/apeiron) | Base data structures | One pinned revision shared by every crate above |
-| [`webfold-bench`](https://github.com/Ptyktos/webfold-bench) | Web benchmarks: competitive (Firecrawl, Crawl4AI, OpenSERP, Steel, …), SERP, chaos/load, capacity | Measurements of fetching, crawling, browsing |
-| [`superdocuments-bench`](https://github.com/Ptyktos/superdocuments-bench) | Conversion/OCR benchmarks | Measurements of HTML/document/PDF conversion quality and speed |
-| [`hashtrinity-bench`](https://github.com/Ptyktos/hashtrinity-bench) | Base-structure benchmarks | Table/map microbenchmarks, block-signature hash comparisons |
-| [`arxiv-search`](https://github.com/Ptyktos/arxiv-search), [`youtube-transcript-mcp`](https://github.com/Ptyktos/youtube-transcript-mcp) | Public MIT MCP servers for arXiv and YouTube sources | Source-specific search/retrieval; webfold may consume their `-core` crates, never the reverse |
-| [`web-agents-marketing`](https://github.com/Ptyktos/web-agents-marketing) | Positioning, pitch and investor material | Anything written for buyers or investors. Every number it quotes links to a result file in a bench repo |
+| [`arxiv-search`](https://github.com/Ptyktos/arxiv-search), [`youtube-transcript-mcp`](https://github.com/Ptyktos/youtube-transcript-mcp) | Public MIT MCP servers for arXiv and YouTube sources | Source-specific retrieval; webfold may consume their `-core` crates, never the reverse |
 
-Rule of thumb: code lives where its dependencies are lightest, numbers live in a bench repo next to the raw results, and claims live in `web-agents-marketing` pointing at those numbers.
+**Evidence (benchmarks, evals, chaos).** [`ptyktos-evals`](https://github.com/Ptyktos/ptyktos-evals) is the index: its `registry.toml` maps every stack layer to the bench that covers it, the command, the baseline and the pass/fail thresholds. Each bench repo keeps its raw results next to its harness:
+
+- [`webfold-bench`](https://github.com/Ptyktos/webfold-bench) — web acquisition: competitive runs (Firecrawl, Crawl4AI, OpenSERP, Steel, Maxun), SERP, chaos/load, capacity; also the published conversion write-up (`bench/STRUCTURED-CONVERSION.md`, Tracks A–F)
+- [`superdocuments-bench`](https://github.com/Ptyktos/superdocuments-bench) — conversion and OCR quality/latency (new conversion benchmarks go here)
+- [`spbench`](https://github.com/Ptyktos/spbench) — the runner behind the conversion tracks (`webfold-structured/run.sh`) and persona-driven CDP task benchmarks
+- [`faultbox`](https://github.com/Ptyktos/faultbox) — fault injection: toxiproxy-compatible TCP chaos proxy plus process/container/VM chaos, used for the failure mode of every layer
+- [`hashtrinity-bench`](https://github.com/Ptyktos/hashtrinity-bench) — base data structures (tables, maps, signature hashing)
+- [`sangdb-bench`](https://github.com/Ptyktos/sangdb-bench) — sangdb store, ontology CRDT, replication, ClickBench-style analytics
+- [`relayfold-bench`](https://github.com/Ptyktos/relayfold-bench) — proxy load and latency vs nginx and others
+- [`memorybench`](https://github.com/Ptyktos/memorybench) — memory, retrieval, long-context
+- [`web-search-bench`](https://github.com/Ptyktos/web-search-bench) — web search and deep-research federation (WANDR, WideSearch, DeepSearchQA, Find-All Company, webarena, …)
+- [`agent-evals`](https://github.com/Ptyktos/agent-evals) — model evals (code, reasoning, safety, vision, …)
+
+**Claims.** [`web-agents-marketing`](https://github.com/Ptyktos/web-agents-marketing) holds positioning, pitch and investor material; every number it quotes links to a result file in one of the repos above.
+
+Rule of thumb: code lives where its dependencies are lightest, numbers live in a bench repo next to the raw results (indexed by ptyktos-evals), and claims live in `web-agents-marketing` pointing at those numbers.
 
 Conversion benchmarks (HTML fixtures, document formats, PDF/OCR) belong in [`superdocuments-bench`](https://github.com/Ptyktos/superdocuments-bench); the HTML/document tracks currently published in `webfold-bench/bench/STRUCTURED-CONVERSION.md` measure this crate's code.
 
