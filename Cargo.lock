@@ -337,7 +337,7 @@ checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 [[package]]
 name = "framefold"
 version = "0.1.0"
-source = "git+https://github.com/Ptyktos/framefold?rev=5447aca9839709cd110ce7ba3b5ddb001233031d#5447aca9839709cd110ce7ba3b5ddb001233031d"
+source = "git+https://github.com/Ptyktos/framefold?rev=5a097c2e2448640c79d43b37b9246d0f7baea0d4#5a097c2e2448640c79d43b37b9246d0f7baea0d4"
 dependencies = [
  "brotli",
  "rquickjs",
@@ -788,7 +788,7 @@ dependencies = [
 [[package]]
 name = "ruler"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/twn/ptyktos/ruler.git?rev=6994c74203641fecf16b0d7b147a950f0e1fae06#6994c74203641fecf16b0d7b147a950f0e1fae06"
+source = "git+https://github.com/Ptyktos/ruler?rev=6994c74203641fecf16b0d7b147a950f0e1fae06#6994c74203641fecf16b0d7b147a950f0e1fae06"
 
 [[package]]
 name = "rustc-hash"

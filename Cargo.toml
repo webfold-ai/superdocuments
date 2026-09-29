@@ -17,7 +17,7 @@ media-codecs = ["dep:transcode"]
 images = ["dep:transcode"]
 
 [dependencies]
-framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5447aca9839709cd110ce7ba3b5ddb001233031d", default-features = false, optional = true }
+framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5a097c2e2448640c79d43b37b9246d0f7baea0d4", default-features = false, optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
