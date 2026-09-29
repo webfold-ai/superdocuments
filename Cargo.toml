@@ -14,7 +14,8 @@ edition = "2021"
 rust-version = "1.88" # For zip
 
 [dependencies]
-apeiron = { path = "/home/ctown/orca/apeiron" }
+# Same GitHub revision hashtrinity pins, so a build holding both has one apeiron.
+apeiron = { git = "https://github.com/Ptyktos/apeiron", rev = "a2b50938679888cba22e5174e8dce92dfb6414cc" }
 log = "0.4"
 serde = "1.0"
 codepage = "0.1"
