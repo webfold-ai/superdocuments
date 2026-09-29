@@ -10,16 +10,21 @@ description = "Ptyktos shared document parsing and conversion APIs"
 default = []
 framefold = ["dep:framefold"]
 framefold-js = ["framefold", "framefold/js"]
-media-codecs = ["dep:transcode_media"]
+# Re-exports the Transcode image/audio/video codecs as `superdocuments::media_codecs`.
+media-codecs = ["dep:transcode"]
+# Embedded-image extraction in the PDF parser (`Document::images`, `PdfImage::to_png`): JPEG decode
+# and PNG encode go through Transcode.
+images = ["dep:transcode"]
 
 [dependencies]
 framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5447aca9839709cd110ce7ba3b5ddb001233031d", default-features = false, optional = true }
-transcode_media = { package = "transcode", git = "https://github.com/Ptyktos/transcode", rev = "f855e4217105863354f58c1d1c840685fff6e44b", optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
-hashtrinity = { git = "https://gitlab.tas.twn.network/twn/ptyktos/hashtrinity.git", features = ["syntax"] }
-transcode = { git = "https://github.com/Ptyktos/transcode", rev = "d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae" }
+hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c82c073c71df7c28b14c62665d62cbf0", features = ["syntax"] }
+# Media codecs only, behind `images` / `media-codecs`. The HTML and PDF document code that used to
+# come from Transcode's `doc` module (not part of the GitHub Transcode) now lives in this crate.
+transcode = { git = "https://github.com/Ptyktos/transcode", rev = "f855e4217105863354f58c1d1c840685fff6e44b", optional = true }
 # `lopdf` (pure-Rust PDF parser, MIT) — used by the AcroForm repair lift from
 # LiteParse. It walks pages + annotations without going through Transcode.
 lopdf = "0.34"
@@ -27,3 +32,4 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 [dev-dependencies]
+

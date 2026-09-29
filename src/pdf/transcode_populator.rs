@@ -15,7 +15,7 @@ use std::fs;
 use std::io;
 use std::path::Path;
 
-use transcode::doc::pdf::Document;
+use crate::pdf::parser::Document;
 
 use super::geometry::{ComplexityReason, OutlineTarget, PageComplexityStats, ParsedPage, TextItem};
 
@@ -52,11 +52,11 @@ pub fn geometry_from_transcode(path: impl AsRef<Path>) -> io::Result<Vec<PageGeo
     populate_geometry(&doc)
 }
 
-fn parse_document(bytes: &[u8]) -> Result<Document, transcode::doc::pdf::PdfError> {
+fn parse_document(bytes: &[u8]) -> Result<Document, crate::pdf::parser::PdfError> {
     Document::parse(bytes)
 }
 
-fn io_err(e: transcode::doc::pdf::PdfError) -> io::Error {
+fn io_err(e: crate::pdf::parser::PdfError) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidData, format!("transcode: {e:?}"))
 }
 
@@ -69,19 +69,19 @@ fn populate_geometry(doc: &Document) -> io::Result<Vec<PageGeometry>> {
         .object(doc.root())
         .and_then(|o| doc.resolve(o))
         .and_then(|o| match o {
-            transcode::doc::pdf::Object::Dict(d) => d.get(&"Pages".to_string()).cloned(),
+            crate::pdf::parser::Object::Dict(d) => d.get(&"Pages".to_string()).cloned(),
             _ => None,
         })
         .and_then(|pages| match pages {
-            transcode::doc::pdf::Object::Ref(n, _g) => doc.object(n).cloned(),
+            crate::pdf::parser::Object::Ref(n, _g) => doc.object(n).cloned(),
             p => Some(p),
         })
         .and_then(|pages| match pages {
-            transcode::doc::pdf::Object::Dict(d) => d.get(&"Count".to_string()).cloned(),
+            crate::pdf::parser::Object::Dict(d) => d.get(&"Count".to_string()).cloned(),
             _ => None,
         })
         .and_then(|c| match c {
-            transcode::doc::pdf::Object::Int(n) => Some(n as usize),
+            crate::pdf::parser::Object::Int(n) => Some(n as usize),
             _ => None,
         })
         .unwrap_or(boxes.len());
@@ -137,33 +137,33 @@ fn read_page_media_box(doc: &Document, _index: usize) -> (f32, f32) {
     // Walk the catalog: root -> /Pages -> /Kids[i] -> /MediaBox.
     let root_obj = doc.object(doc.root());
     let root = match root_obj.and_then(|o| doc.resolve(o)) {
-        Some(transcode::doc::pdf::Object::Dict(d)) => d,
+        Some(crate::pdf::parser::Object::Dict(d)) => d,
         _ => return (0.0, 0.0),
     };
     let pages = match root.get(&"Pages".to_string()) {
-        Some(transcode::doc::pdf::Object::Ref(n, _)) => doc.object(*n),
+        Some(crate::pdf::parser::Object::Ref(n, _)) => doc.object(*n),
         _ => None,
     };
     let pages = match pages {
-        Some(transcode::doc::pdf::Object::Dict(d)) => d,
-        Some(transcode::doc::pdf::Object::Array(_)) => return (0.0, 0.0), // flat
+        Some(crate::pdf::parser::Object::Dict(d)) => d,
+        Some(crate::pdf::parser::Object::Array(_)) => return (0.0, 0.0), // flat
         _ => return (0.0, 0.0),
     };
     // /Kids is an array of refs.
     let kids = match pages.get(&"Kids".to_string()) {
-        Some(transcode::doc::pdf::Object::Array(a)) => a.clone(),
+        Some(crate::pdf::parser::Object::Array(a)) => a.clone(),
         _ => return (0.0, 0.0),
     };
     let first_page_num: Option<u32> = kids.first().and_then(|k| {
-        if let &transcode::doc::pdf::Object::Ref(n, _g) = k {
+        if let &crate::pdf::parser::Object::Ref(n, _g) = k {
             Some(n)
         } else {
             None
         }
     });
     if let Some(page_num) = first_page_num {
-        if let Some(transcode::doc::pdf::Object::Dict(page)) = doc.object(page_num) {
-            if let Some(transcode::doc::pdf::Object::Array(mb)) = page.get(&"MediaBox".to_string())
+        if let Some(crate::pdf::parser::Object::Dict(page)) = doc.object(page_num) {
+            if let Some(crate::pdf::parser::Object::Array(mb)) = page.get(&"MediaBox".to_string())
             {
                 if mb.len() == 4 {
                     let _x = number_from_object(&mb[0]).unwrap_or(0.0);
@@ -178,10 +178,10 @@ fn read_page_media_box(doc: &Document, _index: usize) -> (f32, f32) {
     (0.0, 0.0)
 }
 
-fn number_from_object(obj: &transcode::doc::pdf::Object) -> Option<f64> {
+fn number_from_object(obj: &crate::pdf::parser::Object) -> Option<f64> {
     match obj {
-        transcode::doc::pdf::Object::Int(n) => Some(*n as f64),
-        transcode::doc::pdf::Object::Real(n) => Some(*n),
+        crate::pdf::parser::Object::Int(n) => Some(*n as f64),
+        crate::pdf::parser::Object::Real(n) => Some(*n),
         _ => None,
     }
 }
@@ -285,7 +285,7 @@ fn collect_outline(doc: &Document, obj_num: u32, level: u8) -> Vec<OutlineTarget
     let Some(obj) = doc.object(obj_num) else {
         return out;
     };
-    let transcode::doc::pdf::Object::Dict(dict) = obj else {
+    let crate::pdf::parser::Object::Dict(dict) = obj else {
         return out;
     };
     let mut title = String::new();
@@ -295,7 +295,7 @@ fn collect_outline(doc: &Document, obj_num: u32, level: u8) -> Vec<OutlineTarget
     for (k, v) in dict.iter() {
         match k.as_str() {
             "Title" => {
-                if let transcode::doc::pdf::Object::Str(bytes) = v {
+                if let crate::pdf::parser::Object::Str(bytes) = v {
                     if let Ok(s) = std::str::from_utf8(bytes) {
                         title = s.to_string();
                     }
@@ -306,7 +306,7 @@ fn collect_outline(doc: &Document, obj_num: u32, level: u8) -> Vec<OutlineTarget
                 page_index = extract_page_index(doc, v);
             }
             "First" => {
-                if let transcode::doc::pdf::Object::Ref(n, _) = v {
+                if let crate::pdf::parser::Object::Ref(n, _) = v {
                     child_ref = Some(*n);
                 }
             }
@@ -337,14 +337,14 @@ fn collect_outline(doc: &Document, obj_num: u32, level: u8) -> Vec<OutlineTarget
         let Some(cur_obj) = doc.object(cur) else {
             break;
         };
-        let transcode::doc::pdf::Object::Dict(cur_dict) = cur_obj else {
+        let crate::pdf::parser::Object::Dict(cur_dict) = cur_obj else {
             break;
         };
         let next: Option<u32> = cur_dict
             .iter()
             .find(|(k, _)| k.as_str() == "Next")
             .and_then(|(_, v)| {
-                if let transcode::doc::pdf::Object::Ref(n, _) = v {
+                if let crate::pdf::parser::Object::Ref(n, _) = v {
                     Some(*n)
                 } else {
                     None
@@ -355,21 +355,21 @@ fn collect_outline(doc: &Document, obj_num: u32, level: u8) -> Vec<OutlineTarget
     out
 }
 
-fn extract_page_index(doc: &Document, dest: &transcode::doc::pdf::Object) -> i32 {
+fn extract_page_index(doc: &Document, dest: &crate::pdf::parser::Object) -> i32 {
     // Walk the array `[/Page /XYZ x y z]` or `[/D /Page ...]`. We only
     // care about the /Page reference.
     match dest {
-        transcode::doc::pdf::Object::Array(arr) => arr
+        crate::pdf::parser::Object::Array(arr) => arr
             .iter()
             .find_map(|item| match item {
-                transcode::doc::pdf::Object::Name(name) if name.as_str() == "Page" => None,
-                transcode::doc::pdf::Object::Ref(n, _) => Some(*n as i32),
+                crate::pdf::parser::Object::Name(name) if name.as_str() == "Page" => None,
+                crate::pdf::parser::Object::Ref(n, _) => Some(*n as i32),
                 _ => None,
             })
             .unwrap_or(0),
-        transcode::doc::pdf::Object::Ref(n, _) => {
+        crate::pdf::parser::Object::Ref(n, _) => {
             // Indirect: /A /D /Page — chase one ref.
-            if let Some(transcode::doc::pdf::Object::Dict(d)) = doc.object(*n) {
+            if let Some(crate::pdf::parser::Object::Dict(d)) = doc.object(*n) {
                 d.iter()
                     .find(|(k, _)| k.as_str() == "D")
                     .and_then(|(_, v)| extract_page_index(doc, v).into())
