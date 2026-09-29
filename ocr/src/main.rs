@@ -1464,6 +1464,38 @@ mod tests {
     }
 
     #[test]
+    fn with_synthetic_bboxes_populates_every_span() {
+        let md = "<!-- page 1 -->\n# Heading\n\nBody line.\n";
+        let g = from_ocr_markdown(md, ocr_source("test"));
+        let g2 = with_synthetic_bboxes(g);
+        assert_eq!(g2.pages.len(), 1);
+        let page = &g2.pages[0];
+        assert!(page.width_pts > 0.0);
+        assert!(page.height_pts > 0.0);
+        for region in &page.regions {
+            assert!(region.bbox.is_some(), "regions must have bboxes");
+            for span in &region.spans {
+                assert!(span.bbox.is_some(), "spans must have bboxes");
+            }
+        }
+    }
+
+    #[test]
+    fn with_synthetic_bboxes_y_decreases_top_to_bottom() {
+        let md = "<!-- page 1 -->\nLine 1\nLine 2\nLine 3\n";
+        let g = from_ocr_markdown(md, ocr_source("test"));
+        let g2 = with_synthetic_bboxes(g);
+        let ys: Vec<f64> = g2.pages[0]
+            .regions
+            .iter()
+            .filter_map(|r| r.bbox.as_ref().map(|b| b.y))
+            .collect();
+        for pair in ys.windows(2) {
+            assert!(pair[0] > pair[1], "y must decrease top-to-bottom: {} >= {}", pair[0], pair[1]);
+        }
+    }
+
+    #[test]
     fn table_cell_score_full_match_and_miss() {
         let ref_md = "<!-- page 1 -->\n| A | B |\n| --- | --- |\n| 1 | 2 |\n";
         let hyp_full = ref_md;
