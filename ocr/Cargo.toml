@@ -13,7 +13,7 @@ candle = ["dep:candle-core", "dep:candle-nn", "dep:candle-transformers", "dep:to
 [dependencies]
 # Pinned: results name the exact superdocuments revision they measured. For local iteration
 # against a sibling checkout, override with `[patch."https://github.com/Ptyktos/superdocuments"]`.
-superdocuments = { git = "https://github.com/Ptyktos/superdocuments", rev = "34654d1397d791a1adf33bb2b7c23d7854138a17" }
+superdocuments = { git = "https://github.com/Ptyktos/superdocuments", rev = "7fa4cdf47bc9436a1fe26d43bb5d1d88ed7c4be8" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "blocking"] }

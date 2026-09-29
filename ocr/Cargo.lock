@@ -2389,7 +2389,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 [[package]]
 name = "superdocuments"
 version = "0.8.1"
-source = "git+https://github.com/Ptyktos/superdocuments?rev=34654d1397d791a1adf33bb2b7c23d7854138a17#34654d1397d791a1adf33bb2b7c23d7854138a17"
+source = "git+https://github.com/Ptyktos/superdocuments?rev=7fa4cdf47bc9436a1fe26d43bb5d1d88ed7c4be8#7fa4cdf47bc9436a1fe26d43bb5d1d88ed7c4be8"
 dependencies = [
  "encoding_rs",
  "hashtrinity",
