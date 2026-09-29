@@ -2,7 +2,7 @@
 name = "candle-serve"
 version = "0.0.1"
 edition = "2021"
-description = "Sub HTTP service exposing /v1/chat/completions for the superdocuments-bench/ocr candle-qwen-serve target. Currently a deterministic stub; real Qwen2.5-VL inference is deferred."
+description = "Sub HTTP service exposing /v1/chat/completions backed by Qwen2 via candle-transformers. Default is a deterministic echo stub; CANDLE_STUB=0 loads Qwen/Qwen2.5-0.5B-Instruct from HuggingFace for real autoregressive inference."
 
 [dependencies]
 axum = "0.7"
@@ -12,6 +12,15 @@ serde_json = "1"
 anyhow = "1"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+# Candle + Qwen2 + tokenizers + safetensors + hf-hub. CPU-only by default;
+# candle 0.9's Qwen2 model is the full-precision forward path, not the GGUF
+# path (which has a different constructor signature).
+candle-core = "0.9"
+candle-nn = "0.9"
+candle-transformers = "0.9"
+tokenizers = "0.21"
+hf-hub = "0.3"
+safetensors = "0.5"
 
 [profile.release]
 opt-level = 3
