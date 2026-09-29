@@ -50,7 +50,7 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/lucas/apeiron.git?rev=da01485#da01485d24be8900824750431a70f19100bee200"
+source = "git+https://github.com/Ptyktos/apeiron.git?rev=a2b50938679888cba22e5174e8dce92dfb6414cc#a2b50938679888cba22e5174e8dce92dfb6414cc"
 
 [[package]]
 name = "arbitrary"
@@ -342,7 +342,7 @@ dependencies = [
  "brotli",
  "rquickjs",
  "ruler",
- "transcode 0.2.0",
+ "transcode",
 ]
 
 [[package]]
@@ -416,7 +416,7 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 [[package]]
 name = "hashtrinity"
 version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/twn/ptyktos/hashtrinity.git#d656765b6ee7f85caff8c149e6a228df94fa7f80"
+source = "git+https://github.com/Ptyktos/hashtrinity?rev=2c36b995c82c073c71df7c28b14c62665d62cbf0#2c36b995c82c073c71df7c28b14c62665d62cbf0"
 dependencies = [
  "apeiron",
  "rustls",
@@ -931,8 +931,7 @@ dependencies = [
  "quick-xml",
  "serde",
  "serde_json",
- "transcode 0.1.0",
- "transcode 0.2.0",
+ "transcode",
  "zip",
 ]
 
@@ -1036,14 +1035,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1d38ac1cf9b95face32296c0a3ede1fdc270627c9d9c02a7274dd6d960dc4d56"
 dependencies = [
  "winnow",
-]
-
-[[package]]
-name = "transcode"
-version = "0.1.0"
-source = "git+https://github.com/Ptyktos/transcode?rev=d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae#d8dc8ea95a000e8e87cbb3c0d3ce2eb226ba40ae"
-dependencies = [
- "hashtrinity",
 ]
 
 [[package]]
@@ -1325,12 +1316,3 @@ dependencies = [
  "log",
  "simd-adler32",
 ]
-
-[[patch.unused]]
-name = "ruler"
-version = "0.1.0"
-source = "git+https://gitlab.tas.twn.network/twn/ptyktos/ruler.git?branch=main#bb42d5e698d03cdea5f91f9a2a3e308ed7cb1673"
-
-[[patch.unused]]
-name = "sangdb"
-version = "0.1.0"

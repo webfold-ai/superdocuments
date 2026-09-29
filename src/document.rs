@@ -656,8 +656,8 @@ fn epub(data: &[u8]) -> Result<String, String> {
     let mut out = String::new();
     for name in chapters {
         let html = String::from_utf8_lossy(&entry(&mut zip, &name)?).into_owned();
-        let blocks = transcode::doc::html::to_blocks(&html, &format!("epub:///{name}"));
-        let chapter = transcode::doc::html::render(&blocks, None, 1).0;
+        let blocks = crate::html::to_blocks(&html, &format!("epub:///{name}"));
+        let chapter = crate::html::render(&blocks, None, 1).0;
         if !chapter.trim().is_empty() {
             if !out.is_empty() {
                 out.push_str("\n\n");

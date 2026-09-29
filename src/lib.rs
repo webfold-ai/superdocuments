@@ -14,7 +14,7 @@ pub use framefold as frame_renderer;
 
 /// Optional Transcode image/audio/video codec APIs (`media-codecs` feature).
 #[cfg(feature = "media-codecs")]
-pub use transcode_media as media_codecs;
+pub use transcode as media_codecs;
 
 /// A parsed worksheet. `index` is zero-based in workbook order.
 #[derive(Debug, Clone, PartialEq, Eq)]

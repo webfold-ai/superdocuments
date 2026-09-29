@@ -13,6 +13,7 @@ use std::time::{Duration, Instant};
 pub mod acroform;
 pub mod geometry;
 pub mod page_walker;
+pub mod parser;
 pub mod transcode_populator;
 
 /// Bound parser input before scanning attacker-controlled bytes.
@@ -55,8 +56,8 @@ pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
     }
     let parsed = catch_unwind(AssertUnwindSafe(|| {
         let document =
-            transcode::doc::pdf::Document::parse(bytes).map_err(|error| match error {
-                transcode::doc::pdf::PdfError::Parse(message) => message,
+            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+                crate::pdf::parser::PdfError::Parse(message) => message,
             })?;
         if document.object_count() == 0 || document.root() == 0 {
             return Err("PDF has no readable catalog".to_string());
