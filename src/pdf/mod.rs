@@ -12,6 +12,7 @@ use std::time::{Duration, Instant};
 
 pub mod acroform;
 pub mod geometry;
+pub mod outline;
 pub mod page_walker;
 pub mod parser;
 pub mod transcode_populator;
