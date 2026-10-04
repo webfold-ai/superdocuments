@@ -10,8 +10,8 @@ mod entities;
 pub mod extract;
 
 pub use extract::{
-    chunk_markdown, insert_with, links, render, resolve, to_blocks, to_blocks_with_headings,
-    Block, BlockWithHeadings, ChunkSeed, Template, TextChunk,
+    chunk_markdown, insert_with, links, norm_sig, render, resolve, to_blocks,
+    to_blocks_with_headings, Block, BlockWithHeadings, ChunkSeed, Template, TextChunk,
 };
 
 /// One content block from an HTML document.

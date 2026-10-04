@@ -1371,6 +1371,31 @@ impl DocFormat {
 //   - PPTX/EPUB/RTF: (block_idx, 0, 0)        → block text
 pub type DocCoord = (u32, u32, u32);
 
+/// The signature of one cell's text — the SAME hash an HTML [`crate::html::Block`] carries
+/// (whitespace collapsed, lowercased, FNV-1a), so a repeated boilerplate paragraph in a
+/// DOCX and the same sentence in a web page share one signature and one template vote.
+/// Office formats used to return bare Markdown strings with no stable per-cell identity;
+/// this adds one without changing what they return.
+pub fn cell_signature(text: &str) -> u64 {
+    crate::html::norm_sig(text)
+}
+
+/// Per-coordinate signatures for a lifted document, in render order.
+pub fn cell_signatures(doc: &LiftedDoc) -> Vec<(DocCoord, u64)> {
+    doc.order
+        .iter()
+        .map(|coord| {
+            (
+                *coord,
+                doc.cells
+                    .get(coord)
+                    .map(|text| cell_signature(text))
+                    .unwrap_or(0),
+            )
+        })
+        .collect()
+}
+
 /// The ancestor-heading path for every coordinate of a lifted document, in render order.
 ///
 /// A heading block carries its ANCESTORS' path (not its own title — that is the outline
@@ -2193,6 +2218,28 @@ mod tests {
         // Formats without heading levels report no paths rather than an error.
         assert!(heading_paths_bytes("csv", b"a,b\n1,2\n").unwrap().is_empty());
         assert!(heading_paths_bytes("pdf", b"x").unwrap().is_empty());
+    }
+
+    #[test]
+    fn office_cells_share_the_html_block_signature() {
+        // The same sentence in a DOCX paragraph and in an HTML <p> must hash identically,
+        // whitespace/case insensitively — that is what makes one template seed span formats.
+        let text = "Payment  is due  within thirty days.";
+        let xml = format!(
+            "<w:document><w:p><w:r><w:t>{text}</w:t></w:r></w:p></w:document>"
+        );
+        let doc = package(&[("word/document.xml", xml.as_str())]);
+        let lifted = lift(DocFormat::Docx, &doc).unwrap();
+        let sigs = cell_signatures(&lifted);
+        assert_eq!(sigs.len(), 1);
+        let html_blocks = crate::html::to_blocks("<p>Payment is due within thirty days.</p>", "");
+        assert_eq!(
+            sigs[0].1,
+            html_blocks[0].sig,
+            "office cell sig must equal the HTML block sig"
+        );
+        assert_eq!(sigs[0].1, cell_signature("  PAYMENT IS  DUE WITHIN   THIRTY DAYS."));
+        assert_ne!(cell_signature("Payment is due"), cell_signature("Payment was due"));
     }
 
     #[test]

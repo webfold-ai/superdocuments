@@ -724,7 +724,11 @@ fn attr_val(attrs: &[u8], key: &[u8]) -> String {
 }
 
 /// Signature: collapse whitespace + lowercase, hash. Identical chrome across pages → same sig.
-fn norm_sig(s: &str) -> u64 {
+///
+/// Public so the office lifters can give their cells the SAME signature as an HTML
+/// [`Block`]: `document::cell_signature` delegates here, so a repeated boilerplate
+/// paragraph in a DOCX and the same sentence in a web page hash identically.
+pub fn norm_sig(s: &str) -> u64 {
     let mut h = 0xcbf29ce484222325u64;
     let mut sp = true;
     for c in s.chars() {
