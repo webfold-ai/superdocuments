@@ -7,7 +7,7 @@
 //! move operators (document order = reading order), so there is no sort and no binary search.
 
 use super::inflate::zlib;
-use super::{Dict, Document, Object};
+use super::{page_marker, Dict, Document, Object};
 
 // ── token scanner over PDF bytes (the universal lexer, α = byte) ──
 struct Lex<'a> {
@@ -1011,17 +1011,29 @@ fn decode_str(s: &[u8]) -> String {
 
 impl Document {
     /// PDF → markdown with the **geometric** table gate (no seed). No sort, no bsearch — reading order.
+    ///
+    /// The output carries a `<!-- page N -->` marker (the exact form `pdf::tesseract_ocr` emits)
+    /// before every page's text, including pages that carry no text layer at all. That marker is
+    /// the only page anchor a downstream consumer needs to recover page ranges without re-parsing
+    /// the PDF (see `pdf::split_page_markers` and `graph::from_native_markdown`). Use
+    /// [`Document::markdown_flat`] for the pre-marker, single-blob projection.
     pub fn markdown(&self) -> String {
-        self.markdown_inner(None)
+        self.markdown_inner(None, true)
+    }
+
+    /// [`Document::markdown`] without page markers — the historical single-blob projection.
+    /// Kept additive so callers that diff whole documents keep working unchanged.
+    pub fn markdown_flat(&self) -> String {
+        self.markdown_inner(None, false)
     }
 
     /// PDF → markdown with the **region seed** gating which candidate regions become tables (the
-    /// model-is-a-seed, O(1) classify per candidate).
+    /// model-is-a-seed, O(1) classify per candidate). Emits page markers like [`Document::markdown`].
     pub fn markdown_seeded(&self, seed: &super::RegionSeed) -> String {
-        self.markdown_inner(Some(seed))
+        self.markdown_inner(Some(seed), true)
     }
 
-    fn markdown_inner(&self, seed: Option<&super::RegionSeed>) -> String {
+    fn markdown_inner(&self, seed: Option<&super::RegionSeed>, markers: bool) -> String {
         let mut out = String::new();
         let pdata = self.page_data();
         // The body font size = the char-weighted modal size (the THRONE of the size histogram); headings
@@ -1039,7 +1051,14 @@ impl Document {
             .max_by_key(|(_, c)| **c)
             .map(|(k, _)| *k as f64 / 2.0)
             .unwrap_or(0.0);
-        for (lines, (h, v)) in &pdata {
+        for (index, (lines, (h, v))) in pdata.iter().enumerate() {
+            // The page marker: identical in form to the OCR path's `<!-- page N -->`, so both
+            // extraction paths feed the same downstream page splitter. Emitted for EVERY page in
+            // the page tree, so marker count == page count even when a page has no text layer
+            // (the scanned-page hole the per-page OCR fallback then fills).
+            if markers {
+                out.push_str(&page_marker(index + 1));
+            }
             // generate candidates, then GATE by the seed (if given) or the geometric hand-read.
             let cands: Vec<Cand> = table_candidates(lines, h, v)
                 .into_iter()

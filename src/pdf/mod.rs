@@ -39,8 +39,15 @@ pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
 /// Parse PDF bytes and return layout-aware Markdown without spawning a process.
 ///
 /// The parser handles born-digital text PDFs and FlateDecode content streams. It
-/// does not OCR image-only pages; those produce no text. Malformed input and parser
-/// panics are returned as errors rather than escaping to the caller.
+/// does not OCR image-only pages; those produce no text (they still get their
+/// `<!-- page N -->` marker, so the hole is visible to a page-aware consumer).
+/// Malformed input and parser panics are returned as errors rather than escaping
+/// to the caller.
+///
+/// Every page's text is preceded by a `<!-- page N -->` marker — byte-identical to
+/// the marker the OCR path emits — so downstream consumers recover page ranges with
+/// [`split_page_markers`] without re-parsing the PDF. Use [`extract_markdown_flat`]
+/// for the historical marker-less projection.
 pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
     if bytes.len() > MAX_PDF_BYTES {
         return Err(io::Error::new(
@@ -66,6 +73,151 @@ pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
     }))
     .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
+}
+
+/// [`extract_markdown`] without the `<!-- page N -->` markers — the historical
+/// single-blob projection, kept additive so whole-document comparisons keep working.
+pub fn extract_markdown_flat(bytes: &[u8]) -> io::Result<String> {
+    if bytes.len() > MAX_PDF_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "PDF exceeds size limit",
+        ));
+    }
+    if !bytes.starts_with(b"%PDF-") {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid PDF header",
+        ));
+    }
+    let parsed = catch_unwind(AssertUnwindSafe(|| {
+        let document =
+            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+                crate::pdf::parser::PdfError::Parse(message) => message,
+            })?;
+        if document.object_count() == 0 || document.root() == 0 {
+            return Err("PDF has no readable catalog".to_string());
+        }
+        Ok(document.markdown_flat())
+    }))
+    .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
+    parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
+}
+
+// ─── page splitting / merging (the shared page-anchor convention) ─────────────────────────────
+
+/// One page's text, recovered from the `<!-- page N -->` markers that both the native
+/// parser ([`extract_markdown`]) and the Poppler + Tesseract path
+/// ([`tesseract_ocr`]) emit.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PageText {
+    pub number: u32,
+    /// The page body with its marker stripped. Empty for a page with no text layer.
+    pub text: String,
+}
+
+/// Split marker-bearing markdown into its pages. Text appearing before the first marker
+/// becomes page 1; a page with an empty body is still returned (that is how a scanned
+/// page shows up). Marker numbers are taken verbatim, so the result is exactly the page
+/// sequence the emitting parser walked; a trailing text run that is only whitespace does
+/// not invent a page.
+pub fn split_page_markers(markdown: &str) -> Vec<PageText> {
+    let mut pages: Vec<PageText> = Vec::new();
+    let mut current = String::new();
+    let mut number: Option<u32> = None;
+    for line in markdown.lines() {
+        if let Some(marker) = crate::pdf::parser::parse_page_marker(line) {
+            // A marker closes the page before it and opens the next one.
+            if number.is_some() || !current.trim().is_empty() {
+                pages.push(PageText {
+                    number: number.unwrap_or(1),
+                    text: std::mem::take(&mut current),
+                });
+            }
+            number = Some(marker);
+        } else {
+            current.push_str(line);
+            current.push('\n');
+        }
+    }
+    if number.is_some() || !current.trim().is_empty() {
+        pages.push(PageText {
+            number: number.unwrap_or(1),
+            text: current,
+        });
+    }
+    pages
+}
+
+/// Re-join pages into marker-bearing markdown (the inverse of [`split_page_markers`]).
+/// Pages with no text at all are skipped, matching the OCR path's convention of only
+/// emitting a marker for a page it actually recovered text for.
+pub fn merge_page_markers(pages: &[PageText]) -> String {
+    let mut out = String::new();
+    for page in pages {
+        let text = page.text.trim();
+        if text.is_empty() {
+            continue;
+        }
+        if !out.is_empty() {
+            out.push('\n');
+        }
+        out.push_str(&crate::pdf::parser::page_marker(page.number as usize));
+        out.push_str(text);
+    }
+    out
+}
+
+/// Does this page's text carry a real (non-image) text layer? The per-page half of
+/// [`has_embedded_text`] — same predicate, applied to one page instead of the document.
+pub fn page_has_embedded_text(text: &str) -> bool {
+    has_embedded_text(text)
+}
+
+/// Fill the pages that have no text layer from an injected per-page OCR callback, then
+/// merge every page back in page order with its marker.
+///
+/// The callback receives the 1-based page number and returns that page's recognized
+/// text. A page whose native text is already usable is never OCR'd — that is the whole
+/// point of the per-page decision: a mixed born-digital + scanned PDF pays OCR only for
+/// the scanned pages. If every OCR'd page fails, the first error is returned; a partial
+/// failure keeps the pages that did come back (fail-soft per page, fail-closed overall).
+pub fn merge_ocr_pages(
+    pages: &[PageText],
+    ocr_page: &mut impl FnMut(u32) -> io::Result<String>,
+) -> io::Result<String> {
+    let mut merged: Vec<PageText> = Vec::with_capacity(pages.len());
+    let mut errors = 0usize;
+    let mut attempted = 0usize;
+    let mut first_error: Option<io::Error> = None;
+    for page in pages {
+        if page_has_embedded_text(&page.text) {
+            merged.push(page.clone());
+            continue;
+        }
+        attempted += 1;
+        match ocr_page(page.number) {
+            Ok(text) => merged.push(PageText {
+                number: page.number,
+                text,
+            }),
+            Err(error) => {
+                errors += 1;
+                if first_error.is_none() {
+                    first_error = Some(error);
+                }
+                // Keep the page slot with whatever native text it had (usually nothing) so
+                // page numbering downstream stays aligned with the PDF.
+                merged.push(page.clone());
+            }
+        }
+    }
+    if attempted > 0 && errors == attempted {
+        return Err(first_error.unwrap_or_else(|| {
+            io::Error::new(io::ErrorKind::Other, "every OCR page failed")
+        }));
+    }
+    Ok(merge_page_markers(&merged))
 }
 
 /// Runtime limits for the optional Poppler + Tesseract OCR fallback.
@@ -854,10 +1006,67 @@ fn extract_file_with_ocr_inner(
     let native = extract_file(path);
     if let Ok(markdown) = &native {
         if has_embedded_text(markdown) {
+            // Per-page decision. A PDF can be born-digital on some pages and a scan on
+            // others; the old whole-document check short-circuited on the first alnum
+            // line and never OCR'd the scanned pages. If every page already has a text
+            // layer this is the unchanged native fast path; if only some pages lack text
+            // we OCR exactly those and merge; if every page lacks text we fall through
+            // to the whole-document render below (one pdftoppm pass is cheaper than N).
+            let pages = split_page_markers(markdown);
+            let missing: Vec<u32> = pages
+                .iter()
+                .filter(|page| !page_has_embedded_text(&page.text))
+                .map(|page| page.number)
+                .collect();
+            if missing.is_empty() {
+                if let Some(metrics) = metrics.as_ref() {
+                    metrics.record_native_hit();
+                }
+                return Ok(markdown.clone());
+            }
+            if missing.len() < pages.len() {
+                let ocr_pages = missing.len() as u64;
+                {
+                    let mut t = timings.lock().expect("phase timings mutex poisoned");
+                    t.used_ocr = true;
+                    t.pages_rendered = ocr_pages;
+                }
+                let mut recognize_seconds = 0.0f64;
+                let merged = {
+                    let mut per_page = |number: u32| {
+                        let started = Instant::now();
+                        let result = ocr_page_text(path, options, number);
+                        let seconds = started.elapsed().as_secs_f64();
+                        recognize_seconds += seconds;
+                        if let Some(metrics) = metrics.as_ref() {
+                            metrics.record_recognize(seconds, 0);
+                        }
+                        observer("page_recognize", seconds, 1, 0);
+                        result
+                    };
+                    merge_ocr_pages(&pages, &mut per_page)
+                };
+                let mut t = timings.lock().expect("phase timings mutex poisoned");
+                t.recognize_seconds = recognize_seconds;
+                t.bytes_ocr = merged.as_ref().map(|m| m.len() as u64).unwrap_or(0);
+                drop(t);
+                observer("recognize_done", recognize_seconds, ocr_pages, 0);
+                if merged.is_ok() {
+                    if let Some(metrics) = metrics.as_ref() {
+                        metrics.record_outcome(true, false);
+                    }
+                }
+                return merged.map_err(|ocr_error| match &native {
+                    Err(native_error) => io::Error::new(
+                        ocr_error.kind(),
+                        format!("PDF parser failed ({native_error}); OCR fallback failed ({ocr_error})"),
+                    ),
+                    Ok(_) => ocr_error,
+                });
+            }
             if let Some(metrics) = metrics.as_ref() {
                 metrics.record_native_hit();
             }
-            return Ok(markdown.clone());
         }
     }
     timings
@@ -887,6 +1096,81 @@ fn extract_file_with_ocr_inner(
             Ok(_) => Err(ocr_error),
         },
     }
+}
+
+/// OCR exactly one page: `pdftoppm -f N -l N` renders just that page, then Tesseract reads it.
+/// Same executables, same limits and same `<!-- page N -->` output convention as
+/// [`tesseract_ocr`], but scoped to a single page so a mixed born-digital + scanned PDF
+/// pays the render/recognize cost only on the pages that have no text layer.
+fn ocr_page_text(path: &Path, options: &OcrOptions, page: u32) -> io::Result<String> {
+    options.validate()?;
+    let metadata = std::fs::metadata(path)?;
+    if metadata.len() > MAX_PDF_BYTES as u64 {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "PDF exceeds size limit",
+        ));
+    }
+    if page == 0 || page > options.max_pages {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "page outside the configured OCR page range",
+        ));
+    }
+    let deadline = Instant::now() + options.timeout;
+    let temp = OcrTempDir::create()?;
+    let prefix = temp.0.join(format!("page{page}"));
+    let mut render = Command::new("pdftoppm");
+    render
+        .args(["-f", &page.to_string(), "-l", &page.to_string()])
+        .arg("-scale-to")
+        .arg(options.max_image_dimension.to_string())
+        .arg("-png")
+        .arg(path)
+        .arg(&prefix);
+    run_bounded(&mut render, deadline)?;
+    let image = std::fs::read_dir(&temp.0)?
+        .filter_map(Result::ok)
+        .map(|entry| entry.path())
+        .find(|path| {
+            path.extension().and_then(|s| s.to_str()) == Some("png")
+                && path
+                    .file_stem()
+                    .and_then(|s| s.to_str())
+                    .and_then(|s| s.strip_prefix(&format!("page{page}")))
+                    .map(|rest| rest.trim_start_matches('-'))
+                    .and_then(|digits| digits.parse::<u32>().ok())
+                    == Some(page)
+        })
+        .ok_or_else(|| {
+            io::Error::new(
+                io::ErrorKind::InvalidData,
+                format!("Poppler rendered no image for page {page}"),
+            )
+        })?;
+    let rendered_bytes = image.metadata().map(|m| m.len()).unwrap_or(0);
+    if rendered_bytes > MAX_OCR_RENDER_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "rendered PDF pages exceed the disk-space limit",
+        ));
+    }
+    let base = temp.0.join(format!("ocr-{page}"));
+    let mut ocr = Command::new("tesseract");
+    ocr.arg(&image)
+        .arg(&base)
+        .arg("-l")
+        .arg(&options.languages)
+        .args(["--psm", "3"]);
+    run_bounded(&mut ocr, deadline)?;
+    let text = read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
+    if text.len() > MAX_OCR_TOTAL_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "total OCR output exceeds size limit",
+        ));
+    }
+    Ok(text)
 }
 
 /// Force OCR for every page using the installed Poppler and Tesseract executables.
@@ -1244,6 +1528,327 @@ mod tests {
 
     fn minimal_text_pdf() -> Vec<u8> {
         pdf_with_stream(b"BT /F1 12 Tf 72 720 Td (Hello PDF) Tj ET", "")
+    }
+
+    /// Fixture PDF + the PDF page count its `pdfinfo` reports. The native parser must emit
+    /// exactly one `<!-- page N -->` marker per page, 1..=pages, for every one of them.
+    const PAGE_COUNTED_FIXTURES: &[(&str, u32)] = &[
+        ("borderless-table.pdf", 1),
+        ("mixed-native-and-scanned.pdf", 2),
+        ("reportlab-ascii85.pdf", 1),
+        ("reportlab-invoice.pdf", 1),
+        ("rotated-15deg.pdf", 1),
+        ("scanned-fuzzy.pdf", 1),
+        ("scanned-text.pdf", 1),
+        ("two-column.pdf", 1),
+    ];
+
+    fn fixture(name: &str) -> Vec<u8> {
+        let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures").join(name);
+        std::fs::read(&path).unwrap_or_else(|e| panic!("read fixture {name}: {e}"))
+    }
+
+    #[test]
+    fn native_parser_emits_one_page_marker_per_page_for_every_fixture() {
+        for (name, expected_pages) in PAGE_COUNTED_FIXTURES {
+            let markdown = extract_markdown(&fixture(name))
+                .unwrap_or_else(|e| panic!("extract {name}: {e}"));
+            let numbers: Vec<u32> = markdown
+                .lines()
+                .filter_map(crate::pdf::parser::parse_page_marker)
+                .collect();
+            let expected: Vec<u32> = (1..=*expected_pages).collect();
+            assert_eq!(numbers, expected, "page markers for {name}: {markdown:?}");
+            let marker_lines = markdown
+                .lines()
+                .filter(|line| line.starts_with("<!-- page "))
+                .count();
+            assert_eq!(marker_lines as u32, *expected_pages, "{name}");
+            let split = split_page_markers(&markdown);
+            assert_eq!(split.len(), *expected_pages as usize, "{name}");
+            assert_eq!(
+                split.iter().map(|p| p.number).collect::<Vec<_>>(),
+                expected,
+                "{name}"
+            );
+            // Round-trip: merging the split pages and re-splitting reproduces the page
+            // sequence (merge skips pages with no text at all, like the OCR path does).
+            let non_empty: Vec<u32> = split
+                .iter()
+                .filter(|p| page_has_embedded_text(&p.text))
+                .map(|p| p.number)
+                .collect();
+            assert_eq!(
+                split_page_markers(&merge_page_markers(&split))
+                    .iter()
+                    .map(|p| p.number)
+                    .collect::<Vec<_>>(),
+                non_empty,
+                "{name}"
+            );
+            for page in &split {
+                let again =
+                    split_page_markers(&merge_page_markers(std::slice::from_ref(page)));
+                if page_has_embedded_text(&page.text) {
+                    assert_eq!(again.first().map(|p| p.number), Some(page.number), "{name}");
+                } else {
+                    assert!(
+                        again.is_empty(),
+                        "a text-less page is not re-emitted: {name} page {}",
+                        page.number
+                    );
+                }
+            }
+        }
+    }
+
+    /// A two-page PDF: page 1 has a text layer, page 2 is a bare scan (no `/Contents`).
+    fn mixed_native_and_scanned_pdf() -> Vec<u8> {
+        let objects: Vec<Vec<u8>> = vec![
+            b"<< /Type /Catalog /Pages 2 0 R >>".to_vec(),
+            b"<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>".to_vec(),
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 6 0 R >>".to_vec(),
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << >> >>".to_vec(),
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".to_vec(),
+            {
+                let body = b"BT /F1 12 Tf 72 720 Td (Native page one) Tj ET";
+                let mut stream =
+                    format!("<< /Length {} >> stream\n", body.len()).into_bytes();
+                stream.extend_from_slice(body);
+                stream.extend_from_slice(b"\nendstream");
+                stream
+            },
+        ];
+        let mut bytes = b"%PDF-1.4\n".to_vec();
+        let mut offsets = Vec::new();
+        for (index, object) in objects.iter().enumerate() {
+            offsets.push(bytes.len());
+            bytes.extend_from_slice(format!("{} 0 obj\n", index + 1).as_bytes());
+            bytes.extend_from_slice(object);
+            bytes.extend_from_slice(b"\nendobj\n");
+        }
+        let xref = bytes.len();
+        bytes.extend_from_slice(
+            format!("xref\n0 {}\n0000000000 65535 f \n", objects.len() + 1).as_bytes(),
+        );
+        for offset in offsets {
+            bytes.extend_from_slice(format!("{offset:010} 00000 n \n").as_bytes());
+        }
+        bytes.extend_from_slice(
+            format!(
+                "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n",
+                objects.len() + 1
+            )
+            .as_bytes(),
+        );
+        bytes
+    }
+
+    #[test]
+    fn two_page_pdf_marks_every_page_and_per_page_ocr_fills_only_the_blank_one() {
+        let pdf = mixed_native_and_scanned_pdf();
+        let markdown = extract_markdown(&pdf).unwrap();
+        let pages = split_page_markers(&markdown);
+        assert_eq!(
+            pages.iter().map(|p| p.number).collect::<Vec<_>>(),
+            vec![1, 2],
+            "{markdown:?}"
+        );
+        assert!(pages[0].text.contains("Native page one"), "{markdown:?}");
+        assert!(
+            !page_has_embedded_text(&pages[1].text),
+            "page 2 is the scanned one: {:?}",
+            pages[1].text
+        );
+        let mut asked: Vec<u32> = Vec::new();
+        let merged = merge_ocr_pages(&pages, &mut |number| {
+            asked.push(number);
+            Ok(format!("OCR recovered page {number}"))
+        })
+        .unwrap();
+        assert_eq!(asked, vec![2], "only the text-less page is OCR'd");
+        let merged_pages = split_page_markers(&merged);
+        assert_eq!(
+            merged_pages.iter().map(|p| p.number).collect::<Vec<_>>(),
+            vec![1, 2]
+        );
+        assert!(merged_pages[0].text.contains("Native page one"));
+        assert!(merged_pages[1].text.contains("OCR recovered page 2"));
+    }
+
+    #[test]
+    fn scanned_fixture_pages_carry_a_marker_with_no_text() {
+        // A scanned page has no text layer: the marker must still be there so a downstream
+        // page-aware consumer can see the hole (and the per-page OCR fallback can fill it).
+        for name in ["scanned-text.pdf", "scanned-fuzzy.pdf"] {
+            let markdown = extract_markdown(&fixture(name)).unwrap();
+            let pages = split_page_markers(&markdown);
+            assert_eq!(pages.len(), 1, "{name}");
+            assert!(
+                !page_has_embedded_text(&pages[0].text),
+                "{name} should have no text layer, got {:?}",
+                pages[0].text
+            );
+        }
+    }
+
+    #[test]
+    fn extract_markdown_flat_drops_the_markers() {
+        let markdown = extract_markdown_flat(&fixture("reportlab-invoice.pdf")).unwrap();
+        assert!(!markdown.contains("<!-- page"), "{markdown:?}");
+        assert!(markdown.contains("Invoice Fixture 2025"), "{markdown:?}");
+        // Same text as the paged projection, minus the markers.
+        let paged = extract_markdown(&fixture("reportlab-invoice.pdf")).unwrap();
+        assert_eq!(
+            markdown,
+            paged.lines()
+                .filter(|l| !l.starts_with("<!-- page "))
+                .collect::<Vec<_>>()
+                .join("\n")
+                + "\n"
+        );
+    }
+
+    #[test]
+    fn split_and_merge_round_trip_mixed_native_and_scanned() {
+        let markdown = extract_markdown(&fixture("mixed-native-and-scanned.pdf")).unwrap();
+        let pages = split_page_markers(&markdown);
+        assert_eq!(pages.len(), 2);
+        assert_eq!(pages.iter().map(|p| p.number).collect::<Vec<_>>(), vec![1, 2]);
+        // The native parser cannot decode this adversarial fixture's text layer (it carries
+        // no recoverable text on either page), so both pages take the OCR branch: the fixture
+        // still proves the marker sequence is 1..=page_count, which is what downstream needs.
+        let missing: Vec<u32> = pages
+            .iter()
+            .filter(|p| !page_has_embedded_text(&p.text))
+            .map(|p| p.number)
+            .collect();
+        assert_eq!(missing, vec![1, 2]);
+    }
+
+    #[test]
+    fn merge_ocr_pages_only_ocrs_the_scanned_pages_and_keeps_order() {
+        let pages = split_page_markers(&extract_markdown(&mixed_native_and_scanned_pdf()).unwrap());
+        let mut asked: Vec<u32> = Vec::new();
+        let merged = merge_ocr_pages(&pages, &mut |number| {
+            asked.push(number);
+            Ok(format!("OCR text for page {number}"))
+        })
+        .unwrap();
+        assert_eq!(asked, vec![2], "only the page with no text layer is OCR'd");
+        let merged_pages = split_page_markers(&merged);
+        assert_eq!(
+            merged_pages.iter().map(|p| p.number).collect::<Vec<_>>(),
+            vec![1, 2]
+        );
+        assert!(merged_pages[0].text.contains("Native page one"));
+        assert!(merged_pages[1].text.contains("OCR text for page 2"));
+    }
+
+    #[test]
+    fn merge_ocr_pages_is_fail_soft_per_page_and_fail_closed_overall() {
+        let pages = vec![
+            PageText {
+                number: 1,
+                text: String::new(),
+            },
+            PageText {
+                number: 2,
+                text: "native body\n".into(),
+            },
+            PageText {
+                number: 3,
+                text: String::new(),
+            },
+        ];
+        // One page fails: the pages that came back survive, in order.
+        let merged = merge_ocr_pages(&pages, &mut |number| {
+            if number == 1 {
+                Err(io::Error::new(io::ErrorKind::Other, "boom"))
+            } else {
+                Ok(format!("ocr {number}"))
+            }
+        })
+        .unwrap();
+        let out = split_page_markers(&merged);
+        assert_eq!(out.iter().map(|p| p.number).collect::<Vec<_>>(), vec![2, 3]);
+        assert!(out[1].text.contains("ocr 3"));
+
+        // Every OCR'd page fails: the error surfaces.
+        let all_scanned = vec![PageText {
+            number: 1,
+            text: String::new(),
+        }];
+        let error = merge_ocr_pages(&all_scanned, &mut |_| {
+            Err(io::Error::new(io::ErrorKind::Other, "boom"))
+        })
+        .unwrap_err();
+        assert_eq!(error.kind(), io::ErrorKind::Other);
+    }
+
+    #[test]
+    #[ignore = "requires pdftoppm and tesseract on PATH"]
+    fn mixed_native_and_scanned_pdf_ocrs_only_the_scanned_page() {
+        // The adversarial fixture's page 2 is a deliberately noisy scan: its OCR text is
+        // lossy on this host (Tesseract returns "Senwrnrnea sester Page: OOF werk ..."
+        // for "Scanned raster page: OCR works on mixed documents."). The same lossy text
+        // comes out of the whole-document path, so the assertion here is the page STRUCTURE
+        // — two pages, in order, both carrying text — not the noisy OCR characters.
+        let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/mixed-native-and-scanned.pdf");
+        let markdown = extract_file_with_ocr(path).unwrap();
+        let pages = split_page_markers(&markdown);
+        assert_eq!(
+            pages.iter().map(|p| p.number).collect::<Vec<_>>(),
+            vec![1, 2],
+            "{markdown:?}"
+        );
+        assert!(pages[0].text.contains("selectable text"), "{markdown:?}");
+        assert!(!pages[1].text.trim().is_empty(), "{markdown:?}");
+    }
+
+    #[test]
+    #[ignore = "requires pdftoppm and tesseract on PATH"]
+    fn per_page_ocr_matches_whole_document_ocr_quality_on_a_one_page_scan() {
+        // Fair three-column check on the same held-out fixture (scanned-text.pdf):
+        //   quality  = normalized OCR text vs the fixture's authored phrase
+        //   baseline = the pre-existing whole-document `tesseract_ocr` path (same image,
+        //              same Tesseract build, one pdftoppm pass over 1 page)
+        // The per-page path must not be worse than the baseline on quality; it does one
+        // pdftoppm invocation per page, which for a multi-page scan is the cost of the
+        // scanned pages only.
+        let pdf = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/scanned-text.pdf");
+        let options = OcrOptions::default();
+        let normalize = |text: &str| {
+            text.chars()
+                .filter(|ch| ch.is_alphanumeric())
+                .flat_map(char::to_lowercase)
+                .collect::<String>()
+        };
+        let expected = normalize("Scanned fixture: OCR works.");
+
+        let baseline_started = Instant::now();
+        let baseline = tesseract_ocr(&pdf, &options).unwrap();
+        let baseline_seconds = baseline_started.elapsed().as_secs_f64();
+        // The baseline output carries the `<!-- page 1 -->` marker; compare page text only.
+        let baseline_text: String = baseline
+            .lines()
+            .filter(|line| !line.starts_with("<!-- page "))
+            .collect::<Vec<_>>()
+            .join("\n");
+
+        let per_page_started = Instant::now();
+        let per_page = ocr_page_text(&pdf, &options, 1).unwrap();
+        let per_page_seconds = per_page_started.elapsed().as_secs_f64();
+
+        println!("baseline whole-doc OCR: {baseline_seconds:.2}s, per-page OCR: {per_page_seconds:.2}s");
+        println!("baseline quality == expected: {}", normalize(&baseline_text) == expected);
+        println!("per-page quality == expected: {}", normalize(&per_page) == expected);
+        assert_eq!(normalize(&per_page), expected, "per-page OCR text: {per_page:?}");
+        assert_eq!(
+            normalize(&baseline_text),
+            expected,
+            "baseline whole-document OCR text: {baseline:?}"
+        );
     }
 
     #[test]

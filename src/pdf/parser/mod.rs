@@ -97,6 +97,23 @@ impl RegionSeed {
     }
 }
 
+/// The one page-anchor convention shared by both extraction paths: the native parser
+/// (`Document::markdown`) and the Poppler + Tesseract path (`pdf::tesseract_ocr`) both prefix
+/// every page's text with `<!-- page N -->`. Consumers split on this prefix to recover page
+/// ranges — see [`crate::pdf::split_page_markers`].
+pub const PAGE_MARKER_PREFIX: &str = "<!-- page ";
+
+/// The marker line (including its trailing newline) that precedes page `number`'s text.
+pub fn page_marker(number: usize) -> String {
+    format!("{PAGE_MARKER_PREFIX}{number} -->\n")
+}
+
+/// Parse a marker line's page number: `<!-- page 7 -->` → `Some(7)`, anything else → `None`.
+pub fn parse_page_marker(line: &str) -> Option<u32> {
+    let rest = line.trim().strip_prefix(PAGE_MARKER_PREFIX)?;
+    rest.trim_end_matches("-->").trim().parse().ok()
+}
+
 /// A PDF object — the universal value (document nodes and content-stream operands are the same type,
 /// the one Term). A dict is a [`Table`] (the Map face); a ref resolves through the object table in O(1).
 #[derive(Clone, Debug, PartialEq)]
@@ -407,6 +424,15 @@ mod tests {
     }
 
     // A PDF dict is the Map face — name → object, O(1) get.
+    #[test]
+    fn page_marker_round_trips() {
+        assert_eq!(page_marker(3), "<!-- page 3 -->\n");
+        assert_eq!(parse_page_marker("<!-- page 3 -->"), Some(3));
+        assert_eq!(parse_page_marker("<!-- page 12 -->"), Some(12));
+        assert_eq!(parse_page_marker("<!-- page x -->"), None);
+        assert_eq!(parse_page_marker("# heading"), None);
+    }
+
     #[test]
     fn dict_is_the_map_face() {
         let mut d: Dict = Table::new();
