@@ -36,6 +36,21 @@ pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
     extract_markdown(&bytes)
 }
 
+/// [`extract_file`] without the `<!-- page N -->` markers — the historical projection.
+pub fn extract_file_flat(path: impl AsRef<Path>) -> io::Result<String> {
+    let file = std::fs::File::open(path)?;
+    if file.metadata()?.len() > MAX_PDF_BYTES as u64 {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "PDF exceeds size limit",
+        ));
+    }
+    let mut bytes = Vec::new();
+    file.take(MAX_PDF_BYTES as u64 + 1)
+        .read_to_end(&mut bytes)?;
+    extract_markdown_flat(&bytes)
+}
+
 /// Parse PDF bytes and return layout-aware Markdown without spawning a process.
 ///
 /// The parser handles born-digital text PDFs and FlateDecode content streams. It
@@ -1032,8 +1047,20 @@ fn extract_file_with_ocr_inner(
                     t.pages_rendered = ocr_pages;
                 }
                 let mut recognize_seconds = 0.0f64;
+                // Same page-limit contract as the whole-document path: a scanned page past
+                // `max_pages` is not OCR'd, and the truncation is stated rather than silent.
+                let skipped_past_limit = missing
+                    .iter()
+                    .filter(|number| **number > options.max_pages)
+                    .count();
                 let merged = {
                     let mut per_page = |number: u32| {
+                        if number > options.max_pages {
+                            return Err(io::Error::new(
+                                io::ErrorKind::InvalidInput,
+                                "page outside the configured OCR page limit",
+                            ));
+                        }
                         let started = Instant::now();
                         let result = ocr_page_text(path, options, number);
                         let seconds = started.elapsed().as_secs_f64();
@@ -1046,6 +1073,18 @@ fn extract_file_with_ocr_inner(
                     };
                     merge_ocr_pages(&pages, &mut per_page)
                 };
+                let merged = merged.map(|mut markdown| {
+                    if skipped_past_limit > 0 {
+                        let mut t = timings.lock().expect("phase timings mutex poisoned");
+                        t.truncated = true;
+                        drop(t);
+                        markdown.push_str(&format!(
+                            "\n\n[OCR stopped at the configured limit of {} pages; later pages may be omitted]",
+                            options.max_pages
+                        ));
+                    }
+                    markdown
+                });
                 let mut t = timings.lock().expect("phase timings mutex poisoned");
                 t.recognize_seconds = recognize_seconds;
                 t.bytes_ocr = merged.as_ref().map(|m| m.len() as u64).unwrap_or(0);
@@ -1642,6 +1681,78 @@ mod tests {
             .as_bytes(),
         );
         bytes
+    }
+
+    /// A PDF whose first page carries text and whose remaining pages have no `/Contents` at
+    /// all (a stand-in for scanned pages).
+    fn blank_page_pdf(blank: usize) -> Vec<u8> {
+        assert!(blank >= 2);
+        // objects: 1 catalog, 2 pages, 3 font, 4 first-page content, then one page object each.
+        let mut objects: Vec<Vec<u8>> = vec![
+            b"<< /Type /Catalog /Pages 2 0 R >>".to_vec(),
+            format!("<< /Type /Pages /Kids [5 0 R 6 0 R 7 0 R] /Count {blank} >>").into_bytes(),
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".to_vec(),
+            {
+                let body = b"BT /F1 12 Tf 72 720 Td (Native page one) Tj ET";
+                let mut stream = format!("<< /Length {} >> stream\n", body.len()).into_bytes();
+                stream.extend_from_slice(body);
+                stream.extend_from_slice(b"\nendstream");
+                stream
+            },
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>".to_vec(),
+        ];
+        for _ in 1..blank {
+            objects.push(
+                b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << >> >>".to_vec(),
+            );
+        }
+        let mut bytes = b"%PDF-1.4\n".to_vec();
+        let mut offsets = Vec::new();
+        for (index, object) in objects.iter().enumerate() {
+            offsets.push(bytes.len());
+            bytes.extend_from_slice(format!("{} 0 obj\n", index + 1).as_bytes());
+            bytes.extend_from_slice(object);
+            bytes.extend_from_slice(b"\nendobj\n");
+        }
+        let xref = bytes.len();
+        bytes.extend_from_slice(
+            format!("xref\n0 {}\n0000000000 65535 f \n", objects.len() + 1).as_bytes(),
+        );
+        for offset in offsets {
+            bytes.extend_from_slice(format!("{offset:010} 00000 n \n").as_bytes());
+        }
+        bytes.extend_from_slice(
+            format!(
+                "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n",
+                objects.len() + 1
+            )
+            .as_bytes(),
+        );
+        bytes
+    }
+
+    #[test]
+    #[ignore = "requires pdftoppm on PATH"]
+    fn mixed_path_states_the_page_limit_instead_of_dropping_silently() {
+        // 3 pages: page 1 born-digital, pages 2 and 3 text-less. With max_pages = 2 only
+        // page 2 is rendered; page 3 is past the limit and the output SAYS so (the same
+        // contract the whole-document OCR path has), rather than silently omitting it.
+        let pdf = blank_page_pdf(3);
+        let dir = OcrTempDir::create().unwrap();
+        let path = dir.0.join("blank-pages-mixed.pdf");
+        std::fs::write(&path, &pdf).unwrap();
+        let mut options = OcrOptions::default();
+        options.max_pages = 2;
+        let markdown = extract_file_with_ocr_options(&path, &options).unwrap();
+        assert!(
+            markdown.contains("OCR stopped at the configured limit of 2 pages"),
+            "{markdown:?}"
+        );
+        let pages = split_page_markers(&markdown);
+        assert!(
+            pages.iter().any(|p| p.text.contains("Native page one")),
+            "the born-digital page survives: {markdown:?}"
+        );
     }
 
     #[test]
