@@ -146,6 +146,15 @@ fn heading_level(tag: &[u8]) -> Option<u8> {
 /// State carried through the one pass.
 struct Walk<'a> {
     blocks: Vec<Block>,
+    /// Ancestor heading path for each pushed block, parallel to `blocks`. Only filled when
+    /// `track_headings` is on (the [`to_blocks_with_headings`] pass); empty otherwise.
+    heading_paths: Vec<Vec<String>>,
+    /// Set when the caller asked for heading paths — the only cost difference between
+    /// [`to_blocks`] and [`to_blocks_with_headings`].
+    track_headings: bool,
+    /// Currently-open headings, outermost first: `(level, title)`. A heading of level L
+    /// truncates the stack at the last entry with level >= L before it opens.
+    open_headings: Vec<(u8, String)>,
     cur: String, // current inline buffer (the only per-block alloc beyond output)
     cur_links: Vec<String>,
     prefix: String,  // pending block prefix (#, -, > …)
@@ -171,6 +180,36 @@ impl Walk<'_> {
         }
         let id = attr_val(attrs, b"id");
         !id.is_empty() && self.revealed.iter().any(|r| *r == id.as_bytes())
+    }
+
+    /// Open a heading of `level`: a new same-or-shallower heading ends every heading at
+    /// that level or deeper, so the stack stays a true ancestor path (h1 → h2 → h2 gives
+    /// [h1, h2], not [h1, h2, h2]).
+    fn open_heading(&mut self, level: u8) {
+        while matches!(self.open_headings.last(), Some((l, _)) if *l >= level) {
+            self.open_headings.pop();
+        }
+        self.open_headings.push((level, String::new()));
+    }
+
+    /// Close the innermost open heading. The title is recorded during the flush (see
+    /// `flush`), so an unclosed heading still carries its text; here we only need the
+    /// caller to flush at the close tag.
+    fn close_heading(&mut self) {
+        self.flush();
+    }
+
+    fn heading_path(&self) -> Vec<String> {
+        if !self.track_headings {
+            return Vec::new();
+        }
+        // An open heading whose text has not been flushed yet has no title; it is not yet an
+        // ancestor of anything, and including it would put an empty string in the path.
+        self.open_headings
+            .iter()
+            .filter(|(_, title)| !title.is_empty())
+            .map(|(_, title)| title.clone())
+            .collect()
     }
 }
 
@@ -205,11 +244,26 @@ impl Walk<'_> {
                 format!("{}{body}", self.prefix)
             };
             let sig = norm_sig(body);
+            let heading_path = self.heading_path();
+            if !self.prefix.is_empty() && self.prefix.starts_with('#') {
+                // This block IS a heading: its text is the title of the innermost open
+                // heading. Filling it here (not at the close tag) means an UNCLOSED heading
+                // still gets its title, and the heading block itself is flushed while the
+                // slot is still empty — so it carries its ancestors' path, not its own.
+                if let Some(slot) = self.open_headings.last_mut() {
+                    if slot.1.is_empty() && !body.is_empty() {
+                        slot.1 = body.to_string();
+                    }
+                }
+            }
             self.blocks.push(Block {
                 md,
                 sig,
                 links: std::mem::take(&mut self.cur_links),
             });
+            if self.track_headings {
+                self.heading_paths.push(heading_path);
+            }
         }
         self.cur.clear();
         self.cur_links.clear();
@@ -246,11 +300,42 @@ impl Walk<'_> {
 
 /// **The one pass.** Walk the bytes; tags are byte-slices (no allocation); emit markdown blocks.
 pub fn to_blocks(html: &str, base: &str) -> Vec<Block> {
+    to_blocks_inner(html, base, false).0
+}
+
+/// A [`Block`] plus the heading path (ancestor headings, outermost first) that encloses it.
+///
+/// The heading block itself carries its ANCESTORS' path, not its own title — the same
+/// convention a document outline gives, and the one a tree builder wants when it hangs
+/// the heading under its parent.
+#[derive(Debug, Clone)]
+pub struct BlockWithHeadings {
+    pub block: Block,
+    pub heading_path: Vec<String>,
+}
+
+/// Like [`to_blocks`], but every block also carries the heading path in force where it was
+/// emitted. Same parse, same `Block` values — the heading path is additive metadata, so
+/// callers that only need `Block` keep using [`to_blocks`] and pay nothing.
+pub fn to_blocks_with_headings(html: &str, base: &str) -> Vec<BlockWithHeadings> {
+    let (blocks, paths) = to_blocks_inner(html, base, true);
+    debug_assert_eq!(blocks.len(), paths.len());
+    blocks
+        .into_iter()
+        .zip(paths)
+        .map(|(block, heading_path)| BlockWithHeadings { block, heading_path })
+        .collect()
+}
+
+fn to_blocks_inner(html: &str, base: &str, track_headings: bool) -> (Vec<Block>, Vec<Vec<String>>) {
     let b = html.as_bytes();
     let n = b.len();
     let mut i = 0;
     let mut w = Walk {
         blocks: Vec::new(),
+        heading_paths: Vec::new(),
+        track_headings,
+        open_headings: Vec::new(),
         cur: String::new(),
         cur_links: Vec::new(),
         prefix: String::new(),
@@ -342,7 +427,7 @@ pub fn to_blocks(html: &str, base: &str) -> Vec<Block> {
         }
     }
     w.flush();
-    w.blocks
+    (w.blocks, w.heading_paths)
 }
 
 fn handle_open(w: &mut Walk, tag: &[u8], attrs: &[u8], base: &str, self_close: bool) {
@@ -380,6 +465,7 @@ fn handle_open(w: &mut Walk, tag: &[u8], attrs: &[u8], base: &str, self_close: b
     }
     if let Some(lvl) = heading_level(tag) {
         w.flush();
+        w.open_heading(lvl);
         w.prefix = format!("{} ", "#".repeat(lvl as usize));
         return;
     }
@@ -488,7 +574,9 @@ fn handle_close(w: &mut Walk, tag: &[u8]) {
         return;
     }
     if heading_level(tag).is_some() {
-        w.flush();
+        // The heading's own block is flushed with its slot still empty (so it carries the
+        // ANCESTOR path); the blocks after it carry this heading's title.
+        w.close_heading();
         w.prefix.clear();
         return;
     }
@@ -1170,5 +1258,60 @@ mod tests {
         assert!(!md.contains("<p>"), "tag soup leaked: {md}");
         assert!(!md.contains("&#34;"), "entities leaked: {md}");
         assert!(md.trim().is_empty(), "nothing visible should remain: {md}");
+    }
+
+    #[test]
+    fn heading_paths_track_ancestors_per_block() {
+        let html = "<h1>Top</h1><p>Intro</p>\
+                    <h2>Section A</h2><p>Body A</p>\
+                    <h3>Detail A1</h3><p>Deep A</p>\
+                    <h2>Section B</h2><p>Body B</p>";
+        let blocks = to_blocks_with_headings(html, "https://example.com/");
+        let paths: Vec<(&str, &[String])> = blocks
+            .iter()
+            .map(|b| (b.block.md.as_str(), b.heading_path.as_slice()))
+            .collect();
+        let rendered: Vec<(String, Vec<String>)> = paths
+            .iter()
+            .map(|(md, path)| (md.to_string(), path.to_vec()))
+            .collect();
+        assert_eq!(
+            rendered,
+            vec![
+                // A heading block carries its ANCESTORS' path, not its own title.
+                ("# Top".to_string(), vec![]),
+                ("Intro".to_string(), vec!["Top".into()]),
+                ("## Section A".to_string(), vec!["Top".into()]),
+                ("Body A".to_string(), vec!["Top".into(), "Section A".into()]),
+                ("### Detail A1".to_string(), vec!["Top".into(), "Section A".into()]),
+                ("Deep A".to_string(), vec![
+                    "Top".into(),
+                    "Section A".into(),
+                    "Detail A1".into()
+                ]),
+                // A same-level heading closes the previous one: no "Detail A1" here.
+                ("## Section B".to_string(), vec!["Top".into()]),
+                ("Body B".to_string(), vec!["Top".into(), "Section B".into()]),
+            ]
+        );
+        // The block payload is identical to `to_blocks` — the path is additive metadata.
+        let plain: Vec<Block> = to_blocks(html, "https://example.com/");
+        let pairs: Vec<(&Block, &Block)> = plain.iter().zip(blocks.iter().map(|b| &b.block)).collect();
+        for (plain_block, headed) in pairs {
+            assert_eq!(plain_block.md, headed.md);
+            assert_eq!(plain_block.sig, headed.sig);
+            assert_eq!(plain_block.links, headed.links);
+        }
+    }
+
+    #[test]
+    fn heading_paths_handle_unclosed_and_shallower_headings() {
+        // Unclosed <h2>: every following block still sits under it.
+        let blocks = to_blocks_with_headings("<h1>T</h1><h2>S<p>body", "https://example.com/");
+        assert_eq!(blocks[2].heading_path, vec!["T".to_string(), "S".to_string()]);
+        // An <h1> after an <h2> closes the h2.
+        let blocks = to_blocks_with_headings("<h2>S</h2><p>x</p><h1>T</h1><p>y</p>", "https://example.com/");
+        assert_eq!(blocks[1].heading_path, vec!["S".to_string()]);
+        assert_eq!(blocks[3].heading_path, vec!["T".to_string()]);
     }
 }

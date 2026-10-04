@@ -1371,6 +1371,49 @@ impl DocFormat {
 //   - PPTX/EPUB/RTF: (block_idx, 0, 0)        → block text
 pub type DocCoord = (u32, u32, u32);
 
+/// The ancestor-heading path for every coordinate of a lifted document, in render order.
+///
+/// A heading block carries its ANCESTORS' path (not its own title — that is the outline
+/// convention, and the one a tree builder wants when it hangs the heading under its
+/// parent); every block after it carries the path including that heading. A new heading
+/// at level L closes every open heading at level >= L, so `h1 → h2 → h2` yields
+/// `[h1, h2]` and never `[h1, h2, h2]`.
+///
+/// Derived from the already-lifted `kinds` tags (3..=8 = heading 1..6) — no re-parse,
+/// no second pass over the XML, and nothing added to `LiftedDoc`'s layout.
+pub fn heading_paths(doc: &LiftedDoc) -> Vec<(DocCoord, Vec<String>)> {
+    let mut open: Vec<(u8, String)> = Vec::new();
+    let mut out = Vec::with_capacity(doc.order.len());
+    for coord in &doc.order {
+        let kind = doc.kinds.get(coord).copied().unwrap_or(0);
+        if kind >= 3 {
+            let level = kind - 2;
+            while matches!(open.last(), Some((l, _)) if *l >= level) {
+                open.pop();
+            }
+            let ancestors: Vec<String> = open.iter().map(|(_, title)| title.clone()).collect();
+            out.push((*coord, ancestors));
+            open.push((level, doc.cells.get(coord).cloned().unwrap_or_default().trim().to_string()));
+        } else {
+            let ancestors: Vec<String> = open.iter().map(|(_, title)| title.clone()).collect();
+            out.push((*coord, ancestors));
+        }
+    }
+    out
+}
+
+/// Heading paths for an in-memory office package, without materialising Markdown.
+///
+/// Only the formats whose lift records heading levels (DOCX / DOCM, via the `HeadingN`
+/// paragraph styles) produce paths; other formats return an empty vector rather than an
+/// error, so a caller can ask unconditionally.
+pub fn heading_paths_bytes(extension: &str, data: &[u8]) -> Result<Vec<(DocCoord, Vec<String>)>, String> {
+    match extension.to_ascii_lowercase().as_str() {
+        "docx" | "docm" => Ok(heading_paths(&lift(DocFormat::Docx, data)?)),
+        _ => Ok(Vec::new()),
+    }
+}
+
 /// Lifted document state. Parsed once, addressed by coordinate, never re-rendered in full.
 pub struct LiftedDoc {
     pub format: DocFormat,
@@ -2105,6 +2148,51 @@ mod tests {
             worksheet(xml, &["hello".into()]).unwrap(),
             vec![vec!["hello", "", "42"]]
         );
+    }
+
+    #[test]
+    fn docx_paragraphs_carry_ancestor_heading_paths() {
+        let doc = package(&[(
+            "word/document.xml",
+            "<w:document>\
+             <w:p><w:pPr><w:pStyle w:val=\"Heading1\"/></w:pPr><w:r><w:t>Annual Report</w:t></w:r></w:p>\
+             <w:p><w:r><w:t>Preamble</w:t></w:r></w:p>\
+             <w:p><w:pPr><w:pStyle w:val=\"Heading2\"/></w:pPr><w:r><w:t>Revenue</w:t></w:r></w:p>\
+             <w:p><w:r><w:t>Q1 was up.</w:t></w:r></w:p>\
+             <w:p><w:pPr><w:pStyle w:val=\"Heading3\"/></w:pPr><w:r><w:t>EMEA</w:t></w:r></w:p>\
+             <w:p><w:r><w:t>EMEA detail.</w:t></w:r></w:p>\
+             <w:p><w:pPr><w:pStyle w:val=\"Heading2\"/></w:pPr><w:r><w:t>Costs</w:t></w:r></w:p>\
+             <w:p><w:r><w:t>Costs detail.</w:t></w:r></w:p>\
+             </w:document>",
+        )]);
+        let paths = heading_paths_bytes("docx", &doc).unwrap();
+        let rendered: Vec<Vec<String>> = paths.iter().map(|(_, p)| p.clone()).collect();
+        let expected: Vec<Vec<&str>> = vec![
+            vec![],                                     // Annual Report
+            vec!["Annual Report"],                      // Preamble
+            vec!["Annual Report"],                      // Revenue
+            vec!["Annual Report", "Revenue"],           // Q1 was up.
+            vec!["Annual Report", "Revenue"],           // EMEA
+            vec!["Annual Report", "Revenue", "EMEA"],   // EMEA detail.
+            vec!["Annual Report"],                        // Costs (level 2 closes "Revenue")
+            vec!["Annual Report", "Costs"],             // Costs detail.
+        ];
+        assert_eq!(
+            rendered,
+            expected
+                .iter()
+                .map(|path| path.iter().map(|s| s.to_string()).collect::<Vec<_>>())
+                .collect::<Vec<_>>()
+        );
+        // Coordinates line up with the lifted render order (one coord per paragraph).
+        let lifted = lift(DocFormat::Docx, &doc).unwrap();
+        assert_eq!(
+            paths.iter().map(|(c, _)| *c).collect::<Vec<_>>(),
+            lifted.order
+        );
+        // Formats without heading levels report no paths rather than an error.
+        assert!(heading_paths_bytes("csv", b"a,b\n1,2\n").unwrap().is_empty());
+        assert!(heading_paths_bytes("pdf", b"x").unwrap().is_empty());
     }
 
     #[test]

@@ -10,8 +10,8 @@ mod entities;
 pub mod extract;
 
 pub use extract::{
-    chunk_markdown, insert_with, links, render, resolve, to_blocks, Block, ChunkSeed, Template,
-    TextChunk,
+    chunk_markdown, insert_with, links, render, resolve, to_blocks, to_blocks_with_headings,
+    Block, BlockWithHeadings, ChunkSeed, Template, TextChunk,
 };
 
 /// One content block from an HTML document.
@@ -42,6 +42,18 @@ pub fn parse(html: &str, base_url: &str) -> HtmlDocument {
         })
         .collect();
     HtmlDocument { blocks, markdown }
+}
+
+/// The same parse as [`parse`], with each block's ancestor heading path attached — the
+/// `h1`/`h2`… breadcrumbs in force where the block was emitted. Additive: nothing about
+/// `parse`'s output changes.
+pub fn parse_with_headings(html: &str, base_url: &str) -> (HtmlDocument, Vec<Vec<String>>) {
+    let document = parse(html, base_url);
+    let paths: Vec<Vec<String>> = to_blocks_with_headings(html, base_url)
+        .into_iter()
+        .map(|entry| entry.heading_path)
+        .collect();
+    (document, paths)
 }
 
 /// Convert HTML bytes to Markdown.
@@ -99,5 +111,21 @@ mod tests {
         let md = to_markdown_str("<NAV><p>chrome</p></NAV><p>Body</p>", "https://example.test/");
         assert!(md.contains("Body"), "{md}");
         assert!(!md.contains("chrome"), "{md}");
+    }
+
+    #[test]
+    fn parse_with_headings_returns_paths_alongside_the_same_document() {
+        let (document, paths) = parse_with_headings(
+            "<html><body><h1>Guide</h1><h2>Install</h2><p>Run it</p></body></html>",
+            "https://example.test/",
+        );
+        assert_eq!(paths.len(), document.blocks.len());
+        assert_eq!(paths[0], Vec::<String>::new());
+        assert_eq!(paths[1], vec!["Guide".to_string()]);
+        assert_eq!(
+            paths[2],
+            vec!["Guide".to_string(), "Install".to_string()]
+        );
+        assert!(document.markdown.contains("Run it"));
     }
 }

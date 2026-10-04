@@ -214,7 +214,7 @@ pub fn merge_ocr_pages(
     }
     if attempted > 0 && errors == attempted {
         return Err(first_error.unwrap_or_else(|| {
-            io::Error::new(io::ErrorKind::Other, "every OCR page failed")
+            io::Error::other("every OCR page failed")
         }));
     }
     Ok(merge_page_markers(&merged))

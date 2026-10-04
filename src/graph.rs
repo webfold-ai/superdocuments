@@ -787,6 +787,26 @@ mod tests {
     }
 
     #[test]
+    fn from_native_markdown_recovers_one_page_per_marker() {
+        // The native parser now emits `<!-- page N -->` per page, so the graph gets real
+        // per-page nodes instead of a synthesised single page 1.
+        let md = "<!-- page 1 -->\n# Title\n\nIntro body.\n\n\
+                  <!-- page 2 -->\n## Section\n\nSecond page body.\n";
+        let g = from_native_markdown(md, "superdocuments-native");
+        assert_eq!(
+            g.pages.iter().map(|p| p.number).collect::<Vec<_>>(),
+            vec![1, 2]
+        );
+        let page_two = &g.pages[1];
+        assert_eq!(page_two.regions.len(), 2, "{:?}", page_two.regions);
+        assert_eq!(page_two.regions[0].kind, RegionKind::Title);
+        assert_eq!(page_two.regions[1].kind, RegionKind::Paragraph);
+        assert_eq!(page_two.regions[1].text(), "Second page body.");
+        // Regions never leak across a page boundary.
+        assert!(g.pages[0].regions.iter().all(|r| r.text() != "Second page body."));
+    }
+
+    #[test]
     fn from_pdf_path_handles_mixed_native_and_scanned_fixture() {
         // Skip if the fixture doesn't exist — this test is for local runs that
         // have already generated adversarial PDFs; it should not fail in a clean
