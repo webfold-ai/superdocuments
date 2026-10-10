@@ -8,6 +8,7 @@ Private Ptyktos crate for reusable document parsing and conversion. It has no We
 - Structured XLSX/XLSM sheet names and cell rows via `superdocuments::xlsx::read_sheet` (including sparse-cell preservation).
 - Streaming conversion and the existing document-fold cache APIs.
 - The single-pass HTML-to-Markdown extractor (`superdocuments::html::{to_blocks, render, Template, links, resolve, chunk_markdown}`) plus structured blocks with Markdown, stable signatures, and extracted links via `superdocuments::html::parse`, independent of fetching and URL acquisition. Chrome subtrees (`nav`, `header`, `script`, …) are tracked on a tag stack, so a mismatched close tag cannot end a dropped subtree early.
+- Bounded EPUB extraction (spine-driven, O(1) manifest via `apeiron::Map`) — see [docs/EPUB.md](docs/EPUB.md) and [`superdocuments::epub`](src/epub.rs).
 - In-process PDF-to-Markdown parsing through the crate's own PDF parser (`superdocuments::pdf::parser`, `extract_markdown` / `extract_file`), with bounded input and panic containment; empty/unsupported text layers fall back to Poppler + Tesseract via `extract_file_with_ocr`.
 - Optional Transcode image/audio/video codec re-export (`media-codecs` feature) and embedded PDF image extraction (`images` feature), sharing the same pinned revision used by Framefold.
 
