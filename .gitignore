@@ -10,3 +10,12 @@ nyc.rs
 .vscode/
 examples/doc_*.rs
 .harness/
+
+# Agent scratch - never commit
+.harness/
+.box/
+.cache/
+__pycache__/
+*.pyc
+*.log
+
