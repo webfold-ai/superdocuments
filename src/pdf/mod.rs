@@ -68,6 +68,35 @@ pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
 }
 
+/// Parse PDF bytes into one Markdown string per page (page order; empty for pages with no
+/// selectable text). Same limits and panic containment as `extract_markdown`.
+pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
+    if bytes.len() > MAX_PDF_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "PDF exceeds size limit",
+        ));
+    }
+    if !bytes.starts_with(b"%PDF-") {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid PDF header",
+        ));
+    }
+    let parsed = catch_unwind(AssertUnwindSafe(|| {
+        let document =
+            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+                crate::pdf::parser::PdfError::Parse(message) => message,
+            })?;
+        if document.object_count() == 0 || document.root() == 0 {
+            return Err("PDF has no readable catalog".to_string());
+        }
+        Ok(document.markdown_pages())
+    }))
+    .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
+    parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
+}
+
 /// Runtime limits for the optional Poppler + Tesseract OCR fallback.
 #[derive(Clone, Debug)]
 pub struct OcrOptions {
@@ -854,10 +883,27 @@ fn extract_file_with_ocr_inner(
     let native = extract_file(path);
     if let Ok(markdown) = &native {
         if has_embedded_text(markdown) {
-            if let Some(metrics) = metrics.as_ref() {
-                metrics.record_native_hit();
+            // A document with some text-bearing pages and some without (a scan stapled to a
+            // born-digital file) must not lose the empty pages: OCR only those.
+            let empty_pages = std::fs::read(path)
+                .ok()
+                .and_then(|bytes| extract_pages_markdown(&bytes).ok())
+                .map(|pages| {
+                    pages
+                        .iter()
+                        .enumerate()
+                        .filter(|(_, p)| !has_embedded_text(p))
+                        .map(|(i, _)| i as u32 + 1)
+                        .collect::<Vec<u32>>()
+                })
+                .unwrap_or_default();
+            if empty_pages.is_empty() {
+                if let Some(metrics) = metrics.as_ref() {
+                    metrics.record_native_hit();
+                }
+                return Ok(markdown.clone());
             }
-            return Ok(markdown.clone());
+            return merge_native_and_ocr(path, options, &empty_pages, &mut observer, &timings);
         }
     }
     timings
@@ -902,6 +948,16 @@ pub fn tesseract_ocr(path: impl AsRef<Path>, options: &OcrOptions) -> io::Result
 pub fn tesseract_ocr_with_observer(
     path: impl AsRef<Path>,
     options: &OcrOptions,
+    observer: impl FnMut(&str, f64, u64, u64),
+) -> io::Result<String> {
+    tesseract_ocr_pages(path, options, None, observer)
+}
+
+/// `tesseract_ocr_with_observer` restricted to the listed 1-based pages (`None` = every page).
+fn tesseract_ocr_pages(
+    path: impl AsRef<Path>,
+    options: &OcrOptions,
+    only: Option<&[u32]>,
     mut observer: impl FnMut(&str, f64, u64, u64),
 ) -> io::Result<String> {
     options.validate()?;
@@ -952,6 +1008,9 @@ pub fn tesseract_ocr_with_observer(
         pages.push((number, path));
     }
     pages.sort_by_key(|(number, _)| *number);
+    if let Some(only) = only {
+        pages.retain(|(number, _)| only.contains(number));
+    }
     let rendered_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
         path.metadata()
             .map(|metadata| total.saturating_add(metadata.len()))
@@ -1065,6 +1124,49 @@ pub fn tesseract_ocr_with_observer(
         ));
     }
     Ok(output)
+}
+
+/// OCR the pages in `empty_pages` and splice the result between the native pages, in page order.
+fn merge_native_and_ocr(
+    path: &Path,
+    options: &OcrOptions,
+    empty_pages: &[u32],
+    observer: &mut impl FnMut(&str, f64, u64, u64),
+    timings: &Arc<Mutex<PhaseTimings>>,
+) -> io::Result<String> {
+    timings
+        .lock()
+        .expect("phase timings mutex poisoned")
+        .used_ocr = true;
+    let bytes = std::fs::read(path)?;
+    let native_pages = extract_pages_markdown(&bytes)?;
+    let ocr = tesseract_ocr_pages(path, options, Some(empty_pages), &mut *observer)?;
+    // `ocr` holds `<!-- page N -->\ntext` blocks separated by blank lines.
+    let mut ocr_by_page: std::collections::BTreeMap<u32, String> = Default::default();
+    for block in ocr.split("<!-- page ").skip(1) {
+        if let Some((num, rest)) = block.split_once(" -->\n") {
+            if let Ok(n) = num.trim().parse::<u32>() {
+                ocr_by_page.insert(n, rest.trim().to_string());
+            }
+        }
+    }
+    let mut out = String::new();
+    for (i, native) in native_pages.iter().enumerate() {
+        let number = i as u32 + 1;
+        let text = if has_embedded_text(native) {
+            native.trim().to_string()
+        } else {
+            ocr_by_page.get(&number).cloned().unwrap_or_default()
+        };
+        if text.is_empty() {
+            continue;
+        }
+        if !out.is_empty() {
+            out.push_str("\n\n");
+        }
+        out.push_str(&format!("<!-- page {number} -->\n{text}"));
+    }
+    Ok(out)
 }
 
 fn has_embedded_text(markdown: &str) -> bool {
@@ -1278,6 +1380,25 @@ mod tests {
         assert!(extract_file_with_ocr(path)
             .unwrap()
             .contains("Invoice Fixture 2025"));
+    }
+
+    #[test]
+    fn ascii85_fixture_is_read_natively_without_ocr() {
+        // extract_file never spawns OCR: this fails if the ASCII85Decode filter is not applied.
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
+        let native = extract_file(fixtures.join("reportlab-ascii85.pdf")).unwrap();
+        assert!(native.contains("Invoice Fixture 2025"), "{native:?}");
+        assert!(native.contains("INV-2048"), "{native:?}");
+    }
+
+    #[test]
+    fn mixed_fixture_keeps_native_page_and_ocrs_only_the_scan() {
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
+        let bytes = std::fs::read(fixtures.join("mixed-native-and-scanned.pdf")).unwrap();
+        let pages = extract_pages_markdown(&bytes).unwrap();
+        assert_eq!(pages.len(), 2);
+        assert!(has_embedded_text(&pages[0]), "{:?}", pages[0]);
+        assert!(!has_embedded_text(&pages[1]), "{:?}", pages[1]);
     }
 
     #[test]
