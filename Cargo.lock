@@ -1316,3 +1316,11 @@ dependencies = [
  "log",
  "simd-adler32",
 ]
+
+[[patch.unused]]
+name = "guardfold"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "modelfold"
+version = "0.1.0"
