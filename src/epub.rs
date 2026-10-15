@@ -267,7 +267,9 @@ pub fn opf_path(book: &Book) -> &str {
 /// items share: a duplicated id is never resolved to one of them.
 pub fn manifest_get<'a>(book: &'a Book, id: &str) -> Option<&'a ManifestItem> {
     match book.index.get_at(id) {
-        Some(&(first, false)) => book.items.get(first as usize),
+        // The table's answer is checked the way `spine_step` checks it: the position must be in
+        // range and the item stored there must carry this id. A wrong answer is a refusal.
+        Some(&(first, false)) => book.items.get(first as usize).filter(|it| it.id == id),
         _ => None,
     }
 }
@@ -682,6 +684,20 @@ mod tests {
         assert_eq!(ch1.media_type, "application/xhtml+xml");
         assert_eq!(ch1.href, "OEBPS/ch1.xhtml");
         assert!(manifest_get(&book, "missing").is_none());
+    }
+
+    #[test]
+    fn manifest_get_refuses_a_table_answer_naming_another_item() {
+        let bytes = build_epub();
+        let mut book = read(&bytes).expect("read should succeed");
+        let other = book
+            .items
+            .iter()
+            .position(|it| it.id != "ch1")
+            .expect("the package has a second item") as u32;
+        // A table answer that points "ch1" at a different item must be refused, not followed.
+        book.index.insert("ch1".to_string(), (other, false));
+        assert!(manifest_get(&book, "ch1").is_none());
     }
 
     #[test]
