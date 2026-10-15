@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Axiom audit for the superdocuments PDF proofs (mirrors webfold's proof/audit.py).
+"""Axiom audit for the superdocuments PDF and EPUB proofs (mirrors webfold's proof/audit.py).
 
 Every authored declaration of the audited modules (private lemmas and instances
 included) must have an empty transitive axiom set: no propext, Quot.sound,
@@ -8,7 +8,7 @@ a missing required declaration and a timeout all fail closed.
 
   proof/audit.py              full audit: spec, extraction (PdfMath) and refinement
                               (PdfProofs); fails while any of them is missing.
-  proof/audit.py --spec-only  the specification alone (PdfSpec, Constructive).
+  proof/audit.py --spec-only  the specifications alone (PdfSpec, EpubSpec, Constructive).
 """
 import pathlib
 import subprocess
@@ -55,8 +55,24 @@ reconRowGo_length reconRow_length reconRow_bytes pngDecode_rows unpredict_cases
 examples'''.split())
 
 
+# The EPUB specification's own theorems (G12; proof/EpubSpec.lean). Its kernels and their
+# refinement theorems join KERNELS/REFINES once proof/extract_epub.rs is extracted.
+EPUB_SPEC = set('''nth_lt childRole_cases childRole_item childRole_itemref childRole_leaf
+roleFrom_ignored roleOf_item_iff roleOf_itemref_iff itemAccept_spec
+firstIndex_sound firstIndex_least firstIndex_none firstIndex_of_mem countId_pos_of_mem
+countId_two_of_two countId_two_witness countId_one_unique
+resolveId_item_sound resolveId_item_unique resolveId_missing_iff resolveId_duplicate_iff
+resolveId_item_complete indexStep_fields buildFrom_eq lookupIndex_build
+resolveSpine_length resolveSpine_read_sound resolveSpine_missing resolveSpine_duplicate
+resolveSpine_read_nodup resolveSpine_repeated spineCode_read codeAt_eq codeAt_not_corrupt
+pathPart_clean hexVal_lt hexFields_spec pctDecode_plain pctDecode_length_le segKind_one
+segKind_two removeDots_clean removeDots_plain removeDots_parent_at_root resolveHref_absolute
+resolveHref_clean textBudget_accept textBudget_refuse renderGo_eq render_spec
+entryBoundOk_spec entryBoundOk_of examples'''.split())
+
+
 def required(full):
-    names = {'PdfSpec.' + n for n in SPEC}
+    names = {'PdfSpec.' + n for n in SPEC} | {'EpubSpec.' + n for n in EPUB_SPEC}
     if full:
         names |= {'pdf_math.' + n for n in KERNELS}
         names |= {'PdfProofs.' + n for n in REFINES}
@@ -65,8 +81,8 @@ def required(full):
 
 def main():
     full = '--spec-only' not in sys.argv[1:]
-    modules = ['Constructive', 'PdfSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
-    targets = ['PdfSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
+    modules = ['Constructive', 'PdfSpec', 'EpubSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
+    targets = ['PdfSpec', 'EpubSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
     subprocess.run(['lake', 'build'] + targets, cwd=ROOT, check=True, timeout=600)
     declarations = ', '.join('`' + n for n in sorted(required(full)))
     imports = '\n'.join('import ' + m for m in ['Lean'] + targets)
