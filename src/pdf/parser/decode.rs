@@ -272,6 +272,10 @@ pub(super) fn decode_within(d: &Dict, raw: &[u8], cap: usize) -> Option<Vec<u8>>
         return None;
     }
     let names = filter_names(d)?;
+    // A filter-free stream is its own decoded output, so it answers to the same ceiling.
+    if names.is_empty() && raw.len() > cap {
+        return None;
+    }
     let mut data = raw.to_vec();
     for (i, name) in names.iter().enumerate() {
         data = match name.as_str() {

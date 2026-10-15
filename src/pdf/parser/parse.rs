@@ -979,7 +979,13 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
         // A word broken at a line end (`compari-` / `son`) is one word: the hyphen is dropped and
         // the next line continues it. The next line must be ordinary text starting in lower case.
         let continues = lines.get(i + 1).is_some_and(|n| {
-            !n.text.starts_with('\u{0}') && n.text.starts_with(|c: char| c.is_lowercase())
+            let in_table = cands
+                .iter()
+                .enumerate()
+                .any(|(ci, c)| !emitted[ci] && n.y <= c.ytop + 2.0 && n.y >= c.ybot - 2.0);
+            !in_table
+                && !n.text.starts_with('\u{0}')
+                && n.text.starts_with(|c: char| c.is_lowercase())
         });
         match l.text.strip_suffix('-') {
             Some(stem) if !heading && continues && stem.ends_with(|c: char| c.is_alphabetic()) => {
@@ -1111,7 +1117,15 @@ impl Document {
             } else {
                 None
             };
-            out.put(name.clone(), FormText { content, own });
+            let matrix = form_matrix(d);
+            out.put(
+                name.clone(),
+                FormText {
+                    content,
+                    own,
+                    matrix,
+                },
+            );
         }
         out
     }
@@ -1535,6 +1549,51 @@ impl Pen {
 struct FormText {
     content: std::rc::Rc<Vec<u8>>,
     own: Option<(Table<String, CMap>, Table<String, u32>)>,
+    /// The form's `/Matrix` (form space to user space); the identity when absent or malformed.
+    matrix: [f64; 6],
+}
+
+/// A `/Matrix` array of six numbers, or the identity when it is absent or not six numbers.
+fn form_matrix(d: &Dict) -> [f64; 6] {
+    const IDENTITY: [f64; 6] = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
+    let Some(Object::Array(items)) = d.get(&"Matrix".to_string()) else {
+        return IDENTITY;
+    };
+    let nums: Vec<f64> = items
+        .iter()
+        .filter_map(|o| match o {
+            Object::Int(n) => Some(*n as f64),
+            Object::Real(r) => Some(*r),
+            _ => None,
+        })
+        .collect();
+    match <[f64; 6]>::try_from(nums.as_slice()) {
+        Ok(m) if m.iter().all(|v| v.is_finite()) => m,
+        _ => IDENTITY,
+    }
+}
+
+/// The inverse of an affine matrix, or `None` when it is singular.
+fn invert(m: &[f64; 6]) -> Option<[f64; 6]> {
+    let det = m[0] * m[3] - m[1] * m[2];
+    if det.abs() < 1e-12 || !det.is_finite() {
+        return None;
+    }
+    let (a, b, c, d) = (m[3] / det, -m[1] / det, -m[2] / det, m[0] / det);
+    Some([a, b, c, d, -(m[4] * a + m[5] * c), -(m[4] * b + m[5] * d)])
+}
+
+/// Map a form's lines from form space into the frame the page's own text is laid out in.
+fn place_form_lines(lines: &mut [Line], m: &[f64; 6]) {
+    for l in lines {
+        let x0 = l.segs.first().map_or(0.0, |s| s.0);
+        let y = l.y;
+        l.y = m[1] * x0 + m[3] * y + m[5];
+        for seg in &mut l.segs {
+            seg.0 = m[0] * seg.0 + m[2] * y + m[4];
+            seg.1 = m[0] * seg.1 + m[2] * y + m[4];
+        }
+    }
 }
 
 fn extract_text(
@@ -1544,6 +1603,11 @@ fn extract_text(
     forms: &Table<String, FormText>,
 ) -> Vec<Line> {
     let mut p = Pen::new();
+    // The CTM (`cm`/`q`/`Q`), tracked only to place Form XObjects: page text is laid out in text
+    // space, so a form's lines are mapped relative to the CTM in force at the last `BT`.
+    let mut ctm = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
+    let mut ctm_stack: Vec<[f64; 6]> = Vec::new();
+    let mut text_ctm = ctm;
     let mut font: Option<&CMap> = None; // the current font's CMap, set by Tf (the Map face)
     let mut ops: Vec<Tok> = Vec::new();
     let mut lex = Lex::new(content);
@@ -1552,7 +1616,28 @@ fn extract_text(
             let nums: Vec<f64> = ops.iter().filter_map(num).collect();
             let last_str = || ops.iter().rev().find(|t| matches!(t, Tok::Str(_)));
             match op.as_str() {
+                "cm" if nums.len() >= 6 => {
+                    let n = nums.len();
+                    ctm = matmul(
+                        &[
+                            nums[n - 6],
+                            nums[n - 5],
+                            nums[n - 4],
+                            nums[n - 3],
+                            nums[n - 2],
+                            nums[n - 1],
+                        ],
+                        &ctm,
+                    );
+                }
+                "q" => ctm_stack.push(ctm),
+                "Q" => {
+                    if let Some(c) = ctm_stack.pop() {
+                        ctm = c;
+                    }
+                }
                 "BT" => {
+                    text_ctm = ctm;
                     p.x = 0.0;
                     p.y = 0.0;
                     p.lx = 0.0;
@@ -1661,7 +1746,11 @@ fn extract_text(
                                 None => (fonts, imgs),
                             };
                             p.flush();
-                            let inner = extract_text(&form.content, ff, fi, &Table::new());
+                            let mut inner = extract_text(&form.content, ff, fi, &Table::new());
+                            // Form space -> user space at this paint point -> the page-text frame.
+                            let user = matmul(&form.matrix, &ctm);
+                            let placed = invert(&text_ctm).map_or(user, |inv| matmul(&user, &inv));
+                            place_form_lines(&mut inner, &placed);
                             p.lines.extend(inner);
                             p.started = false;
                         } else if let Some(obj) = imgs.get(n) {
@@ -2256,5 +2345,78 @@ impl Document {
             }
         }
         false
+    }
+}
+
+#[cfg(test)]
+mod review_tests {
+    use super::*;
+
+    fn form(content: &str, matrix: [f64; 6]) -> FormText {
+        FormText {
+            content: std::rc::Rc::new(content.as_bytes().to_vec()),
+            own: None,
+            matrix,
+        }
+    }
+
+    /// A form painted at two places lands at two places: its lines are mapped by the CTM at
+    /// each `Do` (and by its own `/Matrix`), not left in form space.
+    #[test]
+    fn form_lines_follow_the_invocation_transform() {
+        let mut forms = Table::new();
+        forms.put(
+            "Fm".to_string(),
+            form(
+                "BT /F1 12 Tf 10 20 Td (Stamp) Tj ET",
+                [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+            ),
+        );
+        let page = b"q 1 0 0 1 0 100 cm /Fm Do Q q 1 0 0 1 50 400 cm /Fm Do Q";
+        let lines = extract_text(page, &Table::new(), &Table::new(), &forms);
+        let ys: Vec<f64> = lines.iter().map(|l| l.y).collect();
+        assert_eq!(ys, vec![120.0, 420.0], "lines: {:?}", ys);
+        assert_eq!(lines[1].segs[0].0, 60.0);
+
+        // The form's own /Matrix composes with the CTM.
+        let mut scaled = Table::new();
+        scaled.put(
+            "Fm".to_string(),
+            form(
+                "BT /F1 12 Tf 10 20 Td (Stamp) Tj ET",
+                [2.0, 0.0, 0.0, 2.0, 0.0, 0.0],
+            ),
+        );
+        let lines = extract_text(b"/Fm Do", &Table::new(), &Table::new(), &scaled);
+        assert_eq!(lines[0].y, 40.0);
+    }
+
+    /// A hyphenated line before a detected table is not joined to the table's first row.
+    #[test]
+    fn dehyphenation_does_not_reach_into_a_table() {
+        let line = |text: &str, y: f64| Line {
+            text: text.to_string(),
+            size: 10.0,
+            bold: false,
+            y,
+            segs: vec![(0.0, 50.0, 0, false)],
+        };
+        let lines = vec![line("intro-", 300.0), line("alpha beta", 200.0)];
+        let cands = vec![Cand {
+            ytop: 205.0,
+            ybot: 195.0,
+            rowys: vec![205.0, 195.0],
+            colxs: vec![0.0, 25.0, 50.0],
+            feat: 0,
+            geo_ok: true,
+        }];
+        let mut out = String::new();
+        emit_lines(&mut out, &lines, &cands, 10.0);
+        assert!(out.starts_with("intro-\n"), "markdown: {out:?}");
+
+        // Ordinary text after it still joins the word.
+        let mut out = String::new();
+        emit_lines(&mut out, &lines, &[], 10.0);
+        assert!(out.starts_with("introalpha"), "markdown: {out:?}");
     }
 }

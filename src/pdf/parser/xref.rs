@@ -156,6 +156,51 @@ fn occurrences(bytes: &[u8], needle: &[u8]) -> Vec<usize> {
 }
 
 /// The first position in the sorted `positions` that is at or after `from`.
+/// The first `endobj` keyword at or after `from` that is a token: not inside a literal string
+/// (nested parentheses and backslash escapes), a hex string or a comment, and delimited on both
+/// sides. `None` when the input ends first, including inside an unterminated string.
+fn endobj_token(bytes: &[u8], from: usize) -> Option<usize> {
+    let delim = |b: u8| b.is_ascii_whitespace() || b"()<>[]{}/%".contains(&b);
+    let mut i = from;
+    while i < bytes.len() {
+        match bytes[i] {
+            b'(' => {
+                let mut depth = 1usize;
+                i += 1;
+                while i < bytes.len() && depth > 0 {
+                    match bytes[i] {
+                        b'\\' => i += 1,
+                        b'(' => depth += 1,
+                        b')' => depth -= 1,
+                        _ => {}
+                    }
+                    i += 1;
+                }
+                if depth > 0 {
+                    return None;
+                }
+            }
+            b'<' if bytes.get(i + 1) != Some(&b'<') => {
+                i += 1 + bytes[i + 1..].iter().position(|&b| b == b'>')? + 1;
+            }
+            b'%' => {
+                i += bytes[i..]
+                    .iter()
+                    .position(|&b| b == b'\r' || b == b'\n')
+                    .unwrap_or(bytes.len() - i);
+            }
+            b'e' if bytes[i..].starts_with(b"endobj")
+                && (i == from || delim(bytes[i - 1]))
+                && bytes.get(i + 6).is_none_or(|&b| delim(b)) =>
+            {
+                return Some(i);
+            }
+            _ => i += 1,
+        }
+    }
+    None
+}
+
 fn next_at(positions: &[usize], from: usize) -> Option<usize> {
     let i = positions.partition_point(|&p| p < from);
     positions.get(i).copied()
@@ -309,7 +354,13 @@ impl<'a> Loader<'a> {
     /// The end of an object body: the next `endobj`, or the end of the input. Lexing an object
     /// stops there, so an unterminated array or dictionary cannot run on through later objects.
     fn body_end(&self, from: usize) -> usize {
-        next_at(&self.endobj_at, from).unwrap_or(self.bytes.len())
+        let raw = next_at(&self.endobj_at, from).unwrap_or(self.bytes.len());
+        // Most bodies hold no string or comment before their `endobj`; only scan when one could.
+        let head = &self.bytes[from.min(raw)..raw];
+        if !head.iter().any(|b| matches!(b, b'(' | b'<' | b'%')) {
+            return raw;
+        }
+        endobj_token(self.bytes, from).unwrap_or(raw)
     }
 
     /// An integer object at the in-use offset of `num`, read without following streams (so a
