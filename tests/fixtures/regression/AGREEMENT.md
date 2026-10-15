@@ -55,3 +55,7 @@ Files that agree at 0.95 or more are not listed as explained. The regression set
 ## Verification note
 
 The markup-stripping figures were recomputed on the dumped texts of this run. For `reportlab-ascii85.pdf`, the earlier stripping of `</td><td>` without spaces fused adjacent cell words, which is an artifact of the check, not of the output. Replacing the tags with spaces leaves no word difference from poppler, so the only extra words are the tag names `table`, `tr` and `td`.
+
+## Re-verification on HEAD (2026-10-15, round 1)
+
+Re-ran `webfold-pdf-vs-poppler` (5 reps, one warm-up, `[patch]` copy against this worktree) over the 23 corpus files. Per-file agreement and character counts match the table above exactly; the aggregate is unchanged (23 of 23 extracted by both tools). The bit-flip sweep over the same 23 files (`SUPERDOCUMENTS_FUZZ_CORPUS`) passes with no panic and no hang. The proof-layer mutation control was re-run: `f1 <= 2#u64` in `proof/PdfMath.lean` planted as `f1 <= 3#u64` turns `proof/PdfProofs.lean:173` red, and restoring the file from git turns the build green again. `proof/audit.py` run over the PDF modules only (Constructive, PdfSpec, PdfMath, PdfProofs) reports AXIOM AUDIT PASS with 346 declarations. The full `lake build` and `audit.py` gates are not green at HEAD because of uncommitted EPUB work (`proof/EpubMath.lean`, `proof/extract_epub.rs`) that is outside this G18 change; the PDF targets build on their own.
