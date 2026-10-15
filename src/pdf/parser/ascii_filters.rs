@@ -1,6 +1,10 @@
 //! ASCII85Decode and ASCIIHexDecode (PDF 32000-1 §7.4.2, §7.4.3). Both are total on arbitrary
-//! bytes: malformed input yields `None` rather than a panic, and output size is bounded by the
-//! input (ASCII85 expands 5 bytes to at most 4, hex 2 to 1), so no cap is needed.
+//! bytes: malformed input yields `None` rather than a panic. Hex halves its input and ASCII85 maps
+//! five bytes to four, except that `z` maps one byte to four, so ASCII85 takes an explicit output
+//! ceiling.
+
+/// Ceiling on the decoded size of one ASCII85 stream (a run of `z` otherwise expands 4x).
+pub const MAX_ASCII85_OUT: usize = 64 * 1024 * 1024;
 
 #[inline]
 fn is_ws(b: u8) -> bool {
@@ -10,6 +14,11 @@ fn is_ws(b: u8) -> bool {
 /// ASCII85: `z` is four zero bytes, `~>` ends the data, a final group of n chars (2..=4) yields
 /// n-1 bytes. An optional leading `<~` is accepted.
 pub fn ascii85(input: &[u8]) -> Option<Vec<u8>> {
+    ascii85_capped(input, MAX_ASCII85_OUT)
+}
+
+/// `ascii85` with an explicit output ceiling; `None` once the output would exceed it.
+pub fn ascii85_capped(input: &[u8], max_out: usize) -> Option<Vec<u8>> {
     let mut data = input;
     while let [first, rest @ ..] = data {
         if is_ws(*first) {
@@ -21,7 +30,7 @@ pub fn ascii85(input: &[u8]) -> Option<Vec<u8>> {
     if data.starts_with(b"<~") {
         data = &data[2..];
     }
-    let mut out = Vec::with_capacity(data.len() / 5 * 4 + 4);
+    let mut out = Vec::with_capacity((data.len() / 5 * 4 + 4).min(max_out));
     let mut group = [0u8; 5];
     let mut n = 0usize;
     for &b in data {
@@ -34,6 +43,9 @@ pub fn ascii85(input: &[u8]) -> Option<Vec<u8>> {
                 if n != 0 {
                     return None;
                 }
+                if out.len() + 4 > max_out {
+                    return None;
+                }
                 out.extend_from_slice(&[0, 0, 0, 0]);
             }
             b'!'..=b'u' => {
@@ -42,6 +54,9 @@ pub fn ascii85(input: &[u8]) -> Option<Vec<u8>> {
                 if n == 5 {
                     let v = group.iter().fold(0u64, |a, &d| a * 85 + d as u64);
                     if v > u32::MAX as u64 {
+                        return None;
+                    }
+                    if out.len() + 4 > max_out {
                         return None;
                     }
                     out.extend_from_slice(&(v as u32).to_be_bytes());
@@ -115,6 +130,12 @@ mod tests {
         assert!(ascii85(b"s8W-!~>").is_some(), "max group 0xFFFFFFFF");
         assert!(ascii85(b"s8W-\"~>").is_none(), "group above 2^32-1 is invalid");
         assert!(ascii85(b"\x80~>").is_none());
+    }
+    #[test]
+    fn a85_z_runs_are_capped() {
+        let zs = vec![b'z'; 1000];
+        assert_eq!(ascii85_capped(&zs, 4000).unwrap().len(), 4000);
+        assert!(ascii85_capped(&zs, 3999).is_none());
     }
     #[test]
     fn hex_vectors() {
