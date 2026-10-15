@@ -1,0 +1,5 @@
+Inference Benchmark Smoke
+A two-line fixture that every inference target must recover.
+Line two: the second line is what tests reading-order agreement.
+
+

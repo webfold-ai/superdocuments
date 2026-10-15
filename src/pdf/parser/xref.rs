@@ -13,10 +13,15 @@
 //! headers as a last resort. The scan is bounded per object and keeps the last header of each
 //! number, which is the newest revision in file order.
 
-use super::decode::decode;
+use super::decode::{decode_within, inflates, MAX_DECODED};
 use super::parse::{is_delim, is_ws, parse_dict, parse_value, Lex, Tok};
 use super::pdf_kernels as k;
 use super::{Dict, Document, Object, PdfError, Table};
+use std::cell::Cell;
+
+/// Inflated bytes one document may produce across all of its xref streams and object streams. A
+/// failed inflate is charged its whole cap, so an attacker cannot repeat a bomb to multiply work.
+const DOC_DECODE_BUDGET: usize = 512 << 20;
 
 /// One cross-reference entry (Table 18), with the fields the kernels check.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -27,10 +32,12 @@ enum Entry {
     Null,
 }
 
-/// A decoded object stream: its bytes, `/First`, and the header's `(object number, offset)` pairs.
+/// A decoded object stream: its bytes, `/First`, whether it declares `/N`, and the header's
+/// `(object number, offset)` pairs.
 struct ObjStm {
     data: Vec<u8>,
     first: u64,
+    has_n: bool,
     pairs: Vec<(u32, u64)>,
 }
 
@@ -43,11 +50,25 @@ struct Loader<'a> {
     endstream_at: Vec<usize>,
     /// The governing entry of each object number. A newer section's entry is never replaced.
     map: Table<u32, Entry>,
-    /// Decoded object streams, and the index in `streams` of each one read.
+    /// Decoded object streams, and for each object-stream number the index in `streams` of its
+    /// load, or `None` when the load refused. A refusal is cached too: each stream is decoded at
+    /// most once per map generation.
     streams: Vec<ObjStm>,
-    stream_index: Table<u32, usize>,
+    stream_index: Table<u32, Option<usize>>,
     /// Trailer dictionaries, newest first.
     trailers: Vec<Dict>,
+    /// The section offsets already read, shared by the `/Prev` chain and `/XRefStm` links, so that
+    /// every link goes through `xref_prev_ok` against one visited set (chainOk).
+    visited: Table<u64, bool>,
+    /// Inflated bytes this document may still produce (see `DOC_DECODE_BUDGET`).
+    decode_budget: usize,
+    /// Stream decodes attempted, for the regression tests.
+    decode_attempts: usize,
+    /// Bytes of object bodies parsed so far, and the most that may be parsed. Each object body is
+    /// lexed to its `endobj`; the limit keeps a file of overlapping headers from being lexed
+    /// quadratically.
+    work: Cell<u64>,
+    work_limit: u64,
 }
 
 /// Skip white space from `pos`; the position of the first byte that is not white space.
@@ -245,16 +266,37 @@ fn read_be(data: &[u8], at: usize, width: u64) -> Option<u64> {
 
 impl<'a> Loader<'a> {
     fn new(bytes: &'a [u8]) -> Self {
+        let len = bytes.len() as u64;
         Loader {
             bytes,
-            len: bytes.len() as u64,
+            len,
             endobj_at: occurrences(bytes, b"endobj"),
             endstream_at: occurrences(bytes, b"endstream"),
             map: Table::new(),
             streams: Vec::new(),
             stream_index: Table::new(),
             trailers: Vec::new(),
+            visited: Table::new(),
+            decode_budget: DOC_DECODE_BUDGET,
+            decode_attempts: 0,
+            work: Cell::new(0),
+            work_limit: len.saturating_mul(16).saturating_add(4 << 20),
         }
+    }
+
+    /// Decode a stream against the document's remaining budget. Output is charged by its length;
+    /// a failed inflate is charged its cap.
+    fn decode_stream(&mut self, d: &Dict, raw: &[u8]) -> Option<Vec<u8>> {
+        let cap = self.decode_budget.min(MAX_DECODED);
+        self.decode_attempts += 1;
+        let out = decode_within(d, raw, cap);
+        let charge = match &out {
+            Some(v) => v.len(),
+            None if inflates(d) => cap,
+            None => 0,
+        };
+        self.decode_budget = self.decode_budget.saturating_sub(charge);
+        out
     }
 
     /// Set the entry of `num` unless a newer section already has one.
@@ -272,10 +314,13 @@ impl<'a> Loader<'a> {
 
     /// An integer object at the in-use offset of `num`, read without following streams (so a
     /// `/Length` reference cannot recurse).
-    fn direct_int(&self, num: u32) -> Option<u64> {
-        let &Entry::InUse { offset, .. } = self.map.get(&num)? else {
+    fn direct_int(&self, num: u32, gen: u16) -> Option<u64> {
+        let &Entry::InUse { offset, gen: have } = self.map.get(&num)? else {
             return None;
         };
+        if have != u64::from(gen) {
+            return None;
+        }
         if !k::xref_offset_ok(offset, self.len) {
             return None;
         }
@@ -307,7 +352,7 @@ impl<'a> Loader<'a> {
         }
         let length = match dict.get(&"Length".to_string()) {
             Some(Object::Int(n)) if *n >= 0 => Some(*n as u64),
-            Some(Object::Ref(m, _)) => self.direct_int(*m),
+            Some(Object::Ref(m, g)) => self.direct_int(*m, *g),
             _ => None,
         };
         if let Some(length) = length {
@@ -331,13 +376,22 @@ impl<'a> Loader<'a> {
     fn object_at(&self, pos: usize) -> Option<(u32, u64, Object)> {
         let (num, gen, body) = header_at(self.bytes, pos)?;
         let end = self.body_end(body);
+        let work = self.work.get().saturating_add((end - body) as u64);
+        if work > self.work_limit {
+            return None;
+        }
+        self.work.set(work);
         let mut lex = Lex::new(&self.bytes[..end]);
         lex.i = body;
         let first = lex.next()?;
         let obj = parse_value(&mut lex, first, 0);
         if let Object::Dict(d) = obj {
             lex.skip_ws();
-            if self.bytes[lex.i..].starts_with(b"stream") {
+            if self
+                .bytes
+                .get(lex.i..)
+                .is_some_and(|rest| rest.starts_with(b"stream"))
+            {
                 let raw = self.stream_raw(&d, lex.i)?;
                 return Some((num, gen, Object::Stream(d, raw)));
             }
@@ -390,14 +444,28 @@ impl<'a> Loader<'a> {
                 entries.push((num as u32, entry));
             }
         }
-        let mut lex = Lex::new(bytes);
-        lex.i = skip_ws(bytes, q);
+        // The trailer ends before the next `startxref`; lexing stops there rather than at end of
+        // file, and the scan is charged to the work budget like an object body.
+        let start = skip_ws(bytes, q);
+        let limit = bytes[start..]
+            .windows("startxref".len())
+            .position(|w| w == b"startxref")
+            .map_or(bytes.len(), |p| start + p);
+        let work = self.work.get().saturating_add((limit - start) as u64);
+        if work > self.work_limit {
+            return None;
+        }
+        self.work.set(work);
+        let mut lex = Lex::new(&bytes[..limit]);
+        lex.i = start;
         if lex.next()? != Tok::DictOpen {
             return None;
         }
         let trailer = parse_dict(&mut lex, 1);
         if let Some(xs) = dict_uint(&trailer, "XRefStm") {
-            if k::xref_offset_ok(xs, self.len) {
+            let seen = self.visited.has(&xs);
+            if k::xref_prev_ok(xs, self.len, seen) {
+                self.visited.put(xs, true);
                 self.stream_section(xs as usize);
             }
         }
@@ -415,7 +483,7 @@ impl<'a> Loader<'a> {
         let Object::Stream(d, raw) = obj else {
             return None;
         };
-        let data = decode(&d, &raw)?;
+        let data = self.decode_stream(&d, &raw)?;
         let w = w_array(&d)?;
         let (ok, row_len) = k::xref_row_len(w[0], w[1], w[2]);
         if !ok {
@@ -434,7 +502,8 @@ impl<'a> Loader<'a> {
                 let Some(num) = first.checked_add(j).filter(|n| *n <= u32::MAX as u64) else {
                     break 'sections;
                 };
-                let entry = Self::row_entry(&data, start as usize, w, self.len).unwrap_or(Entry::Null);
+                let entry =
+                    Self::row_entry(&data, start as usize, w, self.len).unwrap_or(Entry::Null);
                 self.insert_absent(num as u32, entry);
                 row += 1;
             }
@@ -446,12 +515,19 @@ impl<'a> Loader<'a> {
     /// An in-use offset outside the file resolves to null.
     fn row_entry(data: &[u8], start: usize, w: [u64; 3], file_len: u64) -> Option<Entry> {
         let w1_zero = w[0] == 0;
-        let f1 = if w1_zero { 0 } else { read_be(data, start, w[0])? };
+        let f1 = if w1_zero {
+            0
+        } else {
+            read_be(data, start, w[0])?
+        };
         let f2 = read_be(data, start + w[0] as usize, w[1])?;
         let f3 = read_be(data, start + (w[0] + w[1]) as usize, w[2])?;
         Some(match k::xref_entry_type(w1_zero, f1) {
             0 => Entry::Free,
-            1 if k::xref_offset_ok(f2, file_len) => Entry::InUse { offset: f2, gen: f3 },
+            1 if k::xref_offset_ok(f2, file_len) => Entry::InUse {
+                offset: f2,
+                gen: f3,
+            },
             1 => Entry::Null,
             2 => Entry::Compressed {
                 stream: f2,
@@ -464,14 +540,13 @@ impl<'a> Loader<'a> {
     /// Follow the chain of sections from `start`: each `/Prev` offset is read once, and only when
     /// it lies inside the file. `false` when the first section does not read.
     fn load_chain(&mut self, start: u64) -> bool {
-        let mut visited: Table<u64, bool> = Table::new();
         let mut next = Some(start);
         while let Some(off) = next {
-            let seen = visited.has(&off);
+            let seen = self.visited.has(&off);
             if !k::xref_prev_ok(off, self.len, seen) {
                 break;
             }
-            visited.put(off, true);
+            self.visited.put(off, true);
             let Some(trailer) = self.section_at(off as usize) else {
                 break;
             };
@@ -483,24 +558,43 @@ impl<'a> Loader<'a> {
 
     /// The `/Root` of the newest trailer that names one.
     fn root_num(&self) -> Option<u32> {
-        self.trailers.iter().find_map(|t| match t.get(&"Root".to_string()) {
-            Some(Object::Ref(r, _)) => Some(*r),
-            _ => None,
-        })
+        self.trailers
+            .iter()
+            .find_map(|t| match t.get(&"Root".to_string()) {
+                Some(Object::Ref(r, _)) => Some(*r),
+                _ => None,
+            })
     }
 
-    /// Decode the object stream `s` (generation 0, in use, in the file) and read its header. The
-    /// header is accepted by the header kernel before anything is allocated for its pairs.
+    /// Whether object stream `s` has a direct entry: in use, generation 0, inside the file.
+    fn stream_direct(&self, s: u32) -> bool {
+        matches!(
+            self.map.get(&s),
+            Some(&Entry::InUse { offset, gen }) if gen == 0 && k::xref_offset_ok(offset, self.len)
+        )
+    }
+
+    /// The object stream `s`, decoded and with its header read; `None` when it refuses. The load
+    /// (its success or its refusal) is cached, so a stream is decoded at most once.
     fn load_objstm(&mut self, s: u32) -> Option<usize> {
-        if let Some(&i) = self.stream_index.get(&s) {
-            return Some(i);
+        if let Some(&cached) = self.stream_index.get(&s) {
+            return cached;
         }
-        let &Entry::InUse { offset, gen } = self.map.get(&s)? else {
+        let loaded = self.read_objstm(s);
+        self.stream_index.put(s, loaded);
+        loaded
+    }
+
+    /// Decode the object stream `s` and read its header. The header is accepted by the header
+    /// kernel before anything is allocated for its pairs. A stream without `/N` is loaded with no
+    /// pairs and `has_n` false, so no object is ever read from it.
+    fn read_objstm(&mut self, s: u32) -> Option<usize> {
+        if !self.stream_direct(s) {
+            return None;
+        }
+        let &Entry::InUse { offset, .. } = self.map.get(&s)? else {
             return None;
         };
-        if gen != 0 || !k::xref_offset_ok(offset, self.len) {
-            return None;
-        }
         let (num, g, obj) = self.object_at(offset as usize)?;
         if num != s || g != 0 {
             return None;
@@ -508,9 +602,11 @@ impl<'a> Loader<'a> {
         let Object::Stream(d, raw) = obj else {
             return None;
         };
-        let n = dict_uint(&d, "N")?;
+        let declared_n = dict_uint(&d, "N");
+        let has_n = declared_n.is_some();
+        let n = declared_n.unwrap_or(0);
         let first = dict_uint(&d, "First")?;
-        let data = decode(&d, &raw)?;
+        let data = self.decode_stream(&d, &raw)?;
         let len = data.len() as u64;
         if !k::objstm_header_ok(first, len, n) {
             return None;
@@ -528,23 +624,34 @@ impl<'a> Loader<'a> {
             pairs.push((objnum as u32, off));
         }
         let idx = self.streams.len();
-        self.streams.push(ObjStm { data, first, pairs });
-        self.stream_index.put(s, idx);
+        self.streams.push(ObjStm {
+            data,
+            first,
+            has_n,
+            pairs,
+        });
         Some(idx)
     }
 
-    /// Object `num`, stored at `index` of object stream `s`. The index and extent kernels decide
-    /// whether the object lies inside the stream; a header that names another object refuses.
+    /// Object `num`, stored at `index` of object stream `s`. The reference kernel gates every
+    /// condition on the stream (its entry, self-reference, `/N`, the index); the extent kernel
+    /// decides whether the object lies inside the stream; the header must name `num`.
     fn load_compressed(&mut self, num: u32, s: u32, index: u64) -> Option<Object> {
-        if s == num {
+        let stream_direct = self.stream_direct(s);
+        // Only a stream with a direct entry is loaded at all.
+        let idx = if stream_direct {
+            self.load_objstm(s)
+        } else {
+            None
+        };
+        let (has_n, n) = match idx {
+            Some(i) => (self.streams[i].has_n, self.streams[i].pairs.len() as u64),
+            None => (false, 0),
+        };
+        if !k::objstm_ref_ok(stream_direct, s == num, has_n, n, index) {
             return None;
         }
-        let idx = self.load_objstm(s)?;
-        let st = &self.streams[idx];
-        let n = st.pairs.len() as u64;
-        if !k::objstm_ref_ok(true, false, true, n, index) {
-            return None;
-        }
+        let st = &self.streams[idx?];
         let i = index as usize;
         let (objnum, off) = st.pairs[i];
         if objnum != num {
@@ -577,7 +684,8 @@ impl<'a> Loader<'a> {
                     if stream > u32::MAX as u64 {
                         None
                     } else {
-                        self.load_compressed(num, stream as u32, index).map(|o| (o, 0))
+                        self.load_compressed(num, stream as u32, index)
+                            .map(|o| (o, 0))
                     }
                 }
                 _ => None,
@@ -598,7 +706,10 @@ impl<'a> Loader<'a> {
         let mut pos = 0usize;
         while let Some(p) = find_from(bytes, pos, b"obj") {
             pos = p + 3;
-            if bytes.get(p + 3).is_some_and(|&b| !(is_ws(b) || is_delim(b))) {
+            if bytes
+                .get(p + 3)
+                .is_some_and(|&b| !(is_ws(b) || is_delim(b)))
+            {
                 continue;
             }
             let Some((num, gen, start)) = header_before(bytes, p) else {
@@ -614,6 +725,8 @@ impl<'a> Loader<'a> {
                 );
             }
         }
+        // The object-stream cache belongs to the map it was read against: start it afresh.
+        self.stream_index = Table::new();
         let mut in_use: Vec<(u32, usize)> = Vec::new();
         for (num, entry) in self.map.iter() {
             if let Entry::InUse { offset, .. } = entry {

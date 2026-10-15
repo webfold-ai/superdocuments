@@ -111,18 +111,10 @@ const DIST_EXTRA: [u32; 30] = [
 
 fn fixed_huffs() -> (Huff, Huff) {
     let mut ll = [0u16; 288];
-    for i in 0..144 {
-        ll[i] = 8;
-    }
-    for i in 144..256 {
-        ll[i] = 9;
-    }
-    for i in 256..280 {
-        ll[i] = 7;
-    }
-    for i in 280..288 {
-        ll[i] = 8;
-    }
+    ll[..144].fill(8);
+    ll[144..256].fill(9);
+    ll[256..280].fill(7);
+    ll[280..288].fill(8);
     (Huff::new(&ll), Huff::new(&[5u16; 30]))
 }
 
@@ -175,7 +167,7 @@ pub fn inflate(data: &[u8]) -> Option<Vec<u8>> {
 /// size, hard-capped at 256 MiB. 256× admits legitimately highly-compressible streams while rejecting
 /// bombs in O(1). When the decoded size IS known (an image's `stride·h`), pass it via `inflate_capped`.
 fn default_cap(data: &[u8]) -> usize {
-    data.len().saturating_mul(256).min(256 << 20).max(1 << 20)
+    data.len().saturating_mul(256).clamp(1 << 20, 256 << 20)
 }
 
 /// Raw DEFLATE with an explicit output ceiling (the streaming-law bound: output bounded, never a

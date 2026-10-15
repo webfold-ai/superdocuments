@@ -108,7 +108,7 @@ def objstm_header_ok
     else ok (n <= 4611686018427387904#u64)
 
 /-- [pdf_math::objstm_span]:
-    Source: 'proof/extract_pdf.rs', lines 89:0-105:1
+    Source: 'proof/extract_pdf.rs', lines 89:0-111:1
     Visibility: public -/
 def objstm_span
   (first : Std.U64) (off : Std.U64) (has_next : Bool) (next_off : Std.U64)
@@ -146,7 +146,7 @@ def objstm_span
       else ok (false, 0#u64, 0#u64)
 
 /-- [pdf_math::xref_prev_ok]:
-    Source: 'proof/extract_pdf.rs', lines 108:0-110:1
+    Source: 'proof/extract_pdf.rs', lines 114:0-116:1
     Visibility: public -/
 def xref_prev_ok
   (offset : Std.U64) (file_len : Std.U64) (seen : Bool) : Result Bool := do
@@ -155,7 +155,7 @@ def xref_prev_ok
   else ok false
 
 /-- [pdf_math::stream_extent]:
-    Source: 'proof/extract_pdf.rs', lines 113:0-119:1
+    Source: 'proof/extract_pdf.rs', lines 119:0-125:1
     Visibility: public -/
 def stream_extent
   (start : Std.U64) (length : Std.U64) (file_len : Std.U64) :
@@ -171,7 +171,7 @@ def stream_extent
   else ok (false, 0#u64)
 
 /-- [pdf_math::predictor_kind]:
-    Source: 'proof/extract_pdf.rs', lines 122:0-132:1
+    Source: 'proof/extract_pdf.rs', lines 128:0-138:1
     Visibility: public -/
 def predictor_kind (p : Std.U64) : Result Std.U8 := do
   if p = 1#u64
@@ -187,7 +187,7 @@ def predictor_kind (p : Std.U64) : Result Std.U8 := do
       else ok 3#u8
 
 /-- [pdf_math::png_geometry]:
-    Source: 'proof/extract_pdf.rs', lines 136:0-153:1
+    Source: 'proof/extract_pdf.rs', lines 142:0-159:1
     Visibility: public -/
 def png_geometry
   (colors : Std.U64) (bpc : Std.U64) (columns : Std.U64) :
@@ -235,7 +235,7 @@ def png_geometry
   else ok (false, 0#u64, 0#u64)
 
 /-- [pdf_math::png_recon_byte]:
-    Source: 'proof/extract_pdf.rs', lines 158:0-191:1
+    Source: 'proof/extract_pdf.rs', lines 164:0-201:1
     Visibility: public -/
 def png_recon_byte
   (tag : Std.U8) (x : Std.U8) (a : Std.U8) (b : Std.U8) (c : Std.U8) :

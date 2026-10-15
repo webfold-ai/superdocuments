@@ -170,7 +170,7 @@ impl Walk<'_> {
             return false;
         }
         let id = attr_val(attrs, b"id");
-        !id.is_empty() && self.revealed.iter().any(|r| *r == id.as_bytes())
+        !id.is_empty() && self.revealed.contains(&id.as_bytes())
     }
 }
 

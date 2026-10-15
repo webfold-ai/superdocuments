@@ -28,16 +28,25 @@
 //! 4. **layout fold** — the accumulator ruler (text→lines) + table grid as hashmap cells.
 //! 5. **classify** — text-vs-scanned as the `x = B/U` accumulator ratio.
 
-pub mod inflate;
 mod decode;
+pub mod inflate;
 mod parse;
-mod xref;
 /// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the
 /// production xref, object-stream and predictor code calls these same functions, and the proofs in
 /// `proof/PdfProofs.lean` are about them (`proof/regen.sh` extracts the same source).
-#[allow(dead_code)]
+// The lints allowed here are about the kernels' shape (a range check written out, a bool-returning
+// if, a manual ceiling division or absolute difference). That shape is what Charon/Aeneas extract,
+// so the kernels keep it and the proofs stay about this exact code.
+#[allow(
+    dead_code,
+    clippy::manual_range_contains,
+    clippy::needless_bool,
+    clippy::manual_div_ceil,
+    clippy::manual_abs_diff
+)]
 #[path = "../../../proof/extract_pdf.rs"]
 mod pdf_kernels;
+mod xref;
 // The HashTrinity primitive now lives in the shared `hashtrinity` crate (the Rust rung of
 // HashTrinityCore.lean); pdffold was its template. Re-exported so `crate::Table` is unchanged.
 pub use hashtrinity::Table;
@@ -155,11 +164,18 @@ impl Document {
     /// generation differs from the object's resolves to null.
     pub fn resolve<'a>(&'a self, o: &'a Object) -> Option<&'a Object> {
         match o {
-            Object::Ref(n, g) => match self.gens.get(n) {
-                Some(&have) if have != *g => None,
-                _ => self.object(*n),
-            },
+            Object::Ref(n, g) => self.ref_object(*n, *g),
             other => Some(other),
+        }
+    }
+
+    /// The object that the reference `n g R` names (7.3.10): `None` when the current xref entry
+    /// for `n` has another generation (a stale reference into an incremental update) or is absent.
+    /// Every lookup of a reference in the parser goes through here, never through `object` alone.
+    pub fn ref_object(&self, n: u32, g: u16) -> Option<&Object> {
+        match self.gens.get(&n) {
+            Some(&have) if have != g => None,
+            _ => self.object(n),
         }
     }
 

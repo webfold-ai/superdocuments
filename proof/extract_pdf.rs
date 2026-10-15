@@ -86,7 +86,13 @@ pub fn objstm_header_ok(first: u64, len: u64, n: u64) -> bool {
 
 /// Extent of object `i` in an object stream: `[first+off, end)` where `end` is the next
 /// object's offset (or `len`), accepted iff `first+off < end <= len`.
-pub fn objstm_span(first: u64, off: u64, has_next: bool, next_off: u64, len: u64) -> (bool, u64, u64) {
+pub fn objstm_span(
+    first: u64,
+    off: u64,
+    has_next: bool,
+    next_off: u64,
+    len: u64,
+) -> (bool, u64, u64) {
     if has_next && next_off > 0xFFFF_FFFF_FFFF_FFFF - first {
         (false, 0, 0)
     } else {
@@ -173,7 +179,11 @@ pub fn png_recon_byte(tag: u8, x: u8, a: u8, b: u8, c: u8) -> (bool, u8) {
             let pb = if aw >= cw { aw - cw } else { cw - aw };
             let s_ab = aw + bw;
             let s_cc = cw + cw;
-            let pc = if s_ab >= s_cc { s_ab - s_cc } else { s_cc - s_ab };
+            let pc = if s_ab >= s_cc {
+                s_ab - s_cc
+            } else {
+                s_cc - s_ab
+            };
             if pa <= pb && pa <= pc {
                 aw
             } else if pb <= pc {

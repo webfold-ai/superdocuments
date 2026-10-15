@@ -2,8 +2,9 @@
 //! the production entry points (`Document::parse`, `Document::resolve`, `Document::stream_bytes`,
 //! `crate::pdf::extract_markdown`); the inputs are small PDFs built here, one per defect.
 
+use super::{startxref, Loader};
 use crate::pdf::parser::{Document, Object};
-use std::panic::{catch_unwind, AssertUnwindSafe};
+use std::time::{Duration, Instant};
 
 /// Adler-32 of `data` (the zlib trailer).
 fn adler32(data: &[u8]) -> u32 {
@@ -101,7 +102,11 @@ fn page_objects(text: &str) -> Vec<(u32, Vec<u8>)> {
         ),
         (
             4,
-            format!("<< /Length {} >>\nstream\n{content}\nendstream", content.len()).into_bytes(),
+            format!(
+                "<< /Length {} >>\nstream\n{content}\nendstream",
+                content.len()
+            )
+            .into_bytes(),
         ),
         (
             5,
@@ -155,7 +160,9 @@ fn xref_stream_pdf(predict: bool) -> Vec<u8> {
         .as_bytes(),
     );
     let font_obj = out.len();
-    out.extend_from_slice(b"5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n");
+    out.extend_from_slice(
+        b"5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n",
+    );
     let objstm_at = out.len();
     let objstm_dict = format!(
         "6 0 obj\n<< /Type /ObjStm /N 3 /First {first} /Length {} >>\nstream\n",
@@ -249,7 +256,10 @@ fn generation_mismatch_resolves_to_null() {
     let pdf = classic_pdf(&page_objects("gen"), 1, &[]);
     let doc = Document::parse(&pdf).expect("parse");
     assert!(doc.resolve(&Object::Ref(2, 0)).is_some());
-    assert!(doc.resolve(&Object::Ref(2, 1)).is_none(), "gen 1 of an object read as gen 0");
+    assert!(
+        doc.resolve(&Object::Ref(2, 1)).is_none(),
+        "gen 1 of an object read as gen 0"
+    );
 }
 
 #[test]
@@ -316,10 +326,7 @@ fn compressed_index_past_n_is_refused() {
     let doc = Document::parse(&pdf).expect("parse");
     // The row's index 7 is past /N 3, so the entry itself is refused. Header recovery may still
     // find object 1 among the members; whatever is found must be the catalog, never another object.
-    assert!(matches!(
-        doc.object(1),
-        None | Some(Object::Dict(_))
-    ));
+    assert!(matches!(doc.object(1), None | Some(Object::Dict(_))));
     if let Some(Object::Dict(d)) = doc.object(1) {
         assert!(matches!(d.get(&"Type".to_string()), Some(Object::Name(t)) if t == "Catalog"));
     }
@@ -335,20 +342,30 @@ fn unknown_filter_refuses_the_stream() {
     let pdf = classic_pdf(&objs, 1, &[]);
     let doc = Document::parse(&pdf).expect("parse");
     let stream = doc.object(4).expect("content stream");
-    assert!(doc.stream_bytes(stream).is_none(), "an unsupported filter is not handed on");
+    assert!(
+        doc.stream_bytes(stream).is_none(),
+        "an unsupported filter is not handed on"
+    );
 }
 
 #[test]
 fn png_row_predictors_reconstruct_every_filter_type() {
     // Each filter tag (None, Sub, Up) reconstructs to the original rows.
     let rows: Vec<Vec<u8>> = (0..5u8)
-        .map(|r| (0..6u8).map(|c| r.wrapping_mul(37).wrapping_add(c.wrapping_mul(91))).collect())
+        .map(|r| {
+            (0..6u8)
+                .map(|c| r.wrapping_mul(37).wrapping_add(c.wrapping_mul(91)))
+                .collect()
+        })
         .collect();
     for tag in [0u8, 1, 2] {
         let encoded = png_encode(&rows, tag);
         let raw = zlib_stored(&encoded);
         let mut dict = crate::pdf::parser::Dict::new();
-        dict.put("Filter".to_string(), Object::Name("FlateDecode".to_string()));
+        dict.put(
+            "Filter".to_string(),
+            Object::Name("FlateDecode".to_string()),
+        );
         let mut parms = crate::pdf::parser::Dict::new();
         parms.put("Predictor".to_string(), Object::Int(12));
         parms.put("Columns".to_string(), Object::Int(6));
@@ -364,31 +381,33 @@ fn png_row_predictors_reconstruct_every_filter_type() {
 #[test]
 fn bit_flips_never_panic_or_hang() {
     // Every single-bit flip of a small PDF with each structure (classic table, xref stream with
-    // object stream, predicted xref stream) parses without panicking, and quickly.
+    // object stream, predicted xref stream) parses without panicking, and quickly. The parser is
+    // called directly: a panic fails the test, and nothing here relies on `catch_unwind`.
     let bases = [
         classic_pdf(&page_objects("flip"), 1, &[]),
         xref_stream_pdf(false),
         xref_stream_pdf(true),
     ];
-    let started = std::time::Instant::now();
+    let started = Instant::now();
     let mut runs = 0usize;
     for base in &bases {
         for pos in 0..base.len() {
             for bit in 0..8 {
                 let mut pdf = base.clone();
                 pdf[pos] ^= 1 << bit;
-                let result = catch_unwind(AssertUnwindSafe(|| {
-                    if let Ok(doc) = Document::parse(&pdf) {
-                        let _ = doc.markdown();
-                    }
-                }));
-                assert!(result.is_ok(), "panic on flip at {pos} bit {bit}");
+                if let Ok(doc) = Document::parse(&pdf) {
+                    let _ = doc.markdown();
+                }
                 runs += 1;
             }
         }
     }
     assert!(runs > 1000);
-    assert!(started.elapsed().as_secs() < 120, "bit-flip sweep took {:?}", started.elapsed());
+    assert!(
+        started.elapsed().as_secs() < 120,
+        "bit-flip sweep took {:?}",
+        started.elapsed()
+    );
 }
 
 #[test]
@@ -400,15 +419,14 @@ fn garbage_never_panics() {
             x ^= x << 13;
             x ^= x >> 17;
             x ^= x << 5;
-            buf.push(b"<<>>[]/ 0123456789 obj endobj stream endstream xref trailer startxref R\n"
-                [(x as usize) % 72]);
+            buf.push(
+                b"<<>>[]/ 0123456789 obj endobj stream endstream xref trailer startxref R\n"
+                    [(x as usize) % 72],
+            );
         }
-        let result = catch_unwind(AssertUnwindSafe(|| {
-            if let Ok(doc) = Document::parse(&buf) {
-                let _ = doc.markdown();
-            }
-        }));
-        assert!(result.is_ok(), "panic on seed {seed}");
+        if let Ok(doc) = Document::parse(&buf) {
+            let _ = doc.markdown();
+        }
     }
 }
 
@@ -417,22 +435,37 @@ fn ascii85_and_asciihex_stages_decode_before_flate() {
     // "Hello World!" in ASCII85, with the `~>` end marker.
     let text = b"87cURD]i,\"Ebo80~>";
     let mut dict = crate::pdf::parser::Dict::new();
-    dict.put("Filter".to_string(), Object::Name("ASCII85Decode".to_string()));
+    dict.put(
+        "Filter".to_string(),
+        Object::Name("ASCII85Decode".to_string()),
+    );
     assert_eq!(
-        Document::default().stream_bytes(&Object::Stream(dict, text.to_vec())).as_deref(),
+        Document::default()
+            .stream_bytes(&Object::Stream(dict, text.to_vec()))
+            .as_deref(),
         Some(&b"Hello World!"[..])
     );
     // ASCIIHex with white space and a `>` end marker, then RunLength with a repeat and a literal.
     let mut hex = crate::pdf::parser::Dict::new();
-    hex.put("Filter".to_string(), Object::Name("ASCIIHexDecode".to_string()));
+    hex.put(
+        "Filter".to_string(),
+        Object::Name("ASCIIHexDecode".to_string()),
+    );
     assert_eq!(
-        Document::default().stream_bytes(&Object::Stream(hex, b"4 8 6 5 6C6C6F>".to_vec())).as_deref(),
+        Document::default()
+            .stream_bytes(&Object::Stream(hex, b"4 8 6 5 6C6C6F>".to_vec()))
+            .as_deref(),
         Some(&b"Hello"[..])
     );
     let mut rl = crate::pdf::parser::Dict::new();
-    rl.put("Filter".to_string(), Object::Name("RunLengthDecode".to_string()));
+    rl.put(
+        "Filter".to_string(),
+        Object::Name("RunLengthDecode".to_string()),
+    );
     assert_eq!(
-        Document::default().stream_bytes(&Object::Stream(rl, vec![255, b'a', 0, b'z', 128])).as_deref(),
+        Document::default()
+            .stream_bytes(&Object::Stream(rl, vec![255, b'a', 0, b'z', 128]))
+            .as_deref(),
         Some(&b"aaz"[..])
     );
 }
@@ -446,9 +479,356 @@ fn huge_text_coordinates_do_not_size_allocations() {
                    BT 0 -20 Td (Under) Tj 100000000000 -20 Td (Edge) Tj ET";
     objs[3] = (
         4,
-        format!("<< /Length {} >>\nstream\n{content}\nendstream", content.len()).into_bytes(),
+        format!(
+            "<< /Length {} >>\nstream\n{content}\nendstream",
+            content.len()
+        )
+        .into_bytes(),
     );
     let pdf = classic_pdf(&objs, 1, &[]);
     let md = text_of(&pdf).expect("a malformed coordinate extracts without aborting");
     assert!(md.contains("Left"), "markdown: {md:?}");
+}
+
+/// A deterministic generator for the mutation tests (xorshift64).
+struct Rng(u64);
+
+impl Rng {
+    fn next(&mut self) -> u64 {
+        self.0 ^= self.0 << 13;
+        self.0 ^= self.0 >> 7;
+        self.0 ^= self.0 << 17;
+        self.0
+    }
+
+    fn below(&mut self, n: usize) -> usize {
+        (self.next() % n.max(1) as u64) as usize
+    }
+}
+
+/// The bytes of a fixture under `tests/fixtures`.
+fn fixture(rel: &str) -> Vec<u8> {
+    let path = format!("{}/tests/fixtures/{rel}", env!("CARGO_MANIFEST_DIR"));
+    std::fs::read(&path).unwrap_or_else(|e| panic!("fixture {path}: {e}"))
+}
+
+/// Every `.pdf` directly under `tests/fixtures` and under `tests/fixtures/regression`, by name.
+fn fixture_pdfs() -> Vec<String> {
+    let mut names = Vec::new();
+    for dir in ["", "regression"] {
+        let path = format!("{}/tests/fixtures/{dir}", env!("CARGO_MANIFEST_DIR"));
+        for entry in std::fs::read_dir(&path).expect("fixtures directory") {
+            let name = entry
+                .expect("entry")
+                .file_name()
+                .to_string_lossy()
+                .into_owned();
+            if name.ends_with(".pdf") {
+                names.push(if dir.is_empty() {
+                    name
+                } else {
+                    format!("{dir}/{name}")
+                });
+            }
+        }
+    }
+    names.sort();
+    names
+}
+
+#[test]
+fn literal_string_cut_off_by_end_of_file_does_not_panic() {
+    // The smoke.pdf fuzz shape: an object whose last token is a literal string ending in a
+    // backslash at the end of the input. The lexer stepped past the end and the next slice panicked.
+    let pdf = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Title (cut\\".to_vec();
+    let doc = Document::parse(&pdf).expect("a truncated object still parses");
+    let _ = doc.markdown();
+    let hex = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Title <41\\".to_vec();
+    let _ = Document::parse(&hex)
+        .expect("a truncated hex string still parses")
+        .markdown();
+}
+
+#[test]
+fn regression_set_loads_through_the_xref_chain() {
+    // DoD 2: these files used to fail with "PDF has no readable catalog". Each must read through
+    // startxref, the /Prev chain and the xref sections, with the catalog loaded from the chain
+    // (not from header recovery), and extract text.
+    for name in [
+        "doc.pdf",
+        "paper-html2pdf.pdf",
+        "paper-syndesi.pdf",
+        "research-agent-loop.pdf",
+        "webfold-benchmarks.pdf",
+    ] {
+        let bytes = fixture(&format!("regression/{name}"));
+        let mut l = Loader::new(&bytes);
+        assert!(
+            startxref(&bytes).is_some_and(|off| l.load_chain(off)),
+            "{name}: xref chain"
+        );
+        let root = l
+            .root_num()
+            .unwrap_or_else(|| panic!("{name}: trailer names /Root"));
+        let mut doc = Document::default();
+        l.load_all(&mut doc);
+        assert!(
+            matches!(doc.object(root), Some(Object::Dict(d)) if matches!(d.get(&"Type".to_string()), Some(Object::Name(t)) if t == "Catalog")),
+            "{name}: the catalog {root} loads from the chain"
+        );
+        let md = Document::parse(&bytes).expect("parses").markdown();
+        assert!(!md.trim().is_empty(), "{name}: non-empty text");
+    }
+    let bytes = fixture("regression/doc.pdf");
+    let mut l = Loader::new(&bytes);
+    assert!(startxref(&bytes).is_some_and(|off| l.load_chain(off)));
+    let mut doc = Document::default();
+    l.load_all(&mut doc);
+    assert!(
+        !l.streams.is_empty(),
+        "doc.pdf's objects are read from its /ObjStm"
+    );
+}
+
+#[test]
+fn smoke_pdf_yields_the_poppler_line_set() {
+    // DoD 3: the text lines of smoke.pdf match `pdftotext` (smoke.expected.txt), ignoring the
+    // markdown heading marker.
+    let bytes = fixture("regression/smoke.pdf");
+    let want = String::from_utf8(fixture("regression/smoke.expected.txt")).expect("utf8");
+    let got = Document::parse(&bytes).expect("parses").markdown();
+    let lines = |s: &str| -> Vec<String> {
+        s.lines()
+            .map(|l| l.trim().trim_start_matches('#').trim().to_string())
+            .filter(|l| !l.is_empty())
+            .collect()
+    };
+    assert_eq!(lines(&got), lines(&want), "markdown: {got:?}");
+}
+
+/// A PDF whose xref stream (object 3) has `count` type-2 rows that all name object stream 2. Stream
+/// 2 is FlateDecode of 4 MiB of spaces with `/First 9999`, past its decoded length, so its header
+/// is refused.
+fn refused_objstm_pdf(count: usize) -> Vec<u8> {
+    let mut out = b"%PDF-1.5\n".to_vec();
+    out.extend_from_slice(b"1 0 obj\n<< /Type /Catalog >>\nendobj\n");
+    let data = vec![b' '; 4 << 20];
+    let z = zlib_stored(&data);
+    let off2 = out.len();
+    out.extend_from_slice(
+        format!(
+            "2 0 obj\n<< /Type /ObjStm /N 2 /First 9999 /Filter /FlateDecode /Length {} >>\nstream\n",
+            z.len()
+        )
+        .as_bytes(),
+    );
+    out.extend_from_slice(&z);
+    out.extend_from_slice(b"\nendstream\nendobj\n");
+    let off3 = out.len();
+    let size = count + 4;
+    let mut rows = Vec::new();
+    rows.extend(row_bytes([1, 4, 2], [0, 0, 0]));
+    rows.extend(row_bytes([1, 4, 2], [1, 9, 0]));
+    rows.extend(row_bytes([1, 4, 2], [1, off2 as u64, 0]));
+    rows.extend(row_bytes([1, 4, 2], [1, off3 as u64, 0]));
+    for i in 0..count {
+        rows.extend(row_bytes([1, 4, 2], [2, 2, (i % 2) as u64]));
+    }
+    out.extend_from_slice(
+        format!(
+            "3 0 obj\n<< /Type /XRef /Size {size} /W [1 4 2] /Index [0 {size}] /Root 1 0 R /Length {} >>\nstream\n",
+            rows.len()
+        )
+        .as_bytes(),
+    );
+    out.extend_from_slice(&rows);
+    out.extend_from_slice(format!("\nendstream\nendobj\nstartxref\n{off3}\n%%EOF\n").as_bytes());
+    out
+}
+
+#[test]
+fn refused_object_stream_is_decoded_once() {
+    // Many type-2 entries name one refused object stream: its decode and its refusal are cached,
+    // so the 4 MiB stream is inflated once, not once per entry.
+    let pdf = refused_objstm_pdf(2000);
+    let started = Instant::now();
+    let mut l = Loader::new(&pdf);
+    assert!(startxref(&pdf).is_some_and(|off| l.load_chain(off)));
+    let mut doc = Document::default();
+    l.load_all(&mut doc);
+    assert_eq!(
+        l.decode_attempts, 2,
+        "the xref stream and the object stream, each once"
+    );
+    assert!(doc.object(1).is_some(), "the direct catalog still loads");
+    assert!(
+        doc.object(4).is_none(),
+        "an object from the refused stream does not load"
+    );
+    assert!(
+        started.elapsed() < Duration::from_secs(20),
+        "took {:?}",
+        started.elapsed()
+    );
+}
+
+#[test]
+fn document_decode_budget_bounds_inflation() {
+    // With a 1 MiB budget, the 4 MiB object stream's inflate is refused and charged its cap, so the
+    // budget is spent and a later reference does not inflate again.
+    let pdf = refused_objstm_pdf(3);
+    let mut l = Loader::new(&pdf);
+    l.decode_budget = 1 << 20;
+    assert!(startxref(&pdf).is_some_and(|off| l.load_chain(off)));
+    let mut doc = Document::default();
+    l.load_all(&mut doc);
+    assert_eq!(l.decode_budget, 0, "the failed inflate is charged its cap");
+    assert!(l.streams.is_empty(), "no object stream was produced");
+    let before = l.decode_attempts;
+    assert!(
+        l.load_compressed(4, 2, 0).is_none(),
+        "a refused stream stays refused"
+    );
+    assert_eq!(l.decode_attempts, before, "and it is not decoded again");
+}
+
+#[test]
+fn stale_generation_contents_and_kids_contribute_no_text() {
+    // The file holds object 4 at generation 0 and object 3 at generation 0. A reference that names
+    // generation 1 (a stale pointer left over from an earlier revision) must resolve to null, so
+    // neither its content stream nor its page-tree node contributes text (7.3.10).
+    let mut stale_contents = page_objects("STALE CONTENTS");
+    stale_contents[2].1 = b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] \
+        /Contents 4 1 R /Resources << /Font << /F1 5 0 R >> >> >>"
+        .to_vec();
+    let md = text_of(&classic_pdf(&stale_contents, 1, &[])).unwrap_or_default();
+    assert!(
+        !md.contains("STALE CONTENTS"),
+        "stale /Contents read: {md:?}"
+    );
+
+    let mut stale_kids = page_objects("STALE KIDS");
+    stale_kids[1].1 = b"<< /Type /Pages /Kids [3 1 R] /Count 1 >>".to_vec();
+    let md = text_of(&classic_pdf(&stale_kids, 1, &[])).unwrap_or_default();
+    assert!(!md.contains("STALE KIDS"), "stale /Kids read: {md:?}");
+
+    // Control: the same document with generation 0 references does yield its text.
+    let fresh = text_of(&classic_pdf(&page_objects("FRESH TEXT"), 1, &[])).expect("fresh PDF");
+    assert!(fresh.contains("FRESH TEXT"), "control markdown: {fresh:?}");
+}
+
+#[test]
+fn indirect_decode_parms_are_resolved_or_refused() {
+    // A FlateDecode content stream whose /DecodeParms is an indirect reference. Resolved to a
+    // dictionary, the parameters apply and the text is read. Resolved to a non-dictionary, the
+    // stream refuses: its predictor is unknown, so no predicted bytes are passed on.
+    let content = b"BT /F1 12 Tf 72 700 Td (PARMS TEXT) Tj ET";
+    let flate = zlib_stored(content);
+    let stream = |parms: &str| {
+        let mut body = format!(
+            "<< /Length {} /Filter /FlateDecode /DecodeParms {parms} >>\nstream\n",
+            flate.len()
+        )
+        .into_bytes();
+        body.extend_from_slice(&flate);
+        body.extend_from_slice(b"\nendstream");
+        body
+    };
+    let objects = |parms_obj: Vec<u8>| {
+        let mut objs = page_objects("unused");
+        objs[2].1 = b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R \
+            /Resources << /Font << /F1 5 0 R >> >> >>"
+            .to_vec();
+        objs[3].1 = stream("6 0 R");
+        objs.push((6, parms_obj));
+        objs
+    };
+    let direct = text_of(&classic_pdf(
+        &objects(b"<< /Predictor 1 >>".to_vec()),
+        1,
+        &[],
+    ))
+    .unwrap_or_default();
+    assert!(direct.contains("PARMS TEXT"), "resolved dict: {direct:?}");
+    let refused = text_of(&classic_pdf(&objects(b"42".to_vec()), 1, &[])).unwrap_or_default();
+    assert!(
+        !refused.contains("PARMS TEXT"),
+        "non-dict parms decoded: {refused:?}"
+    );
+}
+
+/// The files the mutation sweep starts from: every repo fixture and regression file, then, when
+/// `SUPERDOCUMENTS_FUZZ_CORPUS` names a directory, every `.pdf` directly inside it (the full
+/// comparison corpus, which is too large to commit). Sorted, so a run is reproducible.
+fn fuzz_corpus() -> Vec<(String, Vec<u8>)> {
+    let mut out: Vec<(String, Vec<u8>)> = fixture_pdfs()
+        .into_iter()
+        .map(|name| {
+            let bytes = fixture(&name);
+            (name, bytes)
+        })
+        .collect();
+    if let Ok(dir) = std::env::var("SUPERDOCUMENTS_FUZZ_CORPUS") {
+        let mut paths: Vec<std::path::PathBuf> = std::fs::read_dir(&dir)
+            .expect("SUPERDOCUMENTS_FUZZ_CORPUS directory")
+            .map(|e| e.expect("corpus entry").path())
+            .filter(|p| p.extension().is_some_and(|x| x == "pdf"))
+            .collect();
+        paths.sort();
+        for path in paths {
+            let bytes = std::fs::read(&path).expect("corpus file");
+            out.push((path.display().to_string(), bytes));
+        }
+    }
+    out
+}
+
+#[test]
+fn corpus_mutations_never_panic_or_hang() {
+    // DoD 4: seeded bit flips, byte overwrites, truncations and splices over every fixture and the
+    // regression set (and the `SUPERDOCUMENTS_FUZZ_CORPUS` directory when set). No `catch_unwind`:
+    // a panic or a slow case fails the test directly.
+    let started = Instant::now();
+    let mut rng = Rng(777);
+    let mut runs = 0usize;
+    for (name, base) in fuzz_corpus() {
+        for _ in 0..60 {
+            let mut pdf = base.clone();
+            match rng.below(4) {
+                0 => {
+                    let pos = rng.below(pdf.len());
+                    pdf[pos] ^= 1 << rng.below(8);
+                }
+                1 => {
+                    let pos = rng.below(pdf.len());
+                    pdf[pos] = rng.next() as u8;
+                }
+                2 => pdf.truncate(rng.below(pdf.len())),
+                _ => {
+                    let from = rng.below(pdf.len());
+                    let len = rng.below(pdf.len() - from).min(256);
+                    let to = rng.below(pdf.len());
+                    let piece = pdf[from..from + len].to_vec();
+                    let end = (to + piece.len()).min(pdf.len());
+                    pdf[to..end].copy_from_slice(&piece[..end - to]);
+                }
+            }
+            let case = Instant::now();
+            if let Ok(doc) = Document::parse(&pdf) {
+                let _ = doc.markdown();
+            }
+            assert!(
+                case.elapsed() < Duration::from_secs(10),
+                "{name} run {runs} took {:?}",
+                case.elapsed()
+            );
+            runs += 1;
+        }
+    }
+    assert!(runs >= 500, "ran {runs} mutations");
+    assert!(
+        started.elapsed() < Duration::from_secs(300),
+        "sweep took {:?}",
+        started.elapsed()
+    );
 }

@@ -659,9 +659,19 @@ fn overlay_transcode_geometry(
             let region_text = region_text(region);
             let key = region_text.trim().to_lowercase();
             if let Some(&(x, y, w, h)) = lookup.get(&key) {
-                region.bbox = Some(BBox { x, y, width: w, height: h });
+                region.bbox = Some(BBox {
+                    x,
+                    y,
+                    width: w,
+                    height: h,
+                });
                 for span in &mut region.spans {
-                    span.bbox = Some(BBox { x, y, width: w, height: h });
+                    span.bbox = Some(BBox {
+                        x,
+                        y,
+                        width: w,
+                        height: h,
+                    });
                 }
             } else if !lookup.is_empty() {
                 // Coarse fallback: use the first Transcode span's bbox for
@@ -793,6 +803,13 @@ mod tests {
         // checkout.
         let path = std::path::Path::new("tests/fixtures/mixed-native-and-scanned.pdf");
         if !path.exists() {
+            return;
+        }
+        // The scanned page needs OCR. Without Poppler and Tesseract on PATH the page-level contract
+        // cannot be exercised here; the native half is still checked by the pdf module's tests.
+        let tool = |name: &str| std::process::Command::new(name).arg("-v").output().is_ok();
+        if !(tool("pdftoppm") && tool("tesseract")) {
+            eprintln!("skipped: pdftoppm and tesseract are needed for the scanned page");
             return;
         }
         let g = from_pdf_path(path).expect("graph build");

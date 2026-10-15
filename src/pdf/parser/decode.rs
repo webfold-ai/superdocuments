@@ -33,8 +33,42 @@ fn filter_names(d: &Dict) -> Option<Vec<String>> {
     }
 }
 
-/// The `/DecodeParms` entry for stage `i`: a dictionary, a null, or absent.
-/// A `Ref` is not followed here, so it counts as absent.
+/// Is every `/DecodeParms` entry of the stream a direct dictionary or null (or absent)? A reference
+/// that was not resolved before decoding makes the stream undecodable: its predictor is unknown, and
+/// predicted bytes must not be passed on as data (7.4, unpredict).
+fn parms_direct(d: &Dict) -> bool {
+    let direct = |o: &Object| matches!(o, Object::Dict(_) | Object::Null);
+    match d.get(&"DecodeParms".to_string()) {
+        None => true,
+        Some(Object::Array(a)) => a.iter().all(direct),
+        Some(o) => direct(o),
+    }
+}
+
+/// `d` with each indirect `/DecodeParms` entry (top level or inside the array) replaced by the
+/// object it names, through `resolve`. A stream without `/DecodeParms` is borrowed, not copied.
+pub(super) fn with_resolved_parms<'a>(
+    d: &'a Dict,
+    resolve: &dyn Fn(u32, u16) -> Option<Object>,
+) -> std::borrow::Cow<'a, Dict> {
+    let Some(parms) = d.get(&"DecodeParms".to_string()) else {
+        return std::borrow::Cow::Borrowed(d);
+    };
+    let fix = |o: &Object| match o {
+        Object::Ref(n, g) => resolve(*n, *g).unwrap_or(Object::Ref(*n, *g)),
+        other => other.clone(),
+    };
+    let new = match parms {
+        Object::Array(a) => Object::Array(a.iter().map(fix).collect()),
+        other => fix(other),
+    };
+    let mut out = d.clone();
+    out.put("DecodeParms".to_string(), new);
+    std::borrow::Cow::Owned(out)
+}
+
+/// The `/DecodeParms` entry for stage `i`: a dictionary, a null, or absent. The caller has already
+/// checked with `parms_direct` that no entry is an unresolved reference.
 fn stage_parms(d: &Dict, i: usize) -> Option<&Dict> {
     match d.get(&"DecodeParms".to_string()) {
         Some(Object::Dict(p)) if i == 0 => Some(p),
@@ -84,9 +118,17 @@ fn png_unpredict(data: &[u8], row_bytes: u64, bpp: u64) -> Option<Vec<u8>> {
         let tag = data[start];
         for j in 0..rb {
             let x = data[start + 1 + j];
-            let a = if (j as u64) >= bpp { cur[j - bpp as usize] } else { 0 };
+            let a = if (j as u64) >= bpp {
+                cur[j - bpp as usize]
+            } else {
+                0
+            };
             let b = prev[j];
-            let c = if (j as u64) >= bpp { prev[j - bpp as usize] } else { 0 };
+            let c = if (j as u64) >= bpp {
+                prev[j - bpp as usize]
+            } else {
+                0
+            };
             let (ok_byte, v) = k::png_recon_byte(tag, x, a, b, c);
             if !ok_byte {
                 return None;
@@ -195,7 +237,7 @@ fn a85_value(group: &[u8; 5]) -> Option<u32> {
 
 /// RunLengthDecode (§7.4.5): a length byte `0..=127` copies the next `n + 1` bytes; `129..=255`
 /// repeats the next byte `257 - n` times; `128` ends the data. Output is capped.
-fn run_length(data: &[u8]) -> Option<Vec<u8>> {
+fn run_length(data: &[u8], cap: usize) -> Option<Vec<u8>> {
     let mut out = Vec::new();
     let mut i = 0usize;
     while i < data.len() {
@@ -214,7 +256,7 @@ fn run_length(data: &[u8]) -> Option<Vec<u8>> {
                 out.resize(out.len() + (257 - len as usize), byte);
             }
         }
-        if out.len() > MAX_DECODED {
+        if out.len() > cap {
             return None;
         }
     }
@@ -222,25 +264,40 @@ fn run_length(data: &[u8]) -> Option<Vec<u8>> {
 }
 
 /// Decode a stream's raw bytes through its `/Filter` chain, one stage per name, each with its own
-/// `/DecodeParms`. Filter-free streams come back unchanged. LZWDecode and the image filters, and
-/// data a stage cannot decode, give `None`: the stream is refused rather than handed on undecoded.
-pub(super) fn decode(d: &Dict, raw: &[u8]) -> Option<Vec<u8>> {
+/// `/DecodeParms`, every stage capped at `cap` bytes of output. Filter-free streams come back
+/// unchanged. LZWDecode and the image filters, and data a stage cannot decode, give `None`: the
+/// stream is refused rather than handed on undecoded.
+pub(super) fn decode_within(d: &Dict, raw: &[u8], cap: usize) -> Option<Vec<u8>> {
+    if !parms_direct(d) {
+        return None;
+    }
     let names = filter_names(d)?;
     let mut data = raw.to_vec();
     for (i, name) in names.iter().enumerate() {
         data = match name.as_str() {
             "FlateDecode" | "Fl" => {
-                let inflated = zlib_capped(&data, MAX_DECODED)?;
+                let inflated = zlib_capped(&data, cap)?;
                 unpredict(inflated, stage_parms(d, i))?
             }
             "ASCIIHexDecode" | "AHx" => ascii_hex(&data)?,
             "ASCII85Decode" | "A85" => ascii85(&data)?,
-            "RunLengthDecode" | "RL" => run_length(&data)?,
+            "RunLengthDecode" | "RL" => run_length(&data, cap)?,
             _ => return None,
         };
-        if data.len() > MAX_DECODED {
+        if data.len() > cap {
             return None;
         }
     }
     Some(data)
+}
+
+/// Decode with the per-stream ceiling `MAX_DECODED`.
+pub(super) fn decode(d: &Dict, raw: &[u8]) -> Option<Vec<u8>> {
+    decode_within(d, raw, MAX_DECODED)
+}
+
+/// Does the stream's filter chain inflate (FlateDecode)? A failed inflate may have produced
+/// output up to its cap, so the caller charges that work against its budget.
+pub(super) fn inflates(d: &Dict) -> bool {
+    filter_names(d).is_some_and(|names| names.iter().any(|n| n == "FlateDecode" || n == "Fl"))
 }
