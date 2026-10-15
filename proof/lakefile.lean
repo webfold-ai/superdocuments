@@ -11,4 +11,4 @@ package superdocumentsProof where
 
 @[default_target]
 lean_lib PdfProof where
-  roots := #[`Constructive, `PdfSpec]
+  roots := #[`Constructive, `PdfSpec, `PdfMath, `PdfProofs]
