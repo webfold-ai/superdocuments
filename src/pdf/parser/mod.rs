@@ -29,7 +29,15 @@
 //! 5. **classify** — text-vs-scanned as the `x = B/U` accumulator ratio.
 
 pub mod inflate;
+mod decode;
 mod parse;
+mod xref;
+/// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the
+/// production xref, object-stream and predictor code calls these same functions, and the proofs in
+/// `proof/PdfProofs.lean` are about them (`proof/regen.sh` extracts the same source).
+#[allow(dead_code)]
+#[path = "../../../proof/extract_pdf.rs"]
+mod pdf_kernels;
 // The HashTrinity primitive now lives in the shared `hashtrinity` crate (the Rust rung of
 // HashTrinityCore.lean); pdffold was its template. Re-exported so `crate::Table` is unchanged.
 pub use hashtrinity::Table;
@@ -126,6 +134,9 @@ pub type Dict = Table<String, Object>;
 #[derive(Default)]
 pub struct Document {
     pub(crate) objects: Table<u32, Object>,
+    /// The generation each loaded object was read with. A reference with another generation
+    /// resolves to null (ISO 32000 §7.3.10).
+    pub(crate) gens: Table<u32, u16>,
     pub(crate) root: u32,
 }
 
@@ -140,10 +151,14 @@ impl Document {
         self.objects.get(&num)
     }
 
-    /// Resolve a reference in one O(1) hop (or pass a direct object through).
+    /// Resolve a reference in one O(1) hop (or pass a direct object through). A reference whose
+    /// generation differs from the object's resolves to null.
     pub fn resolve<'a>(&'a self, o: &'a Object) -> Option<&'a Object> {
         match o {
-            Object::Ref(n, _) => self.object(*n),
+            Object::Ref(n, g) => match self.gens.get(n) {
+                Some(&have) if have != *g => None,
+                _ => self.object(*n),
+            },
             other => Some(other),
         }
     }

@@ -6,16 +6,15 @@
 //! **text accumulator** over the content stream: each operator is O(1), line breaks come from the
 //! move operators (document order = reading order), so there is no sort and no binary search.
 
-use super::inflate::zlib;
 use super::{Dict, Document, Object};
 
 // ── token scanner over PDF bytes (the universal lexer, α = byte) ──
-struct Lex<'a> {
-    d: &'a [u8],
-    i: usize,
+pub(super) struct Lex<'a> {
+    pub(super) d: &'a [u8],
+    pub(super) i: usize,
 }
 #[derive(Clone, Debug, PartialEq)]
-enum Tok {
+pub(super) enum Tok {
     Num(f64),
     Str(Vec<u8>),
     Name(String),
@@ -26,10 +25,10 @@ enum Tok {
     Kw(String),
 }
 
-fn is_ws(b: u8) -> bool {
+pub(super) fn is_ws(b: u8) -> bool {
     matches!(b, b' ' | b'\t' | b'\r' | b'\n' | 0x0c | 0)
 }
-fn is_delim(b: u8) -> bool {
+pub(super) fn is_delim(b: u8) -> bool {
     matches!(
         b,
         b'(' | b')' | b'<' | b'>' | b'[' | b']' | b'{' | b'}' | b'/' | b'%'
@@ -37,10 +36,10 @@ fn is_delim(b: u8) -> bool {
 }
 
 impl<'a> Lex<'a> {
-    fn new(d: &'a [u8]) -> Self {
+    pub(super) fn new(d: &'a [u8]) -> Self {
         Lex { d, i: 0 }
     }
-    fn skip_ws(&mut self) {
+    pub(super) fn skip_ws(&mut self) {
         while self.i < self.d.len() {
             let b = self.d[self.i];
             if b == b'%' {
@@ -54,34 +53,40 @@ impl<'a> Lex<'a> {
             }
         }
     }
-    fn next(&mut self) -> Option<Tok> {
-        self.skip_ws();
-        if self.i >= self.d.len() {
-            return None;
-        }
-        let b = self.d[self.i];
-        match b {
-            b'[' => {
-                self.i += 1;
-                Some(Tok::ArrOpen)
+    /// The next token. A stray delimiter is skipped, not an error, so this never recurses.
+    pub(super) fn next(&mut self) -> Option<Tok> {
+        loop {
+            self.skip_ws();
+            if self.i >= self.d.len() {
+                return None;
             }
-            b']' => {
-                self.i += 1;
-                Some(Tok::ArrClose)
+            let b = self.d[self.i];
+            let tok = match b {
+                b'[' => {
+                    self.i += 1;
+                    Some(Tok::ArrOpen)
+                }
+                b']' => {
+                    self.i += 1;
+                    Some(Tok::ArrClose)
+                }
+                b'<' if self.d.get(self.i + 1) == Some(&b'<') => {
+                    self.i += 2;
+                    Some(Tok::DictOpen)
+                }
+                b'>' if self.d.get(self.i + 1) == Some(&b'>') => {
+                    self.i += 2;
+                    Some(Tok::DictClose)
+                }
+                b'<' => self.hex_string(),
+                b'(' => self.lit_string(),
+                b'/' => self.name(),
+                b'0'..=b'9' | b'+' | b'-' | b'.' => self.number(),
+                _ => self.keyword(),
+            };
+            if tok.is_some() {
+                return tok;
             }
-            b'<' if self.d.get(self.i + 1) == Some(&b'<') => {
-                self.i += 2;
-                Some(Tok::DictOpen)
-            }
-            b'>' if self.d.get(self.i + 1) == Some(&b'>') => {
-                self.i += 2;
-                Some(Tok::DictClose)
-            }
-            b'<' => self.hex_string(),
-            b'(' => self.lit_string(),
-            b'/' => self.name(),
-            b'0'..=b'9' | b'+' | b'-' | b'.' => self.number(),
-            _ => self.keyword(),
         }
     }
     fn name(&mut self) -> Option<Tok> {
@@ -107,6 +112,7 @@ impl<'a> Lex<'a> {
         let txt = String::from_utf8_lossy(&self.d[s..self.i]);
         Some(Tok::Num(txt.parse().unwrap_or(0.0)))
     }
+    /// A keyword run. A byte that starts no token (a stray delimiter) is skipped: `None`.
     fn keyword(&mut self) -> Option<Tok> {
         let s = self.i;
         while self.i < self.d.len() && !is_ws(self.d[self.i]) && !is_delim(self.d[self.i]) {
@@ -114,7 +120,7 @@ impl<'a> Lex<'a> {
         }
         if self.i == s {
             self.i += 1;
-            return self.next();
+            return None;
         }
         Some(Tok::Kw(
             String::from_utf8_lossy(&self.d[s..self.i]).into_owned(),
@@ -202,23 +208,46 @@ impl<'a> Lex<'a> {
 }
 
 // ── parse one object from a token stream (recursive on dict/array; refs collapse `N G R`) ──
-fn parse_value(lex: &mut Lex, first: Tok) -> Object {
+
+/// Nesting bound for arrays and dictionaries; deeper input reads as null, so the recursion has a
+/// fixed depth whatever the file says.
+const MAX_DEPTH: u32 = 64;
+
+/// The object number of `n` when it is an integer in `0..2^32`.
+fn ref_num(n: f64) -> Option<u32> {
+    if n.fract() == 0.0 && (0.0..4_294_967_296.0).contains(&n) {
+        Some(n as u32)
+    } else {
+        None
+    }
+}
+
+/// The generation of `g` when it is an integer in `0..=65535`.
+fn ref_gen(g: f64) -> Option<u16> {
+    if g.fract() == 0.0 && (0.0..=65_535.0).contains(&g) {
+        Some(g as u16)
+    } else {
+        None
+    }
+}
+
+pub(super) fn parse_value(lex: &mut Lex, first: Tok, depth: u32) -> Object {
     match first {
         Tok::Num(n) => {
-            // could be `N G R` (ref) or `N G obj` start — peek
+            // `N G R` is a reference when both numbers are in range; otherwise `N` is a number
             let save = lex.i;
             if let Some(Tok::Num(g)) = lex.next() {
                 let save2 = lex.i;
-                match lex.next() {
-                    Some(Tok::Kw(k)) if k == "R" => return Object::Ref(n as u32, g as u16),
-                    _ => {
-                        lex.i = save2;
+                if let Some(Tok::Kw(k)) = lex.next() {
+                    if k == "R" {
+                        if let (Some(num), Some(gen)) = (ref_num(n), ref_gen(g)) {
+                            return Object::Ref(num, gen);
+                        }
                     }
                 }
-                lex.i = save;
-            } else {
-                lex.i = save;
+                lex.i = save2;
             }
+            lex.i = save;
             if n.fract() == 0.0 {
                 Object::Int(n as i64)
             } else {
@@ -228,16 +257,24 @@ fn parse_value(lex: &mut Lex, first: Tok) -> Object {
         Tok::Str(s) => Object::Str(s),
         Tok::Name(n) => Object::Name(n),
         Tok::ArrOpen => {
+            if depth >= MAX_DEPTH {
+                return Object::Null;
+            }
             let mut v = Vec::new();
             while let Some(t) = lex.next() {
                 if t == Tok::ArrClose {
                     break;
                 }
-                v.push(parse_value(lex, t));
+                v.push(parse_value(lex, t, depth + 1));
             }
             Object::Array(v)
         }
-        Tok::DictOpen => Object::Dict(parse_dict(lex)),
+        Tok::DictOpen => {
+            if depth >= MAX_DEPTH {
+                return Object::Null;
+            }
+            Object::Dict(parse_dict(lex, depth + 1))
+        }
         Tok::Kw(k) => match k.as_str() {
             "true" => Object::Bool(true),
             "false" => Object::Bool(false),
@@ -247,14 +284,14 @@ fn parse_value(lex: &mut Lex, first: Tok) -> Object {
     }
 }
 
-fn parse_dict(lex: &mut Lex) -> Dict {
+pub(super) fn parse_dict(lex: &mut Lex, depth: u32) -> Dict {
     let mut d = Dict::new();
     while let Some(t) = lex.next() {
         match t {
             Tok::DictClose => break,
             Tok::Name(key) => {
                 if let Some(vt) = lex.next() {
-                    d.put(key, parse_value(lex, vt));
+                    d.put(key, parse_value(lex, vt, depth));
                 }
             }
             _ => {}
@@ -263,111 +300,19 @@ fn parse_dict(lex: &mut Lex) -> Dict {
     d
 }
 
-/// find `keyword` (e.g. b"obj") occurrences, scanning forward; returns each start index.
-fn find_all(hay: &[u8], needle: &[u8]) -> Vec<usize> {
-    let mut v = Vec::new();
-    let mut i = 0;
-    while i + needle.len() <= hay.len() {
-        if &hay[i..i + needle.len()] == needle {
-            v.push(i);
-            i += needle.len();
-        } else {
-            i += 1;
-        }
-    }
-    v
-}
-
 impl Document {
-    /// **The one-time prepare** — one `O(n)` forward scan ([`find_all`]) locates every `N G obj`;
-    /// each is folded into the object Table so subsequent lookups are `O(1)`, and the catalog (the
-    /// object whose `/Type` is `/Catalog`) is picked. This trades xref-table chasing + bsearch for a
-    /// single linear pass — no xref *traversal* at lookup time.
+    /// Load the document through its cross-reference structure (see `xref`): `startxref`, the
+    /// `/Prev` chain, xref tables and streams, and object streams. O(file) once; lookups are O(1).
     pub fn parse(bytes: &[u8]) -> Result<Document, super::PdfError> {
-        let mut doc = Document::default();
-        for &p in &find_all(bytes, b" obj") {
-            // back up over " obj" to read `N G` (the two ints before it)
-            let mut j = p;
-            // skip back whitespace then a number (generation), whitespace, a number (objnum)
-            let read_int_back = |b: &[u8], end: usize| -> Option<(u32, usize)> {
-                let mut k = end;
-                while k > 0 && is_ws(b[k - 1]) {
-                    k -= 1;
-                }
-                let e = k;
-                while k > 0 && b[k - 1].is_ascii_digit() {
-                    k -= 1;
-                }
-                if k == e {
-                    return None;
-                }
-                let n: u32 = String::from_utf8_lossy(&b[k..e]).parse().ok()?;
-                Some((n, k))
-            };
-            let (gen, k1) = match read_int_back(bytes, j) {
-                Some(x) => x,
-                None => continue,
-            };
-            let _ = gen;
-            let (num, _k2) = match read_int_back(bytes, k1) {
-                Some(x) => x,
-                None => continue,
-            };
-            // parse the object body starting after " obj"
-            let mut lex = Lex::new(bytes);
-            lex.i = p + 4;
-            j = p;
-            let _ = j;
-            let t = match lex.next() {
-                Some(t) => t,
-                None => continue,
-            };
-            let mut obj = parse_value(&mut lex, t);
-            // a stream object: the just-parsed dict, followed by `stream … endstream`
-            if let Object::Dict(dict) = &obj {
-                lex.skip_ws();
-                if bytes.get(lex.i..).is_some_and(|r| r.starts_with(b"stream")) {
-                    let mut s = lex.i + 6;
-                    if bytes.get(s) == Some(&b'\r') {
-                        s += 1;
-                    }
-                    if bytes.get(s) == Some(&b'\n') {
-                        s += 1;
-                    }
-                    if let Some(rel) = find_all(&bytes[s..], b"endstream").into_iter().next() {
-                        let raw = bytes[s..s + rel].to_vec();
-                        obj = Object::Stream(dict.clone(), raw);
-                    }
-                }
-            }
-            doc.set_object(num, obj);
-        }
-        // catalog = the object with /Type /Catalog
-        for (num, o) in doc.objects.iter() {
-            if let Object::Dict(d) = o {
-                if matches!(d.get(&"Type".to_string()), Some(Object::Name(n)) if n == "Catalog") {
-                    doc.root = *num;
-                    break;
-                }
-            }
-        }
-        Ok(doc)
+        super::xref::load(bytes)
     }
 
-    /// Decode a stream's bytes (FlateDecode → inflate; else raw). The Map face decides the filter.
+    /// Decode a stream's bytes through its `/Filter` chain and predictor (see `decode`). The
+    /// Map face decides the filter. `None` for a non-stream or an undecodable stream.
     pub fn stream_bytes(&self, o: &Object) -> Option<Vec<u8>> {
-        if let Object::Stream(d, raw) = o {
-            let flate = matches!(d.get(&"Filter".to_string()),
-                Some(Object::Name(f)) if f == "FlateDecode")
-                || matches!(d.get(&"Filter".to_string()),
-                    Some(Object::Array(a)) if a.iter().any(|x| matches!(x, Object::Name(n) if n == "FlateDecode")));
-            if flate {
-                zlib(raw)
-            } else {
-                Some(raw.clone())
-            }
-        } else {
-            None
+        match o {
+            Object::Stream(d, raw) => super::decode::decode(d, raw),
+            _ => None,
         }
     }
 }
@@ -606,30 +551,37 @@ fn columns_from_gutters(region: &[&Line]) -> Option<Vec<f64>> {
             xmax = xmax.max(x1);
         }
     }
-    if !(xmax - xmin > 10.0) {
+    // The projection is as wide as the region, so the region must lie within a PDF user space (at
+    // most 14400 points). A wider or non-finite span is a malformed content stream, not a table, and
+    // is refused before any buffer is sized from it.
+    if !(xmax - xmin > 10.0 && xmax - xmin <= MAX_TABLE_SPAN) {
         return None;
     }
     let w = (xmax - xmin).ceil() as usize + 2;
     let mut cov = vec![0u32; w]; // x-projection DEPTH: rows covering x
     let mut nrows = 0u32;
+    let mut row = vec![false; w]; // this row's coverage, cleared after each row (mark once per row)
+    let mut touched: Vec<usize> = Vec::new();
     for l in region {
         if l.segs.is_empty() {
             continue;
         }
         nrows += 1;
-        let mut row = vec![false; w]; // this row's coverage (mark once per row)
         for &(x0, x1, _, _) in &l.segs {
             let a = ((x0 - xmin).floor().max(0.0) as usize).min(w - 1);
             let b = ((x1 - xmin).ceil() as usize).min(w - 1);
-            for cell in row.iter_mut().take(b + 1).skip(a) {
-                *cell = true;
+            for cell in a..=b {
+                if !row[cell] {
+                    row[cell] = true;
+                    touched.push(cell);
+                }
             }
         }
-        for (i, &r) in row.iter().enumerate() {
-            if r {
-                cov[i] += 1;
-            }
+        for &i in &touched {
+            cov[i] += 1;
+            row[i] = false;
         }
+        touched.clear();
     }
     if nrows < 2 {
         return None;
@@ -753,14 +705,23 @@ struct Cand {
     geo_ok: bool,
 }
 
+/// The widest a table region may be, in points: the largest PDF user-space extent.
+const MAX_TABLE_SPAN: f64 = 14_400.0;
+/// The most cells a table candidate may have; larger grids are not tables this reader proposes.
+const MAX_GRID_CELLS: usize = 600;
+
 /// Push a candidate (if it forms a ≥2×2 grid). RECALL is generous here — the gate (seed or geometric)
 /// decides table-ness later; this only proposes structurally-plausible regions.
 fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64>, ruled: bool) {
     if rowys.len() < 3 || colxs.len() < 3 {
         return;
     } // ≥2 rows, ≥2 columns
+    // Refuse an oversized grid before `region_stats` sizes its per-cell buffers from it.
+    if (rowys.len() - 1) * (colxs.len() - 1) > MAX_GRID_CELLS {
+        return;
+    }
     let st = region_stats(lines, &rowys, &colxs, ruled);
-    if st.nr < 2 || st.nc < 2 || st.nr * st.nc > 600 {
+    if st.nr < 2 || st.nc < 2 || st.nr * st.nc > MAX_GRID_CELLS {
         return;
     }
     // A RULED grid IS the table — the drawn lattice is the author's own structure, so accept on a loose
@@ -1059,9 +1020,10 @@ impl Document {
     fn page_data(&self) -> Vec<(Vec<Line>, (Vec<(f64, f64, f64)>, Vec<(f64, f64, f64)>))> {
         let mut pages = Vec::new();
         if let Some(Object::Dict(cat)) = self.object(self.root) {
+            let mut seen = super::Table::new();
             match cat.get(&"Pages".to_string()) {
-                Some(Object::Ref(pr, _)) => self.collect_pages(*pr, &mut pages, 0),
-                _ => self.collect_pages(self.root, &mut pages, 0),
+                Some(Object::Ref(pr, _)) => self.collect_pages(*pr, &mut pages, 0, &mut seen),
+                _ => self.collect_pages(self.root, &mut pages, 0, &mut seen),
             }
         }
         let mut pdata = Vec::new();
@@ -1206,10 +1168,19 @@ impl Document {
         m
     }
 
-    fn collect_pages(&self, num: u32, out: &mut Vec<u32>, depth: u32) {
-        if depth > 64 {
+    /// Walk the page tree. Each node is visited once (`seen`), so a `/Kids` list that names a node
+    /// twice, or names an ancestor, cannot multiply the walk; the depth bound stays as well.
+    fn collect_pages(
+        &self,
+        num: u32,
+        out: &mut Vec<u32>,
+        depth: u32,
+        seen: &mut super::Table<u32, bool>,
+    ) {
+        if depth > 64 || seen.has(&num) {
             return;
         }
+        seen.put(num, true);
         let Some(Object::Dict(d)) = self.object(num) else {
             return;
         };
@@ -1223,7 +1194,7 @@ impl Document {
                     };
                     for k in &kids {
                         if let Object::Ref(n, _) = k {
-                            self.collect_pages(*n, out, depth + 1);
+                            self.collect_pages(*n, out, depth + 1, seen);
                         }
                     }
                 }
