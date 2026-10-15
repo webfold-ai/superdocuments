@@ -832,3 +832,40 @@ fn corpus_mutations_never_panic_or_hang() {
         started.elapsed()
     );
 }
+
+#[test]
+fn endobj_inside_a_string_or_comment_does_not_end_the_object() {
+    // A catalog whose literal string (with an escaped parenthesis), hex string and comment
+    // contain `endobj` keeps the entries after them.
+    let mut objs = page_objects("Catalog survives");
+    objs[0] = (
+        1,
+        b"<< /Title (endobj \\) endobj) /Hex <656e646f626a> % endobj\n /Type /Catalog /Pages 2 0 R >>"
+            .to_vec(),
+    );
+    let pdf = classic_pdf(&objs, 1, &[]);
+    let doc = Document::parse(&pdf).expect("parse");
+    let Some(Object::Dict(cat)) = doc.object(1) else {
+        panic!("catalog is a dictionary");
+    };
+    assert!(
+        cat.get(&"Pages".to_string()).is_some(),
+        "entries after the string survive"
+    );
+    let md = text_of(&pdf).expect("extracts");
+    assert!(md.contains("Catalog survives"), "markdown: {md:?}");
+}
+
+#[test]
+fn filter_free_streams_answer_to_the_decode_ceiling() {
+    use crate::pdf::parser::decode::decode_within;
+    let d = crate::pdf::parser::Dict::new();
+    assert_eq!(
+        decode_within(&d, b"0123456789", 10).as_deref(),
+        Some(&b"0123456789"[..])
+    );
+    assert!(
+        decode_within(&d, b"0123456789", 9).is_none(),
+        "raw stream over the cap is refused"
+    );
+}

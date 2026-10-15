@@ -864,6 +864,24 @@ struct PhaseTimings {
     recognize_seconds: f64,
 }
 
+/// Record what an OCR run produced in the request's phase timings: its output size, the pages it
+/// rendered and whether it stopped at the page limit. Both the scanned and the mixed path call it,
+/// so the request log reports the OCR work either way.
+fn record_ocr_output(timings: &Mutex<PhaseTimings>, ocr_result: &io::Result<String>) {
+    let Ok(markdown) = ocr_result else {
+        return;
+    };
+    let mut t = timings.lock().expect("phase timings mutex poisoned");
+    if markdown.contains("OCR stopped at the configured limit of") {
+        t.truncated = true;
+    }
+    if let Some(last_brace) = markdown.rfind("<!-- page ") {
+        let tail = &markdown[last_brace..];
+        t.pages_rendered = tail.matches("<!-- page ").count() as u64;
+    }
+    t.bytes_ocr = markdown.len() as u64;
+}
+
 fn extract_file_with_ocr_inner(
     path: &Path,
     options: &OcrOptions,
@@ -888,12 +906,12 @@ fn extract_file_with_ocr_inner(
                 .lock()
                 .expect("phase timings mutex poisoned")
                 .used_ocr = true;
-            return Ok(
-                match tesseract_ocr_with_observer(path, options, &mut observer) {
-                    Ok(ocr) => merge_native_and_ocr(pages, &ocr),
-                    Err(_) => pages.concat(),
-                },
-            );
+            let ocr_result = tesseract_ocr_with_observer(path, options, &mut observer);
+            record_ocr_output(&timings, &ocr_result);
+            return Ok(match ocr_result {
+                Ok(ocr) => merge_native_and_ocr(pages, &ocr),
+                Err(_) => pages.concat(),
+            });
         }
     }
     timings
@@ -901,18 +919,7 @@ fn extract_file_with_ocr_inner(
         .expect("phase timings mutex poisoned")
         .used_ocr = true;
     let ocr_result = tesseract_ocr_with_observer(path, options, &mut observer);
-    let mut t = timings.lock().expect("phase timings mutex poisoned");
-    if let Ok(markdown) = &ocr_result {
-        if markdown.contains("OCR stopped at the configured limit of") {
-            t.truncated = true;
-        }
-        if let Some(last_brace) = markdown.rfind("<!-- page ") {
-            let tail = &markdown[last_brace..];
-            t.pages_rendered = tail.matches("<!-- page ").count() as u64;
-        }
-        t.bytes_ocr = markdown.len() as u64;
-    }
-    drop(t);
+    record_ocr_output(&timings, &ocr_result);
     match ocr_result {
         Ok(markdown) => Ok(markdown),
         Err(ocr_error) => match native {
