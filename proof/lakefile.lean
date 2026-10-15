@@ -12,4 +12,4 @@ package superdocumentsProof where
 
 @[default_target]
 lean_lib PdfProof where
-  roots := #[`Constructive, `PdfSpec, `EpubSpec, `PdfMath, `PdfProofs]
+  roots := #[`Constructive, `PdfSpec, `EpubSpec, `PdfMath, `PdfProofs, `EpubMath, `EpubTables, `EpubProofs]

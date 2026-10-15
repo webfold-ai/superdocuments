@@ -71,18 +71,34 @@ resolveHref_clean textBudget_accept textBudget_refuse renderGo_eq render_spec
 entryBoundOk_spec entryBoundOk_of examples'''.split())
 
 
+# The loop-free EPUB kernels of proof/extract_epub.rs (G12; the EpubSpec module docstring).
+EPUB_KERNELS = set('''opf_child_role manifest_item_accept manifest_index_step spine_step
+href_byte_class pct_hex path_segment_kind epub_text_budget zip_entry_bound'''.split())
+
+# Refinement theorems EpubProofs must provide (each kernel equals its field function), and
+# the contract theorems production relies on (EpubTables holds the exhaustive byte checks).
+EPUB_REFINES = {k + '_refines' for k in EPUB_KERNELS} | set('''opf_child_role_item
+opf_child_role_itemref manifest_item_accept_spec spine_step_read_sound zip_entry_bound_spec
+epub_text_budget_accept epub_text_budget_refuse pct_hex_value_lt path_segment_kind_one'''.split())
+
+EPUB_MODULES = ['EpubMath', 'EpubTables', 'EpubProofs']
+
+
 def required(full):
     names = {'PdfSpec.' + n for n in SPEC} | {'EpubSpec.' + n for n in EPUB_SPEC}
     if full:
         names |= {'pdf_math.' + n for n in KERNELS}
         names |= {'PdfProofs.' + n for n in REFINES}
+        names |= {'epub_math.' + n for n in EPUB_KERNELS}
+        names |= {'EpubProofs.' + n for n in EPUB_REFINES}
     return names
 
 
 def main():
     full = '--spec-only' not in sys.argv[1:]
-    modules = ['Constructive', 'PdfSpec', 'EpubSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
-    targets = ['PdfSpec', 'EpubSpec'] + (['PdfMath', 'PdfProofs'] if full else [])
+    modules = ['Constructive', 'PdfSpec', 'EpubSpec'] + (
+        ['PdfMath', 'PdfProofs'] + EPUB_MODULES if full else [])
+    targets = ['PdfSpec', 'EpubSpec'] + (['PdfMath', 'PdfProofs'] + EPUB_MODULES if full else [])
     subprocess.run(['lake', 'build'] + targets, cwd=ROOT, check=True, timeout=600)
     declarations = ', '.join('`' + n for n in sorted(required(full)))
     imports = '\n'.join('import ' + m for m in ['Lean'] + targets)
