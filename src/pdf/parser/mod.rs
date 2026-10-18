@@ -28,6 +28,7 @@
 //! 4. **layout fold** — the accumulator ruler (text→lines) + table grid as hashmap cells.
 //! 5. **classify** — text-vs-scanned as the `x = B/U` accumulator ratio.
 
+pub mod ascii_filters;
 pub mod inflate;
 mod parse;
 // The HashTrinity primitive now lives in the shared `hashtrinity` crate (the Rust rung of
