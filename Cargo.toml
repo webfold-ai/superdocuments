@@ -1,3 +1,4 @@
+[workspace]
 [package]
 name = "superdocuments"
 version = "0.8.1"
@@ -22,6 +23,11 @@ quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
 hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c82c073c71df7c28b14c62665d62cbf0", features = ["syntax"] }
+# The O(1) borrowed-key map used for the EPUB manifest index. Same shape
+# as `calamine-apeiron`'s relationship / path caches. Path dep because
+# apeiron has no published crate yet; see the calamine-apeiron APEIRON-FORK.md
+# note for the same constraint.
+apeiron = { path = "/home/ctown/orca/apeiron" }
 # Media codecs only, behind `images` / `media-codecs`. The HTML and PDF document code that used to
 # come from Transcode's `doc` module (not part of the GitHub Transcode) now lives in this crate.
 transcode = { git = "https://github.com/Ptyktos/transcode", rev = "f855e4217105863354f58c1d1c840685fff6e44b", optional = true }
