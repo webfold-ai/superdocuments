@@ -33,7 +33,10 @@ fn archive(data: &[u8]) -> Result<ZipArchive<Cursor<&[u8]>>, String> {
     for i in 0..zip.len() {
         let entry = zip.by_index_raw(i).map_err(|e| e.to_string())?;
         if entry.size() > MAX_ENTRY {
-            return Err(format!("entry too large: {}", entry.name()));
+            return Err(format!(
+                "entry too large: {}",
+                entry.name().unwrap_or_else(|_| "<undecodable name>".into())
+            ));
         }
         total = total
             .checked_add(entry.size())
@@ -207,7 +210,10 @@ fn csv_rows(data: &str, delimiter: char) -> Result<Vec<Vec<String>>, String> {
 
 fn docx(data: &[u8]) -> Result<String, String> {
     let mut zip = archive(data)?;
-    let document_path = if zip.file_names().any(|name| name == "word/document.xml") {
+    let document_path = if zip
+        .file_names()
+        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
+    {
         "word/document.xml".to_string()
     } else {
         let rels = entry(&mut zip, "_rels/.rels")?;
@@ -324,6 +330,7 @@ fn docx(data: &[u8]) -> Result<String, String> {
             .by_index_raw(index)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if name.starts_with("word/charts/") && name.ends_with(".xml") {
             let chart = entry(&mut zip, &name)?;
@@ -355,6 +362,7 @@ fn pptx(data: &[u8]) -> Result<String, String> {
             .by_index_raw(i)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if let Some(number) = name
             .strip_prefix("ppt/slides/slide")
@@ -482,6 +490,7 @@ fn xlsx(data: &[u8]) -> Result<String, String> {
             .by_index_raw(i)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if let Some(number) = name
             .strip_prefix("xl/worksheets/sheet")
@@ -647,6 +656,7 @@ fn epub(data: &[u8]) -> Result<String, String> {
             .by_index_raw(i)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if name.ends_with(".xhtml") || name.ends_with(".html") {
             chapters.push(name);
@@ -756,6 +766,7 @@ fn xlsb(data: &[u8]) -> Result<String, String> {
             .by_index_raw(index)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if let Some(number) = name
             .strip_prefix("xl/worksheets/sheet")
@@ -1081,7 +1092,9 @@ fn write_xlsx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String
         let Ok(entry) = zip.by_index_raw(i) else {
             continue;
         };
-        let name = entry.name().to_string();
+        let Ok(name) = entry.name().map(|n| n.into_owned()) else {
+            continue;
+        };
         if let Some(number) = name
             .strip_prefix("xl/worksheets/sheet")
             .and_then(|s| s.strip_suffix(".xml"))
@@ -1168,7 +1181,10 @@ fn write_xlsx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String
 
 fn write_docx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String> {
     let mut zip = archive(data)?;
-    let document_path = if zip.file_names().any(|name| name == "word/document.xml") {
+    let document_path = if zip
+        .file_names()
+        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
+    {
         "word/document.xml".to_string()
     } else {
         let rels = entry(&mut zip, "_rels/.rels")?;
@@ -1538,7 +1554,9 @@ fn lift_xlsx(data: &[u8]) -> Result<LiftedDoc, String> {
         let Ok(entry) = zip.by_index_raw(i) else {
             continue;
         };
-        let name = entry.name().to_string();
+        let Ok(name) = entry.name().map(|n| n.into_owned()) else {
+            continue;
+        };
         if let Some(number) = name
             .strip_prefix("xl/worksheets/sheet")
             .and_then(|s| s.strip_suffix(".xml"))
@@ -1627,7 +1645,10 @@ fn lift_docx(data: &[u8]) -> Result<LiftedDoc, String> {
     let mut zip = archive(data)?;
 
     // Find the document part. The simple case is word/document.xml; otherwise walk the rels.
-    let document_path = if zip.file_names().any(|name| name == "word/document.xml") {
+    let document_path = if zip
+        .file_names()
+        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
+    {
         "word/document.xml".to_string()
     } else {
         let rels = read_zip_entry(&mut zip, "_rels/.rels")?;

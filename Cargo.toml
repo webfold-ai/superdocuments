@@ -21,7 +21,7 @@ images = ["dep:transcode"]
 framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5a097c2e2448640c79d43b37b9246d0f7baea0d4", default-features = false, optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
-zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
+zip = { version = "9", default-features = false, features = ["deflate"] }
 hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c82c073c71df7c28b14c62665d62cbf0", features = ["syntax"] }
 # The O(1) borrowed-key map used for the EPUB manifest index. Same shape
 # as `calamine-apeiron`'s relationship / path caches. Path dep because
