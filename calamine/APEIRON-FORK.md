@@ -6,9 +6,9 @@ path caches and workbook relationship indexes use `apeiron::Map` with borrowed
 `&str` lookups. XLS and ODS readers are unchanged controls. This is an initial
 storage migration, not a rewrite of spreadsheet parsing or a claimed speedup.
 
-The `apeiron` dependency resolves from `/home/ctown/orca/apeiron`. The local
-path makes this fork a workspace integration rather than a redistributable
-standalone package. The upstream Calamine source is MIT; Apeiron has its own
+The `apeiron` dependency resolves from the `apeiron` branch of Ptyktos/hashtrinity
+(commit a2b5093). This crate lives in the superdocuments workspace as `calamine/`
+rather than as a redistributable standalone package. The upstream Calamine source is MIT; Apeiron has its own
 license in that checkout, which must be reviewed before external distribution.
 
 Validation:
