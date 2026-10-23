@@ -109,11 +109,6 @@ version = "0.1.0"
 source = "git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56#255ca3018a0f06300153d905cb19b37ea548bb56"
 
 [[package]]
-name = "apeiron"
-version = "0.1.0"
-source = "git+https://github.com/Ptyktos/hashtrinity?rev=a2b50938679888cba22e5174e8dce92dfb6414cc#a2b50938679888cba22e5174e8dce92dfb6414cc"
-
-[[package]]
 name = "atoi_simd"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -207,7 +202,7 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 name = "calamine"
 version = "0.36.1"
 dependencies = [
- "apeiron 0.1.0 (git+https://github.com/Ptyktos/hashtrinity?rev=a2b50938679888cba22e5174e8dce92dfb6414cc)",
+ "apeiron",
  "atoi_simd",
  "byteorder",
  "chrono",
@@ -698,7 +693,7 @@ name = "hashtrinity"
 version = "0.1.0"
 source = "git+https://github.com/Ptyktos/hashtrinity?rev=2c36b995c82c073c71df7c28b14c62665d62cbf0#2c36b995c82c073c71df7c28b14c62665d62cbf0"
 dependencies = [
- "apeiron 0.1.0 (git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56)",
+ "apeiron",
  "rustls",
  "serde",
  "serde_json",
@@ -1382,7 +1377,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 name = "superdocuments"
 version = "0.8.1"
 dependencies = [
- "apeiron 0.1.0 (git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56)",
+ "apeiron",
  "encoding_rs",
  "framefold",
  "hashtrinity",
