@@ -50,11 +50,7 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-
-[[package]]
-name = "apeiron"
-version = "0.1.0"
-source = "git+https://github.com/Ptyktos/apeiron.git?rev=a2b50938679888cba22e5174e8dce92dfb6414cc#a2b50938679888cba22e5174e8dce92dfb6414cc"
+source = "git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56#255ca3018a0f06300153d905cb19b37ea548bb56"
 
 [[package]]
 name = "autocfg"
@@ -397,7 +393,7 @@ name = "hashtrinity"
 version = "0.1.0"
 source = "git+https://github.com/Ptyktos/hashtrinity?rev=2c36b995c82c073c71df7c28b14c62665d62cbf0#2c36b995c82c073c71df7c28b14c62665d62cbf0"
 dependencies = [
- "apeiron 0.1.0 (git+https://github.com/Ptyktos/apeiron.git?rev=a2b50938679888cba22e5174e8dce92dfb6414cc)",
+ "apeiron",
  "rustls",
  "serde",
  "serde_json",
@@ -915,7 +911,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 name = "superdocuments"
 version = "0.8.1"
 dependencies = [
- "apeiron 0.1.0",
+ "apeiron",
  "encoding_rs",
  "framefold",
  "hashtrinity",
