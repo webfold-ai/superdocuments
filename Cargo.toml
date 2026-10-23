@@ -1,4 +1,8 @@
 [workspace]
+members = ["calamine"]
+# calamine/fuzz is a cargo-fuzz crate built on its own.
+exclude = ["calamine/fuzz"]
+
 [package]
 name = "superdocuments"
 version = "0.8.1"
@@ -24,11 +28,10 @@ encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
 hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c82c073c71df7c28b14c62665d62cbf0", features = ["syntax"] }
 # The O(1) borrowed-key map used for the EPUB manifest index. Same shape
-# as `calamine-apeiron`'s relationship / path caches. apeiron has no published crate and
-# Ptyktos/apeiron is retired: the crate lives in Ptyktos/hashtrinity (branch `apeiron`), pinned here at
-# the Apache-2.0 tip. This was `path = "/home/ctown/orca/apeiron"`, a developer-machine path that no
-# clean checkout, CI runner or Nix build can resolve (`cargo metadata` fails on it).
-apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56", version = "0.1.0" }
+# as the relationship / path caches in `calamine/`. apeiron has no published crate; its history
+# lives on the `apeiron` branch of Ptyktos/hashtrinity (Ptyktos/apeiron is gone), at the commit
+# hashtrinity itself pins.
+apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "a2b50938679888cba22e5174e8dce92dfb6414cc" }
 # Media codecs only, behind `images` / `media-codecs`. The HTML and PDF document code that used to
 # come from Transcode's `doc` module (not part of the GitHub Transcode) now lives in this crate.
 transcode = { git = "https://github.com/Ptyktos/transcode", rev = "8e65c5afeb8adb9663511760b80e19156970207e", optional = true }
@@ -41,8 +44,7 @@ serde_json = "1"
 [dev-dependencies]
 
 
-# hashtrinity@2c36b99 still names the retired Ptyktos/apeiron git source. Resolve that name to the same
-# apeiron commit as the direct dependency above, so the graph has exactly one apeiron. (Patches only
-# apply in a root manifest: a consumer such as webfold carries its own copy of this table.)
+# hashtrinity (and anything else pinned before the move) still names Ptyktos/apeiron, which no
+# longer exists; redirect that source to the same commit on the hashtrinity `apeiron` branch.
 [patch."https://github.com/Ptyktos/apeiron"]
-apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56" }
+apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "a2b50938679888cba22e5174e8dce92dfb6414cc" }
