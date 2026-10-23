@@ -31,7 +31,10 @@ fn archive(data: &[u8]) -> Result<ZipArchive<Cursor<&[u8]>>, String> {
     for i in 0..zip.len() {
         let entry = zip.by_index_raw(i).map_err(|e| e.to_string())?;
         if entry.size() > MAX_ENTRY {
-            return Err(format!("entry too large: {}", entry.name()));
+            return Err(format!(
+                "entry too large: {}",
+                entry.name().unwrap_or_else(|_| "<undecodable name>".into())
+            ));
         }
         total = total
             .checked_add(entry.size())
@@ -163,6 +166,7 @@ pub fn read_workbook(data: &[u8]) -> Result<Vec<Worksheet>, String> {
             .by_index_raw(i)
             .map_err(|e| e.to_string())?
             .name()
+            .map_err(|e| e.to_string())?
             .to_string();
         if let Some(number) = name
             .strip_prefix("xl/worksheets/sheet")
