@@ -31,7 +31,7 @@ hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c
 apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56", version = "0.1.0" }
 # Media codecs only, behind `images` / `media-codecs`. The HTML and PDF document code that used to
 # come from Transcode's `doc` module (not part of the GitHub Transcode) now lives in this crate.
-transcode = { git = "https://github.com/Ptyktos/transcode", rev = "f855e4217105863354f58c1d1c840685fff6e44b", optional = true }
+transcode = { git = "https://github.com/Ptyktos/transcode", rev = "8e65c5afeb8adb9663511760b80e19156970207e", optional = true }
 # `lopdf` (pure-Rust PDF parser, MIT) — used by the AcroForm repair lift from
 # LiteParse. It walks pages + annotations without going through Transcode.
 lopdf = "0.34"
