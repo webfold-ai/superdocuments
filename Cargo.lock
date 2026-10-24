@@ -106,7 +106,7 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://github.com/Ptyktos/hashtrinity?rev=a2b50938679888cba22e5174e8dce92dfb6414cc#a2b50938679888cba22e5174e8dce92dfb6414cc"
+source = "git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56#255ca3018a0f06300153d905cb19b37ea548bb56"
 
 [[package]]
 name = "atoi_simd"
