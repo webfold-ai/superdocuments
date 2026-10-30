@@ -10,6 +10,7 @@ repo to [`superdocuments/`](https://github.com/Ptyktos/superdocuments),
 | Path | Role |
 |---|---|
 | `ocr/` | OCR quality / latency / graph-fidelity harness. CPU baselines + GPU/OpenAI-compat inference targets. |
+| `marathondocbench/` | Baidu's MarathonDocBench (hundred-page document parsing): page images in, one Markdown file per document out, for the OCR fallback and Tesseract. Official scorer not yet run. |
 
 ## How this relates to existing bench work
 
