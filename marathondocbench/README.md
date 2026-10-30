@@ -45,7 +45,7 @@ book, not tested: its pages are 1812 px tall and webfold rendered them at a long
 * The OCR defaults (`superdocuments::pdf::OcrOptions`) are English only, 20 pages, a longest page edge of 2400 px and 120 s. Hard limits in superdocuments: at most 100 pages, at most 600 s,
   and pages x edge^2 x 4 bytes within 512 MiB (about 22 pages at 2400 px, 40 pages at 1800 px). A 100 to 300 page document therefore **cannot be OCR'd in one call**; this lane splits it into 40-page
   chunks and joins them. Webfold gained `--ocr-lang`, `--ocr-max-pages`, `--ocr-max-dim` and `--ocr-timeout` (or `WEBFOLD_OCR_*`) to make that possible; before, none of it was reachable from the CLI.
-* `webfold pdf` as shipped drops everything after page 20 with no error, so a hundred-page scan comes back as a fifth of a document. It does add a truncation note to the output for some limits; whether it does here was not checked.
+* `webfold pdf` as shipped stops after page 20, so a hundred-page scan comes back as a fifth of a document. It says so in the output (`[OCR stopped at the configured limit of 20 pages; later pages may be omitted]`) and exits 0, which a pipeline that does not read the text will miss.
 * Tesseract spins OpenMP threads; with more concurrent processes than cores a single page took minutes instead of half a second. The lane sets `OMP_THREAD_LIMIT=1` and two jobs.
 * No layout. The fallback returns text with `<!-- page N -->` markers: no headings, tables, formulas or figure tags, which is most of what MarathonDocBench scores.
 
