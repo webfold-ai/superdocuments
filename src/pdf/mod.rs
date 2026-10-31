@@ -20,6 +20,12 @@ pub mod transcode_populator;
 pub const MAX_PDF_BYTES: usize = 256 * 1024 * 1024;
 const MAX_OCR_TOTAL_BYTES: usize = 16 * 1024 * 1024;
 const MAX_OCR_RENDER_BYTES: u64 = 512 * 1024 * 1024;
+/// Most pages one call may OCR. They are rendered in windows, so this bounds time, not memory.
+const MAX_OCR_PAGES: u32 = 2_000;
+/// Longest wall-clock budget accepted.
+const MAX_OCR_TIMEOUT: Duration = Duration::from_secs(3_600);
+/// Pages rendered at once, whatever the budget allows.
+const MAX_OCR_WINDOW: u32 = 25;
 
 /// Read and parse a PDF file without spawning a process.
 pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
@@ -112,12 +118,16 @@ pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
 pub struct OcrOptions {
     /// Tesseract language codes, e.g. `eng` or `eng+deu`.
     pub languages: String,
-    /// Maximum rendered pages. PDFs beyond this limit return an explicit truncation note.
+    /// Maximum pages to OCR (1..=2000). PDFs beyond this limit return an explicit truncation note.
+    /// Pages are rendered and recognised in windows, so a long document costs time, not memory.
     pub max_pages: u32,
     /// Maximum edge length of each rendered page in pixels.
     pub max_image_dimension: u32,
-    /// Shared wall-clock budget for rendering and OCR.
+    /// Shared wall-clock budget for rendering and OCR (1..=3600 s).
     pub timeout: Duration,
+    /// Tesseract processes run at once (1..=16). With more than one, each is held to a single
+    /// OpenMP thread, since Tesseract's own threads spin and oversubscribing the cores makes every page slower.
+    pub workers: u32,
     /// Optional observability sink — counters/gauges/histograms plus an append-only JSONL
     /// log. Both default to no-op so callers without metrics infrastructure are unaffected.
     pub config: OcrConfig,
@@ -130,6 +140,7 @@ impl Default for OcrOptions {
             max_pages: 20,
             max_image_dimension: 2_400,
             timeout: Duration::from_secs(120),
+            workers: 1,
             config: OcrConfig::default(),
         }
     }
@@ -712,10 +723,10 @@ impl OcrOptions {
                 "invalid OCR language list",
             ));
         }
-        if !(1..=100).contains(&self.max_pages) {
+        if !(1..=MAX_OCR_PAGES).contains(&self.max_pages) {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
-                "OCR page limit must be 1..=100",
+                "OCR page limit must be 1..=2000",
             ));
         }
         if !(256..=4_000).contains(&self.max_image_dimension) {
@@ -724,20 +735,16 @@ impl OcrOptions {
                 "OCR image dimension must be 256..=4000",
             ));
         }
-        let render_bound = u64::from(self.max_pages)
-            .saturating_mul(u64::from(self.max_image_dimension))
-            .saturating_mul(u64::from(self.max_image_dimension))
-            .saturating_mul(4);
-        if render_bound > MAX_OCR_RENDER_BYTES {
+        if !(1..=16).contains(&self.workers) {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
-                "OCR page and pixel limits exceed the rendered-data budget",
+                "OCR workers must be 1..=16",
             ));
         }
-        if self.timeout.is_zero() || self.timeout > Duration::from_secs(600) {
+        if self.timeout.is_zero() || self.timeout > MAX_OCR_TIMEOUT {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
-                "OCR timeout must be 1..=600 seconds",
+                "OCR timeout must be 1..=3600 seconds",
             ));
         }
         Ok(())
@@ -1000,7 +1007,29 @@ fn format_ocr_pages(ocr: &OcrPages, max_pages: u32) -> String {
     output
 }
 
+/// Pages rendered per `pdftoppm` call: as many as the render budget allows at this image size, at most [`MAX_OCR_WINDOW`].
+fn ocr_window(options: &OcrOptions) -> u32 {
+    let per_page = u64::from(options.max_image_dimension).pow(2) * 4;
+    ((MAX_OCR_RENDER_BYTES / per_page).max(1) as u32).min(MAX_OCR_WINDOW)
+}
+
+/// The 1-based page windows `(first, last)` covering `1..=max_pages`.
+fn ocr_windows(max_pages: u32, window: u32) -> Vec<(u32, u32)> {
+    let window = window.max(1);
+    let mut out = Vec::new();
+    let mut first = 1;
+    while first <= max_pages {
+        let last = (first + window - 1).min(max_pages);
+        out.push((first, last));
+        first = last + 1;
+    }
+    out
+}
+
 /// `tesseract_ocr_with_observer` restricted to the listed 1-based pages (`None` = every page).
+///
+/// Pages are rendered a window at a time, recognised (by up to `options.workers` Tesseract processes at once)
+/// and their images deleted before the next window, so the render budget bounds a window, not the document.
 fn tesseract_ocr_pages(
     path: impl AsRef<Path>,
     options: &OcrOptions,
@@ -1016,151 +1045,185 @@ fn tesseract_ocr_pages(
             "PDF exceeds size limit",
         ));
     }
+    let fail = |error: io::Error| {
+        if let Some(metrics) = options.config.metrics.as_ref() {
+            metrics.record_outcome(false, false);
+        }
+        error
+    };
     let deadline = Instant::now() + options.timeout;
     let temp = OcrTempDir::create()?;
-    let prefix = temp.0.join("page");
-    let mut render = Command::new("pdftoppm");
-    render
-        .args(["-f", "1", "-l"])
-        .arg(options.max_pages.to_string())
-        .arg("-scale-to")
-        .arg(options.max_image_dimension.to_string())
-        .arg("-png")
-        .arg(input)
-        .arg(&prefix);
-    let render_started = Instant::now();
-    let render_outcome = run_bounded(&mut render, deadline);
-    let render_seconds = render_started.elapsed().as_secs_f64();
-    if let Err(error) = render_outcome {
-        if let Some(metrics) = options.config.metrics.as_ref() {
-            metrics.record_outcome(false, false);
+    let window = ocr_window(options);
+    let selected = |n: u32| only.is_none_or(|only| only.contains(&n));
+    let last_wanted = only.and_then(|only| only.iter().copied().max());
+
+    let mut collected: Vec<(u32, String)> = Vec::new();
+    let mut collected_bytes = 0usize;
+    let (mut render_seconds, mut recognize_seconds_total) = (0.0f64, 0.0f64);
+    let (mut rendered_pages, mut rendered_bytes_total, mut pages_kept) = (0u64, 0u64, 0u64);
+    // The last window came back full, so the document may run on past `max_pages`.
+    let mut limit_reached = false;
+    let mut document_ended = false;
+
+    for (first, last) in ocr_windows(options.max_pages, window) {
+        if only.is_some() && !(first..=last).any(selected) {
+            // nothing wanted here: no need to render it; the document may still continue
+            limit_reached = last == options.max_pages;
+            if last_wanted.is_some_and(|m| m <= last) {
+                break;
+            }
+            continue;
         }
-        return Err(error);
+        let prefix = temp.0.join("page");
+        let mut render = Command::new("pdftoppm");
+        render
+            .args(["-f"])
+            .arg(first.to_string())
+            .arg("-l")
+            .arg(last.to_string())
+            .arg("-scale-to")
+            .arg(options.max_image_dimension.to_string())
+            .arg("-png")
+            .arg(input)
+            .arg(&prefix);
+        let render_started = Instant::now();
+        let render_outcome = run_bounded(&mut render, deadline);
+        render_seconds += render_started.elapsed().as_secs_f64();
+        if let Err(error) = render_outcome {
+            return Err(fail(error));
+        }
+
+        let mut pages = Vec::new();
+        for entry in std::fs::read_dir(&temp.0)? {
+            let path = entry?.path();
+            if path.extension().and_then(|s| s.to_str()) != Some("png") {
+                continue;
+            }
+            let Some(number) = path
+                .file_stem()
+                .and_then(|s| s.to_str())
+                .and_then(|s| s.strip_prefix("page-"))
+                .and_then(|s| s.parse::<u32>().ok())
+            else {
+                continue;
+            };
+            pages.push((number, path));
+        }
+        pages.sort_by_key(|(number, _)| *number);
+        let rendered_in_window = pages.len() as u32;
+        limit_reached = rendered_in_window == last - first + 1 && last == options.max_pages;
+        document_ended = rendered_in_window < last - first + 1;
+        pages.retain(|(number, _)| selected(*number));
+        let window_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
+            path.metadata()
+                .map(|metadata| total.saturating_add(metadata.len()))
+        })?;
+        if window_bytes > MAX_OCR_RENDER_BYTES {
+            return Err(fail(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "rendered PDF pages exceed the disk-space limit",
+            )));
+        }
+        rendered_pages += pages.len() as u64;
+        rendered_bytes_total = rendered_bytes_total.saturating_add(window_bytes);
+
+        // recognise the window, `workers` pages at a time; results come back in page order
+        let languages = options.languages.as_str();
+        let workers = options.workers.max(1) as usize;
+        let tmp = temp.0.as_path();
+        let recognised: Vec<io::Result<(u32, f64, String)>> = pages
+            .chunks(workers)
+            .flat_map(|batch| {
+                thread::scope(|scope| {
+                    let handles: Vec<_> = batch
+                        .iter()
+                        .map(|(number, image)| {
+                            scope.spawn(move || {
+                                let base = tmp.join(format!("ocr-{number}"));
+                                let mut ocr = Command::new("tesseract");
+                                ocr.arg(image).arg(&base).arg("-l").arg(languages).args(["--psm", "3"]);
+                                if workers > 1 {
+                                    ocr.env("OMP_THREAD_LIMIT", "1");
+                                }
+                                let started = Instant::now();
+                                run_bounded(&mut ocr, deadline)?;
+                                let seconds = started.elapsed().as_secs_f64();
+                                let text = read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
+                                let _ = std::fs::remove_file(base.with_extension("txt"));
+                                Ok((*number, seconds, text))
+                            })
+                        })
+                        .collect();
+                    handles
+                        .into_iter()
+                        .map(|h| {
+                            h.join()
+                                .unwrap_or_else(|_| Err(io::Error::other("OCR worker panicked")))
+                        })
+                        .collect::<Vec<_>>()
+                })
+            })
+            .collect();
+        for (_, image) in &pages {
+            let _ = std::fs::remove_file(image);
+        }
+        for item in recognised {
+            let (number, page_seconds, text) = item.map_err(&fail)?;
+            recognize_seconds_total += page_seconds;
+            observer("page_recognize", page_seconds, 1, text.len() as u64);
+            if let Some(log_path) = options.config.log_path.as_deref() {
+                let _ = write_log_line(
+                    log_path,
+                    LogEvent::Flame {
+                        stage: "page_recognize",
+                        elapsed_us: (page_seconds * 1_000_000.0) as u64,
+                        pages: 1,
+                    },
+                );
+            }
+            if !text.trim().is_empty() {
+                if collected_bytes.saturating_add(text.len()) > MAX_OCR_TOTAL_BYTES {
+                    return Err(fail(io::Error::new(
+                        io::ErrorKind::InvalidData,
+                        "total OCR output exceeds size limit",
+                    )));
+                }
+                collected_bytes += text.len();
+                collected.push((number, text.trim().to_string()));
+                pages_kept += 1;
+            }
+        }
+        if document_ended || last_wanted.is_some_and(|m| m <= last) {
+            break;
+        }
     }
 
-    let mut pages = Vec::new();
-    for entry in std::fs::read_dir(&temp.0)? {
-        let path = entry?.path();
-        if path.extension().and_then(|s| s.to_str()) != Some("png") {
-            continue;
-        }
-        let Some(number) = path
-            .file_stem()
-            .and_then(|s| s.to_str())
-            .and_then(|s| s.strip_prefix("page-"))
-            .and_then(|s| s.parse::<u32>().ok())
-        else {
-            continue;
-        };
-        pages.push((number, path));
-    }
-    pages.sort_by_key(|(number, _)| *number);
-    // The render cap is a property of the render, so it is judged before any page selection.
-    let rendered_limit_reached = pages.len() == options.max_pages as usize;
-    let rendered_total = pages.len();
-    if let Some(only) = only {
-        pages.retain(|(number, _)| only.contains(number));
-    }
     let selected_beyond_render = only.is_some_and(|only| {
-        rendered_limit_reached && only.iter().any(|n| *n as usize > rendered_total)
+        limit_reached && !document_ended && only.iter().any(|n| *n > options.max_pages)
     });
-    let rendered_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
-        path.metadata()
-            .map(|metadata| total.saturating_add(metadata.len()))
-    })?;
-    if rendered_bytes > MAX_OCR_RENDER_BYTES {
-        if let Some(metrics) = options.config.metrics.as_ref() {
-            metrics.record_outcome(false, false);
-        }
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
-            "rendered PDF pages exceed the disk-space limit",
-        ));
-    }
-    if pages.is_empty() && selected_beyond_render {
-        // Every requested page lies past the render cap: report truncation, keep the caller's
-        // native text.
+    if collected.is_empty() && rendered_pages == 0 && selected_beyond_render {
+        // Every requested page lies past the cap: report truncation, keep the caller's native text.
         if let Some(metrics) = options.config.metrics.as_ref() {
             metrics.record_outcome(true, true);
         }
         return Ok(OcrPages { pages: Vec::new(), truncated: true });
     }
-    if pages.is_empty() {
-        if let Some(metrics) = options.config.metrics.as_ref() {
-            metrics.record_outcome(false, false);
-        }
-        return Err(io::Error::new(
+    if rendered_pages == 0 {
+        return Err(fail(io::Error::new(
             io::ErrorKind::InvalidData,
             "Poppler rendered no PDF pages",
-        ));
+        )));
     }
-
-    observer(
-        "render_done",
-        render_seconds,
-        pages.len() as u64,
-        rendered_bytes,
-    );
+    observer("render_done", render_seconds, rendered_pages, rendered_bytes_total);
     if let Some(log_path) = options.config.log_path.as_deref() {
         let _ = write_log_line(
             log_path,
             LogEvent::Flame {
                 stage: "render",
                 elapsed_us: (render_seconds * 1_000_000.0) as u64,
-                pages: pages.len() as u32,
+                pages: rendered_pages as u32,
             },
         );
-    }
-
-    let mut collected: Vec<(u32, String)> = Vec::new();
-    let mut collected_bytes = 0usize;
-    let mut recognize_seconds_total = 0.0f64;
-    let mut pages_kept = 0u64;
-    for (number, image) in pages {
-        let base = temp.0.join(format!("ocr-{number}"));
-        let mut ocr = Command::new("tesseract");
-        ocr.arg(&image)
-            .arg(&base)
-            .arg("-l")
-            .arg(&options.languages)
-            .args(["--psm", "3"]);
-        let page_started = Instant::now();
-        let page_outcome = run_bounded(&mut ocr, deadline);
-        let page_seconds = page_started.elapsed().as_secs_f64();
-        if let Err(error) = page_outcome {
-            if let Some(metrics) = options.config.metrics.as_ref() {
-                metrics.record_outcome(false, false);
-            }
-            return Err(error);
-        }
-        let text = read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
-        let text_len = text.len() as u64;
-        recognize_seconds_total += page_seconds;
-        observer("page_recognize", page_seconds, 1, text_len);
-        if let Some(log_path) = options.config.log_path.as_deref() {
-            let _ = write_log_line(
-                log_path,
-                LogEvent::Flame {
-                    stage: "page_recognize",
-                    elapsed_us: (page_seconds * 1_000_000.0) as u64,
-                    pages: 1,
-                },
-            );
-        }
-        if !text.trim().is_empty() {
-            if collected_bytes.saturating_add(text.len()) > MAX_OCR_TOTAL_BYTES {
-                if let Some(metrics) = options.config.metrics.as_ref() {
-                    metrics.record_outcome(false, false);
-                }
-                return Err(io::Error::new(
-                    io::ErrorKind::InvalidData,
-                    "total OCR output exceeds size limit",
-                ));
-            }
-            collected_bytes += text.len();
-            collected.push((number, text.trim().to_string()));
-            pages_kept += 1;
-        }
     }
     observer("recognize_done", recognize_seconds_total, pages_kept, 0);
     if let Some(log_path) = options.config.log_path.as_deref() {
@@ -1173,13 +1236,11 @@ fn tesseract_ocr_pages(
             },
         );
     }
+    let truncated = limit_reached && !document_ended;
     if let Some(metrics) = options.config.metrics.as_ref() {
-        metrics.record_outcome(true, rendered_limit_reached);
+        metrics.record_outcome(true, truncated);
     }
-    Ok(OcrPages {
-        pages: collected,
-        truncated: rendered_limit_reached,
-    })
+    Ok(OcrPages { pages: collected, truncated })
 }
 
 /// OCR the pages in `empty_pages` and splice the result between the native pages, in page order.
@@ -1533,6 +1594,43 @@ mod tests {
     }
 
     #[test]
+    fn ocr_windows_cover_the_page_range_without_gaps_or_overlap() {
+        assert_eq!(ocr_windows(1, 25), [(1, 1)]);
+        assert_eq!(ocr_windows(25, 25), [(1, 25)]);
+        assert_eq!(ocr_windows(26, 25), [(1, 25), (26, 26)]);
+        assert_eq!(ocr_windows(103, 40), [(1, 40), (41, 80), (81, 103)]);
+        let all = ocr_windows(2000, 22);
+        assert_eq!(all.first(), Some(&(1, 22)));
+        assert_eq!(all.last().map(|w| w.1), Some(2000));
+        assert!(all.windows(2).all(|w| w[1].0 == w[0].1 + 1));
+    }
+
+    #[test]
+    fn the_render_window_fits_the_render_budget() {
+        for dim in [256u32, 1_800, 2_400, 4_000] {
+            let options = OcrOptions { max_image_dimension: dim, ..Default::default() };
+            let w = u64::from(ocr_window(&options));
+            assert!(w >= 1 && w <= u64::from(MAX_OCR_WINDOW));
+            assert!(w == 1 || w * u64::from(dim) * u64::from(dim) * 4 <= MAX_OCR_RENDER_BYTES, "dim {dim} window {w}");
+        }
+    }
+
+    #[test]
+    fn options_allow_long_documents_and_reject_nonsense() {
+        let long = OcrOptions { max_pages: 300, timeout: Duration::from_secs(3_600), workers: 4, ..Default::default() };
+        assert!(long.validate().is_ok());
+        for bad in [
+            OcrOptions { max_pages: 0, ..Default::default() },
+            OcrOptions { max_pages: 2_001, ..Default::default() },
+            OcrOptions { workers: 0, ..Default::default() },
+            OcrOptions { workers: 17, ..Default::default() },
+            OcrOptions { timeout: Duration::from_secs(3_601), ..Default::default() },
+        ] {
+            assert!(bad.validate().is_err(), "{bad:?}");
+        }
+    }
+
+    #[test]
     fn mixed_fixture_scan_beyond_the_page_cap_keeps_native_text_and_notes_truncation() {
         let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
         let options = OcrOptions {
@@ -1601,6 +1699,15 @@ mod tests {
             oversized_render.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput
         );
+        // many large pages are fine: they are rendered a window at a time, and a window fits the render budget
+        let mut large_pages = OcrOptions::default();
+        large_pages.max_pages = 100;
+        large_pages.max_image_dimension = 4_000;
+        assert!(large_pages.validate().is_ok());
+        assert!(u64::from(ocr_window(&large_pages)) * 4_000 * 4_000 * 4 <= MAX_OCR_RENDER_BYTES);
+        let mut too_many = OcrOptions::default();
+        too_many.max_pages = MAX_OCR_PAGES + 1;
+        assert_eq!(too_many.validate().unwrap_err().kind(), io::ErrorKind::InvalidInput);
 
         let temp = OcrTempDir::create().unwrap();
         let oversized = temp.0.join("oversized.pdf");
