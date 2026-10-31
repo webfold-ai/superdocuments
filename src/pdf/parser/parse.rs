@@ -6,16 +6,15 @@
 //! **text accumulator** over the content stream: each operator is O(1), line breaks come from the
 //! move operators (document order = reading order), so there is no sort and no binary search.
 
-use super::inflate::zlib;
 use super::{Dict, Document, Object};
 
 // ── token scanner over PDF bytes (the universal lexer, α = byte) ──
-struct Lex<'a> {
-    d: &'a [u8],
-    i: usize,
+pub(super) struct Lex<'a> {
+    pub(super) d: &'a [u8],
+    pub(super) i: usize,
 }
 #[derive(Clone, Debug, PartialEq)]
-enum Tok {
+pub(super) enum Tok {
     Num(f64),
     Str(Vec<u8>),
     Name(String),
@@ -26,10 +25,10 @@ enum Tok {
     Kw(String),
 }
 
-fn is_ws(b: u8) -> bool {
+pub(super) fn is_ws(b: u8) -> bool {
     matches!(b, b' ' | b'\t' | b'\r' | b'\n' | 0x0c | 0)
 }
-fn is_delim(b: u8) -> bool {
+pub(super) fn is_delim(b: u8) -> bool {
     matches!(
         b,
         b'(' | b')' | b'<' | b'>' | b'[' | b']' | b'{' | b'}' | b'/' | b'%'
@@ -37,10 +36,10 @@ fn is_delim(b: u8) -> bool {
 }
 
 impl<'a> Lex<'a> {
-    fn new(d: &'a [u8]) -> Self {
+    pub(super) fn new(d: &'a [u8]) -> Self {
         Lex { d, i: 0 }
     }
-    fn skip_ws(&mut self) {
+    pub(super) fn skip_ws(&mut self) {
         while self.i < self.d.len() {
             let b = self.d[self.i];
             if b == b'%' {
@@ -54,34 +53,40 @@ impl<'a> Lex<'a> {
             }
         }
     }
-    fn next(&mut self) -> Option<Tok> {
-        self.skip_ws();
-        if self.i >= self.d.len() {
-            return None;
-        }
-        let b = self.d[self.i];
-        match b {
-            b'[' => {
-                self.i += 1;
-                Some(Tok::ArrOpen)
+    /// The next token. A stray delimiter is skipped, not an error, so this never recurses.
+    pub(super) fn next(&mut self) -> Option<Tok> {
+        loop {
+            self.skip_ws();
+            if self.i >= self.d.len() {
+                return None;
             }
-            b']' => {
-                self.i += 1;
-                Some(Tok::ArrClose)
+            let b = self.d[self.i];
+            let tok = match b {
+                b'[' => {
+                    self.i += 1;
+                    Some(Tok::ArrOpen)
+                }
+                b']' => {
+                    self.i += 1;
+                    Some(Tok::ArrClose)
+                }
+                b'<' if self.d.get(self.i + 1) == Some(&b'<') => {
+                    self.i += 2;
+                    Some(Tok::DictOpen)
+                }
+                b'>' if self.d.get(self.i + 1) == Some(&b'>') => {
+                    self.i += 2;
+                    Some(Tok::DictClose)
+                }
+                b'<' => self.hex_string(),
+                b'(' => self.lit_string(),
+                b'/' => self.name(),
+                b'0'..=b'9' | b'+' | b'-' | b'.' => self.number(),
+                _ => self.keyword(),
+            };
+            if tok.is_some() {
+                return tok;
             }
-            b'<' if self.d.get(self.i + 1) == Some(&b'<') => {
-                self.i += 2;
-                Some(Tok::DictOpen)
-            }
-            b'>' if self.d.get(self.i + 1) == Some(&b'>') => {
-                self.i += 2;
-                Some(Tok::DictClose)
-            }
-            b'<' => self.hex_string(),
-            b'(' => self.lit_string(),
-            b'/' => self.name(),
-            b'0'..=b'9' | b'+' | b'-' | b'.' => self.number(),
-            _ => self.keyword(),
         }
     }
     fn name(&mut self) -> Option<Tok> {
@@ -107,6 +112,7 @@ impl<'a> Lex<'a> {
         let txt = String::from_utf8_lossy(&self.d[s..self.i]);
         Some(Tok::Num(txt.parse().unwrap_or(0.0)))
     }
+    /// A keyword run. A byte that starts no token (a stray delimiter) is skipped: `None`.
     fn keyword(&mut self) -> Option<Tok> {
         let s = self.i;
         while self.i < self.d.len() && !is_ws(self.d[self.i]) && !is_delim(self.d[self.i]) {
@@ -114,7 +120,7 @@ impl<'a> Lex<'a> {
         }
         if self.i == s {
             self.i += 1;
-            return self.next();
+            return None;
         }
         Some(Tok::Kw(
             String::from_utf8_lossy(&self.d[s..self.i]).into_owned(),
@@ -168,6 +174,8 @@ impl<'a> Lex<'a> {
                 _ => out.push(c),
             }
         }
+        // A backslash as the last byte steps past the end: clamp, so `i <= d.len()` always holds.
+        self.i = self.i.min(self.d.len());
         Some(Tok::Str(out))
     }
     fn hex_string(&mut self) -> Option<Tok> {
@@ -197,28 +205,52 @@ impl<'a> Lex<'a> {
         if have {
             out.push(hi << 4);
         }
+        self.i = self.i.min(self.d.len());
         Some(Tok::Str(out))
     }
 }
 
 // ── parse one object from a token stream (recursive on dict/array; refs collapse `N G R`) ──
-fn parse_value(lex: &mut Lex, first: Tok) -> Object {
+
+/// Nesting bound for arrays and dictionaries; deeper input reads as null, so the recursion has a
+/// fixed depth whatever the file says.
+const MAX_DEPTH: u32 = 64;
+
+/// The object number of `n` when it is an integer in `0..2^32`.
+fn ref_num(n: f64) -> Option<u32> {
+    if n.fract() == 0.0 && (0.0..4_294_967_296.0).contains(&n) {
+        Some(n as u32)
+    } else {
+        None
+    }
+}
+
+/// The generation of `g` when it is an integer in `0..=65535`.
+fn ref_gen(g: f64) -> Option<u16> {
+    if g.fract() == 0.0 && (0.0..=65_535.0).contains(&g) {
+        Some(g as u16)
+    } else {
+        None
+    }
+}
+
+pub(super) fn parse_value(lex: &mut Lex, first: Tok, depth: u32) -> Object {
     match first {
         Tok::Num(n) => {
-            // could be `N G R` (ref) or `N G obj` start — peek
+            // `N G R` is a reference when both numbers are in range; otherwise `N` is a number
             let save = lex.i;
             if let Some(Tok::Num(g)) = lex.next() {
                 let save2 = lex.i;
-                match lex.next() {
-                    Some(Tok::Kw(k)) if k == "R" => return Object::Ref(n as u32, g as u16),
-                    _ => {
-                        lex.i = save2;
+                if let Some(Tok::Kw(k)) = lex.next() {
+                    if k == "R" {
+                        if let (Some(num), Some(gen)) = (ref_num(n), ref_gen(g)) {
+                            return Object::Ref(num, gen);
+                        }
                     }
                 }
-                lex.i = save;
-            } else {
-                lex.i = save;
+                lex.i = save2;
             }
+            lex.i = save;
             if n.fract() == 0.0 {
                 Object::Int(n as i64)
             } else {
@@ -228,16 +260,24 @@ fn parse_value(lex: &mut Lex, first: Tok) -> Object {
         Tok::Str(s) => Object::Str(s),
         Tok::Name(n) => Object::Name(n),
         Tok::ArrOpen => {
+            if depth >= MAX_DEPTH {
+                return Object::Null;
+            }
             let mut v = Vec::new();
             while let Some(t) = lex.next() {
                 if t == Tok::ArrClose {
                     break;
                 }
-                v.push(parse_value(lex, t));
+                v.push(parse_value(lex, t, depth + 1));
             }
             Object::Array(v)
         }
-        Tok::DictOpen => Object::Dict(parse_dict(lex)),
+        Tok::DictOpen => {
+            if depth >= MAX_DEPTH {
+                return Object::Null;
+            }
+            Object::Dict(parse_dict(lex, depth + 1))
+        }
         Tok::Kw(k) => match k.as_str() {
             "true" => Object::Bool(true),
             "false" => Object::Bool(false),
@@ -247,14 +287,14 @@ fn parse_value(lex: &mut Lex, first: Tok) -> Object {
     }
 }
 
-fn parse_dict(lex: &mut Lex) -> Dict {
+pub(super) fn parse_dict(lex: &mut Lex, depth: u32) -> Dict {
     let mut d = Dict::new();
     while let Some(t) = lex.next() {
         match t {
             Tok::DictClose => break,
             Tok::Name(key) => {
                 if let Some(vt) = lex.next() {
-                    d.put(key, parse_value(lex, vt));
+                    d.put(key, parse_value(lex, vt, depth));
                 }
             }
             _ => {}
@@ -263,95 +303,11 @@ fn parse_dict(lex: &mut Lex) -> Dict {
     d
 }
 
-/// find `keyword` (e.g. b"obj") occurrences, scanning forward; returns each start index.
-fn find_all(hay: &[u8], needle: &[u8]) -> Vec<usize> {
-    let mut v = Vec::new();
-    let mut i = 0;
-    while i + needle.len() <= hay.len() {
-        if &hay[i..i + needle.len()] == needle {
-            v.push(i);
-            i += needle.len();
-        } else {
-            i += 1;
-        }
-    }
-    v
-}
-
 impl Document {
-    /// **The one-time prepare** — one `O(n)` forward scan ([`find_all`]) locates every `N G obj`;
-    /// each is folded into the object Table so subsequent lookups are `O(1)`, and the catalog (the
-    /// object whose `/Type` is `/Catalog`) is picked. This trades xref-table chasing + bsearch for a
-    /// single linear pass — no xref *traversal* at lookup time.
+    /// Load the document through its cross-reference structure (see `xref`): `startxref`, the
+    /// `/Prev` chain, xref tables and streams, and object streams. O(file) once; lookups are O(1).
     pub fn parse(bytes: &[u8]) -> Result<Document, super::PdfError> {
-        let mut doc = Document::default();
-        for &p in &find_all(bytes, b" obj") {
-            // back up over " obj" to read `N G` (the two ints before it)
-            let mut j = p;
-            // skip back whitespace then a number (generation), whitespace, a number (objnum)
-            let read_int_back = |b: &[u8], end: usize| -> Option<(u32, usize)> {
-                let mut k = end;
-                while k > 0 && is_ws(b[k - 1]) {
-                    k -= 1;
-                }
-                let e = k;
-                while k > 0 && b[k - 1].is_ascii_digit() {
-                    k -= 1;
-                }
-                if k == e {
-                    return None;
-                }
-                let n: u32 = String::from_utf8_lossy(&b[k..e]).parse().ok()?;
-                Some((n, k))
-            };
-            let (gen, k1) = match read_int_back(bytes, j) {
-                Some(x) => x,
-                None => continue,
-            };
-            let _ = gen;
-            let (num, _k2) = match read_int_back(bytes, k1) {
-                Some(x) => x,
-                None => continue,
-            };
-            // parse the object body starting after " obj"
-            let mut lex = Lex::new(bytes);
-            lex.i = p + 4;
-            j = p;
-            let _ = j;
-            let t = match lex.next() {
-                Some(t) => t,
-                None => continue,
-            };
-            let mut obj = parse_value(&mut lex, t);
-            // a stream object: the just-parsed dict, followed by `stream … endstream`
-            if let Object::Dict(dict) = &obj {
-                lex.skip_ws();
-                if bytes.get(lex.i..).is_some_and(|r| r.starts_with(b"stream")) {
-                    let mut s = lex.i + 6;
-                    if bytes.get(s) == Some(&b'\r') {
-                        s += 1;
-                    }
-                    if bytes.get(s) == Some(&b'\n') {
-                        s += 1;
-                    }
-                    if let Some(rel) = find_all(&bytes[s..], b"endstream").into_iter().next() {
-                        let raw = bytes[s..s + rel].to_vec();
-                        obj = Object::Stream(dict.clone(), raw);
-                    }
-                }
-            }
-            doc.set_object(num, obj);
-        }
-        // catalog = the object with /Type /Catalog
-        for (num, o) in doc.objects.iter() {
-            if let Object::Dict(d) = o {
-                if matches!(d.get(&"Type".to_string()), Some(Object::Name(n)) if n == "Catalog") {
-                    doc.root = *num;
-                    break;
-                }
-            }
-        }
-        Ok(doc)
+        super::xref::load(bytes)
     }
 
     /// Decode a stream's bytes by applying its /Filter chain in order (ASCII85Decode,
@@ -385,6 +341,13 @@ impl Document {
 
 // ── the layout fold: page tree → content → the text accumulator → markdown ──
 
+/// The drawn rules of a page: horizontal `(y, x0, x1)` and vertical `(x, y0, y1)`.
+type PageRules = (Vec<(f64, f64, f64)>, Vec<(f64, f64, f64)>);
+/// One page's laid-out lines with its drawn rules.
+type PageData = Vec<(Vec<Line>, PageRules)>;
+/// One row of `Document::table_debug`.
+type TableDebugRow = (usize, usize, usize, usize, usize, bool, bool, usize, usize);
+
 fn num(t: &Tok) -> Option<f64> {
     if let Tok::Num(n) = t {
         Some(*n)
@@ -414,7 +377,7 @@ fn is_heading(l: &str, size: f64, bold: bool, body: f64) -> bool {
 /// (`11 Dual-…`, `1.2 Methods`). Page numbers (no letter) and captions (`Figure …`) don't match.
 fn is_section_heading(l: &str) -> bool {
     let c: Vec<char> = l.trim_start().chars().collect();
-    if c.first().map_or(true, |ch| !ch.is_ascii_digit()) {
+    if c.first().is_none_or(|ch| !ch.is_ascii_digit()) {
         return false;
     }
     let mut i = 0;
@@ -458,8 +421,8 @@ fn matmul(m: &[f64; 6], n: &[f64; 6]) -> [f64; 6] {
 /// Extract the axis-aligned ruling lines from a content stream — tracking the CTM (`cm`/`q`/`Q`) and
 /// the path (`m`/`l`/`re`), emitting each segment in user space on a paint op. The grid the table is
 /// drawn with. Returns (horizontal rules `(y, x0, x1)`, vertical rules `(x, y0, y1)`).
-fn extract_rules(content: &[u8]) -> (Vec<(f64, f64, f64)>, Vec<(f64, f64, f64)>) {
-    let (mut h, mut v): (Vec<(f64, f64, f64)>, Vec<(f64, f64, f64)>) = (Vec::new(), Vec::new());
+fn extract_rules(content: &[u8]) -> PageRules {
+    let (mut h, mut v): PageRules = (Vec::new(), Vec::new());
     let mut ctm = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
     let mut stack: Vec<[f64; 6]> = Vec::new();
     let map = |c: &[f64; 6], px: f64, py: f64| {
@@ -617,30 +580,37 @@ fn columns_from_gutters(region: &[&Line]) -> Option<Vec<f64>> {
             xmax = xmax.max(x1);
         }
     }
-    if !(xmax - xmin > 10.0) {
+    // The projection is as wide as the region, so the region must lie within a PDF user space (at
+    // most 14400 points). A wider or non-finite span is a malformed content stream, not a table, and
+    // is refused before any buffer is sized from it.
+    if !(xmax - xmin > 10.0 && xmax - xmin <= MAX_TABLE_SPAN) {
         return None;
     }
     let w = (xmax - xmin).ceil() as usize + 2;
     let mut cov = vec![0u32; w]; // x-projection DEPTH: rows covering x
     let mut nrows = 0u32;
+    let mut row = vec![false; w]; // this row's coverage, cleared after each row (mark once per row)
+    let mut touched: Vec<usize> = Vec::new();
     for l in region {
         if l.segs.is_empty() {
             continue;
         }
         nrows += 1;
-        let mut row = vec![false; w]; // this row's coverage (mark once per row)
         for &(x0, x1, _, _) in &l.segs {
             let a = ((x0 - xmin).floor().max(0.0) as usize).min(w - 1);
             let b = ((x1 - xmin).ceil() as usize).min(w - 1);
-            for cell in row.iter_mut().take(b + 1).skip(a) {
-                *cell = true;
+            for (cell, slot) in row.iter_mut().enumerate().take(b + 1).skip(a) {
+                if !*slot {
+                    *slot = true;
+                    touched.push(cell);
+                }
             }
         }
-        for (i, &r) in row.iter().enumerate() {
-            if r {
-                cov[i] += 1;
-            }
+        for &i in &touched {
+            cov[i] += 1;
+            row[i] = false;
         }
+        touched.clear();
     }
     if nrows < 2 {
         return None;
@@ -764,14 +734,23 @@ struct Cand {
     geo_ok: bool,
 }
 
+/// The widest a table region may be, in points: the largest PDF user-space extent.
+const MAX_TABLE_SPAN: f64 = 14_400.0;
+/// The most cells a table candidate may have; larger grids are not tables this reader proposes.
+const MAX_GRID_CELLS: usize = 600;
+
 /// Push a candidate (if it forms a ≥2×2 grid). RECALL is generous here — the gate (seed or geometric)
 /// decides table-ness later; this only proposes structurally-plausible regions.
 fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64>, ruled: bool) {
     if rowys.len() < 3 || colxs.len() < 3 {
         return;
     } // ≥2 rows, ≥2 columns
+      // Refuse an oversized grid before `region_stats` sizes its per-cell buffers from it.
+    if (rowys.len() - 1) * (colxs.len() - 1) > MAX_GRID_CELLS {
+        return;
+    }
     let st = region_stats(lines, &rowys, &colxs, ruled);
-    if st.nr < 2 || st.nc < 2 || st.nr * st.nc > 600 {
+    if st.nr < 2 || st.nc < 2 || st.nr * st.nc > MAX_GRID_CELLS {
         return;
     }
     // A RULED grid IS the table — the drawn lattice is the author's own structure, so accept on a loose
@@ -793,9 +772,9 @@ fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64
     });
 }
 
-/// Segment a page's lines into blocks — maximal runs of consecutive lines with normal line spacing
-/// (a y-gap > 2 ems, an image, or the reading order jumping back up = a block boundary). Each block is
-/// a candidate table region for the borderless (no-rules) case.
+// Segment a page's lines into blocks — maximal runs of consecutive lines with normal line spacing
+// (a y-gap > 2 ems, an image, or the reading order jumping back up = a block boundary). Each block is
+// a candidate table region for the borderless (no-rules) case.
 
 /// **Propose the candidate table region** bounded by the drawn horizontal rules. The grid the author
 /// drew IS the table; we read its structure off the geometry:
@@ -803,6 +782,7 @@ fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64
 ///   text lines' own boundaries (the borderless case).
 /// * **columns** = the **merged** vertical rules (doubled strokes collapsed to one edge); if there are
 ///   too few real vertical rules, the text's own whitespace **gutter valleys** (the soft projection).
+///
 /// The gate (in [`add_cand`]) decides table-ness — ruled grids on a loose `fill`/`multi_col` read,
 /// borderless gutters on the strict prose gate. Every step is O(1)/element on the accumulator
 /// (coordinate buckets, projection depth); the only sorts are on the tiny rule/column lists (the page,
@@ -961,7 +941,7 @@ fn region_stats(lines: &[Line], rowys: &[f64], colxs: &[f64], ruled: bool) -> Re
         nr,
         nc,
         fill_pct: filled * 100 / (nr * nc),
-        avg_cell: if filled > 0 { text_len / filled } else { 999 },
+        avg_cell: text_len.checked_div(filled).unwrap_or(999),
         multi_col_pct: multi_col_rows * 100 / rows_with_text,
         ruled,
     }
@@ -1007,11 +987,30 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
             i += 1;
             continue;
         }
-        if is_heading(&l.text, l.size, l.bold, body) {
+        let heading = is_heading(&l.text, l.size, l.bold, body);
+        if heading {
             out.push_str("# ");
         }
-        out.push_str(&l.text);
-        out.push('\n');
+        // A word broken at a line end (`compari-` / `son`) is one word: the hyphen is dropped and
+        // the next line continues it. The next line must be ordinary text starting in lower case.
+        let continues = lines.get(i + 1).is_some_and(|n| {
+            let in_table = cands
+                .iter()
+                .enumerate()
+                .any(|(ci, c)| !emitted[ci] && n.y <= c.ytop + 2.0 && n.y >= c.ybot - 2.0);
+            !in_table
+                && !n.text.starts_with('\u{0}')
+                && n.text.starts_with(|c: char| c.is_lowercase())
+        });
+        match l.text.strip_suffix('-') {
+            Some(stem) if !heading && continues && stem.ends_with(|c: char| c.is_alphabetic()) => {
+                out.push_str(stem);
+            }
+            _ => {
+                out.push_str(&l.text);
+                out.push('\n');
+            }
+        }
         i += 1;
     }
 }
@@ -1070,6 +1069,7 @@ impl Document {
                     None => c.geo_ok,
                 })
                 .collect();
+            let mut out = String::new();
             emit_lines(&mut out, lines, &cands, body);
             out.push('\n'); // page break
             pages_out.push(out);
@@ -1079,21 +1079,24 @@ impl Document {
 
     /// Per page: the laid-out lines (document = reading order) + the drawn ruling lines. The shared
     /// prepare for markdown / training.
-    fn page_data(&self) -> Vec<(Vec<Line>, (Vec<(f64, f64, f64)>, Vec<(f64, f64, f64)>))> {
+    fn page_data(&self) -> PageData {
         let mut pages = Vec::new();
         if let Some(Object::Dict(cat)) = self.object(self.root) {
+            let mut seen = super::Table::new();
             match cat.get(&"Pages".to_string()) {
-                Some(Object::Ref(pr, _)) => self.collect_pages(*pr, &mut pages, 0),
-                _ => self.collect_pages(self.root, &mut pages, 0),
+                Some(Object::Ref(pr, pg)) => self.collect_pages(*pr, *pg, &mut pages, 0, &mut seen),
+                _ => self.collect_pages(self.root, 0, &mut pages, 0, &mut seen),
             }
         }
         let mut pdata = Vec::new();
+        let mut contents = ContentCache::new();
         for pnum in pages {
             if let Some(Object::Dict(page)) = self.object(pnum) {
-                let fonts = self.page_fonts(page);
+                let fonts = self.page_fonts(page, &mut contents);
                 let imgs = self.image_names(page);
-                let content = self.page_content(page);
-                let lines: Vec<Line> = extract_text(&content, &fonts, &imgs)
+                let content = self.page_content(page, &mut contents);
+                let forms = self.form_texts(page, &mut contents);
+                let lines: Vec<Line> = extract_text(&content, &fonts, &imgs, &forms)
                     .into_iter()
                     .filter(|l| !l.text.trim().is_empty())
                     .collect();
@@ -1101,6 +1104,47 @@ impl Document {
             }
         }
         pdata
+    }
+
+    /// The Form XObjects of a page's resources, decoded: each one's content and, when it has its own
+    /// `/Resources`, its own fonts and images.
+    fn form_texts(&self, page: &Dict, cache: &mut ContentCache) -> Table<String, FormText> {
+        let mut out = Table::new();
+        let Some(res) = self.as_dict(page.get(&"Resources".to_string())) else {
+            return out;
+        };
+        let Some(xobjects) = self.as_dict(res.get(&"XObject".to_string())) else {
+            return out;
+        };
+        for (name, r) in xobjects.iter() {
+            let Object::Ref(n, g) = r else {
+                continue;
+            };
+            let Some(Object::Stream(d, _)) = self.ref_object(*n, *g) else {
+                continue;
+            };
+            if !matches!(d.get(&"Subtype".to_string()), Some(Object::Name(s)) if s == "Form") {
+                continue;
+            }
+            let Some(content) = cache.stream(self, *n, *g) else {
+                continue;
+            };
+            let own = if d.get(&"Resources".to_string()).is_some() {
+                Some((self.page_fonts(d, cache), self.image_names(d)))
+            } else {
+                None
+            };
+            let matrix = form_matrix(d);
+            out.put(
+                name.clone(),
+                FormText {
+                    content,
+                    own,
+                    matrix,
+                },
+            );
+        }
+        out
     }
 
     /// Every candidate region's `(feature signature, geometric-verdict)` across the doc — for FOLDING
@@ -1178,9 +1222,7 @@ impl Document {
     /// Diagnostic: per page, the raw candidate stats + rule counts — why a region did or didn't pass the
     /// gate. Each entry `(nr, nc, fill_pct, avg_cell, multi_col_pct, ruled, geo_ok, n_hrules, n_vrules)`;
     /// a page with no candidate emits one all-zero row carrying just the rule counts (ruled vs borderless).
-    pub fn table_debug(
-        &self,
-    ) -> Vec<(usize, usize, usize, usize, usize, bool, bool, usize, usize)> {
+    pub fn table_debug(&self) -> Vec<TableDebugRow> {
         let mut out = Vec::new();
         for (lines, (h, v)) in &self.page_data() {
             let nh = cluster_coords(h.iter().map(|r| r.0).collect(), 3.0).len();
@@ -1215,8 +1257,8 @@ impl Document {
         if let Some(res) = self.as_dict(page.get(&"Resources".to_string())) {
             if let Some(xo) = self.as_dict(res.get(&"XObject".to_string())) {
                 for (name, r) in xo.iter() {
-                    if let Object::Ref(n, _) = r {
-                        if let Some(Object::Stream(d, _)) = self.object(*n) {
+                    if let Object::Ref(n, g) = r {
+                        if let Some(Object::Stream(d, _)) = self.ref_object(*n, *g) {
                             if matches!(d.get(&"Subtype".to_string()), Some(Object::Name(s)) if s == "Image")
                             {
                                 m.put(name.clone(), *n);
@@ -1229,11 +1271,21 @@ impl Document {
         m
     }
 
-    fn collect_pages(&self, num: u32, out: &mut Vec<u32>, depth: u32) {
-        if depth > 64 {
+    /// Walk the page tree. Each node is visited once (`seen`), so a `/Kids` list that names a node
+    /// twice, or names an ancestor, cannot multiply the walk; the depth bound stays as well.
+    fn collect_pages(
+        &self,
+        num: u32,
+        gen: u16,
+        out: &mut Vec<u32>,
+        depth: u32,
+        seen: &mut super::Table<u32, bool>,
+    ) {
+        if depth > 64 || seen.has(&num) {
             return;
         }
-        let Some(Object::Dict(d)) = self.object(num) else {
+        seen.put(num, true);
+        let Some(Object::Dict(d)) = self.ref_object(num, gen) else {
             return;
         };
         match d.get(&"Type".to_string()) {
@@ -1245,8 +1297,8 @@ impl Document {
                         _ => return,
                     };
                     for k in &kids {
-                        if let Object::Ref(n, _) = k {
-                            self.collect_pages(*n, out, depth + 1);
+                        if let Object::Ref(n, g) = k {
+                            self.collect_pages(*n, *g, out, depth + 1, seen);
                         }
                     }
                 }
@@ -1254,24 +1306,20 @@ impl Document {
         }
     }
 
-    fn page_content(&self, page: &Dict) -> Vec<u8> {
+    fn page_content(&self, page: &Dict, cache: &mut ContentCache) -> Vec<u8> {
         let mut bytes = Vec::new();
         match page.get(&"Contents".to_string()) {
-            Some(Object::Ref(n, _)) => {
-                if let Some(o) = self.object(*n) {
-                    if let Some(b) = self.stream_bytes(o) {
-                        bytes = b;
-                    }
+            Some(Object::Ref(n, g)) => {
+                if let Some(b) = cache.stream(self, *n, *g) {
+                    bytes.extend_from_slice(&b);
                 }
             }
             Some(Object::Array(a)) => {
                 for r in a {
-                    if let Object::Ref(n, _) = r {
-                        if let Some(o) = self.object(*n) {
-                            if let Some(b) = self.stream_bytes(o) {
-                                bytes.extend(b);
-                                bytes.push(b'\n');
-                            }
+                    if let Object::Ref(n, g) = r {
+                        if let Some(b) = cache.stream(self, *n, *g) {
+                            bytes.extend_from_slice(&b);
+                            bytes.push(b'\n');
                         }
                     }
                 }
@@ -1279,6 +1327,55 @@ impl Document {
             _ => {}
         }
         bytes
+    }
+}
+
+/// Inflate budget for the page contents of one walk of the page tree.
+const CONTENT_BUDGET: usize = 512 << 20;
+
+/// The decoded content streams of one walk, by object number. A stream that several pages share
+/// is inflated once, and the walk as a whole inflates at most `CONTENT_BUDGET` bytes: a failed
+/// inflate is charged its cap, so repeated bombs cannot multiply the work.
+pub(crate) struct ContentCache {
+    decoded: super::Table<u32, Option<std::rc::Rc<Vec<u8>>>>,
+    budget: usize,
+}
+
+impl ContentCache {
+    fn new() -> Self {
+        ContentCache {
+            decoded: super::Table::new(),
+            budget: CONTENT_BUDGET,
+        }
+    }
+
+    /// The decoded bytes of the stream that `n g R` names, or `None` when the reference is stale,
+    /// absent, or refuses. The generation is checked before the cache, so a stale reference never
+    /// receives the bytes cached for the current object with the same number.
+    fn stream(&mut self, doc: &Document, n: u32, g: u16) -> Option<std::rc::Rc<Vec<u8>>> {
+        doc.ref_object(n, g)?;
+        if let Some(done) = self.decoded.get(&n) {
+            return done.clone();
+        }
+        let out = match doc.object(n) {
+            Some(Object::Stream(d, raw)) => {
+                let cap = self.budget.min(super::decode::MAX_DECODED);
+                let resolved = super::decode::with_resolved_parms(d, &|pn, pg| {
+                    doc.ref_object(pn, pg).cloned()
+                });
+                let out = super::decode::decode_within(&resolved, raw, cap);
+                let charge = match &out {
+                    Some(v) => v.len(),
+                    None if super::decode::inflates(d) => cap,
+                    None => 0,
+                };
+                self.budget = self.budget.saturating_sub(charge);
+                out.map(std::rc::Rc::new)
+            }
+            _ => None,
+        };
+        self.decoded.put(n, out.clone());
+        out
     }
 }
 
@@ -1320,6 +1417,9 @@ struct Pen {
     tw: f64,
     tz: f64,
     leading: f64,
+    /// The one-em scales of the previous run, horizontal and vertical (see `show`).
+    last_sh: f64,
+    last_sv: f64,
 }
 impl Pen {
     fn new() -> Pen {
@@ -1345,6 +1445,8 @@ impl Pen {
             tw: 0.0,
             tz: 1.0,
             leading: 0.0,
+            last_sh: 0.0,
+            last_sv: 0.0,
         }
     }
     /// Flush the line, carrying its font size (heading signal), bold flag, baseline y, and segments.
@@ -1371,15 +1473,25 @@ impl Pen {
     /// * **between runs** — at the run's first glyph, the gap `x − prev_end_x` (estimated end vs the
     ///   reposition's exact start) opens a space past a conservative threshold; one word's width error
     ///   is small, and long-run drift is never checked here (only the first glyph is).
+    ///
     /// A vertical move since the last glyph is a newline. The pen advances by each glyph's `/Widths`.
     fn show(&mut self, elems: &[Tok], font: Option<&CMap>) {
         let sh = self.fs * self.a * self.tz; // one em → user-space (horizontal)
         let sv = self.fs * self.d; // one em → user-space (vertical), for the line-break test
-        let thr = 0.30 * sh.abs().max(1e-6); // between-run gap: a space, with margin for width drift
-                                             // The between-run width-gap is trustworthy ONLY when this font has real `/Widths` (so end-x is
-                                             // exact). Type0/CID fonts carry widths in `/W` (not loaded here) → `adv` empty → end-x would
-                                             // drift and fabricate gaps; for them we fall back to the exact signals (kern + explicit space).
-        let has_w = font.map_or(false, |c| !c.adv.is_empty());
+                                   // A vertical move is a new line only past half the larger of this run's and the previous run's
+                                   // em, so a raised label of a smaller size stays on its line.
+        let line_em = 0.5 * sv.abs().max(self.last_sv.abs());
+        self.last_sv = sv;
+        // between-run gap: a word space. Exact widths leave little drift, and an interword space in
+        // a 10pt Latin Modern font measures about 0.27 em (2.73 pt), so the bar is 0.15 em. The em is
+        // the larger of this run's and the previous run's, so a small raised label (a 7pt exponent
+        // after 10pt text) does not read a space it does not have.
+        let thr = 0.15 * sh.abs().max(self.last_sh.abs()).max(1e-6);
+        self.last_sh = sh;
+        // The between-run width-gap is trustworthy only when this font declares its widths (`/Widths`,
+        // or a Type0 font's `/W`), so end-x is exact. Without them the end-x would drift and fabricate
+        // gaps; those fonts fall back to the exact signals (kern + explicit space).
+        let has_w = font.is_some_and(|c| c.widths);
         let mut first = true; // first glyph of THIS run carries the between-run edge
         let mut pending = false; // an exact kern gap awaiting the next glyph
         for el in elems {
@@ -1392,7 +1504,7 @@ impl Pen {
                 }
                 Tok::Str(s) => {
                     let mut big = false;
-                    if self.started && first && (self.y - self.last_y).abs() > 0.5 * sv.abs() {
+                    if self.started && first && (self.y - self.last_y).abs() > line_em {
                         self.flush(); // new line
                     } else if self.started && !self.cur.is_empty() && !self.cur.ends_with(' ') {
                         let gap = self.x - self.end_x;
@@ -1431,7 +1543,7 @@ impl Pen {
                     } // the run's end-x (its extent)
                     self.cur_size = self.cur_size.max((self.fs * self.d).abs()); // the line's font size (heading signal)
                     self.cur_n += nch;
-                    if font.map_or(false, |c| c.bold) {
+                    if font.is_some_and(|c| c.bold) {
                         self.cur_bold_n += nch;
                     } // bold fraction
                     self.end_x = self.x;
@@ -1449,12 +1561,70 @@ impl Pen {
 /// `T*`) and font/spacing state; `Tj`/`TJ`/`'`/`"` show runs through [`Pen::show`], which reads the
 /// inter-run gap (the edge) to place spaces and the vertical move to break lines. Document order is
 /// the stream order — no sort, no binary search.
+/// A Form XObject a page paints with `Do`: its decoded content, and its own fonts and images when it
+/// has `/Resources` (otherwise the page's are used).
+struct FormText {
+    content: std::rc::Rc<Vec<u8>>,
+    own: Option<(Table<String, CMap>, Table<String, u32>)>,
+    /// The form's `/Matrix` (form space to user space); the identity when absent or malformed.
+    matrix: [f64; 6],
+}
+
+/// A `/Matrix` array of six numbers, or the identity when it is absent or not six numbers.
+fn form_matrix(d: &Dict) -> [f64; 6] {
+    const IDENTITY: [f64; 6] = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
+    let Some(Object::Array(items)) = d.get(&"Matrix".to_string()) else {
+        return IDENTITY;
+    };
+    let nums: Vec<f64> = items
+        .iter()
+        .filter_map(|o| match o {
+            Object::Int(n) => Some(*n as f64),
+            Object::Real(r) => Some(*r),
+            _ => None,
+        })
+        .collect();
+    match <[f64; 6]>::try_from(nums.as_slice()) {
+        Ok(m) if m.iter().all(|v| v.is_finite()) => m,
+        _ => IDENTITY,
+    }
+}
+
+/// The inverse of an affine matrix, or `None` when it is singular.
+fn invert(m: &[f64; 6]) -> Option<[f64; 6]> {
+    let det = m[0] * m[3] - m[1] * m[2];
+    if det.abs() < 1e-12 || !det.is_finite() {
+        return None;
+    }
+    let (a, b, c, d) = (m[3] / det, -m[1] / det, -m[2] / det, m[0] / det);
+    Some([a, b, c, d, -(m[4] * a + m[5] * c), -(m[4] * b + m[5] * d)])
+}
+
+/// Map a form's lines from form space into the frame the page's own text is laid out in.
+fn place_form_lines(lines: &mut [Line], m: &[f64; 6]) {
+    for l in lines {
+        let x0 = l.segs.first().map_or(0.0, |s| s.0);
+        let y = l.y;
+        l.y = m[1] * x0 + m[3] * y + m[5];
+        for seg in &mut l.segs {
+            seg.0 = m[0] * seg.0 + m[2] * y + m[4];
+            seg.1 = m[0] * seg.1 + m[2] * y + m[4];
+        }
+    }
+}
+
 fn extract_text(
     content: &[u8],
     fonts: &Table<String, CMap>,
     imgs: &Table<String, u32>,
+    forms: &Table<String, FormText>,
 ) -> Vec<Line> {
     let mut p = Pen::new();
+    // The CTM (`cm`/`q`/`Q`), tracked only to place Form XObjects: page text is laid out in text
+    // space, so a form's lines are mapped relative to the CTM in force at the last `BT`.
+    let mut ctm = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
+    let mut ctm_stack: Vec<[f64; 6]> = Vec::new();
+    let mut text_ctm = ctm;
     let mut font: Option<&CMap> = None; // the current font's CMap, set by Tf (the Map face)
     let mut ops: Vec<Tok> = Vec::new();
     let mut lex = Lex::new(content);
@@ -1463,7 +1633,28 @@ fn extract_text(
             let nums: Vec<f64> = ops.iter().filter_map(num).collect();
             let last_str = || ops.iter().rev().find(|t| matches!(t, Tok::Str(_)));
             match op.as_str() {
+                "cm" if nums.len() >= 6 => {
+                    let n = nums.len();
+                    ctm = matmul(
+                        &[
+                            nums[n - 6],
+                            nums[n - 5],
+                            nums[n - 4],
+                            nums[n - 3],
+                            nums[n - 2],
+                            nums[n - 1],
+                        ],
+                        &ctm,
+                    );
+                }
+                "q" => ctm_stack.push(ctm),
+                "Q" => {
+                    if let Some(c) = ctm_stack.pop() {
+                        ctm = c;
+                    }
+                }
                 "BT" => {
+                    text_ctm = ctm;
                     p.x = 0.0;
                     p.y = 0.0;
                     p.lx = 0.0;
@@ -1564,7 +1755,22 @@ fn extract_text(
                 "Do" => {
                     if let Some(Tok::Name(n)) = ops.iter().rev().find(|t| matches!(t, Tok::Name(_)))
                     {
-                        if let Some(obj) = imgs.get(n) {
+                        if let Some(form) = forms.get(n) {
+                            // A form's text is laid out at its paint point, with its own fonts (or the
+                            // page's). Forms are not nested: the empty table ends the recursion.
+                            let (ff, fi) = match &form.own {
+                                Some((f, i)) => (f, i),
+                                None => (fonts, imgs),
+                            };
+                            p.flush();
+                            let mut inner = extract_text(&form.content, ff, fi, &Table::new());
+                            // Form space -> user space at this paint point -> the page-text frame.
+                            let user = matmul(&form.matrix, &ctm);
+                            let placed = invert(&text_ctm).map_or(user, |inv| matmul(&user, &inv));
+                            place_form_lines(&mut inner, &placed);
+                            p.lines.extend(inner);
+                            p.started = false;
+                        } else if let Some(obj) = imgs.get(n) {
                             p.flush();
                             p.lines.push(Line {
                                 text: format!("\u{0}{}", obj),
@@ -1603,6 +1809,8 @@ pub struct CMap {
     /// This is what makes a run's **end-x** real, so the inter-run gap (the edge) can be read.
     adv: Table<u32, i64>,
     dw: i64,
+    /// Whether the font declares widths (`/Widths` or a CIDFont `/W`), so `adv` gives end-x exactly.
+    widths: bool,
     /// is this a bold font? (BaseFont name or FontDescriptor ForceBold/FontWeight) — a heading signal.
     bold: bool,
 }
@@ -1906,6 +2114,7 @@ fn parse_cmap(bytes: &[u8]) -> CMap {
         width,
         adv: Table::new(),
         dw: 500,
+        widths: false,
         bold: false,
     }
 }
@@ -1920,7 +2129,9 @@ impl Document {
     }
     /// Build the page's fonts: name → CMap (the two Map faces — `/ToUnicode` + `/Encoding /Differences`).
     /// Built for EVERY font, not just ones with ToUnicode (the subset headers live in `/Encoding`).
-    pub(crate) fn page_fonts(&self, page: &Dict) -> Table<String, CMap> {
+    /// The fonts of a page's resources. A `/ToUnicode` CMap is decoded through the walk's cache, so a
+    /// CMap shared by many pages is inflated once.
+    pub(crate) fn page_fonts(&self, page: &Dict, cache: &mut ContentCache) -> Table<String, CMap> {
         let mut fonts = Table::new();
         if let Some(res) = self.as_dict(page.get(&"Resources".to_string())) {
             if let Some(fd) = self.as_dict(res.get(&"Font".to_string())) {
@@ -1928,10 +2139,9 @@ impl Document {
                     if let Some(font) = self.as_dict(Some(fref)) {
                         // /ToUnicode (if present) is the first Map face
                         let mut cm = match font.get(&"ToUnicode".to_string()) {
-                            Some(Object::Ref(tn, _)) => self
-                                .object(*tn)
-                                .and_then(|o| self.stream_bytes(o))
-                                .map(|b| parse_cmap(&b)),
+                            Some(Object::Ref(tn, tg)) => {
+                                cache.stream(self, *tn, *tg).map(|b| parse_cmap(&b))
+                            }
                             _ => None,
                         }
                         .unwrap_or(CMap {
@@ -1940,6 +2150,7 @@ impl Document {
                             width: 1,
                             adv: Table::new(),
                             dw: 500,
+                            widths: false,
                             bold: false,
                         });
                         // simple fonts are 1-byte; only Type0 (CID) is multi-byte
@@ -1983,35 +2194,123 @@ impl Document {
         m
     }
 
+    /// The CIDFont of a Type0 font: the first entry of its `/DescendantFonts`.
+    fn descendant_font<'a>(&'a self, font: &'a Dict) -> Option<&'a Dict> {
+        match self.resolve(font.get(&"DescendantFonts".to_string())?)? {
+            Object::Array(a) => match self.resolve(a.first()?)? {
+                Object::Dict(d) => Some(d),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+
+    /// The CIDFont widths of a Type0 font (§9.7.4.3): `/DW` (default 1000) and `/W`, whose entries are
+    /// `c [w1 w2 …]` or `cfirst clast w`. Each CID's advance goes into the advance Map face, keyed
+    /// by the code (Identity-H codes are CIDs). A range is bounded, so a hostile `/W` cannot size
+    /// the table.
+    fn cid_widths(&self, font: &Dict, cm: &mut CMap) {
+        let Some(desc) = self.descendant_font(font) else {
+            return;
+        };
+        let num = |o: &Object| match self.resolve(o) {
+            Some(Object::Int(n)) => Some(*n),
+            Some(Object::Real(r)) => Some(*r as i64),
+            _ => None,
+        };
+        cm.dw = desc.get(&"DW".to_string()).and_then(num).unwrap_or(1000);
+        let Some(Object::Array(w)) = desc.get(&"W".to_string()).and_then(|o| self.resolve(o))
+        else {
+            return;
+        };
+        cm.widths = true;
+        let mut budget = 1usize << 20;
+        let mut i = 0usize;
+        while i < w.len() {
+            let Some(c0) = num(&w[i]) else { break };
+            match w.get(i + 1).and_then(|o| self.resolve(o)) {
+                Some(Object::Array(list)) => {
+                    for (k, o) in list.iter().enumerate() {
+                        if let (Some(cid), Some(v)) = (u32::try_from(c0 + k as i64).ok(), num(o)) {
+                            if budget > 0 {
+                                budget -= 1;
+                                cm.adv.put(cid, v);
+                            }
+                        }
+                    }
+                    i += 2;
+                }
+                _ => {
+                    let (Some(c1), Some(v)) =
+                        (w.get(i + 1).and_then(num), w.get(i + 2).and_then(num))
+                    else {
+                        break;
+                    };
+                    let mut cid = c0;
+                    while cid <= c1 && budget > 0 {
+                        if let Ok(c) = u32::try_from(cid) {
+                            cm.adv.put(c, v);
+                        }
+                        budget -= 1;
+                        cid += 1;
+                    }
+                    i += 3;
+                }
+            }
+        }
+    }
+
     /// Load the font's `/Widths` (indexed from `/FirstChar`) into the advance Map face (code → width).
     /// `/MissingWidth` from the descriptor (or a half-em) is the default. The one-time prepare; the
     /// per-run advance is then `get` per code — so a run's end-x is known and the gap is measurable.
+    /// A Type0 font takes its widths from its CIDFont instead (`cid_widths`).
     fn load_widths(&self, font: &Dict, cm: &mut CMap) {
+        if matches!(font.get(&"Subtype".to_string()), Some(Object::Name(s)) if s == "Type0") {
+            self.cid_widths(font, cm);
+            return;
+        }
         let first = match font.get(&"FirstChar".to_string()).map(|o| self.resolve(o)) {
             Some(Some(Object::Int(n))) => *n as u32,
             _ => 0,
         };
+        // A Type 3 font's widths are in glyph space: its `/FontMatrix` gives the scale to 1/1000 em.
+        let scale = if matches!(font.get(&"Subtype".to_string()), Some(Object::Name(s)) if s == "Type3")
+        {
+            match font
+                .get(&"FontMatrix".to_string())
+                .and_then(|o| self.resolve(o))
+            {
+                Some(Object::Array(m)) => match m.first().and_then(|o| self.resolve(o)) {
+                    Some(Object::Int(a)) if *a != 0 => *a as f64 * 1000.0,
+                    Some(Object::Real(a)) if *a != 0.0 => *a * 1000.0,
+                    _ => 1.0,
+                },
+                _ => 1.0,
+            }
+        } else {
+            1.0
+        };
         if let Some(Object::Array(ws)) = font
             .get(&"Widths".to_string())
-            .map(|o| self.resolve(o))
-            .flatten()
+            .and_then(|o| self.resolve(o))
         {
             for (i, w) in ws.iter().enumerate() {
                 let v = match self.resolve(w) {
-                    Some(Object::Int(n)) => *n,
-                    Some(Object::Real(r)) => *r as i64,
+                    Some(Object::Int(n)) => (*n as f64 * scale).round() as i64,
+                    Some(Object::Real(r)) => (*r * scale).round() as i64,
                     _ => continue,
                 };
                 if v != 0 {
                     cm.adv.put(first + i as u32, v);
                 }
             }
+            cm.widths = true;
         }
         // default width: descriptor /MissingWidth, else keep the half-em fallback
         if let Some(fdesc) = self.as_dict(font.get(&"FontDescriptor".to_string())) {
             match fdesc.get(&"MissingWidth".to_string()) {
-                Some(Object::Int(n)) => cm.dw = *n,
-                Some(Object::Real(r)) => cm.dw = *r as i64,
+                Some(Object::Int(n)) => cm.dw = (*n as f64 * scale).round() as i64,
+                Some(Object::Real(r)) => cm.dw = (*r * scale).round() as i64,
                 _ => {}
             }
         }
@@ -2038,8 +2337,7 @@ impl Document {
             .or_else(|| {
                 match font
                     .get(&"DescendantFonts".to_string())
-                    .map(|o| self.resolve(o))
-                    .flatten()
+                    .and_then(|o| self.resolve(o))
                 {
                     Some(Object::Array(a)) => self
                         .as_dict(a.first())
@@ -2064,5 +2362,78 @@ impl Document {
             }
         }
         false
+    }
+}
+
+#[cfg(test)]
+mod review_tests {
+    use super::*;
+
+    fn form(content: &str, matrix: [f64; 6]) -> FormText {
+        FormText {
+            content: std::rc::Rc::new(content.as_bytes().to_vec()),
+            own: None,
+            matrix,
+        }
+    }
+
+    /// A form painted at two places lands at two places: its lines are mapped by the CTM at
+    /// each `Do` (and by its own `/Matrix`), not left in form space.
+    #[test]
+    fn form_lines_follow_the_invocation_transform() {
+        let mut forms = Table::new();
+        forms.put(
+            "Fm".to_string(),
+            form(
+                "BT /F1 12 Tf 10 20 Td (Stamp) Tj ET",
+                [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+            ),
+        );
+        let page = b"q 1 0 0 1 0 100 cm /Fm Do Q q 1 0 0 1 50 400 cm /Fm Do Q";
+        let lines = extract_text(page, &Table::new(), &Table::new(), &forms);
+        let ys: Vec<f64> = lines.iter().map(|l| l.y).collect();
+        assert_eq!(ys, vec![120.0, 420.0], "lines: {:?}", ys);
+        assert_eq!(lines[1].segs[0].0, 60.0);
+
+        // The form's own /Matrix composes with the CTM.
+        let mut scaled = Table::new();
+        scaled.put(
+            "Fm".to_string(),
+            form(
+                "BT /F1 12 Tf 10 20 Td (Stamp) Tj ET",
+                [2.0, 0.0, 0.0, 2.0, 0.0, 0.0],
+            ),
+        );
+        let lines = extract_text(b"/Fm Do", &Table::new(), &Table::new(), &scaled);
+        assert_eq!(lines[0].y, 40.0);
+    }
+
+    /// A hyphenated line before a detected table is not joined to the table's first row.
+    #[test]
+    fn dehyphenation_does_not_reach_into_a_table() {
+        let line = |text: &str, y: f64| Line {
+            text: text.to_string(),
+            size: 10.0,
+            bold: false,
+            y,
+            segs: vec![(0.0, 50.0, 0, false)],
+        };
+        let lines = vec![line("intro-", 300.0), line("alpha beta", 200.0)];
+        let cands = vec![Cand {
+            ytop: 205.0,
+            ybot: 195.0,
+            rowys: vec![205.0, 195.0],
+            colxs: vec![0.0, 25.0, 50.0],
+            feat: 0,
+            geo_ok: true,
+        }];
+        let mut out = String::new();
+        emit_lines(&mut out, &lines, &cands, 10.0);
+        assert!(out.starts_with("intro-\n"), "markdown: {out:?}");
+
+        // Ordinary text after it still joins the word.
+        let mut out = String::new();
+        emit_lines(&mut out, &lines, &[], 10.0);
+        assert!(out.starts_with("introalpha"), "markdown: {out:?}");
     }
 }

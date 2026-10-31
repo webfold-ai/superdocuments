@@ -53,6 +53,12 @@ fn read_pdf_capped(path: &Path) -> io::Result<Vec<u8>> {
 /// does not OCR image-only pages; those produce no text. Malformed input and parser
 /// panics are returned as errors rather than escaping to the caller.
 pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
+    native_pages_of_bytes(bytes).map(|pages| pages.concat())
+}
+
+/// The native markdown of each page of PDF `bytes`, in page order (the pages `extract_markdown`
+/// concatenates). Size and header are checked first; a parser panic is returned as an error.
+fn native_pages_of_bytes(bytes: &[u8]) -> io::Result<Vec<String>> {
     if bytes.len() > MAX_PDF_BYTES {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
@@ -66,14 +72,13 @@ pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
         ));
     }
     let parsed = catch_unwind(AssertUnwindSafe(|| {
-        let document =
-            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
-                crate::pdf::parser::PdfError::Parse(message) => message,
-            })?;
+        let document = crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+            crate::pdf::parser::PdfError::Parse(message) => message,
+        })?;
         if document.object_count() == 0 || document.root() == 0 {
             return Err("PDF has no readable catalog".to_string());
         }
-        Ok(document.markdown())
+        Ok(document.markdown_pages())
     }))
     .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
@@ -885,6 +890,24 @@ struct PhaseTimings {
     recognize_seconds: f64,
 }
 
+/// Record what an OCR run produced in the request's phase timings: its output size, the pages it
+/// rendered and whether it stopped at the page limit. Both the scanned and the mixed path call it,
+/// so the request log reports the OCR work either way.
+fn record_ocr_output(timings: &Mutex<PhaseTimings>, ocr_result: &io::Result<String>) {
+    let Ok(markdown) = ocr_result else {
+        return;
+    };
+    let mut t = timings.lock().expect("phase timings mutex poisoned");
+    if markdown.contains("OCR stopped at the configured limit of") {
+        t.truncated = true;
+    }
+    if let Some(last_brace) = markdown.rfind("<!-- page ") {
+        let tail = &markdown[last_brace..];
+        t.pages_rendered = tail.matches("<!-- page ").count() as u64;
+    }
+    t.bytes_ocr = markdown.len() as u64;
+}
+
 fn extract_file_with_ocr_inner(
     path: &Path,
     options: &OcrOptions,
@@ -929,18 +952,7 @@ fn extract_file_with_ocr_inner(
         .expect("phase timings mutex poisoned")
         .used_ocr = true;
     let ocr_result = tesseract_ocr_with_observer(path, options, &mut observer);
-    let mut t = timings.lock().expect("phase timings mutex poisoned");
-    if let Ok(markdown) = &ocr_result {
-        if markdown.contains("OCR stopped at the configured limit of") {
-            t.truncated = true;
-        }
-        if let Some(last_brace) = markdown.rfind("<!-- page ") {
-            let tail = &markdown[last_brace..];
-            t.pages_rendered = tail.matches("<!-- page ").count() as u64;
-        }
-        t.bytes_ocr = markdown.len() as u64;
-    }
-    drop(t);
+    record_ocr_output(&timings, &ocr_result);
     match ocr_result {
         Ok(markdown) => Ok(markdown),
         Err(ocr_error) => match native {
@@ -1289,6 +1301,53 @@ fn has_embedded_text(markdown: &str) -> bool {
     })
 }
 
+/// A page that paints an image and has no native text: an image-only (scanned) page.
+fn is_image_only(page: &str) -> bool {
+    !has_embedded_text(page) && page.contains("![](")
+}
+
+/// The OCR text of each page of a `tesseract_ocr` result, keyed by page number. The result's
+/// `<!-- page N -->` markers delimit the pages; the limit notice after the last page is not text.
+fn ocr_page_texts(ocr: &str) -> Vec<(usize, String)> {
+    let mut out = Vec::new();
+    for piece in ocr.split("<!-- page ").skip(1) {
+        let Some((number, text)) = piece.split_once(" -->") else {
+            continue;
+        };
+        let Ok(number) = number.trim().parse::<usize>() else {
+            continue;
+        };
+        let text = text
+            .split("\n\n[OCR stopped at the configured limit")
+            .next()
+            .unwrap_or(text);
+        out.push((number, text.trim().to_string()));
+    }
+    out
+}
+
+/// A mixed document: each page keeps its native text. An image-only page takes its OCR text when
+/// OCR recognised one; otherwise its native markdown stands. Every page is marked with its number,
+/// as the OCR output is.
+fn merge_native_and_ocr(native: &[String], ocr: &str) -> String {
+    let ocr_pages = ocr_page_texts(ocr);
+    let mut out = String::new();
+    for (i, page) in native.iter().enumerate() {
+        let number = i + 1;
+        let ocr_text = ocr_pages
+            .iter()
+            .find(|(n, _)| *n == number)
+            .map(|(_, t)| t.as_str());
+        out.push_str(&format!("<!-- page {number} -->\n"));
+        match ocr_text {
+            Some(text) if is_image_only(page) => out.push_str(text),
+            _ => out.push_str(page.trim_end()),
+        }
+        out.push_str("\n\n");
+    }
+    out
+}
+
 struct OcrTempDir(PathBuf);
 
 impl OcrTempDir {
@@ -1419,6 +1478,36 @@ fn run(command: &mut Command) -> io::Result<String> {
 mod tests {
     use super::*;
     use std::process::Command;
+
+    #[test]
+    fn mixed_document_keeps_native_text_and_takes_ocr_for_scanned_pages() {
+        // Page 1 has native text; page 2 is an image with no text layer, so its OCR text replaces the
+        // image marker. The page 1 text is kept as native, and the OCR notice is not page text.
+        let native = vec![
+            "Native title\n\n".to_string(),
+            "![](img_5.png)\n\n".to_string(),
+        ];
+        let ocr = "<!-- page 1 -->\nocr of page one\n\n<!-- page 2 -->\nScanned words here\n\n\
+                   [OCR stopped at the configured limit of 1 pages; later pages may be omitted]";
+        let merged = merge_native_and_ocr(&native, ocr);
+        assert_eq!(
+            merged,
+            "<!-- page 1 -->\nNative title\n\n<!-- page 2 -->\nScanned words here\n\n"
+        );
+        assert!(
+            !merged.contains("OCR stopped"),
+            "the limit notice is not page text"
+        );
+    }
+
+    #[test]
+    fn image_only_page_without_ocr_keeps_its_marker() {
+        let native = vec!["![](img_4.png)\n\n".to_string()];
+        assert_eq!(
+            merge_native_and_ocr(&native, ""),
+            "<!-- page 1 -->\n![](img_4.png)\n\n"
+        );
+    }
 
     fn pdf_with_stream(content: &[u8], filter: &str) -> Vec<u8> {
         let mut stream =
@@ -1593,10 +1682,21 @@ mod tests {
     #[test]
     fn malformed_pdf_and_ocr_limits_fail_closed() {
         assert!(extract_markdown(b"%PDF-1.4\\n").is_err());
-        let mut options = OcrOptions::default();
-        options.max_pages = 0;
+        let options = OcrOptions {
+            max_pages: 0,
+            ..OcrOptions::default()
+        };
         assert_eq!(
             options.validate().unwrap_err().kind(),
+            io::ErrorKind::InvalidInput
+        );
+        let oversized_render = OcrOptions {
+            max_pages: 100,
+            max_image_dimension: 4_000,
+            ..OcrOptions::default()
+        };
+        assert_eq!(
+            oversized_render.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput
         );
         // many large pages are fine: they are rendered a window at a time, and a window fits the render budget

@@ -96,7 +96,10 @@ mod tests {
 
     #[test]
     fn drop_tags_match_case_insensitively() {
-        let md = to_markdown_str("<NAV><p>chrome</p></NAV><p>Body</p>", "https://example.test/");
+        let md = to_markdown_str(
+            "<NAV><p>chrome</p></NAV><p>Body</p>",
+            "https://example.test/",
+        );
         assert!(md.contains("Body"), "{md}");
         assert!(!md.contains("chrome"), "{md}");
     }

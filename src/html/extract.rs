@@ -55,8 +55,8 @@ const DROP_TAGS: &[&[u8]] = &[
     b"select",
     b"option",
     b"figure",
-    b"ix:header",     // inline XBRL: spec-invisible metadata container
-    b"ix:hidden",     // inline XBRL: hidden contexts (SEC EDGAR wraps these in display:none divs)
+    b"ix:header", // inline XBRL: spec-invisible metadata container
+    b"ix:hidden", // inline XBRL: hidden contexts (SEC EDGAR wraps these in display:none divs)
     b"ix:references",
 ];
 
@@ -148,11 +148,11 @@ struct Walk<'a> {
     blocks: Vec<Block>,
     cur: String, // current inline buffer (the only per-block alloc beyond output)
     cur_links: Vec<String>,
-    prefix: String,  // pending block prefix (#, -, > …)
+    prefix: String, // pending block prefix (#, -, > …)
     // Open chrome subtrees, innermost last. A close tag only pops back to its own matching
     // open, so a stray `</header>` inside `<nav>` cannot end the drop and leak nav/script text.
     drop_stack: Vec<&'static [u8]>,
-    pre_depth: i32,  // inside <pre> (verbatim)
+    pre_depth: i32, // inside <pre> (verbatim)
     list_depth: usize,
     ordered: Vec<bool>,
     emph: Vec<u8>, // emphasis stack: 1 = *, 2 = **
@@ -170,7 +170,7 @@ impl Walk<'_> {
             return false;
         }
         let id = attr_val(attrs, b"id");
-        !id.is_empty() && self.revealed.iter().any(|r| *r == id.as_bytes())
+        !id.is_empty() && self.revealed.contains(&id.as_bytes())
     }
 }
 

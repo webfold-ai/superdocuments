@@ -31,6 +31,22 @@
 pub mod ascii_filters;
 pub mod inflate;
 mod parse;
+/// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the
+/// production xref, object-stream and predictor code calls these same functions, and the proofs in
+/// `proof/PdfProofs.lean` are about them (`proof/regen.sh` extracts the same source).
+// The lints allowed here are about the kernels' shape (a range check written out, a bool-returning
+// if, a manual ceiling division or absolute difference). That shape is what Charon/Aeneas extract,
+// so the kernels keep it and the proofs stay about this exact code.
+#[allow(
+    dead_code,
+    clippy::manual_range_contains,
+    clippy::needless_bool,
+    clippy::manual_div_ceil,
+    clippy::manual_abs_diff
+)]
+#[path = "../../../proof/extract_pdf.rs"]
+mod pdf_kernels;
+mod xref;
 // The HashTrinity primitive now lives in the shared `hashtrinity` crate (the Rust rung of
 // HashTrinityCore.lean); pdffold was its template. Re-exported so `crate::Table` is unchanged.
 pub use hashtrinity::Table;
@@ -127,6 +143,9 @@ pub type Dict = Table<String, Object>;
 #[derive(Default)]
 pub struct Document {
     pub(crate) objects: Table<u32, Object>,
+    /// The generation each loaded object was read with. A reference with another generation
+    /// resolves to null (ISO 32000 §7.3.10).
+    pub(crate) gens: Table<u32, u16>,
     pub(crate) root: u32,
 }
 
@@ -141,11 +160,22 @@ impl Document {
         self.objects.get(&num)
     }
 
-    /// Resolve a reference in one O(1) hop (or pass a direct object through).
+    /// Resolve a reference in one O(1) hop (or pass a direct object through). A reference whose
+    /// generation differs from the object's resolves to null.
     pub fn resolve<'a>(&'a self, o: &'a Object) -> Option<&'a Object> {
         match o {
-            Object::Ref(n, _) => self.object(*n),
+            Object::Ref(n, g) => self.ref_object(*n, *g),
             other => Some(other),
+        }
+    }
+
+    /// The object that the reference `n g R` names (7.3.10): `None` when the current xref entry
+    /// for `n` has another generation (a stale reference into an incremental update) or is absent.
+    /// Every lookup of a reference in the parser goes through here, never through `object` alone.
+    pub fn ref_object(&self, n: u32, g: u16) -> Option<&Object> {
+        match self.gens.get(&n) {
+            Some(&have) if have != g => None,
+            _ => self.object(n),
         }
     }
 

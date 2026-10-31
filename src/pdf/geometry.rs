@@ -451,9 +451,11 @@ mod tests {
 
     #[test]
     fn document_metadata_serializes_with_skip() {
-        let mut m = DocumentMetadata::default();
-        m.creation_date = Some("D:20240101".into());
-        m.raw_file_size = Some(1024);
+        let m = DocumentMetadata {
+            creation_date: Some("D:20240101".into()),
+            raw_file_size: Some(1024),
+            ..DocumentMetadata::default()
+        };
         let s = serde_json::to_string(&m).unwrap();
         assert!(s.contains("creation_date"));
         assert!(s.contains("raw_file_size"));
@@ -474,9 +476,11 @@ mod lifted_tests {
 
     #[test]
     fn document_metadata_round_trips_with_only_some_fields() {
-        let mut m = DocumentMetadata::default();
-        m.creation_date = Some("D:20240101".into());
-        m.raw_file_size = Some(2048);
+        let m = DocumentMetadata {
+            creation_date: Some("D:20240101".into()),
+            raw_file_size: Some(2048),
+            ..DocumentMetadata::default()
+        };
         let s = serde_json::to_string(&m).unwrap();
         let back: DocumentMetadata = serde_json::from_str(&s).unwrap();
         assert_eq!(back.creation_date.as_deref(), Some("D:20240101"));
