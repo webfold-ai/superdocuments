@@ -310,16 +310,31 @@ impl Document {
         super::xref::load(bytes)
     }
 
-    /// Decode a stream's bytes through its `/Filter` chain and predictor (see `decode`). The
-    /// Map face decides the filter. `None` for a non-stream or an undecodable stream.
+    /// Decode a stream's bytes by applying its /Filter chain in order (ASCII85Decode,
+    /// ASCIIHexDecode, FlateDecode). A chain with any other filter (DCT, CCITT, LZW, ...) is
+    /// not a text stream and passes through the filters before it unchanged.
     pub fn stream_bytes(&self, o: &Object) -> Option<Vec<u8>> {
-        match o {
-            Object::Stream(d, raw) => {
-                let d =
-                    super::decode::with_resolved_parms(d, &|n, g| self.ref_object(n, g).cloned());
-                super::decode::decode(&d, raw)
+        if let Object::Stream(d, raw) = o {
+            let names: Vec<&str> = match d.get(&"Filter".to_string()) {
+                Some(Object::Name(f)) => vec![f.as_str()],
+                Some(Object::Array(a)) => a
+                    .iter()
+                    .filter_map(|x| if let Object::Name(n) = x { Some(n.as_str()) } else { None })
+                    .collect(),
+                _ => vec![],
+            };
+            let mut cur = raw.clone();
+            for f in names {
+                cur = match f {
+                    "FlateDecode" | "Fl" => zlib(&cur)?,
+                    "ASCII85Decode" | "A85" => super::ascii_filters::ascii85(&cur)?,
+                    "ASCIIHexDecode" | "AHx" => super::ascii_filters::ascii_hex(&cur)?,
+                    _ => return Some(cur),
+                };
             }
-            _ => None,
+            Some(cur)
+        } else {
+            None
         }
     }
 }
@@ -1016,7 +1031,8 @@ impl Document {
         self.markdown_inner(Some(seed))
     }
 
-    /// The markdown of each page, in page order; each ends with its page break.
+    /// One markdown string per page, in page order (the same layout as `markdown`). A page with no
+    /// selectable text yields an empty or whitespace-only string.
     pub fn markdown_pages(&self) -> Vec<String> {
         self.markdown_pages_inner(None)
     }
@@ -1026,7 +1042,7 @@ impl Document {
     }
 
     fn markdown_pages_inner(&self, seed: Option<&super::RegionSeed>) -> Vec<String> {
-        let mut pages = Vec::new();
+        let mut pages_out = Vec::new();
         let pdata = self.page_data();
         // The body font size = the char-weighted modal size (the THRONE of the size histogram); headings
         // are the off-throne lines, OR bold / section-numbered same-size lines.
@@ -1044,6 +1060,7 @@ impl Document {
             .map(|(k, _)| *k as f64 / 2.0)
             .unwrap_or(0.0);
         for (lines, (h, v)) in &pdata {
+            let mut out = String::new();
             // generate candidates, then GATE by the seed (if given) or the geometric hand-read.
             let cands: Vec<Cand> = table_candidates(lines, h, v)
                 .into_iter()
@@ -1055,9 +1072,9 @@ impl Document {
             let mut out = String::new();
             emit_lines(&mut out, lines, &cands, body);
             out.push('\n'); // page break
-            pages.push(out);
+            pages_out.push(out);
         }
-        pages
+        pages_out
     }
 
     /// Per page: the laid-out lines (document = reading order) + the drawn ruling lines. The shared

@@ -23,6 +23,11 @@ const MAX_OCR_RENDER_BYTES: u64 = 512 * 1024 * 1024;
 
 /// Read and parse a PDF file without spawning a process.
 pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
+    extract_markdown(&read_pdf_capped(path.as_ref())?)
+}
+
+/// Read a PDF whole, never more than `MAX_PDF_BYTES + 1` bytes however the file changes underfoot.
+fn read_pdf_capped(path: &Path) -> io::Result<Vec<u8>> {
     let file = std::fs::File::open(path)?;
     if file.metadata()?.len() > MAX_PDF_BYTES as u64 {
         return Err(io::Error::new(
@@ -33,7 +38,7 @@ pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
     let mut bytes = Vec::new();
     file.take(MAX_PDF_BYTES as u64 + 1)
         .read_to_end(&mut bytes)?;
-    extract_markdown(&bytes)
+    Ok(bytes)
 }
 
 /// Parse PDF bytes and return layout-aware Markdown without spawning a process.
@@ -73,19 +78,33 @@ fn native_pages_of_bytes(bytes: &[u8]) -> io::Result<Vec<String>> {
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
 }
 
-/// The native per-page markdown of the PDF at `path` (see `native_pages_of_bytes`).
-fn native_pages_of_file(path: &Path) -> io::Result<Vec<String>> {
-    let file = std::fs::File::open(path)?;
-    if file.metadata()?.len() > MAX_PDF_BYTES as u64 {
+/// Parse PDF bytes into one Markdown string per page (page order; empty for pages with no
+/// selectable text). Same limits and panic containment as `extract_markdown`.
+pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
+    if bytes.len() > MAX_PDF_BYTES {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "PDF exceeds size limit",
         ));
     }
-    let mut bytes = Vec::new();
-    file.take(MAX_PDF_BYTES as u64 + 1)
-        .read_to_end(&mut bytes)?;
-    native_pages_of_bytes(&bytes)
+    if !bytes.starts_with(b"%PDF-") {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "invalid PDF header",
+        ));
+    }
+    let parsed = catch_unwind(AssertUnwindSafe(|| {
+        let document =
+            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+                crate::pdf::parser::PdfError::Parse(message) => message,
+            })?;
+        if document.object_count() == 0 || document.root() == 0 {
+            return Err("PDF has no readable catalog".to_string());
+        }
+        Ok(document.markdown_pages())
+    }))
+    .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
+    parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
 }
 
 /// Runtime limits for the optional Poppler + Tesseract OCR fallback.
@@ -889,29 +908,36 @@ fn extract_file_with_ocr_inner(
     mut observer: impl FnMut(&str, f64, u64, u64),
     timings: Arc<Mutex<PhaseTimings>>,
 ) -> io::Result<String> {
-    let native = native_pages_of_file(path);
-    if let Ok(pages) = &native {
-        let any_text = pages.iter().any(|page| has_embedded_text(page));
-        let image_only = pages.iter().any(|page| is_image_only(page));
-        if any_text && !image_only {
-            if let Some(metrics) = metrics.as_ref() {
-                metrics.record_native_hit();
+    let bytes = read_pdf_capped(path);
+    let native = match &bytes {
+        Ok(bytes) => extract_markdown(bytes),
+        Err(error) => Err(io::Error::new(error.kind(), error.to_string())),
+    };
+    if let (Ok(markdown), Ok(bytes)) = (&native, &bytes) {
+        if has_embedded_text(markdown) {
+            // A document with some text-bearing pages and some without (a scan stapled to a
+            // born-digital file) must not lose the empty pages: OCR only those.
+            let page_texts = extract_pages_markdown(bytes).unwrap_or_default();
+            let empty_pages: Vec<u32> = page_texts
+                .iter()
+                .enumerate()
+                .filter(|(_, p)| !has_embedded_text(p))
+                .map(|(i, _)| i as u32 + 1)
+                .collect();
+            if empty_pages.is_empty() {
+                if let Some(metrics) = metrics.as_ref() {
+                    metrics.record_native_hit();
+                }
+                return Ok(markdown.clone());
             }
-            return Ok(pages.concat());
-        }
-        if any_text {
-            // A mixed document: OCR the file once, and keep the native text of every page that has it.
-            // When OCR is unavailable the native text stands.
-            timings
-                .lock()
-                .expect("phase timings mutex poisoned")
-                .used_ocr = true;
-            let ocr_result = tesseract_ocr_with_observer(path, options, &mut observer);
-            record_ocr_output(&timings, &ocr_result);
-            return Ok(match ocr_result {
-                Ok(ocr) => merge_native_and_ocr(pages, &ocr),
-                Err(_) => pages.concat(),
-            });
+            return merge_native_and_ocr(
+                path,
+                options,
+                &page_texts,
+                &empty_pages,
+                &mut observer,
+                &timings,
+            );
         }
     }
     timings
@@ -945,8 +971,42 @@ pub fn tesseract_ocr(path: impl AsRef<Path>, options: &OcrOptions) -> io::Result
 pub fn tesseract_ocr_with_observer(
     path: impl AsRef<Path>,
     options: &OcrOptions,
-    mut observer: impl FnMut(&str, f64, u64, u64),
+    observer: impl FnMut(&str, f64, u64, u64),
 ) -> io::Result<String> {
+    let ocr = tesseract_ocr_pages(path, options, None, observer)?;
+    Ok(format_ocr_pages(&ocr, options.max_pages))
+}
+
+/// Recognised pages with their numbers kept structurally (OCR text is never re-parsed for them).
+struct OcrPages {
+    pages: Vec<(u32, String)>,
+    /// Pages past `max_pages` were not rendered, so some requested or later pages may be missing.
+    truncated: bool,
+}
+
+fn format_ocr_pages(ocr: &OcrPages, max_pages: u32) -> String {
+    let mut output = String::new();
+    for (number, text) in &ocr.pages {
+        if !output.is_empty() {
+            output.push_str("\n\n");
+        }
+        output.push_str(&format!("<!-- page {number} -->\n{}", text.trim()));
+    }
+    if ocr.truncated {
+        output.push_str(&format!(
+            "\n\n[OCR stopped at the configured limit of {max_pages} pages; later pages may be omitted]"
+        ));
+    }
+    output
+}
+
+/// `tesseract_ocr_with_observer` restricted to the listed 1-based pages (`None` = every page).
+fn tesseract_ocr_pages(
+    path: impl AsRef<Path>,
+    options: &OcrOptions,
+    only: Option<&[u32]>,
+    mut observer: impl FnMut(&str, f64, u64, u64),
+) -> io::Result<OcrPages> {
     options.validate()?;
     let input = path.as_ref();
     let metadata = std::fs::metadata(input)?;
@@ -995,6 +1055,15 @@ pub fn tesseract_ocr_with_observer(
         pages.push((number, path));
     }
     pages.sort_by_key(|(number, _)| *number);
+    // The render cap is a property of the render, so it is judged before any page selection.
+    let rendered_limit_reached = pages.len() == options.max_pages as usize;
+    let rendered_total = pages.len();
+    if let Some(only) = only {
+        pages.retain(|(number, _)| only.contains(number));
+    }
+    let selected_beyond_render = only.is_some_and(|only| {
+        rendered_limit_reached && only.iter().any(|n| *n as usize > rendered_total)
+    });
     let rendered_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
         path.metadata()
             .map(|metadata| total.saturating_add(metadata.len()))
@@ -1007,6 +1076,14 @@ pub fn tesseract_ocr_with_observer(
             io::ErrorKind::InvalidData,
             "rendered PDF pages exceed the disk-space limit",
         ));
+    }
+    if pages.is_empty() && selected_beyond_render {
+        // Every requested page lies past the render cap: report truncation, keep the caller's
+        // native text.
+        if let Some(metrics) = options.config.metrics.as_ref() {
+            metrics.record_outcome(true, true);
+        }
+        return Ok(OcrPages { pages: Vec::new(), truncated: true });
     }
     if pages.is_empty() {
         if let Some(metrics) = options.config.metrics.as_ref() {
@@ -1035,8 +1112,8 @@ pub fn tesseract_ocr_with_observer(
         );
     }
 
-    let rendered_limit_reached = pages.len() == options.max_pages as usize;
-    let mut output = String::new();
+    let mut collected: Vec<(u32, String)> = Vec::new();
+    let mut collected_bytes = 0usize;
     let mut recognize_seconds_total = 0.0f64;
     let mut pages_kept = 0u64;
     for (number, image) in pages {
@@ -1071,7 +1148,7 @@ pub fn tesseract_ocr_with_observer(
             );
         }
         if !text.trim().is_empty() {
-            if output.len().saturating_add(text.len()) > MAX_OCR_TOTAL_BYTES {
+            if collected_bytes.saturating_add(text.len()) > MAX_OCR_TOTAL_BYTES {
                 if let Some(metrics) = options.config.metrics.as_ref() {
                     metrics.record_outcome(false, false);
                 }
@@ -1080,10 +1157,8 @@ pub fn tesseract_ocr_with_observer(
                     "total OCR output exceeds size limit",
                 ));
             }
-            if !output.is_empty() {
-                output.push_str("\n\n");
-            }
-            output.push_str(&format!("<!-- page {number} -->\n{}", text.trim()));
+            collected_bytes += text.len();
+            collected.push((number, text.trim().to_string()));
             pages_kept += 1;
         }
     }
@@ -1101,13 +1176,61 @@ pub fn tesseract_ocr_with_observer(
     if let Some(metrics) = options.config.metrics.as_ref() {
         metrics.record_outcome(true, rendered_limit_reached);
     }
-    if rendered_limit_reached {
-        output.push_str(&format!(
+    Ok(OcrPages {
+        pages: collected,
+        truncated: rendered_limit_reached,
+    })
+}
+
+/// OCR the pages in `empty_pages` and splice the result between the native pages, in page order.
+/// `page_texts` is the native text per page, from the bytes the caller already read under the cap.
+fn merge_native_and_ocr(
+    path: &Path,
+    options: &OcrOptions,
+    page_texts: &[String],
+    empty_pages: &[u32],
+    observer: &mut impl FnMut(&str, f64, u64, u64),
+    timings: &Arc<Mutex<PhaseTimings>>,
+) -> io::Result<String> {
+    timings
+        .lock()
+        .expect("phase timings mutex poisoned")
+        .used_ocr = true;
+    let ocr = tesseract_ocr_pages(path, options, Some(empty_pages), &mut *observer)?;
+    {
+        let mut t = timings.lock().expect("phase timings mutex poisoned");
+        t.bytes_ocr = ocr.pages.iter().map(|(_, text)| text.len() as u64).sum();
+        t.truncated = ocr.truncated;
+        t.pages_rendered = ocr.pages.len() as u64;
+    }
+    let ocr_by_page: std::collections::BTreeMap<u32, &str> = ocr
+        .pages
+        .iter()
+        .map(|(number, text)| (*number, text.as_str()))
+        .collect();
+    let mut out = String::new();
+    for (i, native) in page_texts.iter().enumerate() {
+        let number = i as u32 + 1;
+        let text = if has_embedded_text(native) {
+            native.trim()
+        } else {
+            ocr_by_page.get(&number).copied().unwrap_or("")
+        };
+        if text.is_empty() {
+            continue;
+        }
+        if !out.is_empty() {
+            out.push_str("\n\n");
+        }
+        out.push_str(&format!("<!-- page {number} -->\n{text}"));
+    }
+    if ocr.truncated {
+        out.push_str(&format!(
             "\n\n[OCR stopped at the configured limit of {} pages; later pages may be omitted]",
             options.max_pages
         ));
     }
-    Ok(output)
+    Ok(out)
 }
 
 fn has_embedded_text(markdown: &str) -> bool {
@@ -1398,6 +1521,41 @@ mod tests {
         assert!(extract_file_with_ocr(path)
             .unwrap()
             .contains("Invoice Fixture 2025"));
+    }
+
+    #[test]
+    fn ascii85_fixture_is_read_natively_without_ocr() {
+        // extract_file never spawns OCR: this fails if the ASCII85Decode filter is not applied.
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
+        let native = extract_file(fixtures.join("reportlab-ascii85.pdf")).unwrap();
+        assert!(native.contains("Invoice Fixture 2025"), "{native:?}");
+        assert!(native.contains("INV-2048"), "{native:?}");
+    }
+
+    #[test]
+    fn mixed_fixture_scan_beyond_the_page_cap_keeps_native_text_and_notes_truncation() {
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
+        let options = OcrOptions {
+            max_pages: 1,
+            ..Default::default()
+        };
+        let out = extract_file_with_ocr_options(
+            fixtures.join("mixed-native-and-scanned.pdf"),
+            &options,
+        )
+        .unwrap();
+        assert!(out.contains("This first page carries selectable text"), "{out:?}");
+        assert!(out.contains("OCR stopped at the configured limit of 1 pages"), "{out:?}");
+    }
+
+    #[test]
+    fn mixed_fixture_keeps_native_page_and_ocrs_only_the_scan() {
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
+        let bytes = std::fs::read(fixtures.join("mixed-native-and-scanned.pdf")).unwrap();
+        let pages = extract_pages_markdown(&bytes).unwrap();
+        assert_eq!(pages.len(), 2);
+        assert!(has_embedded_text(&pages[0]), "{:?}", pages[0]);
+        assert!(!has_embedded_text(&pages[1]), "{:?}", pages[1]);
     }
 
     #[test]

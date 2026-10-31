@@ -28,7 +28,7 @@
 //! 4. **layout fold** — the accumulator ruler (text→lines) + table grid as hashmap cells.
 //! 5. **classify** — text-vs-scanned as the `x = B/U` accumulator ratio.
 
-mod decode;
+pub mod ascii_filters;
 pub mod inflate;
 mod parse;
 /// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the
