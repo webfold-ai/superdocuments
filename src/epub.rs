@@ -127,8 +127,8 @@ pub fn read(bytes: &[u8]) -> Result<Book, String> {
     if bytes.len() > MAX_TOTAL as usize {
         return Err(format!("EPUB too large: {} bytes", bytes.len()));
     }
-    let mut zip = ZipArchive::new(Cursor::new(bytes))
-        .map_err(|e| format!("invalid EPUB ZIP: {e}"))?;
+    let mut zip =
+        ZipArchive::new(Cursor::new(bytes)).map_err(|e| format!("invalid EPUB ZIP: {e}"))?;
     if zip.len() > MAX_ENTRIES {
         return Err(format!("too many entries: {}", zip.len()));
     }
@@ -182,8 +182,8 @@ pub fn extract_text(book: &Book, bytes: &[u8]) -> Result<String, String> {
     if bytes.len() > MAX_TOTAL as usize {
         return Err(format!("EPUB too large: {} bytes", bytes.len()));
     }
-    let mut zip = ZipArchive::new(Cursor::new(bytes))
-        .map_err(|e| format!("invalid EPUB ZIP: {e}"))?;
+    let mut zip =
+        ZipArchive::new(Cursor::new(bytes)).map_err(|e| format!("invalid EPUB ZIP: {e}"))?;
     let mut out = String::new();
     for (i, item) in book.spine.iter().enumerate() {
         let entry = read_bounded_xhtml(&mut zip, &item.href)?;
@@ -223,10 +223,7 @@ pub fn manifest_get<'a>(book: &'a Book, id: &str) -> Option<&'a ManifestItem> {
 
 // ── internal: container + package parsing ──────────────────────────────
 
-fn read_bounded_xhtml(
-    zip: &mut ZipArchive<Cursor<&[u8]>>,
-    name: &str,
-) -> Result<Vec<u8>, String> {
+fn read_bounded_xhtml(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, String> {
     let file = zip
         .by_name(name)
         .map_err(|e| format!("missing spine entry {name:?}: {e}"))?;
@@ -283,9 +280,7 @@ fn parse_package(
             .read_event_into(&mut buf)
             .map_err(|e| format!("OPF parse error: {e}"))?
         {
-            Event::Start(e) | Event::Empty(e)
-                if e.local_name().as_ref().as_bytes() == b"item" =>
-            {
+            Event::Start(e) | Event::Empty(e) if e.local_name().as_ref().as_bytes() == b"item" => {
                 let id = attr(&e, b"id");
                 let href = attr(&e, b"href");
                 let media_type = attr(&e, b"media-type");

@@ -319,7 +319,13 @@ impl Document {
                 Some(Object::Name(f)) => vec![f.as_str()],
                 Some(Object::Array(a)) => a
                     .iter()
-                    .filter_map(|x| if let Object::Name(n) = x { Some(n.as_str()) } else { None })
+                    .filter_map(|x| {
+                        if let Object::Name(n) = x {
+                            Some(n.as_str())
+                        } else {
+                            None
+                        }
+                    })
                     .collect(),
                 _ => vec![],
             };

@@ -285,7 +285,10 @@ impl<RS: Read + Seek> Xlsb<RS> {
     }
 
     /// MS-XLSB 2.1.7.61
-    fn read_workbook(&mut self, relationships: &apeiron::Map<String, String>) -> Result<(), XlsbError> {
+    fn read_workbook(
+        &mut self,
+        relationships: &apeiron::Map<String, String>,
+    ) -> Result<(), XlsbError> {
         let mut iter =
             RecordIter::from_zip(&mut self.zip, "xl/workbook.bin", &self.zip_path_cache)?;
         let mut buf = Vec::with_capacity(1024);
@@ -305,9 +308,9 @@ impl<RS: Read + Seek> Xlsb<RS> {
                         let relid = &buf[12..12 + rel_len];
                         // converts utf16le to utf8 for HashMap search
                         let relid = UTF_16LE.decode(relid).0;
-                        let target = relationships.get_at(relid.as_ref()).ok_or_else(|| {
-                            XlsbError::FileNotFound(relid.to_string())
-                        })?;
+                        let target = relationships
+                            .get_at(relid.as_ref())
+                            .ok_or_else(|| XlsbError::FileNotFound(relid.to_string()))?;
                         let path = format!("xl/{target}");
                         // ST_SheetState
                         let visible = match read_u32(&buf) {

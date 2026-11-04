@@ -188,7 +188,10 @@ pub fn build_zip_path_cache<RS: Read + Seek>(zip: &ZipArchive<RS>) -> Map<String
 /// Look up a path in the cache, falling back to the path itself.
 pub fn cached_zip_path<'a>(cache: &'a Map<String, String>, path: &'a str) -> &'a str {
     let key = path.to_ascii_lowercase();
-    cache.get_at(key.as_str()).map(|s| s.as_str()).unwrap_or(path)
+    cache
+        .get_at(key.as_str())
+        .map(|s| s.as_str())
+        .unwrap_or(path)
 }
 
 pub const FTAB_LEN: usize = 485;

@@ -116,10 +116,19 @@ mod tests {
 
     #[test]
     fn a85_known_vectors() {
-        assert_eq!(ascii85(b"87cURD]i,\"Ebo80~>").unwrap(), b"Hello World!".to_vec());
-        assert_eq!(ascii85(b"<~87cURD]i,\"Ebo80~>").unwrap(), b"Hello World!".to_vec());
+        assert_eq!(
+            ascii85(b"87cURD]i,\"Ebo80~>").unwrap(),
+            b"Hello World!".to_vec()
+        );
+        assert_eq!(
+            ascii85(b"<~87cURD]i,\"Ebo80~>").unwrap(),
+            b"Hello World!".to_vec()
+        );
         assert_eq!(ascii85(b"z~>").unwrap(), vec![0, 0, 0, 0]);
-        assert_eq!(ascii85(b"87cU\nRD]i,\"Ebo80").unwrap(), b"Hello World!".to_vec());
+        assert_eq!(
+            ascii85(b"87cU\nRD]i,\"Ebo80").unwrap(),
+            b"Hello World!".to_vec()
+        );
     }
     #[test]
     fn a85_partial_group_and_errors() {
@@ -128,7 +137,10 @@ mod tests {
         assert!(ascii85(b"8~>").is_none(), "single trailing char is invalid");
         assert!(ascii85(b"87zcU~>").is_none(), "z inside a group is invalid");
         assert!(ascii85(b"s8W-!~>").is_some(), "max group 0xFFFFFFFF");
-        assert!(ascii85(b"s8W-\"~>").is_none(), "group above 2^32-1 is invalid");
+        assert!(
+            ascii85(b"s8W-\"~>").is_none(),
+            "group above 2^32-1 is invalid"
+        );
         assert!(ascii85(b"\x80~>").is_none());
     }
     #[test]
