@@ -10,7 +10,11 @@ fn main() {
         eprintln!("usage: ocr_file FILE.pdf [--lang L] [--pages N] [--dim PX] [--timeout SECS] [--workers N]");
         std::process::exit(2);
     };
-    let flag = |name: &str| args.iter().position(|a| a == name).and_then(|i| args.get(i + 1));
+    let flag = |name: &str| {
+        args.iter()
+            .position(|a| a == name)
+            .and_then(|i| args.get(i + 1))
+    };
     let mut o = OcrOptions::default();
     if let Some(v) = flag("--lang") {
         o.languages = v.clone();
@@ -30,7 +34,11 @@ fn main() {
     let started = Instant::now();
     match extract_file_with_ocr_options(path, &o) {
         Ok(md) => {
-            eprintln!("{} bytes in {:.1}s", md.len(), started.elapsed().as_secs_f64());
+            eprintln!(
+                "{} bytes in {:.1}s",
+                md.len(),
+                started.elapsed().as_secs_f64()
+            );
             println!("{md}");
         }
         Err(e) => {

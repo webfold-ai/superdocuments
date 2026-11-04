@@ -100,10 +100,9 @@ pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
         ));
     }
     let parsed = catch_unwind(AssertUnwindSafe(|| {
-        let document =
-            crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
-                crate::pdf::parser::PdfError::Parse(message) => message,
-            })?;
+        let document = crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
+            crate::pdf::parser::PdfError::Parse(message) => message,
+        })?;
         if document.object_count() == 0 || document.root() == 0 {
             return Err("PDF has no readable catalog".to_string());
         }
@@ -1141,14 +1140,19 @@ fn tesseract_ocr_pages(
                             scope.spawn(move || {
                                 let base = tmp.join(format!("ocr-{number}"));
                                 let mut ocr = Command::new("tesseract");
-                                ocr.arg(image).arg(&base).arg("-l").arg(languages).args(["--psm", "3"]);
+                                ocr.arg(image)
+                                    .arg(&base)
+                                    .arg("-l")
+                                    .arg(languages)
+                                    .args(["--psm", "3"]);
                                 if workers > 1 {
                                     ocr.env("OMP_THREAD_LIMIT", "1");
                                 }
                                 let started = Instant::now();
                                 run_bounded(&mut ocr, deadline)?;
                                 let seconds = started.elapsed().as_secs_f64();
-                                let text = read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
+                                let text =
+                                    read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
                                 let _ = std::fs::remove_file(base.with_extension("txt"));
                                 Ok((*number, seconds, text))
                             })
@@ -1206,7 +1210,10 @@ fn tesseract_ocr_pages(
         if let Some(metrics) = options.config.metrics.as_ref() {
             metrics.record_outcome(true, true);
         }
-        return Ok(OcrPages { pages: Vec::new(), truncated: true });
+        return Ok(OcrPages {
+            pages: Vec::new(),
+            truncated: true,
+        });
     }
     if rendered_pages == 0 {
         return Err(fail(io::Error::new(
@@ -1214,7 +1221,12 @@ fn tesseract_ocr_pages(
             "Poppler rendered no PDF pages",
         )));
     }
-    observer("render_done", render_seconds, rendered_pages, rendered_bytes_total);
+    observer(
+        "render_done",
+        render_seconds,
+        rendered_pages,
+        rendered_bytes_total,
+    );
     if let Some(log_path) = options.config.log_path.as_deref() {
         let _ = write_log_line(
             log_path,
@@ -1240,7 +1252,10 @@ fn tesseract_ocr_pages(
     if let Some(metrics) = options.config.metrics.as_ref() {
         metrics.record_outcome(true, truncated);
     }
-    Ok(OcrPages { pages: collected, truncated })
+    Ok(OcrPages {
+        pages: collected,
+        truncated,
+    })
 }
 
 /// OCR the pages in `empty_pages` and splice the result between the native pages, in page order.
@@ -1608,23 +1623,49 @@ mod tests {
     #[test]
     fn the_render_window_fits_the_render_budget() {
         for dim in [256u32, 1_800, 2_400, 4_000] {
-            let options = OcrOptions { max_image_dimension: dim, ..Default::default() };
+            let options = OcrOptions {
+                max_image_dimension: dim,
+                ..Default::default()
+            };
             let w = u64::from(ocr_window(&options));
             assert!(w >= 1 && w <= u64::from(MAX_OCR_WINDOW));
-            assert!(w == 1 || w * u64::from(dim) * u64::from(dim) * 4 <= MAX_OCR_RENDER_BYTES, "dim {dim} window {w}");
+            assert!(
+                w == 1 || w * u64::from(dim) * u64::from(dim) * 4 <= MAX_OCR_RENDER_BYTES,
+                "dim {dim} window {w}"
+            );
         }
     }
 
     #[test]
     fn options_allow_long_documents_and_reject_nonsense() {
-        let long = OcrOptions { max_pages: 300, timeout: Duration::from_secs(3_600), workers: 4, ..Default::default() };
+        let long = OcrOptions {
+            max_pages: 300,
+            timeout: Duration::from_secs(3_600),
+            workers: 4,
+            ..Default::default()
+        };
         assert!(long.validate().is_ok());
         for bad in [
-            OcrOptions { max_pages: 0, ..Default::default() },
-            OcrOptions { max_pages: 2_001, ..Default::default() },
-            OcrOptions { workers: 0, ..Default::default() },
-            OcrOptions { workers: 17, ..Default::default() },
-            OcrOptions { timeout: Duration::from_secs(3_601), ..Default::default() },
+            OcrOptions {
+                max_pages: 0,
+                ..Default::default()
+            },
+            OcrOptions {
+                max_pages: 2_001,
+                ..Default::default()
+            },
+            OcrOptions {
+                workers: 0,
+                ..Default::default()
+            },
+            OcrOptions {
+                workers: 17,
+                ..Default::default()
+            },
+            OcrOptions {
+                timeout: Duration::from_secs(3_601),
+                ..Default::default()
+            },
         ] {
             assert!(bad.validate().is_err(), "{bad:?}");
         }
@@ -1637,13 +1678,17 @@ mod tests {
             max_pages: 1,
             ..Default::default()
         };
-        let out = extract_file_with_ocr_options(
-            fixtures.join("mixed-native-and-scanned.pdf"),
-            &options,
-        )
-        .unwrap();
-        assert!(out.contains("This first page carries selectable text"), "{out:?}");
-        assert!(out.contains("OCR stopped at the configured limit of 1 pages"), "{out:?}");
+        let out =
+            extract_file_with_ocr_options(fixtures.join("mixed-native-and-scanned.pdf"), &options)
+                .unwrap();
+        assert!(
+            out.contains("This first page carries selectable text"),
+            "{out:?}"
+        );
+        assert!(
+            out.contains("OCR stopped at the configured limit of 1 pages"),
+            "{out:?}"
+        );
     }
 
     #[test]
@@ -1707,7 +1752,10 @@ mod tests {
         assert!(u64::from(ocr_window(&large_pages)) * 4_000 * 4_000 * 4 <= MAX_OCR_RENDER_BYTES);
         let mut too_many = OcrOptions::default();
         too_many.max_pages = MAX_OCR_PAGES + 1;
-        assert_eq!(too_many.validate().unwrap_err().kind(), io::ErrorKind::InvalidInput);
+        assert_eq!(
+            too_many.validate().unwrap_err().kind(),
+            io::ErrorKind::InvalidInput
+        );
 
         let temp = OcrTempDir::create().unwrap();
         let oversized = temp.0.join("oversized.pdf");
