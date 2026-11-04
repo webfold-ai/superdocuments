@@ -10,13 +10,26 @@ what the PDF parser's OCR fallback (`pdftoppm` + `tesseract`) exists for.
 
 ## What is here
 
-| File | Role |
+| Subcommand | Role |
 |---|---|
-| `fetch.py` | download the ground truth and the page images of chosen documents (`--shortest N`, `--ids`, `--all`); nothing is committed, the page images are for academic and research use only |
-| `run.py` | write one Markdown file per document per system: `webfold` (chunked, all languages), `webfold_default` (`webfold pdf` as shipped), `tesseract` (the incumbent it wraps) |
-| `score_provisional.py` | a text-only character similarity. **Not an MPDocBench metric** |
-| `make_subset_gt.py`, `score_official.md` | how to run the official toolkit on a subset or on all 100 documents |
+| `fetch` | download the ground truth and the page images of chosen documents (`--shortest N`, `--ids`, `--all`); nothing is committed, the page images are for academic and research use only |
+| `run` | write one Markdown file per document per system: `webfold` (chunked, all languages), `webfold_default` (`webfold pdf` as shipped), `tesseract` (the incumbent it wraps) |
+| `score` | a text-only character similarity. **Not an MPDocBench metric** |
+| `subset`, `score_official.md` | cut the ground truth to the fetched documents; how to run the official toolkit on a subset or on all 100 documents |
 | `results/` | the timings and provisional scores below |
+
+All four are subcommands of one Rust binary, `ocr/src/bin/marathondocbench.rs` (no Python). `run` needs `tesseract` with the language packs and a `webfold` binary (`WEBFOLD_BIN`); it writes the page PDFs itself.
+
+```bash
+cargo build --release --manifest-path ocr/Cargo.toml --bin marathondocbench
+B=ocr/target/release/marathondocbench
+$B fetch  --out ~/.cache/marathondocbench --shortest 2        # or --ids mp3lan_0101 mp3lan_0778, or --all
+WEBFOLD_BIN=webfold $B run --data ~/.cache/marathondocbench --out ~/.cache/marathondocbench/pred [--systems webfold,webfold_default,tesseract] [--lang chi_sim+chi_tra+eng] [--jobs 2]
+$B score  --data ~/.cache/marathondocbench --pred ~/.cache/marathondocbench/pred [--json out.json]
+$B subset --data ~/.cache/marathondocbench                    # for the official scorer, see score_official.md
+```
+
+The score implements the Levenshtein similarity with a bit-parallel (Myers/Hyyro) distance over characters; it reproduced the Python/rapidfuzz table below to the printed digit.
 
 ## Result, 2026-10-30: two documents, text only, provisional score
 
