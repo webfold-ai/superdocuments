@@ -39,7 +39,7 @@ The minimum supported Rust version is 1.85 (`rust-version` in `Cargo.toml`).
 
 ## Licence
 
-The crate is licensed under the Functional Source License, Version 1.1, ALv2 Future License (`LICENSE`). FSL is source-available, not an OSI-approved open-source licence. The `calamine/` sub-crate is MIT (`calamine/Cargo.toml`), and its upstream authorship is retained there.
+The crate is licensed under the Apache License, Version 2.0 (`LICENSE`). The `calamine/` sub-crate is MIT (`calamine/Cargo.toml`), and its upstream authorship is retained there.
 
 ## Contributing and security
 
