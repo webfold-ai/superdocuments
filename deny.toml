@@ -36,9 +36,10 @@ highlight = "all"
 unknown-registry = "deny"
 unknown-git = "deny"
 allow-registry = ["https://github.com/rust-lang/crates.io-index"]
-# Git sources the lock file needs today. Each must be a Ptyktos repository pinned to a revision
+# Git sources the lock file needs today. Each must be a Ptyktos or webfold-ai repository pinned to a revision
 # in Cargo.toml. Remove an entry when its dependency moves to crates.io.
 allow-git = [
+    "https://github.com/webfold-ai/apeiron",
     "https://github.com/Ptyktos/hashtrinity",
     "https://github.com/Ptyktos/framefold",
     "https://github.com/Ptyktos/transcode",

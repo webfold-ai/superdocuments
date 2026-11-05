@@ -37,7 +37,6 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `quick-xml` | crates.io | `0.42` | Required | XML parsing for OOXML, ODF and EPUB |
 | `zip` | crates.io | `9` (`deflate` only) | Required | ZIP containers |
 | `encoding_rs` | crates.io | `0.8` | Required | Windows-1252 decoding for RTF escapes |
-| `lopdf` | crates.io | `0.34` | Required | AcroForm repair and page heuristics in `pdf` |
 | `serde`, `serde_json` | crates.io | `1` | Required | Geometry types and JSON output in `pdf` and `graph` |
 | `hashtrinity` | git, `Ptyktos/hashtrinity` | rev `59fea1c338e22d8ef5b82968c4e0621d38d00ba5` | Required (`syntax` feature) | `Table` hash map used by the cache, HTML extractor and PDF parser; syntax codec for Markdown frontmatter |
 | `apeiron` | git, `webfold-ai/apeiron` | rev `56b7943671ca8f87059dce02fcc862054968d5ca` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`) |

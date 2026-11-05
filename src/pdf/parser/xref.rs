@@ -854,6 +854,15 @@ pub(super) fn load(bytes: &[u8]) -> Result<Document, PdfError> {
         Some(r) if doc.object(r).is_some() => r,
         _ => catalog_scan(&doc),
     };
+    if !recovered {
+        for t in &l.trailers {
+            for (k, v) in t.iter() {
+                if doc.trailer.get(k).is_none() {
+                    doc.trailer.put(k.clone(), v.clone());
+                }
+            }
+        }
+    }
     Ok(doc)
 }
 

@@ -4,7 +4,7 @@
 //! LiteParse's full `page_complexity` walks a `pdfium::Page` object for
 //! image refs, vector path coverage, font-encoding anomalies, and
 //! AcroForm references. We don't link PDFium, so this lift carries the
-//! **decision function** and runs it against the signals Transcode + lopdf
+//! **decision function** and runs it against the signals Transcode + the in-house parser
 //! expose on a raw byte buffer:
 //!
 //! 1. **AcroForm dict present** — `parse_pdf_bytes` reads the catalog's

@@ -39,7 +39,7 @@ This page describes `superdocuments` 0.8.1 as it is in the source. Every stateme
 | `markdown` | Hand-written Markdown parser and HTML renderer (not CommonMark-complete, per its module docs). Not used by `convert_bytes`. Only YAML frontmatter uses `hashtrinity::codec::syntax` |
 | `pdf` | Entry points, OCR fallback, OCR metrics, legacy process adapter |
 | `pdf::parser` | In-tree PDF parser: xref and object streams, filters (`decode.rs`, `inflate.rs`, `ascii_filters.rs`), text layout and Markdown output (`parse.rs`) |
-| `pdf::geometry`, `pdf::transcode_populator`, `pdf::page_walker`, `pdf::acroform` | Geometry types, per-page spans and outline, page-complexity heuristics, AcroForm repair via `lopdf` |
+| `pdf::geometry`, `pdf::transcode_populator`, `pdf::page_walker`, `pdf::acroform` | Geometry types, per-page spans and outline, page-complexity heuristics, AcroForm repair on the in-house parser |
 | `graph` | `DocumentGraph` with provenance, projected from Markdown (`<!-- page N -->` blocks) and optionally overlaid with span geometry |
 | `lib.rs` | Module list, feature-gated re-exports, the `Worksheet` type |
 
@@ -85,7 +85,7 @@ Despite their names, `pdf::transcode_populator` and `geometry_from_transcode` us
 - `calamine/`: a workspace member (`[workspace] members = ["calamine"]`) that the root crate does not depend on. It is a fork of calamine 0.36.1 with `apeiron` maps (`calamine/APEIRON-FORK.md`). It has its own `rust-version` (1.88, against 1.85 for the root crate) and is not built by a plain `cargo test` at the root. `calamine/fuzz` is excluded from the workspace.
 - `pdf::extract_with_format`, `pdf::document_metadata`: the source comments call this surface shape-only. In `extract_with_format` the `pages` entries have empty text and zero size, and `document_metadata` fills in only the file size.
 - `pdf::to_markdown` and `to_markdown_with_manifest`: a legacy adapter that runs an external `pdffold` program, a `PDFFOLD_BIN` binary, or `cargo run --example md` against `PDFFOLD_MANIFEST`. Not used by the native path.
-- `pdf::acroform::repair_acroform`: a repair helper lifted from LiteParse. Its PDFium verification step is stubbed out, per the module comment.
+- `pdf::acroform::repair_acroform`: finds orphaned widget fields with the in-house PDF parser and appends an incremental update that adds the missing `/AcroForm` and a new catalog revision. It runs on files whose newest cross-reference section is a classic table, and skips encrypted files. The PDFium verification step of the LiteParse original is not carried.
 - `pdf::page_walker`: coarse heuristics; the module comment says richer signals are not computed.
 - `graph::from_pdf_path` labels every graph's source as OCR (`Source::Ocr`), whether or not OCR ran.
 - `proof/`: Lean files and `proof/extract_pdf.rs`. The Rust file is compiled into the library through a `#[path]` attribute in `pdf/parser/mod.rs`. The Lean files are not part of the Cargo build; this page makes no claim about their status.
