@@ -1255,6 +1255,19 @@ impl Document {
         m
     }
 
+    /// The object numbers of the pages, in page-tree order.
+    pub(crate) fn page_numbers(&self) -> Vec<u32> {
+        let mut pages = Vec::new();
+        if let Some(Object::Dict(cat)) = self.object(self.root) {
+            let mut seen = super::Table::new();
+            match cat.get(&"Pages".to_string()) {
+                Some(Object::Ref(pr, pg)) => self.collect_pages(*pr, *pg, &mut pages, 0, &mut seen),
+                _ => self.collect_pages(self.root, 0, &mut pages, 0, &mut seen),
+            }
+        }
+        pages
+    }
+
     /// Walk the page tree. Each node is visited once (`seen`), so a `/Kids` list that names a node
     /// twice, or names an ancestor, cannot multiply the walk; the depth bound stays as well.
     fn collect_pages(

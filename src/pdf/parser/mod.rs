@@ -148,6 +148,9 @@ pub struct Document {
     /// resolves to null (ISO 32000 §7.3.10).
     pub(crate) gens: Table<u32, u16>,
     pub(crate) root: u32,
+    /// The trailer entries of the cross-reference chain, newest section first: an entry in a newer
+    /// trailer hides the same key in an older one. Empty when the file was rebuilt from its headers.
+    pub(crate) trailer: Dict,
 }
 
 impl Document {
