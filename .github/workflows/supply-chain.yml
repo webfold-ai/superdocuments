@@ -26,9 +26,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
+      # cargo-audit 0.22.2 needs rustc 1.88; the audit does not depend on the crate's MSRV. The
+      # action's ref picks the toolchain, so this is the 1.88.0 branch, pinned by commit.
+      - uses: dtolnay/rust-toolchain@360a4e93673de6630fac2478bc9e35244b01a759 # 1.88.0 branch head
         with:
-          # cargo-audit 0.22.2 needs rustc 1.88; the audit does not depend on the crate's MSRV.
           toolchain: 1.88.0
       - run: cargo install --locked cargo-audit
       - run: cargo audit --deny warnings
@@ -40,9 +41,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
+      # cargo-deny 0.19.4 needs rustc 1.88; the policy check does not depend on the crate's MSRV.
+      - uses: dtolnay/rust-toolchain@360a4e93673de6630fac2478bc9e35244b01a759 # 1.88.0 branch head
         with:
-          # cargo-deny 0.19.4 needs rustc 1.88; the policy check does not depend on the crate's MSRV.
           toolchain: 1.88.0
       - run: cargo install --locked cargo-deny --version 0.19.4
       - run: cargo deny check advisories bans licenses sources
