@@ -28,7 +28,8 @@ jobs:
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
         with:
-          toolchain: 1.85.0
+          # cargo-audit 0.22.2 needs rustc 1.88; the audit does not depend on the crate's MSRV.
+          toolchain: 1.88.0
       - run: cargo install --locked cargo-audit
       - run: cargo audit --deny warnings
 
@@ -41,7 +42,8 @@ jobs:
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
         with:
-          toolchain: 1.85.0
+          # cargo-deny 0.19.4 needs rustc 1.88; the policy check does not depend on the crate's MSRV.
+          toolchain: 1.88.0
       - run: cargo install --locked cargo-deny --version 0.19.4
       - run: cargo deny check advisories bans licenses sources
 
