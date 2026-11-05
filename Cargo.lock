@@ -106,7 +106,10 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://github.com/Ptyktos/hashtrinity?rev=255ca3018a0f06300153d905cb19b37ea548bb56#255ca3018a0f06300153d905cb19b37ea548bb56"
+source = "git+https://github.com/webfold-ai/apeiron?rev=56b7943671ca8f87059dce02fcc862054968d5ca#56b7943671ca8f87059dce02fcc862054968d5ca"
+dependencies = [
+ "libc",
+]
 
 [[package]]
 name = "atoi_simd"
@@ -691,7 +694,7 @@ checksum = "ed5909b6e89a2db4456e54cd5f673791d7eca6732202bbf2a9cc504fe2f9b84a"
 [[package]]
 name = "hashtrinity"
 version = "0.1.0"
-source = "git+https://github.com/Ptyktos/hashtrinity?rev=2c36b995c82c073c71df7c28b14c62665d62cbf0#2c36b995c82c073c71df7c28b14c62665d62cbf0"
+source = "git+https://github.com/Ptyktos/hashtrinity?rev=59fea1c338e22d8ef5b82968c4e0621d38d00ba5#59fea1c338e22d8ef5b82968c4e0621d38d00ba5"
 dependencies = [
  "apeiron",
  "rustls",
@@ -1636,7 +1639,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]

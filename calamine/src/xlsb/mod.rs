@@ -163,13 +163,13 @@ pub struct Xlsb<RS> {
     #[cfg(feature = "picture")]
     pictures: Option<Vec<(String, Vec<u8>)>>,
     options: XlsbOptions,
-    zip_path_cache: apeiron::Map<String, String>,
+    zip_path_cache: apeiron::freq::Table<String, String>,
 }
 
 impl<RS: Read + Seek> Xlsb<RS> {
     /// MS-XLSB
-    fn read_relationships(&mut self) -> Result<apeiron::Map<String, String>, XlsbError> {
-        let mut relationships = apeiron::Map::new();
+    fn read_relationships(&mut self) -> Result<apeiron::freq::Table<String, String>, XlsbError> {
+        let mut relationships = apeiron::freq::Table::new();
         match self.zip.by_name("xl/_rels/workbook.bin.rels") {
             Ok(f) => {
                 let mut xml = XmlReader::from_reader(BufReader::new(f));
@@ -287,7 +287,7 @@ impl<RS: Read + Seek> Xlsb<RS> {
     /// MS-XLSB 2.1.7.61
     fn read_workbook(
         &mut self,
-        relationships: &apeiron::Map<String, String>,
+        relationships: &apeiron::freq::Table<String, String>,
     ) -> Result<(), XlsbError> {
         let mut iter =
             RecordIter::from_zip(&mut self.zip, "xl/workbook.bin", &self.zip_path_cache)?;
@@ -645,7 +645,7 @@ where
     fn from_zip(
         zip: &'a mut ZipArchive<RS>,
         path: &str,
-        cache: &apeiron::Map<String, String>,
+        cache: &apeiron::freq::Table<String, String>,
     ) -> Result<RecordIter<'a, RS>, XlsbError> {
         let zip_path = cached_zip_path(cache, path);
 

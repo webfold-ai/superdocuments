@@ -2,12 +2,11 @@
 
 This local fork starts at Calamine `0af05f4f6030351e3b8a999ea0810c8618368776`
 (v0.36.1). It keeps Calamine's parser and public API. XLSX and XLSB ZIP part
-path caches and workbook relationship indexes use `apeiron::Map` with borrowed
+path caches and workbook relationship indexes use `apeiron::freq::Table` with borrowed
 `&str` lookups. XLS and ODS readers are unchanged controls. This is an initial
 storage migration, not a rewrite of spreadsheet parsing or a claimed speedup.
 
-The `apeiron` dependency resolves from the `apeiron` branch of Ptyktos/hashtrinity
-(commit a2b5093). This crate lives in the superdocuments workspace as `calamine/`
+The `apeiron` dependency resolves from `webfold-ai/apeiron` (`apeiron::freq::Table`). This code lives in the superdocuments workspace as `calamine/`
 rather than as a redistributable standalone package. The upstream Calamine source is MIT; Apeiron has its own
 license in that checkout, which must be reviewed before external distribution.
 
