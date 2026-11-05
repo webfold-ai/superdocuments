@@ -1316,53 +1316,6 @@ fn has_embedded_text(markdown: &str) -> bool {
     })
 }
 
-/// A page that paints an image and has no native text: an image-only (scanned) page.
-fn is_image_only(page: &str) -> bool {
-    !has_embedded_text(page) && page.contains("![](")
-}
-
-/// The OCR text of each page of a `tesseract_ocr` result, keyed by page number. The result's
-/// `<!-- page N -->` markers delimit the pages; the limit notice after the last page is not text.
-fn ocr_page_texts(ocr: &str) -> Vec<(usize, String)> {
-    let mut out = Vec::new();
-    for piece in ocr.split("<!-- page ").skip(1) {
-        let Some((number, text)) = piece.split_once(" -->") else {
-            continue;
-        };
-        let Ok(number) = number.trim().parse::<usize>() else {
-            continue;
-        };
-        let text = text
-            .split("\n\n[OCR stopped at the configured limit")
-            .next()
-            .unwrap_or(text);
-        out.push((number, text.trim().to_string()));
-    }
-    out
-}
-
-/// A mixed document: each page keeps its native text. An image-only page takes its OCR text when
-/// OCR recognised one; otherwise its native markdown stands. Every page is marked with its number,
-/// as the OCR output is.
-fn merge_native_and_ocr(native: &[String], ocr: &str) -> String {
-    let ocr_pages = ocr_page_texts(ocr);
-    let mut out = String::new();
-    for (i, page) in native.iter().enumerate() {
-        let number = i + 1;
-        let ocr_text = ocr_pages
-            .iter()
-            .find(|(n, _)| *n == number)
-            .map(|(_, t)| t.as_str());
-        out.push_str(&format!("<!-- page {number} -->\n"));
-        match ocr_text {
-            Some(text) if is_image_only(page) => out.push_str(text),
-            _ => out.push_str(page.trim_end()),
-        }
-        out.push_str("\n\n");
-    }
-    out
-}
-
 struct OcrTempDir(PathBuf);
 
 impl OcrTempDir {
@@ -1493,36 +1446,6 @@ fn run(command: &mut Command) -> io::Result<String> {
 mod tests {
     use super::*;
     use std::process::Command;
-
-    #[test]
-    fn mixed_document_keeps_native_text_and_takes_ocr_for_scanned_pages() {
-        // Page 1 has native text; page 2 is an image with no text layer, so its OCR text replaces the
-        // image marker. The page 1 text is kept as native, and the OCR notice is not page text.
-        let native = vec![
-            "Native title\n\n".to_string(),
-            "![](img_5.png)\n\n".to_string(),
-        ];
-        let ocr = "<!-- page 1 -->\nocr of page one\n\n<!-- page 2 -->\nScanned words here\n\n\
-                   [OCR stopped at the configured limit of 1 pages; later pages may be omitted]";
-        let merged = merge_native_and_ocr(&native, ocr);
-        assert_eq!(
-            merged,
-            "<!-- page 1 -->\nNative title\n\n<!-- page 2 -->\nScanned words here\n\n"
-        );
-        assert!(
-            !merged.contains("OCR stopped"),
-            "the limit notice is not page text"
-        );
-    }
-
-    #[test]
-    fn image_only_page_without_ocr_keeps_its_marker() {
-        let native = vec!["![](img_4.png)\n\n".to_string()];
-        assert_eq!(
-            merge_native_and_ocr(&native, ""),
-            "<!-- page 1 -->\n![](img_4.png)\n\n"
-        );
-    }
 
     fn pdf_with_stream(content: &[u8], filter: &str) -> Vec<u8> {
         let mut stream =
@@ -1735,23 +1658,18 @@ mod tests {
             options.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput
         );
-        let oversized_render = OcrOptions {
+        // many large pages are fine: they are rendered a window at a time, and a window fits the render budget
+        let large_pages = OcrOptions {
             max_pages: 100,
             max_image_dimension: 4_000,
             ..OcrOptions::default()
         };
-        assert_eq!(
-            oversized_render.validate().unwrap_err().kind(),
-            io::ErrorKind::InvalidInput
-        );
-        // many large pages are fine: they are rendered a window at a time, and a window fits the render budget
-        let mut large_pages = OcrOptions::default();
-        large_pages.max_pages = 100;
-        large_pages.max_image_dimension = 4_000;
         assert!(large_pages.validate().is_ok());
         assert!(u64::from(ocr_window(&large_pages)) * 4_000 * 4_000 * 4 <= MAX_OCR_RENDER_BYTES);
-        let mut too_many = OcrOptions::default();
-        too_many.max_pages = MAX_OCR_PAGES + 1;
+        let too_many = OcrOptions {
+            max_pages: MAX_OCR_PAGES + 1,
+            ..OcrOptions::default()
+        };
         assert_eq!(
             too_many.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput

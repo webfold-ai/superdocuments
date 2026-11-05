@@ -29,6 +29,7 @@
 //! 5. **classify** — text-vs-scanned as the `x = B/U` accumulator ratio.
 
 pub mod ascii_filters;
+mod decode;
 pub mod inflate;
 mod parse;
 /// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the

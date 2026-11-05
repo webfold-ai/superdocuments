@@ -265,9 +265,11 @@ fn parse_container(bytes: &[u8]) -> Result<String, String> {
     Err("container.xml has no <rootfile full-path=...>".into())
 }
 
-fn parse_package(
-    bytes: &[u8],
-) -> Result<(Map<String, ManifestItem>, Vec<String>, Option<String>), String> {
+/// A parsed OPF package: the manifest by item id, the spine's idrefs in order, and the package
+/// title when the OPF declares one.
+type Package = (Map<String, ManifestItem>, Vec<String>, Option<String>);
+
+fn parse_package(bytes: &[u8]) -> Result<Package, String> {
     let s = std::str::from_utf8(bytes).map_err(|e| format!("OPF is not UTF-8: {e}"))?;
     let mut reader = Reader::from_str(s);
     reader.config_mut().trim_text(true);
