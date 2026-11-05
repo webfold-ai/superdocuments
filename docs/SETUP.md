@@ -10,7 +10,7 @@ common substrate (`memoryfold`, `modelfold`, `hashtrinity`).
 | `Ptyktos/agent-evals` | agents / code / reasoning / safety / vision / medical / financial / ops | one binary, 110+ adapters (`./target/release/agent_evals --list`) |
 | `Ptyktos/memorybench` | memory / retrieval / long-context | one binary + 30 adapters (`./target/release/memorybench --list`) |
 | `Ptyktos/decision-bench` | decision / routing / intent / guardrails / NLI / LLM-as-judge | three binaries (`reservoir_baseline`, `guardfold_direct`, `verdict_engine`) + capture-based for external models |
-| `Ptyktos/superdocuments` | shared document parsing — also the home of this guide | n/a |
+| `webfold-ai/superdocuments` | shared document parsing — also the home of this guide | n/a |
 
 (Plus the legacy `guardfold/benches/jev-as-judge/` for the JEV
 reproduction, and the autofold draft worktree at
@@ -48,7 +48,7 @@ mkdir -p ~/projects && cd ~/projects
 git clone https://github.com/Ptyktos/agent-evals.git
 git clone https://github.com/Ptyktos/memorybench.git
 git clone https://github.com/Ptyktos/decision-bench.git
-git clone https://github.com/Ptyktos/superdocuments.git
+git clone https://github.com/webfold-ai/superdocuments.git
 
 cd agent-evals && cargo build --release && cd ..
 cd memorybench && cargo build --release && cd ..
