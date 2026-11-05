@@ -7,7 +7,7 @@ This page records what the repository does for the OpenSSF Scorecard and Best Pr
 | Check | Where | Status |
 |---|---|---|
 | Security-Policy | `SECURITY.md` | present |
-| License | `LICENSE` | present (FSL-1.1-ALv2; not OSI-approved) |
+| License | `LICENSE` | present (Apache-2.0) |
 | Pinned-Dependencies | `.github/workflows/*.yml` | every `uses:` pinned to a full SHA |
 | Token-Permissions | workflows | `contents: read` by default |
 | SAST | `codeql.yml` | CodeQL, needs GHAS on a private repository |

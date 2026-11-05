@@ -11,8 +11,8 @@ ignore = []
 
 [licenses]
 version = 2
-# Dependency licences only. The crate's own licence is the FSL in LICENSE and is not
-# an SPDX identifier, so it is not listed here.
+# Dependency licences only. The crate's own licence is Apache-2.0 (LICENSE), which is
+# already in the allow list below.
 allow = [
     "MIT",
     "Apache-2.0",

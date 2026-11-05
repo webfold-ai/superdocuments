@@ -1,5 +1,7 @@
 # superdocuments
 
+> **Status: research build.** This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
+
 Document parsing and conversion for Rust. Converts DOCX, DOCM, PPTX, XLSX, XLSM, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML and plain text to Markdown, and extracts text from PDF.
 
 ## What is in the crate
@@ -39,7 +41,7 @@ The minimum supported Rust version is 1.85 (`rust-version` in `Cargo.toml`).
 
 ## Licence
 
-The crate is licensed under the Functional Source License, Version 1.1, ALv2 Future License (`LICENSE`). FSL is source-available, not an OSI-approved open-source licence. The `calamine/` sub-crate is MIT (`calamine/Cargo.toml`), and its upstream authorship is retained there.
+The crate is licensed under the Apache License, Version 2.0 (`LICENSE`). The `calamine/` sub-crate is MIT (`calamine/Cargo.toml`), and its upstream authorship is retained there.
 
 ## Contributing and security
 
