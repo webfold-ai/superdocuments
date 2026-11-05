@@ -310,37 +310,16 @@ impl Document {
         super::xref::load(bytes)
     }
 
-    /// Decode a stream's bytes by applying its /Filter chain in order (ASCII85Decode,
-    /// ASCIIHexDecode, FlateDecode). A chain with any other filter (DCT, CCITT, LZW, ...) is
-    /// not a text stream and passes through the filters before it unchanged.
+    /// Decode a stream's bytes through its `/Filter` chain and predictor (see `decode`). The
+    /// Map face decides the filter. `None` for a non-stream or an undecodable stream.
     pub fn stream_bytes(&self, o: &Object) -> Option<Vec<u8>> {
-        if let Object::Stream(d, raw) = o {
-            let names: Vec<&str> = match d.get(&"Filter".to_string()) {
-                Some(Object::Name(f)) => vec![f.as_str()],
-                Some(Object::Array(a)) => a
-                    .iter()
-                    .filter_map(|x| {
-                        if let Object::Name(n) = x {
-                            Some(n.as_str())
-                        } else {
-                            None
-                        }
-                    })
-                    .collect(),
-                _ => vec![],
-            };
-            let mut cur = raw.clone();
-            for f in names {
-                cur = match f {
-                    "FlateDecode" | "Fl" => zlib(&cur)?,
-                    "ASCII85Decode" | "A85" => super::ascii_filters::ascii85(&cur)?,
-                    "ASCIIHexDecode" | "AHx" => super::ascii_filters::ascii_hex(&cur)?,
-                    _ => return Some(cur),
-                };
+        match o {
+            Object::Stream(d, raw) => {
+                let d =
+                    super::decode::with_resolved_parms(d, &|n, g| self.ref_object(n, g).cloned());
+                super::decode::decode(&d, raw)
             }
-            Some(cur)
-        } else {
-            None
+            _ => None,
         }
     }
 }
@@ -1066,7 +1045,6 @@ impl Document {
             .map(|(k, _)| *k as f64 / 2.0)
             .unwrap_or(0.0);
         for (lines, (h, v)) in &pdata {
-            let mut out = String::new();
             // generate candidates, then GATE by the seed (if given) or the geometric hand-read.
             let cands: Vec<Cand> = table_candidates(lines, h, v)
                 .into_iter()
