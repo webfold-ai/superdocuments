@@ -7,7 +7,7 @@
 use std::borrow::Cow;
 use std::io::{Read, Seek};
 
-use hashtrinity::Table;
+use apeiron::freq::Table;
 
 use quick_xml::{escape::resolve_xml_entity, events::BytesRef};
 use zip::read::ZipArchive;
@@ -180,7 +180,7 @@ pub fn build_zip_path_cache<RS: Read + Seek>(zip: &ZipArchive<RS>) -> Table<Stri
     // looked up by name, so it has no cache entry.
     for zip_path in zip.file_names().flatten() {
         let normalized = zip_path.replace('\\', "/").to_ascii_lowercase();
-        cache.put(normalized, zip_path.to_string());
+        cache.insert(normalized, zip_path.to_string());
     }
     cache
 }
@@ -189,7 +189,7 @@ pub fn build_zip_path_cache<RS: Read + Seek>(zip: &ZipArchive<RS>) -> Table<Stri
 pub fn cached_zip_path<'a>(cache: &'a Table<String, String>, path: &'a str) -> &'a str {
     let key = path.to_ascii_lowercase();
     cache
-        .get(&key)
+        .get_at(key.as_str())
         .map(|s| s.as_str())
         .unwrap_or(path)
 }

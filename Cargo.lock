@@ -205,6 +205,7 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 name = "calamine"
 version = "0.36.1"
 dependencies = [
+ "apeiron",
  "atoi_simd",
  "byteorder",
  "chrono",
@@ -214,7 +215,6 @@ dependencies = [
  "env_logger",
  "fast-float2",
  "glob",
- "hashtrinity",
  "log",
  "quick-xml",
  "rstest",
@@ -1380,6 +1380,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 name = "superdocuments"
 version = "0.8.1"
 dependencies = [
+ "apeiron",
  "encoding_rs",
  "framefold",
  "hashtrinity",

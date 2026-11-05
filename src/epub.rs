@@ -26,13 +26,14 @@
 //! page) and walk the spine here. Webfold's `--dump text` will route
 //! `legislation.gov.au` URLs through this module.
 //!
-//! ## Why a hashtrinity-backed manifest
+//! ## Why an apeiron-backed manifest
 //!
 //! The id → item lookup is the hot path on every spine walk. `HashMap`
 //! pays the string hash twice (once in `Hash` and once in `Eq`) and
-//! owns the keys it stores. `hashtrinity::Table<String, _>` is the table
-//! the rest of this crate uses, and the same `String: Coord` impl handles
-//! the OPF id strings. Manifest
+//! owns the keys it stores. `apeiron::freq::Table<String, _>` is the table
+//! the rest of the substrate uses (`calamine/` in this workspace for XLSX
+//! path/relationship caches, `hashtrinity` for the fact registry), and
+//! the same `String: Coord` impl handles the OPF id strings. Manifest
 //! resolution is O(1) and the keys stay borrowed between the
 //! `read()` and `extract_text()` calls, so the spine walk does not
 //! re-allocate them.
@@ -43,7 +44,7 @@
 //! extract is a typed text spine; if a caller needs a chapter's media,
 //! they re-open the EPUB with their own reader.
 use crate::html::to_markdown;
-use hashtrinity::Table;
+use apeiron::freq::Table;
 use quick_xml::{
     events::{BytesStart, Event},
     Reader,
@@ -142,10 +143,10 @@ pub fn read(bytes: &[u8]) -> Result<Book, String> {
     let (manifest, spine_ids, title) = parse_package(&opf_bytes)?;
 
     // 3. Pre-resolve spine hrefs against the OPF directory. One O(1)
-    //    hashtrinity::Table lookup per idref.
+    //    apeiron::freq::Table lookup per idref.
     let mut spine = Vec::with_capacity(spine_ids.len());
     for id in spine_ids {
-        match manifest.get(&id) {
+        match manifest.get_at(id.as_str()) {
             Some(item) => {
                 let href = join_href(&opf_dir, &item.href);
                 spine.push(SpineItem {
@@ -217,7 +218,7 @@ pub fn title(book: &Book) -> Option<&str> {
 /// id (the spine walk already skipped those, but a caller iterating
 /// the manifest by id may need the same lookup).
 pub fn manifest_get<'a>(book: &'a Book, id: &str) -> Option<&'a ManifestItem> {
-    book.manifest.get(&id.to_string())
+    book.manifest.get_at(id)
 }
 
 // ── internal: container + package parsing ──────────────────────────────
@@ -286,7 +287,7 @@ fn parse_package(bytes: &[u8]) -> Result<Package, String> {
                 let href = attr(&e, b"href");
                 let media_type = attr(&e, b"media-type");
                 if let (Some(id), Some(href)) = (id, href) {
-                    manifest.put(
+                    manifest.insert(
                         id.clone(),
                         ManifestItem {
                             id,

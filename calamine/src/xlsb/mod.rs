@@ -163,13 +163,13 @@ pub struct Xlsb<RS> {
     #[cfg(feature = "picture")]
     pictures: Option<Vec<(String, Vec<u8>)>>,
     options: XlsbOptions,
-    zip_path_cache: hashtrinity::Table<String, String>,
+    zip_path_cache: apeiron::freq::Table<String, String>,
 }
 
 impl<RS: Read + Seek> Xlsb<RS> {
     /// MS-XLSB
-    fn read_relationships(&mut self) -> Result<hashtrinity::Table<String, String>, XlsbError> {
-        let mut relationships = hashtrinity::Table::new();
+    fn read_relationships(&mut self) -> Result<apeiron::freq::Table<String, String>, XlsbError> {
+        let mut relationships = apeiron::freq::Table::new();
         match self.zip.by_name("xl/_rels/workbook.bin.rels") {
             Ok(f) => {
                 let mut xml = XmlReader::from_reader(BufReader::new(f));
@@ -185,7 +185,7 @@ impl<RS: Read + Seek> Xlsb<RS> {
                         Ok(Event::Start(e)) if e.name() == QName("Relationship") => {
                             let (id, target) = get_attrs!(e, "Id" => id, "Target" => target)?;
                             if let (Some(id), Some(target)) = (id, target) {
-                                relationships.put(id.to_string(), decode_attr(target)?);
+                                relationships.insert(id.to_string(), decode_attr(target)?);
                             }
                         }
                         Ok(Event::Eof) => break,
@@ -287,7 +287,7 @@ impl<RS: Read + Seek> Xlsb<RS> {
     /// MS-XLSB 2.1.7.61
     fn read_workbook(
         &mut self,
-        relationships: &hashtrinity::Table<String, String>,
+        relationships: &apeiron::freq::Table<String, String>,
     ) -> Result<(), XlsbError> {
         let mut iter =
             RecordIter::from_zip(&mut self.zip, "xl/workbook.bin", &self.zip_path_cache)?;
@@ -309,7 +309,7 @@ impl<RS: Read + Seek> Xlsb<RS> {
                         // converts utf16le to utf8 for HashMap search
                         let relid = UTF_16LE.decode(relid).0;
                         let target = relationships
-                            .get(&relid.to_string())
+                            .get_at(relid.as_ref())
                             .ok_or_else(|| XlsbError::FileNotFound(relid.to_string()))?;
                         let path = format!("xl/{target}");
                         // ST_SheetState
@@ -645,7 +645,7 @@ where
     fn from_zip(
         zip: &'a mut ZipArchive<RS>,
         path: &str,
-        cache: &hashtrinity::Table<String, String>,
+        cache: &apeiron::freq::Table<String, String>,
     ) -> Result<RecordIter<'a, RS>, XlsbError> {
         let zip_path = cached_zip_path(cache, path);
 

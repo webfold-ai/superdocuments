@@ -39,17 +39,15 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `encoding_rs` | crates.io | `0.8` | Required | Windows-1252 decoding for RTF escapes |
 | `lopdf` | crates.io | `0.34` | Required | AcroForm repair and page heuristics in `pdf` |
 | `serde`, `serde_json` | crates.io | `1` | Required | Geometry types and JSON output in `pdf` and `graph` |
-| `hashtrinity` | git, `Ptyktos/hashtrinity` | rev `2c36b995c82c073c71df7c28b14c62665d62cbf0` | Required (`syntax` feature) | `Table` hash map used by the cache, HTML extractor and PDF parser; syntax codec for Markdown frontmatter |
-| `apeiron` | git, `Ptyktos/hashtrinity` (its `apeiron` branch) | rev `255ca3018a0f06300153d905cb19b37ea548bb56` | Required | `apeiron::Map` for the EPUB manifest index |
+| `hashtrinity` | git, `Ptyktos/hashtrinity` | rev `59fea1c338e22d8ef5b82968c4e0621d38d00ba5` | Required (`syntax` feature) | `Table` hash map used by the cache, HTML extractor and PDF parser; syntax codec for Markdown frontmatter |
+| `apeiron` | git, `webfold-ai/apeiron` | rev `56b7943671ca8f87059dce02fcc862054968d5ca` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`) |
 | `framefold` | git, `Ptyktos/framefold` | rev `5a097c2e2448640c79d43b37b9246d0f7baea0d4` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
 | `transcode` | git, `Ptyktos/transcode` | rev `8e65c5afeb8adb9663511760b80e19156970207e` | Features `media-codecs`, `images` | Codec re-export as `media_codecs`; embedded PDF image decode and PNG encode |
 | `calamine` (local) | `calamine/` in this repository | version 0.36.1 | Not a dependency of the root crate | Workspace member only; see below |
 
 At run time, OCR also needs the external `pdftoppm` (Poppler) and `tesseract` programs. The legacy `pdf::to_markdown` adapter needs a `pdffold` executable (`PDFFOLD_BIN`, `PDFFOLD_MANIFEST` or `PATH`).
 
-**Repository name versus package name.** A git dependency is named by repository URL, but Cargo uses the package name declared in the manifest there. The `apeiron` package is built from the `Ptyktos/hashtrinity` repository, not from a repository called apeiron. The GitHub repository `webfold-ai/superdocuments` publishes the package `superdocuments`. The `calamine/` directory is a package also named `calamine`, but it is a local fork of tafia/calamine (`calamine/APEIRON-FORK.md`), not the crates.io release.
-
-**Why there is a `[patch]`.** `Cargo.toml` says that `hashtrinity` still names the `Ptyktos/apeiron` repository, which no longer exists. `[patch."https://github.com/Ptyktos/apeiron"]` redirects that source to the same commit on the `apeiron` branch of `Ptyktos/hashtrinity`, so `Cargo.lock` holds a single `apeiron` package.
+**Repository name versus package name.** A git dependency is named by repository URL, but Cargo uses the package name declared in the manifest there. The `apeiron` package is built from the `webfold-ai/apeiron` repository. The GitHub repository `webfold-ai/superdocuments` publishes the package `superdocuments`. The `calamine/` directory is part of this workspace: an in-house spreadsheet reader forked from tafia/calamine (`calamine/APEIRON-FORK.md`), not the crates.io release.
 
 ## Cargo features
 
