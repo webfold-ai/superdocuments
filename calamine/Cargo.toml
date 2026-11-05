@@ -14,9 +14,8 @@ edition = "2021"
 rust-version = "1.88" # For zip
 
 [dependencies]
-# The commit hashtrinity pins, so a build holding both has one apeiron. Ptyktos/apeiron is gone;
-# its history lives on the `apeiron` branch of Ptyktos/hashtrinity.
-apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56" }
+# Same pin as the superdocuments crate, so a build holding both has one hashtrinity (and one apeiron).
+hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "59fea1c338e22d8ef5b82968c4e0621d38d00ba5" }
 log = "0.4"
 serde = "1.0"
 codepage = "0.1"

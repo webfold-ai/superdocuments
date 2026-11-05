@@ -26,14 +26,13 @@
 //! page) and walk the spine here. Webfold's `--dump text` will route
 //! `legislation.gov.au` URLs through this module.
 //!
-//! ## Why an apeiron-backed manifest
+//! ## Why a hashtrinity-backed manifest
 //!
 //! The id → item lookup is the hot path on every spine walk. `HashMap`
 //! pays the string hash twice (once in `Hash` and once in `Eq`) and
-//! owns the keys it stores. `apeiron::Map<String, _>` is the table
-//! the rest of the substrate uses (`calamine/` in this workspace for XLSX
-//! path/relationship caches, `hashtrinity` for the fact registry), and
-//! the same `String: Coord` impl handles the OPF id strings. Manifest
+//! owns the keys it stores. `hashtrinity::Table<String, _>` is the table
+//! the rest of this crate uses, and the same `String: Coord` impl handles
+//! the OPF id strings. Manifest
 //! resolution is O(1) and the keys stay borrowed between the
 //! `read()` and `extract_text()` calls, so the spine walk does not
 //! re-allocate them.
@@ -44,7 +43,7 @@
 //! extract is a typed text spine; if a caller needs a chapter's media,
 //! they re-open the EPUB with their own reader.
 use crate::html::to_markdown;
-use apeiron::Map;
+use hashtrinity::Table;
 use quick_xml::{
     events::{BytesStart, Event},
     Reader,
@@ -78,7 +77,7 @@ pub struct SpineItem {
 /// spine in reading order. Holds no file bytes; the original
 /// container is passed back to `extract_text`.
 pub struct Book {
-    manifest: Map<String, ManifestItem>,
+    manifest: Table<String, ManifestItem>,
     spine: Vec<SpineItem>,
     /// Absolute path of the OPF inside the ZIP (e.g. `OEBPS/content.opf`).
     /// Recorded for callers that want it; not consumed by the in-tree
@@ -143,10 +142,10 @@ pub fn read(bytes: &[u8]) -> Result<Book, String> {
     let (manifest, spine_ids, title) = parse_package(&opf_bytes)?;
 
     // 3. Pre-resolve spine hrefs against the OPF directory. One O(1)
-    //    apeiron::Map lookup per idref.
+    //    hashtrinity::Table lookup per idref.
     let mut spine = Vec::with_capacity(spine_ids.len());
     for id in spine_ids {
-        match manifest.get_at(id.as_str()) {
+        match manifest.get(&id) {
             Some(item) => {
                 let href = join_href(&opf_dir, &item.href);
                 spine.push(SpineItem {
@@ -218,7 +217,7 @@ pub fn title(book: &Book) -> Option<&str> {
 /// id (the spine walk already skipped those, but a caller iterating
 /// the manifest by id may need the same lookup).
 pub fn manifest_get<'a>(book: &'a Book, id: &str) -> Option<&'a ManifestItem> {
-    book.manifest.get_at(id)
+    book.manifest.get(&id.to_string())
 }
 
 // ── internal: container + package parsing ──────────────────────────────
@@ -267,13 +266,13 @@ fn parse_container(bytes: &[u8]) -> Result<String, String> {
 
 /// A parsed OPF package: the manifest by item id, the spine's idrefs in order, and the package
 /// title when the OPF declares one.
-type Package = (Map<String, ManifestItem>, Vec<String>, Option<String>);
+type Package = (Table<String, ManifestItem>, Vec<String>, Option<String>);
 
 fn parse_package(bytes: &[u8]) -> Result<Package, String> {
     let s = std::str::from_utf8(bytes).map_err(|e| format!("OPF is not UTF-8: {e}"))?;
     let mut reader = Reader::from_str(s);
     reader.config_mut().trim_text(true);
-    let mut manifest = Map::<String, ManifestItem>::new();
+    let mut manifest = Table::<String, ManifestItem>::new();
     let mut spine_ids: Vec<String> = Vec::new();
     let mut title: Option<String> = None;
     let mut buf = Vec::with_capacity(1024);
@@ -287,7 +286,7 @@ fn parse_package(bytes: &[u8]) -> Result<Package, String> {
                 let href = attr(&e, b"href");
                 let media_type = attr(&e, b"media-type");
                 if let (Some(id), Some(href)) = (id, href) {
-                    manifest.insert(
+                    manifest.put(
                         id.clone(),
                         ManifestItem {
                             id,

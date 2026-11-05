@@ -26,12 +26,7 @@ framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5a097c2e24486
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
-hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "2c36b995c82c073c71df7c28b14c62665d62cbf0", features = ["syntax"] }
-# The O(1) borrowed-key map used for the EPUB manifest index. Same shape
-# as the relationship / path caches in `calamine/`. apeiron has no published crate; its history
-# lives on the `apeiron` branch of Ptyktos/hashtrinity (Ptyktos/apeiron is gone). 255ca30 is that
-# branch's Apache-2.0 tip; the previous pin, a2b5093, carried a GPL-3.0 LICENSE.
-apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56" }
+hashtrinity = { git = "https://github.com/Ptyktos/hashtrinity", rev = "59fea1c338e22d8ef5b82968c4e0621d38d00ba5", features = ["syntax"] }
 # Media codecs only, behind `images` / `media-codecs`. The HTML and PDF document code that used to
 # come from Transcode's `doc` module (not part of the GitHub Transcode) now lives in this crate.
 transcode = { git = "https://github.com/Ptyktos/transcode", rev = "8e65c5afeb8adb9663511760b80e19156970207e", optional = true }
@@ -42,9 +37,3 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 [dev-dependencies]
-
-
-# hashtrinity (and anything else pinned before the move) still names Ptyktos/apeiron, which no
-# longer exists; redirect that source to the same commit on the hashtrinity `apeiron` branch.
-[patch."https://github.com/Ptyktos/apeiron"]
-apeiron = { git = "https://github.com/Ptyktos/hashtrinity", rev = "255ca3018a0f06300153d905cb19b37ea548bb56" }

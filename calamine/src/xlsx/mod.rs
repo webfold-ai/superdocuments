@@ -272,7 +272,7 @@ pub struct Xlsx<RS> {
     /// Reader options
     options: XlsxOptions,
     /// Cached ZIP path lookups (lowercased normalized -> original).
-    zip_path_cache: apeiron::Map<String, String>,
+    zip_path_cache: hashtrinity::Table<String, String>,
 }
 
 /// Xlsx reader options
@@ -441,7 +441,7 @@ impl<RS: Read + Seek> Xlsx<RS> {
 
     fn read_workbook(
         &mut self,
-        relationships: &apeiron::Map<String, (String, String)>,
+        relationships: &hashtrinity::Table<String, (String, String)>,
     ) -> Result<(), XlsxError> {
         let path = format!("{}workbook.xml", self.xl_path);
         let mut xml = match xml_reader(&mut self.zip, path.as_ref(), &self.zip_path_cache) {
@@ -485,7 +485,7 @@ impl<RS: Read + Seek> Xlsx<RS> {
                         }
                     }
                     let (r, rel_type) = relationships
-                        .get_at(rel_id)
+                        .get(&rel_id.to_string())
                         .ok_or(XlsxError::RelationshipNotFound)?;
                     // target may be absolute or relative path;
                     let path = if let Some(abs_path) = r.strip_prefix("/") {
@@ -546,7 +546,7 @@ impl<RS: Read + Seek> Xlsx<RS> {
         Ok(())
     }
 
-    fn read_relationships(&mut self) -> Result<apeiron::Map<String, (String, String)>, XlsxError> {
+    fn read_relationships(&mut self) -> Result<hashtrinity::Table<String, (String, String)>, XlsxError> {
         let rels_path = format!("{}_rels/workbook.xml.rels", self.xl_path);
         let mut xml = match xml_reader(&mut self.zip, rels_path.as_ref(), &self.zip_path_cache) {
             None => {
@@ -554,7 +554,7 @@ impl<RS: Read + Seek> Xlsx<RS> {
             }
             Some(x) => x?,
         };
-        let mut relationships = apeiron::Map::new();
+        let mut relationships = hashtrinity::Table::new();
         let mut buf = Vec::with_capacity(64);
         loop {
             buf.clear();
@@ -565,7 +565,7 @@ impl<RS: Read + Seek> Xlsx<RS> {
                     if let Some(id) = id {
                         let rel_type = rel_type.map(ToOwned::to_owned).unwrap_or_default();
                         let target = target.map(ToOwned::to_owned).unwrap_or_default();
-                        relationships.insert(id.to_string(), (target, rel_type));
+                        relationships.put(id.to_string(), (target, rel_type));
                     }
                 }
                 Ok(Event::End(e)) if e.local_name().as_ref() == "Relationships" => break,
@@ -2353,7 +2353,7 @@ impl Hyperlink {
 fn read_sheet_hyperlink_rels<RS>(
     zip: &mut ZipArchive<RS>,
     sheet_path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
 ) -> Result<HashMap<String, String>, XlsxError>
 where
     RS: Read + Seek,
@@ -2740,7 +2740,7 @@ fn col_from_cell_ref(cell_ref: &str) -> u32 {
 fn xml_reader<'a, RS: Read + Seek>(
     zip: &'a mut ZipArchive<RS>,
     path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
 ) -> Option<Result<XlReader<'a, RS>, XlsxError>> {
     let zip_path = cached_zip_path(cache, path);
 
@@ -3373,7 +3373,7 @@ fn item_value(e: &BytesStart) -> Result<Value, quick_xml::events::attributes::At
 fn find_pivot_cache_definitions_from_pivot<RS>(
     zip: &mut zip::ZipArchive<RS>,
     path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
 ) -> Result<String, XlsxError>
 where
     RS: Read + Seek,
@@ -3432,7 +3432,7 @@ where
 fn find_pivot_cache_records_from_definitions<RS>(
     zip: &mut zip::ZipArchive<RS>,
     path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
     cache_path: &str,
 ) -> Result<String, XlsxError>
 where
@@ -3490,7 +3490,7 @@ where
 fn find_pivot_table_paths_from_sheet<RS>(
     zip: &mut zip::ZipArchive<RS>,
     sheet_path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
 ) -> Result<Vec<String>, XlsxError>
 where
     RS: Read + Seek,
@@ -3543,7 +3543,7 @@ where
 fn find_pivot_name_from_pivot_path<RS>(
     zip: &mut zip::ZipArchive<RS>,
     pivot_path: &str,
-    cache: &apeiron::Map<String, String>,
+    cache: &hashtrinity::Table<String, String>,
 ) -> Result<String, XlsxError>
 where
     RS: Read + Seek,
