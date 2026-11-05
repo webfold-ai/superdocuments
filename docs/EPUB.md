@@ -2,9 +2,9 @@
 
 `superdocuments::epub` is the substrate's spine-driven EPUB reader. It
 reads the OCF (Open Container Format) container, indexes the package
-manifest in an O(1) borrowed-key table, and walks the spine one
-chapter at a time. Memory cost is one XHTML chapter plus its Markdown
-render, regardless of book size.
+manifest in an `apeiron::Map`, and walks the spine one chapter at a
+time. Each chapter is read and converted separately, but `extract_text`
+accumulates the whole result in one `String`, capped at 64 MiB.
 
 This document is the *substrate* half of the EPUB story. The webfold
 client side lives in `Ptyktos/webfold/docs/EPUB-WALK.md`.
@@ -15,7 +15,7 @@ client side lives in `Ptyktos/webfold/docs/EPUB-WALK.md`.
 - Resolving the spine (canonical reading order) against the manifest.
 - Extracting each spine entry as Markdown via the existing
   `superdocuments::html::to_markdown` pipeline.
-- Bounded input, panic containment, structured errors.
+- Bounded input and `Err(String)` errors. The module has no panic containment.
 
 ## What is NOT in scope
 
@@ -87,19 +87,10 @@ META-INF/        │ read(bytes)                        │
 
 ## Why the manifest is `apeiron::Map<String, ManifestItem>`
 
-The id → item lookup is the hot path on every spine walk. The OPF
-ids are static strings; `HashMap<String, _>` pays the string hash
-twice (once in `Hash`, once in `Eq`) and owns the keys it stores.
-`apeiron::Map<String, _>` is the same table the rest of the
-substrate uses:
-
-- `calamine-apeiron`'s XLSX relationship and path caches
-  (`apeiron::Map<String, String>` and `apeiron::Map<String, (String, String)>`).
-- `hashtrinity` for the fact registry.
-- Aeneas / Icarus for the typed-fact layer.
-
-The same `String: Coord` impl (in `apeiron::fold`) handles the OPF
-ids, so there is one address function across the substrate.
+The id → item lookup runs once per spine entry. `apeiron::Map<String, _>`
+is the table the local `calamine/` fork also uses for its XLSX and XLSB
+path caches and relationship indexes (`calamine/APEIRON-FORK.md`). No
+benchmark comparing it with `HashMap` is recorded in this repository.
 
 `apeiron::Map` also exposes a borrowed-key `get_at<Q: Locate<K>>(&self, q: Q)`
 that accepts `&str` directly. The public `manifest_get` API uses that,
@@ -151,16 +142,12 @@ Seven unit tests in `src/epub.rs`:
 | `opf_dirname_strips_the_filename_only` | Path helper. |
 | `join_href_resolves_against_opf_dir` | Path helper, with the backslash and absolute-href edge cases. |
 
-Full superdocuments lib suite: **131 passed, 0 failed** (124 pre-existing
-+ 7 new).
-
 ## What we did not adopt
 
 - **`danigm/epub-rs`** (`epub` crate on crates.io). A reasonable
   reader, but adding a new crate dep for a 200-line reader that uses
   the same `quick-xml` + `zip` the crate already has is a wash. The
-  xlsx.rs pattern (own parser, no extra crate) is the right shape for
-  the substrate and the speed we wanted.
+  xlsx.rs pattern (own parser, no extra crate) is the shape used here.
 - **`rbook`**. Cleaner document model, but same shape as `danigm/epub-rs`
   and same observation: we don't need its full DocC model for an
   extractor.
