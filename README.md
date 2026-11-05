@@ -1,5 +1,7 @@
 # superdocuments
 
+> **Status: research build.** This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
+
 Document parsing and conversion for Rust. Converts DOCX, DOCM, PPTX, XLSX, XLSM, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML and plain text to Markdown, and extracts text from PDF.
 
 ## What is in the crate
