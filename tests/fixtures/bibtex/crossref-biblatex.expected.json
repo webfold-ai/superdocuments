@@ -1,0 +1,136 @@
+[
+  {
+    "editor": [
+      {
+        "family": "Guyon",
+        "given": "Isabelle"
+      },
+      {
+        "family": "Von Luxburg",
+        "given": "Ulrike"
+      }
+    ],
+    "id": "nips2017",
+    "issued": {
+      "date-parts": [
+        [
+          2017,
+          12
+        ]
+      ]
+    },
+    "publisher": "Curran Associates",
+    "title": "Advances in Neural Information Processing Systems 30",
+    "type": "book"
+  },
+  {
+    "DOI": "10.5555/3295222.3295349",
+    "author": [
+      {
+        "family": "Vaswani",
+        "given": "Ashish"
+      },
+      {
+        "family": "Shazeer",
+        "given": "Noam"
+      }
+    ],
+    "editor": [
+      {
+        "family": "Guyon",
+        "given": "Isabelle"
+      },
+      {
+        "family": "Von Luxburg",
+        "given": "Ulrike"
+      }
+    ],
+    "id": "vaswani2017",
+    "issued": {
+      "date-parts": [
+        [
+          2017,
+          6,
+          12
+        ]
+      ]
+    },
+    "number": "arXiv:1706.03762",
+    "page": "5998-6008",
+    "publisher": "Curran Associates",
+    "title": "Attention Is All You Need",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://www.nature.com/articles/nature14539",
+    "author": [
+      {
+        "family": "LeCun",
+        "given": "Yann"
+      },
+      {
+        "family": "Bengio",
+        "given": "Yoshua"
+      },
+      {
+        "family": "Hinton",
+        "given": "Geoffrey"
+      }
+    ],
+    "id": "lecun2015",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "number": "arXiv:1502.00001",
+    "title": "Deep learning",
+    "type": "article"
+  },
+  {
+    "author": [
+      {
+        "family": "Anon"
+      }
+    ],
+    "id": "cycle_a",
+    "title": "Cycle A",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "Anon"
+      }
+    ],
+    "id": "cycle_b",
+    "title": "Cycle A",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "literal": "World Health Organization"
+      },
+      {
+        "family": "Zola",
+        "given": "Émile"
+      },
+      {
+        "literal": "et al."
+      }
+    ],
+    "id": "ac_ronym",
+    "issued": {
+      "date-parts": [
+        [
+          2003
+        ]
+      ]
+    },
+    "title": "Institutional author",
+    "type": "article"
+  }
+]

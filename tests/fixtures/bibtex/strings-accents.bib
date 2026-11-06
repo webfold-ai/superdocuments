@@ -1,0 +1,41 @@
+% Hand-written fixture: @string, @preamble, @comment, concatenation and accents.
+@preamble{ "\newcommand{\noop}[1]{#1}" }
+@comment{ This block is ignored by BibTeX, but kept here as text. }
+@string{acm = "ACM Press"}
+@string{pub = acm # ", New York"}
+@string{jmlr = {Journal of Machine Learning Research}}
+
+@inproceedings{schneider2020,
+  author = {Schneider, Jürgen and Ma{\l}gorzata, Nowak},
+  title = {Caf{\'e} au lait: the \c{C}ase of {\ss}},
+  booktitle = "Proc. of " # "the Workshop",
+  publisher = pub,
+  month = sep,
+  year = 2020,
+  pages = {1--10}
+}
+
+@article{mueller2019,
+  author = {M{\"u}ller, Hans and {\v S}evčenko, Taras},
+  title = {Erd{\H o}s numbers \& \%{} rates},
+  journal = jmlr,
+  month = jan,
+  year = {2019},
+  url = {https://example.org/a\_b},
+  doi = {https://doi.org/10.1234/ABC.def-9}
+}
+
+@inproceedings{quoted2018,
+  author = "O'Brien, Pat",
+  title = "A {``}quoted{''} title with a \textendash{} dash",
+  crossref = "conf2018",
+  pages = {5--6}
+}
+
+@proceedings{conf2018,
+  editor = {Chen, Li},
+  title = {Proceedings of Conf 2018},
+  year = {2018},
+  publisher = acm,
+  address = {New York}
+}

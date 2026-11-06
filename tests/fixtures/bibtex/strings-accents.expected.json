@@ -1,0 +1,101 @@
+[
+  {
+    "author": [
+      {
+        "family": "Schneider",
+        "given": "Jürgen"
+      },
+      {
+        "family": "Małgorzata",
+        "given": "Nowak"
+      }
+    ],
+    "container-title": "Proc. of the Workshop",
+    "id": "schneider2020",
+    "issued": {
+      "date-parts": [
+        [
+          2020,
+          9
+        ]
+      ]
+    },
+    "page": "1-10",
+    "publisher": "ACM Press, New York",
+    "title": "Café au lait: the Çase of ß",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1234/ABC.def-9",
+    "URL": "https://example.org/a_b",
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Ševčenko",
+        "given": "Taras"
+      }
+    ],
+    "container-title": "Journal of Machine Learning Research",
+    "id": "mueller2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019,
+          1
+        ]
+      ]
+    },
+    "title": "Erdős numbers & % rates",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "O'Brien",
+        "given": "Pat"
+      }
+    ],
+    "editor": [
+      {
+        "family": "Chen",
+        "given": "Li"
+      }
+    ],
+    "id": "quoted2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "5-6",
+    "publisher": "ACM Press",
+    "publisher-place": "New York",
+    "title": "A ``quoted'' title with a – dash",
+    "type": "paper-conference"
+  },
+  {
+    "editor": [
+      {
+        "family": "Chen",
+        "given": "Li"
+      }
+    ],
+    "id": "conf2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "publisher": "ACM Press",
+    "publisher-place": "New York",
+    "title": "Proceedings of Conf 2018",
+    "type": "book"
+  }
+]

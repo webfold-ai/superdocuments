@@ -1,0 +1,44 @@
+% Hand-written fixture: crossref inheritance, BibLaTeX date and arXiv fields.
+@proceedings{nips2017,
+  title = {Advances in Neural Information Processing Systems 30},
+  editor = {Guyon, Isabelle and {Von Luxburg}, Ulrike},
+  date = {2017-12},
+  publisher = {Curran Associates},
+}
+
+@inproceedings{vaswani2017,
+  author = {Vaswani, Ashish and Shazeer, Noam},
+  title = {Attention Is All You Need},
+  crossref = {nips2017},
+  pages = {5998--6008},
+  eprint = {arXiv:1706.03762},
+  eprinttype = {arxiv},
+  date = {2017-06-12T10:00:00},
+  doi = {10.5555/3295222.3295349},
+}
+
+@online{lecun2015,
+  author = {LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+  title = {Deep learning},
+  date = {2015/2016-05},
+  url = {https://www.nature.com/articles/nature14539},
+  urldate = {2024-01-02},
+  archiveprefix = {arXiv},
+  eprint = {1502.00001},
+}
+
+@article{cycle_a,
+  author = {Anon},
+  title = {Cycle A},
+  crossref = {cycle_b},
+}
+
+@article{cycle_b,
+  crossref = {cycle_a},
+}
+
+@misc{ac_ronym,
+  author = {{World Health Organization} and {\'E}mile Zola and others},
+  title = {Institutional author},
+  year = {2003}
+}

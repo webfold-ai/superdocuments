@@ -1,0 +1,94 @@
+[
+  {
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Babbage",
+        "given": "Charles"
+      }
+    ],
+    "container-title": "Taylor's Scientific Memoirs",
+    "id": "lovelace1843",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          1843
+        ]
+      ]
+    },
+    "page": "691-731",
+    "title": "Notes on the Analytical Engine",
+    "type": "article-journal",
+    "volume": "3"
+  },
+  {
+    "ISBN": "0-201-13447-0",
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1984
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "publisher-place": "Reading, MA",
+    "title": "The TeXbook",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the 1952 ACM National Meeting",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1952
+        ]
+      ]
+    },
+    "page": "243-249",
+    "title": "The Education of a Computer",
+    "type": "paper-conference"
+  },
+  {
+    "id": "nokey_fields_only",
+    "note": "Online",
+    "title": "A Misc Entry With No Trailing Comma",
+    "type": "article"
+  },
+  {
+    "author": [
+      {
+        "family": "Berg",
+        "given": "Jan",
+        "non-dropping-particle": "van der"
+      }
+    ],
+    "id": "thesis2001",
+    "issued": {
+      "date-parts": [
+        [
+          2001
+        ]
+      ]
+    },
+    "title": "On Übersetzung",
+    "type": "thesis"
+  }
+]
