@@ -868,3 +868,40 @@ fn bibtex_round_trip_into_citations_is_stable() {
         "{rendered}"
     );
 }
+
+#[test]
+fn newline_after_control_word_is_swallowed_and_comments_end_runs() {
+    // TeX skips the line break after a control word, and a comment eats its newline.
+    let text = render_text(&parse("\\ldots\nand word%hidden\nnext"), &RenderOptions::default());
+    assert!(text.contains("…and"), "{text}");
+    assert!(text.contains("wordnext"), "{text}");
+}
+
+#[test]
+fn standalone_tikzpicture_options_are_not_code() {
+    let doc = parse("\\begin{tikzpicture}[scale=2]\\draw (0,0);\\end{tikzpicture}");
+    let figs = super::figures(&doc);
+    assert_eq!(figs.len(), 1);
+    assert!(figs[0].tikz.as_deref().unwrap_or("").trim_start().starts_with("\\draw"));
+}
+
+#[test]
+fn citation_notes_are_decoded() {
+    let doc = parse("See \\citep[p.~2][p.~3]{k}.");
+    let cite = doc.blocks.iter().find_map(|b| match b {
+        Block::Paragraph(p) => p.iter().find_map(|i| match i {
+            Inline::Cite(c) => Some(c.clone()),
+            _ => None,
+        }),
+        _ => None,
+    });
+    let cite = cite.unwrap_or(crate::latex::Cite { command: String::new(), pre: None, post: None, keys: vec![] });
+    assert_eq!(cite.pre, Some("p.\u{a0}2".to_string()));
+    assert_eq!(cite.post, Some("p.\u{a0}3".to_string()));
+}
+
+#[test]
+fn figures_inside_theorems_are_collected() {
+    let doc = parse("\\newtheorem{thm}{Theorem}\n\\begin{thm}\n\\begin{figure}\\caption{Inside.}\\end{figure}\n\\end{thm}");
+    assert_eq!(super::figures(&doc).len(), 1);
+}

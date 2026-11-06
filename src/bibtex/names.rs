@@ -604,3 +604,17 @@ mod tests {
         }
     }
 }
+
+#[cfg(test)]
+mod boundary_tests {
+    use super::*;
+
+    #[test]
+    fn exact_length_and_prefix_boundaries() {
+        assert_eq!(parse_year("20000"), None);
+        assert_eq!(parse_date("2020-5-03"), None);
+        assert_eq!(parse_date("2020-05-5"), None);
+        assert_eq!(normalize_doi("1234/abc"), None);
+        assert_eq!(normalize_url("mailto:a@b.org").as_deref(), Some("mailto:a@b.org"));
+    }
+}
