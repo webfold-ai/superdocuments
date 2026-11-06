@@ -511,10 +511,28 @@ fn string_values_are_decoded_too() {
 #[test]
 fn brace_depth_limit_is_exact() {
     let text = "@article{k, title = {a{b{c}}}}";
-    let ok = parse_with(text, &Limits { max_depth: 3, ..Limits::default() });
-    assert!(warnings_text(&ok).iter().all(|m| !m.contains("nesting")), "{:?}", warnings_text(&ok));
-    let too_deep = parse_with(text, &Limits { max_depth: 2, ..Limits::default() });
-    assert!(warnings_text(&too_deep).iter().any(|m| m.contains("nesting")));
+    let ok = parse_with(
+        text,
+        &Limits {
+            max_depth: 3,
+            ..Limits::default()
+        },
+    );
+    assert!(
+        warnings_text(&ok).iter().all(|m| !m.contains("nesting")),
+        "{:?}",
+        warnings_text(&ok)
+    );
+    let too_deep = parse_with(
+        text,
+        &Limits {
+            max_depth: 2,
+            ..Limits::default()
+        },
+    );
+    assert!(warnings_text(&too_deep)
+        .iter()
+        .any(|m| m.contains("nesting")));
 }
 
 #[test]
@@ -526,8 +544,12 @@ fn unbalanced_comment_is_not_kept() {
 
 #[test]
 fn duplicate_keys_compare_case_insensitively_and_repeated_fields_keep_the_first() {
-    let bib = parse("@article{Key, title={A}}\n@article{key, title={B}}\n@article{k2, title={A}, title={B}}");
-    assert!(warnings_text(&bib).iter().any(|m| m.contains("duplicate key")));
+    let bib = parse(
+        "@article{Key, title={A}}\n@article{key, title={B}}\n@article{k2, title={A}, title={B}}",
+    );
+    assert!(warnings_text(&bib)
+        .iter()
+        .any(|m| m.contains("duplicate key")));
     assert_eq!(entry(&bib, "k2").value("title"), Some("A"));
     assert!(warnings_text(&bib).iter().any(|m| m.contains("repeated")));
 }

@@ -1,0 +1,7 @@
+page 1 obj 3 16x8 DeviceRGB bpc 8 ours=png poppler=image -> ok
+page 1 obj 4 8x4 DeviceGray bpc 8 ours=png poppler=image -> ok
+page 1 obj 5 32x24 DeviceRGB bpc 8 ours=jpeg poppler=jpeg -> ok
+page 2 obj 6 4x2 Indexed bpc 2 ours=raw poppler=image -> ok
+page 3 obj 7 16x16 DeviceGray bpc 8 ours=jpeg poppler=jpeg -> ok
+page 4 obj 3 16x8 DeviceRGB bpc 8 ours=png poppler=image -> ok
+6 images, 0 disagreements

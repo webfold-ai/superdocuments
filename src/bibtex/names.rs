@@ -615,6 +615,9 @@ mod boundary_tests {
         assert_eq!(parse_date("2020-5-03"), None);
         assert_eq!(parse_date("2020-05-5"), None);
         assert_eq!(normalize_doi("1234/abc"), None);
-        assert_eq!(normalize_url("mailto:a@b.org").as_deref(), Some("mailto:a@b.org"));
+        assert_eq!(
+            normalize_url("mailto:a@b.org").as_deref(),
+            Some("mailto:a@b.org")
+        );
     }
 }

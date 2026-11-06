@@ -1,0 +1,8 @@
+L03 DETECTED          newline after control word is not skipped [3s] latex::tests::newline_after_control_word_is_swallowed_and_comments_end_runs
+L06 SURVIVED          \verb accepts letters as delimiters [3s] 
+L08 DETECTED          comment character is part of text runs [4s] latex::tests::newline_after_control_word_is_swallowed_and_comments_end_runs
+L09 SURVIVED          trailing blank text is kept [3s] 
+L17 DETECTED          tikzpicture options kept as code [3s] latex::tests::standalone_tikzpicture_options_are_not_code
+L21 SURVIVED          citation note is not decoded [3s] 
+L27 DETECTED          figures inside theorems are not collected [3s] latex::tests::figures_inside_theorems_are_collected
+SUMMARY latex {'DETECTED': 4, 'SURVIVED': 3}

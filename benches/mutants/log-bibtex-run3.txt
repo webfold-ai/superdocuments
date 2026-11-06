@@ -1,0 +1,17 @@
+B15 DETECTED          stray } inside quotes does not end the value [2s] bibtex::tests::mutated_fixtures_never_panic_and_round_trip, bibtex::tests::random_bytes_never_panic
+B16 DETECTED          von detection inverted [2s] bibtex::names::tests::comma_form_von_must_start_the_name, bibtex::names::tests::first_last_order, bibtex::names::tests::last_first_and_suffix_forms, bibtex::names::tests::von_part_in_first_last_order
+B17 DETECTED          comma form uses the first-last von rule [2s] bibtex::names::tests::comma_form_von_must_start_the_name, bibtex::tests::golden_files_for_every_fixture, bibtex::tests::names_follow_bibtex_rules
+B18 DETECTED          institutional names are split [2s] bibtex::names::tests::braced_institution_is_literal, bibtex::names::tests::name_lists_split_on_and_and_flag_others, bibtex::tests::csl_json_maps_types_names_dates_and_inheritance, bibtex::tests::golden_files_for_every_fixture
+B19 DETECTED          page separator order: single dash first [2s] bibtex::names::tests::pages_ranges_and_article_numbers, bibtex::tests::csl_json_maps_types_names_dates_and_inheritance, bibtex::tests::golden_files_for_every_fixture, bibtex::tests::pages_ranges_are_parsed
+B20 DETECTED          short years accepted [2s] bibtex::names::boundary_tests::exact_length_and_prefix_boundaries
+B21 DETECTED          December as a number is refused [2s] bibtex::names::tests::years_and_months
+B22 DETECTED          one-digit month or day accepted with the wrong length check [2s] bibtex::names::boundary_tests::exact_length_and_prefix_boundaries
+B23 DETECTED          DOI prefix check weakened [2s] bibtex::names::boundary_tests::exact_length_and_prefix_boundaries
+B24 DETECTED          mailto URLs refused [2s] bibtex::names::boundary_tests::exact_length_and_prefix_boundaries
+B25 DETECTED          AND is not a name separator [2s] bibtex::names::tests::name_lists_split_on_and_and_flag_others
+B26 DETECTED          writer emits decoded values, not raw [2s] bibtex::tests::golden_files_for_every_fixture, bibtex::tests::mutated_fixtures_never_panic_and_round_trip, bibtex::tests::random_bytes_never_panic, bibtex::tests::truncated_fixtures_never_panic_and_round_trip
+B27 DETECTED          year off by one in issued dates [2s] bibtex::tests::csl_json_maps_types_names_dates_and_inheritance, bibtex::tests::golden_files_for_every_fixture
+B28 DETECTED          inproceedings maps to article [2s] bibtex::tests::csl_json_maps_types_names_dates_and_inheritance, bibtex::tests::golden_files_for_every_fixture
+B29 DETECTED          crossref inheritance disabled beyond one level [2s] bibtex::tests::crossref_inherits_missing_fields, bibtex::tests::csl_json_maps_types_names_dates_and_inheritance, bibtex::tests::golden_files_for_every_fixture
+B30 DETECTED          pages are never parsed [3s] bibtex::tests::pages_ranges_are_parsed
+SUMMARY bibtex {'DETECTED': 16}

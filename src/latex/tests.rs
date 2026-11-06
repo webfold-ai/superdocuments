@@ -872,7 +872,10 @@ fn bibtex_round_trip_into_citations_is_stable() {
 #[test]
 fn newline_after_control_word_is_swallowed_and_comments_end_runs() {
     // TeX skips the line break after a control word, and a comment eats its newline.
-    let text = render_text(&parse("\\ldots\nand word%hidden\nnext"), &RenderOptions::default());
+    let text = render_text(
+        &parse("\\ldots\nand word%hidden\nnext"),
+        &RenderOptions::default(),
+    );
     assert!(text.contains("…and"), "{text}");
     assert!(text.contains("wordnext"), "{text}");
 }
@@ -882,7 +885,12 @@ fn standalone_tikzpicture_options_are_not_code() {
     let doc = parse("\\begin{tikzpicture}[scale=2]\\draw (0,0);\\end{tikzpicture}");
     let figs = super::figures(&doc);
     assert_eq!(figs.len(), 1);
-    assert!(figs[0].tikz.as_deref().unwrap_or("").trim_start().starts_with("\\draw"));
+    assert!(figs[0]
+        .tikz
+        .as_deref()
+        .unwrap_or("")
+        .trim_start()
+        .starts_with("\\draw"));
 }
 
 #[test]
@@ -895,7 +903,12 @@ fn citation_notes_are_decoded() {
         }),
         _ => None,
     });
-    let cite = cite.unwrap_or(crate::latex::Cite { command: String::new(), pre: None, post: None, keys: vec![] });
+    let cite = cite.unwrap_or(crate::latex::Cite {
+        command: String::new(),
+        pre: None,
+        post: None,
+        keys: vec![],
+    });
     assert_eq!(cite.pre, Some("p.\u{a0}2".to_string()));
     assert_eq!(cite.post, Some("p.\u{a0}3".to_string()));
 }

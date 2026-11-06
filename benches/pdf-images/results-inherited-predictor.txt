@@ -1,0 +1,2 @@
+page 1 obj 3 5x6 DeviceRGB bpc 8 ours=png poppler=image -> ok
+1 images, 0 disagreements
