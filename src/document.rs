@@ -844,113 +844,6 @@ fn xlsb(data: &[u8]) -> Result<String, String> {
     Ok(out.trim_end().to_string())
 }
 
-fn rtf(data: &[u8]) -> Result<String, String> {
-    if !data.starts_with(b"{\\rtf") {
-        return Err("invalid RTF header".into());
-    }
-    let mut out = String::new();
-    let mut hidden = false;
-    let mut stack = Vec::new();
-    let mut i = 0usize;
-    while i < data.len() {
-        match data[i] {
-            b'{' => {
-                stack.push(hidden);
-                i += 1;
-            }
-            b'}' => {
-                hidden = stack.pop().ok_or("unbalanced RTF group")?;
-                i += 1;
-            }
-            b'\\' => {
-                i += 1;
-                let Some(&next) = data.get(i) else {
-                    break;
-                };
-                if matches!(next, b'\\' | b'{' | b'}') {
-                    if !hidden {
-                        out.push(next as char);
-                    }
-                    i += 1;
-                } else if next == b'\'' {
-                    let hex = data.get(i + 1..i + 3).ok_or("truncated RTF hex escape")?;
-                    let hex = std::str::from_utf8(hex).map_err(|e| e.to_string())?;
-                    let byte = u8::from_str_radix(hex, 16).map_err(|e| e.to_string())?;
-                    if !hidden {
-                        out.push_str(&encoding_rs::WINDOWS_1252.decode(&[byte]).0);
-                    }
-                    i += 3;
-                } else if next == b'*' {
-                    hidden = true;
-                    i += 1;
-                } else if next.is_ascii_alphabetic() {
-                    let start = i;
-                    while data.get(i).is_some_and(u8::is_ascii_alphabetic) {
-                        i += 1;
-                    }
-                    let word = &data[start..i];
-                    let number_start = i;
-                    if data.get(i) == Some(&b'-') {
-                        i += 1;
-                    }
-                    while data.get(i).is_some_and(u8::is_ascii_digit) {
-                        i += 1;
-                    }
-                    let number = std::str::from_utf8(&data[number_start..i])
-                        .ok()
-                        .and_then(|s| s.parse::<i32>().ok());
-                    if data.get(i) == Some(&b' ') {
-                        i += 1;
-                    }
-                    match word {
-                        b"bin" => {
-                            let count = number.ok_or("RTF bin length missing")?;
-                            let count =
-                                usize::try_from(count).map_err(|_| "negative RTF bin length")?;
-                            i = i
-                                .checked_add(count)
-                                .filter(|end| *end <= data.len())
-                                .ok_or("truncated RTF binary run")?;
-                        }
-                        b"fonttbl" | b"colortbl" | b"stylesheet" | b"pict" | b"object"
-                        | b"info" => hidden = true,
-                        b"par" | b"line" if !hidden => out.push_str("\n\n"),
-                        b"tab" if !hidden => out.push('\t'),
-                        b"u" if !hidden => {
-                            if let Some(value) = number {
-                                let codepoint = (value as i16 as u16) as u32;
-                                if let Some(ch) = char::from_u32(codepoint) {
-                                    out.push(ch);
-                                }
-                            }
-                            if data.get(i) == Some(&b'?') {
-                                i += 1;
-                            }
-                        }
-                        _ => {}
-                    }
-                } else {
-                    if !hidden && next == b'~' {
-                        out.push(' ');
-                    }
-                    i += 1;
-                }
-            }
-            b'\r' | b'\n' => i += 1,
-            byte => {
-                if !hidden {
-                    out.push(byte as char);
-                }
-                i += 1;
-            }
-        }
-    }
-    if !stack.is_empty() {
-        return Err("unclosed RTF group".into());
-    }
-    Ok(out.trim().to_string())
-}
-
 /// Convert an in-memory document to Markdown. Unsupported extensions return an
 /// error rather than silently interpreting binary Office bytes as text.
 pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
@@ -963,7 +856,7 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         "xls" => Err("legacy XLS conversion remains in the Webfold compatibility adapter".into()),
         "xlsb" => xlsb(data),
         "epub" => epub(data),
-        "rtf" => rtf(data),
+        "rtf" => crate::rtf::convert(data),
         "csv" => {
             let decoded = decode_csv(data)?;
             csv_rows(&decoded, csv_delimiter(&decoded)).map(|rows| markdown_table(&rows))

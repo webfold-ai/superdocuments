@@ -7,6 +7,7 @@ pub mod graph;
 pub mod html;
 pub mod markdown;
 pub mod pdf;
+pub mod rtf;
 pub mod xlsx;
 
 /// Optional native composition-to-frame/video renderer. Enable `framefold` to use it.
