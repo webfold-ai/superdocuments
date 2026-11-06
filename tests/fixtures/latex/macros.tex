@@ -1,0 +1,24 @@
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\pair}[2][]{\langle #1 #2 \rangle}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\def\wrap#1#2{[#1|#2]}
+\DeclareMathOperator{\tr}{tr}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newenvironment{remarkbox}{\begin{quote}\textbf{Remark.}}{\end{quote}}
+\begin{document}
+\section{Macros}
+Let $x \in \R^n$ and $\norm{x} \le 1$. Also $\pair{x}{y}$ and $\tr(A)$.
+We get \wrap{a}{b} in text.
+\begin{remarkbox}
+Macros expand inside environments.
+\end{remarkbox}
+\begin{theorem}[Main]\label{thm:main}
+Every $\vec{v}$ has a norm.
+\end{theorem}
+\begin{lemma}
+Auxiliary fact.
+\end{lemma}
+See Theorem~\ref{thm:main}.
+\end{document}

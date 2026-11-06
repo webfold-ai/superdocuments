@@ -1,0 +1,9 @@
+# Layout
+
+> A quoted paragraph that wraps.
+
+Centered text with *style*.
+
+Left aligned.
+
+Inside a minipage.

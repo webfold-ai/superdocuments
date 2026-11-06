@@ -1,0 +1,8 @@
+# A fragment
+
+No document environment here, just text with $\alpha$ and a (key1).
+
+## Second
+
+1. one
+2. two

@@ -6,6 +6,7 @@ pub mod document;
 pub mod epub;
 pub mod graph;
 pub mod html;
+pub mod latex;
 pub mod markdown;
 pub mod pdf;
 pub mod rtf;

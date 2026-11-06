@@ -1,0 +1,12 @@
+Tables
+
+Table 1: Accuracy by method.
+
+Method	Dataset A	Dataset B
+Baseline	71.2	68.0
+Ours	79.5	77.1
+
+As Table 1 shows, the method works.
+
+Summary	
+x	y

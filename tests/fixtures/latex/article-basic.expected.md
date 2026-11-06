@@ -1,0 +1,29 @@
+# On Sparse Recovery
+
+Ada Smith, Bo Chen, Example University
+
+2024
+
+## Abstract
+
+We study sparse recovery with *nearly* optimal guarantees.
+
+## Introduction
+
+Recovery of a signal $x \in \mathbb{R}^n$ from few measurements is classical. This paper extends the **basic** result.[^1]
+
+Our main contribution is stated below. It is short.
+
+### Setting
+
+We write `A` for the sensing matrix.
+
+##### Notation.
+
+Vectors are columns.
+
+## Acknowledgements
+
+Thanks to the reviewers.
+
+[^1]: Funded by a grant.

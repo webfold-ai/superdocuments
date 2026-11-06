@@ -1,0 +1,11 @@
+Macros
+
+Let x \in \R^n and \norm{x} \le 1. Also \pair{x}{y} and \tr(A). We get [a|b] in text.
+
+Remark. Macros expand inside environments.
+
+Theorem 1 (Main). Every \vec{v} has a norm.
+
+Lemma 2. Auxiliary fact.
+
+See Theorem 1.

@@ -1,0 +1,55 @@
+# Math
+
+Inline dollars $a+b$ and parens $c^2$ are kept as TeX.
+
+The energy is
+
+$$
+E = mc^2 \tag{1}
+$$
+
+as in (1).
+
+Display brackets:
+
+$$
+\sum_{i=1}^n i = \frac{n(n+1)}{2}
+$$
+
+And double dollars:
+
+$$
+\int_0^1 x\,dx = \tfrac12
+$$
+
+$$
+\begin{aligned}
+f(x) &= x^2
+\end{aligned} \tag{2}
+$$
+
+$$
+\begin{aligned}
+g(x) &= 2x
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+h(x) &= x^3
+\end{aligned} \tag{3}
+$$
+
+Unnumbered:
+
+$$
+a=b
+$$
+
+Tagged:
+
+$$
+\tag{$\star$} c=d
+$$
+
+Equation 3 and (2).
