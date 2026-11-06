@@ -332,6 +332,11 @@ impl Document {
     }
 }
 
+/// The plain text of inline content: markup removed, runs of spaces collapsed.
+pub fn plain_text(inlines: &[Inline]) -> String {
+    parser::plain(inlines)
+}
+
 /// Parses LaTeX with the default options and no file access.
 pub fn parse(source: &str) -> Document {
     parser::parse(source, &Options::default(), None)

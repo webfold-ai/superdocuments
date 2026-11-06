@@ -1,6 +1,7 @@
 //! Shared Ptyktos document parsing/conversion APIs. Parsers return structured data first;
 //! product-specific presentation and import policy belong to their callers.
 
+pub mod arxiv_source;
 pub mod bibtex;
 pub mod document;
 pub mod epub;
