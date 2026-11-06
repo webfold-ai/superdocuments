@@ -61,7 +61,8 @@ This page describes `superdocuments` 0.8.1 as it is in the source. Every stateme
 | PDF input | 256 MiB, and the bytes must start with `%PDF-` | `MAX_PDF_BYTES` |
 | OCR | Defaults: 20 pages, 2,400 px, 120 s, 1 worker, language `eng`. Accepted ranges: 1 to 2,000 pages, 256 to 4,000 px, 1 to 3,600 s, 1 to 16 workers. Language list limited to ASCII alphanumerics, `_` and `+` | `OcrOptions::validate` |
 | ODS repeated columns | 16,384 | `odf_repeat` |
-| CSV, RTF, HTML, plain text | No size limit in the code | `convert_bytes` |
+| CSV, HTML, plain text | No size limit in the code | `convert_bytes` |
+| RTF | 128 MiB input and 128 MiB output, 256 group levels (`rtf::Limits`) | `convert_bytes` |
 
 - Errors are returned, not thrown. The `document`, `xlsx` and `epub` modules return `Result<_, String>`; the `pdf` module returns `io::Result`.
 - Panic containment (`catch_unwind`) exists in `pdf::extract_markdown` and `pdf::extract_pages_markdown` only. `geometry_from_transcode`, `outline` and `complexity` call the parser directly. The `document`, `epub` and `html` modules have no panic containment.

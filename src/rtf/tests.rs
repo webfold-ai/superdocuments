@@ -6,6 +6,7 @@
 //! intended output change, run `RTF_REGENERATE=1 cargo test --lib rtf::tests::golden`, then review
 //! the diff.
 
+use super::charset;
 use super::*;
 
 const FIXTURES: &[&str] = &[
@@ -565,6 +566,103 @@ fn writer_declares_font_table_and_code_page() {
     assert!(source.starts_with("{\\rtf1\\ansi\\ansicpg1252"));
     assert!(source.contains("{\\fonttbl{\\f0"));
     assert!(source.contains("{\\stylesheet"));
+}
+
+#[test]
+fn underline_and_italic_are_recorded_on_runs() {
+    let doc = parse_fixture("wordpad-sizes.rtf");
+    let runs: Vec<(String, bool, bool)> = doc
+        .blocks
+        .iter()
+        .flat_map(|b| match b {
+            Block::Paragraph(p) => p.runs.clone(),
+            _ => Vec::new(),
+        })
+        .map(|r| (r.text, r.style.underline, r.style.italic))
+        .collect();
+    assert!(
+        runs.contains(&("underlined".to_string(), true, false)),
+        "{runs:?}"
+    );
+    assert!(
+        runs.contains(&("italic".to_string(), false, true)),
+        "{runs:?}"
+    );
+    assert!(runs.iter().all(|(t, u, _)| !(*u && t.contains("then"))));
+}
+
+#[test]
+fn depth_limit_is_inclusive() {
+    let data = fixture("nested-groups.rtf");
+    // The fixture opens 61 groups: the document group and 60 bold groups.
+    let at_limit = Options {
+        limits: Limits {
+            max_depth: 61,
+            ..Limits::default()
+        },
+        ..Options::default()
+    };
+    assert!(parse_with(&data, &at_limit).is_ok());
+    let one_less = Options {
+        limits: Limits {
+            max_depth: 60,
+            ..Limits::default()
+        },
+        ..Options::default()
+    };
+    assert_eq!(
+        parse_with(&data, &one_less),
+        Err(RtfError::TooDeep { limit: 60 })
+    );
+}
+
+#[test]
+fn object_result_is_shown_and_object_data_is_not() {
+    let doc =
+        parse(br"{\rtf1 A{\object{\*\objclass Word.Document}{\*\objdata 0105}{\result Shown}}B}")
+            .unwrap();
+    assert_eq!(texts(&doc), vec!["AShownB"]);
+}
+
+#[test]
+fn unknown_ignorable_destinations_are_skipped() {
+    let doc = parse(br"{\rtf1 A{\*\unknown hidden text}B}").unwrap();
+    assert_eq!(texts(&doc), vec!["AB"]);
+}
+
+#[test]
+fn shift_jis_lead_bytes_above_9f_pair_with_their_trail() {
+    // Find a CJK character whose Shift_JIS lead byte is in 0xE0..=0xFC, encode it with
+    // encoding_rs, and feed the bytes to the decoder one escape at a time.
+    let mut found = None;
+    for code in 0x4E00u32..0x9FFF {
+        let Some(c) = char::from_u32(code) else {
+            continue;
+        };
+        let text = c.to_string();
+        let (bytes, _, had_errors) = encoding_rs::SHIFT_JIS.encode(&text);
+        if !had_errors && bytes.len() == 2 && bytes[0] >= 0xE0 {
+            found = Some((c, bytes.into_owned()));
+            break;
+        }
+    }
+    let (c, bytes) = found.expect("a kanji with a lead byte above 0x9F");
+    let cp = charset::from_number(932).unwrap();
+    let mut decoder = charset::Decoder::default();
+    let mut out = String::new();
+    for b in &bytes {
+        decoder.push(cp, std::slice::from_ref(b), &mut out);
+    }
+    assert_eq!(out, c.to_string());
+}
+
+#[test]
+fn incomplete_multibyte_sequence_is_reported_as_a_warning() {
+    let doc = parse(br"{\rtf1\ansi\ansicpg932 A\'82}").unwrap();
+    assert_eq!(texts(&doc), vec!["A\u{fffd}"]);
+    assert!(warnings_text(&doc)
+        .iter()
+        .any(|w| w.contains("could not be decoded")));
 }
 
 // ----- equivalence with the previous converter ------------------------------------------------
