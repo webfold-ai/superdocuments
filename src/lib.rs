@@ -9,6 +9,7 @@ pub mod graph;
 pub mod html;
 pub mod latex;
 pub mod markdown;
+pub mod mathml;
 pub mod pdf;
 pub mod rtf;
 pub mod tex_text;
