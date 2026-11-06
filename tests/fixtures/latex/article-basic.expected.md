@@ -1,6 +1,7 @@
 # On Sparse Recovery
 
-Ada Smith, Bo Chen, Example University
+Ada Smith, Bo Chen\
+Example University
 
 2024
 

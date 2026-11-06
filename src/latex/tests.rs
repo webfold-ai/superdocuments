@@ -110,9 +110,9 @@ fn title_authors_date_and_abstract() {
         text_of(doc.title.as_deref().unwrap_or(&[])),
         "On Sparse Recovery"
     );
-    // \and and \\ both separate entries: two authors and an affiliation line.
+    // \and separates authors; the \\ inside the second block is an affiliation line.
     let authors: Vec<String> = doc.authors.iter().map(|a| text_of(a)).collect();
-    assert_eq!(authors, ["Ada Smith", "Bo Chen", "Example University"]);
+    assert_eq!(authors, ["Ada Smith", "Bo Chen Example University"]);
     assert_eq!(doc.date.as_deref(), Some("2024"));
     let abs = doc.abstract_body.clone().unwrap_or_default();
     assert_eq!(abs.len(), 1);

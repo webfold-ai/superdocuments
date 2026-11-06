@@ -89,7 +89,8 @@ pub struct Warning {
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Document {
     pub title: Option<Vec<Inline>>,
-    /// One entry per `\and`, `\AND` or `\\` in `\author`.
+    /// One entry per `\and` or `\AND` in `\author`. A line break inside an author's block
+    /// (an affiliation) stays in that author's inlines.
     pub authors: Vec<Vec<Inline>>,
     pub date: Option<String>,
     pub abstract_body: Option<Vec<Block>>,

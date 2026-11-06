@@ -1891,7 +1891,8 @@ fn substitute(body: &str, args: &[String]) -> String {
     out
 }
 
-/// Splits `\author` at `\and`, `\AND` and `\\`, outside braces.
+/// Splits `\author` at `\and` and `\AND`, outside braces. A `\\` is a line break inside one
+/// author's block (an affiliation), so it stays in that author's text.
 fn split_authors(raw: &str) -> Vec<&str> {
     let bytes = raw.as_bytes();
     let mut out = Vec::new();
@@ -1914,12 +1915,6 @@ fn split_authors(raw: &str) -> Vec<&str> {
                 if rest.starts_with(b"\\AND") && word_end(4) {
                     out.push(&raw[start..i]);
                     i += 4;
-                    start = i;
-                    continue;
-                }
-                if rest.starts_with(b"\\\\") {
-                    out.push(&raw[start..i]);
-                    i += 2;
                     start = i;
                     continue;
                 }

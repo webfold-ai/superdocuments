@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{amsthm,amsmath}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\begin{document}
+\section{Preliminaries}
+\begin{definition}\label{def:norm}
+A norm is a function $\|\cdot\|$ with $\|x\| \ge 0$.
+\end{definition}
+\begin{lemma}\label{lem:tri}
+For all $x,y$, $\|x+y\| \le \|x\| + \|y\|$.
+\end{lemma}
+\begin{proof}
+Follows from Cauchy--Schwarz. See Lemma~\ref{lem:tri}.
+\end{proof}
+\begin{theorem}[Main result]\label{thm:main}
+Every finite-dimensional normed space is complete.
+\end{theorem}
+Theorem~\ref{thm:main} uses Definition~\ref{def:norm}.
+\end{document}

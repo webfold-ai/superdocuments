@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,graphicx,booktabs,natbib,hyperref}
+\title{Sparse Attention for Long Documents}
+\author{Ada Smith\thanks{Corresponding author.} \and Bo Chen}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study attention patterns that reduce the quadratic cost of self-attention on long inputs, and report accuracy and speed on three benchmarks.
+\end{abstract}
+
+\section{Introduction}
+Transformers scale poorly with sequence length~\citep{vaswani2017}. Several sparse patterns have been proposed~\citep{child2019,beltagy2020}. We make three contributions:
+\begin{enumerate}
+  \item a block-sparse pattern with $O(n\sqrt{n})$ cost;
+  \item a training recipe that keeps accuracy within 1\% of dense attention;
+  \item an open implementation at \url{https://example.org/sparse}.
+\end{enumerate}
+
+\section{Method}\label{sec:method}
+Let $Q, K, V \in \mathbb{R}^{n \times d}$ be the queries, keys and values. The dense output is
+\begin{equation}\label{eq:dense}
+  \mathrm{Attn}(Q,K,V) = \mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d}}\right)V.
+\end{equation}
+Our block pattern restricts the score matrix to blocks of size $b$, as in Eq.~\eqref{eq:dense} with a mask $M$.
+\begin{align}
+  \mathcal{C}_{\text{dense}} &= O(n^2 d) \label{eq:cost-dense} \\
+  \mathcal{C}_{\text{ours}} &= O(n\sqrt{n}\,d) \label{eq:cost-ours}
+\end{align}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/pattern}
+  \caption{Block pattern for $n=16$, $b=4$.}
+  \label{fig:pattern}
+\end{figure}
+
+\section{Experiments}
+\begin{table}[h]
+  \centering
+  \caption{Accuracy (\%) on three benchmarks.}
+  \label{tab:acc}
+  \begin{tabular}{lccc}
+    \toprule
+    Model & A & B & C \\
+    \midrule
+    Dense & 81.2 & 77.4 & 69.0 \\
+    Ours & 80.9 & 77.1 & 68.6 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Results are in Table~\ref{tab:acc}; the cost trade-off is shown in Figure~\ref{fig:pattern}. As Eq.~\eqref{eq:cost-ours} shows, the savings grow with $n$.
+
+\section{Conclusion}
+Sparse blocks give most of the accuracy at a fraction of the cost.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{document}
