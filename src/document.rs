@@ -562,6 +562,9 @@ fn ods(data: &[u8]) -> Result<String, String> {
         String::new(),
     );
     let (mut in_cell, mut in_text) = (false, false);
+    // A cell whose start tag carries a typed value (`office:value`, `office:date-value`, ...) is
+    // already complete: its `text:p` child is only the formatted display text of the same value.
+    let mut seeded = false;
     loop {
         match reader
             .read_event_into(&mut buf)
@@ -577,6 +580,7 @@ fn ods(data: &[u8]) -> Result<String, String> {
             Event::Start(tag) if tag.name().as_ref().as_bytes() == b"table:table-cell" => {
                 in_cell = true;
                 cell = odf_cell_value(&tag);
+                seeded = !cell.is_empty();
             }
             Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"table:table-cell" => {
                 let repeat = odf_repeat(&tag);
@@ -586,7 +590,9 @@ fn ods(data: &[u8]) -> Result<String, String> {
             Event::Start(tag) if in_cell && tag.name().as_ref().as_bytes() == b"text:p" => {
                 in_text = true
             }
-            Event::Text(value) if in_cell && in_text => cell.push_str(&text(value.as_ref())),
+            Event::Text(value) if in_cell && in_text && !seeded => {
+                cell.push_str(&text(value.as_ref()))
+            }
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"text:p" => {
                 in_text = false;
                 if !cell.ends_with(' ') {
@@ -2067,6 +2073,21 @@ mod tests {
         assert!(convert_bytes("html", b"<h1>HTML</h1>")
             .unwrap()
             .contains("HTML"));
+    }
+
+    #[test]
+    fn ods_cell_with_a_value_attribute_and_display_text_is_not_doubled() {
+        // LibreOffice writes a number cell as value attribute plus the formatted text in `text:p`.
+        let sheet = package(&[(
+            "content.xml",
+            "<office:document><table:table table:name=\"Data\"><table:table-row>\
+             <table:table-cell office:value-type=\"float\" office:value=\"42\"><text:p>42</text:p></table:table-cell>\
+             <table:table-cell office:value-type=\"string\"><text:p>Name</text:p></table:table-cell>\
+             <table:table-cell office:value-type=\"float\" office:value=\"7.5\"><text:p>7.50</text:p></table:table-cell>\
+             </table:table-row></table:table></office:document>",
+        )]);
+        let md = convert_bytes("ods", &sheet).unwrap();
+        assert!(md.contains("| 42 | Name | 7.5 |"), "got: {md}");
     }
 
     #[test]
