@@ -2,6 +2,7 @@
 name = "candle-serve"
 version = "0.0.1"
 edition = "2021"
+license = "Apache-2.0"
 description = "Sub HTTP service exposing /v1/chat/completions backed by Qwen2 via candle-transformers. Default is a deterministic echo stub; CANDLE_STUB=0 loads Qwen/Qwen2.5-0.5B-Instruct from HuggingFace for real autoregressive inference."
 
 [dependencies]

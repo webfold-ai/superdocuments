@@ -62,4 +62,4 @@ superdocuments is the source of truth for them.
 
 ## License
 
-Private. Do not redistribute.
+Apache-2.0. See [LICENSE](LICENSE).
