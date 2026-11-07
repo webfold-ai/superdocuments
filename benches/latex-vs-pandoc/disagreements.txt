@@ -1,0 +1,2 @@
+tests/fixtures/latex/figures.tex	figures_top_level	ours=4	pandoc=5
+tests/fixtures/latex/figures.tex	figures_with_caption	ours=6	pandoc=5

@@ -1,0 +1,94 @@
+[
+  {
+    "id": "ok1",
+    "issued": {
+      "date-parts": [
+        [
+          2000
+        ]
+      ]
+    },
+    "title": "Fine",
+    "type": "article-journal"
+  },
+  {
+    "id": "nokeyfield",
+    "type": "article-journal"
+  },
+  {
+    "id": "badfield",
+    "issued": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    },
+    "type": "article-journal"
+  },
+  {
+    "container-title": "",
+    "id": "undefined",
+    "issued": {
+      "date-parts": [
+        [
+          2003
+        ]
+      ]
+    },
+    "type": "article-journal"
+  },
+  {
+    "id": "ok1",
+    "title": "Duplicate key",
+    "type": "article-journal"
+  },
+  {
+    "id": "trailing",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "title": "Quoted \"with\" nested quotes",
+    "type": "article-journal"
+  },
+  {
+    "id": "empty_value",
+    "issued": {
+      "date-parts": [
+        [
+          2006
+        ]
+      ]
+    },
+    "title": "",
+    "type": "article-journal"
+  },
+  {
+    "id": "ok_last",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "title": "Last",
+    "type": "article-journal"
+  },
+  {
+    "id": "unclosed",
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "title": "never closes",
+    "type": "article-journal"
+  }
+]

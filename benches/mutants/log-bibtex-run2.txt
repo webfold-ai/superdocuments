@@ -1,0 +1,16 @@
+B01 DETECTED          entry limit off by one [3s] bibtex::tests::limits_stop_reading_with_a_warning
+B02 DETECTED          @string values are not decoded [2s] bibtex::tests::string_values_are_decoded_too
+B03 DETECTED          brace depth limit off by one (braced) [2s] bibtex::tests::brace_depth_limit_is_exact
+B04 DETECTED          braced group ends one brace early [2s] bibtex::tests::accents_and_symbols_become_unicode_with_raw_kept, bibtex::tests::braces_and_quotes_nest_and_keep_their_inner_text, bibtex::tests::crossref_cycles_stop, bibtex::tests::crossref_inherits_missing_fields
+B05 DETECTED          quote ends inside braces [2s] bibtex::tests::mutated_fixtures_never_panic_and_round_trip
+B06 DETECTED          entry is dropped at its closing brace [2s] bibtex::tests::accents_and_symbols_become_unicode_with_raw_kept, bibtex::tests::braces_and_quotes_nest_and_keep_their_inner_text, bibtex::tests::crossref_cycles_stop, bibtex::tests::crossref_inherits_missing_fields
+B07 DETECTED          @string blocks are ignored [4s] bibtex::tests::golden_files_for_every_fixture, bibtex::tests::string_macros_concatenation_and_month_names, bibtex::tests::string_values_are_decoded_too
+B08 DETECTED          @preamble blocks are ignored [4s] bibtex::tests::golden_files_for_every_fixture, bibtex::tests::preamble_and_comment_are_kept_as_raw_text
+B09 DETECTED          @comment blocks are ignored [3s] bibtex::tests::golden_files_for_every_fixture, bibtex::tests::preamble_and_comment_are_kept_as_raw_text, bibtex::tests::unbalanced_comment_is_not_kept
+B10 DETECTED          unbalanced @comment is kept [3s] bibtex::tests::unbalanced_comment_is_not_kept
+B11 DETECTED          macros are never expanded [3s] bibtex::tests::golden_files_for_every_fixture, bibtex::tests::malformed_input_warns_and_keeps_what_it_can, bibtex::tests::string_macros_concatenation_and_month_names, bibtex::tests::string_values_are_decoded_too
+B12 DETECTED          duplicate keys compared case-sensitively [3s] bibtex::tests::duplicate_keys_compare_case_insensitively_and_repeated_fields_keep_the_first
+B13 DETECTED          field names keep their case [3s] bibtex::tests::field_names_are_case_insensitive_and_last_comma_is_optional, bibtex::tests::golden_files_for_every_fixture
+B14 DETECTED          repeated fields are kept [3s] bibtex::tests::duplicate_keys_compare_case_insensitively_and_repeated_fields_keep_the_first
+B15 DETECTED          stray } inside quotes does not end the value [4s] bibtex::tests::mutated_fixtures_never_panic_and_round_trip, bibtex::tests::random_bytes_never_panic
+RESTORE CHECK FAILED for src/bibtex/names.rs

@@ -1,0 +1,49 @@
+Explanations for the pandoc comparison (run_benchmark.py, pandoc 3.1.3, 20 runs per timing).
+
+Agreement after the author fix: 16 LaTeX fixtures, all metrics compared; 2 disagreements remain.
+
+1. figures.tex: figures_top_level ours=4 pandoc=5; figures_with_caption ours=6 pandoc=5.
+   The starred figure environment figure* (caption* with no number) is dropped by pandoc:
+   pandoc returns no Figure for it. Our reader keeps it as a figure, which is what LaTeX
+   does (figure* is a float). Ours is right; pandoc's count is 5 = 3 top-level figures
+   plus 2 subfigures. The two counted differences come from that one environment.
+
+BibTeX (5 files). Metrics compared only for files pandoc reads.
+2. basic.bib: pandoc fails with "unexpected '('" on @Inproceedings(...). BibTeX allows
+   parentheses as entry delimiters, so pandoc is wrong here; ours reads all 5 entries.
+3. malformed.bib: pandoc fails at line 3 on a missing comma after the key. Our reader
+   warns and skips that entry, which is the documented recovery. Pandoc gives no output,
+   so this file gives no structure comparison.
+4. crossref-biblatex.bib: pandoc was killed for out-of-memory under a 4 GB ceiling
+   (exit 251, "out of memory"). A minimal file reproduces it: two entries whose crossref
+   fields name each other (a cycle). Pandoc's reader does not stop on the cycle; ours
+   follows crossref up to 8 levels and stops, with resolved values. BibTeX itself does
+   not follow a cycle. Ours is the correct behaviour; pandoc is not robust here.
+5. strings-accents.bib: after two harness corrections (typographic apostrophe and the
+   https://doi.org prefix are the same data), no disagreements remain. Pandoc keeps
+   O’Brien and the DOI URL form; we keep the input apostrophe and return the bare DOI.
+   Both are valid representations.
+6. Earlier disagreements that were ours and wrong, now fixed (listed for transparency):
+   - article-basic: three authors instead of two. A line break inside \author is part of an
+     author's block (the affiliation), and only \and separates authors. Fixed in
+     src/latex/parser.rs; golden output updated.
+   - Links: pandoc turns resolved \ref into links. The comparison now counts our resolved
+     references with explicit links.
+   - crossref year: the year is inherited from the parent entry (BibTeX crossref). The
+     harness now uses the resolved value.
+
+Where pandoc does more (not measured here, stated for the report): many more packages and
+macros (natbib and biblatex citation commands, cleveref, hyperref, siunitx, algorithmic,
+user macros that produce Markdown structure), citeproc-style bibliography rendering,
+table column alignment and spans in Markdown, and the output of unknown environments.
+Our reader expands user macros in text, but it does not load packages. Math is kept as
+TeX in both.
+
+Where we do more: figure* and subfigures are structured with captions, labels and image
+candidates; labels and equation numbers are computed; BibTeX names, pages, dates, DOIs and
+URLs are parsed into typed values; crossref cycles are handled.
+
+Timing caveats. pandoc times are process wall time, including Haskell start-up. Our CLI
+times include our process start-up too. The in-process figure measures parse and render
+with no start-up. These are small files on one core, warm, with 20 runs and the median
+reported. They do not show behaviour on large documents.

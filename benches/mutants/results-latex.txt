@@ -1,0 +1,2 @@
+L22	DETECTED	\and does not separate authors	2s latex::tests::golden_files_for_every_fixture, latex::tests::title_authors_date_and_abstract
+SUMMARY	{'DETECTED': 1}

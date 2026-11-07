@@ -2,7 +2,7 @@
 
 `superdocuments::epub` is the substrate's spine-driven EPUB reader. It
 reads the OCF (Open Container Format) container, indexes the package
-manifest in an `apeiron::Map`, and walks the spine one chapter at a
+manifest in an `apeiron::freq::Table`, and walks the spine one chapter at a
 time. Each chapter is read and converted separately, but `extract_text`
 accumulates the whole result in one `String`, capped at 64 MiB.
 
@@ -85,14 +85,14 @@ META-INF/        │ read(bytes)                        │
             └──────────────────────────────────────┘
 ```
 
-## Why the manifest is `apeiron::Map<String, ManifestItem>`
+## Why the manifest is `apeiron::freq::Table<String, ManifestItem>`
 
-The id → item lookup runs once per spine entry. `apeiron::Map<String, _>`
+The id → item lookup runs once per spine entry. `apeiron::freq::Table<String, _>`
 is the table the local `calamine/` fork also uses for its XLSX and XLSB
 path caches and relationship indexes (`calamine/APEIRON-FORK.md`). No
 benchmark comparing it with `HashMap` is recorded in this repository.
 
-`apeiron::Map` also exposes a borrowed-key `get_at<Q: Locate<K>>(&self, q: Q)`
+`apeiron::freq::Table` also exposes a borrowed-key `get_at<Q: Locate<K>>(&self, q: Q)`
 that accepts `&str` directly. The public `manifest_get` API uses that,
 so a caller iterating ids does not allocate on the lookup path.
 
@@ -135,7 +135,7 @@ Seven unit tests in `src/epub.rs`:
 | test | pins |
 |---|---|
 | `read_parses_manifest_and_spine_in_order` | The spine order and href resolution against the OPF directory. |
-| `manifest_get_is_o1_lookups_by_id` | The `apeiron::Map` id lookup is a real `get_at` call. |
+| `manifest_get_is_o1_lookups_by_id` | The `apeiron::freq::Table` id lookup is a real `get_at` call. |
 | `extract_text_walks_spine_in_order` | A two-chapter fixture comes out with chapter 1 before chapter 2 in the rendered text. |
 | `spine_with_broken_idref_is_skipped_not_panicked` | A package whose spine lists a non-existent id drops the chapter and reads the rest. |
 | `extract_text_refuses_a_missing_spine_entry` | A consistent package whose ZIP is missing one chapter surfaces a clean error that names the file. |

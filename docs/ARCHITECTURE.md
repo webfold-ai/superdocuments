@@ -61,7 +61,8 @@ This page describes `superdocuments` 0.8.1 as it is in the source. Every stateme
 | PDF input | 256 MiB, and the bytes must start with `%PDF-` | `MAX_PDF_BYTES` |
 | OCR | Defaults: 20 pages, 2,400 px, 120 s, 1 worker, language `eng`. Accepted ranges: 1 to 2,000 pages, 256 to 4,000 px, 1 to 3,600 s, 1 to 16 workers. Language list limited to ASCII alphanumerics, `_` and `+` | `OcrOptions::validate` |
 | ODS repeated columns | 16,384 | `odf_repeat` |
-| CSV, RTF, HTML, plain text | No size limit in the code | `convert_bytes` |
+| CSV, HTML, plain text | No size limit in the code | `convert_bytes` |
+| RTF | 128 MiB input and 128 MiB output, 256 group levels (`rtf::Limits`) | `convert_bytes` |
 
 - Errors are returned, not thrown. The `document`, `xlsx` and `epub` modules return `Result<_, String>`; the `pdf` module returns `io::Result`.
 - Panic containment (`catch_unwind`) exists in `pdf::extract_markdown` and `pdf::extract_pages_markdown` only. `geometry_from_transcode`, `outline` and `complexity` call the parser directly. The `document`, `epub` and `html` modules have no panic containment.
@@ -91,3 +92,39 @@ Despite their names, `pdf::transcode_populator` and `geometry_from_transcode` us
 - `proof/`: Lean files and `proof/extract_pdf.rs`. The Rust file is compiled into the library through a `#[path]` attribute in `pdf/parser/mod.rs`. The Lean files are not part of the Cargo build; this page makes no claim about their status.
 - `examples/check_transcode` and `examples/transcode_geometry` read fixtures from a hard-coded developer path and will not find them elsewhere. `examples/ocr_file.rs` takes a path argument.
 - `.harness/` holds developer-tool state, not library code.
+
+## Reading LaTeX, BibTeX and arXiv sources
+
+These modules were added after the description above and are documented here in the same terms: what the code does, and where it stops.
+
+| Module | Role | Public entry points | Limits (constant or option) |
+|---|---|---|---|
+| `tex_text` | TeX accents, letter commands and symbols to Unicode, shared by `bibtex` and `latex` | `decode(s, Ligatures::{None, Tex})`, `accented`, `symbol`, `combining_mark` | None; unknown control words are kept as written |
+| `bibtex` | BibTeX/BibLaTeX reader, writer and CSL-JSON export | `parse`, `parse_with(&Limits)`, `write`, `csl_json`, `Bibliography::resolved_value`, name, page, date, DOI and URL parsers | `bibtex::Limits`: input 64 MiB, 100,000 entries, 1,000 fields per entry, 1 MiB per value, 64 brace levels |
+| `latex` | Bounded LaTeX reader (not a TeX engine) and Markdown, plain-text and HTML renderers | `parse`, `parse_with(&Options, Option<&dyn FileProvider>)`, `figures`, `resolve_citations`, `render_markdown`, `render_text`, `render_html` | `latex::Options`: 32 MiB input, 100,000 expansions, 4 MiB of expansion text, depth 128, 256 files, 10,000 recorded warnings |
+| `mathml` | MathML to TeX; uses the TeX annotation when present | `to_tex`, `to_tex_with(&Options)` | 4 MiB input, depth 64, 100,000 nodes |
+| `arxiv_source` | Reads an arXiv e-print (gzip tar or gzip single file) from bytes; no network or disk access | `read_eprint`, `read_eprint_with(&Options)`, `detect_image_format` | `ArchiveLimits`: 64 MiB compressed, 256 MiB unpacked, 64 MiB per file, 4,096 entries, compression ratio 200 |
+| `pdf::images` | Lists embedded image XObjects per page, with JPEG bytes unchanged and Flate images as PNG | `pdf::extract_images` | Page and XObject walk bounded at 100,000 nodes and depth 32; the PDF parser's own limits apply |
+
+### How the LaTeX reader works
+
+- The lexer (`latex/lexer.rs`) yields control words, control symbols, text runs, groups, math delimiters and spaces. Comments are removed. A blank line is a paragraph break. `\verb` is read here because its delimiter can be any character.
+- The parser (`latex/parser.rs`) reads tokens from a stack of sources. The bottom one is the document. Macro expansions and `\input` files are pushed on top, so they are read in place. Math, verbatim bodies, arguments and file paths are read as raw text from the top source.
+- `body` returns when it meets a stop for its caller: a closing brace, an `\end`, an `\item`, a table cell boundary, or the end of input. Environments and groups are built from those returns, so an unmatched delimiter is reported and reading continues.
+- Numbering is computed by the reader: sections, figures, tables, equations (with `align` rows and `\nonumber`) and theorem-like environments. `\ref` and `\eqref` are resolved in the renderers, after the whole document has been read, so forward references work.
+- Unknown commands produce a warning. Their arguments are kept as text, because they are read as ordinary groups.
+
+### Limits of the LaTeX reader
+
+- No TeX engine: packages are not loaded, `\newenvironment` and `\newtheorem` are supported only as far as the reader's tables go, and `\def` supports undelimited parameters only.
+- Math is never expanded. Macros used inside math stay as TeX, which is correct for the output but means the Markdown or HTML is only as clear as the source.
+- Figures: `\includegraphics` candidates follow graphicx's order (`.pdf`, `.png`, `.jpg`, `.jpeg`, `.eps`). `tikzpicture` is recorded as an opaque figure and is not rendered.
+- `\input` and `\include` are read only through a `FileProvider`; `arxiv_source` supplies one that reads only from the archive.
+
+### arXiv e-prints
+
+`arxiv_source::read_eprint` takes the bytes served at `/e-print/<id>`. It rejects, with an error and no partial result: absolute, `..` and backslash paths; symbolic and hard links; gzip streams whose CRC or length do not match; and archives over a limit. The inflate output ceiling follows the compressed size times the ratio limit, so a corrupt or hostile stream fails quickly. Problems that do not stop the read (non-UTF-8 source, which is decoded as Latin-1; figures whose image is missing from the archive) are returned as warnings.
+
+### PDF images and page rasterisation
+
+`pdf::extract_images` lists embedded images with their page, object number, size, colour space and bits per component. DCT (JPEG) data is returned unchanged. Flate or unfiltered 8-bit DeviceGray and DeviceRGB images are returned as PNG, written with stored deflate blocks, which are valid but uncompressed. Other decodable images are returned as raw samples with their colour space. Page rasterisation is not implemented; this crate does not draw pages.

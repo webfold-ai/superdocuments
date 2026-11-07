@@ -1,0 +1,2 @@
+L21 DETECTED          citation note is not decoded [3s] latex::tests::citation_notes_are_decoded
+SUMMARY latex {'DETECTED': 1}

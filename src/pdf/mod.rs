@@ -12,6 +12,7 @@ use std::time::{Duration, Instant};
 
 pub mod acroform;
 pub mod geometry;
+pub mod images;
 pub mod page_walker;
 pub mod parser;
 pub mod transcode_populator;
@@ -1844,6 +1845,8 @@ pub fn outline(path: impl AsRef<Path>) -> io::Result<Vec<OutlineTarget>> {
 /// or `AnnotationText` reasons only. When a real PDF backend is available
 /// the transcode-backed `complexity_from_transcode` populator returns richer
 /// signals (SparseText + page-level thresholds).
+/// Embedded image XObjects, page by page. See [`images`].
+pub use crate::pdf::images::{extract_images, ImageEncoding, ImageInfo};
 pub use crate::pdf::page_walker::page_complexity;
 pub use crate::pdf::page_walker::page_complexity_from_bytes;
 pub use crate::pdf::transcode_populator::{

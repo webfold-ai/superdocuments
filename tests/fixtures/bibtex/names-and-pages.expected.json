@@ -1,0 +1,45 @@
+[
+  {
+    "author": [
+      {
+        "family": "Beethoven",
+        "given": "Ludwig",
+        "non-dropping-particle": "van"
+      },
+      {
+        "family": "Vallee Poussin",
+        "given": "Charles Louis Xavier Joseph",
+        "non-dropping-particle": "de la"
+      },
+      {
+        "family": "Smith",
+        "given": "John Q.",
+        "suffix": "Jr"
+      },
+      {
+        "family": "Álvarez y Muñoz",
+        "given": "Ana"
+      },
+      {
+        "family": "Gogh",
+        "given": "V.",
+        "non-dropping-particle": "van"
+      },
+      {
+        "family": "P.",
+        "given": "A. B. C. D. E. F. G. H. I. J. K. L. M. N. O."
+      }
+    ],
+    "id": "names1",
+    "issued": {
+      "date-parts": [
+        [
+          2000
+        ]
+      ]
+    },
+    "page": "12-34, 56-60, 7, e123",
+    "title": "Name parsing",
+    "type": "article-journal"
+  }
+]

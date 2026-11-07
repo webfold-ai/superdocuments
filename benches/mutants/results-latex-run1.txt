@@ -1,0 +1,30 @@
+L01	DETECTED	comment does not end at a newline	2s latex::lexer::tests::blank_line_is_paragraph_break_and_comments_vanish
+L02	DETECTED	blank line needs two more newlines	2s latex::lexer::tests::blank_line_is_paragraph_break_and_comments_vanish, latex::tests::golden_files_for_every_fixture
+L03	SURVIVED	newline after control word is not skipped	2s
+L04	DETECTED	math escapes are not respected	3s latex::lexer::tests::until_raw_finds_delimiter_past_escaped_dollar
+L05	DETECTED	group escapes are not respected	2s latex::lexer::tests::raw_group_removes_comments_and_keeps_escapes
+L06	SURVIVED	\verb accepts letters as delimiters	3s
+L07	DETECTED-TIMEOUT	\verb is not recognised	420s latex::lexer::tests::verb_takes_any_delimiter, latex::tests::golden_files_for_every_fixture, latex::tests::verbatim_bodies_are_raw_and_keep_their_language
+L08	SURVIVED	comment character is part of text runs	3s
+L09	SURVIVED	trailing blank text is kept	3s
+L10	DETECTED	runs of spaces are not collapsed	3s latex::tests::golden_files_for_every_fixture
+L11	DETECTED	subsection counter not reset by a section	3s latex::tests::sections_numbering_and_reference_resolution
+L12	DETECTED	\nonumber does not suppress numbering	3s latex::tests::golden_files_for_every_fixture, latex::tests::math_is_kept_as_tex_with_numbers_and_labels
+L13	DETECTED	\nonumber ignored when numbering	3s latex::tests::golden_files_for_every_fixture, latex::tests::math_is_kept_as_tex_with_numbers_and_labels
+L14	DETECTED	graphicx search order changed	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz
+L15	DETECTED	optional argument counted as mandatory	3s latex::tests::macro_with_optional_argument_uses_the_default
+L16	DETECTED	last macro argument not substituted	3s latex::tests::golden_files_for_every_fixture, latex::tests::macro_with_optional_argument_uses_the_default, latex::tests::macros_expand_in_text_and_stay_tex_in_math
+L17	SURVIVED	tikzpicture options kept as code	3s
+L18	DETECTED	starred caption is numbered	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz, latex::tests::golden_files_for_every_fixture
+L19	DETECTED	subfigure numbers not composed with the parent	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz, latex::tests::golden_files_for_every_fixture
+L21	SURVIVED	citation note is not decoded	2s
+L22	DETECTED	\\ does not separate authors	3s latex::tests::golden_files_for_every_fixture, latex::tests::title_authors_date_and_abstract
+L24	DETECTED	figure labels recorded under an empty name	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz, latex::tests::golden_files_for_every_fixture
+L25	DETECTED	thebibliography keys never resolve	3s latex::tests::citations_link_to_thebibliography_and_report_unresolved_keys
+L26	DETECTED	unresolved references reported inverted	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz, latex::tests::sections_numbering_and_reference_resolution
+L27	SURVIVED	figures inside theorems are not collected	3s
+L28	DETECTED	dollar signs are not escaped in Markdown	3s latex::tests::golden_files_for_every_fixture
+L29	DETECTED	headings deeper than level 4 are clamped	3s latex::tests::golden_files_for_every_fixture
+L30	DETECTED	ordered list numbers are all 1	3s latex::tests::golden_files_for_every_fixture
+L32	DETECTED	subfigure letters start at b	3s latex::tests::figures_carry_captions_labels_paths_subfigures_and_tikz, latex::tests::golden_files_for_every_fixture
+SUMMARY	{'DETECTED': 21, 'SURVIVED': 7, 'DETECTED-TIMEOUT': 1}

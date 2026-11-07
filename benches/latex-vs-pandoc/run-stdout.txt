@@ -1,0 +1,23 @@
+tests/fixtures/latex/accents.tex: diffs=0 pandoc=24.0ms ours_cli=4.0ms ours_inproc=0.069ms
+tests/fixtures/latex/article-basic.tex: diffs=0 pandoc=24.0ms ours_cli=2.1ms ours_inproc=0.122ms
+tests/fixtures/latex/citations.tex: diffs=0 pandoc=23.9ms ours_cli=4.0ms ours_inproc=0.06ms
+tests/fixtures/latex/figures.tex: diffs=2 pandoc=32.3ms ours_cli=4.0ms ours_inproc=0.118ms
+tests/fixtures/latex/fragment.tex: diffs=0 pandoc=24.0ms ours_cli=4.1ms ours_inproc=0.031ms
+tests/fixtures/latex/lists.tex: diffs=0 pandoc=24.0ms ours_cli=2.2ms ours_inproc=0.058ms
+tests/fixtures/latex/macros.tex: diffs=0 pandoc=21.3ms ours_cli=4.0ms ours_inproc=0.109ms
+tests/fixtures/latex/main-with-input.tex: diffs=0 pandoc=22.4ms ours_cli=4.0ms ours_inproc=0.017ms
+tests/fixtures/latex/math.tex: diffs=0 pandoc=22.2ms ours_cli=4.0ms ours_inproc=0.092ms
+tests/fixtures/latex/quotes-minipage.tex: diffs=0 pandoc=24.0ms ours_cli=4.0ms ours_inproc=0.037ms
+tests/fixtures/latex/realistic-article.tex: diffs=0 pandoc=36.0ms ours_cli=2.7ms ours_inproc=0.365ms
+tests/fixtures/latex/sections-numbering.tex: diffs=0 pandoc=24.0ms ours_cli=2.3ms ours_inproc=0.045ms
+tests/fixtures/latex/tables.tex: diffs=0 pandoc=24.0ms ours_cli=2.1ms ours_inproc=0.083ms
+tests/fixtures/latex/theorem-proof.tex: diffs=0 pandoc=20.2ms ours_cli=2.3ms ours_inproc=0.095ms
+tests/fixtures/latex/unknown-and-malformed.tex: diffs=0 pandoc=24.0ms ours_cli=2.1ms ours_inproc=0.044ms
+tests/fixtures/latex/verbatim.tex: diffs=0 pandoc=24.0ms ours_cli=4.0ms ours_inproc=0.023ms
+tests/fixtures/bibtex/basic.bib: diffs=0 pandoc=Nonems ours_cli=6.8ms
+tests/fixtures/bibtex/crossref-biblatex.bib: diffs=0 pandoc=Nonems ours_cli=2.4ms
+tests/fixtures/bibtex/malformed.bib: diffs=0 pandoc=Nonems ours_cli=4.0ms
+tests/fixtures/bibtex/names-and-pages.bib: diffs=0 pandoc=24.0ms ours_cli=4.0ms
+tests/fixtures/bibtex/strings-accents.bib: diffs=0 pandoc=53.2ms ours_cli=3.3ms
+2 disagreements written
+BENCH-EXIT 0

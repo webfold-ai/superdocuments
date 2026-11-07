@@ -1,0 +1,12 @@
+Text before the first entry is ignored.
+@article{ok1, title = {Fine}, year = 2000}
+@article{missing_comma title = {Missing comma after key}, year = 2001}
+@article{nokeyfield, = {x}}
+@article{badfield, title {no equals}, year = 2002}
+@article{undefined, journal = undefinedmacro, year = 2003}
+@article{ok1, title = {Duplicate key}}
+@article{trailing, title = {Quoted "with" nested {quotes}}, year = 2004}
+@string{bad = }
+@article{empty_value, title = , year = 2006}
+@article{ok_last, title = {Last}, year = 2007}
+@article{unclosed, title = {never closes}, year = 2005
