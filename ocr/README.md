@@ -25,7 +25,7 @@ the CPU baselines in
 | `candle-qwen-serve` | HTTP (`/v1/chat/completions`) | `http://localhost:38080/v1` | In-tree `services/candle-serve` (currently a deterministic echo stub; real Qwen2.5 model load deferred). Sub HTTP service per "eventually our own" — model lives in a separate process so the bench doesn't drag candle into its build. |
 | `llama-cpp-server` | HTTP (`/v1/chat/completions`) | `http://localhost:8081/v1` | Official `llama-server` binary from [ggerganov/llama.cpp](https://github.com/ggerganov/llama.cpp) (16k★, MIT). Run as `./llama-server -m model.gguf --port 8081`. Lightweight GGUF runtime. |
 | `peregrine-ng` | HTTP (`/v1/chat/completions`) | `http://localhost:38100/v1` | Ptyktos Rust-native GGUF inference engine extracted from Bedrock (`peregrine-ng` crate, MIT). Qwen2.5/Qwen3.5 family. |
-| `modelfold-serve` | HTTP (`/v1/chat/completions`) | `http://localhost:38200/v1` | Ptyktos ML primitives substrate (`modelfold` crate, FSL-1.1-ALv2) — GPU kernels + quantization + training fold. The companion server exposes checkpoints over OpenAI-compat. |
+| `modelfold-serve` | HTTP (`/v1/chat/completions`) | `http://localhost:38200/v1` | Ptyktos ML primitives substrate (`modelfold` crate, Apache-2.0) — GPU kernels + quantization + training fold. The companion server exposes checkpoints over OpenAI-compat. |
 
 `target_available()` does a cheap `/v1/models` probe so unreachable gateways
 report `UNREACHABLE` rather than wasting a chat-completion budget.

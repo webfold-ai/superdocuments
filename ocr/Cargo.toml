@@ -2,6 +2,7 @@
 name = "superdocuments-bench-ocr"
 version = "0.0.1"
 edition = "2021"
+license = "Apache-2.0"
 description = "OCR inference-stack benchmark: candle / sglang / vllm / ai-gateway / litellm / bifrost / portkey on the same fixtures."
 
 [features]
