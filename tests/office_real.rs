@@ -132,3 +132,22 @@ fn libreoffice_written_xlsx_and_pptx_read_the_same_content() {
         "{slides}"
     );
 }
+
+#[test]
+fn libreoffice_rtf_heading_with_outline_numbering_is_a_heading_not_a_list_item() {
+    let md = convert("rich.rtf");
+    assert!(md.starts_with("# Rich Document\n"), "{md}");
+    assert!(
+        md.contains("[the site](https://example.com/a?x=1&y=2)"),
+        "{md}"
+    );
+}
+
+#[test]
+fn a_bullet_list_followed_by_a_numbered_list_is_two_lists() {
+    let md = convert("basic.docx");
+    assert!(
+        md.contains("- Second bullet\n\n1. Step one\n2. Step two"),
+        "{md}"
+    );
+}

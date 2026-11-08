@@ -1066,7 +1066,15 @@ impl<'o> Reader<'o> {
         let blank = marker.is_none()
             && para.list.is_none()
             && runs.iter().all(|r| r.text.trim().is_empty());
-        let block = if marker.is_some() || para.list.is_some() {
+        // A heading that LibreOffice numbers through an outline list carries `\ls` and an empty
+        // `\listtext`: it is still a heading, not a list item with no bullet.
+        let empty_marker = marker.as_deref().is_none_or(|m| m.trim().is_empty());
+        let heading = if empty_marker && (marker.is_some() || para.list.is_some()) {
+            self.heading_level(&para, &runs)
+        } else {
+            None
+        };
+        let block = if heading.is_none() && (marker.is_some() || para.list.is_some()) {
             let marker = marker.unwrap_or_default();
             Block::ListItem(ListItem {
                 level: para.ilvl,
@@ -1075,7 +1083,7 @@ impl<'o> Reader<'o> {
                 runs,
             })
         } else {
-            let heading_level = self.heading_level(&para, &runs);
+            let heading_level = heading.or_else(|| self.heading_level(&para, &runs));
             Block::Paragraph(Paragraph {
                 runs,
                 heading_level,

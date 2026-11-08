@@ -735,19 +735,29 @@ fn links_of(rels: &[Rel]) -> HashMap<String, String> {
         .collect()
 }
 
+/// Whether a list-item line starts with a number marker rather than a bullet.
+fn ordered_item(line: &str) -> bool {
+    line.trim_start().starts_with(|c: char| c.is_ascii_digit())
+}
+
 fn join_blocks(blocks: &[Block]) -> String {
     let mut out = String::new();
     let mut previous_item = false;
+    let mut previous_ordered = false;
     for block in blocks {
         let (body, item) = match block {
             Block::Heading(t) | Block::Para(t) | Block::Table(t) => (t.as_str(), false),
             Block::Item(t) => (t.as_str(), true),
         };
         if !out.is_empty() {
-            out.push_str(if item && previous_item { "\n" } else { "\n\n" });
+            // Items of one list sit on consecutive lines; a bullet list followed by a numbered
+            // one (or the reverse) is two lists and gets a blank line between them.
+            let same_list = item && previous_item && ordered_item(body) == previous_ordered;
+            out.push_str(if same_list { "\n" } else { "\n\n" });
         }
         out.push_str(body);
         previous_item = item;
+        previous_ordered = item && ordered_item(body);
     }
     out
 }
