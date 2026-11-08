@@ -10,6 +10,7 @@ pub mod html;
 pub mod latex;
 pub mod markdown;
 pub mod mathml;
+pub(crate) mod ooxml;
 pub mod pdf;
 pub mod rtf;
 pub mod tex_text;

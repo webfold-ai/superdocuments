@@ -5,7 +5,7 @@
 
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
-use std::io::{BufRead, Cursor, Read, Write};
+use std::io::{Cursor, Read, Write};
 use std::sync::Arc;
 use zip::ZipArchive;
 
@@ -13,7 +13,7 @@ const MAX_ENTRY: u64 = 32 * 1024 * 1024;
 const MAX_TOTAL: u64 = 128 * 1024 * 1024;
 const MAX_ENTRIES: usize = 4096;
 
-fn text(raw: &str) -> String {
+pub(crate) fn text(raw: &str) -> String {
     quick_xml::escape::unescape(raw).map_or_else(|_| raw.to_string(), |s| s.into_owned())
 }
 
@@ -43,7 +43,7 @@ fn attr(tag: &BytesStart<'_>, name: &[u8]) -> Option<String> {
         .map(|a| text(a.value.as_ref()))
 }
 
-fn archive(data: &[u8]) -> Result<ZipArchive<Cursor<&[u8]>>, String> {
+pub(crate) fn archive(data: &[u8]) -> Result<ZipArchive<Cursor<&[u8]>>, String> {
     let mut zip = ZipArchive::new(Cursor::new(data)).map_err(|e| format!("invalid ZIP: {e}"))?;
     if zip.len() > MAX_ENTRIES {
         return Err("too many archive entries".into());
@@ -67,7 +67,7 @@ fn archive(data: &[u8]) -> Result<ZipArchive<Cursor<&[u8]>>, String> {
     Ok(zip)
 }
 
-fn entry(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, String> {
+pub(crate) fn entry(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, String> {
     let file = zip.by_name(name).map_err(|_| format!("missing {name}"))?;
     if file.size() > MAX_ENTRY {
         return Err(format!("entry too large: {name}"));
@@ -82,7 +82,7 @@ fn entry(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, Str
     Ok(data)
 }
 
-fn xml_text(data: &[u8], wanted: &[u8]) -> Result<String, String> {
+pub(crate) fn xml_text(data: &[u8], wanted: &[u8]) -> Result<String, String> {
     let mut reader = Reader::from_reader(data);
     let mut buf = Vec::new();
     let mut depth = 0usize;
@@ -110,7 +110,7 @@ fn xml_text(data: &[u8], wanted: &[u8]) -> Result<String, String> {
     Ok(out)
 }
 
-fn markdown_table(rows: &[Vec<String>]) -> String {
+pub(crate) fn markdown_table(rows: &[Vec<String>]) -> String {
     if rows.is_empty() {
         return String::new();
     }
@@ -228,310 +228,18 @@ fn csv_rows(data: &str, delimiter: char) -> Result<Vec<Vec<String>>, String> {
     Ok(rows)
 }
 
-fn docx(data: &[u8]) -> Result<String, String> {
-    let mut zip = archive(data)?;
-    let document_path = if zip
-        .file_names()
-        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
-    {
-        "word/document.xml".to_string()
-    } else {
-        let rels = entry(&mut zip, "_rels/.rels")?;
-        let mut reader = Reader::from_reader(rels.as_slice());
-        let mut buf = Vec::new();
-        let mut target = None;
-        loop {
-            match reader
-                .read_event_into(&mut buf)
-                .map_err(|e| e.to_string())?
-            {
-                Event::Empty(tag) | Event::Start(tag)
-                    if tag.name().as_ref().as_bytes() == b"Relationship" =>
-                {
-                    if attr(&tag, b"Type").is_some_and(|kind| kind.ends_with("/officeDocument")) {
-                        target = attr(&tag, b"Target");
-                        break;
-                    }
-                }
-                Event::Eof => break,
-                _ => {}
-            }
-            buf.clear();
-        }
-        let path = target.ok_or("missing officeDocument relationship")?;
-        if path.starts_with('/') || path.split('/').any(|part| part == "..") {
-            return Err("officeDocument target escapes package".into());
-        }
-        path
-    };
-    let xml = entry(&mut zip, &document_path)?;
-    let mut reader = Reader::from_reader(xml.as_slice());
-    let mut buf = Vec::new();
-    let (mut paragraph, mut output, mut in_text, mut heading) =
-        (String::new(), String::new(), false, 0usize);
-    let (mut in_table, mut cell, mut row, mut table) =
-        (false, String::new(), Vec::new(), Vec::new());
-    loop {
-        match reader
-            .read_event_into(&mut buf)
-            .map_err(|e| e.to_string())?
-        {
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => in_table = true,
-            Event::Start(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = true
-            }
-            Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = false
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"wp:docPr" => {
-                if let Some(description) = attr(&tag, b"descr") {
-                    if !paragraph.is_empty() {
-                        paragraph.push(' ');
-                    }
-                    paragraph.push_str(&description);
-                }
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"o:OLEObject" => {
-                if let Some(kind) = attr(&tag, b"ProgID") {
-                    paragraph.push_str(&format!("Embedded object: {kind}"));
-                }
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:pStyle" => {
-                if let Some(style) = attr(&tag, b"w:val") {
-                    heading = style
-                        .strip_prefix("Heading")
-                        .and_then(|n| n.parse::<usize>().ok())
-                        .unwrap_or(0)
-                        .min(6);
-                }
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:tab" => paragraph.push('\t'),
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:br" => paragraph.push('\n'),
-            Event::Text(value) if in_text => paragraph.push_str(&text(value.as_ref())),
-            Event::GeneralRef(r) if in_text => push_ref(&mut paragraph, &r),
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
-                let line = paragraph.trim();
-                if !line.is_empty() {
-                    if in_table {
-                        if !cell.is_empty() {
-                            cell.push(' ');
-                        }
-                        cell.push_str(line);
-                    } else {
-                        if heading > 0 {
-                            output.push_str(&"#".repeat(heading));
-                            output.push(' ');
-                        }
-                        output.push_str(line);
-                        output.push_str("\n\n");
-                    }
-                }
-                paragraph.clear();
-                heading = 0;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tc" => {
-                row.push(std::mem::take(&mut cell))
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tr" => {
-                table.push(std::mem::take(&mut row))
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => {
-                output.push_str(&markdown_table(&table));
-                output.push('\n');
-                table.clear();
-                in_table = false;
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-        buf.clear();
-    }
-    for index in 0..zip.len() {
-        let name = zip
-            .by_index_raw(index)
-            .map_err(|e| e.to_string())?
-            .name()
-            .map_err(|e| e.to_string())?
-            .to_string();
-        if name.starts_with("word/charts/") && name.ends_with(".xml") {
-            let chart = entry(&mut zip, &name)?;
-            let title = xml_text(&chart, b"a:t")?;
-            let values = xml_text(&chart, b"c:v")?;
-            if !title.trim().is_empty() || !values.trim().is_empty() {
-                output.push_str(&format!(
-                    "\n**Chart: {}**\n\n{}\n",
-                    title.trim(),
-                    values.trim()
-                ));
-            }
-        } else if name.starts_with("word/diagrams/") && name.ends_with(".xml") {
-            let diagram = entry(&mut zip, &name)?;
-            let values = xml_text(&diagram, b"a:t")?;
-            if !values.trim().is_empty() {
-                output.push_str(&format!("\nDiagram: {}\n", values.trim()));
-            }
-        }
-    }
-    Ok(output.trim_end().to_string())
-}
-
-fn pptx(data: &[u8]) -> Result<String, String> {
-    let mut zip = archive(data)?;
-    let mut slides = Vec::new();
-    for i in 0..zip.len() {
-        let name = zip
-            .by_index_raw(i)
-            .map_err(|e| e.to_string())?
-            .name()
-            .map_err(|e| e.to_string())?
-            .to_string();
-        if let Some(number) = name
-            .strip_prefix("ppt/slides/slide")
-            .and_then(|s| s.strip_suffix(".xml"))
-            .and_then(|s| s.parse::<usize>().ok())
-        {
-            slides.push((number, name));
-        }
-    }
-    slides.sort_by_key(|(number, _)| *number);
-    let mut out = String::new();
-    for (number, name) in slides {
-        let xml = entry(&mut zip, &name)?;
-        let lines = xml_text(&xml, b"a:t")?;
-        if !lines.trim().is_empty() {
-            if !out.is_empty() {
-                out.push_str("\n\n---\n\n");
-            }
-            out.push_str(&format!("## Slide {number}\n\n{}", lines.trim()));
-        }
-    }
-    Ok(out)
-}
-
-fn shared_strings(xml: &[u8]) -> Result<Vec<String>, String> {
-    let mut reader = Reader::from_reader(xml);
-    let mut buf = Vec::new();
-    let (mut strings, mut current, mut in_t, mut in_si) = (Vec::new(), String::new(), false, false);
-    loop {
-        match reader
-            .read_event_into(&mut buf)
-            .map_err(|e| e.to_string())?
-        {
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"si" => {
-                in_si = true;
-                current.clear();
-            }
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = true,
-            Event::Text(value) if in_si && in_t => current.push_str(&text(value.as_ref())),
-            Event::GeneralRef(r) if in_si && in_t => push_ref(&mut current, &r),
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = false,
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"si" => {
-                strings.push(std::mem::take(&mut current));
-                in_si = false;
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-        buf.clear();
-    }
-    Ok(strings)
-}
-
-fn column(reference: &str) -> Option<usize> {
-    let mut value = 0usize;
-    for byte in reference.bytes().take_while(u8::is_ascii_alphabetic) {
-        value = value
-            .checked_mul(26)?
-            .checked_add((byte.to_ascii_uppercase() - b'A' + 1) as usize)?;
-    }
-    value.checked_sub(1).filter(|v| *v < 16_384)
-}
-
-fn worksheet(xml: &[u8], strings: &[String]) -> Result<Vec<Vec<String>>, String> {
-    let mut reader = Reader::from_reader(xml);
-    let mut buf = Vec::new();
-    let mut rows = Vec::new();
-    let (mut row, mut cell, mut cell_type, mut cell_col, mut in_value) =
-        (Vec::new(), String::new(), String::new(), None, false);
-    loop {
-        match reader
-            .read_event_into(&mut buf)
-            .map_err(|e| e.to_string())?
-        {
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"row" => row.clear(),
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"c" => {
-                cell.clear();
-                cell_type = attr(&tag, b"t").unwrap_or_default();
-                cell_col = attr(&tag, b"r").and_then(|r| column(&r));
-            }
-            Event::Start(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t") => {
-                in_value = true
-            }
-            Event::Text(value) if in_value => cell.push_str(&text(value.as_ref())),
-            Event::GeneralRef(r) if in_value => push_ref(&mut cell, &r),
-            Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t") => {
-                in_value = false
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"c" => {
-                let value = if cell_type == "s" {
-                    let index = cell
-                        .parse::<usize>()
-                        .map_err(|_| "bad shared-string index")?;
-                    strings
-                        .get(index)
-                        .cloned()
-                        .ok_or("shared-string index out of range")?
-                } else {
-                    std::mem::take(&mut cell)
-                };
-                let col = cell_col.unwrap_or(row.len());
-                if row.len() <= col {
-                    row.resize(col + 1, String::new());
-                }
-                row[col] = value;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"row" => {
-                rows.push(std::mem::take(&mut row))
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-        buf.clear();
-    }
-    Ok(rows)
-}
-
 fn xlsx(data: &[u8]) -> Result<String, String> {
-    let mut zip = archive(data)?;
-    let strings = match entry(&mut zip, "xl/sharedStrings.xml") {
-        Ok(xml) => shared_strings(&xml)?,
-        Err(_) => Vec::new(),
-    };
-    let mut sheets = Vec::new();
-    for i in 0..zip.len() {
-        let name = zip
-            .by_index_raw(i)
-            .map_err(|e| e.to_string())?
-            .name()
-            .map_err(|e| e.to_string())?
-            .to_string();
-        if let Some(number) = name
-            .strip_prefix("xl/worksheets/sheet")
-            .and_then(|s| s.strip_suffix(".xml"))
-            .and_then(|s| s.parse::<usize>().ok())
-        {
-            sheets.push((number, name));
-        }
-    }
-    sheets.sort_by_key(|(number, _)| *number);
+    let sheets = crate::ooxml::xlsx::read(data)?;
     let mut out = String::new();
-    for (number, name) in sheets {
-        let xml = entry(&mut zip, &name)?;
-        let rows = worksheet(&xml, &strings)?;
+    for sheet in sheets {
         if !out.is_empty() {
             out.push_str("\n\n");
         }
-        out.push_str(&format!("## Sheet {number}\n\n{}", markdown_table(&rows)));
+        out.push_str(&format!(
+            "## {}\n\n{}",
+            sheet.name,
+            markdown_table(&sheet.rows).trim_end()
+        ));
     }
     Ok(out.trim_end().to_string())
 }
@@ -879,8 +587,8 @@ fn xlsb(data: &[u8]) -> Result<String, String> {
 /// error rather than silently interpreting binary Office bytes as text.
 pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
     match extension.to_ascii_lowercase().as_str() {
-        "docx" | "docm" => docx(data),
-        "pptx" => pptx(data),
+        "docx" | "docm" => crate::ooxml::docx::convert(data),
+        "pptx" => crate::ooxml::pptx::convert(data),
         "xlsx" | "xlsm" => xlsx(data),
         "odt" | "odp" => odt(data),
         "ods" => ods(data),
@@ -932,13 +640,9 @@ pub fn convert_streaming<W: Write>(
             let rows = csv_rows(&decoded, delimiter)?;
             write_csv_rows(&rows, out)
         }
-        "xlsx" | "xlsm" => {
-            // Stream the worksheet XML directly to the sink. We don't build the
-            // LiftedDoc Tables on the cold path; the fold's cache is built lazily on
-            // repeat reads, not up front.
-            write_xlsx_streaming(data, out)
-        }
-        "docx" | "docm" => write_docx_streaming(data, out),
+        // Every other format, including DOCX and XLSX: one implementation (`convert_bytes`), so
+        // the streamed output cannot drift from it. Those readers need the whole package
+        // (styles, numbering, relationships) before the first line can be written.
         // Fallback: full convert_bytes, write the resulting String once.
         other => {
             let s = convert_bytes(other, data)?;
@@ -1001,234 +705,6 @@ fn write_csv_rows<W: Write>(rows: &[Vec<String>], out: &mut W) -> Result<(), Str
         }
         line.push('\n');
         out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-    }
-    Ok(())
-}
-
-fn write_xlsx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String> {
-    let mut zip = archive(data)?;
-    let strings = match entry(&mut zip, "xl/sharedStrings.xml") {
-        Ok(xml) => shared_strings(&xml)?,
-        Err(_) => Vec::new(),
-    };
-    let mut sheets: Vec<(usize, String)> = Vec::new();
-    for i in 0..zip.len() {
-        let Ok(entry) = zip.by_index_raw(i) else {
-            continue;
-        };
-        let Ok(name) = entry.name().map(|n| n.into_owned()) else {
-            continue;
-        };
-        if let Some(number) = name
-            .strip_prefix("xl/worksheets/sheet")
-            .and_then(|s| s.strip_suffix(".xml"))
-            .and_then(|s| s.parse::<usize>().ok())
-        {
-            sheets.push((number, name));
-        }
-    }
-    sheets.sort_by_key(|(n, _)| *n);
-    let mut line = String::with_capacity(64);
-    for (sheet_idx, sheet_name) in sheets.iter() {
-        line.clear();
-        line.push_str("## Sheet ");
-        line.push_str(&sheet_idx.to_string());
-        line.push_str("\n\n");
-        out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-
-        let xml = entry(&mut zip, sheet_name)?;
-        let mut reader = Reader::from_reader(xml.as_slice());
-        let mut buf = Vec::new();
-        let mut last_col: u32 = 0;
-        let mut row_buf: Vec<String> = Vec::with_capacity(16);
-        let mut first_row_in_sheet = true;
-        loop {
-            buf.clear();
-            match reader
-                .read_event_into(&mut buf)
-                .map_err(|e| e.to_string())?
-            {
-                Event::Start(tag) | Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"c" => {
-                    let cell_ref = attr(&tag, b"r");
-                    let col = cell_ref.as_deref().and_then(column).unwrap_or(0);
-                    let kind = attr(&tag, b"t");
-                    let value = read_cell_value(&mut reader, &mut buf, kind.as_deref(), &strings)?;
-                    // Pad row_buf with empty strings so col is indexable.
-                    while row_buf.len() <= col {
-                        row_buf.push(String::new());
-                    }
-                    row_buf[col] = value;
-                    if (col as u32) > last_col {
-                        last_col = col as u32;
-                    }
-                }
-                Event::End(tag) if tag.name().as_ref().as_bytes() == b"row" => {
-                    // Flush the row.
-                    line.clear();
-                    line.push('|');
-                    for v in &row_buf {
-                        line.push(' ');
-                        if v.contains('|') {
-                            for ch in v.chars() {
-                                if ch == '|' {
-                                    line.push('\\');
-                                }
-                                line.push(ch);
-                            }
-                        } else {
-                            line.push_str(v);
-                        }
-                        line.push_str(" |");
-                    }
-                    line.push('\n');
-                    out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-                    if first_row_in_sheet {
-                        line.clear();
-                        line.push('|');
-                        for _ in 0..=last_col {
-                            line.push_str(" --- |");
-                        }
-                        out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-                        first_row_in_sheet = false;
-                    }
-                    row_buf.clear();
-                    last_col = 0;
-                }
-                Event::End(tag) if tag.name().as_ref().as_bytes() == b"sheetData" => break,
-                Event::Eof => break,
-                _ => {}
-            }
-        }
-    }
-    Ok(())
-}
-
-fn write_docx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String> {
-    let mut zip = archive(data)?;
-    let document_path = if zip
-        .file_names()
-        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
-    {
-        "word/document.xml".to_string()
-    } else {
-        let rels = entry(&mut zip, "_rels/.rels")?;
-        let mut reader = Reader::from_reader(rels.as_slice());
-        let mut buf = Vec::new();
-        let mut target = None;
-        loop {
-            match reader
-                .read_event_into(&mut buf)
-                .map_err(|e| e.to_string())?
-            {
-                Event::Empty(tag) | Event::Start(tag)
-                    if tag.name().as_ref().as_bytes() == b"Relationship" =>
-                {
-                    if attr(&tag, b"Type").is_some_and(|kind| kind.ends_with("/officeDocument")) {
-                        target = attr(&tag, b"Target");
-                        break;
-                    }
-                }
-                Event::Eof => break,
-                _ => {}
-            }
-            buf.clear();
-        }
-        let path = target.ok_or("missing officeDocument relationship")?;
-        if path.starts_with('/') || path.split('/').any(|part| part == "..") {
-            return Err("officeDocument target escapes package".into());
-        }
-        path
-    };
-    let xml = entry(&mut zip, &document_path)?;
-    let mut reader = Reader::from_reader(xml.as_slice());
-    let mut buf = Vec::new();
-    let mut paragraph = String::new();
-    let mut heading: u8 = 0;
-    let mut in_text = false;
-    let mut in_table = false;
-    let mut cell = String::new();
-    let mut row: Vec<String> = Vec::new();
-    let mut table: Vec<Vec<String>> = Vec::new();
-    // Track whether the previous paragraph was non-empty so we can emit "\n\n"
-    // BETWEEN paragraphs (matching convert_bytes's "\n\n" join) without leaving a
-    // trailing "\n\n" after the last one.
-    let mut wrote_paragraph = false;
-    loop {
-        match reader
-            .read_event_into(&mut buf)
-            .map_err(|e| e.to_string())?
-        {
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => {
-                in_table = true;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => {
-                in_table = false;
-            }
-            Event::Start(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = true
-            }
-            Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = false
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:pStyle" => {
-                if let Some(style) = attr(&tag, b"w:val") {
-                    heading = style
-                        .strip_prefix("Heading")
-                        .and_then(|n| n.parse::<u8>().ok())
-                        .unwrap_or(0)
-                        .min(6);
-                }
-            }
-            Event::Text(value) if in_text => paragraph.push_str(&text(value.as_ref())),
-            Event::GeneralRef(r) if in_text => push_ref(&mut paragraph, &r),
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
-                let line = paragraph.trim();
-                if !line.is_empty() {
-                    if in_table {
-                        if !cell.is_empty() {
-                            cell.push(' ');
-                        }
-                        cell.push_str(line);
-                    } else {
-                        let prefix = if heading > 0 {
-                            "#".repeat(heading as usize)
-                        } else {
-                            String::new()
-                        };
-                        if wrote_paragraph {
-                            out.write_all(b"\n\n").map_err(|e| e.to_string())?;
-                        }
-                        let mut out_line = String::with_capacity(prefix.len() + line.len() + 4);
-                        if !prefix.is_empty() {
-                            out_line.push_str(&prefix);
-                            out_line.push(' ');
-                        }
-                        out_line.push_str(line);
-                        out.write_all(out_line.as_bytes())
-                            .map_err(|e| e.to_string())?;
-                        wrote_paragraph = true;
-                    }
-                }
-                paragraph.clear();
-                heading = 0;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tc" => {
-                row.push(std::mem::take(&mut cell))
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tr" => {
-                table.push(std::mem::take(&mut row))
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-        buf.clear();
-    }
-    // Flush the trailing table (if the document ended mid-table).
-    if !table.is_empty() {
-        let table_md = markdown_table(&table);
-        out.write_all(table_md.as_bytes())
-            .map_err(|e| e.to_string())?;
-        out.write_all(b"\n").map_err(|e| e.to_string())?;
     }
     Ok(())
 }
@@ -1300,7 +776,7 @@ impl DocFormat {
     /// Non-streaming formats still get cached as `Arc<String>` (no parse on warm hit), but they
     /// don't stream the render.
     fn is_streaming(self) -> bool {
-        matches!(self, Self::Xlsx | Self::Docx | Self::Csv)
+        matches!(self, Self::Csv)
     }
 }
 
@@ -1455,233 +931,11 @@ pub fn convert_cached<W: Write>(
 
 fn lift(format: DocFormat, data: &[u8]) -> Result<LiftedDoc, String> {
     match format {
-        DocFormat::Xlsx => lift_xlsx(data),
-        DocFormat::Docx | DocFormat::Docm => lift_docx(data),
         DocFormat::Csv => lift_csv(data),
         _ => Err(format!(
             "lift: format {format:?} uses the rendered-string cache path"
         )),
     }
-}
-
-fn lift_xlsx(data: &[u8]) -> Result<LiftedDoc, String> {
-    let mut zip = archive(data)?;
-
-    // shared strings: one Vec<u8> buffer, materialized once. Bounded by the workbook; cannot
-    // exceed MAX_TOTAL/MAX_ENTRY because `archive` already validated that.
-    let strings = match read_zip_entry(&mut zip, "xl/sharedStrings.xml") {
-        Ok(xml) => shared_strings(&xml)?,
-        Err(_) => Vec::new(),
-    };
-
-    let mut sheets: Vec<(usize, String)> = Vec::new();
-    for i in 0..zip.len() {
-        let Ok(entry) = zip.by_index_raw(i) else {
-            continue;
-        };
-        let Ok(name) = entry.name().map(|n| n.into_owned()) else {
-            continue;
-        };
-        if let Some(number) = name
-            .strip_prefix("xl/worksheets/sheet")
-            .and_then(|s| s.strip_suffix(".xml"))
-            .and_then(|s| s.parse::<usize>().ok())
-        {
-            sheets.push((number, name));
-        }
-    }
-    sheets.sort_by_key(|(n, _)| *n);
-
-    let mut cells: hashtrinity::Table<DocCoord, String> = hashtrinity::Table::new();
-    let mut kinds: hashtrinity::Table<DocCoord, u8> = hashtrinity::Table::new();
-    let mut order: Vec<DocCoord> = Vec::new();
-    let mut section_names: Vec<String> = Vec::with_capacity(sheets.len());
-    let mut row_widths: hashtrinity::Table<DocCoord, u16> = hashtrinity::Table::new();
-
-    for (number, name) in &sheets {
-        section_names.push(format!("Sheet {number}"));
-        // Stream the worksheet XML straight from the ZIP entry into the XML reader. No
-        // `Vec::with_capacity(file.size())`, no `read_to_end` — the entry's `Read` impl is
-        // borrowed by `Reader::from_reader`.
-        let xml = read_zip_entry(&mut zip, name)?;
-        let mut reader = Reader::from_reader(xml.as_slice());
-        let mut buf = Vec::new();
-        // current_row tracks the worksheet row index; col tracks the column index inside
-        // that row. They are independent — a `<row>` event sets current_row from its `r=`
-        // attribute (default 0), and a `<c>` event sets col from its `r=` attribute (default
-        // current_row, which advances row-major through sparse columns).
-        let mut current_row: u32 = 0;
-        let mut col: usize = 0;
-        let mut row_width: u16 = 0;
-        loop {
-            buf.clear();
-            match reader
-                .read_event_into(&mut buf)
-                .map_err(|e| e.to_string())?
-            {
-                Event::Start(tag) if tag.name().as_ref().as_bytes() == b"row" => {
-                    current_row = attr(&tag, b"r")
-                        .and_then(|r| r.parse::<u32>().ok())
-                        .unwrap_or(0);
-                    row_width = 0;
-                    col = 0;
-                }
-                Event::Start(tag) | Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"c" => {
-                    let cell_type = attr(&tag, b"t");
-                    let cell_ref = attr(&tag, b"r");
-                    col = cell_ref.as_deref().and_then(column).unwrap_or(col);
-                    // Read the <v> or <is> body as a streaming text accumulate.
-                    let value =
-                        read_cell_value(&mut reader, &mut buf, cell_type.as_deref(), &strings)?;
-                    if !value.is_empty() {
-                        let coord = (*number as u32, current_row, col as u32);
-                        cells.put(coord, value);
-                        kinds.put(coord, 1);
-                        order.push(coord);
-                    }
-                    if col as u16 + 1 > row_width {
-                        row_width = col as u16 + 1;
-                    }
-                }
-                Event::End(tag) if tag.name().as_ref().as_bytes() == b"row" => {
-                    // Tag the row's first cell with the row width for the render pass.
-                    if row_width > 0 {
-                        row_widths.put((*number as u32, current_row, 0), row_width);
-                    }
-                }
-                Event::End(tag) if tag.name().as_ref().as_bytes() == b"sheetData" => break,
-                Event::Eof => break,
-                _ => {}
-            }
-        }
-    }
-
-    Ok(LiftedDoc {
-        format: DocFormat::Xlsx,
-        section_names,
-        cells,
-        kinds,
-        order,
-        row_widths,
-    })
-}
-
-fn lift_docx(data: &[u8]) -> Result<LiftedDoc, String> {
-    let mut zip = archive(data)?;
-
-    // Find the document part. The simple case is word/document.xml; otherwise walk the rels.
-    let document_path = if zip
-        .file_names()
-        .any(|name| name.is_ok_and(|n| n == "word/document.xml"))
-    {
-        "word/document.xml".to_string()
-    } else {
-        let rels = read_zip_entry(&mut zip, "_rels/.rels")?;
-        let mut reader = Reader::from_reader(rels.as_slice());
-        let mut buf = Vec::new();
-        let mut target = None;
-        loop {
-            match reader
-                .read_event_into(&mut buf)
-                .map_err(|e| e.to_string())?
-            {
-                Event::Empty(tag) | Event::Start(tag)
-                    if tag.name().as_ref().as_bytes() == b"Relationship" =>
-                {
-                    if attr(&tag, b"Type").is_some_and(|kind| kind.ends_with("/officeDocument")) {
-                        target = attr(&tag, b"Target");
-                        break;
-                    }
-                }
-                Event::Eof => break,
-                _ => {}
-            }
-            buf.clear();
-        }
-        let path = target.ok_or("missing officeDocument relationship")?;
-        if path.starts_with('/') || path.split('/').any(|part| part == "..") {
-            return Err("officeDocument target escapes package".into());
-        }
-        path
-    };
-
-    let xml = read_zip_entry(&mut zip, &document_path)?;
-    let mut reader = Reader::from_reader(xml.as_slice());
-    let mut buf = Vec::new();
-
-    let mut cells: hashtrinity::Table<DocCoord, String> = hashtrinity::Table::new();
-    let mut kinds: hashtrinity::Table<DocCoord, u8> = hashtrinity::Table::new();
-    let mut order: Vec<DocCoord> = Vec::new();
-    let mut row_widths: hashtrinity::Table<DocCoord, u16> = hashtrinity::Table::new();
-    let mut paragraph_idx: u32 = 0;
-    let mut current = String::new();
-    let mut heading: u8 = 0;
-    let mut in_text = false;
-    let mut in_table = false;
-    let mut row_cells: u16 = 0;
-    let mut table_start: u32 = 0;
-
-    loop {
-        match reader
-            .read_event_into(&mut buf)
-            .map_err(|e| e.to_string())?
-        {
-            Event::Start(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => {
-                in_table = true;
-                table_start = paragraph_idx;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tbl" => {
-                in_table = false;
-            }
-            Event::Start(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = true
-            }
-            Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"w:t" | b"m:t") => {
-                in_text = false
-            }
-            Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:pStyle" => {
-                if let Some(style) = attr(&tag, b"w:val") {
-                    heading = style
-                        .strip_prefix("Heading")
-                        .and_then(|n| n.parse::<u8>().ok())
-                        .unwrap_or(0)
-                        .min(6);
-                }
-            }
-            Event::Text(value) if in_text => current.push_str(&text(value.as_ref())),
-            Event::GeneralRef(r) if in_text => push_ref(&mut current, &r),
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
-                let coord = (paragraph_idx, 0, 0);
-                if !current.trim().is_empty() {
-                    let kind = if heading > 0 { 2 + heading } else { 1 };
-                    cells.put(coord, std::mem::take(&mut current));
-                    kinds.put(coord, kind);
-                    order.push(coord);
-                    if in_table {
-                        row_cells += 1;
-                    }
-                }
-                paragraph_idx += 1;
-                heading = 0;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:tr" => {
-                row_widths.put((table_start, paragraph_idx, 0), row_cells);
-                row_cells = 0;
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-        buf.clear();
-    }
-
-    Ok(LiftedDoc {
-        format: DocFormat::Docx,
-        section_names: vec!["DOCX".to_string()],
-        cells,
-        kinds,
-        order,
-        row_widths,
-    })
 }
 
 fn lift_csv(data: &[u8]) -> Result<LiftedDoc, String> {
@@ -1727,166 +981,13 @@ fn row_count(rows: &[Vec<String>]) -> usize {
     rows.len()
 }
 
-/// Read a ZIP entry as `Vec<u8>` (bounded by MAX_ENTRY). Used by the lift where the XML reader
-/// needs an owned buffer; the streaming entry is read once and dropped. Compared to `entry()`
-/// above, this function deliberately *does* materialize so the parser can own the buffer and
-/// free it on drop — but it caps at MAX_ENTRY so memory is bounded.
-fn read_zip_entry(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, String> {
-    entry(zip, name)
-}
-
 // ─── Render (streaming write to a `Write` sink) ──────────────────────────────────────────────
 
 fn render_streaming<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
     match doc.format {
-        DocFormat::Xlsx => render_xlsx(doc, out),
-        DocFormat::Docx | DocFormat::Docm => render_docx(doc, out),
         DocFormat::Csv => render_csv(doc, out),
         _ => Err(format!("render: format {:?} not streaming", doc.format)),
     }
-}
-
-fn render_xlsx<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
-    // doc.order is already (sheet, row, col) row-major across sheets. Walk it in a
-    // single pass, tracking which sheet and row we are in, with a per-row scratch
-    // String for the current line. The hashtrinity::Table borrows return Option<&String>
-    // for free — no per-cell clone. hashtrinity::Table::get is O(1) per coord; for
-    // production Tables larger than the 512 KiB cache-resident threshold this path
-    // would benefit from get_each batching (F.1) — but the Track E corpus's Tables are
-    // tiny and fall back to the plain get loop inside get_each, so the chunking is
-    // omitted here for clarity. When the LiftedDoc Tables grow past the cache line the
-    // chunked get_each path becomes the win.
-    if doc.order.is_empty() {
-        return Ok(());
-    }
-
-    let mut current_sheet: u32 = u32::MAX;
-    let mut current_row: u32 = u32::MAX;
-    let mut last_col: u32 = 0;
-    let mut line = String::with_capacity(64);
-    let mut header_emitted = false;
-
-    for coord in &doc.order {
-        if coord.0 != current_sheet {
-            // Finish the previous sheet's last row + flush.
-            if current_sheet != u32::MAX {
-                line.push('\n');
-                out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-                line.clear();
-            }
-            current_sheet = coord.0;
-            current_row = u32::MAX;
-            let section_name = doc
-                .section_names
-                .get((coord.0 as usize).saturating_sub(1))
-                .map(String::as_str)
-                .unwrap_or("?");
-            line.clear();
-            line.push_str("## ");
-            line.push_str(section_name);
-            line.push_str("\n\n");
-            out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-            line.clear();
-            header_emitted = false;
-        }
-        if coord.1 != current_row {
-            // Finish the previous row.
-            if current_row != u32::MAX {
-                line.push('\n');
-                out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-                if !header_emitted {
-                    // The previous row was the header row. Emit separator.
-                    line.clear();
-                    line.push('|');
-                    for _ in 0..=last_col {
-                        line.push_str(" --- |");
-                    }
-                    line.push('\n');
-                    out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-                    header_emitted = true;
-                }
-                line.clear();
-            }
-            current_row = coord.1;
-            line.push('|');
-        }
-        let cell = doc.cells.get(coord).map(String::as_str).unwrap_or("");
-        line.push(' ');
-        if cell.contains('|') {
-            for ch in cell.chars() {
-                if ch == '|' {
-                    line.push('\\');
-                }
-                line.push(ch);
-            }
-        } else {
-            line.push_str(cell);
-        }
-        line.push_str(" |");
-        last_col = coord.2;
-    }
-    // Flush the last row of the last sheet.
-    line.push('\n');
-    out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-    // If the last sheet had exactly one row (the header row) and we never emitted the
-    // separator, emit it now so a one-row sheet still matches the canonical Markdown
-    // table shape (header, separator, zero data rows).
-    if !header_emitted && current_sheet != u32::MAX {
-        line.clear();
-        line.push('|');
-        for _ in 0..=last_col {
-            line.push_str(" --- |");
-        }
-        out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-    }
-    Ok(())
-}
-
-fn render_docx<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
-    // Each non-empty paragraph is its own cell. Headings render with `#` × level; body
-    // paragraphs separate with a blank line (matches convert_bytes's "\n\n" join and
-    // .trim_end() final pass). The prefix is a precomputed static string; we don't
-    // allocate a new heading prefix per cell. The line buffer is reused across cells
-    // so the per-cell allocation is just `line.clear()`.
-    const HEADING_PREFIXES: &[&str] = &[
-        "",        // kind 0 — placeholder (shouldn't reach here)
-        "",        // kind 1 — body text, no prefix
-        "",        // kind 2 — placeholder
-        "# ",      // kind 3 — heading 1
-        "## ",     // kind 4 — heading 2
-        "### ",    // kind 5 — heading 3
-        "#### ",   // kind 6 — heading 4
-        "##### ",  // kind 7 — heading 5
-        "###### ", // kind 8 — heading 6
-    ];
-    let last_index = doc.order.len().saturating_sub(1);
-    let mut line = String::with_capacity(64);
-    for (i, coord) in doc.order.iter().enumerate() {
-        let cell = doc.cells.get(coord).map(String::as_str).unwrap_or("");
-        let kind = doc.kinds.get(coord).copied().unwrap_or(1) as usize;
-        let prefix = if (3..=8).contains(&kind) {
-            HEADING_PREFIXES[kind]
-        } else {
-            ""
-        };
-        if !prefix.is_empty() {
-            line.clear();
-            line.push_str(prefix);
-            line.push_str(cell);
-            if i < last_index {
-                line.push_str("\n\n");
-            }
-            out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-        } else if !cell.trim().is_empty() {
-            line.clear();
-            line.push_str(cell);
-            if i < last_index {
-                line.push_str("\n\n");
-            }
-            out.write_all(line.as_bytes()).map_err(|e| e.to_string())?;
-        }
-    }
-    Ok(())
 }
 
 fn render_csv<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
@@ -1958,52 +1059,6 @@ fn render_csv<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
 // Reads until the matching `</v>`, `</is>`, or self-closing terminator; unescapes entity refs;
 // resolves `t="s"` shared-string indices via the shared-string table. Caller owns the `Reader`
 // and `buf` so we don't allocate per cell.
-fn read_cell_value<R: BufRead>(
-    reader: &mut Reader<R>,
-    buf: &mut Vec<u8>,
-    cell_type: Option<&str>,
-    strings: &[String],
-) -> Result<String, String> {
-    let mut value = String::new();
-    let mut in_body = false;
-    let mut is_self_closing = false;
-    loop {
-        buf.clear();
-        match reader.read_event_into(buf).map_err(|e| e.to_string())? {
-            Event::Start(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t" | b"is") => {
-                in_body = true;
-            }
-            Event::Text(t) if in_body => value.push_str(&text(t.as_ref())),
-            Event::GeneralRef(r) if in_body => push_ref(&mut value, &r),
-            Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t" | b"is") => {
-                break;
-            }
-            Event::Empty(_) => {
-                is_self_closing = true;
-                break;
-            }
-            Event::End(tag) if tag.name().as_ref().as_bytes() == b"c" => {
-                // </c> closes the cell before we hit a </v>: treat as empty.
-                break;
-            }
-            Event::Eof => break,
-            _ => {}
-        }
-    }
-    let _ = is_self_closing;
-    if cell_type == Some("s") {
-        let idx = value
-            .parse::<usize>()
-            .map_err(|_| "bad shared-string index")?;
-        strings
-            .get(idx)
-            .cloned()
-            .ok_or_else(|| "shared-string index out of range".to_string())
-    } else {
-        Ok(value)
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -2050,7 +1105,7 @@ mod tests {
     fn spreadsheet_cells_preserve_sparse_columns() {
         let xml = br#"<worksheet><sheetData><row><c r="A1" t="s"><v>0</v></c><c r="C1"><v>42</v></c></row></sheetData></worksheet>"#;
         assert_eq!(
-            worksheet(xml, &["hello".into()]).unwrap(),
+            crate::ooxml::xlsx::worksheet(xml, &["hello".into()], &Default::default()).unwrap(),
             vec![vec!["hello", "", "42"]]
         );
     }
