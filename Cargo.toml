@@ -26,7 +26,7 @@ framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5a097c2e24486
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
-hashtrinity = { version = "0.1.0", git = "https://github.com/Ptyktos/hashtrinity", rev = "59fea1c338e22d8ef5b82968c4e0621d38d00ba5", features = ["syntax"] }
+hashtrinity = { version = "0.1.0", git = "https://github.com/Ptyktos/hashtrinity", rev = "f74bc22288faa08625637ee810977cd0064e11e5", features = ["syntax"] }
 # The O(1) borrowed-key table (`apeiron::freq::Table`, zero-allocation `get_at(&str)`) used for the EPUB
 # manifest index and the XLSX/XLSB path and relationship caches in `calamine/`.
 apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "56b7943671ca8f87059dce02fcc862054968d5ca" }
