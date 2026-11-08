@@ -17,6 +17,25 @@ fn text(raw: &str) -> String {
     quick_xml::escape::unescape(raw).map_or_else(|_| raw.to_string(), |s| s.into_owned())
 }
 
+/// Appends the character an XML reference stands for: `&#38;`, `&#x26;`, and the five predefined
+/// entities. quick-xml reports `&amp;` and its kind as `Event::GeneralRef`, separate from the
+/// surrounding `Event::Text`, so a reader that handles only `Text` silently loses every `&`, `<`,
+/// `>`, `"` and `'` that the document wrote as an entity. An unknown entity is dropped.
+pub(crate) fn push_ref(out: &mut String, reference: &quick_xml::events::BytesRef<'_>) {
+    if let Ok(Some(c)) = reference.resolve_char_ref() {
+        out.push(c);
+        return;
+    }
+    match reference.as_ref() {
+        "amp" => out.push('&'),
+        "lt" => out.push('<'),
+        "gt" => out.push('>'),
+        "quot" => out.push('"'),
+        "apos" => out.push('\''),
+        _ => {}
+    }
+}
+
 fn attr(tag: &BytesStart<'_>, name: &[u8]) -> Option<String> {
     tag.attributes()
         .flatten()
@@ -81,6 +100,7 @@ fn xml_text(data: &[u8], wanted: &[u8]) -> Result<String, String> {
                 }
             }
             Event::Text(value) if depth > 0 => out.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if depth > 0 => push_ref(&mut out, &r),
             Event::CData(value) if depth > 0 => out.push_str(value.as_ref()),
             Event::Eof => break,
             _ => {}
@@ -288,6 +308,7 @@ fn docx(data: &[u8]) -> Result<String, String> {
             Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:tab" => paragraph.push('\t'),
             Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"w:br" => paragraph.push('\n'),
             Event::Text(value) if in_text => paragraph.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_text => push_ref(&mut paragraph, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
                 let line = paragraph.trim();
                 if !line.is_empty() {
@@ -402,6 +423,7 @@ fn shared_strings(xml: &[u8]) -> Result<Vec<String>, String> {
             }
             Event::Start(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = true,
             Event::Text(value) if in_si && in_t => current.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_si && in_t => push_ref(&mut current, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = false,
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"si" => {
                 strings.push(std::mem::take(&mut current));
@@ -446,6 +468,7 @@ fn worksheet(xml: &[u8], strings: &[String]) -> Result<Vec<Vec<String>>, String>
                 in_value = true
             }
             Event::Text(value) if in_value => cell.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_value => push_ref(&mut cell, &r),
             Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t") => {
                 in_value = false
             }
@@ -530,6 +553,7 @@ fn odt(data: &[u8]) -> Result<String, String> {
                 active = true
             }
             Event::Text(value) if active => paragraph.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if active => push_ref(&mut paragraph, &r),
             Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"text:p" | b"text:h") => {
                 if !paragraph.trim().is_empty() {
                     if tag.name().as_ref().as_bytes() == b"text:h" {
@@ -593,6 +617,7 @@ fn ods(data: &[u8]) -> Result<String, String> {
             Event::Text(value) if in_cell && in_text && !seeded => {
                 cell.push_str(&text(value.as_ref()))
             }
+            Event::GeneralRef(r) if in_cell && in_text && !seeded => push_ref(&mut cell, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"text:p" => {
                 in_text = false;
                 if !cell.ends_with(' ') {
@@ -1155,6 +1180,7 @@ fn write_docx_streaming<W: Write>(data: &[u8], out: &mut W) -> Result<(), String
                 }
             }
             Event::Text(value) if in_text => paragraph.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_text => push_ref(&mut paragraph, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
                 let line = paragraph.trim();
                 if !line.is_empty() {
@@ -1623,6 +1649,7 @@ fn lift_docx(data: &[u8]) -> Result<LiftedDoc, String> {
                 }
             }
             Event::Text(value) if in_text => current.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_text => push_ref(&mut current, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"w:p" => {
                 let coord = (paragraph_idx, 0, 0);
                 if !current.trim().is_empty() {
@@ -1947,6 +1974,7 @@ fn read_cell_value<R: BufRead>(
                 in_body = true;
             }
             Event::Text(t) if in_body => value.push_str(&text(t.as_ref())),
+            Event::GeneralRef(r) if in_body => push_ref(&mut value, &r),
             Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t" | b"is") => {
                 break;
             }

@@ -1,4 +1,5 @@
 //! Bounded XLSX/XLSM reader extracted from Webfold's native worksheet parser.
+use crate::document::push_ref;
 use crate::Worksheet;
 use quick_xml::{
     events::{BytesStart, Event},
@@ -76,6 +77,7 @@ fn shared_strings(xml: &[u8]) -> Result<Vec<String>, String> {
             }
             Event::Start(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = true,
             Event::Text(value) if in_si && in_t => current.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_si && in_t => push_ref(&mut current, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"t" => in_t = false,
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"si" => {
                 strings.push(std::mem::take(&mut current));
@@ -120,6 +122,7 @@ fn worksheet(xml: &[u8], strings: &[String]) -> Result<Vec<Vec<String>>, String>
                 in_value = true
             }
             Event::Text(value) if in_value => cell.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_value => push_ref(&mut cell, &r),
             Event::End(tag) if matches!(tag.name().as_ref().as_bytes(), b"v" | b"t") => {
                 in_value = false
             }
