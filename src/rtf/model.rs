@@ -103,6 +103,9 @@ pub struct Table {
 pub struct Row {
     pub header: bool,
     pub cells: Vec<Cell>,
+    /// The right edge of each cell in twips (`\cellxN`), as written. The reader uses it to turn a
+    /// cell that spans several columns into one cell followed by empty ones, and clears it.
+    pub edges: Vec<i32>,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq)]

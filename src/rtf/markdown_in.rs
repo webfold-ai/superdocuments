@@ -153,6 +153,7 @@ fn parse_table(lines: &[&str], start: usize, doc: &mut RtfDocument) -> (Table, u
             rows.push(Row {
                 header: rows.is_empty(),
                 cells,
+                edges: Vec::new(),
             });
         }
         index += 1;

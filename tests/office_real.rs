@@ -151,3 +151,10 @@ fn a_bullet_list_followed_by_a_numbered_list_is_two_lists() {
         "{md}"
     );
 }
+
+#[test]
+fn rtf_merged_cell_written_through_cellx_edges_keeps_its_columns() {
+    let md = convert("rich.rtf");
+    assert!(md.contains("| Merged head |  | Third |"), "{md}");
+    assert!(md.contains("| a | b | c |"), "{md}");
+}
