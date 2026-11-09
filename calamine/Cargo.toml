@@ -15,7 +15,7 @@ rust-version = "1.88" # For zip
 
 [dependencies]
 # Same apeiron as the superdocuments crate, so a build holds one.
-apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "56b7943671ca8f87059dce02fcc862054968d5ca" }
+apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "d0eda3226193542949306f767d7280404921546f" }
 log = "0.4"
 serde = "1.0"
 codepage = "0.1"

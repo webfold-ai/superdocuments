@@ -33,7 +33,7 @@ jobs:
         env:
           SUBSTRATE_TOKEN: ${{ secrets.CARGO_SUBSTRATE_TOKEN }}
         run: |
-          # hashtrinity and apeiron are private repositories. With the token configured, git
+          # wirefold is a private repository. With the token configured, git
           # fetches them as the token's owner; without it the job warns and the fetch fails
           # as before, so a missing secret is visible instead of silently ignored.
           if [ -z "${SUBSTRATE_TOKEN:-}" ]; then
@@ -60,7 +60,7 @@ jobs:
         env:
           SUBSTRATE_TOKEN: ${{ secrets.CARGO_SUBSTRATE_TOKEN }}
         run: |
-          # hashtrinity and apeiron are private repositories. With the token configured, git
+          # wirefold is a private repository. With the token configured, git
           # fetches them as the token's owner; without it the job warns and the fetch fails
           # as before, so a missing secret is visible instead of silently ignored.
           if [ -z "${SUBSTRATE_TOKEN:-}" ]; then
@@ -86,7 +86,7 @@ jobs:
         env:
           SUBSTRATE_TOKEN: ${{ secrets.CARGO_SUBSTRATE_TOKEN }}
         run: |
-          # hashtrinity and apeiron are private repositories. With the token configured, git
+          # wirefold is a private repository. With the token configured, git
           # fetches them as the token's owner; without it the job warns and the fetch fails
           # as before, so a missing secret is visible instead of silently ignored.
           if [ -z "${SUBSTRATE_TOKEN:-}" ]; then

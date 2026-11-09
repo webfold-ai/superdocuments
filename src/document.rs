@@ -794,19 +794,19 @@ pub struct LiftedDoc {
     /// Section names in render order (sheet names, slide names, …).
     pub section_names: Vec<String>,
     /// Cells: the parsed state. Keyed by coordinate; value is the literal cell text.
-    pub cells: hashtrinity::Table<DocCoord, String>,
+    pub cells: apeiron::map::hashtrinity::Table<DocCoord, String>,
     /// Cell kind tag: 0 = text, 1 = number, 2 = date, 3 = heading-1, 4 = heading-2, ….
     /// Used by the render pass to pick the right Markdown prefix without re-parsing.
-    pub kinds: hashtrinity::Table<DocCoord, u8>,
+    pub kinds: apeiron::map::hashtrinity::Table<DocCoord, u8>,
     /// The render order: which coordinates to emit, in order. Stored as a Vec so render is
     /// strictly streaming-write (no Table iteration order surprises).
     pub order: Vec<DocCoord>,
     /// Per-coordinate row width (DOCX tables, XLSX rows). Used to terminate table renders.
     /// `0` means "no row width tracked for this coordinate".
-    pub row_widths: hashtrinity::Table<DocCoord, u16>,
+    pub row_widths: apeiron::map::hashtrinity::Table<DocCoord, u16>,
 }
 
-/// The fold cache. Two hashtrinity::Tables:
+/// The fold cache. Two apeiron::map::hashtrinity::Tables:
 ///   - `lifted`: streaming formats — the parsed state, rendered streaming.
 ///   - `rendered`: non-streaming formats — the cached Markdown `String` directly.
 ///
@@ -828,8 +828,8 @@ pub struct LiftedDoc {
 /// The `u64` choice keeps the lookup path branch-free and the hashtable probe
 /// single-cycle; the only work in the hot path is `Table::get` + the render.
 pub struct DocumentCache {
-    lifted: hashtrinity::Table<(u64, u8), Arc<LiftedDoc>>,
-    rendered: hashtrinity::Table<(u64, u8), Arc<String>>,
+    lifted: apeiron::map::hashtrinity::Table<(u64, u8), Arc<LiftedDoc>>,
+    rendered: apeiron::map::hashtrinity::Table<(u64, u8), Arc<String>>,
     hits: u64,
     misses: u64,
 }
@@ -837,8 +837,8 @@ pub struct DocumentCache {
 impl DocumentCache {
     pub fn new() -> Self {
         Self {
-            lifted: hashtrinity::Table::new(),
-            rendered: hashtrinity::Table::new(),
+            lifted: apeiron::map::hashtrinity::Table::new(),
+            rendered: apeiron::map::hashtrinity::Table::new(),
             hits: 0,
             misses: 0,
         }
@@ -943,8 +943,10 @@ fn lift_csv(data: &[u8]) -> Result<LiftedDoc, String> {
     let delimiter = csv_delimiter(&decoded);
     let rows = csv_rows(&decoded, delimiter)?;
 
-    let mut cells: hashtrinity::Table<DocCoord, String> = hashtrinity::Table::new();
-    let mut kinds: hashtrinity::Table<DocCoord, u8> = hashtrinity::Table::new();
+    let mut cells: apeiron::map::hashtrinity::Table<DocCoord, String> =
+        apeiron::map::hashtrinity::Table::new();
+    let mut kinds: apeiron::map::hashtrinity::Table<DocCoord, u8> =
+        apeiron::map::hashtrinity::Table::new();
     let mut order: Vec<DocCoord> = Vec::new();
     let row_count = row_count(&rows);
 
@@ -960,7 +962,8 @@ fn lift_csv(data: &[u8]) -> Result<LiftedDoc, String> {
         }
     }
 
-    let mut row_widths: hashtrinity::Table<DocCoord, u16> = hashtrinity::Table::new();
+    let mut row_widths: apeiron::map::hashtrinity::Table<DocCoord, u16> =
+        apeiron::map::hashtrinity::Table::new();
     let max_cols = rows.iter().map(|r| r.len()).max().unwrap_or(0) as u16;
     if max_cols > 0 {
         row_widths.put((0, 0, 0), max_cols);

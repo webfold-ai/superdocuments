@@ -11,7 +11,7 @@
 //! detection), inline links `[text](url)` and images `![alt](url)`, GFM-style pipe
 //! tables, blockquotes, inline emphasis (`*`/`_`), strong (`**`/`__`), inline code
 //! (`` ` ``), and YAML frontmatter (a `---`-delimited block at the very top of the
-//! document, parsed via `hashtrinity::codec::syntax`).
+//! document, parsed via `wirefold::codec::syntax`).
 //!
 //! Explicitly **not** supported: footnotes, GFM task-list checkboxes, raw HTML
 //! passthrough, reference-style links (`[text][label]`), setext headings (`===`/`---`
@@ -56,19 +56,19 @@
 //!
 //! The AST is a flat arena (`Vec<Node>`) addressed by index; each `Node` holds
 //! `Vec<usize>` child indices, not `Rc<RefCell<...>>` — matching this crate's existing
-//! plain-owned-data caching convention (see `hashtrinity::Table` usage in
+//! plain-owned-data caching convention (see `apeiron::map::hashtrinity::Table` usage in
 //! [`crate::document`]). Inline content (`Inline`) is a small recursive enum owned
 //! directly inside its parent block node: inline trees never need to be shared or
 //! mutated after construction, so there's no benefit to arena-indexing them too.
 
-use hashtrinity::codec::syntax::{parse_surface, Surface, SyntaxTerm};
+use wirefold::codec::syntax::{parse_surface, Surface, SyntaxTerm};
 
 // ---------------------------------------------------------------------------------
 // Public data model
 // ---------------------------------------------------------------------------------
 
 /// Parsed YAML frontmatter — the `---`-delimited block at the top of the document,
-/// decoded via `hashtrinity::codec::syntax`'s collapsed term representation.
+/// decoded via `wirefold::codec::syntax`'s collapsed term representation.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Frontmatter {
     pub data: SyntaxTerm,

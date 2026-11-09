@@ -23,8 +23,8 @@ fn fnv1a_bytes(h0: u64, bytes: &[u8]) -> u64 {
 ///   B/U (Accum)  = `\|new, old\| new + old`           → Template.freq counting
 ///   4th (Graph)  = `\|new, old\| [new, old].concat()` → links adjacency
 #[inline]
-pub fn insert_with<K: hashtrinity::Coord + Eq, V>(
-    m: &mut hashtrinity::Table<K, V>,
+pub fn insert_with<K: apeiron::map::hashtrinity::Coord + Eq, V>(
+    m: &mut apeiron::map::hashtrinity::Table<K, V>,
     k: K,
     v: V,
     f: impl FnOnce(V, V) -> V,
@@ -756,7 +756,7 @@ pub fn resolve(base: &str, href: &str) -> String {
 /// The monoid laws (commutative, associative, (0,0) unit) hold per `count_two` / `fusion_is_commutative_monoid`.
 #[derive(Default)]
 pub struct Template {
-    pub freq: hashtrinity::Table<u64, u32>,
+    pub freq: apeiron::map::hashtrinity::Table<u64, u32>,
     pub pages: u32,
 }
 
@@ -766,7 +766,7 @@ impl Template {
     }
     pub fn fold(&mut self, blocks: &[Block]) {
         self.pages += 1;
-        let mut seen = hashtrinity::Table::new();
+        let mut seen = apeiron::map::hashtrinity::Table::new();
         for b in blocks {
             if !seen.has(&b.sig) {
                 seen.mark(b.sig);
@@ -849,7 +849,7 @@ impl TextChunk {
 /// Building the seed is the one certification pass; every later read is O(1) — the streaming law.
 #[derive(Debug, Clone, Default)]
 pub struct ChunkSeed {
-    chunks: hashtrinity::Table<usize, TextChunk>,
+    chunks: apeiron::map::hashtrinity::Table<usize, TextChunk>,
     count: usize,
 }
 

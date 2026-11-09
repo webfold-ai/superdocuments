@@ -40,7 +40,7 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 # in Cargo.toml. Remove an entry when its dependency moves to crates.io.
 allow-git = [
     "https://github.com/webfold-ai/apeiron",
-    "https://github.com/Ptyktos/hashtrinity",
+    "https://github.com/webfold-ai/wirefold",
     "https://github.com/Ptyktos/framefold",
     "https://github.com/Ptyktos/transcode",
 ]

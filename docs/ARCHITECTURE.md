@@ -47,7 +47,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 ## State and caching
 
 - There is no global state in the conversion code. The only locks are `Mutex`es in `pdf/mod.rs`, around OCR timings and the OCR metrics histograms.
-- `DocumentCache` owns two `hashtrinity::Table`s keyed by `(identity: u64, format: u8)`: parsed `LiftedDoc`s for CSV only, and rendered `Arc<String>`s for every other cacheable format (DOCX and XLSX included, so a warm hit does no parsing). It counts `hits()` and `misses()`. The code has no eviction, so entries live as long as the cache.
+- `DocumentCache` owns two `apeiron::map::hashtrinity::Table`s keyed by `(identity: u64, format: u8)`: parsed `LiftedDoc`s for CSV only, and rendered `Arc<String>`s for every other cacheable format (DOCX and XLSX included, so a warm hit does no parsing). It counts `hits()` and `misses()`. The code has no eviction, so entries live as long as the cache.
 - The key is the identity the caller passes. The library does not hash or compare the bytes on a hit, so two different documents given the same identity return the first one's output. `fingerprint_bytes` is a helper: a 64-bit FNV-1a hash, documented in the source as not cryptographic.
 - `convert_cached` builds a new `DocumentCache` on every call, so it never hits; hold a `DocumentCache` to reuse results.
 - `DocumentCache::convert` accepts only extensions known to `DocFormat::from_extension` (`xlsx`, `xlsm`, `xlsb`, `xls`, `ods`, `docx`, `docm`, `pptx`, `odt`, `odp`, `epub`, `rtf`, `csv`). HTML, `htm`, `txt`, `md` and `markdown` are rejected by the cache although `convert_bytes` accepts them. `xls` passes the cache lookup and then fails in `convert_bytes`.
