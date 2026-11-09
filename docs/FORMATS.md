@@ -317,6 +317,7 @@ Parses RTF into blocks (paragraphs, list items and nested tables), hyperlinks, f
 - The writer drops headers, footers and unreferenced footnotes, and writes every list with \ls1 and no list table (writer.rs:1-5, 132-147). A numbered list item with no stored marker is written with the marker '1.' (writer.rs:135-141).
 - The whole document is held in memory. There is no streaming reader (CHANGELOG.md, RTF limits).
 - Code pages that encoding_rs lacks (such as 437, 850, 1361) produce warnings and fall back to cp1252. Only the Symbol-font bullet is mapped (charset.rs:58-87; reader.rs:880-893).
+- Merged cells are read from the cell edges (\cellx), the way LibreOffice writes them: a cell that spans columns is one cell followed by empty ones. Checked on a LibreOffice-written file on 2026-11-09. Cells merged through \clmgf and \clmrg markers, and vertical merges, are not read.
 
 ## Spreadsheets
 
