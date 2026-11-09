@@ -97,7 +97,8 @@ jobs:
       - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
         with:
           toolchain: 1.85.0
-      - run: cargo install --locked cargo-cyclonedx
+      # 0.5.10 needs rustc 1.86; this job is pinned to 1.85.0, so pin the last release that supports it.
+      - run: cargo install --locked cargo-cyclonedx --version 0.5.9
       - name: Generate SBOM
         run: cargo cyclonedx --format json --override-filename superdocuments.sbom
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
