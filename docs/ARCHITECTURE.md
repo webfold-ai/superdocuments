@@ -1,6 +1,6 @@
 # Architecture
 
-This page describes `superdocuments` 0.8.1 as it is in the source. Every statement refers to code under `src/`, `Cargo.toml` or `.github/`. It was written by reading the code; the test suite was not run when it was prepared. Where the code does not settle a point, the page says "not verified".
+This page describes `superdocuments` 0.9.0 as it is in the source. Every statement refers to code under `src/`, `Cargo.toml` or `.github/`. It was written by reading the code; the test suite was not run when it was prepared. Where the code does not settle a point, the page says "not verified".
 
 ## Inputs and outputs
 

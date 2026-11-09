@@ -609,7 +609,7 @@ pub fn from_pdf_path(path: impl AsRef<Path>) -> std::io::Result<DocumentGraph> {
 
     let markdown = extract_file_with_ocr_options(path.as_ref(), &options)?;
     let source = Source::Ocr {
-        model: "superdocuments-0.8.1".into(),
+        model: concat!("superdocuments-", env!("CARGO_PKG_VERSION")).into(),
         dpi: 0,
         psm: 3,
         languages: "eng".into(),

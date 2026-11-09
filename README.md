@@ -4,7 +4,7 @@ Convert documents to Markdown and extract content in Rust.
 
 `document::convert_bytes` and `convert_path` turn DOCX, DOCM, PPTX, XLSX, XLSM, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML and plain text or Markdown into Markdown, choosing the converter from the file extension. PDF is handled separately by the `pdf` module: in-process text extraction to Markdown, with an optional OCR fallback that calls external `pdftoppm` and `tesseract` binaries. Legacy binary `.xls` is not converted (`convert_bytes` returns an error for it).
 
-> **Status: research build.** Version 0.8.1 (`Cargo.toml`). This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
+> **Status: research build.** Version 0.9.0 (`Cargo.toml`). This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
 
 The repository is `webfold-ai/superdocuments`; the Cargo package and library crate are named `superdocuments`.
 

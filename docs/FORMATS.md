@@ -95,7 +95,7 @@ When a PDF has no readable text, or a page has none, the library renders the pag
 - **Page-marked Markdown.** Each recognised page is written after a `<!-- page N -->` marker, in page order. In a mixed file, native pages keep their native text under the same markers, and OCR text fills the empty pages.
 - **Tesseract plain text.** The pipeline reads the `.txt` file that Tesseract writes for each page, capped at 4 MiB. No bounding boxes, word confidences or hOCR are kept, so the output has no coordinates.
 - **Truncation notice.** When the page limit is reached and the document has more pages, the output ends with `[OCR stopped at the configured limit of N pages; later pages may be omitted]`. The notice is part of the string, so downstream code must check for it.
-- **Document graph (library).** `graph::from_pdf_path` builds a `DocumentGraph` from the extraction output with one region per page, and labels the source as OCR with the model string `superdocuments-0.8.1`, psm 3 and language `eng`, whether or not OCR ran.
+- **Document graph (library).** `graph::from_pdf_path` builds a `DocumentGraph` from the extraction output with one region per page, and labels the source as OCR with the model string `superdocuments-<crate version>` (for example `superdocuments-0.9.0`), psm 3 and language `eng`, whether or not OCR ran.
 - **JSON-lines log entries (library, when a log path is set).** A `started` event records the input size, languages, page limit, image size and timeout. A `finished` event records the outcome (native, ocr or error), whether OCR was used, whether the run was truncated, pages rendered, bytes rendered, bytes OCR'd, and elapsed, render and recognise times in milliseconds.
 
 ### How it works

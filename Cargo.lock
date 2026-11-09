@@ -1206,7 +1206,7 @@ checksum = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
 
 [[package]]
 name = "superdocuments"
-version = "0.8.1"
+version = "0.9.0"
 dependencies = [
  "apeiron 0.1.0 (git+https://github.com/webfold-ai/apeiron?rev=56b7943671ca8f87059dce02fcc862054968d5ca)",
  "encoding_rs",
