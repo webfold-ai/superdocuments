@@ -4,7 +4,7 @@
 
 - Crates.io dependencies are locked in `Cargo.lock`. Build with `--locked`.
 - Git dependencies are pinned to full revisions in `Cargo.toml` and allowed by `deny.toml`:
-  `hashtrinity` and `apeiron` (both from the `Ptyktos/hashtrinity` repository), and the optional `framefold` and `transcode`. See the README dependency table.
+  `apeiron` (`webfold-ai/apeiron`) and `wirefold` (`webfold-ai/wirefold`), and the optional `framefold` and `transcode`. See the README dependency table.
 - `calamine/` is a workspace member with its own `Cargo.toml`. It shares the root `Cargo.lock` and is not a dependency of the root crate.
 
 ## Checks in CI

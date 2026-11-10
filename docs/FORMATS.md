@@ -2,14 +2,14 @@
 
 One section per format: what it reads, what comes out, where each claim comes from, and what it does not do.
 
-This file is a snapshot of the format guides published on the Webfold website, written on 2026-11-07 from the source in this repository and in `webfold`. Paths are `repo/path`. An evidence row marked *named test* names a test that exists; it was not run to produce this document (the ODS fix is the exception, noted where it appears). Features on an open pull request are marked at the top of their section. When the code and this file disagree, the code is right; please open an issue.
+This file is a snapshot of the format guides published on the Webfold website, written on 2026-11-07 and updated on 2026-11-08 (DOCX, PPTX and spreadsheets) from the source in this repository and in `webfold`. Paths are `repo/path`. An evidence row marked *named test* names a test that exists; it was not run to produce this document. *test, run 2026-11-08, passing* marks a test that was run and passed when the DOCX, PPTX and XLSX sections were rewritten (the ODS fix is the other exception, noted where it appears). Webfold pins `superdocuments` at revision `e0fb9a8`, which predates PR 23 (the RTF reader and writer, LaTeX, BibTeX, arXiv source, MathML and the ODS number-cell fix), so statements about what the Webfold command line does describe that older revision. The DOCX, PPTX and XLSX sections describe the readers in this repository, which Webfold does not have until its pin moves. When the code and this file disagree, the code is right; please open an issue.
 
 | Section | Reads |
 |---|---|
 | [PDF](#pdf) | Text, headings, tables and images from born-digital PDFs, read in process. |
 | [OCR](#ocr) | Text from scanned PDF pages, through Poppler and Tesseract run on your machine. |
-| [DOCX](#docx) | Word files (DOCX, DOCM) to Markdown: paragraphs, heading styles and pipe tables. |
-| [PPTX](#pptx) | PowerPoint (PPTX) to Markdown: each slide's text runs under a Slide N heading. |
+| [DOCX](#docx) | Word files (DOCX, DOCM) to Markdown: headings from styles, lists, links, tables, footnotes. |
+| [PPTX](#pptx) | PowerPoint (PPTX) to Markdown: slides in presentation order, with titles, text, tables and notes. |
 | [RTF](#rtf) | RTF in and out: a structured reader, Markdown and plain text, and an ASCII writer. |
 | [Spreadsheets](#spreadsheets) | XLSX, XLSB, ODS, CSV and legacy XLS to Markdown tables and structured cell rows. |
 | [OpenDocument](#opendocument) | ODT, ODP and ODS to Markdown, and the structure the reader drops. |
@@ -95,7 +95,7 @@ When a PDF has no readable text, or a page has none, the library renders the pag
 - **Page-marked Markdown.** Each recognised page is written after a `<!-- page N -->` marker, in page order. In a mixed file, native pages keep their native text under the same markers, and OCR text fills the empty pages.
 - **Tesseract plain text.** The pipeline reads the `.txt` file that Tesseract writes for each page, capped at 4 MiB. No bounding boxes, word confidences or hOCR are kept, so the output has no coordinates.
 - **Truncation notice.** When the page limit is reached and the document has more pages, the output ends with `[OCR stopped at the configured limit of N pages; later pages may be omitted]`. The notice is part of the string, so downstream code must check for it.
-- **Document graph (library).** `graph::from_pdf_path` builds a `DocumentGraph` from the extraction output with one region per page, and labels the source as OCR with the model string `superdocuments-0.8.1`, psm 3 and language `eng`, whether or not OCR ran.
+- **Document graph (library).** `graph::from_pdf_path` builds a `DocumentGraph` from the extraction output with one region per page, and labels the source as OCR with the model string `superdocuments-<crate version>` (for example `superdocuments-0.9.0`), psm 3 and language `eng`, whether or not OCR ran.
 - **JSON-lines log entries (library, when a log path is set).** A `started` event records the input size, languages, page limit, image size and timeout. A `finished` event records the outcome (native, ocr or error), whether OCR was used, whether the run was truncated, pages rendered, bytes rendered, bytes OCR'd, and elapsed, render and recognise times in milliseconds.
 
 ### How it works
@@ -139,122 +139,126 @@ When a PDF has no readable text, or a page has none, the library renders the pag
 
 ## DOCX
 
-Reads the main document part of a DOCX or DOCM package and writes Markdown: paragraph text, headings for the Heading1 to Heading6 style ids, and pipe tables. Images are not extracted, but drawing alt text is written as text. The whole-document writer and the streaming writer do not give the same output.
+Reads a DOCX or DOCM package and writes Markdown: headings taken from the document's own styles, bullet and numbered lists, bold and italic, hyperlinks with their targets, pipe tables (merged cells and nested tables included), and footnotes and endnotes. Tracked deletions are left out. Images are not extracted, and headers, footers and comments are not read.
+
+> **In superdocuments PR 24, not yet in Webfold.** The rewritten DOCX, PPTX and XLSX readers are in superdocuments pull request 24, which is open and tested there. The superdocuments revision that Webfold pins (e0fb9a8) has the older readers, so the Webfold command line and MCP server produce the older output until that pin moves. Everything below describes the new readers unless it says otherwise.
 
 ### Reads
 
-- **DOCX and DOCM packages.** Both extensions share one reader (superdocuments/src/document.rs:851-852 in convert_bytes). The main part is word/document.xml, or the part named by the officeDocument relationship in _rels/.rels. That target must be relative and must not contain '..' (document.rs:212-246).
-- **Paragraph text.** Text comes from w:t and math m:t elements (document.rs:260, 290). w:tab becomes a tab and w:br becomes a newline (document.rs:288-289). Run formatting is not read, so bold, italic, underline and colour are dropped.
-- **Headings by style id.** A paragraph is a heading only when its w:pStyle value is Heading1 to Heading6 (document.rs:279-287). The match is on the style id, not the display name, so a style called 'Heading 1' with another id, or the Title style, stays a plain paragraph.
-- **Tables.** w:tbl, w:tr and w:tc build a grid. The paragraphs in one cell are joined with a space (document.rs:294-316). Each finished table is written as a Markdown pipe table, and its first row is the header (document.rs:93-119, 317-322).
-- **Drawing alt text and embedded objects.** The descr attribute of wp:docPr is added to the paragraph text (document.rs:266-273). An embedded OLE object is written as 'Embedded object:' followed by its ProgID (document.rs:274-278). No image bytes are read.
-- **Charts and diagrams (convert_bytes only).** After the body, every word/charts/*.xml part gets its title and values written in bold, and every word/diagrams/*.xml part gets its text appended (document.rs:328-352). convert_streaming does not do this.
+- **DOCX and DOCM packages.** One reader serves both extensions (superdocuments/src/ooxml/docx.rs). The main part is the officeDocument relationship in _rels/.rels, else word/document.xml; a target that leaves the package is an error. Elements and attributes are matched by local name, so a file whose producer binds the WordprocessingML namespace to some other prefix reads the same.
+- **Headings from styles.** styles.xml decides. A paragraph is a heading when its style, or a style it is based on, has an outline level, or is named 'heading N' or 'Title'. A paragraph's own outline level overrides its style, and level 9 means body text. Depth is capped at six '#', and Title is depth one.
+- **Lists.** A numPr on the paragraph or on its style points into numbering.xml. A bullet level gives '- '. Any other number format gives '1.', counted per list and level, and a level numbered 'none' is a plain paragraph. Nested levels are indented four spaces.
+- **Bold, italic and links.** Run properties w:b and w:i (a value of 0 or false turns them off) and the Strong and Emphasis character styles give ** and *. Hyperlinks become [text](url), from relationships and from HYPERLINK field instructions. A link that only names a bookmark keeps its text and drops the link.
+- **Tables.** Each table is a pipe table whose first row is the header. A gridSpan adds empty cells for the columns it covers, and a vertically merged continuation cell is empty. Paragraphs and soft line breaks inside a cell are joined with <br>. A nested table is flattened into its parent cell, one line per row, with the cells joined by ' · '.
+- **Footnotes and endnotes.** A reference becomes [^id] (endnotes [^eN]). The notes that the body refers to are written as [^id]: definitions after the body, in order of first reference. Separator notes are skipped.
+- **Text boxes and alternate content.** For mc:AlternateContent only the Choice branch is read, so a text box that Word also stores as a VML fallback is read once. The paragraphs of a text box are written as their own paragraphs, ahead of the paragraph that holds the box.
+- **Tracked changes.** Inserted text is kept and deleted text (w:delText) is not. The records that hold a paragraph's or run's previous properties (pPrChange, rPrChange and the like) are skipped, so old properties never replace the current ones.
+- **Alt text, embedded objects, charts and diagrams.** The descr attribute of wp:docPr is written as text. An embedded OLE object is written as 'Embedded object:' and its ProgID. After the body, every word/charts part gives its title and values and every word/diagrams part gives its text. No image bytes are read.
 
 ### Produces
 
-- **Markdown string from convert_bytes.** Paragraphs are separated by blank lines. A heading is the matching number of '#' followed by the text. Tables are pipe tables, and the output is trimmed at the end (document.rs:298-322, 354). The README lists no public structured output for DOCX.
-- **Markdown written by convert_streaming.** Paragraphs are written while the XML is read. Table rows are not: all of them go into one buffer that is written after the last paragraph, as a single table (document.rs:1121, 1184-1201). Tabs, line breaks, alt text, charts, diagrams and OLE names are not written (document.rs:1137-1152).
-- **Table shape.** Every row is padded with empty cells to the widest row in the table, so the column count is the widest row (document.rs:97-108). A table with no rows writes nothing.
-- **Internal lift for the cache.** superdocuments keeps DOCX paragraphs as coordinates (paragraph index, row 0, column 0) for its own lifted-document cache, and heading level in a second coordinate (document.rs:1275-1281). This type is public in the crate but is not documented as a DOCX output.
+- **Markdown string.** Blocks are separated by blank lines. Headings are '#' lines, consecutive list items sit on consecutive lines, tables are pipe tables, footnote definitions follow the body, and chart and diagram text comes last. The output is trimmed at both ends.
+- **One output on every path.** convert_streaming and DocumentCache::convert call the same reader as convert_bytes. The separate streaming writer and cache-lift code that DOCX used to have, which gave different Markdown for the same file, were removed.
+- **Table shape.** Every row is padded with empty cells to the widest row. A table with no rows writes nothing.
 
 ### How it works
 
-1. **Dispatch.** convert_bytes sends docx and docm to the DOCX reader (document.rs:850-852). The webfold CLI sends .docx and .docm to webfold's convert_path, which delegates to this function (webfold/src/cli/document.rs:130-140; webfold/src/document.rs:140-147).
-2. **Bound the archive.** The ZIP is opened only after its entry count (at most 4,096), each declared entry size (at most 32 MiB) and the declared total (at most 128 MiB) pass (document.rs:12-14, 27-49).
-3. **Find the main part.** Use word/document.xml. If it is absent, follow the officeDocument relationship in _rels/.rels, rejecting absolute paths and '..' (document.rs:213-246).
-4. **Read XML events.** Each w:p end closes a paragraph. A w:pStyle value sets the heading level for that paragraph. Inside a table, the paragraph text goes into the current cell instead of the output (document.rs:247-310).
-5. **Close tables.** Each w:tbl end writes a Markdown table from the collected rows, then clears the rows and the in-table flag (document.rs:317-322).
-6. **Append chart and diagram text.** After the body, each word/charts/*.xml and word/diagrams/*.xml part is read and its text is appended to the output (document.rs:328-353).
+1. **Dispatch.** convert_bytes sends docx and docm to ooxml::docx::convert. The Webfold command line sends .docx and .docm to webfold's convert_path, which calls convert_bytes in the superdocuments revision Webfold pins.
+2. **Bound the archive.** The ZIP is opened only after its entry count (at most 4,096), each declared entry size (at most 32 MiB) and the declared total (at most 128 MiB) pass. Entry reads are capped at the limit plus one byte whatever the declared size.
+3. **Find the parts.** The main part comes from _rels/.rels. Its own relationships give the styles, numbering, footnotes and endnotes parts and the hyperlink targets. Relationship targets are resolved against the part that holds them and may not leave the package.
+4. **Read styles and numbering.** styles.xml gives each style's name, outline level, list and parent; numbering.xml gives each list's number format per level.
+5. **Read the body as events.** A paragraph stack and a table stack track nesting, so a text box inside a paragraph, or a table inside a cell, cannot close the wrong thing. A paragraph ends as a heading, a list item or a plain paragraph, and goes to the current table cell if one is open.
+6. **Read the notes parts.** footnotes.xml and endnotes.xml are read with the same code, each with its own hyperlink relationships. Only notes the body refers to are written.
+7. **Append chart and diagram text.** Each word/charts and word/diagrams part is read for its text and appended after the body.
 
 ### Evidence
 
 | Claim | How we know | Where | Detail |
 |---|---|---|---|
-| Headings come only from the style ids Heading1 to Heading6, capped at level 6 | read from the code | superdocuments/src/document.rs:279-287 | strip_prefix('Heading') then parse; any other id gives level 0. |
-| Tabs and line breaks become a tab and a newline inside the paragraph text | read from the code | superdocuments/src/document.rs:288-289 | w:tab pushes '\t'; w:br pushes '\n'. |
-| Tables become Markdown pipe tables; the first row is the header; pipes in cells are escaped | read from the code | superdocuments/src/document.rs:93-119, 317-322 | markdown_table replaces '\|' with '\\|' (line 106) and writes the separator after row 0. |
-| Drawing alt text is inlined; no image data is extracted | read from the code | superdocuments/src/document.rs:266-273 | Only the descr attribute of wp:docPr is read. |
-| OLE objects are written as 'Embedded object:' plus the ProgID | read from the code | superdocuments/src/document.rs:274-278 | o:OLEObject ProgID attribute. |
-| convert_streaming writes all table rows together, after the last paragraph | read from the code | superdocuments/src/document.rs:1121, 1184-1201 | The table buffer is pushed to on every w:tr end and never cleared until the final flush, so all tables in the document merge into one table at the end. Not run. |
-| The streaming writer has no arms for w:tab, w:br, wp:docPr, OLE objects or charts | read from the code | superdocuments/src/document.rs:1131-1152 | Its match handles w:tbl, w:t, m:t, w:pStyle, text, w:p end, w:tc and w:tr only. |
-| ZIP bounds: 4,096 entries, 32 MiB per declared entry, 128 MiB declared total | read from the code | superdocuments/src/document.rs:12-14, 27-49 | archive() checks the declared sizes from the central directory before any entry is read. |
-| Entry reads are capped at the entry limit plus one byte, whatever the declared size | read from the code | superdocuments/src/document.rs:51-64 | entry() uses file.take(MAX_ENTRY + 1) and rejects anything longer. |
-| The officeDocument target must be relative and must not contain '..' | read from the code | superdocuments/src/document.rs:241-245 | Absolute paths and any '..' component return an error. |
-| Routing: the webfold CLI sends docx and docm to the superdocuments conversion | read from the code | webfold/src/cli/document.rs:130-140 | markdown_source lists docx and docm in the document branch and calls webfold::document::convert_path. |
-| A DOCX heading and body convert to '# Report' and 'Body'; an officeDocument target at content/main.xml is followed | named test (not run for this document) | superdocuments/src/document.rs:2025-2030 (test office_packages_convert_through_public_api) | Named test; not run. It covers one heading and one paragraph only. |
-| convert_streaming and convert_bytes are compared on a one-heading, one-paragraph DOCX | named test (not run for this document) | superdocuments/src/document.rs:2169-2183 (test convert_streaming_matches_convert_bytes_for_csv_docx_xlsx) | Named test; not run. The input has no tables, tabs, alt text or charts, so the gaps above are not covered. |
-| Webfold converts mixed office and ebook fixtures in about 27.7 microseconds median on one document | measured | webfold-website/src/lib/marketing/benchmarks.ts:46 (slug documents, Measured 2026) | 45 public fixtures across formats, uncached. The figure is not broken out by format, so it is not a DOCX number. |
+| Headings, lists, bold and italic, and tables convert from a python-docx file | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (docx_structure_comes_from_styles_numbering_and_tables); fixture tests/fixtures/office/basic.docx | Ran 2026-11-08, passing. Title and Heading 1 and 2 give '#', '#' and '##'; 'List Bullet' and 'List Number' give '- ' and '1. ' through numbering.xml; a cell with a pipe and a soft break gives 'Value \\| pipe' and 'Line one<br>Line two'. |
+| Links with targets, a footnote, a nested list and a merged cell convert from a LibreOffice file | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (libreoffice_docx_keeps_links_footnotes_nested_lists_and_merged_cells); fixture tests/fixtures/office/rich.docx | Ran 2026-11-08, passing. The fixture was written by LibreOffice 'soffice --convert-to docx' from a flat ODT, so its footnote ids and style ids are LibreOffice's, not hand-picked. |
+| Entity references (&amp; &lt; &gt;) in text survive in DOCX | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (entity_references_are_kept_in_every_xml_format) | Ran 2026-11-08, passing. Before commit 44241df every XML reader here dropped the character an entity reference stands for. |
+| Any namespace prefix reads; outline level; tracked deletions; alternate content; nested tables; gridSpan and vMerge; HYPERLINK fields; w:b val=0; Title without a styles part | test, run 2026-11-08, passing | superdocuments/src/ooxml/docx.rs (module tests) | Ran 2026-11-08, 9 tests passing. They use XML built by hand in the test, not a file from Word. |
+| A heading is decided by outline level or style name along the basedOn chain, capped at six | read from the code | superdocuments/src/ooxml/docx.rs (Styles::heading_level, name_level) | A direct outlineLvl wins; level 9 gives body text; Title is depth one. |
+| A bullet level gives '- ', other formats give a counted '1.', format none gives plain text | read from the code | superdocuments/src/ooxml/docx.rs (Numbering::is_bullet, Parser::finish_paragraph) | The count restarts when a shallower level of the same list appears. |
+| Only the Choice half of mc:AlternateContent is read | read from the code | superdocuments/src/ooxml/docx.rs (Parser::start, skip counter) | Fallback and the property-change records are skipped with the same counter. |
+| convert_streaming and the cache use the same DOCX reader as convert_bytes | read from the code | superdocuments/src/document.rs (convert_streaming fallback arm; DocFormat::is_streaming) | The earlier write_docx_streaming, lift_docx and render_docx were deleted. The equality test convert_streaming_matches_convert_bytes_for_csv_docx_xlsx still passes. |
+| ZIP bounds: 4,096 entries, 32 MiB per declared entry, 128 MiB declared total | read from the code | superdocuments/src/document.rs (archive, entry) | Unchanged by the rewrite. |
+| A relationship target is resolved inside the package; one that leaves it is refused | test, run 2026-11-08, passing | superdocuments/src/ooxml/mod.rs (resolve_joins_against_the_holding_part_and_stays_inside) | Ran 2026-11-08, passing. |
+| Routing: the Webfold command line sends docx and docm to the superdocuments conversion | read from the code | webfold/src/cli/document.rs:130-140 | markdown_source lists docx and docm in the document branch and calls webfold::document::convert_path, which uses the pinned superdocuments revision. |
+| Webfold converts mixed office and ebook fixtures in about 27.7 microseconds median on one document | measured | webfold-website/src/lib/marketing/benchmarks.ts:46 (slug documents, Measured 2026) | 45 public fixtures across formats, uncached, measured with the older readers. The new readers have not been benchmarked, and the figure is not a DOCX number. |
 
 ### Limits
 
-- Headings are read only from the style ids Heading1 to Heading6. Heading styles with other ids and the Title style stay plain text (document.rs:279-287).
-- No list markers and no run formatting. w:numPr is never read, so list items are plain paragraphs, and bold, italic, underline and colour are dropped.
-- Hyperlink text is kept but the target URL is dropped. Only w:t and m:t are read (document.rs:260).
-- Footnotes, endnotes, comments, headers and footers are not read. Only word/document.xml, _rels/.rels, word/charts and word/diagrams parts are opened.
-- Text in w:delText (deleted tracked changes) is not read, because only w:t and m:t are collected (document.rs:260).
-- A soft line break (w:br) in a table cell puts a newline into the cell, and markdown_table escapes only pipes, so the Markdown row breaks (document.rs:289, 298, 106). Not run.
-- Nested tables are not tracked. The first w:tbl end writes and clears the shared row buffer, so the outer table layout breaks (document.rs:259, 317-322). Not run.
-- convert_streaming and convert_bytes give different Markdown for the same DOCX (document.rs:1137-1152 against 266-352).
+- Webfold does not have this yet: its pinned superdocuments revision still has the older reader, which read headings only from the ids Heading1 to Heading6 and wrote no lists, links or footnotes.
+- No file written by Microsoft Word is among the test fixtures. The real files come from python-docx (which uses Word's default style set) and LibreOffice; the rest is XML built by hand. A Word file with unusual styles or numbering may read differently.
+- List numbering restarts and start values are not applied: a numbered list counts from 1 per list and level, whatever its start override says. Bullet glyphs are not read.
+- Underline, strikethrough, colour, superscript and subscript are dropped. Page, column and section breaks are ignored. Markdown characters in the text (asterisks, underscores, brackets) are not escaped, except pipes in table cells.
+- Headers, footers and comments are not read. Image bytes are not extracted. Chart and SmartArt text is appended after the body, not placed where the object sits.
+- Markdown has no spans: a merged cell leaves empty cells at the covered positions, and a nested table is flattened to text inside its parent cell.
+- Equations are read as their plain text runs (m:t), without structure.
+- Text box paragraphs are written ahead of the paragraph that holds the box, not at the box's position in the line.
+- Legacy .doc is not supported.
+
 
 ## PPTX
 
-Reads the slide parts of a PPTX package (ppt/slides/slideN.xml) and writes each slide as a '## Slide N' section holding its text runs. Speaker notes, tables, images and the slide order in presentation.xml are not used, so the output shows only the text that sits in the slide parts.
+Reads a PPTX package and writes each slide as a '## Slide N' section in the order the presentation shows them: the title, the text one paragraph at a time, tables as Markdown tables, hyperlinks, and the speaker notes. Footers, dates and slide numbers are dropped. Charts, SmartArt, comments and images are not read.
+
+> **In superdocuments PR 24, not yet in Webfold.** The rewritten DOCX, PPTX and XLSX readers are in superdocuments pull request 24, which is open and tested there. The superdocuments revision that Webfold pins (e0fb9a8) has the older readers, so the Webfold command line and MCP server produce the older output until that pin moves. Everything below describes the new readers unless it says otherwise.
 
 ### Reads
 
-- **PPTX packages.** Routed only by the pptx extension (superdocuments/src/document.rs:853). Each slide is a part named ppt/slides/slideN.xml, and N is parsed from the file name (document.rs:357-373).
-- **Text runs.** Every a:t element in a slide part is read. The reader keeps no record of the surrounding shape, paragraph or table, so text from any a:t is taken (document.rs:379, xml_text at 66-91). Each run is followed by a space, so a slide comes out as one line of text.
-- **Slide order by file name.** Slides are sorted by the number in the file name, not by the order in presentation.xml (document.rs:375). The presentation part is never opened.
-- **Parts that are opened.** Only names under ppt/slides/ that end in .xml and have a numeric middle part are opened. Notes, layouts, masters, charts and media parts are never opened (document.rs:359-374).
-- **Empty slides.** A slide whose text is empty after trimming is left out (document.rs:380). Heading numbers can therefore skip.
+- **PPTX packages.** Routed by the pptx extension to superdocuments/src/ooxml/pptx.rs. The slide list is the sldIdLst of the presentation part, resolved through that part's relationships. Only if no slide resolves does the reader fall back to the numbers in ppt/slides/slideN.xml file names.
+- **Slide order and numbering.** Slides are numbered by position in the presentation, which is the number a person sees. A moved slide keeps its old file name, so the file-name number would be wrong.
+- **Titles.** A shape whose placeholder type is title or ctrTitle gives the slide's title, written as 'Slide N: Title'. Text without a title placeholder is body text.
+- **Body text.** Each a:p paragraph is written as its own paragraph, with a:br written as a line break, bold and italic as ** and *, and hyperlinks as [text](url) from the slide's relationships. An explicit bullet (buChar) gives '- ' and an explicit number (buAutoNum) a counted '1.', indented four spaces per level. Bullets that come only from the layout or master are not visible from the slide and are not written.
+- **Tables.** A graphic frame's a:tbl becomes a pipe table whose first row is the header. Cells carrying hMerge or vMerge are empty, and paragraphs inside a cell are joined with <br>.
+- **Speaker notes.** The slide's notesSlide relationship gives the notes part. Only its body placeholder is read, and the text is written as '**Notes:** ...' after the slide's content.
+- **What is dropped.** Footer, date, header and slide-number placeholders are not written. The Fallback half of mc:AlternateContent is skipped so equations and similar are not read twice. A slide with no title, body or notes is left out, though it still counts in the numbering.
 
 ### Produces
 
-- **Markdown string.** Each slide becomes '## Slide N', a blank line, and its text on one line. Each slide's text is trimmed before it is written, and slides are joined with a horizontal rule (document.rs:377-386). The whole result is returned as one String.
-- **No streaming writer.** convert_streaming has no PPTX arm. It falls back to convert_bytes and writes the whole string once (document.rs:913-916).
-- **No document metadata.** The docProps parts (title, author, dates) are never opened, so none of that metadata appears in the output (document.rs:357-388).
-- **No structured type.** The README lists no public structured output for PPTX (format matrix, PPTX row).
+- **Markdown string.** Slides are separated by a '---' rule. Each starts with '## Slide N' or '## Slide N: Title', followed by body paragraphs, tables and the notes.
+- **No structured type.** The README lists no public structured output for PPTX. convert_streaming and the cache call the same reader as convert_bytes.
 
 ### How it works
 
-1. **Dispatch.** convert_bytes sends pptx to pptx() (document.rs:853). The webfold CLI sends .pptx to webfold's convert_path, which delegates to this function (webfold/src/cli/document.rs:130-140; webfold/src/document.rs:140-147).
-2. **Bound the archive.** archive() applies the same ZIP limits as the DOCX reader: 4,096 entries, 32 MiB per declared entry, 128 MiB declared total (document.rs:12-14, 27-49).
-3. **Collect slide parts.** Keep names that start with ppt/slides/slide, end with .xml and have a numeric middle part (document.rs:359-374).
-4. **Sort.** Sort the list by that number (document.rs:375).
-5. **Read text.** For each slide, read the part and join every a:t text with spaces, then trim (document.rs:377-379; xml_text at 66-91).
-6. **Write sections.** Write '## Slide N' and the text for each non-empty slide, separated by a horizontal rule (document.rs:380-386).
+1. **Dispatch.** convert_bytes sends pptx to ooxml::pptx::convert. The Webfold command line sends .pptx to webfold's convert_path, which calls convert_bytes in the pinned superdocuments revision.
+2. **Bound the archive.** The same ZIP limits as the other OOXML readers: 4,096 entries, 32 MiB per declared entry, 128 MiB declared total.
+3. **Order the slides.** presentation.xml is read for its sldId elements. Each has two attributes named id; the one that matches a slide relationship is used, because the other is the slide's numeric id.
+4. **Read each slide.** Events from the slide part feed a paragraph, a table and a placeholder tracker. A paragraph ends as the title, a body line, a list item, or a table-cell line.
+5. **Read the notes.** The notes part is read with the same code, keeping only the body placeholder.
+6. **Write.** Each non-empty slide is written with its position as the number.
 
 ### Evidence
 
 | Claim | How we know | Where | Detail |
 |---|---|---|---|
-| Slides are read from ppt/slides/slideN.xml and sorted numerically by N | read from the code | superdocuments/src/document.rs:357-375 | The name prefix and suffix are stripped, then the middle is parsed as a number. |
-| Only a:t text is extracted from a slide | read from the code | superdocuments/src/document.rs:379, 66-91 | xml_text(&xml, b'a:t') collects text inside a:t elements and adds a space after each one. |
-| Slide sections are separated by a horizontal rule; empty slides are dropped | read from the code | superdocuments/src/document.rs:377-386 | The separator is written only between non-empty slides. |
-| The presentation part is not opened, so presentation order is not used | read from the code | superdocuments/src/document.rs:357-375 | The only parts read are names under ppt/slides/. |
-| convert_streaming has no pptx arm and falls back to convert_bytes | read from the code | superdocuments/src/document.rs:913-916 | The fallback arm converts the whole document, then writes one string. |
-| Only the pptx extension is routed to the PPTX reader | read from the code | superdocuments/src/document.rs:853 | No ppt arm exists in convert_bytes. The webfold extension list (webfold/src/cli/document.rs:130-140) also has no ppt. |
-| XML text is unescaped with quick-xml's unescape; if that fails, the raw text is kept | read from the code | superdocuments/src/document.rs:16-18 | text() falls back to the raw string on an unescape error. The readers have no DTD or custom-entity handling. |
-| The ZIP limits are shared with the DOCX and spreadsheet readers | read from the code | superdocuments/src/document.rs:12-14, 27-49 | Same constants and archive() function as the other OOXML readers. |
-| A slide containing the text Launch converts and contains that word | named test (not run for this document) | superdocuments/src/document.rs:2031-2035 (test office_packages_convert_through_public_api) | Named test; not run. It uses one minimal slide part with one run. |
-| No test covers slide ordering, tables, notes or empty slides | named test (not run for this document) | superdocuments/src/document.rs:1973-2200 (test module) | The test names I read include no PPTX case beyond the minimal slide above. Not run. |
+| Slides follow the presentation order, not the file numbers; notes and a table are read | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (pptx_follows_presentation_order_and_reads_notes_and_tables); fixture tests/fixtures/office/basic.pptx | Ran 2026-11-08, passing. The python-pptx fixture has its two slides reordered, so 'Second slide' (slide2.xml) comes first. The first run of this test failed: the reader took sldId's numeric id instead of r:id and fell back to file order. That is fixed, and is why the test uses a real reordered file. |
+| A LibreOffice-written deck reads the same, with explicit bullets as list items | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (libreoffice_written_xlsx_and_pptx_read_the_same_content); fixture tests/fixtures/office/lo.pptx | Ran 2026-11-08, passing. Written by LibreOffice from basic.odp. |
+| Entity references in slide text survive | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (entity_references_are_kept_in_every_xml_format) | Ran 2026-11-08, passing: 'Intro & Goals' and 'Point <A>'. |
+| A minimal slide with no presentation part still converts | test, run 2026-11-08, passing | superdocuments/src/document.rs (office_packages_convert_through_public_api) | Ran 2026-11-08, passing. This is the file-name fallback. |
+| Footer, date, header and slide-number placeholders are dropped | read from the code | superdocuments/src/ooxml/pptx.rs (Slide::finish_paragraph) | Not covered by a test. |
+| Hyperlinks use the slide's own relationships | read from the code | superdocuments/src/ooxml/pptx.rs (hlinkClick handling in Slide::start) | Not covered by a test. |
+| ZIP limits are shared with the DOCX and spreadsheet readers | read from the code | superdocuments/src/document.rs (archive, entry) | One function for all OOXML readers. |
+| Only the pptx extension is routed to the PPTX reader | read from the code | superdocuments/src/document.rs (convert_bytes); webfold/src/cli/document.rs:130-140 | No ppt arm exists. |
 
 ### Limits
 
-- Slide order is file-name order. A deck reordered in PowerPoint can come out in the original order, because presentation.xml is not read (document.rs:375).
-- Speaker notes are never read. The notes parts are not opened.
-- Tables are not structured. Cell text is flattened into the slide's text line, since every a:t is taken (document.rs:379). Not run against a table deck.
-- Images, image alt text and charts are not read. The README lists no image output for PPTX.
-- Paragraphs and line breaks inside a shape are lost. Each run is separated by a single space, so a whole slide is one line (document.rs:379, 66-91).
-- Slides with no text are omitted, so the slide numbers in the headings can skip.
-- No streaming writer. convert_streaming builds the whole result in memory first (document.rs:913-916).
-- SmartArt, group shapes and chart parts are not opened. Only the slide part itself is read.
+- Webfold does not have this yet: its pinned superdocuments revision still has the older reader, which joined all text runs of a slide in file-number order and read no notes or tables.
+- Charts, SmartArt, comments and images (including image alt text) are not read.
+- Text that only the layout or master carries is not read, and neither are the bullets a layout supplies: only explicit bullets on the slide are written.
+- No file written by Microsoft PowerPoint is among the test fixtures. The real files come from python-pptx and LibreOffice.
+- Reading order inside a slide is the order of shapes in the file, not their position on the slide, so a deck whose shape order differs from its visual order reads out of visual order.
+- Footers, dates and slide numbers are dropped on purpose; a deck that keeps real content there loses it.
+- A slide with nothing to write is left out of the output but still counts in the numbering, so the numbers can skip.
+- Legacy .ppt is not supported.
+
 
 ## RTF
 
 Parses RTF into blocks (paragraphs, list items and nested tables), hyperlinks, footnotes, metadata and warnings, then renders Markdown or plain text from that model. The same module writes ASCII-only RTF from the model, and from the Markdown subset that its own renderer produces.
-
-> **Not yet released.** The RTF reader, writer and Markdown-to-RTF converter are on an open pull request (superdocuments PR 23). Released builds use an older flat plain-text RTF converter that fails on unclosed groups.
 
 ### Reads
 
@@ -298,14 +302,14 @@ Parses RTF into blocks (paragraphs, list items and nested tables), hyperlinks, f
 | Markdown output escapes markup characters and writes a hard break for each newline | read from the code | superdocuments/src/rtf/render.rs:378-397 | escape_markdown() escapes backslash, backtick, asterisk, underscore, brackets, angle brackets and pipe, and writes backslash-newline for newline. |
 | Writer output is ASCII: cp1252 as \'hh, other BMP characters as \uN? with \uc1, and it reads back with the same structure for every fixture | read from the code | superdocuments/src/rtf/writer.rs:1-5, 13-14, 230-264; superdocuments/src/rtf/tests.rs:513-525 (writer_output_is_ascii_and_reads_back_with_the_same_structure) | non_ascii() and cp1252_byte() implement the escapes; the preamble declares \uc1. The named test is not run and compares a subset of the structure. |
 | markdown_to_rtf parses only the Markdown subset the renderer writes; other syntax stays literal | read from the code | superdocuments/src/rtf/markdown_in.rs:1-4, 11-92 | The module comment lists the supported syntax; unsupported text becomes a paragraph. |
-| The branch replaces the flat RTF converter on main; main's convert_bytes arm is the old plain-text function | read from the code | superdocuments git history: a2dacab..0e8d51b, src/document.rs (commit 773115f) | git diff a2dacab HEAD shows the removal of fn rtf() and the new arm 'rtf' => crate::rtf::convert(data). The checkout is on branch ccr-7abbae09-xdtlfe. |
+| The merged reader replaces the flat RTF converter in superdocuments; the revision Webfold pins still has the old one | read from the code | superdocuments/src/document.rs; superdocuments git history (e0fb9a8 vs 56ecac1) | In superdocuments the rtf arm of convert_bytes is crate::rtf::convert (merge 56ecac1). In e0fb9a8, the revision Webfold pins, git show finds fn rtf at src/document.rs:847, the arm rtf => rtf(data) at :966, and no src/rtf/ directory. Checked on 2026-11-07. |
 | Golden test: every fixture's Markdown equals its .expected.md | named test (not run for this document) | superdocuments/src/rtf/tests.rs:99-111 (golden_markdown_for_every_fixture) | Named test; not run. The FIXTURES list covers all 23 .rtf files in tests/fixtures/rtf. |
 | A Markdown sample with headings, emphasis, a link, lists and a table round-trips to the same Markdown | named test (not run for this document) | superdocuments/src/rtf/tests.rs:553-560 (markdown_to_rtf_round_trips_through_markdown) | Named test; not run. One sample, compared as exact text. |
 | Depth, input size and output limits are explicit errors; truncated, mutated and random inputs do not panic | named test (not run for this document) | superdocuments/src/rtf/tests.rs:438-480, 840-880 (exceeding_a_limit_is_an_explicit_error, truncated_and_mutated_fixtures_never_panic_or_hang, random_bytes_never_panic) | Named tests; not run. |
 
 ### Limits
 
-- Status: the reader, writer and markdown_to_rtf are on the open superdocuments PR 23 (commits 773115f and 9477575). The rewrite is on an open pull request and is not merged into main. On main (a2dacab) RTF is a flat plain-text converter that fails on unclosed groups. The webfold pin of superdocuments (rev e0fb9a8) is not in the local clone, so what the webfold CLI does for .rtf was not verified.
+- Status: the reader, writer and markdown_to_rtf are merged into superdocuments (PR 23, commits 773115f and 9477575, merge 56ecac1). The Webfold command line and API use superdocuments revision e0fb9a8, which has the old flat plain-text RTF function (fn rtf at src/document.rs:847 in that revision) and no src/rtf/ module, so they do not have the structured reader until the pin moves.
 - Dropped in Markdown output: colour (the colour table is skipped), font names (the font table keeps only charset and code page), underline (kept in the model, ignored by the renderer), and font size (kept in the model, used only for the heading rule). Right-to-left reordering is not implemented (CHANGELOG.md, RTF limits).
 - Pictures are dropped: \pict, \shppict and object data are skipped. An \object shows only its \result (reader.rs:580-583; 503-511).
 - Fields other than HYPERLINK keep their result text and lose the instruction (reader.rs:448-456).
@@ -313,66 +317,72 @@ Parses RTF into blocks (paragraphs, list items and nested tables), hyperlinks, f
 - The writer drops headers, footers and unreferenced footnotes, and writes every list with \ls1 and no list table (writer.rs:1-5, 132-147). A numbered list item with no stored marker is written with the marker '1.' (writer.rs:135-141).
 - The whole document is held in memory. There is no streaming reader (CHANGELOG.md, RTF limits).
 - Code pages that encoding_rs lacks (such as 437, 850, 1361) produce warnings and fall back to cp1252. Only the Symbol-font bullet is mapped (charset.rs:58-87; reader.rs:880-893).
+- Merged cells are read from the cell edges (\cellx), the way LibreOffice writes them: a cell that spans columns is one cell followed by empty ones. Checked on a LibreOffice-written file on 2026-11-09. Cells merged through \clmgf and \clmrg markers, and vertical merges, are not read.
 
 ## Spreadsheets
 
-Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX a structured Worksheet type with rows of text. Values are the stored text, so number formats and formulas are not applied. Legacy XLS is read only by the webfold adapter (calamine), not by the superdocuments crate, which returns an error for it.
+Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX a structured Worksheet type with rows of text. XLSX sheets carry the workbook's own names in tab order, and date, boolean and error cells are shown as a person reads them; other number formats are not applied. Legacy XLS is read only by the webfold adapter (calamine), not by the superdocuments crate, which returns an error for it.
+
+> **XLSX reader: in superdocuments PR 24, not yet in Webfold.** The rewritten XLSX reader (real sheet names, tab order, dates, booleans) is in superdocuments pull request 24, which is open and tested there. Webfold pins superdocuments at e0fb9a8, which has the older reader, so the Webfold command line and MCP server still name XLSX sheets 'Sheet N'. XLSB, ODS, CSV and legacy XLS are not changed by that pull request, apart from the ODS fix already merged.
 
 ### Reads
 
-- **XLSX and XLSM.** A ZIP with xl/worksheets/sheetN.xml parts and an optional xl/sharedStrings.xml. Sheet parts are sorted by N (superdocuments/src/document.rs:481-514; xlsx.rs:157-192).
+- **XLSX and XLSM.** A ZIP whose workbook part (the officeDocument relationship, else xl/workbook.xml) lists the sheets. Each sheet's name and relationship id give its part, in tab order. Without a workbook part, the reader falls back to the numbers in xl/worksheets/sheetN.xml file names and calls the sheets 'Sheet N' (superdocuments/src/ooxml/xlsx.rs).
+- **XLSX cell values.** A shared string is looked up by index; rich-text runs are joined and phonetic guides (rPh) are left out. Inline strings are read as text. A boolean is TRUE or FALSE, an error cell is shown as written, and a string-result formula shows its cached text. A number whose cell style has a date or time format (built-in ids or a custom format code, with the 1900 or 1904 epoch from workbookPr) is shown as YYYY-MM-DD, HH:MM:SS or both. Any other number is shown exactly as stored. A formula with no cached value is shown as =formula.
 - **XLSB.** The binary workbook. Cell records are read for their cached values, and shared strings come from xl/sharedStrings.bin. Sheet names come from xl/workbook.bin when that part exists, matched to sheets by position (document.rs:741-846).
 - **ODS.** content.xml only. Each table:table becomes one section, named by its table:name attribute (document.rs:552-628).
 - **CSV.** UTF-8 (BOM removed) or UTF-16 with a byte-order mark. The delimiter is guessed from the first line among comma, semicolon and tab (document.rs:121-177). The webfold CLI and webfold's document module use their own CSV parser instead (webfold/src/document.rs:122-125).
 - **Legacy XLS.** superdocuments returns an error for xls (document.rs:857). webfold reads it with calamine::Xls and writes one section per worksheet (webfold/src/document.rs:118-121, 170-190).
-- **Worksheet values.** xlsx::read_workbook and xlsx::read_sheet return Worksheet values, with index in workbook order, name 'Sheet N' and cell text as rows (superdocuments/src/xlsx.rs:157-200; webfold/src/lib.rs:26-34).
+- **Worksheet values.** xlsx::read_workbook and xlsx::read_sheet return Worksheet values, with index in tab order, the workbook's sheet name, and cell text as rows. They share the reader with convert_bytes.
 
 ### Produces
 
-- **Markdown tables.** A '## ' heading for each sheet, then a pipe table whose first row is the header and whose rows are padded to the widest row. XLSX sections are named 'Sheet N' from the file number; XLSB, ODS and XLS use the real sheet names (document.rs:93-119, 505-512, 839-843).
+- **Markdown tables.** A '## ' heading for each sheet, then a pipe table whose first row is the header and whose rows are padded to the widest row. XLSX sections use the workbook's sheet names in tab order; XLSB, ODS and XLS use their real sheet names too. Rows with no cell content are left out.
 - **Worksheet structs.** Worksheet { index, name, rows: Vec<Vec<String>> }. Rows are indexed by column position, with empty strings for gaps. Row numbers are not kept (lib.rs:26-34; xlsx.rs:102-153).
-- **Streamed XLSX and CSV.** convert_streaming for XLSX and XLSM writes each sheet heading and row as the XML is read, with a separator after the first row (document.rs:978-1074). CSV streams through write_csv_rows, which pads rows to a common width (document.rs:920-976).
-- **Lifted document (public type).** superdocuments also exposes LiftedDoc, which keys cells by (sheet, row, column) and keeps a row width for each row (document.rs:1275-1299, 1435-1537). webfold does not use it: its cache calls convert_bytes (webfold/src/document/cache.rs:100).
+- **Streamed XLSX and CSV.** convert_streaming for XLSX and XLSM now calls the same reader as convert_bytes, so the output cannot differ; the separate streaming XLSX writer was removed. CSV streams through write_csv_rows, which pads rows to a common width.
+- **Lifted document (public type).** superdocuments exposes LiftedDoc for CSV only, keyed by (row, column). XLSX and DOCX are cached as rendered Markdown (a warm hit does no parsing), not as lifted cells. webfold does not use LiftedDoc: its cache calls convert_bytes (webfold/src/document/cache.rs:100).
 - **webfold table renderer.** CSV and XLS output in webfold uses its own renderer. Line breaks inside a cell become <br> and pipes are escaped. Rows are padded to the widest row only when (rows + 1) times the widest row is at most twice the total cell count plus the widest row. Otherwise the rows are written unpadded and no separator row is written (webfold/src/document/table.rs:4-83).
 
 ### How it works
 
 1. **Dispatch by extension.** convert_bytes sends xlsx and xlsm to xlsx(), xlsb to xlsb(), ods to ods() and csv to the CSV path. It returns an error for xls (document.rs:850-869). webfold intercepts xls and csv before that call (webfold/src/document.rs:118-126).
 2. **Bound the archive.** The ZIP is checked for entry count (4,096), declared entry size (32 MiB) and declared total (128 MiB) before any part is read (document.rs:12-14, 27-49; xlsx.rs:10-12, 25-47).
-3. **Read shared strings.** xl/sharedStrings.xml is read into a list. A missing part gives an empty list (document.rs:483-486; xlsx.rs:159-162).
-4. **Read sheet cells.** A row element starts and ends a row. Each c element takes its column from r. Its value is the shared string at its index when t is s, otherwise the stored v or inline t text (document.rs:428-479; xlsx.rs:102-153). Formula text in f is not read.
-5. **Place and write.** Cells go into their column index, gaps are filled with empty strings, and each sheet is written as a Markdown table (document.rs:464-468, 505-512, 93-119).
+3. **Read shared strings.** The workbook's sharedStrings relationship (default xl/sharedStrings.xml) is read into a list. A missing part gives an empty list. The styles part is read for the number formats of the cell styles.
+4. **Read sheet cells.** A row element starts and ends a row. Each c element takes its column from r, its type from t and its style from s. The value is built from the shared string, the inline text, the boolean, or the stored number, which is turned into a date when the style says so. A sheet may allocate at most 20 million cells; r references that ask for more are an error.
+5. **Place and write.** Cells go into their column index, gaps are filled with empty strings, rows with no content are dropped, and each sheet is written as a Markdown table.
 6. **XLSB and ODS cell rules.** XLSB decodes cell records by type: RK numbers (scaled by 100 when the low bit is set), real numbers, booleans, strings and shared-string indexes. Error and blank records become empty (document.rs:789-831). ODS takes the office value attribute of each cell, then appends the text of its text:p children. A self-closing repeated cell is expanded up to 16,384 times (document.rs:577-650).
 
 ### Evidence
 
 | Claim | How we know | Where | Detail |
 |---|---|---|---|
-| XLSX sections are named 'Sheet N' from the sheet file number, not from workbook.xml | read from the code | superdocuments/src/xlsx.rs:179-187; superdocuments/src/document.rs:503, 511 | name: format!("Sheet {number}") with number parsed from xl/worksheets/sheetN.xml. |
+| XLSX sheets use the workbook's names in tab order, with dates and booleans readable | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (xlsx_uses_workbook_names_tab_order_dates_and_booleans); fixture tests/fixtures/office/basic.xlsx | Ran 2026-11-08, passing. The openpyxl fixture's tab order is Costs then Revenue; a date, a float and booleans in it read as 2026-11-07, 1234.5, TRUE and FALSE, matching the values openpyxl reads back. |
+| A LibreOffice-written XLSX reads the same | test, run 2026-11-08, passing | superdocuments/tests/office_real.rs (libreoffice_written_xlsx_and_pptx_read_the_same_content); fixture tests/fixtures/office/lo.xlsx | Ran 2026-11-08, passing. Written by LibreOffice from basic.ods. |
+| Serial dates follow Excel, including the 1900 leap-year offset and the 1904 epoch | test, run 2026-11-08, passing | superdocuments/src/ooxml/xlsx.rs (serial_dates_match_excel) | Ran 2026-11-08, passing: 1 is 1900-01-01, 61 is 1900-03-01, 45000 is 2023-03-15, and 0 in the 1904 system is 1904-01-01. |
+| Date number formats are told apart from numeric ones | test, run 2026-11-08, passing | superdocuments/src/ooxml/xlsx.rs (date_formats_are_told_from_number_formats, style_sheet_marks_date_cells) | Ran 2026-11-08, passing: yyyy-mm-dd, d-mmm-yy and [h]:mm are dates; 0.00, 0.0% and quoted 'd' are not. |
+| Inline, rich-text, error, boolean and uncalculated-formula cells; phonetic guides left out | test, run 2026-11-08, passing | superdocuments/src/ooxml/xlsx.rs (cell_kinds, shared_strings_are_rich_text_without_phonetic_guides) | Ran 2026-11-08, passing. |
+| A column past XFD is appended to the row rather than overwriting column A, and a sheet that asks for too many cells is refused | test, run 2026-11-08, passing | superdocuments/src/ooxml/xlsx.rs (columns_past_xfd_and_huge_gaps_are_not_misplaced_or_unbounded) | Ran 2026-11-08, passing. This replaces the earlier note that the streaming path overwrote column A: the streaming path no longer exists. |
+| convert_streaming and the cache use the same XLSX reader as convert_bytes | read from the code | superdocuments/src/document.rs (convert_streaming fallback arm; DocFormat::is_streaming) | write_xlsx_streaming, lift_xlsx and render_xlsx were deleted. |
 | Shared strings are read from xl/sharedStrings.xml; a missing part gives an empty table | read from the code | superdocuments/src/document.rs:390-416, 483-486; superdocuments/src/xlsx.rs:64-90, 159-162 | shared_strings() collects the text of every t inside each si element. |
-| Column index is capped at 16,384 (XFD); cells beyond the cap are placed differently by the two writers | read from the code | superdocuments/src/xlsx.rs:92-100, 138; superdocuments/src/document.rs:425, 1023 | column() returns None above the cap. The DOM path appends at the row end (row.len()). The streaming path uses column 0, so the cell overwrites column A. |
-| The row r attribute is not read, and rows without c children are not emitted | read from the code | superdocuments/src/document.rs:439-472; superdocuments/src/xlsx.rs:113-146 | Rows are numbered only by their position in the sequence. An empty row element with no start or end tag never appears. |
-| Formula text is not read; the cached v value is | read from the code | superdocuments/src/document.rs:445-449; superdocuments/src/xlsx.rs:119-124 | Only v and t children set the in-value flag, so f text is ignored. |
-| Streaming XLSX: an empty self-closing c element is passed to read_cell_value, which keeps reading into the next cell | read from the code | superdocuments/src/document.rs:1021-1025, 1947-1950 | read_cell_value stops only at a matching v, t or is end, an Empty event, a c end or EOF. For Empty c it reads on, so the next cell's value can be taken and the next cell skipped. Not run; no test uses blank cells (document.rs:2169-2196). |
-| Streaming XLSX: a shared-formula cell with a self-closing f before v loses its value, and rich-text inline strings keep only the first run | read from the code | superdocuments/src/document.rs:1947-1950, 1940-1946 | An Empty f element hits the Empty arm and returns an empty string; an inline string's first t end also returns. Not run. The lift path calls the same function (document.rs:1497-1503). |
 | ODS repeat counts apply only to self-closing cells | read from the code | superdocuments/src/document.rs:577-584, 629-634 | number-columns-repeated is read only in the Empty arm, and the count is capped at 16,384 by odf_repeat. A repeated cell that has content is emitted once. |
 | XLSB sheet names come from workbook.bin record 156, matched to sheets by position | read from the code | superdocuments/src/document.rs:745-754, 839-842 | names.get(number - 1), falling back to 'Sheet N'. |
 | webfold reads legacy XLS through calamine::Xls and renders cells with calamine's Display | read from the code | webfold/src/document.rs:170-190; webfold/Cargo.toml:94-98, 221 | calamine is an optional dependency enabled by the default native feature. Data::Empty writes nothing. Merge data is not used. |
 | No webfold test names XLS | named test (not run for this document) | webfold/tests/ (search for xls) and webfold/src/document.rs | A search found no XLS test in tests/ or in any unit test in src/document.rs. The superdocuments test for an XLSB sheet uses an empty sheet part (document.rs:2065-2066). |
 | webfold's CSV renderer keeps line breaks as <br> and escapes pipes, and does not pad sparse tables | named test (not run for this document) | webfold/tests/document_review.rs:18-31, 49-59; webfold/src/document/table.rs:4-23, 43-49, 56-71 | Named tests multiline_cells_are_single_markdown_cells, lone_cr_is_a_record_boundary_and_limits_delimiter_detection and ragged_rows_do_not_expand_to_a_cartesian_grid. Not run. |
 | On 45 public mixed-format fixtures, webfold's median conversion time is about 27.7 microseconds | measured | webfold-website/src/lib/marketing/benchmarks.ts:46 (slug documents, Measured 2026) | Uncached, mixed formats; spreadsheets are not reported separately, so this is not an XLSX figure. |
-| A numeric ODS cell with a value attribute and display text is read once, not twice, on the PR 23 branch | named test (not run for this document) | superdocuments/src/document.rs, test ods_cell_with_a_value_attribute_and_display_text_is_not_doubled | Run on 2026-11-07: failed before the change with '\| 4242 \| Name \| 7.57.50 \|' and passes after it; the library suite is 375 passed, 0 failed, 1 ignored. Branch commit 1b340fa, not yet merged. |
+| A numeric ODS cell with a value attribute and display text is read once, not twice, in superdocuments since PR 23 | named test (not run for this document) | superdocuments/src/document.rs, test ods_cell_with_a_value_attribute_and_display_text_is_not_doubled | Run on 2026-11-07: failed before the change with '\| 4242 \| Name \| 7.57.50 \|' and passes after it; the library suite is 375 passed, 0 failed, 1 ignored. Fix commit 1b340fa, merged as part of 56ecac1; the revision Webfold pins (e0fb9a8) predates it. |
 
 ### Limits
 
-- XLSX sections are named 'Sheet N' from the sheet file number, not the tab name, and they follow file-number order, not tab order (xlsx.rs:187; document.rs:503, 511). The lib.rs comment says resolving workbook names is a follow-up.
-- Values are stored text. No number or date format is applied, so a date appears as its serial number. Booleans appear as 0 or 1. Formulas show only their cached value (document.rs:453-463; xlsx.rs:127-137).
-- Row numbers are not kept. Blank rows and gaps between rows are not reproduced in the Markdown or Worksheet output. Column positions are kept.
-- Cells beyond column XFD (16,384) are placed at the end of the row by convert_bytes and read_sheet, but written into column A by convert_streaming (xlsx.rs:138; document.rs:1023).
-- convert_streaming for XLSX is not verified. Rows are not padded to a common width, the separator takes the first row's width, and blank self-closing cells and some value shapes can take the wrong value (document.rs:1021-1066, 1947-1950). Use convert_bytes until these are tested.
-- Before the fix on superdocuments PR 23 (commit 1b340fa), a numeric ODS cell that carried both an office:value attribute and its formatted text:p child came out twice: 42 as 4242, and 7.5 shown as 7.50 as 7.57.50. LibreOffice writes number cells that way, so any ODS saved by LibreOffice was affected. A cell that starts with a typed value is now taken from the attribute alone. That fix is on the unmerged branch, so released builds still have the defect. Covered (merged) cells are not read.
+- Webfold does not have the new XLSX reader yet: its pinned superdocuments revision still names XLSX sheets 'Sheet N' in file-number order and shows dates as serial numbers and booleans as 0 or 1.
+- Only date, time and boolean cells are formatted. Percentages, currency, thousands separators and fixed decimals are not applied: a cell shown as 12.50% in Excel is 0.125 here.
+- No file written by Microsoft Excel is among the test fixtures. The real files come from openpyxl and LibreOffice.
+- Row numbers are not kept. Rows with no content are dropped and gaps between rows are not reproduced. Column positions are kept. A formula's text is shown only when the file holds no cached value.
+- Merged cells, hidden sheets and rows, comments, charts and images are not read, and hidden sheets are written like any other. Sheets that are not worksheets (chart sheets) are left out.
+- Before the fix in superdocuments (commit 1b340fa, merged 2026-11-07 as part of PR 23), a numeric ODS cell that carried both an office:value attribute and its formatted text:p child came out twice: 42 as 4242, and 7.5 shown as 7.50 as 7.57.50. LibreOffice writes number cells that way, so any ODS saved by LibreOffice was affected. A cell that starts with a typed value is now taken from the attribute alone. Webfold pins superdocuments at revision e0fb9a8, which predates it, so Webfold still has the defect until that pin moves. Covered (merged) cells are not read.
 - CSV differs between the Rust API and the CLI. superdocuments treats a lone CR as data and leaves a newline in a quoted cell as raw text, which breaks the Markdown row. webfold treats CR as a row end and writes <br> (superdocuments document.rs:93-119, 193-198; webfold document/table.rs:44-49). CSV is still an error for an unterminated quote, with no size limit (ARCHITECTURE.md).
 - Legacy XLS: superdocuments returns an error. The webfold adapter has no test in this repo and drops merge information. The adapter is at webfold/src/document.rs:118-121 and enabled by default (Cargo.toml:73, 94-98).
+
 
 ## OpenDocument
 
@@ -417,12 +427,12 @@ Reads OpenDocument text (ODT), presentation (ODP) and spreadsheet (ODS) files by
 | webfold convert sends odt, ods and odp to superdocuments | read from the code | webfold/src/cli/document.rs:130 | markdown_source tests the extension list and calls webfold::document::convert_path, which calls superdocuments::document::convert_bytes (webfold src/document.rs:126). The CLI usage is in webfold/src/main.rs:214. |
 | The ODF test covers the heading, paragraph, sheet and presentation cases | named test (not run for this document) | superdocuments/src/document.rs:2025 | office_packages_convert_through_public_api asserts that odt gives '## Title\n\nBody', that an ods cell of 42 gives a row containing '\| 42 \|', and that odp contains 'Body'. Not run. |
 | The sparse-column spreadsheet test covers empty-cell repeats | named test (not run for this document) | superdocuments/src/document.rs:2016 | spreadsheet_cells_preserve_sparse_columns. Named in the repo; not run. |
-| A numeric ODS cell with a value attribute and display text is read once, not twice, on the PR 23 branch | named test (not run for this document) | superdocuments/src/document.rs, test ods_cell_with_a_value_attribute_and_display_text_is_not_doubled | Run on 2026-11-07: failed before the change with '\| 4242 \| Name \| 7.57.50 \|' and passes after it; the library suite is 375 passed, 0 failed, 1 ignored. Branch commit 1b340fa, not yet merged. |
+| A numeric ODS cell with a value attribute and display text is read once, not twice, in superdocuments since PR 23 | named test (not run for this document) | superdocuments/src/document.rs, test ods_cell_with_a_value_attribute_and_display_text_is_not_doubled | Run on 2026-11-07: failed before the change with '\| 4242 \| Name \| 7.57.50 \|' and passes after it; the library suite is 375 passed, 0 failed, 1 ignored. Fix commit 1b340fa, merged as part of 56ecac1; the revision Webfold pins (e0fb9a8) predates it. |
 
 ### Limits
 
 - Headings are flattened. Every text:h becomes '## ', whatever its outline level, because the reader does not read text:outline-level or styles.xml (src/document.rs:533).
-- Before the fix on superdocuments PR 23 (commit 1b340fa), a numeric ODS cell that carried both an office:value attribute and its formatted text:p child came out twice: 42 as 4242, and 7.5 shown as 7.50 as 7.57.50. LibreOffice writes number cells that way, so any ODS saved by LibreOffice was affected. A cell that starts with a typed value is now taken from the attribute alone. That fix is on the unmerged branch, so released builds still have the defect. Covered (merged) cells are not read.
+- Before the fix in superdocuments (commit 1b340fa, merged 2026-11-07 as part of PR 23), a numeric ODS cell that carried both an office:value attribute and its formatted text:p child came out twice: 42 as 4242, and 7.5 shown as 7.50 as 7.57.50. LibreOffice writes number cells that way, so any ODS saved by LibreOffice was affected. A cell that starts with a typed value is now taken from the attribute alone. Webfold pins superdocuments at revision e0fb9a8, which predates it, so Webfold still has the defect until that pin moves. Covered (merged) cells are not read.
 - No lists, tables or images inside text documents. List items and table cells come out as plain paragraphs. draw:frame images produce no reference.
 - Spacing can be lost. text:s, text:tab and text:line-break produce no text, so words separated only by those elements join together (src/document.rs:524-546).
 - ODP slides are not separated. The reader does not match draw:page, so slide text comes out as one stream in document order. Speaker-notes text is included the same way, because text:p is matched wherever it appears.
@@ -492,8 +502,6 @@ Reads EPUB files, which are ZIP packages of XHTML chapters. The spine reader (ep
 
 superdocuments has readers for LaTeX source, BibTeX files, arXiv e-print archives (a paper's source tarball) and MathML, returning sections, math kept as TeX, figures with image bytes, and bibliography entries. The webfold CLI and MCP server do not call these readers; webfold arxiv get reads the arXiv HTML version of a paper, and the PDF when there is no HTML.
 
-> **Not yet released.** The LaTeX, BibTeX, arXiv source and MathML readers are on an open pull request (superdocuments PR 23) and are not reachable from the Webfold command line or MCP server today. Webfold's arXiv tool uses its own HTML route.
-
 ### Reads
 
 - **LaTeX source (.tex).** latex::parse reads a document or fragment from a string. It is a bounded reader, not a TeX engine, and it loads no packages. \documentclass and \usepackage are dropped with no warning. Commands that a package would add are unknown: they keep their arguments and produce a warning. Macros defined in the file with \newcommand, \renewcommand, \providecommand, \def, \DeclareMathOperator, \newenvironment or \newtheorem are expanded in running text, within limits on the number of expansions, their total size and nesting depth.
@@ -547,6 +555,6 @@ superdocuments has readers for LaTeX source, BibTeX files, arXiv e-print archive
 - Figures are partial. A PDF's embedded images appear only as ![](img_<object>.png) markers with no captions linked: graph.rs defines Figure and Caption region kinds, but no builder assigns them. A tikzpicture is kept as its source and not drawn (superdocuments/src/latex/render.rs:511). Markdown writes the declared path, not the resolved file, so a path given without an extension does not match the file on disk (superdocuments/src/latex/render.rs:244).
 - Citations are text. A \cite key resolves first to a thebibliography item, then to a supplied Bibliography, and is shown as text such as (Author, Year). With neither, the key itself is shown. Nothing is a hyperlink (superdocuments/src/latex/render.rs:323-368; superdocuments/src/latex/mod.rs:378).
 - A BibTeX round trip changes the source. write() emits expanded field values, so @string names and # joins are not kept, and layout changes. Duplicate keys are both kept with a warning, and a repeated field keeps its first value (superdocuments/src/bibtex/write.rs:18; superdocuments/src/bibtex/parse.rs:207, :263).
-- Webfold does not expose these readers. The CLI and MCP server do not call them. These modules are on the open superdocuments PR 23, and webfold pins superdocuments to revision e0fb9a8, which was not checked against them (webfold Cargo.toml:202; docs/competitors/COMPARISON-MATRIX-2026-11.md, section 1).
+- Webfold does not expose these readers. The CLI and MCP server do not call them, and the superdocuments revision Webfold pins (e0fb9a8, webfold/Cargo.toml:202) has none of the modules: src/latex, src/bibtex, src/arxiv_source and src/mathml.rs are all absent from it. They are merged in superdocuments (PR 23, merge 56ecac1).
 - webfold arxiv get fails for papers with no HTML rendition in this checkout. The PDF fallback calls convert_bytes("pdf"), which has no pdf arm, so the call returns an unsupported-extension error (webfold/src/arxiv/mod.rs:280; src/document.rs:126). The e-print is never used.
 - arXiv HTML formula cleanup changes TeX. finish() restores formulas and then runs clean_latex_artifacts over the whole text, which turns \\ into \ and collapses double spaces inside formulas as well as prose (webfold/src/arxiv/html.rs:30-32 and :149-152). Read from code and not run; the unit test covers prose residue only.

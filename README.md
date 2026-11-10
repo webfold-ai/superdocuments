@@ -4,7 +4,7 @@ Convert documents to Markdown and extract content in Rust.
 
 `document::convert_bytes` and `convert_path` turn DOCX, DOCM, PPTX, XLSX, XLSM, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML and plain text or Markdown into Markdown, choosing the converter from the file extension. PDF is handled separately by the `pdf` module: in-process text extraction to Markdown, with an optional OCR fallback that calls external `pdftoppm` and `tesseract` binaries. Legacy binary `.xls` is not converted (`convert_bytes` returns an error for it).
 
-> **Status: research build.** Version 0.8.1 (`Cargo.toml`). This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
+> **Status: research build.** Version 0.9.0 (`Cargo.toml`). This code is not production-ready. It is being hardened toward a production release, and interfaces, formats and results may change without notice.
 
 The repository is `webfold-ai/superdocuments`; the Cargo package and library crate are named `superdocuments`.
 
@@ -14,9 +14,9 @@ Written from reading the source in `src/`; the test suite was not run when this 
 
 | Format | Markdown | Structured output | Images | OCR | Known limitations |
 |---|---|---|---|---|---|
-| DOCX, DOCM | `document::convert_bytes` / `convert_path` / `convert_streaming` | None public | Not extracted. `convert_bytes` inlines drawing alt text (`descr`) | No | Headings only from style ids `Heading1`..`Heading6`. No list markers, hyperlinks, emphasis, footnotes or headers/footers. `convert_bytes` also appends chart text, diagram text and OLE object names; `convert_streaming` does not, and writes table rows after the paragraphs |
-| PPTX | `convert_bytes` | None public | Not extracted | No | Text runs (`a:t`) only, under `## Slide N`. Slides ordered by file name number, not presentation order. No notes, tables or images |
-| XLSX, XLSM | `convert_bytes`, `convert_streaming` | `xlsx::read_workbook`, `xlsx::read_sheet` return `Worksheet { index, name, rows }` | Not extracted | No | Sheets are named `Sheet N` from the `sheetN.xml` file name, not the workbook's sheet names. Values are the stored text: no number or date formatting, no formula text. Not verified: inline strings |
+| DOCX, DOCM | `document::convert_bytes` / `convert_path` / `convert_streaming` | None public | Not extracted. Drawing alt text (`descr`) is inlined | No | Headings from the document's styles (outline level, `heading N`, `Title`), bullet and numbered lists, bold and italic, hyperlinks with targets, tables (`gridSpan`, `vMerge`, nested tables flattened), footnotes and endnotes; tracked deletions omitted. Chart and diagram text is appended. Not read: headers, footers, comments, list start overrides, underline, colour. Tested with python-docx, LibreOffice and hand-built XML; no Word-written file |
+| PPTX | `convert_bytes`, `convert_streaming` | None public | Not extracted | No | Slides in presentation order (`sldIdLst`), numbered by position, under `## Slide N: Title`. Body paragraphs, explicit bullets, hyperlinks, tables and speaker notes; footers, dates and slide numbers dropped. Not read: charts, SmartArt, comments, images, bullets that only the layout supplies. Tested with python-pptx and LibreOffice; no PowerPoint-written file |
+| XLSX, XLSM | `convert_bytes`, `convert_streaming` | `xlsx::read_workbook`, `xlsx::read_sheet` return `Worksheet { index, name, rows }` | Not extracted | No | Sheets use the workbook's names in tab order (`Sheet N` only without a workbook part). Dates and times follow the cell's number format (1900 and 1904 epochs), booleans are `TRUE`/`FALSE`, inline and rich strings are read, uncalculated formulas show as `=formula`. Other number formats (percent, currency, decimals) are not applied. Not read: merged cells, hidden state, comments, charts. Tested with openpyxl and LibreOffice; no Excel-written file |
 | XLSB | `convert_bytes` | None public | Not extracted | No | Cached scalar cells and shared strings only; formulas and styles are not reconstructed (comment in `document.rs`). Sheet names read from `xl/workbook.bin` |
 | XLS (legacy) | Not supported: returns an error | None | n/a | No | Conversion is not implemented in this crate |
 | ODT, ODP | `convert_bytes` (same reader for both) | None public | Not extracted | No | `text:p` and `text:h` only; every heading becomes `##`. No list, table or image handling in the code. ODP slides are not separated |
@@ -42,8 +42,8 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `zip` | crates.io | `9` (`deflate` only) | Required | ZIP containers |
 | `encoding_rs` | crates.io | `0.8` | Required | Code pages for RTF escapes (`src/rtf/charset.rs`) |
 | `serde`, `serde_json` | crates.io | `1` | Required | Geometry types and JSON output in `pdf` and `graph` |
-| `hashtrinity` | git, `Ptyktos/hashtrinity` | rev `59fea1c338e22d8ef5b82968c4e0621d38d00ba5` | Required (`syntax` feature) | `Table` hash map used by the cache, HTML extractor and PDF parser; syntax codec for Markdown frontmatter |
-| `apeiron` | git, `webfold-ai/apeiron` | rev `56b7943671ca8f87059dce02fcc862054968d5ca` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`) |
+| `wirefold` | git, `webfold-ai/wirefold` | rev `ba9a71284844cd1a7f14ae3b7105ad972aaa9e07` | Required (`syntax` feature) | Syntax codec (YAML surface) for Markdown front matter |
+| `apeiron` | git, `webfold-ai/apeiron` | rev `d0eda3226193542949306f767d7280404921546f` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`); `apeiron::map::hashtrinity::Table` is the hash map used by the cache, HTML extractor and PDF parser |
 | `framefold` | git, `Ptyktos/framefold` | rev `5a097c2e2448640c79d43b37b9246d0f7baea0d4` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
 | `transcode` | git, `Ptyktos/transcode` | rev `8e65c5afeb8adb9663511760b80e19156970207e` | Features `media-codecs`, `images` | Codec re-export as `media_codecs`; embedded PDF image decode and PNG encode |
 | `calamine` (local) | `calamine/` in this repository | version 0.36.1 | Not a dependency of the root crate | Workspace member only; see below |

@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+
 jobs:
   rust:
     name: Rust checks
@@ -17,6 +20,18 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Authenticate private git dependencies
+        env:
+          SUBSTRATE_TOKEN: ${{ secrets.CARGO_SUBSTRATE_TOKEN }}
+        run: |
+          # wirefold is a private repository. With the token configured, git
+          # fetches them as the token's owner; without it the job warns and the fetch fails
+          # as before, so a missing secret is visible instead of silently ignored.
+          if [ -z "${SUBSTRATE_TOKEN:-}" ]; then
+            echo "::warning::CARGO_SUBSTRATE_TOKEN is not configured; private git dependencies cannot be fetched"
+            exit 0
+          fi
+          git config --global url."https://x-access-token:${SUBSTRATE_TOKEN}@github.com/".insteadOf "https://github.com/"
       # Minimum supported Rust version (rust-version in Cargo.toml).
       - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
         with:

@@ -48,9 +48,9 @@ mod parse;
 #[path = "../../../proof/extract_pdf.rs"]
 mod pdf_kernels;
 mod xref;
-// The HashTrinity primitive now lives in the shared `hashtrinity` crate (the Rust rung of
-// HashTrinityCore.lean); pdffold was its template. Re-exported so `crate::Table` is unchanged.
-pub use hashtrinity::Table;
+// The table primitive (the former `hashtrinity` crate) lives in `apeiron::map::hashtrinity`.
+// Re-exported so `crate::Table` is unchanged.
+pub use apeiron::map::hashtrinity::Table;
 
 /// **The table-region classifier as a seed** — the model-is-a-seed: a [`Table`] (the HashTrinity)
 /// from a candidate region's feature signature to `(table votes, ¬table votes)`. The **fold** over

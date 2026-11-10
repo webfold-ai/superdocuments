@@ -130,6 +130,8 @@ struct Sink {
     tables: Vec<TableLevel>,
     marker: Option<String>,
     pending_row_header: bool,
+    /// `\cellx` positions of the row being read.
+    row_edges: Vec<i32>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -786,6 +788,15 @@ impl<'o> Reader<'o> {
                 if body {
                     let idx = self.top().sink;
                     self.sink_mut(idx).pending_row_header = false;
+                    self.sink_mut(idx).row_edges.clear();
+                }
+            }
+            b"cellx" => {
+                if body {
+                    if let Some(edge) = param {
+                        let idx = self.top().sink;
+                        self.sink_mut(idx).row_edges.push(edge);
+                    }
                 }
             }
             b"trhdr" => {
@@ -1066,7 +1077,15 @@ impl<'o> Reader<'o> {
         let blank = marker.is_none()
             && para.list.is_none()
             && runs.iter().all(|r| r.text.trim().is_empty());
-        let block = if marker.is_some() || para.list.is_some() {
+        // A heading that LibreOffice numbers through an outline list carries `\ls` and an empty
+        // `\listtext`: it is still a heading, not a list item with no bullet.
+        let empty_marker = marker.as_deref().is_none_or(|m| m.trim().is_empty());
+        let heading = if empty_marker && (marker.is_some() || para.list.is_some()) {
+            self.heading_level(&para, &runs)
+        } else {
+            None
+        };
+        let block = if heading.is_none() && (marker.is_some() || para.list.is_some()) {
             let marker = marker.unwrap_or_default();
             Block::ListItem(ListItem {
                 level: para.ilvl,
@@ -1075,7 +1094,7 @@ impl<'o> Reader<'o> {
                 runs,
             })
         } else {
-            let heading_level = self.heading_level(&para, &runs);
+            let heading_level = heading.or_else(|| self.heading_level(&para, &runs));
             Block::Paragraph(Paragraph {
                 runs,
                 heading_level,
@@ -1146,6 +1165,7 @@ impl<'o> Reader<'o> {
         let sink = self.sink_mut(idx);
         let header = sink.pending_row_header;
         sink.pending_row_header = false;
+        let edges = std::mem::take(&mut sink.row_edges);
         if let Some(level) = sink.tables.last_mut() {
             if !level.cell_blocks.is_empty() {
                 let blocks = std::mem::take(&mut level.cell_blocks);
@@ -1153,7 +1173,11 @@ impl<'o> Reader<'o> {
             }
             if !level.cells.is_empty() {
                 let cells = std::mem::take(&mut level.cells);
-                level.rows.push(Row { header, cells });
+                level.rows.push(Row {
+                    header,
+                    cells,
+                    edges,
+                });
             }
         }
     }
@@ -1174,12 +1198,17 @@ impl<'o> Reader<'o> {
                 let cells = std::mem::take(&mut level.cells);
                 let header = sink.pending_row_header;
                 sink.pending_row_header = false;
-                level.rows.push(Row { header, cells });
+                let edges = std::mem::take(&mut sink.row_edges);
+                level.rows.push(Row {
+                    header,
+                    cells,
+                    edges,
+                });
             }
             if !level.rows.is_empty() {
-                let table = Block::Table(Table {
-                    rows: std::mem::take(&mut level.rows),
-                });
+                let mut rows = std::mem::take(&mut level.rows);
+                span_cells(&mut rows);
+                let table = Block::Table(Table { rows });
                 match sink.tables.last_mut() {
                     Some(parent) => parent.cell_blocks.push(table),
                     None => sink.blocks.push(table),
@@ -1375,6 +1404,40 @@ fn take_argument(s: &str) -> (String, &str) {
     }
     let end = s.find(char::is_whitespace).unwrap_or(s.len());
     (s[..end].to_string(), &s[end..])
+}
+
+/// Turns cells that span several of the table's columns into one cell followed by empty cells.
+///
+/// RTF has no column count: every row lists the right edge of each of its cells (`\cellxN`), and
+/// a merged cell is simply one whose edge skips past several of the other rows' edges.
+/// The columns are the union of every row's edges; a cell covers the columns whose edge lies
+/// after the previous cell's edge and at or before its own. A row whose edge count differs from
+/// its cell count is left as it is.
+fn span_cells(rows: &mut [Row]) {
+    let mut union: Vec<i32> = rows.iter().flat_map(|r| r.edges.iter().copied()).collect();
+    union.sort_unstable();
+    union.dedup();
+    for row in rows.iter_mut() {
+        let edges = std::mem::take(&mut row.edges);
+        if union.len() < 2
+            || edges.len() != row.cells.len()
+            || !edges.windows(2).all(|w| w[0] < w[1])
+        {
+            continue;
+        }
+        let covered = |edge: i32| union.partition_point(|u| *u <= edge);
+        let mut cells = Vec::with_capacity(union.len());
+        let mut before = 0;
+        for (cell, edge) in std::mem::take(&mut row.cells).into_iter().zip(edges) {
+            let upto = covered(edge);
+            cells.push(cell);
+            for _ in 1..upto.saturating_sub(before) {
+                cells.push(Cell::default());
+            }
+            before = upto;
+        }
+        row.cells = cells;
+    }
 }
 
 #[cfg(test)]

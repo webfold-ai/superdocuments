@@ -4,6 +4,24 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-09
+
+### Added
+
+- `src/ooxml/`: shared OOXML helpers (local-name matching, relationship reading, package-safe path resolution) and new DOCX, PPTX and XLSX readers. DOCX: headings from styles, lists from `numbering.xml`, bold and italic, hyperlinks, footnotes and endnotes, tracked deletions omitted, nested tables, merged cells. PPTX: presentation order, notes, tables. XLSX: workbook sheet names in tab order, dates from number formats, booleans, rich and inline strings.
+- RTF: a merged cell written through `\cellx` edges keeps its columns; an outline-numbered heading stays a heading.
+
+### Changed
+
+- `convert_streaming` and `DocumentCache` use one implementation per format for DOCX, PPTX and XLSX (the separate streaming and cache-lift code for DOCX and XLSX was removed; `LiftedDoc` is CSV-only).
+- `hashtrinity` is pinned to a revision that exists upstream.
+- Version 0.9.0, so a dependent can pin `tag = "v0.9.0"`; a tag keeps the commit reachable, which a revision on a branch does not once the branch is squash-merged.
+
+### Fixed
+
+- Every XML reader dropped the character an entity reference stands for (`&amp;`, `&lt;`, `&gt;`, `&quot;`, `&apos;`, numeric references).
+
+
 ### Added
 
 - RTF reading and writing in `superdocuments::rtf`. `rtf::parse` returns an `RtfDocument` (metadata, paragraphs, list items, nested tables, hyperlinks, footnotes, optional headers and footers, warnings). `rtf::to_text` and `rtf::to_markdown` render it. `rtf::to_rtf` and `rtf::markdown_to_rtf` write ASCII-only RTF.
