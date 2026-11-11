@@ -283,3 +283,23 @@ fn truncated_and_mutated_archives_never_panic() {
         let _ = read_eprint(&bytes);
     }
 }
+
+#[test]
+fn a_gzipped_pdf_is_not_read_as_tex() {
+    // arXiv serves a PDF-only submission as a gzip stream of the PDF.
+    let pdf = gzip_stored(b"%PDF-1.5\n1 0 obj\n<< /Type /Catalog >>\nendobj\n");
+    assert_eq!(
+        read_eprint(&pdf).map(|s| s.main_file),
+        Err(Error::NoTexFile)
+    );
+    assert_eq!(
+        crate::document::convert_bytes("gz", &pdf).unwrap_err(),
+        "the archive contains no TeX file"
+    );
+    // A gzip stream of TeX is still one TeX file.
+    let tex = gzip_stored(b"\\section{Kept} Body with %PDF- in the text.");
+    assert_eq!(
+        read_eprint(&tex).map(|s| s.main_file).as_deref(),
+        Ok("main.tex")
+    );
+}

@@ -136,6 +136,197 @@ pub fn symbol(name: &str) -> Option<&'static str> {
     })
 }
 
+/// The text of a siunitx unit argument: `\kilo\gram\per\second\squared` gives `kg/s²`, and
+/// `m.s^{-1}` gives `m·s⁻¹`. A unit macro that is not in the table keeps its name.
+pub fn si_unit(raw: &str) -> String {
+    let chars: Vec<char> = raw.chars().collect();
+    let mut out = String::new();
+    let mut i = 0usize;
+    while i < chars.len() {
+        match chars[i] {
+            '\\' => {
+                let start = i + 1;
+                let mut end = start;
+                while chars.get(end).is_some_and(|c| c.is_ascii_alphabetic()) {
+                    end += 1;
+                }
+                if end == start {
+                    // `\%` and other escaped characters.
+                    if let Some(&c) = chars.get(start) {
+                        out.push(c);
+                    }
+                    i = start + 1;
+                    continue;
+                }
+                let name: String = chars[start..end].iter().collect();
+                i = end;
+                match name.as_str() {
+                    "per" => out.push('/'),
+                    "squared" | "square" => out.push('\u{b2}'),
+                    "cubed" | "cubic" => out.push('\u{b3}'),
+                    "tothe" | "raiseto" => {}
+                    _ => out.push_str(si_symbol(&name).unwrap_or(&name)),
+                }
+            }
+            '^' => {
+                i += 1;
+                let mut exponent = String::new();
+                if chars.get(i) == Some(&'{') {
+                    i += 1;
+                    while let Some(&c) = chars.get(i) {
+                        i += 1;
+                        if c == '}' {
+                            break;
+                        }
+                        exponent.push(c);
+                    }
+                } else if let Some(&c) = chars.get(i) {
+                    exponent.push(c);
+                    i += 1;
+                }
+                out.push_str(&superscript(&exponent));
+            }
+            '.' | '~' => {
+                out.push('\u{b7}');
+                i += 1;
+            }
+            '{' | '}' => i += 1,
+            c if c.is_whitespace() => i += 1,
+            c => {
+                out.push(c);
+                i += 1;
+            }
+        }
+    }
+    out
+}
+
+/// The text of a siunitx number: `1.5e-3` gives `1.5 × 10⁻³`, and `+-` or `\pm` gives `±`.
+pub fn si_number(raw: &str) -> String {
+    let text = raw
+        .trim()
+        .replace("\\pm", "\u{b1}")
+        .replace("+-", "\u{b1}")
+        .replace("\\,", "")
+        .replace(['{', '}'], "");
+    let text: String = text.split_whitespace().collect::<Vec<_>>().join(" ");
+    let Some(pos) = text.find(['e', 'E']) else {
+        return text
+            .replace(" \u{b1} ", "\u{a0}\u{b1}\u{a0}")
+            .replace('-', "\u{2212}");
+    };
+    let (mantissa, exponent) = (&text[..pos], &text[pos + 1..]);
+    let exponent_ok = !exponent.is_empty()
+        && exponent
+            .chars()
+            .all(|c| c.is_ascii_digit() || c == '-' || c == '+');
+    if !exponent_ok {
+        return text;
+    }
+    let power = format!("10{}", superscript(exponent.trim_start_matches('+')));
+    let mantissa = mantissa.replace('-', "\u{2212}");
+    if mantissa.is_empty() {
+        power
+    } else {
+        format!("{mantissa}\u{a0}\u{d7}\u{a0}{power}")
+    }
+}
+
+/// Digits and signs as Unicode superscripts; anything else is written after `^`.
+fn superscript(text: &str) -> String {
+    let mut out = String::new();
+    for c in text.chars() {
+        out.push(match c {
+            '0' => '\u{2070}',
+            '1' => '\u{b9}',
+            '2' => '\u{b2}',
+            '3' => '\u{b3}',
+            '4'..='9' => char::from_u32(0x2070 + (c as u32 - '0' as u32)).unwrap_or(c),
+            '-' => '\u{207b}',
+            '+' => '\u{207a}',
+            _ => return format!("^{text}"),
+        });
+    }
+    out
+}
+
+/// The symbol of a siunitx prefix or unit macro.
+fn si_symbol(name: &str) -> Option<&'static str> {
+    Some(match name {
+        // prefixes
+        "yocto" => "y",
+        "zepto" => "z",
+        "atto" => "a",
+        "femto" => "f",
+        "pico" => "p",
+        "nano" => "n",
+        "micro" => "\u{b5}",
+        "milli" => "m",
+        "centi" => "c",
+        "deci" => "d",
+        "deca" | "deka" => "da",
+        "hecto" => "h",
+        "kilo" => "k",
+        "mega" => "M",
+        "giga" => "G",
+        "tera" => "T",
+        "peta" => "P",
+        "exa" => "E",
+        "kibi" => "Ki",
+        "mebi" => "Mi",
+        "gibi" => "Gi",
+        "tebi" => "Ti",
+        // units
+        "meter" | "metre" => "m",
+        "gram" => "g",
+        "kilogram" => "kg",
+        "second" => "s",
+        "ampere" => "A",
+        "kelvin" => "K",
+        "mole" => "mol",
+        "candela" => "cd",
+        "hertz" => "Hz",
+        "newton" => "N",
+        "pascal" => "Pa",
+        "joule" => "J",
+        "watt" => "W",
+        "coulomb" => "C",
+        "volt" => "V",
+        "farad" => "F",
+        "ohm" => "\u{3a9}",
+        "siemens" => "S",
+        "weber" => "Wb",
+        "tesla" => "T",
+        "henry" => "H",
+        "lumen" => "lm",
+        "lux" => "lx",
+        "becquerel" => "Bq",
+        "gray" => "Gy",
+        "sievert" => "Sv",
+        "radian" => "rad",
+        "steradian" => "sr",
+        "celsius" | "degreeCelsius" => "\u{b0}C",
+        "degree" => "\u{b0}",
+        "percent" => "%",
+        "minute" => "min",
+        "hour" => "h",
+        "day" => "d",
+        "liter" | "litre" => "L",
+        "tonne" => "t",
+        "electronvolt" => "eV",
+        "angstrom" => "\u{c5}",
+        "bar" => "bar",
+        "decibel" => "dB",
+        "bit" => "bit",
+        "byte" => "B",
+        "arcminute" => "\u{2032}",
+        "arcsecond" => "\u{2033}",
+        "astronomicalunit" => "au",
+        "dalton" => "Da",
+        _ => return None,
+    })
+}
+
 /// Formatting commands whose argument is kept and whose name is dropped.
 pub fn is_transparent(name: &str) -> bool {
     matches!(

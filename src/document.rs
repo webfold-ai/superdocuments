@@ -583,8 +583,195 @@ fn xlsb(data: &[u8]) -> Result<String, String> {
     Ok(out.trim_end().to_string())
 }
 
+// ─── Scientific sources: LaTeX, BibTeX, MathML, arXiv e-prints ──────────────────────────────
+
+/// gzip (`1f 8b`) or a tar archive (`ustar` at offset 257): what an arXiv e-print is.
+fn looks_like_archive(data: &[u8]) -> bool {
+    data.starts_with(&[0x1f, 0x8b]) || (data.len() >= 512 && data.get(257..262) == Some(b"ustar"))
+}
+
+/// UTF-8 (a byte-order mark is dropped) when valid, otherwise Latin-1, which is what older
+/// TeX sources usually are.
+fn decode_tex(data: &[u8]) -> String {
+    let data = data.strip_prefix(&[0xef, 0xbb, 0xbf]).unwrap_or(data);
+    match std::str::from_utf8(data) {
+        Ok(text) => text.to_string(),
+        Err(_) => data.iter().map(|&b| char::from(b)).collect(),
+    }
+}
+
+/// How the converters read LaTeX: the default bounds, with the document's own macros expanded
+/// inside math too, since a Markdown math renderer does not know them.
+fn latex_options() -> crate::latex::Options {
+    crate::latex::Options {
+        expand_math_macros: true,
+        ..Default::default()
+    }
+}
+
+/// Markdown for a parsed LaTeX document. When the document has no `thebibliography` of its
+/// own and a bibliography is supplied, the entries it cites are listed under "References",
+/// in order of first citation (`\nocite{*}` lists every entry).
+fn latex_markdown(
+    doc: &crate::latex::Document,
+    bib: Option<&crate::bibtex::Bibliography>,
+) -> String {
+    use crate::latex::CitationSource;
+    let mut out =
+        crate::latex::render_markdown(doc, &crate::latex::RenderOptions { bibliography: bib });
+    let Some(bib) = bib.filter(|_| doc.bibitems.is_empty()) else {
+        return out;
+    };
+    let links = crate::latex::resolve_citations(doc, Some(bib));
+    let everything = links.iter().any(|l| l.key == "*");
+    let mut listed: Vec<&crate::bibtex::Entry> = Vec::new();
+    for link in &links {
+        if link.source != CitationSource::Bibliography {
+            continue;
+        }
+        if let Some(entry) = bib.lookup(&link.key) {
+            if !listed.iter().any(|e| std::ptr::eq(*e, entry)) {
+                listed.push(entry);
+            }
+        }
+    }
+    if everything {
+        for entry in &bib.entries {
+            if !listed.iter().any(|e| std::ptr::eq(*e, entry)) {
+                listed.push(entry);
+            }
+        }
+    }
+    if listed.is_empty() {
+        return out;
+    }
+    out.push_str(if doc.title.is_some() {
+        "\n## References\n\n"
+    } else {
+        "\n# References\n\n"
+    });
+    for entry in listed {
+        out.push_str(&format!(
+            "- `{}` — {}\n",
+            entry.key.replace('`', "'"),
+            crate::bibtex::reference_markdown(bib, entry)
+        ));
+    }
+    out
+}
+
+/// LaTeX source with no file access: `\input` names stay unresolved and `\cite` shows keys.
+fn latex(data: &[u8]) -> Result<String, String> {
+    if looks_like_archive(data) {
+        return eprint(data);
+    }
+    let doc = crate::latex::parse_with(&decode_tex(data), &latex_options(), None);
+    Ok(latex_markdown(&doc, None))
+}
+
+/// A `.tex` file on disk. `\input`, `\include` and `\subfile` are read from the file's own
+/// directory tree and nowhere else (`latex::DirFiles`). The `.bib` files named by
+/// `\bibliography` and `\addbibresource` are read the same way; when there are none, the
+/// `.bbl` file next to the document is used.
+fn latex_path(path: &std::path::Path, data: &[u8]) -> Result<String, String> {
+    let dir = path
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or_else(|| std::path::Path::new("."));
+    let files = crate::latex::DirFiles::new(dir)
+        .map_err(|e| format!("cannot read the document directory: {e}"))?
+        .excluding(path);
+    let options = latex_options();
+    let mut doc = crate::latex::parse_with(&decode_tex(data), &options, Some(&files));
+    let mut bib = crate::bibtex::Bibliography::default();
+    for name in &doc.bibliography_files {
+        let text = if name.to_ascii_lowercase().ends_with(".bib") {
+            files.read(name)
+        } else {
+            files.read(&format!("{name}.bib"))
+        };
+        if let Some(text) = text {
+            bib.entries.extend(crate::bibtex::parse(&text).entries);
+        }
+    }
+    if bib.entries.is_empty() && doc.bibitems.is_empty() {
+        let bbl = path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .and_then(|stem| files.read(&format!("{stem}.bbl")));
+        if let Some(bbl) = bbl {
+            doc.bibitems = crate::latex::parse_with(&bbl, &options, None).bibitems;
+        }
+    }
+    Ok(latex_markdown(&doc, Some(&bib)))
+}
+
+/// An arXiv e-print: a gzip-compressed tar, a plain tar, or a gzip-compressed single TeX file.
+/// `\input` files, `.bib` and `.bbl` files are read from the archive only.
+fn eprint(data: &[u8]) -> Result<String, String> {
+    let options = crate::arxiv_source::Options {
+        latex: latex_options(),
+        ..Default::default()
+    };
+    let mut source =
+        crate::arxiv_source::read_eprint_with(data, &options).map_err(|e| e.to_string())?;
+    // Entries that came from `\bibitem` text (a `.bbl` file) have no author or year to build a
+    // citation from. They are shown the way `thebibliography` items are: by label or number.
+    if source.document.bibitems.is_empty() {
+        let (items, entries): (Vec<_>, Vec<_>) = std::mem::take(&mut source.bibliography.entries)
+            .into_iter()
+            .partition(|e| e.field("raw").is_some() && e.field("author").is_none());
+        source.bibliography.entries = entries;
+        for entry in items {
+            let note = entry.value("note").unwrap_or_default().to_string();
+            source.document.bibitems.push(crate::latex::BibItem {
+                key: entry.key.clone(),
+                label: entry.value("label").map(str::to_string),
+                text: vec![crate::latex::Inline::Text(note)],
+                raw: entry.value("raw").unwrap_or_default().to_string(),
+            });
+        }
+    }
+    Ok(latex_markdown(&source.document, Some(&source.bibliography)))
+}
+
+/// A `.bib` file as a readable Markdown reference list. For structured output use
+/// `bibtex::parse` with `bibtex::csl_json` (CSL-JSON) or `bibtex::write` (BibTeX).
+fn bib(data: &[u8]) -> Result<String, String> {
+    let parsed = crate::bibtex::parse(&decode_tex(data));
+    if parsed.entries.is_empty() {
+        return Err(match parsed.warnings.first() {
+            Some(w) => format!("no BibTeX entries found: {}", w.message),
+            None => "no BibTeX entries found".to_string(),
+        });
+    }
+    Ok(crate::bibtex::render_markdown(&parsed)
+        .trim_end()
+        .to_string())
+}
+
+/// A MathML `<math>` element as display math in TeX.
+fn mathml(data: &[u8]) -> Result<String, String> {
+    let converted = crate::mathml::to_tex(&decode_tex(data));
+    let tex = converted.tex.trim();
+    if tex.is_empty() {
+        return Err(match converted.warnings.first() {
+            Some(w) => format!("no MathML converted: {w}"),
+            None => "no MathML <math> content found".to_string(),
+        });
+    }
+    Ok(format!("$$\n{tex}\n$$"))
+}
+
 /// Convert an in-memory document to Markdown. Unsupported extensions return an
 /// error rather than silently interpreting binary Office bytes as text.
+///
+/// Scientific sources: `tex`, `latex` and `ltx` are read as LaTeX (with no file access, so
+/// `\input` files are not inlined; use `convert_path` for a project on disk). `bib` and
+/// `bibtex` give a Markdown reference list. `mml` and `mathml` give display math in TeX.
+/// `gz`, `tgz` and `tar` are read as an arXiv e-print. An e-print is also recognised by its
+/// content (gzip or tar magic) under a `tex` extension or an extension this function does not
+/// know, which is how files saved from `arxiv.org/e-print/<id>` are named.
 pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
     match extension.to_ascii_lowercase().as_str() {
         "docx" | "docm" => crate::ooxml::docx::convert(data),
@@ -602,17 +789,39 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         }
         "html" | "htm" => Ok(crate::html::to_markdown(data, "")),
         "txt" | "md" | "markdown" => Ok(String::from_utf8_lossy(data).into_owned()),
-        other => Err(format!("unsupported document extension: {other}")),
+        "tex" | "latex" | "ltx" => latex(data),
+        "bib" | "bibtex" => bib(data),
+        "mml" | "mathml" => mathml(data),
+        "gz" | "tgz" | "tar" => eprint(data),
+        other => {
+            let unsupported = format!("unsupported document extension: {other}");
+            if looks_like_archive(data) {
+                // An e-print saved under its arXiv identifier (`2301.00001v2`).
+                return eprint(data).map_err(|_| unsupported);
+            }
+            Err(unsupported)
+        }
     }
 }
 
+/// Convert a file to Markdown by its extension. A `.tex`, `.latex` or `.ltx` file is read
+/// together with its project: `\input` files and bibliographies come from the file's own
+/// directory tree, never from outside it. A file with no extension is accepted only when its
+/// content is an e-print archive.
 pub fn convert_path(path: &std::path::Path) -> Result<String, String> {
-    let extension = path
-        .extension()
-        .and_then(|e| e.to_str())
-        .ok_or("missing document extension")?;
+    let extension = path.extension().and_then(|e| e.to_str());
     let data = std::fs::read(path).map_err(|e| e.to_string())?;
-    convert_bytes(extension, &data)
+    match extension {
+        Some(ext)
+            if matches!(ext.to_ascii_lowercase().as_str(), "tex" | "latex" | "ltx")
+                && !looks_like_archive(&data) =>
+        {
+            latex_path(path, &data)
+        }
+        Some(ext) => convert_bytes(ext, &data),
+        None if looks_like_archive(&data) => eprint(&data),
+        None => Err("missing document extension".into()),
+    }
 }
 
 /// Write-through lift: parse the document and emit Markdown chunks directly to `out`
@@ -750,6 +959,14 @@ pub enum DocFormat {
     Epub = 10,
     Rtf = 11,
     Csv = 12,
+    /// LaTeX source (`tex`, `latex`, `ltx`).
+    Tex = 13,
+    /// BibTeX or BibLaTeX (`bib`, `bibtex`).
+    Bib = 14,
+    /// MathML (`mml`, `mathml`).
+    MathMl = 15,
+    /// An arXiv e-print archive (`gz`, `tgz`, `tar`).
+    ArxivSource = 16,
 }
 
 impl DocFormat {
@@ -768,6 +985,10 @@ impl DocFormat {
             "epub" => Some(Self::Epub),
             "rtf" => Some(Self::Rtf),
             "csv" => Some(Self::Csv),
+            "tex" | "latex" | "ltx" => Some(Self::Tex),
+            "bib" | "bibtex" => Some(Self::Bib),
+            "mml" | "mathml" => Some(Self::MathMl),
+            "gz" | "tgz" | "tar" => Some(Self::ArxivSource),
             _ => None,
         }
     }
@@ -870,6 +1091,7 @@ impl DocumentCache {
         out: &mut W,
     ) -> Result<(), String> {
         let format = DocFormat::from_extension(extension)
+            .or_else(|| looks_like_archive(data).then_some(DocFormat::ArxivSource))
             .ok_or_else(|| format!("unsupported document extension: {extension}"))?;
 
         if format.is_streaming() {

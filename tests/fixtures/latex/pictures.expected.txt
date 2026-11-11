@@ -1,0 +1,27 @@
+Pictures
+
+[TikZ picture, not rendered]
+
+[TikZ picture, not rendered]
+
+Figure 1: Two diagrams in one float.
+
+[forest picture, not rendered]
+
+Figure 2: A parse tree.
+
+Figure 3: Circuit and line.
+
+[circuitikz picture, not rendered]
+
+(3a) A resistor.
+
+[LaTeX picture, not rendered]
+
+(3b) A line.
+
+Table 1: A table drawn as a picture.
+
+[pgfpicture picture, not rendered]
+
+Figures 1, 2 and 3a; Table 1.

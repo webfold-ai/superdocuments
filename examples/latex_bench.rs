@@ -4,6 +4,8 @@
 //! Usage:
 //!   latex_bench counts <file.tex>        JSON counts (structure, math, figures, citations, ...)
 //!   latex_bench markdown <file.tex>      Markdown on stdout (for timing the CLI)
+//!   latex_bench convert <file>           Markdown from `document::convert_path` (a .tex project,
+//!                                        a .bib file, MathML, or an arXiv e-print archive)
 //!   latex_bench plain <file.tex>         plain text on stdout
 //!   latex_bench time <file.tex> <runs>   median in-process nanoseconds for parse + Markdown
 //!   latex_bench bib-counts <file.bib>    JSON counts for BibTeX
@@ -216,6 +218,18 @@ fn main() {
             std::process::exit(2);
         }
     };
+    if cmd == "convert" {
+        // Through the conversion API: project files and bibliography from the file's own
+        // directory, e-print archives by content, macros expanded inside math.
+        match superdocuments::document::convert_path(std::path::Path::new(file)) {
+            Ok(markdown) => println!("{markdown}"),
+            Err(e) => {
+                eprintln!("cannot convert {file}: {e}");
+                std::process::exit(1);
+            }
+        }
+        return;
+    }
     let src = read(file);
     match cmd {
         "counts" => println!(

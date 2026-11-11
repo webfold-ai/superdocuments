@@ -21,7 +21,9 @@ Architecture without a number.
 *TikZ picture, not rendered.*
 
 ```latex
-\draw (0,0) -- (1,1);
+\begin{tikzpicture}[scale=2]
+  \draw (0,0) -- (1,1);
+\end{tikzpicture}
 ```
 
 **Figure 3:** A TikZ diagram.

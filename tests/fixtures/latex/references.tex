@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{cleveref}
+\newtheorem{lemma}{Lemma}
+\begin{document}
+\section{Method}\label{sec:method}
+\subsection{Details}\label{sec:details}
+\begin{figure}
+  \begin{subfigure}{0.5\linewidth}\includegraphics{a}\caption{Left.}\label{fig:a}\end{subfigure}
+  \begin{subfigure}{0.5\linewidth}\includegraphics{b}\caption{Right.}\label{fig:b}\end{subfigure}
+  \caption{Overview.}\label{fig:overview}
+\end{figure}
+\begin{table}\caption{Numbers.}\label{tab:numbers}\begin{tabular}{l} 1 \\ \end{tabular}\end{table}
+\begin{equation} a = b \label{eq:first} \end{equation}
+\begin{equation} c = d \label{eq:second} \end{equation}
+\begin{lemma}\label{lem:key} A key fact. \end{lemma}
+\begin{algorithm}\caption{Search}\label{alg:search}\State go\end{algorithm}
+
+cref: \cref{sec:method}, \cref{fig:overview}, \cref{tab:numbers}, \cref{eq:first}, \cref{lem:key}, \cref{alg:search}, \cref{app:proofs}.
+
+Cref: \Cref{sec:method}, \Cref{fig:overview}, \Cref{tab:numbers}, \Cref{eq:first}, \Cref{lem:key}, \Cref{alg:search}, \Cref{app:proofs}.
+
+autoref: \autoref{sec:method}, \autoref{fig:overview}, \autoref{tab:numbers}, \autoref{eq:first}, \autoref{lem:key}, \autoref{alg:search}, \autoref{app:proofs}.
+
+plain: \ref{sec:method}, \ref{fig:overview}, \ref{tab:numbers}, \eqref{eq:first}, \ref{lem:key}, \ref{alg:search}, \ref{app:proofs}.
+
+several: \cref{fig:overview,fig:a}, \Cref{sec:method, sec:details, app:proofs}, \cref{eq:first,eq:second}.
+
+subfigures: (\subref{fig:a}) and (\subref{fig:b}) of \Cref{fig:overview}; \ref{fig:b}.
+
+missing: \ref{sec:missing}, \cref{sec:method,fig:missing}, \Cref{fig:missing}.
+
+starred: \ref*{sec:method}.
+
+\appendix
+\section{Proofs}\label{app:proofs}
+Deferred.
+\end{document}

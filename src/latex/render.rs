@@ -6,7 +6,7 @@
 use std::fmt::Write as _;
 
 use super::parser::plain;
-use super::{Block, Cite, Document, Figure, ImagePath, Inline, ListKind, Table};
+use super::{Block, Cite, Document, Figure, ImagePath, Inline, ListKind, Picture, Ref, Table};
 use crate::bibtex::Bibliography;
 
 /// Optional inputs for rendering.
@@ -43,6 +43,8 @@ struct Renderer<'a> {
     options: &'a RenderOptions<'a>,
     mode: Mode,
     notes: Vec<String>,
+    /// True while a table cell is written: a line break there must not end the row.
+    in_cell: bool,
 }
 
 impl<'a> Renderer<'a> {
@@ -52,6 +54,7 @@ impl<'a> Renderer<'a> {
             options,
             mode,
             notes: Vec::new(),
+            in_cell: false,
         }
     }
 
@@ -92,7 +95,8 @@ impl<'a> Renderer<'a> {
                 let body = self.inlines(text);
                 let label = self.doc.bibitems[i]
                     .label
-                    .clone()
+                    .as_deref()
+                    .map(bibitem_label)
                     .unwrap_or_else(|| format!("{}", i + 1));
                 let line = match self.mode {
                     Mode::Html => format!("<p>[{}] {}</p>\n", escape_html(&label), body),
@@ -250,6 +254,12 @@ impl<'a> Renderer<'a> {
     }
 
     fn break_line(&self) -> &'static str {
+        if self.in_cell {
+            return match self.mode {
+                Mode::Text => " ",
+                Mode::Markdown | Mode::Html => "<br>",
+            };
+        }
         match self.mode {
             Mode::Text => "\n",
             Mode::Markdown => "\\\n",
@@ -294,12 +304,8 @@ impl<'a> Renderer<'a> {
             }
             Inline::Cite(c) => self.cite(c),
             Inline::Ref(r) => {
-                let number = self.doc.label_number(&r.label).map(str::to_string);
-                match (number, r.command.as_str()) {
-                    (Some(n), "eqref") => self.escape(&format!("({n})")),
-                    (Some(n), _) => self.escape(&n),
-                    (None, _) => self.escape("??"),
-                }
+                let text = self.reference(r);
+                self.escape(&text)
             }
             Inline::Link { url, text } => {
                 let t = self.inlines(text);
@@ -320,6 +326,79 @@ impl<'a> Renderer<'a> {
         }
     }
 
+    /// The text of a reference. `\ref` gives the number, `\eqref` the number in parentheses,
+    /// `\subref` the letter of a subfigure. `\cref`, `\Cref` and `\autoref` add the name of
+    /// what the label is on, as cleveref and hyperref do with their default settings. A label
+    /// that is not defined gives `??`.
+    fn reference(&self, r: &Ref) -> String {
+        let command = r.command.as_str();
+        let named = matches!(command, "cref" | "Cref" | "autoref");
+        let mut kind: Option<String> = None;
+        let mut numbers: Vec<String> = Vec::new();
+        for name in r.labels() {
+            let info = self.doc.labels.iter().find(|l| l.name == name);
+            let Some(number) = info.and_then(|l| l.number.clone()) else {
+                numbers.push("??".into());
+                continue;
+            };
+            let this_kind = info.map(|l| l.kind.clone()).unwrap_or_default();
+            numbers.push(match command {
+                "eqref" => format!("({number})"),
+                "subref" => number
+                    .trim_start_matches(|c: char| c.is_ascii_digit() || c == '.')
+                    .to_string(),
+                "cref" | "Cref" if this_kind == "equation" => format!("({number})"),
+                _ => number,
+            });
+            if kind.is_none() {
+                kind = Some(self.reference_name(name, &this_kind, command, r.labels().len() > 1));
+            }
+        }
+        let list = match numbers.len() {
+            0 => "??".to_string(),
+            1 => numbers[0].clone(),
+            n => format!("{} and {}", numbers[..n - 1].join(", "), numbers[n - 1]),
+        };
+        match kind.filter(|k| named && !k.is_empty()) {
+            Some(k) => format!("{k}\u{a0}{list}"),
+            None => list,
+        }
+    }
+
+    /// The word a named reference puts before the number.
+    fn reference_name(&self, label: &str, kind: &str, command: &str, plural: bool) -> String {
+        let theorem;
+        // (cleveref lower case, cleveref plural, capitalised, capitalised plural)
+        let (short, shorts, long, longs): (&str, &str, &str, &str) = match kind {
+            "section" => ("section", "sections", "Section", "Sections"),
+            "appendix" => ("appendix", "appendices", "Appendix", "Appendices"),
+            "figure" | "subfigure" => ("fig.", "figs.", "Figure", "Figures"),
+            "table" => ("table", "tables", "Table", "Tables"),
+            "equation" => ("eq.", "eqs.", "Equation", "Equations"),
+            "algorithm" => ("algorithm", "algorithms", "Algorithm", "Algorithms"),
+            "theorem" => {
+                theorem = theorem_name(&self.doc.blocks, label).unwrap_or_else(|| "Theorem".into());
+                let word = match (command, plural) {
+                    ("cref", false) => theorem.to_lowercase(),
+                    ("cref", true) => format!("{}s", theorem.to_lowercase()),
+                    (_, false) => theorem.clone(),
+                    (_, true) => format!("{theorem}s"),
+                };
+                return word;
+            }
+            _ => return String::new(),
+        };
+        match (command, plural) {
+            ("cref", false) => short,
+            ("cref", true) => shorts,
+            // hyperref's \autoref writes "section" in lower case.
+            ("autoref", _) if kind == "section" => "section",
+            (_, false) => long,
+            (_, true) => longs,
+        }
+        .to_string()
+    }
+
     fn cite(&self, c: &Cite) -> String {
         let mut labels = Vec::new();
         for key in &c.keys {
@@ -331,7 +410,26 @@ impl<'a> Renderer<'a> {
             (None, Some(q)) => format!("{body}, {q}"),
             _ => body,
         };
-        let textual = matches!(c.command.as_str(), "citet" | "citeauthor" | "citeyear");
+        // \nocite only adds to the reference list.
+        if c.command == "nocite" {
+            return String::new();
+        }
+        let textual = matches!(
+            c.command.as_str(),
+            "citet"
+                | "Citet"
+                | "textcite"
+                | "Textcite"
+                | "newcite"
+                | "citeauthor"
+                | "Citeauthor"
+                | "citeyear"
+                | "citealt"
+                | "citealp"
+                | "citenum"
+                | "citetitle"
+                | "fullcite"
+        );
         let text = if textual { body } else { format!("({body})") };
         self.escape(&text)
     }
@@ -342,7 +440,8 @@ impl<'a> Renderer<'a> {
         if let Some(i) = self.doc.bibitems.iter().position(|b| b.key == key) {
             return self.doc.bibitems[i]
                 .label
-                .clone()
+                .as_deref()
+                .map(bibitem_label)
                 .unwrap_or_else(|| (i + 1).to_string());
         }
         let Some(bib) = self.options.bibliography else {
@@ -352,6 +451,14 @@ impl<'a> Renderer<'a> {
             return key.to_string();
         };
         let names = entry.authors();
+        if names.names.is_empty() && entry.year().is_none() {
+            // Nothing to build "Author, Year" from (for example an entry made from a
+            // `\bibitem`): its own label, or the key.
+            return match entry.value("label") {
+                Some(label) => bibitem_label(label),
+                None => entry.key.clone(),
+            };
+        }
         let family: Vec<String> = names.names.iter().map(|n| n.family.clone()).collect();
         let who = match family.len() {
             0 => entry.key.clone(),
@@ -363,10 +470,10 @@ impl<'a> Renderer<'a> {
             .year()
             .map(|y| y.to_string())
             .unwrap_or_else(|| "n.d.".to_string());
-        if command == "citeyear" {
-            year
-        } else {
-            format!("{who}, {year}")
+        match command {
+            "citeyear" | "citeyearpar" => year,
+            "citeauthor" | "Citeauthor" => who,
+            _ => format!("{who}, {year}"),
         }
     }
 
@@ -410,6 +517,10 @@ impl<'a> Renderer<'a> {
             }
             Block::Verbatim(v) => match self.mode {
                 Mode::Text => format!("{}\n\n", v.text),
+                // Pseudocode is kept as its LaTeX source, and says so.
+                Mode::Markdown if matches!(v.env.as_str(), "algorithm" | "algorithmic") => {
+                    fenced("latex", &v.text)
+                }
                 Mode::Markdown => format!("```\n{}\n```\n\n", v.text.trim_end_matches('\n')),
                 Mode::Html => format!("<pre><code>{}</code></pre>\n", escape_html(&v.text)),
             },
@@ -510,16 +621,38 @@ impl<'a> Renderer<'a> {
 
     fn figure(&mut self, f: &Figure) -> String {
         let mut out = String::new();
-        if let Some(tikz) = &f.tikz {
+        // A figure built by hand may carry only the older `tikz` body.
+        let legacy;
+        let pictures: &[Picture] = if f.pictures.is_empty() {
+            legacy = f
+                .tikz
+                .as_ref()
+                .map(|body| Picture {
+                    env: "tikzpicture".into(),
+                    source: body.trim().to_string(),
+                })
+                .into_iter()
+                .collect::<Vec<_>>();
+            &legacy
+        } else {
+            &f.pictures
+        };
+        for picture in pictures {
+            let what = match picture.env.as_str() {
+                "tikzpicture" => "TikZ picture".to_string(),
+                "picture" => "LaTeX picture".to_string(),
+                other => format!("{other} picture"),
+            };
             out.push_str(&match self.mode {
-                Mode::Text => "[TikZ picture, not rendered]\n\n".to_string(),
+                Mode::Text => format!("[{what}, not rendered]\n\n"),
                 Mode::Markdown => format!(
-                    "*TikZ picture, not rendered.*\n\n```latex\n{}\n```\n\n",
-                    tikz.trim()
+                    "*{}, not rendered.*\n\n{}",
+                    self.escape(&what),
+                    fenced("latex", &picture.source)
                 ),
                 Mode::Html => format!(
-                    "<pre><code class=\"tikz\">{}</code></pre>\n",
-                    escape_html(tikz)
+                    "<pre><code class=\"language-latex\">{}</code></pre>\n",
+                    escape_html(&picture.source)
                 ),
             });
         }
@@ -569,31 +702,58 @@ impl<'a> Renderer<'a> {
             );
             out.push_str(&self.paragraph(&line));
         }
-        let width = t.rows.iter().map(|r| r.cells.len()).max().unwrap_or(0);
+        // A cell that spans columns is followed by empty cells, so that the cells after it
+        // stay under their own columns. HTML keeps the span itself.
+        let width = t
+            .rows
+            .iter()
+            .map(|r| r.cells.iter().map(|c| c.colspan.max(1)).sum::<usize>())
+            .max()
+            .unwrap_or(0);
         if width == 0 {
             return out;
         }
-        let mut grid: Vec<Vec<String>> = Vec::new();
+        let mut grid: Vec<Vec<(String, usize)>> = Vec::new();
+        self.in_cell = true;
         for row in &t.rows {
             let mut cells = Vec::new();
             for cell in &row.cells {
-                let text = self.inlines(&cell.content).replace('\n', " ");
-                cells.push(text);
-            }
-            while cells.len() < width {
-                cells.push(String::new());
+                let mut text = self.inlines(&cell.content).replace('\n', " ");
+                if self.mode == Mode::Text {
+                    // A line break in a cell is a space in plain text; do not double it.
+                    text = text
+                        .split(' ')
+                        .filter(|w| !w.is_empty())
+                        .collect::<Vec<_>>()
+                        .join(" ");
+                }
+                cells.push((text, cell.colspan.max(1)));
             }
             grid.push(cells);
         }
+        self.in_cell = false;
+        // The same rows with every span written out as empty cells.
+        let flat: Vec<Vec<String>> = grid
+            .iter()
+            .map(|row| {
+                let mut cells = Vec::new();
+                for (text, span) in row {
+                    cells.push(text.clone());
+                    cells.extend(std::iter::repeat_n(String::new(), span - 1));
+                }
+                cells.resize(width, String::new());
+                cells
+            })
+            .collect();
         match self.mode {
             Mode::Text => {
-                for row in &grid {
+                for row in &flat {
                     let _ = writeln!(out, "{}", row.join("\t"));
                 }
                 out.push('\n');
             }
             Mode::Markdown => {
-                for (i, row) in grid.iter().enumerate() {
+                for (i, row) in flat.iter().enumerate() {
                     let cells: Vec<String> = row.iter().map(|c| c.replace('|', "\\|")).collect();
                     let _ = writeln!(out, "| {} |", cells.join(" | "));
                     if i == 0 {
@@ -607,8 +767,17 @@ impl<'a> Renderer<'a> {
                 out.push_str("<table>\n");
                 for row in &grid {
                     out.push_str("<tr>");
-                    for cell in row {
-                        let _ = write!(out, "<td>{cell}</td>");
+                    let mut used = 0usize;
+                    for (cell, span) in row {
+                        used += span;
+                        if *span > 1 {
+                            let _ = write!(out, "<td colspan=\"{span}\">{cell}</td>");
+                        } else {
+                            let _ = write!(out, "<td>{cell}</td>");
+                        }
+                    }
+                    for _ in used..width {
+                        out.push_str("<td></td>");
                     }
                     out.push_str("</tr>\n");
                 }
@@ -617,6 +786,63 @@ impl<'a> Renderer<'a> {
         }
         out
     }
+}
+
+/// A `\bibitem` label as shown in a citation. natbib writes `Short(Year)Long`, which is shown
+/// as "Short, Year"; any other label is only decoded (`~`, accents).
+fn bibitem_label(label: &str) -> String {
+    let text = crate::tex_text::decode(label, crate::tex_text::Ligatures::Tex)
+        .replace('\u{a0}', " ")
+        .trim()
+        .to_string();
+    if let Some(open) = text.rfind('(') {
+        if let Some(len) = text[open..].find(')') {
+            let year = &text[open + 1..open + len];
+            let short = text[..open].trim();
+            let is_year = year.len() >= 4 && year.chars().take(4).all(|c| c.is_ascii_digit());
+            if !short.is_empty() && is_year {
+                return format!("{short}, {year}");
+            }
+        }
+    }
+    text
+}
+
+/// The printed name ("Lemma") of the theorem-like block that carries `label`.
+fn theorem_name(blocks: &[Block], label: &str) -> Option<String> {
+    for block in blocks {
+        let found = match block {
+            Block::Theorem(t) if t.label.as_deref() == Some(label) => {
+                Some(t.name.clone()).filter(|n| !n.is_empty())
+            }
+            Block::Theorem(t) => theorem_name(&t.body, label),
+            Block::Quote(inner) => theorem_name(inner, label),
+            Block::List(list) => list
+                .items
+                .iter()
+                .find_map(|item| theorem_name(&item.blocks, label)),
+            _ => None,
+        };
+        if found.is_some() {
+            return found;
+        }
+    }
+    None
+}
+
+/// A fenced Markdown code block. The fence is longer than any run of backticks in the text.
+fn fenced(language: &str, text: &str) -> String {
+    let mut longest = 0usize;
+    let mut run = 0usize;
+    for c in text.chars() {
+        run = if c == '`' { run + 1 } else { 0 };
+        longest = longest.max(run);
+    }
+    let fence = "`".repeat(longest.max(2) + 1);
+    format!(
+        "{fence}{language}\n{}\n{fence}\n\n",
+        text.trim_matches('\n').trim_end()
+    )
 }
 
 fn escape_html(s: &str) -> String {

@@ -13,7 +13,8 @@ use super::lexer::{Lexer, Tok};
 use super::FileProvider;
 use super::{
     BibItem, Block, Cell, Cite, Document, Figure, ImagePath, Inline, LabelInfo, List, ListItem,
-    ListKind, MathBlock, MathRow, Options, Ref, Row, Section, Table, Theorem, Verbatim, Warning,
+    ListKind, MathBlock, MathRow, Options, Picture, Ref, Row, Section, Table, Theorem, Verbatim,
+    Warning,
 };
 use crate::tex_text::{self, Ligatures};
 
@@ -22,6 +23,9 @@ struct MacroDef {
     nargs: usize,
     default: Option<String>,
     body: String,
+    /// The body used when the command is written with a star, for commands that have a
+    /// starred form of their own (`\\DeclarePairedDelimiter`).
+    star_body: Option<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -36,6 +40,8 @@ struct EnvDef {
 struct TheoremDef {
     name: String,
     counter: String,
+    /// False for `\\newtheorem*`.
+    numbered: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -87,8 +93,12 @@ struct FloatAcc {
     images: Vec<ImagePath>,
     subs: Vec<Figure>,
     tikz: Option<String>,
+    pictures: Vec<Picture>,
     rows: Vec<Row>,
     columns: Option<String>,
+    /// Blocks found in the float that the float's own block cannot hold (a listing in a
+    /// figure, table notes). They follow the float.
+    extra: Vec<Block>,
 }
 
 enum FloatEnd {
@@ -130,6 +140,8 @@ pub(super) fn parse(source: &str, options: &Options, files: Option<&dyn FileProv
         figure_ids: 0,
         in_author: false,
         warned_limits: false,
+        appendix: false,
+        switches: HashMap::new(),
     };
     loop {
         let (blocks, end) = p.body(&Stop::Top);
@@ -167,6 +179,10 @@ struct Parser<'a> {
     figure_ids: usize,
     in_author: bool,
     warned_limits: bool,
+    /// True after `\\appendix`: top-level sections are lettered.
+    appendix: bool,
+    /// Switches made with `\\newif\\ifname`, by `name`.
+    switches: HashMap<String, bool>,
 }
 
 impl Parser<'_> {
@@ -366,8 +382,9 @@ impl Parser<'_> {
                 if !found {
                     self.warn(at, "unterminated inline math");
                 }
+                let tex = self.math_tex(tex.trim(), at);
                 st.para.push(Inline::Math {
-                    tex: tex.trim().to_string(),
+                    tex,
                     display: false,
                 });
             }
@@ -378,7 +395,7 @@ impl Parser<'_> {
                 }
                 self.flush(st);
                 let row = MathRow {
-                    tex: tex.trim().to_string(),
+                    tex: self.math_tex(tex.trim(), at),
                     number: None,
                     label: None,
                 };
@@ -419,10 +436,11 @@ impl Parser<'_> {
                     self.warn(at, "unterminated display math");
                 }
                 self.flush(st);
+                let tex = self.math_tex(tex.trim(), at);
                 st.blocks.push(Block::Math(MathBlock {
                     env: "\\[".into(),
                     rows: vec![MathRow {
-                        tex: tex.trim().to_string(),
+                        tex,
                         number: None,
                         label: None,
                     }],
@@ -433,8 +451,9 @@ impl Parser<'_> {
                 if !found {
                     self.warn(at, "unterminated inline math");
                 }
+                let tex = self.math_tex(tex.trim(), at);
                 st.para.push(Inline::Math {
-                    tex: tex.trim().to_string(),
+                    tex,
                     display: false,
                 });
             }
@@ -546,6 +565,11 @@ impl Parser<'_> {
                 None
             }
             "caption" => {
+                // \\caption*[short]{long}, outside a float this reader knows.
+                let _ = self.top().eat(b'*');
+                if self.top().peek_byte() == Some(b'[') {
+                    let _ = self.top().optional_raw();
+                }
                 let inl = self.arg_inlines();
                 self.flush(st);
                 st.blocks.push(Block::Paragraph(inl));
@@ -560,6 +584,10 @@ impl Parser<'_> {
                 if self.in_author && name == "thanks" {
                     let _ = self.arg_inlines();
                     return None;
+                }
+                // \\footnote[number]{text}
+                if self.top().peek_byte() == Some(b'[') {
+                    let _ = self.top().optional_raw();
                 }
                 let inl = self.arg_inlines();
                 st.para.push(Inline::Footnote(inl));
@@ -590,8 +618,8 @@ impl Parser<'_> {
                 None
             }
             "underline" | "textrm" | "textsf" | "textup" | "textnormal" | "mbox" | "text"
-            | "textsuperscript" | "textsubscript" | "hbox" | "ensuremath" | "mathrm" | "mathbf"
-            | "mathit" | "mathsf" | "mathtt" | "mathcal" | "boldsymbol" | "fbox" => {
+            | "textsuperscript" | "textsubscript" | "hbox" | "mathrm" | "mathbf" | "mathit"
+            | "mathsf" | "mathtt" | "mathcal" | "boldsymbol" | "fbox" => {
                 let inl = self.arg_inlines();
                 st.para.extend(inl);
                 None
@@ -619,14 +647,33 @@ impl Parser<'_> {
                 }
                 None
             }
+            "ensuremath" => {
+                let raw = self.top().group_raw().unwrap_or_default();
+                let tex = self.math_tex(raw.trim(), at);
+                st.para.push(Inline::Math {
+                    tex,
+                    display: false,
+                });
+                None
+            }
+            "xspace" => {
+                if self.xspace_wants_space() {
+                    Self::push_text(st, " ");
+                }
+                None
+            }
             "cite" | "citep" | "citet" | "citealp" | "citealt" | "citeauthor" | "citeyear"
             | "citeyearpar" | "nocite" | "parencite" | "textcite" | "autocite" | "footcite"
-            | "citetext" => {
+            | "citetext" | "Citet" | "Citep" | "Citeauthor" | "citenum" | "shortcite"
+            | "newcite" | "Textcite" | "Parencite" | "Autocite" | "smartcite" | "supercite"
+            | "fullcite" | "citetitle" => {
                 let cite = self.cite(name);
                 st.para.push(Inline::Cite(cite));
                 None
             }
-            "ref" | "eqref" | "autoref" | "pageref" | "cref" | "Cref" | "vref" | "nameref" => {
+            "ref" | "eqref" | "autoref" | "pageref" | "cref" | "Cref" | "vref" | "nameref"
+            | "subref" | "labelcref" => {
+                let _ = self.top().eat(b'*');
                 let label = self
                     .top()
                     .group_raw()
@@ -698,8 +745,25 @@ impl Parser<'_> {
                 None
             }
             "title" => {
+                // \\title[short]{long}
+                if self.top().peek_byte() == Some(b'[') {
+                    let _ = self.top().optional_raw();
+                }
                 let inl = self.arg_inlines();
                 self.doc.title = Some(inl);
+                None
+            }
+            // The command form of the abstract, which some classes use: \\abstract{...}.
+            "abstract" if self.top().peek_byte() == Some(b'{') => {
+                let _ = self.next_tok();
+                let saved = self.preamble;
+                self.preamble = false;
+                let (blocks, _) = self.body(&Stop::Group);
+                self.preamble = saved;
+                match self.doc.abstract_body.as_mut() {
+                    Some(existing) => existing.extend(blocks),
+                    None => self.doc.abstract_body = Some(blocks),
+                }
                 None
             }
             "author" => {
@@ -712,16 +776,30 @@ impl Parser<'_> {
                 self.doc.date = Some(text.trim().to_string());
                 None
             }
-            "newcommand" | "renewcommand" | "providecommand" => {
+            "newcommand" | "renewcommand" | "providecommand" | "DeclareRobustCommand" => {
                 self.define_command(name, at);
                 None
             }
-            "def" => {
+            "def" | "gdef" | "edef" | "xdef" => {
                 self.define_plain(at);
                 None
             }
+            "let" => {
+                // `\\let\\new\\old` and `\\let\\new=\\old`: a copy when `\\old` is a macro of the
+                // document. Nothing is defined for a built-in, which keeps its own handling.
+                let target = self.top().ctrl_name_raw();
+                let _ = self.top().eat(b'=');
+                let source = self.top().single_raw();
+                if let (Some(target), Some(source)) = (target, source) {
+                    let old = source.trim_start_matches('\\');
+                    if let Some(def) = self.macros.get(old).cloned() {
+                        self.macros.insert(target, def);
+                    }
+                }
+                None
+            }
             "DeclareMathOperator" => {
-                let _ = self.top().eat(b'*');
+                let star = if self.top().eat(b'*') { "*" } else { "" };
                 let target = self.command_name_arg();
                 let text = self.top().group_raw().unwrap_or_default();
                 if let Some(target) = target {
@@ -730,10 +808,157 @@ impl Parser<'_> {
                         MacroDef {
                             nargs: 0,
                             default: None,
-                            body: format!("\\operatorname{{{text}}}"),
+                            body: format!("\\operatorname{star}{{{text}}}"),
+                            star_body: None,
                         },
                     );
                 }
+                None
+            }
+            "DeclarePairedDelimiter" => {
+                // mathtools: `\\abs{x}` is `\\lvert x \\rvert`, and `\\abs*{x}` sizes the delimiters.
+                let target = self.command_name_arg();
+                let left = self.top().group_raw().unwrap_or_default();
+                let right = self.top().group_raw().unwrap_or_default();
+                if let Some(target) = target {
+                    let (left, right) = (left.trim(), right.trim());
+                    self.macros.insert(
+                        target,
+                        MacroDef {
+                            nargs: 1,
+                            default: None,
+                            body: format!("{left} #1 {right}"),
+                            star_body: Some(format!("\\left{left} #1 \\right{right}")),
+                        },
+                    );
+                }
+                None
+            }
+            "newif" => {
+                if let Some(name) = self.top().ctrl_name_raw() {
+                    if let Some(switch) = name.strip_prefix("if") {
+                        self.switches.insert(switch.to_string(), false);
+                    }
+                }
+                None
+            }
+            "iffalse" => {
+                self.skip_conditional(true);
+                None
+            }
+            // The true branch is being read: it ends at `\\else`, and the rest goes to `\\fi`.
+            "else" => {
+                self.skip_conditional(false);
+                None
+            }
+            "iftrue" | "fi" => None,
+            "ifdefined" | "ifx" | "ifcsname" | "ifnum" | "ifdim" | "ifmmode" | "ifodd" | "if"
+            | "ifcase" | "ifvoid" | "ifhmode" | "ifvmode" | "ifinner" | "ifcat" => {
+                // Not evaluated. The tested tokens of the two common forms are dropped so
+                // that they do not turn into text; the first branch is then read.
+                match name {
+                    "ifdefined" => {
+                        let _ = self.top().single_raw();
+                    }
+                    "ifx" => {
+                        let _ = self.top().single_raw();
+                        let _ = self.top().single_raw();
+                    }
+                    _ => {}
+                }
+                self.warn(
+                    at,
+                    format!("\\{name} is not evaluated; its first branch is kept"),
+                );
+                None
+            }
+            "appendix" => {
+                self.appendix = true;
+                self.sections = [0; 6];
+                None
+            }
+            "cmidrule" => {
+                let _ = self.top().optional_raw();
+                if self.top().peek_byte() == Some(b'(') {
+                    let _ = self.top().until_raw(")", false);
+                }
+                let _ = self.top().group_raw();
+                None
+            }
+            "addlinespace" | "morecmidrules" => {
+                if self.top().peek_raw() == Some(b'[') {
+                    let _ = self.top().optional_raw();
+                }
+                None
+            }
+            "multirow" => {
+                // \\multirow[vpos]{rows}[bigstruts]{width}[vmove]{text}
+                let _ = self.top().optional_raw();
+                let _ = self.top().group_raw();
+                let _ = self.top().optional_raw();
+                let _ = self.top().group_raw();
+                let _ = self.top().optional_raw();
+                let inl = self.arg_inlines();
+                st.para.extend(inl);
+                None
+            }
+            "makecell" | "thead" | "shortstack" => {
+                let _ = self.top().optional_raw();
+                let inl = self.arg_inlines();
+                st.para.extend(inl);
+                None
+            }
+            "SI" | "qty" => {
+                let _ = self.top().optional_raw();
+                let number = self.top().group_raw().unwrap_or_default();
+                let _ = self.top().optional_raw();
+                let unit = self.top().group_raw().unwrap_or_default();
+                let number = tex_text::si_number(&number);
+                let unit = tex_text::si_unit(&unit);
+                let joined = if unit.is_empty() || unit.starts_with(['%', '\u{b0}']) {
+                    format!("{number}{unit}")
+                } else {
+                    format!("{number}\u{a0}{unit}")
+                };
+                Self::push_text(st, &joined);
+                None
+            }
+            "si" | "unit" => {
+                let _ = self.top().optional_raw();
+                let unit = self.top().group_raw().unwrap_or_default();
+                Self::push_text(st, &tex_text::si_unit(&unit));
+                None
+            }
+            "num" => {
+                let _ = self.top().optional_raw();
+                let number = self.top().group_raw().unwrap_or_default();
+                Self::push_text(st, &tex_text::si_number(&number));
+                None
+            }
+            "SIrange" | "qtyrange" | "numrange" => {
+                let _ = self.top().optional_raw();
+                let from = self.top().group_raw().unwrap_or_default();
+                let to = self.top().group_raw().unwrap_or_default();
+                let mut text = format!(
+                    "{}\u{2013}{}",
+                    tex_text::si_number(&from),
+                    tex_text::si_number(&to)
+                );
+                if name != "numrange" {
+                    let unit = self.top().group_raw().unwrap_or_default();
+                    let unit = tex_text::si_unit(&unit);
+                    if !unit.is_empty() {
+                        text.push('\u{a0}');
+                        text.push_str(&unit);
+                    }
+                }
+                Self::push_text(st, &text);
+                None
+            }
+            "ang" => {
+                let _ = self.top().optional_raw();
+                let number = self.top().group_raw().unwrap_or_default();
+                Self::push_text(st, &format!("{}\u{b0}", tex_text::si_number(&number)));
                 None
             }
             "newenvironment" | "renewenvironment" => {
@@ -804,13 +1029,14 @@ impl Parser<'_> {
             }
             "noindent" | "indent" | "centering" | "raggedright" | "raggedleft" | "maketitle"
             | "tableofcontents" | "listoffigures" | "listoftables" | "newpage" | "clearpage"
-            | "cleardoublepage" | "appendix" | "bigskip" | "medskip" | "smallskip" | "hfill"
-            | "vfill" | "hline" | "toprule" | "midrule" | "bottomrule" | "small"
-            | "footnotesize" | "scriptsize" | "tiny" | "normalsize" | "large" | "Large"
-            | "LARGE" | "huge" | "Huge" | "sloppy" | "fussy" | "frenchspacing" | "raggedbottom"
-            | "flushbottom" | "relax" | "protect" | "ignorespaces" | "unskip" | "selectfont"
-            | "linebreak" | "nolinebreak" | "nopagebreak" | "pagebreak" | "smallbreak"
-            | "medbreak" | "bigbreak" | "par@" => {
+            | "cleardoublepage" | "bigskip" | "medskip" | "smallskip" | "hfill" | "vfill"
+            | "hline" | "hdashline" | "toprule" | "midrule" | "bottomrule" | "global" | "long"
+            | "textwidth" | "linewidth" | "columnwidth" | "textheight" | "paperwidth"
+            | "baselineskip" | "small" | "footnotesize" | "scriptsize" | "tiny" | "normalsize"
+            | "large" | "Large" | "LARGE" | "huge" | "Huge" | "sloppy" | "fussy"
+            | "frenchspacing" | "raggedbottom" | "flushbottom" | "relax" | "protect"
+            | "ignorespaces" | "unskip" | "selectfont" | "linebreak" | "nolinebreak"
+            | "nopagebreak" | "pagebreak" | "smallbreak" | "medbreak" | "bigbreak" | "par@" => {
                 if name == "linebreak" || name == "pagebreak" {
                     let _ = self.top().optional_raw();
                 }
@@ -834,6 +1060,9 @@ impl Parser<'_> {
                 }
                 if tex_text::is_transparent(name) {
                     return None;
+                }
+                if let Some(result) = self.switch_command(name) {
+                    return result;
                 }
                 if let Some((opts, mands)) = drop_spec(name) {
                     let _ = self.top().eat(b'*');
@@ -924,15 +1153,15 @@ impl Parser<'_> {
             for deeper in (l + 1)..self.sections.len() {
                 self.sections[deeper] = 0;
             }
-            Some(
-                self.sections[1..=l]
-                    .iter()
-                    .map(|n| n.to_string())
-                    .collect::<Vec<_>>()
-                    .join("."),
-            )
+            let mut parts: Vec<String> =
+                self.sections[1..=l].iter().map(|n| n.to_string()).collect();
+            if self.appendix {
+                parts[0] = letter(self.sections[1]).to_ascii_uppercase();
+            }
+            Some(parts.join("."))
         };
-        self.ctx = ("section".into(), number.clone());
+        let kind = if self.appendix { "appendix" } else { "section" };
+        self.ctx = (kind.into(), number.clone());
         let before = self.doc.labels.len();
         let title = self.arg_inlines();
         let label = self.doc.labels.get(before).map(|l| l.name.clone());
@@ -946,6 +1175,10 @@ impl Parser<'_> {
     }
 
     fn author(&mut self) {
+        // \\author[short]{long}
+        if self.top().peek_byte() == Some(b'[') {
+            let _ = self.top().optional_raw();
+        }
         let raw = self.top().group_raw().unwrap_or_default();
         let saved = self.in_author;
         self.in_author = true;
@@ -969,6 +1202,7 @@ impl Parser<'_> {
     }
 
     fn define_command(&mut self, command: &str, at: usize) {
+        let _ = self.top().eat(b'*');
         let Some(name) = self.command_name_arg() else {
             self.warn(at, format!("\\{command} without a command name"));
             return;
@@ -999,6 +1233,7 @@ impl Parser<'_> {
                 nargs,
                 default,
                 body,
+                star_body: None,
             },
         );
     }
@@ -1027,11 +1262,13 @@ impl Parser<'_> {
                 nargs,
                 default: None,
                 body,
+                star_body: None,
             },
         );
     }
 
     fn define_env(&mut self) {
+        let _ = self.top().eat(b'*');
         let name = self
             .top()
             .group_raw()
@@ -1063,6 +1300,7 @@ impl Parser<'_> {
     }
 
     fn define_theorem(&mut self) {
+        let numbered = !self.top().eat(b'*');
         let name = self
             .top()
             .group_raw()
@@ -1080,6 +1318,7 @@ impl Parser<'_> {
             TheoremDef {
                 name: title,
                 counter,
+                numbered,
             },
         );
     }
@@ -1091,6 +1330,27 @@ impl Parser<'_> {
             .unwrap_or_default()
             .trim()
             .to_string();
+        // The lexer that held this command is still on the stack here, even when the command
+        // was its last token, so a file that includes itself (directly, through another file
+        // or through a macro) is always found.
+        let key = include_key(&name);
+        let open_files = self.stack.iter().filter(|l| l.file.is_some()).count();
+        if self.stack.iter().any(|l| l.file.as_deref() == Some(key)) {
+            self.warn(
+                at,
+                format!("\\{command}{{{name}}} includes itself; the cycle is not followed"),
+            );
+            return;
+        }
+        if open_files >= MAX_INCLUDE_DEPTH {
+            self.warn(
+                at,
+                format!(
+                    "\\{command}{{{name}}} is nested over {MAX_INCLUDE_DEPTH} files deep; skipped"
+                ),
+            );
+            return;
+        }
         let text = match self.files {
             Some(files) if self.files_read < self.opts.max_files => {
                 self.files_read += 1;
@@ -1106,14 +1366,20 @@ impl Parser<'_> {
                     self.warn(at, format!("\\{command} nesting limit reached"));
                     return;
                 }
-                self.stack.push(Lexer::new(Rc::from(t), at, false));
+                let body = document_body(&t);
+                self.stack
+                    .push(Lexer::for_file(Rc::from(body), at, key.to_string()));
             }
             Some(_) => self.warn(at, format!("\\{command}{{{name}}} is over the size limit")),
             None => {
-                self.warn(
-                    at,
-                    format!("\\{command}{{{name}}} not resolved; no file provider"),
-                );
+                let why = if self.files.is_none() {
+                    "no file provider"
+                } else if self.files_read >= self.opts.max_files {
+                    "the file limit was reached"
+                } else {
+                    "the file provider has no such file"
+                };
+                self.warn(at, format!("\\{command}{{{name}}} not resolved; {why}"));
                 self.doc.inputs.push(name);
             }
         }
@@ -1133,6 +1399,13 @@ impl Parser<'_> {
         }
         let mut args: Vec<String> = Vec::new();
         let mut mandatory = def.nargs;
+        let mut body = &def.body;
+        if let Some(star_body) = &def.star_body {
+            if self.top().peek_raw() == Some(b'*') {
+                let _ = self.top().eat(b'*');
+                body = star_body;
+            }
+        }
         if let Some(d) = &def.default {
             let opt = self.top().optional_raw();
             args.push(opt.unwrap_or_else(|| d.clone()));
@@ -1141,7 +1414,7 @@ impl Parser<'_> {
         for _ in 0..mandatory {
             args.push(self.top().single_raw().unwrap_or_default());
         }
-        let expanded = substitute(&def.body, &args);
+        let expanded = substitute(body, &args);
         self.expansion_bytes += expanded.len();
         if self.expansion_bytes > self.opts.max_expansion_bytes {
             if !self.warned_limits {
@@ -1159,6 +1432,198 @@ impl Parser<'_> {
             return;
         }
         self.stack.push(Lexer::new(Rc::from(text), at, false));
+    }
+
+    /// The TeX of a piece of math: as written, or with the document's macros expanded when
+    /// `Options::expand_math_macros` is set.
+    fn math_tex(&mut self, tex: &str, at: usize) -> String {
+        if !self.opts.expand_math_macros || self.macros.is_empty() || !tex.contains('\\') {
+            return tex.to_string();
+        }
+        let mut budget = MathBudget {
+            expansions: self.opts.max_expansions.saturating_sub(self.expansions),
+            bytes: self
+                .opts
+                .max_expansion_bytes
+                .saturating_sub(self.expansion_bytes),
+            exhausted: false,
+        };
+        let before = (budget.expansions, budget.bytes);
+        let out = expand_math(tex, &self.macros, &mut budget, 0);
+        self.expansions += before.0 - budget.expansions;
+        self.expansion_bytes += before.1 - budget.bytes;
+        if budget.exhausted && !self.warned_limits {
+            self.warned_limits = true;
+            self.warn(
+                at,
+                "macro expansion limit reached; further expansions are dropped",
+            );
+        }
+        out
+    }
+
+    /// The raw body of environment `name`, whose `\begin` was just read. The body may start
+    /// in a macro expansion and end in the text below it, and the end may be written as a
+    /// macro or as the end of a user environment (`\newcommand{\ee}{\end{equation}}`,
+    /// `\newenvironment{eq}{\begin{equation}}{\end{equation}}`). Returns the text and whether
+    /// the end was found.
+    fn raw_env_body(&mut self, name: &str) -> (String, bool) {
+        let end = format!("\\end{{{name}}}");
+        let mut closers = vec![end.clone()];
+        let mut tails: Vec<String> = vec![String::new()];
+        for (macro_name, def) in &self.macros {
+            if def.nargs == 0 {
+                if let Some((before, after)) = def.body.split_once(&end) {
+                    if before.trim().is_empty() {
+                        closers.push(format!("\\{macro_name}"));
+                        tails.push(after.to_string());
+                    }
+                }
+            }
+        }
+        for (env_name, def) in &self.envs {
+            if let Some((before, after)) = def.end.split_once(&end) {
+                if before.trim().is_empty() {
+                    closers.push(format!("\\end{{{env_name}}}"));
+                    tails.push(after.to_string());
+                }
+            }
+        }
+        let mut out = String::new();
+        loop {
+            let on_main = {
+                let _ = self.top();
+                self.stack.is_empty()
+            };
+            let (text, hit) = self.top().until_closer(&closers);
+            out.push_str(&text);
+            match hit {
+                Some(index) => {
+                    let tail = tails[index].clone();
+                    if !tail.trim().is_empty() {
+                        let at = self.top().offset();
+                        self.push_expansion(&tail, at);
+                    }
+                    return (out, true);
+                }
+                None if on_main => return (out, false),
+                // The expansion ended inside the environment: go on in the source below it.
+                None => {}
+            }
+        }
+    }
+
+    /// Whether `\xspace` should leave a space: not before punctuation, a brace, a space or
+    /// the end of the text.
+    fn xspace_wants_space(&mut self) -> bool {
+        let lexer = self.top();
+        match lexer.peek_raw() {
+            None => false,
+            Some(b'\\') => !(lexer.rest_starts_with("\\ ") || lexer.rest_starts_with("\\footnote")),
+            Some(b) => !matches!(
+                b,
+                b'.' | b','
+                    | b';'
+                    | b':'
+                    | b'!'
+                    | b'?'
+                    | b'\''
+                    | b'/'
+                    | b'-'
+                    | b')'
+                    | b'~'
+                    | b'{'
+                    | b'}'
+                    | b' '
+                    | b'\t'
+                    | b'\n'
+                    | b'\r'
+            ),
+        }
+    }
+
+    /// Skips the rest of a conditional: to its `\fi`, or to its `\else` when `stop_at_else`
+    /// is set. Conditionals nested inside are skipped whole.
+    fn skip_conditional(&mut self, stop_at_else: bool) {
+        let mut depth = 0usize;
+        while let Some((tok, _)) = self.next_tok() {
+            let Tok::Ctrl(name) = tok else {
+                continue;
+            };
+            if name == "fi" {
+                if depth == 0 {
+                    return;
+                }
+                depth -= 1;
+            } else if name == "else" && depth == 0 && stop_at_else {
+                return;
+            } else if is_conditional(&name)
+                || name
+                    .strip_prefix("if")
+                    .is_some_and(|s| self.switches.contains_key(s))
+            {
+                depth += 1;
+            }
+        }
+    }
+
+    /// `\ifname`, `\nametrue` and `\namefalse` for a switch made with `\newif`. Returns
+    /// `None` when `name` is not one of them.
+    fn switch_command(&mut self, name: &str) -> Option<Option<Ended>> {
+        if let Some(switch) = name.strip_prefix("if") {
+            if let Some(&on) = self.switches.get(switch) {
+                if !on {
+                    self.skip_conditional(true);
+                }
+                return Some(None);
+            }
+        }
+        for (suffix, value) in [("true", true), ("false", false)] {
+            if let Some(switch) = name.strip_suffix(suffix) {
+                if let Some(slot) = self.switches.get_mut(switch) {
+                    *slot = value;
+                    return Some(None);
+                }
+            }
+        }
+        None
+    }
+
+    /// An `algorithm` float or a bare `algorithmic` body. Pseudocode is not interpreted: the
+    /// source is kept as a block, under an "Algorithm N:" line with the caption.
+    fn algorithm(&mut self, name: &str, at: usize, st: &mut State) {
+        let _ = self.top().optional_raw();
+        let (raw, found) = self.top().until_env_end(name);
+        if !found {
+            self.warn(at, format!("unterminated {name}"));
+        }
+        self.flush(st);
+        if name == "algorithmic" {
+            st.blocks.push(Block::Verbatim(Verbatim {
+                env: name.to_string(),
+                language: Some("latex".into()),
+                text: dedent_block(&raw),
+            }));
+            return;
+        }
+        let (body, caption, label) = take_caption_and_label(&raw);
+        let number = self.count("algorithm").to_string();
+        if let Some(label) = label {
+            self.push_label(&label, "algorithm", Some(number.clone()));
+        }
+        let mut head = vec![Inline::Strong(vec![Inline::Text(format!(
+            "Algorithm {number}:"
+        ))])];
+        if let Some(caption) = caption {
+            head.push(Inline::Text(" ".into()));
+            head.extend(self.isolated_inlines(&caption));
+        }
+        st.blocks.push(Block::Paragraph(head));
+        st.blocks.push(Block::Verbatim(Verbatim {
+            env: "algorithm".into(),
+            language: Some("latex".into()),
+            text: dedent_block(&body),
+        }));
     }
 
     // ----- environments ---------------------------------------------------------------------
@@ -1199,40 +1664,46 @@ impl Parser<'_> {
                 self.flush(st);
                 st.blocks.push(Block::List(list));
             }
-            "tabular" | "tabular*" | "tabularx" | "longtable" => {
+            _ if is_tabular_env(&name) => {
                 let table = self.table_env(&name);
                 self.flush(st);
                 st.blocks.push(Block::Table(table));
             }
-            "table" | "table*" => {
-                let block = self.float(&name, Kind::Table, at);
+            "table" | "table*" | "sidewaystable" | "sidewaystable*" => {
+                let blocks = self.float(&name, Kind::Table, at);
                 self.flush(st);
-                st.blocks.push(block);
+                st.blocks.extend(blocks);
             }
-            "figure" | "figure*" | "wrapfigure" | "wrapfigure*" | "subfigure" | "subfigure*" => {
-                let block = self.float(&name, Kind::Figure, at);
+            "figure" | "figure*" | "wrapfigure" | "wrapfigure*" | "subfigure" | "subfigure*"
+            | "sidewaysfigure" | "sidewaysfigure*" | "SCfigure" | "SCfigure*" | "teaserfigure" => {
+                let blocks = self.float(&name, Kind::Figure, at);
                 self.flush(st);
-                st.blocks.push(block);
+                st.blocks.extend(blocks);
             }
-            "tikzpicture" => {
-                let _ = self.top().optional_raw();
-                let (tex, found) = self.top().until_raw("\\end{tikzpicture}", false);
-                if !found {
-                    self.warn(at, "unterminated tikzpicture");
-                }
+            _ if is_picture_env(&name) => {
+                let mut acc = FloatAcc::default();
+                self.picture_into(&name, &mut acc, at);
                 self.flush(st);
-                let fig = self.make_figure(
-                    "tikzpicture",
-                    FloatAcc {
-                        tikz: Some(tex),
-                        ..FloatAcc::default()
-                    },
-                    at,
-                );
+                let fig = self.make_figure(&name, acc, at);
                 st.blocks.push(Block::Figure(fig));
             }
+            "algorithm" | "algorithm*" | "algorithmic" => {
+                self.algorithm(&name, at, st);
+            }
+            "appendices" => {
+                self.appendix = true;
+                self.sections = [0; 6];
+                let blocks = self.env_body(&name);
+                self.flush(st);
+                st.blocks.extend(blocks);
+            }
             "center" | "flushleft" | "flushright" | "minipage" | "small" | "footnotesize"
-            | "scriptsize" | "normalsize" | "large" => {
+            | "scriptsize" | "normalsize" | "large" | "subequations" | "threeparttable"
+            | "spacing" | "singlespace" | "doublespace" | "sloppypar" | "samepage"
+            | "landscape" => {
+                if name == "spacing" {
+                    let _ = self.top().group_raw();
+                }
                 if name == "minipage" {
                     let _ = self.top().optional_raw();
                     let _ = self.top().group_raw();
@@ -1278,18 +1749,21 @@ impl Parser<'_> {
                 let _ = self.top().until_raw("\\end{comment}", false);
             }
             "equation" | "equation*" | "align" | "align*" | "alignat" | "alignat*" | "gather"
-            | "gather*" | "multline" | "multline*" | "eqnarray" | "eqnarray*" | "displaymath" => {
+            | "gather*" | "multline" | "multline*" | "eqnarray" | "eqnarray*" | "displaymath"
+            | "flalign" | "flalign*" | "xalignat" | "xalignat*" | "xxalignat" | "IEEEeqnarray"
+            | "IEEEeqnarray*" | "dmath" | "dmath*" => {
                 let block = self.math_env(&name);
                 self.flush(st);
                 st.blocks.push(Block::Math(block));
             }
             "math" => {
-                let (tex, found) = self.top().until_raw("\\end{math}", true);
+                let (tex, found) = self.raw_env_body("math");
                 if !found {
                     self.warn(at, "unterminated math environment");
                 }
+                let tex = self.math_tex(tex.trim(), at);
                 st.para.push(Inline::Math {
-                    tex: tex.trim().to_string(),
+                    tex,
                     display: false,
                 });
             }
@@ -1316,9 +1790,20 @@ impl Parser<'_> {
                 }));
             }
             _ => {
-                if let Some(def) = self.theorems.get(&name).cloned() {
+                let declared = self.theorems.get(&name).cloned();
+                // Classes and packages predefine the common names; a document that uses one
+                // without `\\newtheorem` still means a theorem-like block.
+                let def = declared.or_else(|| {
+                    let base = name.trim_end_matches('*');
+                    builtin_theorem(base).map(|title| TheoremDef {
+                        name: title.to_string(),
+                        counter: base.to_string(),
+                        numbered: true,
+                    })
+                });
+                if let Some(def) = def {
                     let base = name.trim_end_matches('*').to_string();
-                    let starred = name.ends_with('*');
+                    let starred = name.ends_with('*') || !def.numbered;
                     let title = self.top().optional_raw().map(|t| self.isolated_inlines(&t));
                     let number = if starred {
                         None
@@ -1428,10 +1913,13 @@ impl Parser<'_> {
     }
 
     fn table_env(&mut self, name: &str) -> Table {
-        if matches!(name, "tabularx" | "tabular*") {
+        if matches!(name, "tabularx" | "tabular*" | "tabulary" | "xltabular") {
             let _ = self.top().group_raw();
         }
-        if matches!(name, "tabular" | "tabular*" | "longtable") {
+        if matches!(
+            name,
+            "tabular" | "tabular*" | "longtable" | "supertabular" | "NiceTabular"
+        ) {
             let _ = self.top().optional_raw();
         }
         let columns = self.top().group_raw();
@@ -1506,20 +1994,103 @@ impl Parser<'_> {
     }
 
     /// A `figure` or `table` environment, or a subfigure environment at the top level.
-    fn float(&mut self, name: &str, kind: Kind, at: usize) -> Block {
+    ///
+    /// The first block is the float. What the float's own block cannot hold follows it: the
+    /// rows of a `tabular` inside a figure (as a table), pictures and images inside a table
+    /// float (as picture figures and an image paragraph), and listings or table notes.
+    fn float(&mut self, name: &str, kind: Kind, at: usize) -> Vec<Block> {
         self.skip_float_args(name);
         let mut acc = FloatAcc::default();
         self.float_body(name, kind, &mut acc, FloatEnd::Env(name.to_string()));
+        let extra = std::mem::take(&mut acc.extra);
+        let mut blocks = Vec::new();
         match kind {
             Kind::Table => {
+                let pictures = std::mem::take(&mut acc.pictures);
+                let images = std::mem::take(&mut acc.images);
+                acc.tikz = None;
                 let table = self.finish_table(name, acc, at);
-                Block::Table(table)
+                blocks.push(Block::Table(table));
+                for picture in pictures {
+                    let env = picture.env.clone();
+                    let fig = self.make_figure(
+                        &env,
+                        FloatAcc {
+                            pictures: vec![picture],
+                            ..FloatAcc::default()
+                        },
+                        at,
+                    );
+                    blocks.push(Block::Figure(fig));
+                }
+                if !images.is_empty() {
+                    let mut inlines = Vec::new();
+                    for image in images {
+                        if !inlines.is_empty() {
+                            inlines.push(Inline::Text(" ".into()));
+                        }
+                        inlines.push(Inline::Image(image));
+                    }
+                    blocks.push(Block::Paragraph(inlines));
+                }
             }
             Kind::Figure => {
+                let rows = std::mem::take(&mut acc.rows);
+                let columns = acc.columns.take();
                 let fig = self.finish_figure(name, acc, at);
-                Block::Figure(fig)
+                blocks.push(Block::Figure(fig));
+                if !rows.is_empty() {
+                    blocks.push(Block::Table(Table {
+                        env: "tabular".into(),
+                        caption: None,
+                        caption_text: None,
+                        label: None,
+                        number: None,
+                        columns,
+                        rows,
+                    }));
+                }
             }
         }
+        blocks.extend(extra);
+        blocks
+    }
+
+    /// Reads a picture environment whose `\\begin{name}` was just read, and keeps its source.
+    fn picture_into(&mut self, name: &str, acc: &mut FloatAcc, at: usize) {
+        let (body, found) = self.top().until_env_end(name);
+        if !found {
+            self.warn(at, format!("unterminated {name}"));
+        }
+        let source = dedent(&format!("\\begin{{{name}}}{body}\\end{{{name}}}"));
+        if name == "tikzpicture" && acc.tikz.is_none() {
+            acc.tikz = Some(after_optional(&body).to_string());
+        }
+        acc.pictures.push(Picture {
+            env: name.to_string(),
+            source,
+        });
+    }
+
+    /// A verbatim-like environment inside a float, kept as a block after the float.
+    fn verbatim_into(&mut self, name: &str, acc: &mut FloatAcc) {
+        let mut language = None;
+        if name == "minted" {
+            let _ = self.top().optional_raw();
+            language = self.top().group_raw().map(|s| s.trim().to_string());
+        } else if let Some(opts) = self.top().optional_raw() {
+            language = parse_options(&opts)
+                .into_iter()
+                .find(|(k, _)| k == "language")
+                .map(|(_, v)| v);
+        }
+        let (text, _) = self.top().until_env_end(name);
+        let text = text.strip_prefix('\n').unwrap_or(&text).to_string();
+        acc.extra.push(Block::Verbatim(Verbatim {
+            env: name.to_string(),
+            language,
+            text,
+        }));
     }
 
     fn float_body(&mut self, env: &str, kind: Kind, acc: &mut FloatAcc, end: FloatEnd) {
@@ -1550,7 +2121,7 @@ impl Parser<'_> {
                         let image = self.image_path();
                         acc.images.push(image);
                     }
-                    "subfloat" => {
+                    "subfloat" | "subfigure" => {
                         let caption = self.top().optional_raw();
                         let label = self.top().optional_raw();
                         if self.top().peek_byte() == Some(b'{') {
@@ -1588,18 +2159,21 @@ impl Parser<'_> {
                                 let fig = self.finish_sub(sub, &n, at);
                                 acc.subs.push(fig);
                             }
-                            "tabular" | "tabular*" | "tabularx" | "longtable" => {
+                            _ if is_tabular_env(&n) => {
                                 let table = self.table_env(&n);
                                 acc.rows.extend(table.rows);
                                 if table.columns.is_some() {
                                     acc.columns = table.columns;
                                 }
                             }
-                            "tikzpicture" => {
+                            "verbatim" | "Verbatim" | "BVerbatim" | "alltt" | "lstlisting"
+                            | "minted" => self.verbatim_into(&n, acc),
+                            "tablenotes" => {
                                 let _ = self.top().optional_raw();
-                                let (tex, _) = self.top().until_raw("\\end{tikzpicture}", false);
-                                acc.tikz = Some(tex);
+                                let list = self.list(&n);
+                                acc.extra.push(Block::List(list));
                             }
+                            _ if is_picture_env(&n) => self.picture_into(&n, acc, at),
                             _ => {}
                         }
                     }
@@ -1658,6 +2232,7 @@ impl Parser<'_> {
             image_paths: acc.images,
             subfigures: acc.subs,
             tikz: acc.tikz,
+            pictures: acc.pictures,
             source_span: (at, end.max(at)),
         }
     }
@@ -1703,20 +2278,41 @@ impl Parser<'_> {
     }
 
     fn math_env(&mut self, name: &str) -> MathBlock {
-        let end = format!("\\end{{{name}}}");
-        let (raw, found) = self.top().until_raw(&end, true);
+        let at = self.top().offset();
+        let (mut raw, found) = self.raw_env_body(name);
         if !found {
             let at = self.top().offset();
             self.warn(at, format!("unterminated {name}"));
         }
         let base = name.trim_end_matches('*');
         let starred = name.ends_with('*');
+        // The column count of alignat and the column specification of IEEEeqnarray are
+        // arguments, not math.
+        if matches!(base, "alignat" | "xalignat" | "xxalignat" | "IEEEeqnarray") {
+            let start = raw.len() - raw.trim_start().len();
+            if let Some(close) = matching_brace(&raw, start) {
+                raw.replace_range(..=close, "");
+            }
+        }
+        let raw = self.math_tex(&raw, at);
         let numbered = !starred
             && matches!(
                 base,
-                "equation" | "align" | "alignat" | "gather" | "multline" | "eqnarray"
+                "equation"
+                    | "align"
+                    | "alignat"
+                    | "gather"
+                    | "multline"
+                    | "eqnarray"
+                    | "flalign"
+                    | "xalignat"
+                    | "IEEEeqnarray"
+                    | "dmath"
             );
-        let splits = matches!(base, "align" | "alignat" | "gather" | "eqnarray");
+        let splits = matches!(
+            base,
+            "align" | "alignat" | "gather" | "eqnarray" | "flalign" | "xalignat" | "IEEEeqnarray"
+        );
         let pieces = if splits { split_rows(&raw) } else { vec![raw] };
         let mut rows = Vec::new();
         for piece in pieces {
@@ -1857,6 +2453,406 @@ pub(super) fn plain(inlines: &[Inline]) -> String {
     s.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
+/// Most `\input` files open at once (a file that inputs a file that inputs a file, ...).
+const MAX_INCLUDE_DEPTH: usize = 32;
+
+/// The name an `\input` is known by when looking for cycles: as written, without `./` and
+/// without a `.tex` ending.
+fn include_key(name: &str) -> &str {
+    let name = name.strip_prefix("./").unwrap_or(name);
+    name.strip_suffix(".tex").unwrap_or(name)
+}
+
+/// The part of an included file that belongs in the including document. A file that is a whole
+/// document of its own (`subfiles`, `standalone`) contributes only what is between
+/// `\begin{document}` and `\end{document}`: its preamble is not read, and its
+/// `\end{document}` must not end the main document.
+fn document_body(text: &str) -> &str {
+    const BEGIN: &str = "\\begin{document}";
+    const END: &str = "\\end{document}";
+    let Some(start) = text.find(BEGIN) else {
+        return text;
+    };
+    let body = &text[start + BEGIN.len()..];
+    match body.rfind(END) {
+        Some(end) => &body[..end],
+        None => body,
+    }
+}
+
+/// The tabular-like environments whose rows are read as a table.
+fn is_tabular_env(name: &str) -> bool {
+    matches!(
+        name,
+        "tabular"
+            | "tabular*"
+            | "tabularx"
+            | "tabulary"
+            | "longtable"
+            | "xltabular"
+            | "supertabular"
+            | "NiceTabular"
+    )
+}
+
+/// The printed name of a theorem-like environment that classes and packages commonly define.
+fn builtin_theorem(name: &str) -> Option<&'static str> {
+    Some(match name {
+        "theorem" => "Theorem",
+        "lemma" => "Lemma",
+        "proposition" => "Proposition",
+        "corollary" => "Corollary",
+        "definition" => "Definition",
+        "remark" => "Remark",
+        "example" => "Example",
+        "claim" => "Claim",
+        "conjecture" => "Conjecture",
+        "assumption" => "Assumption",
+        "observation" => "Observation",
+        "fact" => "Fact",
+        "notation" => "Notation",
+        "exercise" => "Exercise",
+        "problem" => "Problem",
+        "property" => "Property",
+        "hypothesis" => "Hypothesis",
+        _ => return None,
+    })
+}
+
+/// TeX's own conditionals, which each need a matching `\fi`.
+fn is_conditional(name: &str) -> bool {
+    matches!(
+        name,
+        "if" | "ifx"
+            | "ifnum"
+            | "ifdim"
+            | "ifodd"
+            | "ifmmode"
+            | "ifhmode"
+            | "ifvmode"
+            | "ifinner"
+            | "ifcat"
+            | "ifcase"
+            | "iftrue"
+            | "iffalse"
+            | "ifdefined"
+            | "ifcsname"
+            | "ifvoid"
+            | "ifhbox"
+            | "ifvbox"
+            | "ifeof"
+    )
+}
+
+/// `dedent` for a block that has no first line of its own: every line loses the common
+/// indentation, and blank lines at both ends are removed.
+fn dedent_block(text: &str) -> String {
+    dedent(&format!("\n{}", text.trim_end()))
+        .trim_start_matches('\n')
+        .to_string()
+}
+
+/// Splits the body of a float read as raw text into the body without its `\caption` and
+/// `\label`, the caption source, and the label.
+fn take_caption_and_label(raw: &str) -> (String, Option<String>, Option<String>) {
+    let mut body = raw.to_string();
+    let mut caption = None;
+    if let Some(pos) = body.find("\\caption") {
+        let mut open = pos + "\\caption".len();
+        if body.as_bytes().get(open) == Some(&b'[') {
+            if let Some(close) = body[open..].find(']') {
+                open += close + 1;
+            }
+        }
+        if let Some(close) = matching_brace(&body, open) {
+            caption = Some(body[open + 1..close].to_string());
+            body.replace_range(pos..=close, "");
+        }
+    }
+    let mut label = None;
+    if let Some(pos) = body.find("\\label{") {
+        let open = pos + "\\label".len();
+        if let Some(close) = matching_brace(&body, open) {
+            label = Some(body[open + 1..close].trim().to_string());
+            body.replace_range(pos..=close, "");
+        }
+    }
+    let lines: Vec<&str> = body.lines().filter(|l| !l.trim().is_empty()).collect();
+    (lines.join("\n"), caption, label)
+}
+
+struct MathBudget {
+    expansions: usize,
+    bytes: usize,
+    exhausted: bool,
+}
+
+/// Deepest macro-in-macro expansion inside math.
+const MAX_MATH_DEPTH: usize = 32;
+
+/// Expands the document's macros in a piece of math. Everything else is copied as written.
+/// `\ensuremath{x}` becomes `x` and `\xspace` is removed, since both only matter in text.
+fn expand_math(
+    tex: &str,
+    macros: &HashMap<String, MacroDef>,
+    budget: &mut MathBudget,
+    depth: usize,
+) -> String {
+    let bytes = tex.as_bytes();
+    let mut out = String::with_capacity(tex.len());
+    let mut i = 0usize;
+    while i < bytes.len() {
+        if bytes[i] != b'\\' {
+            let Some(c) = tex[i..].chars().next() else {
+                break;
+            };
+            out.push(c);
+            i += c.len_utf8();
+            continue;
+        }
+        let mut end = i + 1;
+        while bytes.get(end).is_some_and(|b| b.is_ascii_alphabetic()) {
+            end += 1;
+        }
+        if end == i + 1 {
+            // A control symbol: the backslash and one character.
+            out.push('\\');
+            i += 1;
+            if let Some(c) = tex[i..].chars().next() {
+                out.push(c);
+                i += c.len_utf8();
+            }
+            continue;
+        }
+        let name = &tex[i + 1..end];
+        if name == "xspace" {
+            i = end;
+            continue;
+        }
+        if name == "ensuremath" {
+            let (arg, next) = math_argument(tex, end);
+            let inner = expand_math(&arg, macros, budget, depth + 1);
+            out.push_str(&inner);
+            i = next;
+            continue;
+        }
+        let def = match macros.get(name) {
+            Some(def) if depth < MAX_MATH_DEPTH && !budget.exhausted => def,
+            _ => {
+                out.push_str(&tex[i..end]);
+                i = end;
+                continue;
+            }
+        };
+        if budget.expansions == 0 {
+            budget.exhausted = true;
+            out.push_str(&tex[i..end]);
+            i = end;
+            continue;
+        }
+        let mut next = end;
+        let mut args: Vec<String> = Vec::new();
+        let mut mandatory = def.nargs;
+        let mut template = &def.body;
+        if let Some(star_body) = &def.star_body {
+            if bytes.get(next) == Some(&b'*') {
+                next += 1;
+                template = star_body;
+            }
+        }
+        if let Some(default) = &def.default {
+            let at = skip_spaces(tex, next);
+            if bytes.get(at) == Some(&b'[') {
+                let (arg, after) = bracket_argument(tex, at);
+                args.push(arg);
+                next = after;
+            } else {
+                args.push(default.clone());
+            }
+            mandatory = mandatory.saturating_sub(1);
+        }
+        for _ in 0..mandatory {
+            let (arg, after) = math_argument(tex, next);
+            args.push(arg);
+            next = after;
+        }
+        let body = substitute(template, &args);
+        if body.len() > budget.bytes {
+            budget.exhausted = true;
+            out.push_str(&tex[i..next]);
+            i = next;
+            continue;
+        }
+        budget.expansions -= 1;
+        budget.bytes -= body.len();
+        let expanded = expand_math(&body, macros, budget, depth + 1);
+        let expanded = expanded.trim();
+        // After `^` or `_` a macro stood for one token; its expansion needs braces to stay one.
+        let scripted = out.trim_end().ends_with(['^', '_']);
+        if scripted {
+            out.push('{');
+            out.push_str(expanded);
+            out.push('}');
+        } else {
+            out.push_str(expanded);
+            // A control word at the end must not run into a following letter.
+            let ends_in_word = ends_with_control_word(expanded);
+            if ends_in_word && bytes.get(next).is_some_and(|b| b.is_ascii_alphabetic()) {
+                out.push(' ');
+            }
+        }
+        i = next;
+    }
+    out
+}
+
+fn skip_spaces(tex: &str, mut at: usize) -> usize {
+    let bytes = tex.as_bytes();
+    while bytes.get(at).is_some_and(|b| b.is_ascii_whitespace()) {
+        at += 1;
+    }
+    at
+}
+
+/// One undelimited macro argument in math, starting at `at`: a braced group (without its
+/// braces), a control sequence, or one character. Returns the argument and the offset after.
+fn math_argument(tex: &str, at: usize) -> (String, usize) {
+    let bytes = tex.as_bytes();
+    let at = skip_spaces(tex, at);
+    match bytes.get(at) {
+        None => (String::new(), at),
+        Some(b'{') => match matching_brace_escaped(tex, at) {
+            Some(close) => (tex[at + 1..close].to_string(), close + 1),
+            None => (tex[at + 1..].to_string(), tex.len()),
+        },
+        Some(b'\\') => {
+            let mut end = at + 1;
+            while bytes.get(end).is_some_and(|b| b.is_ascii_alphabetic()) {
+                end += 1;
+            }
+            if end == at + 1 {
+                end += tex[end..].chars().next().map_or(0, char::len_utf8);
+            }
+            (tex[at..end].to_string(), end)
+        }
+        Some(_) => {
+            let len = tex[at..].chars().next().map_or(1, char::len_utf8);
+            (tex[at..at + len].to_string(), at + len)
+        }
+    }
+}
+
+/// A `[...]` argument starting at the `[` at `at`. Returns the inner text and the offset after.
+fn bracket_argument(tex: &str, at: usize) -> (String, usize) {
+    let bytes = tex.as_bytes();
+    let mut depth = 0usize;
+    let mut i = at + 1;
+    while i < bytes.len() {
+        match bytes[i] {
+            b'\\' => i += 1,
+            b'{' => depth += 1,
+            b'}' => depth = depth.saturating_sub(1),
+            b']' if depth == 0 => return (tex[at + 1..i].to_string(), i + 1),
+            _ => {}
+        }
+        i += 1;
+    }
+    (tex[at + 1..].to_string(), tex.len())
+}
+
+/// Like `matching_brace`, but `\{` and `\}` do not count.
+fn matching_brace_escaped(s: &str, open: usize) -> Option<usize> {
+    let bytes = s.as_bytes();
+    let mut depth = 0usize;
+    let mut i = open;
+    while i < bytes.len() {
+        match bytes[i] {
+            b'\\' => i += 1,
+            b'{' => depth += 1,
+            b'}' => {
+                depth = depth.saturating_sub(1);
+                if depth == 0 {
+                    return Some(i);
+                }
+            }
+            _ => {}
+        }
+        i += 1;
+    }
+    None
+}
+
+/// True when the text ends with `\name` (a backslash and letters).
+fn ends_with_control_word(text: &str) -> bool {
+    let trimmed = text.trim_end_matches(|c: char| c.is_ascii_alphabetic());
+    trimmed.len() < text.len() && trimmed.ends_with('\\') && !trimmed.ends_with("\\\\")
+}
+
+/// Environments that draw a picture. Their source is kept whole and nothing is drawn.
+fn is_picture_env(name: &str) -> bool {
+    matches!(
+        name,
+        "tikzpicture"
+            | "pgfpicture"
+            | "picture"
+            | "circuitikz"
+            | "forest"
+            | "pspicture"
+            | "tikzcd"
+            | "asy"
+    )
+}
+
+/// The text after a leading `[...]` optional argument, or the whole text when there is none.
+fn after_optional(body: &str) -> &str {
+    let trimmed = body.trim_start();
+    if !trimmed.starts_with('[') {
+        return body;
+    }
+    let mut depth = 0usize;
+    let mut escaped = false;
+    for (i, c) in trimmed.char_indices() {
+        if escaped {
+            escaped = false;
+            continue;
+        }
+        match c {
+            '\\' => escaped = true,
+            '[' | '{' => depth += 1,
+            ']' | '}' => {
+                depth = depth.saturating_sub(1);
+                if depth == 0 {
+                    return &trimmed[i + 1..];
+                }
+            }
+            _ => {}
+        }
+    }
+    body
+}
+
+/// Removes the indentation that the lines after the first have in common, so that a block
+/// taken from an indented place in the source starts at the margin.
+fn dedent(text: &str) -> String {
+    let mut lines = text.lines();
+    let Some(first) = lines.next() else {
+        return String::new();
+    };
+    let rest: Vec<&str> = lines.collect();
+    let indent = rest
+        .iter()
+        .filter(|l| !l.trim().is_empty())
+        .map(|l| l.len() - l.trim_start_matches([' ', '\t']).len())
+        .min()
+        .unwrap_or(0);
+    let mut out = first.trim_end().to_string();
+    for line in rest {
+        out.push('\n');
+        out.push_str(line.get(indent..).unwrap_or("").trim_end());
+    }
+    out
+}
+
 fn letter(n: u32) -> String {
     let idx = (n.max(1) - 1) % 26;
     char::from(b'a' + idx as u8).to_string()
@@ -1880,7 +2876,14 @@ fn substitute(body: &str, args: &[String]) -> String {
                 let idx = (d as usize) - ('0' as usize);
                 if idx <= args.len() {
                     chars.next();
-                    out.push_str(&args[idx - 1]);
+                    let arg = &args[idx - 1];
+                    // `\alpha#1` with the argument `x` is `\alpha x`, not `\alphax`.
+                    if ends_with_control_word(&out)
+                        && arg.chars().next().is_some_and(|c| c.is_ascii_alphabetic())
+                    {
+                        out.push(' ');
+                    }
+                    out.push_str(arg);
                 } else {
                     out.push('#');
                 }
@@ -2094,6 +3097,20 @@ fn drop_spec(name: &str) -> Option<(usize, usize)> {
         "colorlet" | "rule" | "pdfbookmark" => (1, 2),
         "phantom" | "vphantom" | "hphantom" => (0, 1),
         "numberwithin" => (1, 2),
+        "specialrule" => (0, 3),
+        "rowcolor" | "cellcolor" | "columncolor" | "arrayrulecolor" | "rotatebox" => (1, 1),
+        "rowcolors" => (1, 3),
+        "Xhline"
+        | "cdashline"
+        | "hhline"
+        | "scalebox"
+        | "adjustbox"
+        | "colorbox"
+        | "tikzset"
+        | "DeclareGraphicsExtensions" => (0, 1),
+        "setlist" => (1, 1),
+        "resizebox" | "fcolorbox" => (0, 2),
+        "makebox" | "framebox" => (2, 0),
         _ => return None,
     })
 }

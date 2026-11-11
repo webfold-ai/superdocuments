@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,booktabs,graphicx,subcaption,hyperref,xspace}
+\usepackage[numbers]{natbib}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sys}{\textsc{FoldNet}\xspace}
+\newcommand*{\eg}{e.g.,\xspace}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newtheorem{theorem}{Theorem}
+\title{Sparse Folding for Protein Structure}
+\author{Ada Lovelace\thanks{Equal contribution.} \and Alan Turing}
+\date{March 2024}
+\begin{document}
+\maketitle
+\begin{abstract}
+We introduce \sys, which improves accuracy by 12\% on CASP14. Code: \url{https://example.org/foldnet}.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+Structure prediction~\cite{jumper2021,baek2021} is hard. Following \citet{jumper2021}, \sys minimises the
+loss in Eq.~\eqref{eq:loss} over $x \in \R^n$ with $\norm{x} \le 1$\footnote{The unit ball, \eg in $\R^3$.}.
+Schr\"odinger, Erd\H{o}s and Poincar\'e are cited ``often'' --- see \href{https://arxiv.org/abs/1706.03762}{this paper}.
+Section~\ref{sec:method} has the details, Table~\ref{tab:results} the numbers and Figure~\ref{fig:arch} the model.
+
+\section{Method}\label{sec:method}
+\subsection*{Objective}
+We solve
+\begin{equation}\label{eq:loss}
+  \theta^\star = \argmin_{\theta} \sum_{i=1}^{n} \norm{f_\theta(x_i) - y_i}^2 .
+\end{equation}
+The update is
+\begin{align}
+  g_t &= \nabla_\theta \mathcal{L}(\theta_t), \label{eq:grad} \\
+  \theta_{t+1} &= \theta_t - \eta g_t . \nonumber
+\end{align}
+\begin{theorem}[Convergence]\label{thm:conv}
+If $\eta$ is small, \eqref{eq:grad} converges.
+\end{theorem}
+\begin{itemize}
+  \item Encoder with $d = 512$.
+  \item Decoder:
+  \begin{enumerate}
+    \item attention,
+    \item refinement.
+  \end{enumerate}
+\end{itemize}
+
+\begin{table}[t]
+  \centering
+  \caption{Accuracy on two benchmarks.}\label{tab:results}
+  \begin{tabular}{lcc}
+    \toprule
+    & \multicolumn{2}{c}{TM-score} \\
+    \cmidrule(lr){2-3}
+    Method & CASP14 & CAMEO \\
+    \midrule
+    Baseline & 0.71 & 0.80 \\
+    \sys & \textbf{0.85} & \textbf{0.88} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{figs/encoder}
+    \caption{Encoder.}\label{fig:enc}
+  \end{subfigure}
+  \begin{subfigure}{0.48\textwidth}
+    \includegraphics[width=\linewidth]{figs/decoder.pdf}
+    \caption{Decoder.}\label{fig:dec}
+  \end{subfigure}
+  \caption{The architecture of \sys: (\subref{fig:enc}) encoder, (\subref{fig:dec}) decoder.}
+  \label{fig:arch}
+\end{figure*}
+
+Theorem~\ref{thm:conv} and Figure~\ref{fig:dec} conclude the section.
+
+\bibliographystyle{plainnat}
+\bibliography{paper-short}
+\end{document}
