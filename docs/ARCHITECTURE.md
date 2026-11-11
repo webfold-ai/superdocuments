@@ -35,6 +35,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 | `document` | Format dispatch, per-format converters, the CSV streaming writer, `DocumentCache`, `fingerprint_bytes` |
 | `ooxml` | Shared OOXML helpers (local-name matching, relationships, package-safe path resolution) and the DOCX, PPTX and XLSX readers |
 | `xlsx` | Public XLSX/XLSM entry points returning structured `Worksheet` rows, backed by `ooxml::xlsx` |
+| `media` | `extract_images` (`ExtractedImage`): pictures of DOCX, PPTX, XLSX, ODF and EPUB packages, with mime type from magic bytes, header size for PNG/JPEG/GIF/BMP, first referencing part and alt text. Re-exported from `document` |
 | `epub` | Spine-driven EPUB reader (container, OPF, manifest, spine); see [EPUB.md](EPUB.md) |
 | `html` | HTML to Markdown: `extract.rs` (single-pass extractor, `Template` for repeated-block detection, `chunk_markdown`), `entities.rs` |
 | `markdown` | Hand-written Markdown parser and HTML renderer (not CommonMark-complete, per its module docs). Not used by `convert_bytes`. Only YAML frontmatter uses `hashtrinity::codec::syntax` |
@@ -59,6 +60,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 |---|---|---|
 | ZIP entries, `document.rs` (shared by `ooxml`) | 4,096 entries; 32 MiB per entry; 128 MiB total, checked against sizes declared in the archive | `MAX_ENTRIES`, `MAX_ENTRY`, `MAX_TOTAL` |
 | XLSX worksheet cells | 20,000,000 cells allocated per worksheet; a larger sheet is an error | `MAX_CELLS` in `ooxml/xlsx.rs` |
+| Extracted pictures | 64 MiB per picture (an error above it), 512 MiB in total, 10,000 pictures; an entry name that is absolute, has `..` or a backslash is an error | `media.rs` (`Limits`) |
 | ZIP entries, `epub.rs` | 8,192 entries; 64 MiB per entry; 256 MiB for the whole file; 16 MiB per chapter; 64 MiB of rendered text | `epub.rs` constants |
 | PDF input | 256 MiB, and the bytes must start with `%PDF-` | `MAX_PDF_BYTES` |
 | OCR | Defaults: 20 pages, 2,400 px, 120 s, 1 worker, language `eng`. Accepted ranges: 1 to 2,000 pages, 256 to 4,000 px, 1 to 3,600 s, 1 to 16 workers. Language list limited to ASCII alphanumerics, `_` and `+` | `OcrOptions::validate` |

@@ -8,6 +8,9 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 - Legacy `.xls` (BIFF) conversion through the in-repo `calamine/` crate, now a path dependency of the root crate (default features off). The output has the same Markdown shape as XLSX: one `## <sheet>` section per worksheet in tab order, error cells, booleans and formula results. `DocFormat::Xls` goes through `DocumentCache` and `convert_streaming`.
 
+- `document::extract_images` and `ExtractedImage` (`src/media.rs`): the pictures of DOCX, DOCM, PPTX, XLSX, XLSM, ODT, ODP, ODS and EPUB, with name, media type (from magic bytes), header size for PNG, JPEG, GIF and BMP, first referencing part and alt text. Limits and zip safety are described in the function's doc comment.
+- DOCX and PPTX Markdown writes each picture as `![alt](media/<name>)` where its drawing is. The alt text is the drawing's `descr`; a drawing without a picture still gets its description as text, as before.
+
 ### Changed
 
 - The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.
