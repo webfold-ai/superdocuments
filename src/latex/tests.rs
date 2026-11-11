@@ -23,6 +23,10 @@ const FIXTURES: &[&str] = &[
     "fragment",
     "main-with-input",
     "pictures",
+    "starred",
+    "booktabs",
+    "references",
+    "paper-short",
 ];
 
 fn fixture_text(name: &str) -> String {
@@ -1173,4 +1177,705 @@ fn floats_do_not_drop_what_their_block_cannot_hold() {
         _ => None,
     });
     assert_eq!(listing.and_then(|v| v.language.as_deref()), Some("Python"));
+}
+
+// ----- starred environments ----------------------------------------------------------------------
+
+/// The structure of a document with everything a star may change taken out: environment
+/// names and numbers.
+fn structure(doc: &Document) -> Vec<String> {
+    fn walk(blocks: &[Block], out: &mut Vec<String>) {
+        for b in blocks {
+            match b {
+                Block::Section(s) => out.push(format!("section {}", text_of(&s.title))),
+                Block::Paragraph(p) => out.push(format!("paragraph {}", text_of(p))),
+                Block::List(l) => out.push(format!("list of {}", l.items.len())),
+                Block::Table(t) => out.push(format!(
+                    "table caption={:?} label={:?} rows={:?}",
+                    t.caption_text,
+                    t.label,
+                    t.rows
+                        .iter()
+                        .map(|r| r
+                            .cells
+                            .iter()
+                            .map(|c| text_of(&c.content))
+                            .collect::<Vec<_>>())
+                        .collect::<Vec<_>>()
+                )),
+                Block::Math(m) => out.push(format!(
+                    "math {:?}",
+                    m.rows
+                        .iter()
+                        .map(|r| (r.tex.as_str(), r.label.as_deref()))
+                        .collect::<Vec<_>>()
+                )),
+                Block::Verbatim(v) => out.push(format!("verbatim {}", v.text)),
+                Block::Figure(f) => out.push(format!(
+                    "figure caption={:?} label={:?} images={:?} subfigures={:?}",
+                    f.caption_text,
+                    f.label,
+                    f.image_paths
+                        .iter()
+                        .map(|i| i.declared.as_str())
+                        .collect::<Vec<_>>(),
+                    f.subfigures
+                        .iter()
+                        .map(|s| (s.caption_text.clone(), s.label.clone()))
+                        .collect::<Vec<_>>()
+                )),
+                Block::Theorem(t) => {
+                    out.push(format!("theorem {} label={:?}", t.name, t.label));
+                    walk(&t.body, out);
+                }
+                Block::Quote(inner) => walk(inner, out),
+            }
+        }
+    }
+    let mut out = Vec::new();
+    walk(&doc.blocks, &mut out);
+    out
+}
+
+#[test]
+fn starred_environments_have_the_structure_of_their_unstarred_forms() {
+    let float = "\\centering\\includegraphics[width=\\linewidth]{img/a}\n\
+                 \\caption{A caption.}\\label{x:one}";
+    let subfigures = "\\begin{subfigure}{0.5\\textwidth}\\includegraphics{l}\\caption{Left.}\\label{x:l}\\end{subfigure}\n\
+                      \\begin{subfigure}{0.5\\textwidth}\\includegraphics{r}\\caption{Right.}\\end{subfigure}\n\
+                      \\caption{Both.}\\label{x:one}";
+    let table = "\\caption{A table.}\\label{x:one}\n\\begin{tabular}{lr} a & 1 \\\\ b & 2 \\\\ \\end{tabular}";
+    let cases: &[(&str, &str, &str)] = &[
+        ("figure", "[t]", float),
+        ("figure", "", subfigures),
+        ("sidewaysfigure", "", float),
+        ("table", "[ht]", table),
+        ("sidewaystable", "", table),
+        ("equation", "", "E = mc^2 \\label{x:one}"),
+        ("align", "", "a &= b \\label{x:one} \\\\ c &= d"),
+        ("gather", "", "a = b \\label{x:one} \\\\ c = d"),
+        ("multline", "", "a + b \\\\ = c \\label{x:one}"),
+        ("alignat", "{2}", "a &= b &\\quad c &= d \\label{x:one}"),
+        ("flalign", "", "a &= b & \\label{x:one}"),
+        ("xalignat", "{2}", "a &= b & c &= d \\label{x:one}"),
+        ("eqnarray", "", "a &=& b \\label{x:one} \\\\ c &=& d"),
+    ];
+    for (env, args, body) in cases {
+        let plain = parse(&format!(
+            "Before.\n\\begin{{{env}}}{args}\n{body}\n\\end{{{env}}}\nAfter."
+        ));
+        let starred = parse(&format!(
+            "Before.\n\\begin{{{env}*}}{args}\n{body}\n\\end{{{env}*}}\nAfter."
+        ));
+        assert!(warnings(&plain).is_empty(), "{env}: {}", warnings(&plain));
+        assert!(
+            warnings(&starred).is_empty(),
+            "{env}*: {}",
+            warnings(&starred)
+        );
+        assert_eq!(structure(&plain), structure(&starred), "{env} and {env}*");
+        // Three blocks: the text before, the environment, the text after.
+        assert_eq!(structure(&plain).len(), 3, "{env}: {:?}", structure(&plain));
+        assert_eq!(plain.labels.len(), starred.labels.len(), "{env}");
+        assert!(
+            plain.labels.iter().any(|l| l.name == "x:one"),
+            "{env}: {:?}",
+            plain.labels
+        );
+        let is_math = matches!(plain.blocks[1], Block::Math(_));
+        let starred_number = starred.label_number("x:one");
+        if is_math {
+            // A starred display is not numbered; the unstarred one is.
+            assert_eq!(plain.label_number("x:one"), Some("1"), "{env}");
+            assert_eq!(starred_number, None, "{env}*");
+        } else {
+            // A starred float spans the columns: it is numbered like any other float.
+            assert_eq!(plain.label_number("x:one"), Some("1"), "{env}");
+            assert_eq!(starred_number, Some("1"), "{env}*");
+        }
+    }
+}
+
+#[test]
+fn a_starred_figure_is_a_figure_with_its_subfigures() {
+    // The case behind the two recorded differences from pandoc, which reads figure* as a Div.
+    let doc = parsed("starred");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    let figs = super::figures(&doc);
+    let shape: Vec<(&str, Option<&str>, usize)> = figs
+        .iter()
+        .map(|f| (f.env.as_str(), f.number.as_deref(), f.subfigures.len()))
+        .collect();
+    assert_eq!(shape, [("figure*", Some("1"), 2), ("figure", Some("2"), 0)]);
+    assert_eq!(figs[0].subfigures[1].number.as_deref(), Some("1b"));
+    assert_eq!(doc.label_number("fig:wide"), Some("1"));
+    assert_eq!(doc.label_number("fig:wide-b"), Some("1b"));
+    assert_eq!(doc.label_number("tab:wide"), Some("1"));
+    assert_eq!(doc.label_number("eq:plain"), Some("1"));
+    assert_eq!(doc.label_number("eq:starred"), None);
+    let tables = doc
+        .blocks
+        .iter()
+        .filter(|b| matches!(b, Block::Table(t) if t.env == "table*" && t.rows.len() == 2))
+        .count();
+    assert_eq!(tables, 1);
+}
+
+#[test]
+fn the_column_argument_of_alignat_is_not_math() {
+    let doc = parse("\\begin{alignat}{2} a &= b \\\\ c &= d \\end{alignat}");
+    let rows: Vec<(String, bool)> = all_math(&doc);
+    assert_eq!(rows.len(), 2, "{rows:?}");
+    assert_eq!(rows[0].0, "a &= b");
+    assert!(rows.iter().all(|(tex, _)| !tex.contains("{2}")), "{rows:?}");
+}
+
+#[test]
+fn theorems_work_starred_and_without_a_declaration() {
+    let doc = parse(
+        "\\newtheorem*{mainthm}{Main Theorem}\n\\newtheorem{prop}{Proposition}\n\
+         \\begin{mainthm} Unnumbered. \\end{mainthm}\n\
+         \\begin{prop}\\label{p} Numbered. \\end{prop}\n\
+         \\begin{lemma}\\label{l} Undeclared lemma. \\end{lemma}\n\
+         \\begin{lemma} Second. \\end{lemma}\n\
+         \\begin{definition*} Starred and undeclared. \\end{definition*}",
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    let theorems: Vec<(&str, Option<&str>)> = doc
+        .blocks
+        .iter()
+        .filter_map(|b| match b {
+            Block::Theorem(t) => Some((t.name.as_str(), t.number.as_deref())),
+            _ => None,
+        })
+        .collect();
+    assert_eq!(
+        theorems,
+        [
+            ("Main Theorem", None),
+            ("Proposition", Some("1")),
+            ("Lemma", Some("1")),
+            ("Lemma", Some("2")),
+            ("Definition", None),
+        ]
+    );
+    let rendered = md(&doc);
+    assert!(
+        rendered.contains("**Main Theorem.** Unnumbered."),
+        "{rendered}"
+    );
+    assert!(rendered.contains("**Lemma 2.** Second."), "{rendered}");
+    assert!(
+        !rendered.contains('*') || !rendered.contains("mainthmMain"),
+        "{rendered}"
+    );
+}
+
+// ----- macros ------------------------------------------------------------------------------------
+
+#[test]
+fn environments_opened_and_closed_by_macros_end_where_the_macro_says() {
+    // The common shorthand of older papers. The document must go on after each one.
+    let doc = parse(
+        "\\newcommand{\\be}{\\begin{equation}}\n\\newcommand{\\ee}{\\end{equation}}\n\
+         \\def\\bea{\\begin{eqnarray}}\n\\def\\eea{\\end{eqnarray}}\n\
+         \\newenvironment{eq}{\\begin{equation}}{\\end{equation}}\n\
+         First.\n\\be x = 1 \\label{eq:x} \\ee\nSecond \\eqref{eq:x}.\n\
+         \\bea a &=& b \\\\ c &=& d \\eea\nThird.\n\
+         \\begin{eq} y = 2 \\end{eq}\nFourth, with \\eeprom unknown.",
+    );
+    let shape = structure(&doc);
+    assert_eq!(
+        shape,
+        [
+            "paragraph First.",
+            "math [(\"x = 1\", Some(\"eq:x\"))]",
+            "paragraph Second eq:x.",
+            "math [(\"a &=& b\", None), (\"c &=& d\", None)]",
+            "paragraph Third.",
+            "math [(\"y = 2\", None)]",
+            "paragraph Fourth, with unknown.",
+        ]
+    );
+    assert_eq!(doc.label_number("eq:x"), Some("1"));
+    // \eeprom is another command, not \ee followed by text.
+    assert!(warnings(&doc).contains("\\eeprom"), "{}", warnings(&doc));
+    let rendered = md(&doc);
+    assert!(rendered.contains("Second (1)."), "{rendered}");
+    assert!(rendered.contains("y = 2 \\tag{4}"), "{rendered}");
+}
+
+#[test]
+fn starred_definitions_define_the_command() {
+    let doc = parse(
+        "\\newcommand*{\\one}{ONE}\\renewcommand*{\\one}{UNO}\\providecommand*{\\two}{TWO}\n\
+         \\newcommand*{\\wrap}[1]{<#1>}\\DeclareRobustCommand{\\three}{THREE}\n\
+         \\DeclareMathOperator*{\\argmax}{arg\\,max}\\DeclareMathOperator{\\tr}{tr}\n\
+         \\one{} \\two{} \\wrap{x} \\three{} $\\argmax_x \\tr A$",
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "UNO TWO <x> THREE \\argmax_x \\tr A"
+    );
+    let expanded = parse_with(
+        "\\DeclareMathOperator*{\\argmax}{arg\\,max}\\DeclareMathOperator{\\tr}{tr}$\\argmax_x \\tr A$",
+        &Options {
+            expand_math_macros: true,
+            ..Options::default()
+        },
+        None,
+    );
+    assert_eq!(
+        all_math(&expanded),
+        [(
+            "\\operatorname*{arg\\,max}_x \\operatorname{tr} A".to_string(),
+            false
+        )]
+    );
+}
+
+fn math_expanded(source: &str) -> Vec<String> {
+    let doc = parse_with(
+        source,
+        &Options {
+            expand_math_macros: true,
+            ..Options::default()
+        },
+        None,
+    );
+    all_math(&doc).into_iter().map(|(tex, _)| tex).collect()
+}
+
+#[test]
+fn math_macros_expand_only_when_asked() {
+    let defs = "\\newcommand{\\R}{\\mathbb{R}}\\newcommand{\\norm}[1]{\\left\\lVert #1 \\right\\rVert}\n\
+                \\newcommand{\\vv}[1]{\\vec #1}\\newcommand{\\E}[2][x]{\\mathbb{E}_{#1}\\left[#2\\right]}\n\
+                \\def\\half{\\frac{1}{2}}\\newcommand{\\RR}{\\R\\times\\R}\\newcommand{\\eps}{\\varepsilon}\n\
+                \\newcommand{\\gr}[1]{\\alpha#1}\\DeclarePairedDelimiter{\\abs}{\\lvert}{\\rvert}\n";
+    let source = format!(
+        "{defs}$x \\in \\R^n$, $2^\\R$, $\\norm{{x_i}}$, $\\vv a$, $\\E{{f}} + \\E[y]{{g}}$, \
+         $\\half\\RR$, $\\eps x \\epsilon \\Rightarrow$, $\\gr{{b}}\\gr{{2}}$, $\\abs{{x}} + \\abs*{{y}}$\n\\[ \\norm{{\\norm{{y}}}} \\]\n\
+         \\begin{{align}} \\R &= \\R \\label{{eq:r}} \\\\ \\half &= 0.5 \\end{{align}}"
+    );
+    // By default math is exactly what the author wrote.
+    let raw: Vec<String> = all_math(&parse(&source))
+        .into_iter()
+        .map(|(tex, _)| tex)
+        .collect();
+    assert_eq!(raw[0], "x \\in \\R^n");
+    assert_eq!(raw[2], "\\norm{x_i}");
+    // With the option, no macro of the document is left in the math.
+    let expanded = math_expanded(&source);
+    assert_eq!(
+        expanded,
+        [
+            "x \\in \\mathbb{R}^n",
+            // After ^ the expansion is braced, so it is still one superscript.
+            "2^{\\mathbb{R}}",
+            "\\left\\lVert x_i \\right\\rVert",
+            // `\vec #1` with the argument `a` keeps the space that separates the letters.
+            "\\vec a",
+            "\\mathbb{E}_{x}\\left[f\\right] + \\mathbb{E}_{y}\\left[g\\right]",
+            "\\frac{1}{2}\\mathbb{R}\\times\\mathbb{R}",
+            // \epsilon and \Rightarrow are not \eps and \R followed by letters.
+            "\\varepsilon x \\epsilon \\Rightarrow",
+            // `\alpha#1` with the argument `b` must not become `\alphab`.
+            "\\alpha b\\alpha2",
+            "\\lvert x \\rvert + \\left\\lvert y \\right\\rvert",
+            "\\left\\lVert \\left\\lVert y \\right\\rVert \\right\\rVert",
+            "\\mathbb{R} &= \\mathbb{R}",
+            "\\frac{1}{2} &= 0.5",
+        ]
+    );
+}
+
+#[test]
+fn runaway_math_macros_stop_at_the_limits() {
+    // A macro that expands to itself, and one that doubles each time.
+    let doc = parse_with(
+        "\\newcommand{\\loop}{\\loop x}\\newcommand{\\dbl}[1]{\\dbl{#1#1}} $\\loop$ $\\dbl{ab}$ after",
+        &Options {
+            expand_math_macros: true,
+            max_expansions: 500,
+            max_expansion_bytes: 20_000,
+            ..Options::default()
+        },
+        None,
+    );
+    let maths = all_math(&doc);
+    assert_eq!(maths.len(), 2);
+    assert!(maths.iter().all(|(tex, _)| tex.len() < 200_000), "bounded");
+    assert!(
+        render_text(&doc, &RenderOptions::default())
+            .trim_end()
+            .ends_with("after"),
+        "the text after the math is still read"
+    );
+}
+
+#[test]
+fn xspace_adds_a_space_only_before_a_word() {
+    let doc = parse(
+        "\\newcommand{\\sys}{\\textsc{FoldNet}\\xspace}\
+         \\sys is fast. We use \\sys, then \\sys. \\sys (ours) and \\sys's \\sys{} \\textbf{\\sys}",
+    );
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "FoldNet is fast. We use FoldNet, then FoldNet. FoldNet (ours) and FoldNet's FoldNet FoldNet"
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+}
+
+#[test]
+fn ensuremath_in_text_is_math() {
+    let doc = parse(
+        "\\newcommand{\\Rn}{\\ensuremath{\\mathbb{R}^n}}A point of \\Rn{} and $x \\in \\Rn$.",
+    );
+    assert_eq!(
+        all_math(&doc),
+        [
+            ("\\mathbb{R}^n".to_string(), false),
+            ("x \\in \\Rn".to_string(), false)
+        ]
+    );
+    assert_eq!(
+        md(&doc).trim(),
+        "A point of $\\mathbb{R}^n$ and $x \\in \\Rn$."
+    );
+    assert_eq!(
+        math_expanded("\\newcommand{\\Rn}{\\ensuremath{\\mathbb{R}^n}}$x \\in \\Rn$"),
+        ["x \\in \\mathbb{R}^n"]
+    );
+}
+
+#[test]
+fn false_conditionals_are_skipped_and_switches_are_followed() {
+    let doc = parse(
+        "Shown. \\iffalse HIDDEN-A \\ifx\\a\\b nested \\fi still hidden \\fi Visible.\n\
+         \\iftrue KEPT \\else HIDDEN-B \\fi\n\
+         \\newif\\ifdraft \\ifdraft HIDDEN-C \\else FINAL \\fi\n\
+         \\drafttrue \\ifdraft DRAFT \\else HIDDEN-D \\fi End.",
+    );
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "Shown. Visible. KEPT FINAL DRAFT End."
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    // Other conditionals are not evaluated: the first branch is kept, and that is said.
+    let doc = parse("\\ifdefined\\foo first \\else second \\fi tail");
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "first tail"
+    );
+    assert!(
+        warnings(&doc).contains("not evaluated"),
+        "{}",
+        warnings(&doc)
+    );
+}
+
+#[test]
+fn let_copies_a_macro_of_the_document() {
+    let doc = parse("\\newcommand{\\old}{VALUE}\\let\\new\\old \\let\\other=\\old \\new{} \\other{} \\let\\x=\\relax done");
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "VALUE VALUE done"
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+}
+
+// ----- references --------------------------------------------------------------------------------
+
+#[test]
+fn named_references_say_what_they_point_to() {
+    let doc = parsed("references");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    assert_eq!(doc.unresolved_references(), ["sec:missing", "fig:missing"]);
+    let text = render_text(&doc, &RenderOptions::default()).replace('\u{a0}', " ");
+    for expected in [
+        "cref: section 1, fig. 1, table 1, eq. (1), lemma 1, algorithm 1, appendix A.",
+        "Cref: Section 1, Figure 1, Table 1, Equation (1), Lemma 1, Algorithm 1, Appendix A.",
+        "autoref: section 1, Figure 1, Table 1, Equation 1, Lemma 1, Algorithm 1, Appendix A.",
+        "plain: 1, 1, 1, (1), 1, 1, A.",
+        "several: figs. 1 and 1a, Sections 1, 1.1 and A, eqs. (1) and (2).",
+        "subfigures: (a) and (b) of Figure 1; 1b.",
+        "missing: ??, sections 1 and ??, ??.",
+        "starred: 1.",
+    ] {
+        assert!(text.contains(expected), "missing {expected:?} in:\n{text}");
+    }
+}
+
+#[test]
+fn appendix_sections_are_lettered() {
+    let doc = parse(
+        "\\section{Intro}\\label{s}\\appendix\\section{Proofs}\\label{a}\\subsection{Lemma}\\label{a1}\
+         \\section{Data}\\label{b}",
+    );
+    let numbers: Vec<Option<&str>> = sections(&doc).iter().map(|s| s.number.as_deref()).collect();
+    assert_eq!(numbers, [Some("1"), Some("A"), Some("A.1"), Some("B")]);
+    let kinds: Vec<&str> = doc.labels.iter().map(|l| l.kind.as_str()).collect();
+    assert_eq!(kinds, ["section", "appendix", "appendix", "appendix"]);
+    assert_eq!(doc.label_number("a1"), Some("A.1"));
+}
+
+// ----- tables ------------------------------------------------------------------------------------
+
+#[test]
+fn booktabs_rules_and_row_spans_do_not_leak_into_cells() {
+    let doc = parsed("booktabs");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    let table = doc
+        .blocks
+        .iter()
+        .find_map(|b| match b {
+            Block::Table(t) => Some(t),
+            _ => None,
+        })
+        .unwrap_or_else(|| panic!("no table"));
+    let rows: Vec<Vec<(String, usize)>> = table
+        .rows
+        .iter()
+        .map(|r| {
+            r.cells
+                .iter()
+                .map(|c| (text_of(&c.content), c.colspan))
+                .collect()
+        })
+        .collect();
+    let cell = |s: &str| (s.to_string(), 1usize);
+    assert_eq!(
+        rows,
+        vec![
+            vec![
+                cell(""),
+                ("CASP14".to_string(), 2),
+                ("CAMEO".to_string(), 2)
+            ],
+            vec![
+                cell("Method"),
+                cell("TM"),
+                cell("GDT"),
+                cell("TM"),
+                cell("GDT")
+            ],
+            vec![
+                cell("Baseline"),
+                cell("0.71"),
+                cell("65.2"),
+                cell("0.80"),
+                cell("77.1")
+            ],
+            vec![
+                cell(""),
+                cell("0.72"),
+                cell("66.0"),
+                cell("0.81"),
+                cell("77.9")
+            ],
+            vec![
+                cell("Ours (large)"),
+                cell("0.85"),
+                cell("80.1"),
+                cell("0.88"),
+                cell("84.3")
+            ],
+        ]
+    );
+    let rendered = md(&doc);
+    // The spanned header keeps CAMEO over its own two columns.
+    assert!(
+        rendered.contains("|  | CASP14 |  | CAMEO |  |\n| --- | --- | --- | --- | --- |\n| Method | TM | GDT | TM | GDT |"),
+        "{rendered}"
+    );
+    for leaked in ["lr", "2-3", "2\\*", "gray", "1.5pt", "0.5em"] {
+        assert!(!rendered.contains(leaked), "{leaked} leaked: {rendered}");
+    }
+    let html = render_html(&doc, &RenderOptions::default());
+    assert!(
+        html.contains(
+            "<tr><td></td><td colspan=\"2\">CASP14</td><td colspan=\"2\">CAMEO</td></tr>"
+        ),
+        "{html}"
+    );
+    let text = render_text(&doc, &RenderOptions::default());
+    assert!(text.contains("\tCASP14\t\tCAMEO\t\n"), "{text:?}");
+}
+
+#[test]
+fn a_line_break_inside_a_cell_does_not_break_the_row() {
+    let doc = parse(
+        "\\begin{tabular}{ll} a & \\makecell{first \\\\ second} \\\\ b & c \\\\ \\end{tabular}",
+    );
+    assert_eq!(
+        md(&doc),
+        "| a | first <br>second |\n| --- | --- |\n| b | c |\n"
+    );
+    assert!(render_text(&doc, &RenderOptions::default()).contains("a\tfirst second\n"));
+}
+
+// ----- units, citations, algorithms ----------------------------------------------------------------
+
+#[test]
+fn siunitx_quantities_keep_their_number_and_unit() {
+    let doc = parse(
+        "\\SI{3.5}{\\kilo\\hertz}, \\qty{9.81}{\\meter\\per\\second\\squared}, \\si{\\micro\\meter}, \
+         \\SI{20}{\\percent}, \\SI{-4}{\\celsius}, \\num{1.5e-3}, \\num{2 +- 0.1}, \
+         \\SIrange{1}{5}{\\milli\\second}, \\unit{kg.m^{-1}}, \\ang{45}, \\SI{2}{\\furlong}.",
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    assert_eq!(
+        render_text(&doc, &RenderOptions::default()).trim(),
+        "3.5\u{a0}kHz, 9.81\u{a0}m/s\u{b2}, \u{b5}m, 20%, \u{2212}4\u{b0}C, 1.5\u{a0}\u{d7}\u{a0}10\u{207b}\u{b3}, \
+         2\u{a0}\u{b1}\u{a0}0.1, 1\u{2013}5\u{a0}ms, kg\u{b7}m\u{207b}\u{b9}, 45\u{b0}, 2\u{a0}furlong."
+    );
+}
+
+#[test]
+fn citation_commands_of_natbib_and_biblatex_are_citations() {
+    let bib = crate::bibtex::parse(
+        "@article{k, author={Knuth, Donald}, year=1984, title={T}}\n\
+         @article{l, author={Lamport, Leslie and Knuth, Donald}, year=1986, title={L}}",
+    );
+    let doc = parse(
+        "\\Citet{k} \\newcite{l} \\citeauthor{k} \\citeyear{k} \\citealp{k} \\citep*{k,l} \
+         \\Textcite{k} \\autocite[p.~2]{l} \\nocite{k}\\nocite{*}end",
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    let rendered = render_text(
+        &doc,
+        &RenderOptions {
+            bibliography: Some(&bib),
+        },
+    );
+    assert_eq!(
+        rendered.replace('\u{a0}', " ").trim(),
+        "Knuth, 1984 Lamport and Knuth, 1986 Knuth 1984 Knuth, 1984 (Knuth, 1984; Lamport and Knuth, 1986) \
+         Knuth, 1984 (Lamport and Knuth, 1986, p. 2) end"
+    );
+}
+
+#[test]
+fn algorithms_are_numbered_and_kept_as_source() {
+    let doc = parse(
+        "\\begin{algorithm}[t]\n\\caption{Training loop}\\label{alg:train}\n\\begin{algorithmic}[1]\n\
+         \\State $\\theta \\gets \\theta_0$\n\\For{$t = 1$ to $T$}\n  \\State update $\\theta$\n\\EndFor\n\
+         \\end{algorithmic}\n\\end{algorithm}\n\
+         \\begin{algorithm}\\caption{Second}\\label{alg:two}\\KwIn{x}\\end{algorithm}\n\
+         Algorithms~\\ref{alg:train} and \\ref{alg:two}; \\cref{alg:two}.",
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    assert_eq!(doc.label_number("alg:train"), Some("1"));
+    assert_eq!(doc.label_number("alg:two"), Some("2"));
+    assert_eq!(
+        md(&doc).replace('\u{a0}', " "),
+        "**Algorithm 1:** Training loop\n\n```latex\n\\begin{algorithmic}[1]\n\
+         \\State $\\theta \\gets \\theta_0$\n\\For{$t = 1$ to $T$}\n  \\State update $\\theta$\n\\EndFor\n\
+         \\end{algorithmic}\n```\n\n**Algorithm 2:** Second\n\n```latex\n\\KwIn{x}\n```\n\n\
+         Algorithms 1 and 2; algorithm 2.\n"
+    );
+}
+
+#[test]
+fn optional_arguments_of_title_author_footnote_and_caption_are_not_text() {
+    let doc = parse(
+        "\\title[Short]{The Long Title}\\author[A. L.]{Ada Lovelace}\n\\begin{document}\n\
+         Body\\footnote[3]{A note.} text.\n\n\\caption[Short]{A loose caption.}\n\\end{document}",
+    );
+    assert_eq!(
+        doc.title.as_deref().map(text_of).as_deref(),
+        Some("The Long Title")
+    );
+    assert_eq!(doc.authors.len(), 1);
+    assert_eq!(text_of(&doc.authors[0]), "Ada Lovelace");
+    let rendered = md(&doc);
+    assert!(
+        !rendered.contains("Short") && !rendered.contains("A. L."),
+        "{rendered}"
+    );
+    assert!(rendered.contains("Body[^1] text."), "{rendered}");
+    assert!(rendered.contains("[^1]: A note."), "{rendered}");
+    assert!(rendered.contains("\nA loose caption.\n"), "{rendered}");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+}
+
+#[test]
+fn the_command_form_of_the_abstract_is_the_abstract() {
+    let doc = parse(
+        "\\title{T}\\abstract{We show $x$.}\n\\begin{document}\\maketitle Body.\\end{document}",
+    );
+    let abstract_text = doc
+        .abstract_body
+        .as_ref()
+        .map(|blocks| {
+            structure(&Document {
+                blocks: blocks.clone(),
+                ..Document::default()
+            })
+        })
+        .unwrap_or_default();
+    assert_eq!(abstract_text, ["paragraph We show x."]);
+    assert!(
+        md(&doc).contains("## Abstract\n\nWe show $x$."),
+        "{}",
+        md(&doc)
+    );
+}
+
+#[test]
+fn damaged_fixtures_never_panic_or_hang_with_math_expansion_and_conversion() {
+    // The same truncations and mutations as above, through the paths the converters use:
+    // macros expanded inside math, and `document::convert_bytes`.
+    const ALPHABET: &[u8] = b"{}[]$\\%&#~^_*'\"`\n a1\\begin\\end\\newcommand\\fi";
+    let options = Options {
+        max_expansions: 2_000,
+        max_depth: 32,
+        expand_math_macros: true,
+        ..Options::default()
+    };
+    let run = |src: &str| {
+        let doc = parse_with(src, &options, None);
+        let _ = render_markdown(&doc, &RenderOptions::default());
+        let _ = render_html(&doc, &RenderOptions::default());
+        let _ = crate::document::convert_bytes("tex", src.as_bytes());
+    };
+    let mut rng = Xorshift(0xD1B5_4A32_D192_ED03);
+    for name in FIXTURES {
+        let text = fixture_text(name);
+        let len = text.len();
+        for cut in (0..=len).step_by(11).chain(len.saturating_sub(30)..=len) {
+            if text.is_char_boundary(cut) {
+                run(&text[..cut]);
+            }
+        }
+        for _ in 0..80 {
+            let mut bytes = text.clone().into_bytes();
+            for _ in 0..1 + rng.below(6) {
+                if bytes.is_empty() {
+                    break;
+                }
+                let at = rng.below(bytes.len());
+                bytes[at] = ALPHABET[rng.below(ALPHABET.len())];
+            }
+            if let Ok(s) = String::from_utf8(bytes) {
+                run(&s);
+            }
+        }
+    }
+    // Multi-byte text next to every construct that is read by byte offset.
+    for src in [
+        "\\newcommand{\\é}[1]{é#1é}$\\é{ü}\\é",
+        "\\newcommand{\\a}[2][é]{#1ü#2}$\\a[ñ{]ø}{å}\\a ü$ \\a",
+        "\\begin{alignat}{é} ü &= å \\end{alignat}",
+        "\\begin{algorithm}\\caption[é]{ü}\\label{å}ø\\end{algorithm}",
+        "\\begin{tikzpicture}[é={ü]}]ñ\\end{tikzpicture}",
+        "\\begin{tikzpicture}[é",
+        "\\SI{é}{\\ü^{å}} \\num{1eé} \\si{^}",
+        "\\cmidrule(é \\multirow{é}{ü}{å} \\iffalse é",
+        "$\\ensuremath{é",
+        "$x^\\é$ \\newcommand{\\é}{ü}$x^\\é_\\é\\",
+    ] {
+        run(src);
+    }
 }

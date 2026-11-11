@@ -9,8 +9,12 @@
 //!
 //! What it does and does not do:
 //! - Macros defined with `\newcommand`, `\renewcommand`, `\providecommand`, `\def`,
-//!   `\DeclareMathOperator`, `\newenvironment` and `\newtheorem` are expanded, with limits on
-//!   the number of expansions, the expansion size and the nesting depth.
+//!   `\DeclareMathOperator`, `\newenvironment` and `\newtheorem` (starred forms included) are
+//!   expanded in text, with limits on the number of expansions, the expansion size and the
+//!   nesting depth. Inside math they are expanded only with `Options::expand_math_macros`.
+//!   `\def` with delimited parameters is not supported.
+//! - Conditionals are not evaluated, except `\iffalse`, `\iftrue` and switches made with
+//!   `\newif`. For any other `\if...` the first branch is kept.
 //! - Unknown commands produce a warning and the content of their arguments is kept.
 //! - `\input`, `\include` and `\subfile` are read only through a `FileProvider`. Without one
 //!   they are recorded in `Document::inputs` with a warning. With one, the file is inlined; a
@@ -52,6 +56,11 @@ pub struct Options {
     pub max_files: usize,
     /// Most warnings recorded; further warnings are counted but not stored.
     pub max_warnings: usize,
+    /// Expand the document's own macros inside math as well as in text, so that the TeX in
+    /// `Inline::Math` and `MathRow::tex` uses no command the document defined itself. Off by
+    /// default: math is then kept exactly as written. `document::convert_bytes` and
+    /// `convert_path` turn it on, because Markdown math renderers do not know the macros.
+    pub expand_math_macros: bool,
 }
 
 impl Default for Options {
@@ -63,6 +72,7 @@ impl Default for Options {
             max_depth: 128,
             max_files: 256,
             max_warnings: 10_000,
+            expand_math_macros: false,
         }
     }
 }
@@ -116,7 +126,8 @@ pub struct Document {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct LabelInfo {
     pub name: String,
-    /// `section`, `figure`, `table`, `equation`, `theorem`, `subfigure` or `item`.
+    /// `section`, `appendix`, `figure`, `subfigure`, `table`, `equation`, `theorem`,
+    /// `algorithm`, or `label` for a label in running text.
     pub kind: String,
     pub number: Option<String>,
 }
@@ -323,9 +334,25 @@ pub struct Cite {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Ref {
-    /// `ref`, `eqref`, `pageref`, and so on.
+    /// `ref`, `eqref`, `pageref`, `cref`, `autoref`, `subref`, and so on.
     pub command: String,
+    /// The label as written. `\cref` and `\Cref` take several, separated by commas.
     pub label: String,
+}
+
+impl Ref {
+    /// The labels this reference names: one, or several for the cleveref commands.
+    pub fn labels(&self) -> Vec<&str> {
+        if matches!(self.command.as_str(), "cref" | "Cref" | "labelcref") {
+            self.label
+                .split(',')
+                .map(str::trim)
+                .filter(|l| !l.is_empty())
+                .collect()
+        } else {
+            vec![self.label.as_str()]
+        }
+    }
 }
 
 impl Document {
@@ -342,8 +369,11 @@ impl Document {
         let mut out = Vec::new();
         let mut visit = |inl: &Inline| {
             if let Inline::Ref(r) = inl {
-                if !self.labels.iter().any(|l| l.name == r.label) && !out.contains(&r.label) {
-                    out.push(r.label.clone());
+                for name in r.labels() {
+                    if !self.labels.iter().any(|l| l.name == name) && !out.iter().any(|o| o == name)
+                    {
+                        out.push(name.to_string());
+                    }
                 }
             }
         };

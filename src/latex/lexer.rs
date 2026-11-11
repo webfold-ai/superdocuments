@@ -281,6 +281,61 @@ impl Lexer {
         self.at(self.pos)
     }
 
+    /// The next byte, exactly as it is in the source (no space is skipped).
+    pub(crate) fn peek_raw(&self) -> Option<u8> {
+        self.at(self.pos)
+    }
+
+    /// Whether the source continues with `text` at the current position.
+    pub(crate) fn rest_starts_with(&self, text: &str) -> bool {
+        self.src
+            .as_bytes()
+            .get(self.pos..)
+            .is_some_and(|rest| rest.starts_with(text.as_bytes()))
+    }
+
+    /// Reads math up to the first of `closers` (which is consumed), like `until_raw` with
+    /// `math` set. A closer that is a control word (`\\ee`) matches only as a whole word.
+    /// Returns the text and the index of the closer, or `None` when the source ended first.
+    pub(crate) fn until_closer(&mut self, closers: &[String]) -> (String, Option<usize>) {
+        let src = self.src.clone();
+        let bytes = src.as_bytes();
+        let mut out = String::new();
+        let mut i = self.pos;
+        while i < bytes.len() {
+            if bytes[i] == b'%' {
+                while i < bytes.len() && bytes[i] != b'\n' {
+                    i += 1;
+                }
+                continue;
+            }
+            if bytes[i] == b'\\' {
+                for (index, closer) in closers.iter().enumerate() {
+                    let cb = closer.as_bytes();
+                    if !bytes[i..].starts_with(cb) {
+                        continue;
+                    }
+                    let word = cb.last().is_some_and(|b| b.is_ascii_alphabetic());
+                    let next = bytes.get(i + cb.len());
+                    if word && next.is_some_and(|b| b.is_ascii_alphabetic()) {
+                        continue;
+                    }
+                    self.pos = i + cb.len();
+                    return (out, Some(index));
+                }
+                out.push('\\');
+                i += 1;
+            }
+            let Some(c) = src.get(i..).and_then(|s| s.chars().next()) else {
+                break;
+            };
+            out.push(c);
+            i += c.len_utf8();
+        }
+        self.pos = bytes.len();
+        (out, None)
+    }
+
     /// Reads `{...}` and returns the inner source text. Escapes are kept, comments are removed.
     /// An unclosed group is read to the end. Returns `None` when no `{` follows.
     pub(crate) fn group_raw(&mut self) -> Option<String> {

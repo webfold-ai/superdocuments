@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{booktabs,multirow,colortbl}
+\begin{document}
+\begin{table}[t]
+  \centering
+  \caption{Results on two benchmarks.}
+  \label{tab:results}
+  \resizebox{\linewidth}{!}{%
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{CASP14} & \multicolumn{2}{c}{CAMEO} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    Method & TM & GDT & TM & GDT \\
+    \midrule
+    \multirow{2}{*}{Baseline} & 0.71 & 65.2 & 0.80 & 77.1 \\
+    & 0.72 & 66.0 & 0.81 & 77.9 \\
+    \addlinespace[0.5em]
+    \rowcolor{gray} Ours (large) & \textbf{0.85} & \textbf{80.1} & \cellcolor{gray}\textbf{0.88} & \textbf{84.3} \\
+    \specialrule{1.5pt}{0pt}{0pt}
+    \bottomrule
+  \end{tabular}}
+\end{table}
+
+Table~\ref{tab:results} shows the gain.
+\end{document}

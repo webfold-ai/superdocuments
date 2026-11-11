@@ -600,9 +600,13 @@ fn decode_tex(data: &[u8]) -> String {
     }
 }
 
-/// The reading bounds the converters use for LaTeX.
+/// How the converters read LaTeX: the default bounds, with the document's own macros expanded
+/// inside math too, since a Markdown math renderer does not know them.
 fn latex_options() -> crate::latex::Options {
-    crate::latex::Options::default()
+    crate::latex::Options {
+        expand_math_macros: true,
+        ..Default::default()
+    }
 }
 
 /// Markdown for a parsed LaTeX document. When the document has no `thebibliography` of its

@@ -1,0 +1,47 @@
+\documentclass[twocolumn]{article}
+\begin{document}
+\section*{Starred forms}
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\linewidth]{wide/left}
+    \caption{Left half.}\label{fig:wide-a}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.48\textwidth}
+    \includegraphics[width=\linewidth]{wide/right}
+    \caption{Right half.}\label{fig:wide-b}
+  \end{subfigure}
+  \caption{A figure that spans both columns.}
+  \label{fig:wide}
+\end{figure*}
+
+\begin{figure}
+  \includegraphics{narrow}
+  \caption{A figure in one column.}\label{fig:narrow}
+\end{figure}
+
+\begin{table*}
+  \caption{A table that spans both columns.}\label{tab:wide}
+  \begin{tabular}{lr}
+    Name & Value \\
+    alpha & 1 \\
+  \end{tabular}
+\end{table*}
+
+\begin{equation}
+  a = b \label{eq:plain}
+\end{equation}
+\begin{equation*}
+  c = d \label{eq:starred}
+\end{equation*}
+\begin{align*}
+  e &= f \\
+  g &= h
+\end{align*}
+\begin{flalign}
+  i &= j &
+\end{flalign}
+
+Figures~\ref{fig:wide}, \ref{fig:wide-b} and \ref{fig:narrow}; Table~\ref{tab:wide};
+Equation~\eqref{eq:plain}.
+\end{document}

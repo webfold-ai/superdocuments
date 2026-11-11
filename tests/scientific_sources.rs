@@ -531,3 +531,65 @@ fn a_subfile_that_is_a_whole_document_does_not_end_the_main_one() {
     assert!(md.contains("After the subfile."), "{md}");
     assert!(!md.contains("PREAMBLE-JUNK"), "{md}");
 }
+
+// ----- a short paper, end to end -----------------------------------------------------------------
+
+#[test]
+fn convert_bytes_expands_the_documents_macros_inside_math() {
+    let source = br"\newcommand{\R}{\mathbb{R}}\newcommand{\norm}[1]{\lVert #1 \rVert}
+Let $x \in \R^n$ with $\norm{x} \le 1$.
+\[ \norm{x}^2 = \sum_i x_i^2 \]";
+    let md = convert_bytes("tex", source).unwrap_or_else(|e| panic!("{e}"));
+    assert!(md.contains("$x \\in \\mathbb{R}^n$"), "{md}");
+    assert!(md.contains("$\\lVert x \\rVert \\le 1$"), "{md}");
+    assert!(
+        md.contains("$$\n\\lVert x \\rVert^2 = \\sum_i x_i^2\n$$"),
+        "{md}"
+    );
+    assert!(!md.contains("\\R") && !md.contains("\\norm"), "{md}");
+    // The structured reader keeps math as written unless asked.
+    let doc = latex::parse(std::str::from_utf8(source).unwrap_or_default());
+    let raw = latex::render_markdown(&doc, &latex::RenderOptions::default());
+    assert!(raw.contains("$x \\in \\R^n$"), "{raw}");
+}
+
+/// A short paper with an abstract, sections, a labelled equation and its reference, a booktabs
+/// table with a spanned header, a starred figure with subfigures, a theorem, nested lists, a
+/// footnote, and citations resolved against the `.bib` file next to it.
+#[test]
+fn a_short_paper_converts_to_the_expected_markdown() {
+    let md = convert_path(&fixture("latex/paper-short.tex")).unwrap_or_else(|e| panic!("{e}"));
+    let golden = fixture("latex/paper-short.converted.md");
+    if std::env::var("LATEX_REGENERATE").is_ok() {
+        fs::write(&golden, &md).unwrap_or_else(|e| panic!("{e}"));
+    }
+    let want = fs::read_to_string(&golden).unwrap_or_default();
+    assert_eq!(md, want, "tests/fixtures/latex/paper-short.converted.md");
+    // The points the golden file is there to hold, stated one by one.
+    let flat = md.replace('\u{a0}', " ");
+    for expected in [
+        "# Sparse Folding for Protein Structure\n",
+        "## Abstract\n\nWe introduce FoldNet, which improves accuracy by 12% on CASP14.",
+        "Structure prediction (Jumper et al., 2021; Baek and DiMaio, 2021) is hard.",
+        "Following Jumper et al., 2021, FoldNet minimises the loss in Eq. (1)",
+        "over $x \\in \\mathbb{R}^n$ with $\\lVert x \\rVert \\le 1$[^1].",
+        "Schr\u{f6}dinger, Erd\u{151}s and Poincar\u{e9} are cited \u{201c}often\u{201d} \u{2014} see [this paper](https://arxiv.org/abs/1706.03762).",
+        "Section 2 has the details, Table 1 the numbers and Figure 1 the model.",
+        "### Objective",
+        "\\theta^\\star = \\operatorname*{arg\\,min}_{\\theta} \\sum_{i=1}^{n} \\lVert f_\\theta(x_i) - y_i \\rVert^2 . \\tag{1}",
+        "**Theorem 1 (Convergence).** If $\\eta$ is small, (2) converges.",
+        "|  | TM-score |  |\n| --- | --- | --- |\n| Method | CASP14 | CAMEO |",
+        "| FoldNet | **0.85** | **0.88** |",
+        "**Figure 1:** The architecture of FoldNet: (a) encoder, (b) decoder.",
+        "**(1b)** Decoder.\n\n![](figs/decoder.pdf)",
+        "Theorem 1 and Figure 1b conclude the section.",
+        "[^1]: The unit ball, e.g., in $\\mathbb{R}^3$.",
+        "## References\n\n- `jumper2021` \u{2014} John Jumper, Richard Evans and Alexander Pritzel (2021). \
+         Highly accurate protein structure prediction with AlphaFold. *Nature* 596, 583\u{2013}589. \
+         <https://doi.org/10.1038/s41586-021-03819-2>",
+        "- `baek2021` \u{2014} Minkyung Baek and Frank DiMaio (2021). \
+         Accurate prediction of protein structures and interactions. *Science*.",
+    ] {
+        assert!(flat.contains(expected), "missing {expected:?} in:\n{md}");
+    }
+}
