@@ -1,7 +1,9 @@
 //! Native document-to-Markdown conversion over bounded ZIP/XML inputs.
 //!
-//! Migrated from Webfold's bounded native document parser. Webfold retains a
-//! compatibility adapter for legacy XLS; parsing does not fetch or launch a browser.
+//! Migrated from Webfold's bounded native document parser. Legacy XLS is read by the
+//! in-repo `calamine` crate; parsing does not fetch or launch a browser.
+
+pub use crate::media::{extract_images, ExtractedImage};
 
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
@@ -229,19 +231,116 @@ fn csv_rows(data: &str, delimiter: char) -> Result<Vec<Vec<String>>, String> {
 }
 
 fn xlsx(data: &[u8]) -> Result<String, String> {
-    let sheets = crate::ooxml::xlsx::read(data)?;
+    let sheets = crate::ooxml::xlsx::read(data)?
+        .into_iter()
+        .map(|sheet| (sheet.name, sheet.rows))
+        .collect();
+    Ok(workbook_markdown(sheets))
+}
+
+/// One `## <name>` section per sheet, in workbook order. Shared by the XLSX and legacy XLS readers
+/// so both produce the same shape.
+fn workbook_markdown(sheets: Vec<(String, Vec<Vec<String>>)>) -> String {
     let mut out = String::new();
-    for sheet in sheets {
+    for (name, rows) in sheets {
         if !out.is_empty() {
             out.push_str("\n\n");
         }
         out.push_str(&format!(
             "## {}\n\n{}",
-            sheet.name,
-            markdown_table(&sheet.rows).trim_end()
+            name,
+            markdown_table(&rows).trim_end()
         ));
     }
-    Ok(out.trim_end().to_string())
+    out.trim_end().to_string()
+}
+
+/// Legacy Excel 97-2003 (BIFF8, and BIFF5 from older tools) through the `calamine` workspace
+/// member. Output has the same shape as [`xlsx`].
+fn xls(data: &[u8]) -> Result<String, String> {
+    // calamine still has panicking slice indexes in its BIFF record parser for some damaged files.
+    // A panic here must surface as an error for the caller, so the reader runs behind
+    // `catch_unwind`. Nothing is shared across the boundary that a panic could leave inconsistent.
+    std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| xls_unchecked(data)))
+        .unwrap_or_else(|_| Err("invalid XLS: damaged record".into()))
+}
+
+fn xls_unchecked(data: &[u8]) -> Result<String, String> {
+    use calamine::{Reader, SheetType, Xls};
+    let mut book: Xls<Cursor<&[u8]>> =
+        Reader::new(Cursor::new(data)).map_err(|e| format!("invalid XLS: {e}"))?;
+    let date1904 = book.has_1904_epoch();
+    // calamine keeps its own sheets sorted by name; the workbook's tab order is in the metadata.
+    let names: Vec<String> = book
+        .sheets_metadata()
+        .iter()
+        .filter(|sheet| matches!(sheet.typ, SheetType::WorkSheet))
+        .map(|sheet| sheet.name.clone())
+        .collect();
+    let mut sheets = Vec::with_capacity(names.len());
+    let mut cells = 0usize;
+    for name in names {
+        let range = book
+            .worksheet_range(&name)
+            .map_err(|e| format!("invalid XLS sheet {name}: {e}"))?;
+        let (height, width) = range.get_size();
+        cells = cells.saturating_add(height.saturating_mul(width));
+        if cells > XLS_MAX_CELLS {
+            return Err("worksheet too large".into());
+        }
+        sheets.push((name, xls_rows(&range, date1904)));
+    }
+    Ok(workbook_markdown(sheets))
+}
+
+/// Upper bound on cells across an XLS workbook's sheet ranges, matching the XLSX reader.
+const XLS_MAX_CELLS: usize = 20_000_000;
+
+/// Rows as the XLSX reader builds them: a cell sits at its absolute column, rows with no
+/// content are dropped, and trailing empty cells are trimmed.
+fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<String>> {
+    // Row numbers are not needed: rows without content are dropped, as in the XLSX reader.
+    let Some((_, left)) = range.start() else {
+        return Vec::new();
+    };
+    let left = left as usize;
+    let mut rows = Vec::new();
+    for cells in range.rows() {
+        let mut row: Vec<String> = vec![String::new(); left];
+        row.extend(cells.iter().map(|cell| xls_cell(cell, date1904)));
+        while row.last().is_some_and(String::is_empty) {
+            row.pop();
+        }
+        if !row.is_empty() {
+            rows.push(row);
+        }
+    }
+    rows
+}
+
+/// One cell as the XLSX reader prints it.
+fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
+    use calamine::Data;
+    match cell {
+        Data::Empty => String::new(),
+        Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
+        Data::Bool(value) => if *value { "TRUE" } else { "FALSE" }.to_owned(),
+        Data::Int(value) => value.to_string(),
+        Data::Float(value) => value.to_string(),
+        Data::DateTime(value) => {
+            let serial = value.as_f64();
+            // Calamine reports only that a cell is a date or time format. A duration is a time of
+            // day; a date-time with a fraction shows both, and a whole serial shows the date.
+            let (date_part, time_part) = if value.is_duration() {
+                (false, true)
+            } else {
+                (serial >= 1.0, serial < 1.0 || serial.fract() != 0.0)
+            };
+            crate::ooxml::xlsx::serial_to_text(serial, date1904, date_part, time_part)
+                .unwrap_or_else(|| serial.to_string())
+        }
+        Data::Error(error) => error.to_string(),
+    }
 }
 
 fn odt(data: &[u8]) -> Result<String, String> {
@@ -779,7 +878,7 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         "xlsx" | "xlsm" => xlsx(data),
         "odt" | "odp" => odt(data),
         "ods" => ods(data),
-        "xls" => Err("legacy XLS conversion remains in the Webfold compatibility adapter".into()),
+        "xls" => xls(data),
         "xlsb" => xlsb(data),
         "epub" => epub(data),
         "rtf" => crate::rtf::convert(data),

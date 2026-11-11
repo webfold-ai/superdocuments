@@ -35,6 +35,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 | `document` | Format dispatch, per-format converters, the CSV streaming writer, `DocumentCache`, `fingerprint_bytes` |
 | `ooxml` | Shared OOXML helpers (local-name matching, relationships, package-safe path resolution) and the DOCX, PPTX and XLSX readers |
 | `xlsx` | Public XLSX/XLSM entry points returning structured `Worksheet` rows, backed by `ooxml::xlsx` |
+| `media` | `extract_images` (`ExtractedImage`): pictures of DOCX, PPTX, XLSX, ODF and EPUB packages, with mime type from magic bytes, header size for PNG/JPEG/GIF/BMP, first referencing part and alt text. Re-exported from `document` |
 | `epub` | Spine-driven EPUB reader (container, OPF, manifest, spine); see [EPUB.md](EPUB.md) |
 | `html` | HTML to Markdown: `extract.rs` (single-pass extractor, `Template` for repeated-block detection, `chunk_markdown`), `entities.rs` |
 | `markdown` | Hand-written Markdown parser and HTML renderer (not CommonMark-complete, per its module docs). Not used by `convert_bytes`. Only YAML frontmatter uses `hashtrinity::codec::syntax` |
@@ -59,6 +60,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 |---|---|---|
 | ZIP entries, `document.rs` (shared by `ooxml`) | 4,096 entries; 32 MiB per entry; 128 MiB total, checked against sizes declared in the archive | `MAX_ENTRIES`, `MAX_ENTRY`, `MAX_TOTAL` |
 | XLSX worksheet cells | 20,000,000 cells allocated per worksheet; a larger sheet is an error | `MAX_CELLS` in `ooxml/xlsx.rs` |
+| Extracted pictures | 64 MiB per picture (an error above it), 512 MiB in total, 10,000 pictures; an entry name that is absolute, has `..` or a backslash is an error | `media.rs` (`Limits`) |
 | ZIP entries, `epub.rs` | 8,192 entries; 64 MiB per entry; 256 MiB for the whole file; 16 MiB per chapter; 64 MiB of rendered text | `epub.rs` constants |
 | PDF input | 256 MiB, and the bytes must start with `%PDF-` | `MAX_PDF_BYTES` |
 | OCR | Defaults: 20 pages, 2,400 px, 120 s, 1 worker, language `eng`. Accepted ranges: 1 to 2,000 pages, 256 to 4,000 px, 1 to 3,600 s, 1 to 16 workers. Language list limited to ASCII alphanumerics, `_` and `+` | `OcrOptions::validate` |
@@ -85,7 +87,7 @@ Despite their names, `pdf::transcode_populator` and `geometry_from_transcode` us
 
 ## Experimental, shape-only and excluded code
 
-- `calamine/`: a workspace member (`[workspace] members = ["calamine"]`) that the root crate does not depend on. It is a fork of calamine 0.36.1 with `apeiron` maps (`calamine/APEIRON-FORK.md`). It has its own `rust-version` (1.88, against 1.85 for the root crate) and is not built by a plain `cargo test` at the root. `calamine/fuzz` is excluded from the workspace.
+- `calamine/`: a workspace member (`[workspace] members = ["calamine"]`) and a path dependency of the root crate, used only for the legacy `.xls` reader (`document::xls`). It is a fork of calamine 0.36.1 with `apeiron` maps (`calamine/APEIRON-FORK.md`). Its `rust-version` is 1.88. The root crate also depends on `zip` 9, whose `rust-version` is 1.88, so the root's declared 1.85 was already not what a build needs. `calamine/fuzz` is excluded from the workspace. The fork's CFB and BIFF readers were hardened against damaged files (see the CHANGELOG). The `xls` entry point still runs behind `catch_unwind`, because the BIFF record parser can still panic on some damaged input.
 - `pdf::extract_with_format`, `pdf::document_metadata`: the source comments call this surface shape-only. In `extract_with_format` the `pages` entries have empty text and zero size, and `document_metadata` fills in only the file size.
 - `pdf::to_markdown` and `to_markdown_with_manifest`: a legacy adapter that runs an external `pdffold` program, a `PDFFOLD_BIN` binary, or `cargo run --example md` against `PDFFOLD_MANIFEST`. Not used by the native path.
 - `pdf::acroform::repair_acroform`: finds orphaned widget fields with the in-house PDF parser and appends an incremental update that adds the missing `/AcroForm` and a new catalog revision. It runs on files whose newest cross-reference section is a classic table, and skips encrypted files. The PDFium verification step of the LiteParse original is not carried.
