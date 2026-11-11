@@ -16,7 +16,8 @@ use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
 use super::{
-    attr_local, attrs_local, main_part, read_rels, rels_path_of, render, resolve, Rel, Seg,
+    attr_local, attrs_local, image_refs, main_part, markdown_alt, media_name, read_rels,
+    rels_path_of, render, resolve, Rel, Seg,
 };
 use crate::document::{archive, entry, markdown_table, push_ref, text, xml_text};
 
@@ -276,6 +277,11 @@ struct Parser<'a> {
     note: Option<String>,
     notes: Vec<(String, Vec<Block>)>,
     outer: Vec<Block>,
+    /// Image relationship ids to the file name written in the Markdown (`media/<name>`).
+    images: HashMap<String, String>,
+    /// The `descr` of the last `docPr` in the drawing: the alt text of a picture in it, or, when no
+    /// picture uses it, text read at the end of the drawing.
+    drawing_alt: Option<String>,
 }
 
 impl<'a> Parser<'a> {
@@ -299,6 +305,8 @@ impl<'a> Parser<'a> {
             note: None,
             notes: Vec::new(),
             outer: Vec::new(),
+            images: HashMap::new(),
+            drawing_alt: None,
         }
     }
 
@@ -332,6 +340,23 @@ impl<'a> Parser<'a> {
             italic,
             href,
         });
+    }
+
+    /// A picture in the drawing: `![alt](media/<file>)` at its place in the text. The alt text is
+    /// the drawing's `descr`, or the VML `title`.
+    fn picture(&mut self, tag: &BytesStart<'_>, id_attr: &str) {
+        let Some(id) = attr_local(tag, id_attr) else {
+            return;
+        };
+        let Some(file) = self.images.get(&id).cloned() else {
+            return;
+        };
+        let alt = self
+            .drawing_alt
+            .take()
+            .or_else(|| attr_local(tag, "title"))
+            .unwrap_or_default();
+        self.push_seg(Seg::Raw(format!("![{}](media/{file})", markdown_alt(&alt))));
     }
 
     fn push_seg(&mut self, seg: Seg) {
@@ -443,11 +468,12 @@ impl<'a> Parser<'a> {
                     .find_map(|id| self.links.get(id).cloned());
             }
             "docPr" => {
-                if let Some(description) = attr_local(tag, "descr").filter(|d| !d.trim().is_empty())
-                {
-                    self.add_text(description.trim());
-                }
+                self.drawing_alt = attr_local(tag, "descr")
+                    .map(|d| d.trim().to_owned())
+                    .filter(|d| !d.is_empty());
             }
+            "blip" => self.picture(tag, "embed"),
+            "imagedata" => self.picture(tag, "id"),
             "OLEObject" => {
                 if let Some(kind) = attr_local(tag, "ProgID") {
                     self.add_text(&format!("Embedded object: {kind}"));
@@ -511,6 +537,11 @@ impl<'a> Parser<'a> {
         }
         match name {
             "t" => self.run.in_t = false,
+            "drawing" | "pict" => {
+                if let Some(alt) = self.drawing_alt.take() {
+                    self.add_text(&alt);
+                }
+            }
             "instrText" => self.in_instr = false,
             "r" => self.run = RunState::default(),
             "rPr" => self.run.in_rpr = false,
@@ -784,6 +815,10 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
 
     let xml = entry(&mut zip, &document)?;
     let mut main = Parser::new(&styles, &numbering, links_of(&rels));
+    main.images = image_refs(&rels, &document)
+        .into_iter()
+        .map(|(id, path)| (id, media_name(&path).to_owned()))
+        .collect();
     main.run_xml(&xml)?;
     let mut output = join_blocks(&main.blocks);
 

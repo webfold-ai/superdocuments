@@ -3,6 +3,8 @@
 //! Migrated from Webfold's bounded native document parser. Legacy XLS is read by the
 //! in-repo `calamine` crate; parsing does not fetch or launch a browser.
 
+pub use crate::media::{extract_images, ExtractedImage};
+
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 use std::io::{Cursor, Read, Write};

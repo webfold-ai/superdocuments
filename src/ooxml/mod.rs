@@ -7,6 +7,7 @@
 
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
+use std::collections::HashMap;
 use std::io::Cursor;
 use zip::ZipArchive;
 
@@ -115,6 +116,31 @@ pub(crate) fn resolve(base_part: &str, target: &str) -> Option<String> {
         }
     }
     (!out.is_empty()).then(|| out.join("/"))
+}
+
+/// The image relationships of `base_part`, by relationship id, resolved to package paths
+/// (`ppt/slides/slide1.xml` with `../media/image1.png` gives `ppt/media/image1.png`). External
+/// targets and targets that leave the package are left out.
+pub(crate) fn image_refs(rels: &[Rel], base_part: &str) -> HashMap<String, String> {
+    rels.iter()
+        .filter(|r| r.kind == "image" && !r.external)
+        .filter_map(|r| resolve(base_part, &r.target).map(|path| (r.id.clone(), path)))
+        .collect()
+}
+
+/// The file name of a package path: `media/image1.png` for `word/media/image1.png`.
+pub(crate) fn media_name(path: &str) -> &str {
+    path.rsplit('/').next().unwrap_or(path)
+}
+
+/// Alt text as it goes inside Markdown image brackets: whitespace collapsed to single spaces and
+/// square brackets escaped.
+pub(crate) fn markdown_alt(alt: &str) -> String {
+    alt.split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .replace('[', "\\[")
+        .replace(']', "\\]")
 }
 
 /// The package's main part: the `officeDocument` relationship of `_rels/.rels`, else `default`.

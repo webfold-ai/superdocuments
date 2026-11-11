@@ -14,7 +14,9 @@ use std::collections::HashMap;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::Reader;
 
-use super::{attr_local, attrs_local, main_part, read_rels, rels_path_of, render, resolve, Seg};
+use super::{
+    attr_local, attrs_local, main_part, markdown_alt, read_rels, rels_path_of, render, resolve, Seg,
+};
 use crate::document::{archive, entry, markdown_table, push_ref, text};
 
 #[derive(Default)]
@@ -42,6 +44,10 @@ struct Para {
 
 struct Slide<'a> {
     links: &'a HashMap<String, String>,
+    /// Image relationship ids to the file name written in the Markdown (`media/<name>`).
+    images: &'a HashMap<String, String>,
+    /// The `descr` of the most recent `cNvPr`, the alt text of the picture that follows it.
+    alt: Option<String>,
     notes: bool,
     content: Content,
     para: Option<Para>,
@@ -137,6 +143,23 @@ impl<'a> Slide<'a> {
                 self.href = attrs_local(tag, "id")
                     .iter()
                     .find_map(|id| self.links.get(id).cloned());
+            }
+            "cNvPr" => {
+                self.alt = attr_local(tag, "descr")
+                    .map(|d| d.trim().to_owned())
+                    .filter(|d| !d.is_empty());
+            }
+            "blip" => {
+                if let Some(id) = attr_local(tag, "embed") {
+                    if let Some(file) = self.images.get(&id) {
+                        let alt = self.alt.take().unwrap_or_default();
+                        let markdown = format!("![{}](media/{file})", markdown_alt(&alt));
+                        match self.para.as_mut() {
+                            Some(para) => para.segs.push(Seg::Raw(markdown)),
+                            None => self.content.body.push((false, markdown)),
+                        }
+                    }
+                }
             }
             "t" => self.in_t = true, // lenient: `t` outside `r`
             "br" if self.para.is_some() => {
@@ -260,9 +283,16 @@ impl<'a> Slide<'a> {
     }
 }
 
-fn read_part(xml: &[u8], links: &HashMap<String, String>, notes: bool) -> Result<Content, String> {
+fn read_part(
+    xml: &[u8],
+    links: &HashMap<String, String>,
+    images: &HashMap<String, String>,
+    notes: bool,
+) -> Result<Content, String> {
     let mut slide = Slide {
         links,
+        images,
+        alt: None,
         notes,
         content: Content::default(),
         para: None,
@@ -323,7 +353,9 @@ fn join(items: &[(bool, String)]) -> String {
 }
 
 /// Slide part names in presentation order.
-fn slide_order(zip: &mut zip::ZipArchive<std::io::Cursor<&[u8]>>) -> Result<Vec<String>, String> {
+pub(crate) fn slide_order(
+    zip: &mut zip::ZipArchive<std::io::Cursor<&[u8]>>,
+) -> Result<Vec<String>, String> {
     let mut ordered = Vec::new();
     if let Ok(presentation) = main_part(zip, "ppt/presentation.xml") {
         let rels = read_rels(zip, &rels_path_of(&presentation))?;
@@ -386,14 +418,23 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
             .filter(|r| r.kind == "hyperlink" && r.external)
             .map(|r| (r.id.clone(), r.target.clone()))
             .collect();
-        let slide = read_part(&entry(&mut zip, part)?, &links, false)?;
+        let images: HashMap<String, String> = super::image_refs(&rels, part)
+            .into_iter()
+            .map(|(id, path)| (id, super::media_name(&path).to_owned()))
+            .collect();
+        let slide = read_part(&entry(&mut zip, part)?, &links, &images, false)?;
         let mut notes = Content::default();
         if let Some(notes_part) = rels
             .iter()
             .find(|r| r.kind == "notesSlide" && !r.external)
             .and_then(|r| resolve(part, &r.target))
         {
-            notes = read_part(&entry(&mut zip, &notes_part)?, &HashMap::new(), true)?;
+            notes = read_part(
+                &entry(&mut zip, &notes_part)?,
+                &HashMap::new(),
+                &HashMap::new(),
+                true,
+            )?;
         }
         let body = join(&slide.body);
         let notes_text = notes

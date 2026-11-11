@@ -240,7 +240,7 @@ fn read_bounded_xhtml(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result
     Ok(out)
 }
 
-fn parse_container(bytes: &[u8]) -> Result<String, String> {
+pub(crate) fn parse_container(bytes: &[u8]) -> Result<String, String> {
     let s = std::str::from_utf8(bytes).map_err(|e| format!("container.xml is not UTF-8: {e}"))?;
     let mut reader = Reader::from_str(s);
     reader.config_mut().trim_text(true);
@@ -321,7 +321,7 @@ fn parse_package(bytes: &[u8]) -> Result<Package, String> {
 
 /// `<dir>` of an OPF path inside the ZIP. Pure string ops, no Path —
 /// EPUBs are POSIX-style regardless of host.
-fn opf_dirname(path: &str) -> String {
+pub(crate) fn opf_dirname(path: &str) -> String {
     match path.rsplit_once('/') {
         Some((dir, _)) if !dir.is_empty() => format!("{dir}/"),
         _ => String::new(),
@@ -331,7 +331,7 @@ fn opf_dirname(path: &str) -> String {
 /// Resolve a manifest href (relative to the OPF) against the OPF
 /// directory. Treats the OPF href as a POSIX path; an EPUB that ships
 /// backslashes is malformed and gets the un-joined href returned.
-fn join_href(opf_dir: &str, href: &str) -> String {
+pub(crate) fn join_href(opf_dir: &str, href: &str) -> String {
     if href.contains('\\') || opf_dir.is_empty() {
         return href.to_string();
     }
