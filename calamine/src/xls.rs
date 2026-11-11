@@ -635,9 +635,11 @@ impl<RS: Read + Seek> Xls<RS> {
                     // 512: Dimensions
                     0x0200 => {
                         let Dimensions { start, end } = parse_dimensions(r.data)?;
-                        let rows = (end.0 - start.0 + 1) as usize;
-                        let cols = (end.1 - start.1 + 1) as usize;
-                        cells.reserve(rows.saturating_mul(cols));
+                        // The dimensions come from the file and a reservation is only a hint, so it
+                        // is capped: a corrupt record must not reserve gigabytes up front.
+                        let rows = (end.0.saturating_sub(start.0) as usize).saturating_add(1);
+                        let cols = (end.1.saturating_sub(start.1) as usize).saturating_add(1);
+                        cells.reserve(rows.saturating_mul(cols).min(1 << 16));
                     }
                     //0x0201 => cells.push(parse_blank(r.data)?), // 513: Blank
                     0x0203 => cells.push(parse_number(r.data, &self.formats, self.is_1904)?), // 515: Number

@@ -24,9 +24,9 @@ macro_rules! from_err {
     };
 }
 
-/// Converts a &[u8] into an iterator of `u32`s
+/// Converts a &[u8] into an iterator of `u32`s. A trailing partial word (a truncated sector in a
+/// damaged file) is ignored rather than panicking.
 pub fn to_u32(s: &[u8]) -> impl ExactSizeIterator<Item = u32> + '_ {
-    assert_eq!(s.len() % 4, 0);
     s.as_chunks::<4>()
         .0
         .iter()

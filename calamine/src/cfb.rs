@@ -119,7 +119,8 @@ impl Cfb {
 
         // load the FATs
         debug!("load fat (len {})", h.fat_len);
-        let mut fats = Vec::with_capacity(h.fat_len);
+        // Capacity comes from a header field: a corrupt one must not reserve more than the file holds.
+        let mut fats = Vec::with_capacity(h.fat_len.min(len / 4));
         for id in difat.into_iter().filter(|id| *id < DIFSECT) {
             fats.extend(to_u32(sectors.get(id, reader)?));
         }
@@ -128,8 +129,9 @@ impl Cfb {
         debug!("load directories");
         // we want to read the full chain, so pass no size restriction
         let dirs = sectors.get_chain(h.dir_start, &fats, reader, usize::MAX)?;
+        // A trailing partial entry in a damaged file is not a directory entry: drop it.
         let dirs = dirs
-            .chunks(128)
+            .chunks_exact(128)
             .map(|c| Directory::from_slice(c, h.sector_size))
             .collect::<Vec<_>>();
 
@@ -255,9 +257,8 @@ impl Header {
         let mini_fat_start = read_u32(&buf[60..64]);
         let mini_fat_len = read_usize(&buf[64..68]);
         let difat_start = read_u32(&buf[68..72]);
-        let difat_len = read_usize(&buf[62..76]);
 
-        let mut difat = Vec::with_capacity(difat_len);
+        let mut difat = Vec::new();
         difat.extend(to_u32(&buf[76..512]));
 
         Ok((
@@ -303,7 +304,8 @@ impl Sectors {
             while len < end {
                 let read = r.read(&mut self.data[len..end])?;
                 if read == 0 {
-                    return Ok(&self.data[start..len]);
+                    // A sector that starts past the end of the file is empty, not an inverted range.
+                    return Ok(&self.data[start.min(len)..len]);
                 }
                 len += read;
             }
@@ -319,7 +321,14 @@ impl Sectors {
         len: usize,
     ) -> Result<Vec<u8>, CfbError> {
         let mut chain = Vec::new();
+        let mut visited = 0usize;
         while sector_id != ENDOFCHAIN {
+            // A valid chain visits each FAT entry at most once. A longer one is a cycle in a damaged
+            // file, and a sector id past the FAT has no successor: both are errors, not a loop or panic.
+            visited += 1;
+            if visited > fats.len() {
+                return Err(CfbError::SectorBeyondEof(sector_id));
+            }
             let sector = self.get(sector_id, r)?;
             let remaining = len - chain.len();
             let to_copy = sector.len().min(remaining);
@@ -327,7 +336,9 @@ impl Sectors {
             if chain.len() >= len {
                 break;
             }
-            sector_id = fats[sector_id as usize];
+            sector_id = *fats
+                .get(sector_id as usize)
+                .ok_or(CfbError::SectorBeyondEof(sector_id))?;
         }
         Ok(chain)
     }

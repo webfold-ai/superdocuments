@@ -4,6 +4,18 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ## [Unreleased]
 
+### Added
+
+- Legacy `.xls` (BIFF) conversion through the in-repo `calamine/` crate, now a path dependency of the root crate (default features off). The output has the same Markdown shape as XLSX: one `## <sheet>` section per worksheet in tab order, error cells, booleans and formula results. `DocFormat::Xls` goes through `DocumentCache` and `convert_streaming`.
+
+### Changed
+
+- The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.
+
+### Fixed
+
+- `calamine` CFB reader: a truncated sector, a sector past the end of the file, a short directory entry, a header-driven allocation larger than the file, and a FAT chain that cycles or leaves the FAT now give errors instead of panics, aborts or endless loops. A BIFF dimensions record no longer reserves gigabytes up front.
+
 ## [0.9.0] - 2026-11-09
 
 ### Added

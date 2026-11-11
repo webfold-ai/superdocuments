@@ -1193,6 +1193,7 @@ name = "superdocuments"
 version = "0.9.0"
 dependencies = [
  "apeiron",
+ "calamine",
  "encoding_rs",
  "framefold",
  "quick-xml",
