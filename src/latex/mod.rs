@@ -12,8 +12,11 @@
 //!   `\DeclareMathOperator`, `\newenvironment` and `\newtheorem` are expanded, with limits on
 //!   the number of expansions, the expansion size and the nesting depth.
 //! - Unknown commands produce a warning and the content of their arguments is kept.
-//! - `\input` and `\include` are not read from disk. Without a `FileProvider` they are recorded
-//!   in `Document::inputs` with a warning. With one, the file is inlined.
+//! - `\input`, `\include` and `\subfile` are read only through a `FileProvider`. Without one
+//!   they are recorded in `Document::inputs` with a warning. With one, the file is inlined; a
+//!   file that includes itself is refused, and at most 32 files are open at once. `DirFiles`
+//!   is a provider for one directory tree on disk, which never reads outside its root.
+//!   `parse` itself never touches the file system.
 //! - Math is kept as TeX. Its labels and numbering are computed from the environment, not from
 //!   a TeX run.
 //! - Packages are not loaded. Only what the built-in tables describe is recognised.
@@ -21,6 +24,7 @@
 //! Renderers (`render_text`, `render_markdown`, `render_html`) turn a `Document` into text.
 //! `resolve_citations` links `\cite` keys to a `bibtex::Bibliography`.
 
+mod files;
 mod lexer;
 mod parser;
 mod render;
@@ -28,6 +32,7 @@ mod render;
 #[cfg(test)]
 mod tests;
 
+pub use files::{DirFiles, DEFAULT_MAX_FILE_BYTES, DEFAULT_MAX_TOTAL_BYTES};
 pub use render::{render_html, render_markdown, render_text, RenderOptions};
 
 use crate::bibtex::Bibliography;

@@ -1091,6 +1091,27 @@ impl Parser<'_> {
             .unwrap_or_default()
             .trim()
             .to_string();
+        // The lexer that held this command is still on the stack here, even when the command
+        // was its last token, so a file that includes itself (directly, through another file
+        // or through a macro) is always found.
+        let key = include_key(&name);
+        let open_files = self.stack.iter().filter(|l| l.file.is_some()).count();
+        if self.stack.iter().any(|l| l.file.as_deref() == Some(key)) {
+            self.warn(
+                at,
+                format!("\\{command}{{{name}}} includes itself; the cycle is not followed"),
+            );
+            return;
+        }
+        if open_files >= MAX_INCLUDE_DEPTH {
+            self.warn(
+                at,
+                format!(
+                    "\\{command}{{{name}}} is nested over {MAX_INCLUDE_DEPTH} files deep; skipped"
+                ),
+            );
+            return;
+        }
         let text = match self.files {
             Some(files) if self.files_read < self.opts.max_files => {
                 self.files_read += 1;
@@ -1106,14 +1127,20 @@ impl Parser<'_> {
                     self.warn(at, format!("\\{command} nesting limit reached"));
                     return;
                 }
-                self.stack.push(Lexer::new(Rc::from(t), at, false));
+                let body = document_body(&t);
+                self.stack
+                    .push(Lexer::for_file(Rc::from(body), at, key.to_string()));
             }
             Some(_) => self.warn(at, format!("\\{command}{{{name}}} is over the size limit")),
             None => {
-                self.warn(
-                    at,
-                    format!("\\{command}{{{name}}} not resolved; no file provider"),
-                );
+                let why = if self.files.is_none() {
+                    "no file provider"
+                } else if self.files_read >= self.opts.max_files {
+                    "the file limit was reached"
+                } else {
+                    "the file provider has no such file"
+                };
+                self.warn(at, format!("\\{command}{{{name}}} not resolved; {why}"));
                 self.doc.inputs.push(name);
             }
         }
@@ -1855,6 +1882,33 @@ pub(super) fn plain(inlines: &[Inline]) -> String {
         }
     }
     s.split_whitespace().collect::<Vec<_>>().join(" ")
+}
+
+/// Most `\input` files open at once (a file that inputs a file that inputs a file, ...).
+const MAX_INCLUDE_DEPTH: usize = 32;
+
+/// The name an `\input` is known by when looking for cycles: as written, without `./` and
+/// without a `.tex` ending.
+fn include_key(name: &str) -> &str {
+    let name = name.strip_prefix("./").unwrap_or(name);
+    name.strip_suffix(".tex").unwrap_or(name)
+}
+
+/// The part of an included file that belongs in the including document. A file that is a whole
+/// document of its own (`subfiles`, `standalone`) contributes only what is between
+/// `\begin{document}` and `\end{document}`: its preamble is not read, and its
+/// `\end{document}` must not end the main document.
+fn document_body(text: &str) -> &str {
+    const BEGIN: &str = "\\begin{document}";
+    const END: &str = "\\end{document}";
+    let Some(start) = text.find(BEGIN) else {
+        return text;
+    };
+    let body = &text[start + BEGIN.len()..];
+    match body.rfind(END) {
+        Some(end) => &body[..end],
+        None => body,
+    }
 }
 
 fn letter(n: u32) -> String {

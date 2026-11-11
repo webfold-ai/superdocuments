@@ -12,6 +12,8 @@
 //!
 //! `csl_json` exports CSL-JSON (the citation-processor input format) with `crossref` inheritance
 //! applied. `Bibliography::resolved_value` gives the same inheritance for any field.
+//! `render_markdown` writes a plain, readable reference list (one fixed layout, not a citation
+//! style); `document::convert_bytes("bib", ..)` returns it.
 //!
 //! Limits (`Limits`) bound input size, entry and field counts, value size and brace nesting.
 //! The defaults are generous for real bibliographies; hitting a limit stops parsing with a
@@ -19,6 +21,7 @@
 
 mod names;
 mod parse;
+mod render;
 mod write;
 
 #[cfg(test)]
@@ -29,6 +32,7 @@ pub use names::{
     parse_year, Date, Name, NameList, PageRange,
 };
 pub use parse::parse_with;
+pub use render::{reference_markdown, render_markdown};
 pub use write::{csl_json, write};
 
 use crate::tex_text::{self, Ligatures};

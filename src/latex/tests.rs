@@ -918,3 +918,66 @@ fn figures_inside_theorems_are_collected() {
     let doc = parse("\\newtheorem{thm}{Theorem}\n\\begin{thm}\n\\begin{figure}\\caption{Inside.}\\end{figure}\n\\end{thm}");
     assert_eq!(super::figures(&doc).len(), 1);
 }
+
+// ----- \input bounds -----------------------------------------------------------------------------
+
+struct MapFiles(Vec<(&'static str, &'static str)>);
+
+impl FileProvider for MapFiles {
+    fn read_tex(&self, name: &str) -> Option<String> {
+        self.0
+            .iter()
+            .find(|(n, _)| *n == name)
+            .map(|(_, text)| (*text).to_string())
+    }
+}
+
+#[test]
+fn an_input_cycle_through_a_macro_is_not_followed() {
+    // `loop.tex` reaches itself through a macro defined in the main file.
+    let files = MapFiles(vec![("loop.tex", "LOOP-BODY \\again")]);
+    let doc = parse_with(
+        "\\newcommand{\\again}{\\input{loop}}\nstart \\again{} end",
+        &Options::default(),
+        Some(&files),
+    );
+    let text = render_text(&doc, &RenderOptions::default());
+    assert_eq!(text.matches("LOOP-BODY").count(), 1, "{text}");
+    assert!(text.trim_end().ends_with("end"), "{text}");
+    assert!(
+        warnings(&doc).contains("includes itself"),
+        "{}",
+        warnings(&doc)
+    );
+    // The same file may be read twice in a row: that is not a cycle.
+    let files = MapFiles(vec![("part.tex", "PART")]);
+    let doc = parse_with(
+        "\\input{part} \\input{part}",
+        &Options::default(),
+        Some(&files),
+    );
+    let text = render_text(&doc, &RenderOptions::default());
+    assert_eq!(text.matches("PART").count(), 2, "{text}");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+}
+
+#[test]
+fn a_missing_input_says_whether_a_provider_was_asked() {
+    let without = parse("\\input{gone}");
+    assert!(
+        warnings(&without).contains("not resolved; no file provider"),
+        "{}",
+        warnings(&without)
+    );
+    let with = parse_with(
+        "\\input{gone}",
+        &Options::default(),
+        Some(&MapFiles(vec![])),
+    );
+    assert!(
+        warnings(&with).contains("not resolved; the file provider has no such file"),
+        "{}",
+        warnings(&with)
+    );
+    assert_eq!(with.inputs, ["gone"]);
+}

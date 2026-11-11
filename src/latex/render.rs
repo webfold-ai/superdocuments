@@ -92,7 +92,8 @@ impl<'a> Renderer<'a> {
                 let body = self.inlines(text);
                 let label = self.doc.bibitems[i]
                     .label
-                    .clone()
+                    .as_deref()
+                    .map(bibitem_label)
                     .unwrap_or_else(|| format!("{}", i + 1));
                 let line = match self.mode {
                     Mode::Html => format!("<p>[{}] {}</p>\n", escape_html(&label), body),
@@ -342,7 +343,8 @@ impl<'a> Renderer<'a> {
         if let Some(i) = self.doc.bibitems.iter().position(|b| b.key == key) {
             return self.doc.bibitems[i]
                 .label
-                .clone()
+                .as_deref()
+                .map(bibitem_label)
                 .unwrap_or_else(|| (i + 1).to_string());
         }
         let Some(bib) = self.options.bibliography else {
@@ -352,6 +354,14 @@ impl<'a> Renderer<'a> {
             return key.to_string();
         };
         let names = entry.authors();
+        if names.names.is_empty() && entry.year().is_none() {
+            // Nothing to build "Author, Year" from (for example an entry made from a
+            // `\bibitem`): its own label, or the key.
+            return match entry.value("label") {
+                Some(label) => bibitem_label(label),
+                None => entry.key.clone(),
+            };
+        }
         let family: Vec<String> = names.names.iter().map(|n| n.family.clone()).collect();
         let who = match family.len() {
             0 => entry.key.clone(),
@@ -617,6 +627,26 @@ impl<'a> Renderer<'a> {
         }
         out
     }
+}
+
+/// A `\bibitem` label as shown in a citation. natbib writes `Short(Year)Long`, which is shown
+/// as "Short, Year"; any other label is only decoded (`~`, accents).
+fn bibitem_label(label: &str) -> String {
+    let text = crate::tex_text::decode(label, crate::tex_text::Ligatures::Tex)
+        .replace('\u{a0}', " ")
+        .trim()
+        .to_string();
+    if let Some(open) = text.rfind('(') {
+        if let Some(len) = text[open..].find(')') {
+            let year = &text[open + 1..open + len];
+            let short = text[..open].trim();
+            let is_year = year.len() >= 4 && year.chars().take(4).all(|c| c.is_ascii_digit());
+            if !short.is_empty() && is_year {
+                return format!("{short}, {year}");
+            }
+        }
+    }
+    text
 }
 
 fn escape_html(s: &str) -> String {

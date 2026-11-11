@@ -128,6 +128,13 @@ pub fn read_eprint(data: &[u8]) -> Result<Source, Error> {
 pub fn read_eprint_with(data: &[u8], options: &Options) -> Result<Source, Error> {
     let entries = archive::unpack(data, &options.archive).map_err(Error::Archive)?;
     let mut warnings = Vec::new();
+    // A gzip stream that is not a tar is taken as one TeX file. arXiv serves PDF-only
+    // submissions the same way, and a PDF is not TeX.
+    if let [only] = entries.as_slice() {
+        if only.bytes.starts_with(b"%PDF-") {
+            return Err(Error::NoTexFile);
+        }
+    }
     let main_index = select_main(&entries).ok_or(Error::NoTexFile)?;
     let main = &entries[main_index];
     let main_path = main.path.clone();

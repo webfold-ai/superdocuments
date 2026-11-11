@@ -41,6 +41,9 @@ pub(crate) struct Lexer {
     pub(crate) pos: usize,
     base: usize,
     main: bool,
+    /// The `\input` name this source was read from, for sources that are files. The parser
+    /// uses it to refuse a file that includes itself.
+    pub(crate) file: Option<String>,
 }
 
 impl Lexer {
@@ -50,6 +53,18 @@ impl Lexer {
             pos: 0,
             base,
             main,
+            file: None,
+        }
+    }
+
+    /// A source that is the text of an `\input` file.
+    pub(crate) fn for_file(src: Rc<str>, base: usize, name: String) -> Self {
+        Self {
+            src,
+            pos: 0,
+            base,
+            main: false,
+            file: Some(name),
         }
     }
 
