@@ -13,7 +13,8 @@ use super::lexer::{Lexer, Tok};
 use super::FileProvider;
 use super::{
     BibItem, Block, Cell, Cite, Document, Figure, ImagePath, Inline, LabelInfo, List, ListItem,
-    ListKind, MathBlock, MathRow, Options, Ref, Row, Section, Table, Theorem, Verbatim, Warning,
+    ListKind, MathBlock, MathRow, Options, Picture, Ref, Row, Section, Table, Theorem, Verbatim,
+    Warning,
 };
 use crate::tex_text::{self, Ligatures};
 
@@ -87,8 +88,12 @@ struct FloatAcc {
     images: Vec<ImagePath>,
     subs: Vec<Figure>,
     tikz: Option<String>,
+    pictures: Vec<Picture>,
     rows: Vec<Row>,
     columns: Option<String>,
+    /// Blocks found in the float that the float's own block cannot hold (a listing in a
+    /// figure, table notes). They follow the float.
+    extra: Vec<Block>,
 }
 
 enum FloatEnd {
@@ -1232,30 +1237,20 @@ impl Parser<'_> {
                 st.blocks.push(Block::Table(table));
             }
             "table" | "table*" => {
-                let block = self.float(&name, Kind::Table, at);
+                let blocks = self.float(&name, Kind::Table, at);
                 self.flush(st);
-                st.blocks.push(block);
+                st.blocks.extend(blocks);
             }
             "figure" | "figure*" | "wrapfigure" | "wrapfigure*" | "subfigure" | "subfigure*" => {
-                let block = self.float(&name, Kind::Figure, at);
+                let blocks = self.float(&name, Kind::Figure, at);
                 self.flush(st);
-                st.blocks.push(block);
+                st.blocks.extend(blocks);
             }
-            "tikzpicture" => {
-                let _ = self.top().optional_raw();
-                let (tex, found) = self.top().until_raw("\\end{tikzpicture}", false);
-                if !found {
-                    self.warn(at, "unterminated tikzpicture");
-                }
+            _ if is_picture_env(&name) => {
+                let mut acc = FloatAcc::default();
+                self.picture_into(&name, &mut acc, at);
                 self.flush(st);
-                let fig = self.make_figure(
-                    "tikzpicture",
-                    FloatAcc {
-                        tikz: Some(tex),
-                        ..FloatAcc::default()
-                    },
-                    at,
-                );
+                let fig = self.make_figure(&name, acc, at);
                 st.blocks.push(Block::Figure(fig));
             }
             "center" | "flushleft" | "flushright" | "minipage" | "small" | "footnotesize"
@@ -1533,20 +1528,103 @@ impl Parser<'_> {
     }
 
     /// A `figure` or `table` environment, or a subfigure environment at the top level.
-    fn float(&mut self, name: &str, kind: Kind, at: usize) -> Block {
+    ///
+    /// The first block is the float. What the float's own block cannot hold follows it: the
+    /// rows of a `tabular` inside a figure (as a table), pictures and images inside a table
+    /// float (as picture figures and an image paragraph), and listings or table notes.
+    fn float(&mut self, name: &str, kind: Kind, at: usize) -> Vec<Block> {
         self.skip_float_args(name);
         let mut acc = FloatAcc::default();
         self.float_body(name, kind, &mut acc, FloatEnd::Env(name.to_string()));
+        let extra = std::mem::take(&mut acc.extra);
+        let mut blocks = Vec::new();
         match kind {
             Kind::Table => {
+                let pictures = std::mem::take(&mut acc.pictures);
+                let images = std::mem::take(&mut acc.images);
+                acc.tikz = None;
                 let table = self.finish_table(name, acc, at);
-                Block::Table(table)
+                blocks.push(Block::Table(table));
+                for picture in pictures {
+                    let env = picture.env.clone();
+                    let fig = self.make_figure(
+                        &env,
+                        FloatAcc {
+                            pictures: vec![picture],
+                            ..FloatAcc::default()
+                        },
+                        at,
+                    );
+                    blocks.push(Block::Figure(fig));
+                }
+                if !images.is_empty() {
+                    let mut inlines = Vec::new();
+                    for image in images {
+                        if !inlines.is_empty() {
+                            inlines.push(Inline::Text(" ".into()));
+                        }
+                        inlines.push(Inline::Image(image));
+                    }
+                    blocks.push(Block::Paragraph(inlines));
+                }
             }
             Kind::Figure => {
+                let rows = std::mem::take(&mut acc.rows);
+                let columns = acc.columns.take();
                 let fig = self.finish_figure(name, acc, at);
-                Block::Figure(fig)
+                blocks.push(Block::Figure(fig));
+                if !rows.is_empty() {
+                    blocks.push(Block::Table(Table {
+                        env: "tabular".into(),
+                        caption: None,
+                        caption_text: None,
+                        label: None,
+                        number: None,
+                        columns,
+                        rows,
+                    }));
+                }
             }
         }
+        blocks.extend(extra);
+        blocks
+    }
+
+    /// Reads a picture environment whose `\\begin{name}` was just read, and keeps its source.
+    fn picture_into(&mut self, name: &str, acc: &mut FloatAcc, at: usize) {
+        let (body, found) = self.top().until_env_end(name);
+        if !found {
+            self.warn(at, format!("unterminated {name}"));
+        }
+        let source = dedent(&format!("\\begin{{{name}}}{body}\\end{{{name}}}"));
+        if name == "tikzpicture" && acc.tikz.is_none() {
+            acc.tikz = Some(after_optional(&body).to_string());
+        }
+        acc.pictures.push(Picture {
+            env: name.to_string(),
+            source,
+        });
+    }
+
+    /// A verbatim-like environment inside a float, kept as a block after the float.
+    fn verbatim_into(&mut self, name: &str, acc: &mut FloatAcc) {
+        let mut language = None;
+        if name == "minted" {
+            let _ = self.top().optional_raw();
+            language = self.top().group_raw().map(|s| s.trim().to_string());
+        } else if let Some(opts) = self.top().optional_raw() {
+            language = parse_options(&opts)
+                .into_iter()
+                .find(|(k, _)| k == "language")
+                .map(|(_, v)| v);
+        }
+        let (text, _) = self.top().until_env_end(name);
+        let text = text.strip_prefix('\n').unwrap_or(&text).to_string();
+        acc.extra.push(Block::Verbatim(Verbatim {
+            env: name.to_string(),
+            language,
+            text,
+        }));
     }
 
     fn float_body(&mut self, env: &str, kind: Kind, acc: &mut FloatAcc, end: FloatEnd) {
@@ -1622,11 +1700,14 @@ impl Parser<'_> {
                                     acc.columns = table.columns;
                                 }
                             }
-                            "tikzpicture" => {
+                            "verbatim" | "Verbatim" | "BVerbatim" | "alltt" | "lstlisting"
+                            | "minted" => self.verbatim_into(&n, acc),
+                            "tablenotes" => {
                                 let _ = self.top().optional_raw();
-                                let (tex, _) = self.top().until_raw("\\end{tikzpicture}", false);
-                                acc.tikz = Some(tex);
+                                let list = self.list(&n);
+                                acc.extra.push(Block::List(list));
                             }
+                            _ if is_picture_env(&n) => self.picture_into(&n, acc, at),
                             _ => {}
                         }
                     }
@@ -1685,6 +1766,7 @@ impl Parser<'_> {
             image_paths: acc.images,
             subfigures: acc.subs,
             tikz: acc.tikz,
+            pictures: acc.pictures,
             source_span: (at, end.max(at)),
         }
     }
@@ -1909,6 +1991,71 @@ fn document_body(text: &str) -> &str {
         Some(end) => &body[..end],
         None => body,
     }
+}
+
+/// Environments that draw a picture. Their source is kept whole and nothing is drawn.
+fn is_picture_env(name: &str) -> bool {
+    matches!(
+        name,
+        "tikzpicture"
+            | "pgfpicture"
+            | "picture"
+            | "circuitikz"
+            | "forest"
+            | "pspicture"
+            | "tikzcd"
+            | "asy"
+    )
+}
+
+/// The text after a leading `[...]` optional argument, or the whole text when there is none.
+fn after_optional(body: &str) -> &str {
+    let trimmed = body.trim_start();
+    if !trimmed.starts_with('[') {
+        return body;
+    }
+    let mut depth = 0usize;
+    let mut escaped = false;
+    for (i, c) in trimmed.char_indices() {
+        if escaped {
+            escaped = false;
+            continue;
+        }
+        match c {
+            '\\' => escaped = true,
+            '[' | '{' => depth += 1,
+            ']' | '}' => {
+                depth = depth.saturating_sub(1);
+                if depth == 0 {
+                    return &trimmed[i + 1..];
+                }
+            }
+            _ => {}
+        }
+    }
+    body
+}
+
+/// Removes the indentation that the lines after the first have in common, so that a block
+/// taken from an indented place in the source starts at the margin.
+fn dedent(text: &str) -> String {
+    let mut lines = text.lines();
+    let Some(first) = lines.next() else {
+        return String::new();
+    };
+    let rest: Vec<&str> = lines.collect();
+    let indent = rest
+        .iter()
+        .filter(|l| !l.trim().is_empty())
+        .map(|l| l.len() - l.trim_start_matches([' ', '\t']).len())
+        .min()
+        .unwrap_or(0);
+    let mut out = first.trim_end().to_string();
+    for line in rest {
+        out.push('\n');
+        out.push_str(line.get(indent..).unwrap_or("").trim_end());
+    }
+    out
 }
 
 fn letter(n: u32) -> String {

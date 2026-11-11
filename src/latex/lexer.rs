@@ -408,6 +408,45 @@ impl Lexer {
         (out, false)
     }
 
+    /// Reads the body of environment `name` as written, up to its `\end{name}` (consumed).
+    /// A nested `\begin{name}` is matched with its own `\end{name}`. Nothing is removed from
+    /// the text, but a `\begin` or `\end` inside a comment does not count.
+    pub(crate) fn until_env_end(&mut self, name: &str) -> (String, bool) {
+        let src = self.src.clone();
+        let bytes = src.as_bytes();
+        let begin = format!("\\begin{{{name}}}");
+        let end = format!("\\end{{{name}}}");
+        let start = self.pos;
+        let mut depth = 0usize;
+        let mut i = self.pos;
+        while i < bytes.len() {
+            match bytes[i] {
+                b'%' => {
+                    while i < bytes.len() && bytes[i] != b'\n' {
+                        i += 1;
+                    }
+                }
+                b'\\' if bytes[i..].starts_with(end.as_bytes()) => {
+                    if depth == 0 {
+                        self.pos = i + end.len();
+                        return (src.get(start..i).unwrap_or("").to_string(), true);
+                    }
+                    depth -= 1;
+                    i += end.len();
+                }
+                b'\\' if bytes[i..].starts_with(begin.as_bytes()) => {
+                    depth += 1;
+                    i += begin.len();
+                }
+                // An escaped character (`\%`, `\\`) is never a comment or a command start.
+                b'\\' => i += 2,
+                _ => i += 1,
+            }
+        }
+        self.pos = bytes.len();
+        (src.get(start..).unwrap_or("").to_string(), false)
+    }
+
     /// Reads to the matching `close` for an already consumed `open`. Escapes are kept, comments
     /// are removed. Returns the inner text. An unclosed group is returned up to the end.
     fn balanced(&mut self, open: u8, close: u8) -> String {

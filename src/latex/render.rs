@@ -6,7 +6,7 @@
 use std::fmt::Write as _;
 
 use super::parser::plain;
-use super::{Block, Cite, Document, Figure, ImagePath, Inline, ListKind, Table};
+use super::{Block, Cite, Document, Figure, ImagePath, Inline, ListKind, Picture, Table};
 use crate::bibtex::Bibliography;
 
 /// Optional inputs for rendering.
@@ -520,16 +520,38 @@ impl<'a> Renderer<'a> {
 
     fn figure(&mut self, f: &Figure) -> String {
         let mut out = String::new();
-        if let Some(tikz) = &f.tikz {
+        // A figure built by hand may carry only the older `tikz` body.
+        let legacy;
+        let pictures: &[Picture] = if f.pictures.is_empty() {
+            legacy = f
+                .tikz
+                .as_ref()
+                .map(|body| Picture {
+                    env: "tikzpicture".into(),
+                    source: body.trim().to_string(),
+                })
+                .into_iter()
+                .collect::<Vec<_>>();
+            &legacy
+        } else {
+            &f.pictures
+        };
+        for picture in pictures {
+            let what = match picture.env.as_str() {
+                "tikzpicture" => "TikZ picture".to_string(),
+                "picture" => "LaTeX picture".to_string(),
+                other => format!("{other} picture"),
+            };
             out.push_str(&match self.mode {
-                Mode::Text => "[TikZ picture, not rendered]\n\n".to_string(),
+                Mode::Text => format!("[{what}, not rendered]\n\n"),
                 Mode::Markdown => format!(
-                    "*TikZ picture, not rendered.*\n\n```latex\n{}\n```\n\n",
-                    tikz.trim()
+                    "*{}, not rendered.*\n\n{}",
+                    self.escape(&what),
+                    fenced("latex", &picture.source)
                 ),
                 Mode::Html => format!(
-                    "<pre><code class=\"tikz\">{}</code></pre>\n",
-                    escape_html(tikz)
+                    "<pre><code class=\"language-latex\">{}</code></pre>\n",
+                    escape_html(&picture.source)
                 ),
             });
         }
@@ -647,6 +669,21 @@ fn bibitem_label(label: &str) -> String {
         }
     }
     text
+}
+
+/// A fenced Markdown code block. The fence is longer than any run of backticks in the text.
+fn fenced(language: &str, text: &str) -> String {
+    let mut longest = 0usize;
+    let mut run = 0usize;
+    for c in text.chars() {
+        run = if c == '`' { run + 1 } else { 0 };
+        longest = longest.max(run);
+    }
+    let fence = "`".repeat(longest.max(2) + 1);
+    format!(
+        "{fence}{language}\n{}\n{fence}\n\n",
+        text.trim_matches('\n').trim_end()
+    )
 }
 
 fn escape_html(s: &str) -> String {

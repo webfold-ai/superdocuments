@@ -238,8 +238,18 @@ pub struct Theorem {
     pub body: Vec<Block>,
 }
 
-/// A figure environment (`figure`, `figure*`, `wrapfigure`, `subfigure`, `subfloat`) or an
-/// opaque `tikzpicture`.
+/// The source of a picture environment (`tikzpicture`, `pgfpicture`, `picture`, `circuitikz`,
+/// `forest`, `pspicture`, `tikzcd`, `asy`). Pictures are not drawn: the source is kept whole.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Picture {
+    /// The environment name.
+    pub env: String,
+    /// The environment as written, from `\begin{...}` (with its options) to `\end{...}`.
+    pub source: String,
+}
+
+/// A figure environment (`figure`, `figure*`, `wrapfigure`, `subfigure`, `subfloat`) or a
+/// picture environment that stands on its own.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Figure {
     /// Sequential number among all figures and subfigures, in source order.
@@ -254,8 +264,12 @@ pub struct Figure {
     /// `\includegraphics` paths directly in this figure.
     pub image_paths: Vec<ImagePath>,
     pub subfigures: Vec<Figure>,
-    /// The source of a `tikzpicture`. Not rendered.
+    /// The body of the first `tikzpicture`, without its options. Kept for callers that read
+    /// it; `pictures` has every picture with its complete source.
     pub tikz: Option<String>,
+    /// Every picture environment directly in this figure, in source order. The renderers
+    /// write each one as a fenced `latex` code block; none is drawn.
+    pub pictures: Vec<Picture>,
     /// Byte range of the environment in the main source (approximate inside expansions).
     pub source_span: (usize, usize),
 }

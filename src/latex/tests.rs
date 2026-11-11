@@ -22,6 +22,7 @@ const FIXTURES: &[&str] = &[
     "quotes-minipage",
     "fragment",
     "main-with-input",
+    "pictures",
 ];
 
 fn fixture_text(name: &str) -> String {
@@ -980,4 +981,196 @@ fn a_missing_input_says_whether_a_provider_was_asked() {
         warnings(&with)
     );
     assert_eq!(with.inputs, ["gone"]);
+}
+
+// ----- picture environments ----------------------------------------------------------------------
+
+fn figure_blocks(doc: &Document) -> Vec<&Figure> {
+    doc.blocks
+        .iter()
+        .filter_map(|b| match b {
+            Block::Figure(f) => Some(f),
+            _ => None,
+        })
+        .collect()
+}
+
+#[test]
+fn a_picture_keeps_its_whole_source_with_options_caption_and_label() {
+    let doc = parse(
+        "\\begin{figure}\n  \\begin{tikzpicture}[scale=2, auto]\n    \\draw (0,0) -- (1,1);\n  \
+         \\end{tikzpicture}\n  \\caption{A diagram.}\\label{fig:d}\n\\end{figure}\nSee \\ref{fig:d}.",
+    );
+    let figs = figure_blocks(&doc);
+    assert_eq!(figs.len(), 1);
+    assert_eq!(
+        figs[0].pictures,
+        vec![Picture {
+            env: "tikzpicture".into(),
+            source:
+                "\\begin{tikzpicture}[scale=2, auto]\n  \\draw (0,0) -- (1,1);\n\\end{tikzpicture}"
+                    .into(),
+        }]
+    );
+    assert_eq!(figs[0].caption_text.as_deref(), Some("A diagram."));
+    assert_eq!(figs[0].label.as_deref(), Some("fig:d"));
+    assert_eq!(doc.label_number("fig:d"), Some("1"));
+    assert_eq!(
+        md(&doc),
+        "*TikZ picture, not rendered.*\n\n```latex\n\\begin{tikzpicture}[scale=2, auto]\n  \
+         \\draw (0,0) -- (1,1);\n\\end{tikzpicture}\n```\n\n**Figure 1:** A diagram.\n\nSee 1.\n"
+    );
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+}
+
+#[test]
+fn every_picture_environment_is_kept_as_source_not_read_as_text() {
+    for env in [
+        "tikzpicture",
+        "pgfpicture",
+        "picture",
+        "circuitikz",
+        "forest",
+        "pspicture",
+        "tikzcd",
+        "asy",
+    ] {
+        let body = "[S [NP & she] $ # % \\unknowncommand{x}]";
+        let src = format!("Before.\n\\begin{{{env}}}\n{body}\n\\end{{{env}}}\nAfter.");
+        let doc = parse(&src);
+        assert!(warnings(&doc).is_empty(), "{env}: {}", warnings(&doc));
+        let figs = figure_blocks(&doc);
+        assert_eq!(figs.len(), 1, "{env}");
+        assert_eq!(figs[0].env, env);
+        let expected = format!("\\begin{{{env}}}\n{body}\n\\end{{{env}}}");
+        assert_eq!(figs[0].pictures.len(), 1, "{env}");
+        assert_eq!(figs[0].pictures[0].source, expected, "{env}");
+        let rendered = md(&doc);
+        assert!(
+            rendered.contains(&format!("```latex\n{expected}\n```")),
+            "{env}: {rendered}"
+        );
+        // The body appears once, inside the fence, and the text around it is intact.
+        assert_eq!(rendered.matches("[S [NP").count(), 1, "{env}: {rendered}");
+        assert!(rendered.starts_with("Before.\n"), "{env}: {rendered}");
+        assert!(rendered.trim_end().ends_with("After."), "{env}: {rendered}");
+        let text = render_text(&doc, &RenderOptions::default());
+        assert!(text.contains("picture, not rendered]"), "{env}: {text}");
+        let html = render_html(&doc, &RenderOptions::default());
+        assert!(
+            html.contains("<pre><code class=\"language-latex\">\\begin{"),
+            "{env}: {html}"
+        );
+    }
+}
+
+#[test]
+fn several_pictures_nested_pictures_and_comments_are_all_kept() {
+    let doc = parsed("pictures");
+    assert!(warnings(&doc).is_empty(), "{}", warnings(&doc));
+    let figs = super::figures(&doc);
+    let envs: Vec<&str> = figs.iter().map(|f| f.env.as_str()).collect();
+    assert_eq!(envs, ["figure", "figure", "figure*", "pgfpicture"]);
+    // Two pictures in one float; a commented-out \end does not end the first.
+    assert_eq!(figs[0].pictures.len(), 2);
+    assert!(figs[0].pictures[0]
+        .source
+        .contains("\\draw[->] (a) -- (b);"));
+    assert!(figs[0].pictures[0]
+        .source
+        .starts_with("\\begin{tikzpicture}[scale=0.8, every node/.style={draw}]\n"));
+    assert!(figs[0].pictures[1].source.contains("circle (1)"));
+    // The older field still gives the first tikzpicture's body.
+    assert!(figs[0]
+        .tikz
+        .as_deref()
+        .unwrap_or("")
+        .contains("\\node (b) at (2,0) {B};"));
+    assert_eq!(figs[1].pictures[0].env, "forest");
+    assert_eq!(figs[1].number.as_deref(), Some("2"));
+    // Pictures inside subfigures stay with their subfigure.
+    let subs = &figs[2].subfigures;
+    assert_eq!(subs[0].pictures[0].env, "circuitikz");
+    assert_eq!(subs[0].number.as_deref(), Some("3a"));
+    assert_eq!(subs[1].pictures[0].env, "picture");
+    assert!(subs[1].pictures[0]
+        .source
+        .starts_with("\\begin{picture}(100,50)\n"));
+    // A picture in a table float follows the table as a picture of its own.
+    let after_table = doc
+        .blocks
+        .iter()
+        .position(|b| matches!(b, Block::Table(t) if t.label.as_deref() == Some("tab:pic")));
+    let next = after_table.and_then(|i| doc.blocks.get(i + 1));
+    assert!(
+        matches!(next, Some(Block::Figure(f)) if f.pictures[0].env == "pgfpicture"),
+        "{next:?}"
+    );
+    assert_eq!(doc.label_number("fig:r"), Some("3a"));
+    assert_eq!(doc.label_number("tab:pic"), Some("1"));
+
+    let nested = parse(
+        "\\begin{tikzpicture}\\node{\\begin{tikzpicture}\\draw (0,0);\\end{tikzpicture}};\
+         \\draw (1,1);\\end{tikzpicture} tail",
+    );
+    let figs = figure_blocks(&nested);
+    assert_eq!(figs.len(), 1);
+    assert!(figs[0].pictures[0]
+        .source
+        .ends_with("\\draw (1,1);\\end{tikzpicture}"));
+    assert!(md(&nested).trim_end().ends_with("tail"));
+}
+
+#[test]
+fn an_unterminated_picture_warns() {
+    let doc = parse("\\begin{forest} [a [b]]");
+    assert!(
+        warnings(&doc).contains("unterminated forest"),
+        "{}",
+        warnings(&doc)
+    );
+    assert_eq!(figure_blocks(&doc)[0].pictures[0].env, "forest");
+}
+
+#[test]
+fn a_fence_is_longer_than_the_backticks_in_the_picture() {
+    let doc = parse("\\begin{asy}\nlabel(\"```\");\n\\end{asy}");
+    let rendered = md(&doc);
+    assert!(rendered.contains("````latex\n"), "{rendered}");
+    assert!(rendered.contains("\n````\n"), "{rendered}");
+}
+
+#[test]
+fn floats_do_not_drop_what_their_block_cannot_hold() {
+    // An image in a table float, a tabular in a figure float, a listing in a figure float,
+    // and threeparttable notes.
+    let doc = parse(
+        "\\begin{table}\\caption{As image}\\includegraphics{tab.png}\\end{table}\n\
+         \\begin{figure}\\begin{tabular}{ll} a & b \\\\ c & d \\\\ \\end{tabular}\\caption{As rows}\\end{figure}\n\
+         \\begin{figure}\n\\begin{lstlisting}[language=Python]\nx = 1  # 50% & $y$\n\\end{lstlisting}\n\\caption{Code}\\end{figure}\n\
+         \\begin{table}\\begin{threeparttable}\\caption{Notes}\\begin{tabular}{l} v \\\\ \\end{tabular}\
+         \\begin{tablenotes}\\item First note. \\item Second note.\\end{tablenotes}\\end{threeparttable}\\end{table}",
+    );
+    let rendered = md(&doc);
+    assert!(
+        rendered.contains("**Table 1:** As image\n\n![](tab.png)"),
+        "{rendered}"
+    );
+    assert!(
+        rendered.contains("**Figure 1:** As rows\n\n| a | b |\n| --- | --- |\n| c | d |"),
+        "{rendered}"
+    );
+    assert!(
+        rendered.contains("**Figure 2:** Code\n\n```\nx = 1  # 50% & $y$\n```"),
+        "{rendered}"
+    );
+    assert!(
+        rendered.contains("| v |\n| --- |\n\n- First note.\n- Second note."),
+        "{rendered}"
+    );
+    let listing = doc.blocks.iter().find_map(|b| match b {
+        Block::Verbatim(v) => Some(v),
+        _ => None,
+    });
+    assert_eq!(listing.and_then(|v| v.language.as_deref()), Some("Python"));
 }
