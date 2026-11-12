@@ -162,6 +162,9 @@ pub struct Section {
     /// 1 for `\section` (and `\chapter`), 2 for `\subsection`, 3 for `\subsubsection`,
     /// 4 for `\paragraph`, 5 for `\subparagraph`.
     pub level: u8,
+    /// The command's depth counting `\part` as 0: 1 for `\chapter`, 2 for `\section`, up to 6
+    /// for `\subparagraph`. Pandoc's heading levels follow from this (see `RenderOptions::pandoc`).
+    pub division: u8,
     pub starred: bool,
     pub title: Vec<Inline>,
     pub number: Option<String>,

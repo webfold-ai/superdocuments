@@ -553,7 +553,7 @@ impl Parser<'_> {
                 None
             }
             "section" | "subsection" | "subsubsection" | "paragraph" | "subparagraph"
-            | "chapter" => {
+            | "chapter" | "part" => {
                 let block = self.section(name);
                 self.flush(st);
                 st.blocks.push(Block::Section(block));
@@ -562,6 +562,14 @@ impl Parser<'_> {
             "label" => {
                 let label = self.top().group_raw().unwrap_or_default();
                 self.record_label(&label);
+                // `\section{T}\label{x}`: the label belongs to the heading just read.
+                if st.para.iter().all(|i| matches!(i, Inline::Text(t) if t.trim().is_empty())) {
+                    if let Some(Block::Section(sec)) = st.blocks.last_mut() {
+                        if sec.label.is_none() {
+                            sec.label = Some(label.trim().to_string());
+                        }
+                    }
+                }
                 None
             }
             "caption" => {
@@ -1138,14 +1146,23 @@ impl Parser<'_> {
     fn section(&mut self, name: &str) -> Section {
         let starred = self.top().eat(b'*');
         let _ = self.top().optional_raw();
+        let division: u8 = match name {
+            "part" => 0,
+            "chapter" => 1,
+            "section" => 2,
+            "subsection" => 3,
+            "subsubsection" => 4,
+            "paragraph" => 5,
+            _ => 6,
+        };
         let level: u8 = match name {
-            "chapter" | "section" => 1,
+            "part" | "chapter" | "section" => 1,
             "subsection" => 2,
             "subsubsection" => 3,
             "paragraph" => 4,
             _ => 5,
         };
-        let number = if starred || level > 3 {
+        let number = if starred || level > 3 || name == "part" {
             None
         } else {
             let l = usize::from(level);
@@ -1167,6 +1184,7 @@ impl Parser<'_> {
         let label = self.doc.labels.get(before).map(|l| l.name.clone());
         Section {
             level,
+            division,
             starred,
             title,
             number,

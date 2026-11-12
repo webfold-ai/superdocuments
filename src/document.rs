@@ -730,7 +730,10 @@ fn latex_markdown(
 ) -> String {
     use crate::latex::CitationSource;
     let mut out =
-        crate::latex::render_markdown(doc, &crate::latex::RenderOptions { bibliography: bib });
+        crate::latex::render_markdown(
+        doc,
+        &crate::latex::RenderOptions { bibliography: bib, pandoc: true },
+    );
     let Some(bib) = bib.filter(|_| doc.bibitems.is_empty()) else {
         return out;
     };
@@ -757,11 +760,7 @@ fn latex_markdown(
     if listed.is_empty() {
         return out;
     }
-    out.push_str(if doc.title.is_some() {
-        "\n## References\n\n"
-    } else {
-        "\n# References\n\n"
-    });
+    out.push_str("\n# References\n\n");
     for entry in listed {
         out.push_str(&format!(
             "- `{}` — {}\n",

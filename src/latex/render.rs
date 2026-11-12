@@ -14,6 +14,14 @@ use crate::bibtex::Bibliography;
 pub struct RenderOptions<'a> {
     /// Used to label `\cite` keys that are not in the document's `thebibliography`.
     pub bibliography: Option<&'a Bibliography>,
+    /// Markdown only: write the document the way Pandoc reads LaTeX. Title, authors, date and
+    /// abstract go in a YAML metadata block; heading levels follow Pandoc (the top division in
+    /// the document is level 1); headings carry `{#label}`; `\cite` commands are Pandoc
+    /// citations (`[@key; @key2]`, `@key`); `\ref` is a link to the label with the resolved
+    /// number as its text; description lists are definition lists; figures are `![caption](path)`.
+    /// Off, the title is a level-1 heading, every section is one level lower and citations and
+    /// references are plain text.
+    pub pandoc: bool,
 }
 
 /// Renders plain text.
@@ -58,8 +66,103 @@ impl<'a> Renderer<'a> {
         }
     }
 
+    /// Heading levels added to sections: one below a title heading.
+    fn shift(&self) -> usize {
+        usize::from(self.doc.title.is_some() && !self.front_matter())
+    }
+
+    /// Pandoc's level for a division: the document's top division (`\part`, else `\chapter`,
+    /// else the first `\section` level) becomes 1 whatever it is, with the gap left when levels
+    /// are skipped (`\part` then `\section` is 1 then 3).
+    fn pandoc_depth(&self, division: u8) -> u8 {
+        fn scan(blocks: &[Block], part: &mut bool, chapter: &mut bool) {
+            for b in blocks {
+                match b {
+                    Block::Section(s) => match s.division {
+                        0 => *part = true,
+                        1 => *chapter = true,
+                        _ => {}
+                    },
+                    Block::Quote(inner) => scan(inner, part, chapter),
+                    _ => {}
+                }
+            }
+        }
+        let (mut part, mut chapter) = (false, false);
+        scan(&self.doc.blocks, &mut part, &mut chapter);
+        let shift: i16 = if part {
+            1
+        } else if chapter {
+            0
+        } else {
+            -1
+        };
+        u8::try_from((i16::from(division) + shift).clamp(1, 6)).unwrap_or(6)
+    }
+
+    fn front_matter(&self) -> bool {
+        self.options.pandoc && self.mode == Mode::Markdown
+    }
+
+    /// The YAML block: every value is a double-quoted scalar (or a block scalar for the abstract),
+    /// which Pandoc reads back as Markdown.
+    fn yaml_front_matter(&mut self) -> String {
+        fn quote(s: &str) -> String {
+            let mut o = String::from("\"");
+            for c in s.chars() {
+                match c {
+                    '"' => o.push_str("\\\""),
+                    '\\' => o.push_str("\\\\"),
+                    '\n' => o.push(' '),
+                    c => o.push(c),
+                }
+            }
+            o.push('"');
+            o
+        }
+        let mut y = String::new();
+        if let Some(title) = &self.doc.title {
+            let t = self.inlines(title);
+            y.push_str(&format!("title: {}\n", quote(&t)));
+        }
+        if !self.doc.authors.is_empty() {
+            y.push_str("author:\n");
+            for a in self.doc.authors.clone().iter() {
+                let t = self.inlines(a);
+                y.push_str(&format!("- {}\n", quote(&t)));
+            }
+        }
+        if let Some(date) = &self.doc.date {
+            if !date.is_empty() {
+                y.push_str(&format!("date: {}\n", quote(date)));
+            }
+        }
+        if let Some(abs) = &self.doc.abstract_body {
+            let body = self.blocks(abs);
+            y.push_str("abstract: |\n");
+            for line in body.trim_end().lines() {
+                if line.is_empty() {
+                    y.push('\n');
+                } else {
+                    y.push_str("  ");
+                    y.push_str(line);
+                    y.push('\n');
+                }
+            }
+        }
+        if y.is_empty() {
+            return y;
+        }
+        format!("---\n{y}---\n\n")
+    }
+
     fn document(mut self) -> String {
         let mut out = String::new();
+        if self.front_matter() {
+            out.push_str(&self.yaml_front_matter());
+            out.push_str(&self.blocks(&self.doc.blocks));
+            return self.finish(out);
+        }
         if let Some(title) = &self.doc.title {
             let t = self.inlines(title);
             out.push_str(&self.heading(1, &t));
@@ -87,9 +190,14 @@ impl<'a> Renderer<'a> {
             out.push_str(&self.blocks(abs));
         }
         out.push_str(&self.blocks(&self.doc.blocks));
+        self.finish(out)
+    }
+
+    /// Bibliography items, footnote bodies and the closing newline.
+    fn finish(mut self, mut out: String) -> String {
         if !self.doc.bibitems.is_empty() {
-            let depth = if self.doc.title.is_some() { 2 } else { 1 };
-            out.push_str(&self.heading(depth, "References"));
+            let depth = 1 + self.shift();
+            out.push_str(&self.heading(u8::try_from(depth).unwrap_or(6), "References"));
             let bib: Vec<Vec<Inline>> = self.doc.bibitems.iter().map(|b| b.text.clone()).collect();
             for (i, text) in bib.iter().enumerate() {
                 let body = self.inlines(text);
@@ -305,6 +413,15 @@ impl<'a> Renderer<'a> {
             Inline::Cite(c) => self.cite(c),
             Inline::Ref(r) => {
                 let text = self.reference(r);
+                if self.front_matter() {
+                    let label = r.labels().first().map(|l| l.to_string()).unwrap_or_default();
+                    let shown = if text.contains("??") {
+                        format!("\\[{}\\]", self.escape(&label))
+                    } else {
+                        self.escape(&text)
+                    };
+                    return format!("[{shown}](#{label})");
+                }
                 self.escape(&text)
             }
             Inline::Link { url, text } => {
@@ -399,7 +516,47 @@ impl<'a> Renderer<'a> {
         .to_string()
     }
 
+    /// Pandoc's citation syntax, as its LaTeX reader writes it: `[@a; @b]`, `[see @a; @b p. 4]`,
+    /// `@a` for the textual commands (`\citet`), `[-@a]` for `\citeyear`.
+    fn pandoc_cite(&self, c: &Cite) -> String {
+        let cmd = c.command.as_str();
+        if matches!(cmd, "nocite" | "citetitle" | "fullcite") || c.keys.is_empty() {
+            return String::new();
+        }
+        let post = c.post.as_deref().map(str::trim).filter(|p| !p.is_empty());
+        let pre = c.pre.as_deref().map(str::trim).filter(|p| !p.is_empty());
+        let textual = matches!(
+            cmd,
+            "citet" | "Citet" | "textcite" | "Textcite" | "citeauthor" | "Citeauthor" | "citealt"
+        );
+        if textual {
+            let mut out = format!("@{}", c.keys[0]);
+            if c.keys.len() == 1 {
+                if let Some(q) = post {
+                    out.push_str(&format!(" [{}]", self.escape(q)));
+                }
+            } else {
+                for k in &c.keys[1..] {
+                    out.push_str(&format!(" [@{k}]"));
+                }
+            }
+            return out;
+        }
+        let mark = if matches!(cmd, "citeyear" | "citeyearpar") { "-@" } else { "@" };
+        let mut body = c.keys.iter().map(|k| format!("{mark}{k}")).collect::<Vec<_>>().join("; ");
+        if let Some(q) = post {
+            body = format!("{body} {}", self.escape(q));
+        }
+        if let Some(p) = pre {
+            body = format!("{} {body}", self.escape(p));
+        }
+        format!("[{body}]")
+    }
+
     fn cite(&self, c: &Cite) -> String {
+        if self.front_matter() {
+            return self.pandoc_cite(c);
+        }
         let mut labels = Vec::new();
         for key in &c.keys {
             labels.push(self.cite_label(key, &c.command));
@@ -490,12 +647,15 @@ impl<'a> Renderer<'a> {
     fn block(&mut self, block: &Block) -> String {
         match block {
             Block::Section(s) => {
-                let depth = if self.doc.title.is_some() {
-                    usize::from(s.level) + 1
-                } else {
-                    usize::from(s.level)
-                };
                 let title = self.inlines(&s.title);
+                if self.front_matter() {
+                    let mut text = title;
+                    if let Some(l) = &s.label {
+                        text.push_str(&format!(" {{#{l}}}"));
+                    }
+                    return self.heading(self.pandoc_depth(s.division), &text);
+                }
+                let depth = usize::from(s.level) + self.shift();
                 self.heading(u8::try_from(depth).unwrap_or(6), &title)
             }
             Block::Paragraph(inl) => {
@@ -525,6 +685,39 @@ impl<'a> Renderer<'a> {
                 Mode::Html => format!("<pre><code>{}</code></pre>\n", escape_html(&v.text)),
             },
             Block::Figure(f) => self.figure(f),
+            Block::Theorem(t) if self.front_matter() => {
+                let mut head = t.name.clone();
+                if let Some(n) = &t.number {
+                    head = format!("{head} {n}");
+                }
+                if let Some(title) = &t.title {
+                    let tt = self.inlines(title);
+                    head = format!("{head} ({tt})");
+                }
+                let head = self.escape(&head);
+                // amsthm's plain style sets the body in italics; the others do not.
+                let plain = matches!(
+                    t.env.as_str(),
+                    "theorem" | "lemma" | "proposition" | "corollary" | "conjecture" | "claim"
+                );
+                let mut parts = Vec::new();
+                for b in &t.body {
+                    let text = self.blocks(std::slice::from_ref(b));
+                    let text = text.trim_end().to_string();
+                    if plain && matches!(b, Block::Paragraph(_)) && !text.is_empty() {
+                        parts.push(self.emph(&text));
+                    } else {
+                        parts.push(text);
+                    }
+                }
+                let body = parts.join("\n\n");
+                let lead = if t.env == "proof" {
+                    self.emph(&format!("{head}."))
+                } else {
+                    format!("{}.", self.strong(&head))
+                };
+                format!("{lead} {body}\n\n")
+            }
             Block::Theorem(t) => {
                 let mut head = t.name.clone();
                 if let Some(n) = &t.number {
@@ -566,6 +759,26 @@ impl<'a> Renderer<'a> {
     fn list(&mut self, list: &super::List) -> String {
         let ordered = list.kind == ListKind::Enumerate;
         let mut out = String::new();
+        if self.front_matter() && list.kind == ListKind::Description {
+            for item in &list.items {
+                let content = self.blocks(&item.blocks);
+                let term = item.label.as_ref().map(|l| self.inlines(l)).unwrap_or_default();
+                let _ = writeln!(out, "{term}");
+                let mut first = true;
+                for line in content.trim_end().lines() {
+                    if first {
+                        let _ = writeln!(out, ":   {line}");
+                        first = false;
+                    } else if line.is_empty() {
+                        out.push('\n');
+                    } else {
+                        let _ = writeln!(out, "    {line}");
+                    }
+                }
+                out.push('\n');
+            }
+            return out;
+        }
         if self.mode == Mode::Html {
             out.push_str(if ordered { "<ol>\n" } else { "<ul>\n" });
         }
@@ -620,6 +833,20 @@ impl<'a> Renderer<'a> {
     }
 
     fn figure(&mut self, f: &Figure) -> String {
+        if self.front_matter() && f.pictures.is_empty() && f.tikz.is_none() && !f.image_paths.is_empty() {
+            let caption = f.caption.as_ref().map(|c| self.inlines(c)).unwrap_or_default();
+            let attrs = f.label.as_ref().map(|l| format!("{{#{l}}}")).unwrap_or_default();
+            let mut out = String::new();
+            for (i, img) in f.image_paths.iter().enumerate() {
+                let cap = if i == 0 { caption.as_str() } else { "" };
+                let attrs = if i == 0 { attrs.as_str() } else { "" };
+                out.push_str(&format!("![{cap}]({}){attrs}\n\n", img.declared));
+            }
+            for sub in &f.subfigures {
+                out.push_str(&self.figure(sub));
+            }
+            return out;
+        }
         let mut out = String::new();
         // A figure built by hand may carry only the older `tikz` body.
         let legacy;
