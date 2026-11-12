@@ -10,4 +10,4 @@ description = "Renders the benchmark SVGs embedded in README.md from published w
 [workspace]
 
 [dependencies]
-charton = "0.9"
+charton = { version = "0.9", features = ["png"] }
