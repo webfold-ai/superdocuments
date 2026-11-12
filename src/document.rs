@@ -734,10 +734,12 @@ fn latex_markdown(
     bib: Option<&crate::bibtex::Bibliography>,
 ) -> String {
     use crate::latex::CitationSource;
-    let mut out =
-        crate::latex::render_markdown(
+    let mut out = crate::latex::render_markdown(
         doc,
-        &crate::latex::RenderOptions { bibliography: bib, pandoc: true },
+        &crate::latex::RenderOptions {
+            bibliography: bib,
+            pandoc: true,
+        },
     );
     let Some(bib) = bib.filter(|_| doc.bibitems.is_empty()) else {
         return out;

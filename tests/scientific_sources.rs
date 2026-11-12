@@ -64,11 +64,14 @@ Inline $a^2$ and a reference to Section~\ref{sec:one}.
 \end{document}";
     for ext in ["tex", "TEX", "latex", "ltx"] {
         let md = convert_bytes(ext, source).unwrap_or_else(|e| panic!("{ext}: {e}"));
-        assert!(md.starts_with("# Routing\n"), "{ext}: {md}");
-        assert!(md.contains("## One"), "{ext}: {md}");
+        assert!(
+            md.starts_with("---\ntitle: \"Routing\"\n---\n"),
+            "{ext}: {md}"
+        );
+        assert!(md.contains("# One {#sec:one}"), "{ext}: {md}");
         assert!(md.contains("Inline $a^2$"), "{ext}: {md}");
         assert!(
-            md.replace('\u{a0}', " ").contains("Section 1."),
+            md.replace('\u{a0}', " ").contains("Section [1](#sec:one)."),
             "{ext}: {md}"
         );
         assert!(md.contains("E = mc^2 \\tag{1}"), "{ext}: {md}");
@@ -87,7 +90,7 @@ fn tex_bytes_have_no_file_access_so_inputs_stay_unresolved() {
     // The same main file that `convert_path` inlines below: with bytes only, nothing is read.
     let md = convert_bytes("tex", &fixture_bytes("latex/project/main.tex"))
         .unwrap_or_else(|e| panic!("{e}"));
-    assert!(md.contains("# A Project in Several Files"), "{md}");
+    assert!(md.contains("title: \"A Project in Several Files\""), "{md}");
     assert!(!md.contains("Introduction"), "{md}");
     assert!(!md.contains("References"), "{md}");
 }
@@ -205,9 +208,8 @@ fn gzipped_single_tex_file_is_an_eprint() {
 fn bbl_only_eprint_cites_by_label_and_lists_the_items() {
     let md = convert_bytes("gz", &fixture_bytes("arxiv/bbl-only.tar.gz"))
         .unwrap_or_else(|e| panic!("{e}"));
-    // The natbib label `Vaswani et~al.(2017)` is shown as an author-year citation, not as the
-    // key with "n.d.".
-    assert!(md.contains("(Vaswani et al., 2017)"), "{md}");
+    // The natbib label `Vaswani et~al.(2017)` is cited by its key, not shown as "n.d.".
+    assert!(md.contains("[@vaswani2017]"), "{md}");
     assert!(!md.contains("n.d."), "{md}");
     assert!(md.contains("References"), "{md}");
     assert!(md.contains("Attention is all you need"), "{md}");
@@ -265,19 +267,23 @@ fn document_cache_accepts_the_scientific_formats() {
 #[test]
 fn convert_path_reads_the_project_next_to_the_tex_file() {
     let md = convert_path(&fixture("latex/project/main.tex")).unwrap_or_else(|e| panic!("{e}"));
-    assert!(md.starts_with("# A Project in Several Files\n"), "{md}");
+    assert!(
+        md.starts_with("---\ntitle: \"A Project in Several Files\"\n"),
+        "{md}"
+    );
     // \input{sections/intro}, \input{sections/method.tex}, and a file nested two levels down.
-    assert!(md.contains("## Introduction"), "{md}");
-    assert!(md.contains("## Method"), "{md}");
+    assert!(md.contains("# Introduction"), "{md}");
+    assert!(md.contains("# Method"), "{md}");
     assert!(md.contains("A detail from a nested file"), "{md}");
     // A reference from one input file to a label in another.
     assert!(
-        md.replace('\u{a0}', " ").contains("Section 1 motivates"),
+        md.replace('\u{a0}', " ")
+            .contains("Section [1](#sec:intro) motivates"),
         "{md}"
     );
     // \bibliography{refs}: citations use refs.bib, and only the cited entries are listed.
-    assert!(md.contains("(Vaswani et al., 2017)"), "{md}");
-    assert!(md.contains("## References"), "{md}");
+    assert!(md.contains("[@vaswani2017]"), "{md}");
+    assert!(md.contains("# References"), "{md}");
     assert!(
         md.contains("- `vaswani2017` \u{2014} Ashish Vaswani"),
         "{md}"
@@ -298,12 +304,12 @@ fn convert_path_reads_the_project_next_to_the_tex_file() {
 fn convert_path_falls_back_to_the_bbl_next_to_the_document() {
     let md =
         convert_path(&fixture("latex/project-bbl/paper.tex")).unwrap_or_else(|e| panic!("{e}"));
-    assert!(md.contains("(Vaswani et al., 2017)"), "{md}");
+    assert!(md.contains("[@vaswani2017]"), "{md}");
     assert!(md.contains("# References"), "{md}");
     assert!(md.contains("Attention is all you need."), "{md}");
     assert!(md.contains("*The TeXbook*"), "{md}");
-    // The second item has no label: it is cited by its number.
-    assert!(md.contains("(2)"), "{md}");
+    // Citations keep their keys, so the second item is cited as `[@knuth1984]`.
+    assert!(md.contains("[@knuth1984]"), "{md}");
     assert!(md.contains("[2] D."), "{md}");
 }
 
@@ -436,7 +442,7 @@ fn a_bibliography_outside_the_document_directory_is_not_read() {
     let md = convert_path(&main).unwrap_or_else(|e| panic!("{e}"));
     assert!(!md.contains("SECRET-BIB-SENTINEL"), "{md}");
     assert!(!md.contains("Outside"), "{md}");
-    assert!(md.contains("(k)"), "the key is shown unresolved: {md}");
+    assert!(md.contains("[@k]"), "the key is shown unresolved: {md}");
 }
 
 #[test]
@@ -568,23 +574,23 @@ fn a_short_paper_converts_to_the_expected_markdown() {
     // The points the golden file is there to hold, stated one by one.
     let flat = md.replace('\u{a0}', " ");
     for expected in [
-        "# Sparse Folding for Protein Structure\n",
-        "## Abstract\n\nWe introduce FoldNet, which improves accuracy by 12% on CASP14.",
-        "Structure prediction (Jumper et al., 2021; Baek and DiMaio, 2021) is hard.",
-        "Following Jumper et al., 2021, FoldNet minimises the loss in Eq. (1)",
+        "title: \"Sparse Folding for Protein Structure\"\n",
+        "abstract: |\n  We introduce FoldNet, which improves accuracy by 12% on CASP14.",
+        "Structure prediction [@jumper2021; @baek2021] is hard.",
+        "Following @jumper2021, FoldNet minimises the loss in Eq. [(1)](#eq:loss)",
         "over $x \\in \\mathbb{R}^n$ with $\\lVert x \\rVert \\le 1$[^1].",
         "Schr\u{f6}dinger, Erd\u{151}s and Poincar\u{e9} are cited \u{201c}often\u{201d} \u{2014} see [this paper](https://arxiv.org/abs/1706.03762).",
-        "Section 2 has the details, Table 1 the numbers and Figure 1 the model.",
-        "### Objective",
+        "Section [2](#sec:method) has the details, Table [1](#tab:results) the numbers and Figure [1](#fig:arch) the model.",
+        "# Method {#sec:method}\n\n## Objective",
         "\\theta^\\star = \\operatorname*{arg\\,min}_{\\theta} \\sum_{i=1}^{n} \\lVert f_\\theta(x_i) - y_i \\rVert^2 . \\tag{1}",
-        "**Theorem 1 (Convergence).** If $\\eta$ is small, (2) converges.",
+        "**Theorem 1 (Convergence)**. *If $\\eta$ is small, [(2)](#eq:grad) converges.*",
         "|  | TM-score |  |\n| --- | --- | --- |\n| Method | CASP14 | CAMEO |",
         "| FoldNet | **0.85** | **0.88** |",
-        "**Figure 1:** The architecture of FoldNet: (a) encoder, (b) decoder.",
-        "**(1b)** Decoder.\n\n![](figs/decoder.pdf)",
-        "Theorem 1 and Figure 1b conclude the section.",
+        "**Figure 1:** The architecture of FoldNet: ([a](#fig:enc)) encoder, ([b](#fig:dec)) decoder.",
+        "![Decoder.](figs/decoder.pdf){#fig:dec}",
+        "Theorem [1](#thm:conv) and Figure [1b](#fig:dec) conclude the section.",
         "[^1]: The unit ball, e.g., in $\\mathbb{R}^3$.",
-        "## References\n\n- `jumper2021` \u{2014} John Jumper, Richard Evans and Alexander Pritzel (2021). \
+        "# References\n\n- `jumper2021` \u{2014} John Jumper, Richard Evans and Alexander Pritzel (2021). \
          Highly accurate protein structure prediction with AlphaFold. *Nature* 596, 583\u{2013}589. \
          <https://doi.org/10.1038/s41586-021-03819-2>",
         "- `baek2021` \u{2014} Minkyung Baek and Frank DiMaio (2021). \

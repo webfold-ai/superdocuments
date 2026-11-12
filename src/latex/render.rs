@@ -414,7 +414,11 @@ impl<'a> Renderer<'a> {
             Inline::Ref(r) => {
                 let text = self.reference(r);
                 if self.front_matter() {
-                    let label = r.labels().first().map(|l| l.to_string()).unwrap_or_default();
+                    let label = r
+                        .labels()
+                        .first()
+                        .map(|l| l.to_string())
+                        .unwrap_or_default();
                     let shown = if text.contains("??") {
                         format!("\\[{}\\]", self.escape(&label))
                     } else {
@@ -542,8 +546,17 @@ impl<'a> Renderer<'a> {
             }
             return out;
         }
-        let mark = if matches!(cmd, "citeyear" | "citeyearpar") { "-@" } else { "@" };
-        let mut body = c.keys.iter().map(|k| format!("{mark}{k}")).collect::<Vec<_>>().join("; ");
+        let mark = if matches!(cmd, "citeyear" | "citeyearpar") {
+            "-@"
+        } else {
+            "@"
+        };
+        let mut body = c
+            .keys
+            .iter()
+            .map(|k| format!("{mark}{k}"))
+            .collect::<Vec<_>>()
+            .join("; ");
         if let Some(q) = post {
             body = format!("{body} {}", self.escape(q));
         }
@@ -762,7 +775,11 @@ impl<'a> Renderer<'a> {
         if self.front_matter() && list.kind == ListKind::Description {
             for item in &list.items {
                 let content = self.blocks(&item.blocks);
-                let term = item.label.as_ref().map(|l| self.inlines(l)).unwrap_or_default();
+                let term = item
+                    .label
+                    .as_ref()
+                    .map(|l| self.inlines(l))
+                    .unwrap_or_default();
                 let _ = writeln!(out, "{term}");
                 let mut first = true;
                 for line in content.trim_end().lines() {
@@ -833,9 +850,21 @@ impl<'a> Renderer<'a> {
     }
 
     fn figure(&mut self, f: &Figure) -> String {
-        if self.front_matter() && f.pictures.is_empty() && f.tikz.is_none() && !f.image_paths.is_empty() {
-            let caption = f.caption.as_ref().map(|c| self.inlines(c)).unwrap_or_default();
-            let attrs = f.label.as_ref().map(|l| format!("{{#{l}}}")).unwrap_or_default();
+        if self.front_matter()
+            && f.pictures.is_empty()
+            && f.tikz.is_none()
+            && !f.image_paths.is_empty()
+        {
+            let caption = f
+                .caption
+                .as_ref()
+                .map(|c| self.inlines(c))
+                .unwrap_or_default();
+            let attrs = f
+                .label
+                .as_ref()
+                .map(|l| format!("{{#{l}}}"))
+                .unwrap_or_default();
             let mut out = String::new();
             for (i, img) in f.image_paths.iter().enumerate() {
                 let cap = if i == 0 { caption.as_str() } else { "" };

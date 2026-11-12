@@ -5,9 +5,9 @@ edition = "2021"
 description = "Python and WebAssembly (TypeScript) bindings for superdocuments: convert documents to Markdown from bytes, read XLSX worksheets."
 license = "Apache-2.0"
 repository = "https://github.com/webfold-ai/superdocuments"
-# PyO3 and wasm-bindgen need more than the root crate's 1.85; this crate's floor is its own and
-# does not raise superdocuments' (the root package does not depend on it).
-rust-version = "1.88"
+# The root crate it wraps needs 1.89 (zip, calamine, apeiron, wirefold), which covers PyO3 and
+# wasm-bindgen too.
+rust-version = "1.89"
 publish = false
 
 [lib]

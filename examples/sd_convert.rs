@@ -15,7 +15,9 @@ fn main() {
     let path = first;
     match superdocuments::document::convert_path(std::path::Path::new(&path)) {
         Ok(md) => {
-            std::io::stdout().write_all(md.as_bytes()).expect("write stdout");
+            std::io::stdout()
+                .write_all(md.as_bytes())
+                .expect("write stdout");
         }
         Err(e) => {
             eprintln!("{e}");

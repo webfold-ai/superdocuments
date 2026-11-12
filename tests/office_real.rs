@@ -25,7 +25,8 @@ fn entity_references_are_kept_in_every_xml_format() {
     assert!(ods.contains("A & B"), "{ods}");
     assert!(ods.contains("C<D"), "{ods}");
     let odt = convert("basic.odt");
-    assert!(odt.contains("Tom & Jerry said x < y > z"), "{odt}");
+    // ODT is written through the shared Markdown writer, which escapes `<` and `>`.
+    assert!(odt.contains("Tom & Jerry said x \\< y \\> z"), "{odt}");
 }
 
 #[test]

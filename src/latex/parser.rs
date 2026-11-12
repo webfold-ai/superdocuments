@@ -563,7 +563,11 @@ impl Parser<'_> {
                 let label = self.top().group_raw().unwrap_or_default();
                 self.record_label(&label);
                 // `\section{T}\label{x}`: the label belongs to the heading just read.
-                if st.para.iter().all(|i| matches!(i, Inline::Text(t) if t.trim().is_empty())) {
+                if st
+                    .para
+                    .iter()
+                    .all(|i| matches!(i, Inline::Text(t) if t.trim().is_empty()))
+                {
                     if let Some(Block::Section(sec)) = st.blocks.last_mut() {
                         if sec.label.is_none() {
                             sec.label = Some(label.trim().to_string());
@@ -1742,13 +1746,11 @@ impl Parser<'_> {
                 if name == "minted" {
                     let _ = self.top().optional_raw();
                     language = self.top().group_raw().map(|s| s.trim().to_string());
-                } else {
-                    if let Some(opts) = self.top().optional_raw() {
-                        language = parse_options(&opts)
-                            .into_iter()
-                            .find(|(k, _)| k == "language")
-                            .map(|(_, v)| v);
-                    }
+                } else if let Some(opts) = self.top().optional_raw() {
+                    language = parse_options(&opts)
+                        .into_iter()
+                        .find(|(k, _)| k == "language")
+                        .map(|(_, v)| v);
                 }
                 let end = format!("\\end{{{name}}}");
                 let (text, found) = self.top().until_raw(&end, false);

@@ -30,12 +30,15 @@ fn read(html: &str, epub: bool) -> Doc {
     let mut nodes = dom::parse(html);
     let mut meta = Meta::default();
     let mut r = Reader::default();
-    r.collect_meta(&nodes, &mut meta);
+    Reader::collect_meta(&nodes, &mut meta);
     if epub {
         // Footnote bodies are taken out of the tree first so they are not also read in place.
         r.take_notes(&mut nodes);
     }
-    let body = find_body(&nodes).cloned().map(|b| b.children).unwrap_or(nodes);
+    let body = find_body(&nodes)
+        .cloned()
+        .map(|b| b.children)
+        .unwrap_or(nodes);
     let blocks = r.blocks(&body, false);
     Doc { meta, blocks }
 }
@@ -70,27 +73,89 @@ struct Reader {
 fn is_skipped(tag: &str) -> bool {
     matches!(
         tag,
-        "script" | "style" | "head" | "noscript" | "template" | "title" | "svg" | "canvas" | "select"
-            | "button" | "textarea" | "iframe" | "object" | "embed" | "audio" | "video" | "meta"
-            | "link" | "base" | "datalist" | "dialog" | "map" | "colgroup" | "col"
+        "script"
+            | "style"
+            | "head"
+            | "noscript"
+            | "template"
+            | "title"
+            | "svg"
+            | "canvas"
+            | "select"
+            | "button"
+            | "textarea"
+            | "iframe"
+            | "object"
+            | "embed"
+            | "audio"
+            | "video"
+            | "meta"
+            | "link"
+            | "base"
+            | "datalist"
+            | "dialog"
+            | "map"
+            | "colgroup"
+            | "col"
     )
 }
 
 fn is_block_tag(tag: &str) -> bool {
     matches!(
         tag,
-        "address" | "article" | "aside" | "blockquote" | "body" | "center" | "details" | "dir"
-            | "div" | "dl" | "fieldset" | "figure" | "figcaption" | "footer" | "form" | "h1" | "h2"
-            | "h3" | "h4" | "h5" | "h6" | "header" | "hgroup" | "hr" | "html" | "legend" | "main"
-            | "menu" | "nav" | "ol" | "p" | "pre" | "section" | "summary" | "table" | "ul" | "li"
-            | "dt" | "dd" | "tr" | "td" | "th" | "tbody" | "thead" | "tfoot" | "caption"
+        "address"
+            | "article"
+            | "aside"
+            | "blockquote"
+            | "body"
+            | "center"
+            | "details"
+            | "dir"
+            | "div"
+            | "dl"
+            | "fieldset"
+            | "figure"
+            | "figcaption"
+            | "footer"
+            | "form"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "header"
+            | "hgroup"
+            | "hr"
+            | "html"
+            | "legend"
+            | "main"
+            | "menu"
+            | "nav"
+            | "ol"
+            | "p"
+            | "pre"
+            | "section"
+            | "summary"
+            | "table"
+            | "ul"
+            | "li"
+            | "dt"
+            | "dd"
+            | "tr"
+            | "td"
+            | "th"
+            | "tbody"
+            | "thead"
+            | "tfoot"
+            | "caption"
     )
 }
 
 impl Reader {
     // ---- metadata and footnote collection -------------------------------------------------
 
-    fn collect_meta(&self, nodes: &[Node], meta: &mut Meta) {
+    fn collect_meta(nodes: &[Node], meta: &mut Meta) {
         for n in nodes {
             let Node::Elem(e) = n else { continue };
             match e.tag.as_str() {
@@ -116,7 +181,7 @@ impl Reader {
                         _ => {}
                     }
                 }
-                _ => self.collect_meta(&e.children, meta),
+                _ => Self::collect_meta(&e.children, meta),
             }
         }
     }
@@ -130,12 +195,18 @@ impl Reader {
                 let ty = e.attr("epub:type").unwrap_or("").to_string();
                 let role = e.attr("role").unwrap_or("").to_string();
                 let is_container = matches!(role.as_str(), "doc-endnotes" | "doc-footnotes")
-                    || ty.split_whitespace().any(|t| matches!(t, "footnotes" | "endnotes"))
+                    || ty
+                        .split_whitespace()
+                        .any(|t| matches!(t, "footnotes" | "endnotes"))
                     || (e.tag == "section" && e.has_class("footnotes"))
                     || (e.tag == "div" && e.has_class("footnotes"));
                 let is_note = matches!(role.as_str(), "doc-footnote" | "doc-endnote")
-                    || ty.split_whitespace().any(|t| matches!(t, "footnote" | "endnote" | "rearnote"));
-                let sd = e.attr("id").is_some_and(|id| id.starts_with("sdfootnote") && !id.ends_with("anc") && !id.ends_with("sym"));
+                    || ty
+                        .split_whitespace()
+                        .any(|t| matches!(t, "footnote" | "endnote" | "rearnote"));
+                let sd = e.attr("id").is_some_and(|id| {
+                    id.starts_with("sdfootnote") && !id.ends_with("anc") && !id.ends_with("sym")
+                });
                 if is_container {
                     let mut found = false;
                     collect_note_items(&e.children, &mut self.notes, &mut found);
@@ -143,7 +214,8 @@ impl Reader {
                         remove = true;
                     }
                 } else if (is_note || sd) && e.attr("id").is_some() {
-                    self.notes.insert(e.attr("id").unwrap_or("").to_string(), e.clone());
+                    self.notes
+                        .insert(e.attr("id").unwrap_or("").to_string(), e.clone());
                     remove = true;
                 } else {
                     self.take_notes(&mut e.children);
@@ -169,7 +241,10 @@ impl Reader {
                     if is_skipped(&e.tag) {
                         continue;
                     }
-                    if is_block_tag(&e.tag) || e.tag == "math" && e.attr("display") == Some("block") || has_block_child(e) {
+                    if is_block_tag(&e.tag)
+                        || e.tag == "math" && e.attr("display") == Some("block")
+                        || has_block_child(e)
+                    {
                         self.flush(&mut run, plain, &mut out);
                         self.block_elem(e, plain, &mut out);
                     } else {
@@ -189,7 +264,11 @@ impl Reader {
         let inl = self.inline_run(run.iter().copied());
         run.clear();
         if !inl.is_empty() {
-            out.push(if plain { Block::Plain(inl) } else { Block::Para(inl) });
+            out.push(if plain {
+                Block::Plain(inl)
+            } else {
+                Block::Para(inl)
+            });
         }
     }
 
@@ -218,7 +297,11 @@ impl Reader {
                 let level = e.tag.as_bytes()[1] - b'0';
                 let inlines = self.inline_children(e);
                 if !inlines.is_empty() {
-                    out.push(Block::Heading { level, inlines, id: e.attr("id").map(str::to_string) });
+                    out.push(Block::Heading {
+                        level,
+                        inlines,
+                        id: e.attr("id").map(str::to_string),
+                    });
                 }
             }
             "p" | "caption" | "figcaption" | "legend" | "summary" | "dt" | "dd" | "td" | "th" => {
@@ -227,14 +310,25 @@ impl Reader {
                 } else {
                     let inl = self.inline_children(e);
                     if !inl.is_empty() {
-                        out.push(if plain { Block::Plain(inl) } else { Block::Para(inl) });
+                        out.push(if plain {
+                            Block::Plain(inl)
+                        } else {
+                            Block::Para(inl)
+                        });
                     }
                 }
             }
             "pre" => {
                 let text = e.text();
-                let text = text.strip_prefix('\n').unwrap_or(&text).trim_end_matches('\n').to_string();
-                out.push(Block::Code { lang: code_lang(e), text });
+                let text = text
+                    .strip_prefix('\n')
+                    .unwrap_or(&text)
+                    .trim_end_matches('\n')
+                    .to_string();
+                out.push(Block::Code {
+                    lang: code_lang(e),
+                    text,
+                });
             }
             "blockquote" => {
                 let inner = self.blocks(&e.children, false);
@@ -251,7 +345,10 @@ impl Reader {
             "ol" => {
                 let items = self.list_items(e);
                 if !items.is_empty() {
-                    let start = e.attr("start").and_then(|s| s.trim().parse().ok()).unwrap_or(1);
+                    let start = e
+                        .attr("start")
+                        .and_then(|s| s.trim().parse().ok())
+                        .unwrap_or(1);
                     let style = match e.attr("type") {
                         Some("a") => ListStyle::LowerAlpha,
                         Some("A") => ListStyle::UpperAlpha,
@@ -259,7 +356,11 @@ impl Reader {
                         Some("I") => ListStyle::UpperRoman,
                         _ => ListStyle::Decimal,
                     };
-                    out.push(Block::OrderedList { start, style, items });
+                    out.push(Block::OrderedList {
+                        start,
+                        style,
+                        items,
+                    });
                 }
             }
             "li" => out.extend(self.blocks(&e.children, plain)),
@@ -300,7 +401,10 @@ impl Reader {
         }
         if imgs.len() == 1 && caption.is_some() {
             let cap = caption.map(|c| self.inline_children(c)).unwrap_or_default();
-            out.push(Block::Figure { url: imgs[0].attr("src").unwrap_or("").to_string(), caption: cap });
+            out.push(Block::Figure {
+                url: imgs[0].attr("src").unwrap_or("").to_string(),
+                caption: cap,
+            });
         } else {
             out.extend(self.blocks(&e.children, false));
         }
@@ -380,7 +484,9 @@ impl Reader {
                 let mut cells = Vec::new();
                 for (ci, c) in row_cells(r).into_iter().enumerate() {
                     let a = cell_align(c);
-                    if a != Align::Default && align.get(ci).copied().unwrap_or_default() == Align::Default {
+                    if a != Align::Default
+                        && align.get(ci).copied().unwrap_or_default() == Align::Default
+                    {
                         if align.len() <= ci {
                             align.resize(ci + 1, Align::Default);
                         }
@@ -388,8 +494,16 @@ impl Reader {
                     }
                     cells.push(Cell {
                         blocks: me.blocks(&c.children, true),
-                        colspan: c.attr("colspan").and_then(|v| v.trim().parse().ok()).unwrap_or(1).clamp(1, 1000),
-                        rowspan: c.attr("rowspan").and_then(|v| v.trim().parse().ok()).unwrap_or(1).clamp(1, 1000),
+                        colspan: c
+                            .attr("colspan")
+                            .and_then(|v| v.trim().parse().ok())
+                            .unwrap_or(1)
+                            .clamp(1, 1000),
+                        rowspan: c
+                            .attr("rowspan")
+                            .and_then(|v| v.trim().parse().ok())
+                            .unwrap_or(1)
+                            .clamp(1, 1000),
                     });
                 }
                 if !cells.is_empty() {
@@ -493,15 +607,29 @@ impl Reader {
             }
             "img" => {
                 let alt = e.attr("alt").unwrap_or("").to_string();
-                let title = e.attr("title").filter(|t| !t.is_empty()).map(str::to_string);
-                let alt = if alt.is_empty() { Vec::new() } else { vec![Inline::Text(alt)] };
-                out.push(Inline::Image { url: e.attr("src").unwrap_or("").to_string(), alt, title });
+                let title = e
+                    .attr("title")
+                    .filter(|t| !t.is_empty())
+                    .map(str::to_string);
+                let alt = if alt.is_empty() {
+                    Vec::new()
+                } else {
+                    vec![Inline::Text(alt)]
+                };
+                out.push(Inline::Image {
+                    url: e.attr("src").unwrap_or("").to_string(),
+                    alt,
+                    title,
+                });
                 self.ends_space = false;
             }
             "math" => {
                 let tex = mathml_tex(e);
                 if !tex.is_empty() {
-                    out.push(Inline::Math { display: e.attr("display") == Some("block"), tex });
+                    out.push(Inline::Math {
+                        display: e.attr("display") == Some("block"),
+                        tex,
+                    });
                     self.ends_space = false;
                 }
             }
@@ -515,7 +643,10 @@ impl Reader {
                     .and_then(|s| s.strip_suffix("\\)"))
                     .or_else(|| raw.strip_prefix("\\[").and_then(|s| s.strip_suffix("\\]")))
                     .unwrap_or(raw);
-                out.push(Inline::Math { display, tex: tex.trim().to_string() });
+                out.push(Inline::Math {
+                    display,
+                    tex: tex.trim().to_string(),
+                });
                 self.ends_space = false;
             }
             "span" if e.has_class("smallcaps") => {
@@ -581,8 +712,15 @@ impl Reader {
             out.extend(inner);
             return;
         }
-        let title = e.attr("title").filter(|t| !t.is_empty()).map(str::to_string);
-        out.push(Inline::Link { url: href.to_string(), title, inlines: inner });
+        let title = e
+            .attr("title")
+            .filter(|t| !t.is_empty())
+            .map(str::to_string);
+        out.push(Inline::Link {
+            url: href.to_string(),
+            title,
+            inlines: inner,
+        });
     }
 
     fn note_blocks(&mut self, e: &Elem) -> Vec<Block> {
@@ -600,7 +738,11 @@ impl Reader {
 fn collect_note_items(nodes: &[Node], notes: &mut HashMap<String, Elem>, found: &mut bool) {
     for n in nodes {
         let Node::Elem(e) = n else { continue };
-        if e.tag == "li" || e.tag == "aside" || (e.tag == "div" && e.attr("id").is_some()) || e.tag == "p" && e.attr("id").is_some() {
+        if e.tag == "li"
+            || e.tag == "aside"
+            || (e.tag == "div" && e.attr("id").is_some())
+            || e.tag == "p" && e.attr("id").is_some()
+        {
             if let Some(id) = e.attr("id") {
                 notes.insert(id.to_string(), e.clone());
                 *found = true;
@@ -615,7 +757,9 @@ fn collect_note_items(nodes: &[Node], notes: &mut HashMap<String, Elem>, found: 
 fn strip_note_markers(nodes: &mut Vec<Node>) {
     nodes.retain(|n| match n {
         Node::Elem(e) => {
-            !(e.attr("role") == Some("doc-backlink") || e.has_class("footnote-back") || e.has_class("sdfootnotesym"))
+            !(e.attr("role") == Some("doc-backlink")
+                || e.has_class("footnote-back")
+                || e.has_class("sdfootnotesym"))
         }
         _ => true,
     });
@@ -668,7 +812,11 @@ fn row_cells(tr: &Elem) -> Vec<&Elem> {
 }
 
 fn cell_align(c: &Elem) -> Align {
-    let style = c.attr("style").unwrap_or("").replace(' ', "").to_ascii_lowercase();
+    let style = c
+        .attr("style")
+        .unwrap_or("")
+        .replace(' ', "")
+        .to_ascii_lowercase();
     let a = c.attr("align").unwrap_or("").to_ascii_lowercase();
     if a == "left" || style.contains("text-align:left") {
         Align::Left
@@ -682,18 +830,39 @@ fn cell_align(c: &Elem) -> Align {
 }
 
 fn code_lang(pre: &Elem) -> Option<String> {
-    let mut classes: Vec<String> = pre.attr("class").unwrap_or("").split_whitespace().map(str::to_string).collect();
+    let mut classes: Vec<String> = pre
+        .attr("class")
+        .unwrap_or("")
+        .split_whitespace()
+        .map(str::to_string)
+        .collect();
     for n in &pre.children {
         if let Node::Elem(c) = n {
             if c.tag == "code" {
-                classes.extend(c.attr("class").unwrap_or("").split_whitespace().map(str::to_string));
+                classes.extend(
+                    c.attr("class")
+                        .unwrap_or("")
+                        .split_whitespace()
+                        .map(str::to_string),
+                );
             }
         }
     }
     classes
         .into_iter()
         .map(|c| c.strip_prefix("language-").map(str::to_string).unwrap_or(c))
-        .find(|c| !matches!(c.as_str(), "sourceCode" | "numberSource" | "hljs" | "code" | "highlight" | "prettyprint" | "pre"))
+        .find(|c| {
+            !matches!(
+                c.as_str(),
+                "sourceCode"
+                    | "numberSource"
+                    | "hljs"
+                    | "code"
+                    | "highlight"
+                    | "prettyprint"
+                    | "pre"
+            )
+        })
 }
 
 fn mathml_tex(e: &Elem) -> String {
@@ -796,7 +965,11 @@ mod tests {
 
     #[test]
     fn code_blocks_keep_language_and_text() {
-        let out = md("<pre><code class=\"language-rust\">fn main() {\n    1 &lt; 2\n}\n</code></pre>");
-        assert!(out.contains("```rust\nfn main() {\n    1 < 2\n}\n```"), "{out}");
+        let out =
+            md("<pre><code class=\"language-rust\">fn main() {\n    1 &lt; 2\n}\n</code></pre>");
+        assert!(
+            out.contains("```rust\nfn main() {\n    1 < 2\n}\n```"),
+            "{out}"
+        );
     }
 }

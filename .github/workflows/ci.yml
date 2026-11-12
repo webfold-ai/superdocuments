@@ -32,11 +32,10 @@ jobs:
             exit 0
           fi
           git config --global url."https://x-access-token:${SUBSTRATE_TOKEN}@github.com/".insteadOf "https://github.com/"
-      # Minimum supported Rust version (rust-version in Cargo.toml).
-      - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
-        with:
-          toolchain: 1.85.0
-          components: rustfmt, clippy
+      # The locked dependencies (zip, calamine, apeiron, wirefold) need rustc 1.89; this is the
+      # toolchain `rust-version` names.
+      - name: Install Rust 1.89.0
+        run: rustup toolchain install 1.89.0 --profile minimal --component rustfmt --component clippy && rustup default 1.89.0
       - name: Format
         run: cargo fmt --all -- --check
       - name: Build

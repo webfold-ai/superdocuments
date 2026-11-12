@@ -27,12 +27,18 @@ pub fn to_doc(data: &[u8]) -> Result<Doc, String> {
     styles.collect(&content);
     let mut r = Reader { styles, notes: 0 };
     let mut blocks = Vec::new();
-    match content.find("office:body").and_then(|body| body.find("office:text")) {
+    match content
+        .find("office:body")
+        .and_then(|body| body.find("office:text"))
+    {
         Some(text) => r.body(&text.children, &mut blocks),
         // Hand-made packages without the body wrapper: read the root's children.
         None => r.body(&content.children, &mut blocks),
     }
-    Ok(Doc { meta: Meta::default(), blocks: merge_runs(blocks) })
+    Ok(Doc {
+        meta: Meta::default(),
+        blocks: merge_runs(blocks),
+    })
 }
 
 /// Reads an `.odt` file and writes Pandoc-flavoured Markdown.
@@ -70,22 +76,42 @@ impl Styles {
             for st in section.elems() {
                 match st.name.as_str() {
                     "style:style" => {
-                        let Some(name) = st.attr("style:name") else { continue };
+                        let Some(name) = st.attr("style:name") else {
+                            continue;
+                        };
                         let mut info = StyleInfo {
                             parent: st.attr("style:parent-style-name").map(str::to_string),
                             display_name: st.attr("style:display-name").unwrap_or(name).to_string(),
                             ..Default::default()
                         };
                         if let Some(tp) = st.find("style:text-properties") {
-                            info.bold = tp.attr("fo:font-weight").is_some_and(|w| w == "bold" || w.parse::<u32>().is_ok_and(|n| n >= 600));
-                            info.italic = tp.attr("fo:font-style").is_some_and(|w| w == "italic" || w == "oblique");
-                            info.underline = tp.attr("style:text-underline-style").is_some_and(|w| w != "none");
-                            info.strike = tp.attr("style:text-line-through-style").is_some_and(|w| w != "none");
+                            info.bold = tp.attr("fo:font-weight").is_some_and(|w| {
+                                w == "bold" || w.parse::<u32>().is_ok_and(|n| n >= 600)
+                            });
+                            info.italic = tp
+                                .attr("fo:font-style")
+                                .is_some_and(|w| w == "italic" || w == "oblique");
+                            info.underline = tp
+                                .attr("style:text-underline-style")
+                                .is_some_and(|w| w != "none");
+                            info.strike = tp
+                                .attr("style:text-line-through-style")
+                                .is_some_and(|w| w != "none");
                             if let Some(pos) = tp.attr("style:text-position") {
                                 let first = pos.split_whitespace().next().unwrap_or("");
-                                if first == "super" || first.trim_end_matches('%').parse::<f64>().is_ok_and(|p| p > 0.0) {
+                                if first == "super"
+                                    || first
+                                        .trim_end_matches('%')
+                                        .parse::<f64>()
+                                        .is_ok_and(|p| p > 0.0)
+                                {
                                     info.sup = true;
-                                } else if first == "sub" || first.trim_end_matches('%').parse::<f64>().is_ok_and(|p| p < 0.0) {
+                                } else if first == "sub"
+                                    || first
+                                        .trim_end_matches('%')
+                                        .parse::<f64>()
+                                        .is_ok_and(|p| p < 0.0)
+                                {
                                     info.sub = true;
                                 }
                             }
@@ -94,7 +120,9 @@ impl Styles {
                                 .or_else(|| tp.attr("fo:font-family"))
                                 .unwrap_or("")
                                 .to_ascii_lowercase();
-                            info.mono = ["courier", "mono", "consolas", "menlo", "monaco"].iter().any(|m| font.contains(m));
+                            info.mono = ["courier", "mono", "consolas", "menlo", "monaco"]
+                                .iter()
+                                .any(|m| font.contains(m));
                         }
                         if let Some(pp) = st.find("style:paragraph-properties") {
                             info.align = match pp.attr("fo:text-align") {
@@ -107,13 +135,21 @@ impl Styles {
                         self.by_name.insert(name.to_string(), info);
                     }
                     "text:list-style" => {
-                        let Some(name) = st.attr("style:name") else { continue };
+                        let Some(name) = st.attr("style:name") else {
+                            continue;
+                        };
                         let mut levels: Vec<Option<(u32, ListStyle)>> = Vec::new();
                         for lv in st.elems() {
-                            let level = lv.attr("text:level").and_then(|l| l.parse::<usize>().ok()).unwrap_or(levels.len() + 1);
+                            let level = lv
+                                .attr("text:level")
+                                .and_then(|l| l.parse::<usize>().ok())
+                                .unwrap_or(levels.len() + 1);
                             let entry = match lv.name.as_str() {
                                 "text:list-level-style-number" => {
-                                    let start = lv.attr("text:start-value").and_then(|s| s.parse().ok()).unwrap_or(1);
+                                    let start = lv
+                                        .attr("text:start-value")
+                                        .and_then(|s| s.parse().ok())
+                                        .unwrap_or(1);
                                     let fmt = match lv.attr("style:num-format") {
                                         Some("a") => ListStyle::LowerAlpha,
                                         Some("A") => ListStyle::UpperAlpha,
@@ -166,7 +202,9 @@ impl Styles {
     }
 
     fn is(&self, style: &str, wanted: &[&str]) -> bool {
-        self.names(style).iter().any(|n| wanted.contains(&n.as_str()))
+        self.names(style)
+            .iter()
+            .any(|n| wanted.contains(&n.as_str()))
     }
 
     fn any(&self, style: &str, f: impl Fn(&StyleInfo) -> bool) -> bool {
@@ -176,7 +214,9 @@ impl Styles {
 
 /// `Source_20_Text` and `Source Text` are the same name.
 fn norm_name(n: &str) -> String {
-    n.replace("_20_", " ").replace('_', " ").to_ascii_lowercase()
+    n.replace("_20_", " ")
+        .replace('_', " ")
+        .to_ascii_lowercase()
 }
 
 struct Reader {
@@ -198,10 +238,17 @@ impl Reader {
             let XNode::Elem(e) = n else { continue };
             match e.name.as_str() {
                 "text:h" => {
-                    let level = e.attr("text:outline-level").and_then(|l| l.parse().ok()).unwrap_or(1u8);
+                    let level = e
+                        .attr("text:outline-level")
+                        .and_then(|l| l.parse().ok())
+                        .unwrap_or(1u8);
                     let inl = self.inlines(&e.children, None);
                     if !inl.is_empty() {
-                        out.push(Block::Heading { level: level.clamp(1, 6), inlines: inl, id: None });
+                        out.push(Block::Heading {
+                            level: level.clamp(1, 6),
+                            inlines: inl,
+                            id: None,
+                        });
                     }
                 }
                 "text:p" => self.paragraph(e, false, out),
@@ -214,25 +261,42 @@ impl Reader {
                         out.push(Block::Table(t));
                     }
                 }
-                "text:section" | "text:index-body" | "office:text" | "text:table-of-content-source" => {
+                "text:section"
+                | "text:index-body"
+                | "office:text"
+                | "text:table-of-content-source" => {
                     if e.name != "text:table-of-content-source" {
                         self.body(&e.children, out);
                     }
                 }
-                "text:table-of-content" | "text:alphabetical-index" | "text:illustration-index" | "text:table-index" => {
+                "text:table-of-content"
+                | "text:alphabetical-index"
+                | "text:illustration-index"
+                | "text:table-index" => {
                     // The generated index: its entries repeat the headings.
                 }
-                "text:soft-page-break" | "text:tracked-changes" | "text:sequence-decls" | "text:variable-decls" => {}
+                "text:soft-page-break"
+                | "text:tracked-changes"
+                | "text:sequence-decls"
+                | "text:variable-decls" => {}
                 _ => {}
             }
         }
     }
 
     fn kind(&self, e: &XElem) -> Kind {
-        let Some(style) = e.attr("text:style-name") else { return Kind::Normal };
-        if self.styles.is(style, &["quotations", "quotation", "block quotation", "block quote"]) {
+        let Some(style) = e.attr("text:style-name") else {
+            return Kind::Normal;
+        };
+        if self.styles.is(
+            style,
+            &["quotations", "quotation", "block quotation", "block quote"],
+        ) {
             Kind::Quote
-        } else if self.styles.is(style, &["preformatted text", "source code", "code"]) {
+        } else if self
+            .styles
+            .is(style, &["preformatted text", "source code", "code"])
+        {
             Kind::Code
         } else if self.styles.is(style, &["horizontal line"]) {
             Kind::Rule
@@ -262,7 +326,11 @@ impl Reader {
         if inl.is_empty() {
             return;
         }
-        let block = if plain { Block::Plain(inl) } else { Block::Para(inl) };
+        let block = if plain {
+            Block::Plain(inl)
+        } else {
+            Block::Para(inl)
+        };
         if kind == Kind::Quote {
             out.push(Block::Quote(vec![block]));
         } else {
@@ -272,7 +340,11 @@ impl Reader {
 
     fn list(&mut self, e: &XElem, depth: usize, inherited: Option<&str>) -> Vec<Block> {
         let style = e.attr("text:style-name").or(inherited);
-        let level = style.and_then(|s| self.styles.lists.get(s)).and_then(|l| l.get(depth)).cloned().flatten();
+        let level = style
+            .and_then(|s| self.styles.lists.get(s))
+            .and_then(|l| l.get(depth))
+            .cloned()
+            .flatten();
         let mut items = Vec::new();
         for it in e.elems() {
             if it.name != "text:list-item" && it.name != "text:list-header" {
@@ -303,7 +375,11 @@ impl Reader {
             return Vec::new();
         }
         match level {
-            Some((start, style)) => vec![Block::OrderedList { start, style, items }],
+            Some((start, style)) => vec![Block::OrderedList {
+                start,
+                style,
+                items,
+            }],
             None => vec![Block::BulletList(items)],
         }
     }
@@ -321,14 +397,29 @@ impl Reader {
         }
     }
 
-    fn table_rows(&mut self, nodes: &[XNode], t: &mut Table, align: &mut Vec<Align>, header: bool, first_body: &mut bool) {
+    fn table_rows(
+        &mut self,
+        nodes: &[XNode],
+        t: &mut Table,
+        align: &mut Vec<Align>,
+        header: bool,
+        first_body: &mut bool,
+    ) {
         for n in nodes {
             let XNode::Elem(e) = n else { continue };
             match e.name.as_str() {
-                "table:table-header-rows" => self.table_rows(&e.children, t, align, true, first_body),
-                "table:table-row-group" | "table:table-rows" => self.table_rows(&e.children, t, align, header, first_body),
+                "table:table-header-rows" => {
+                    self.table_rows(&e.children, t, align, true, first_body)
+                }
+                "table:table-row-group" | "table:table-rows" => {
+                    self.table_rows(&e.children, t, align, header, first_body)
+                }
                 "table:table-row" => {
-                    let repeat = e.attr("table:number-rows-repeated").and_then(|r| r.parse::<usize>().ok()).unwrap_or(1).clamp(1, 50);
+                    let repeat = e
+                        .attr("table:number-rows-repeated")
+                        .and_then(|r| r.parse::<usize>().ok())
+                        .unwrap_or(1)
+                        .clamp(1, 50);
                     let mut cells = Vec::new();
                     for c in e.elems() {
                         if c.name == "table:covered-table-cell" {
@@ -337,9 +428,21 @@ impl Reader {
                         if c.name != "table:table-cell" {
                             continue;
                         }
-                        let colspan = c.attr("table:number-columns-spanned").and_then(|s| s.parse().ok()).unwrap_or(1usize).clamp(1, 1000);
-                        let rowspan = c.attr("table:number-rows-spanned").and_then(|s| s.parse().ok()).unwrap_or(1usize).clamp(1, 1000);
-                        let crepeat = c.attr("table:number-columns-repeated").and_then(|s| s.parse::<usize>().ok()).unwrap_or(1).clamp(1, 50);
+                        let colspan = c
+                            .attr("table:number-columns-spanned")
+                            .and_then(|s| s.parse().ok())
+                            .unwrap_or(1usize)
+                            .clamp(1, 1000);
+                        let rowspan = c
+                            .attr("table:number-rows-spanned")
+                            .and_then(|s| s.parse().ok())
+                            .unwrap_or(1usize)
+                            .clamp(1, 1000);
+                        let crepeat = c
+                            .attr("table:number-columns-repeated")
+                            .and_then(|s| s.parse::<usize>().ok())
+                            .unwrap_or(1)
+                            .clamp(1, 50);
                         let mut blocks = Vec::new();
                         let mut cell_style = None;
                         for p in c.elems() {
@@ -362,17 +465,30 @@ impl Reader {
                         }
                         let a = cell_style
                             .as_deref()
-                            .and_then(|s| self.styles.chain(s).into_iter().map(|i| i.align).find(|a| *a != Align::Default))
+                            .and_then(|s| {
+                                self.styles
+                                    .chain(s)
+                                    .into_iter()
+                                    .map(|i| i.align)
+                                    .find(|a| *a != Align::Default)
+                            })
                             .unwrap_or_default();
                         for _ in 0..crepeat {
                             let col = cells.len();
-                            if !header && a != Align::Default && align.get(col).copied().unwrap_or_default() == Align::Default {
+                            if !header
+                                && a != Align::Default
+                                && align.get(col).copied().unwrap_or_default() == Align::Default
+                            {
                                 if align.len() <= col {
                                     align.resize(col + 1, Align::Default);
                                 }
                                 align[col] = a;
                             }
-                            cells.push(Cell { blocks: blocks.clone(), colspan, rowspan });
+                            cells.push(Cell {
+                                blocks: blocks.clone(),
+                                colspan,
+                                rowspan,
+                            });
                         }
                     }
                     // A trailing run of repeated empty rows is a spreadsheet artefact: skip it.
@@ -433,13 +549,21 @@ impl Reader {
                 if href.is_empty() || inner.is_empty() {
                     out.extend(inner);
                 } else {
-                    out.push(Inline::Link { url: href.to_string(), title: None, inlines: inner });
+                    out.push(Inline::Link {
+                        url: href.to_string(),
+                        title: None,
+                        inlines: inner,
+                    });
                 }
             }
             "text:line-break" => out.push(Inline::LineBreak),
             "text:tab" => out.push(Inline::Text(" ".into())),
             "text:s" => {
-                let n = e.attr("text:c").and_then(|c| c.parse::<usize>().ok()).unwrap_or(1).clamp(1, 80);
+                let n = e
+                    .attr("text:c")
+                    .and_then(|c| c.parse::<usize>().ok())
+                    .unwrap_or(1)
+                    .clamp(1, 80);
                 out.push(Inline::Text(" ".repeat(n)));
             }
             "text:note" => {
@@ -458,15 +582,45 @@ impl Reader {
             }
             "draw:frame" => {
                 if let Some(img) = e.descendant("draw:image") {
-                    let alt = e.find("svg:title").map(|t| t.children.iter().filter_map(|c| match c { XNode::Text(s) => Some(s.as_str()), _ => None }).collect::<String>()).unwrap_or_default();
-                    let alt = if alt.is_empty() { Vec::new() } else { vec![Inline::Text(alt)] };
-                    out.push(Inline::Image { url: img.attr("xlink:href").unwrap_or("").to_string(), alt, title: None });
+                    let alt = e
+                        .find("svg:title")
+                        .map(|t| {
+                            t.children
+                                .iter()
+                                .filter_map(|c| match c {
+                                    XNode::Text(s) => Some(s.as_str()),
+                                    _ => None,
+                                })
+                                .collect::<String>()
+                        })
+                        .unwrap_or_default();
+                    let alt = if alt.is_empty() {
+                        Vec::new()
+                    } else {
+                        vec![Inline::Text(alt)]
+                    };
+                    out.push(Inline::Image {
+                        url: img.attr("xlink:href").unwrap_or("").to_string(),
+                        alt,
+                        title: None,
+                    });
                 } else if let Some(tex) = math_in(e) {
-                    out.push(Inline::Math { display: false, tex });
+                    out.push(Inline::Math {
+                        display: false,
+                        tex,
+                    });
                 }
             }
-            "text:bookmark" | "text:bookmark-start" | "text:bookmark-end" | "text:soft-page-break" | "text:reference-mark"
-            | "text:reference-mark-start" | "text:reference-mark-end" | "text:change" | "text:change-start" | "text:change-end" => {}
+            "text:bookmark"
+            | "text:bookmark-start"
+            | "text:bookmark-end"
+            | "text:soft-page-break"
+            | "text:reference-mark"
+            | "text:reference-mark-start"
+            | "text:reference-mark-end"
+            | "text:change"
+            | "text:change-start"
+            | "text:change-end" => {}
             "office:annotation" | "office:annotation-end" => {}
             "text:note-citation" => {}
             _ => {
@@ -480,7 +634,8 @@ impl Reader {
     /// super and subscript, and code.
     fn wrap_style(&self, style: &str, inner: Vec<Inline>) -> Vec<Inline> {
         let st = &self.styles;
-        let mono = st.any(style, |s| s.mono) || st.is(style, &["source text", "source code", "preformatted text"]);
+        let mono = st.any(style, |s| s.mono)
+            || st.is(style, &["source text", "source code", "preformatted text"]);
         let mut v = inner;
         if mono {
             let text = crate::ast::inlines_text(&v);
@@ -495,7 +650,9 @@ impl Reader {
         if st.any(style, |s| s.strike) {
             v = vec![Inline::Strike(v)];
         }
-        if st.any(style, |s| s.underline) && !st.is(style, &["internet link", "visited internet link"]) {
+        if st.any(style, |s| s.underline)
+            && !st.is(style, &["internet link", "visited internet link"])
+        {
             v = vec![Inline::Underline(v)];
         }
         if st.any(style, |s| s.italic) || st.is(style, &["emphasis"]) {
@@ -524,7 +681,9 @@ fn sole_math(p: &XElem) -> Option<String> {
     for n in &p.children {
         match n {
             XNode::Text(t) if t.trim().is_empty() => {}
-            XNode::Elem(e) if e.name == "draw:frame" && found.is_none() => found = Some(math_in(e)?),
+            XNode::Elem(e) if e.name == "draw:frame" && found.is_none() => {
+                found = Some(math_in(e)?)
+            }
             _ => return None,
         }
     }
@@ -538,7 +697,14 @@ fn raw_text(nodes: &[XNode], out: &mut String) {
             XNode::Elem(e) => match e.name.as_str() {
                 "text:line-break" => out.push('\n'),
                 "text:tab" => out.push('\t'),
-                "text:s" => out.push_str(&" ".repeat(e.attr("text:c").and_then(|c| c.parse::<usize>().ok()).unwrap_or(1).clamp(1, 200))),
+                "text:s" => out.push_str(
+                    &" ".repeat(
+                        e.attr("text:c")
+                            .and_then(|c| c.parse::<usize>().ok())
+                            .unwrap_or(1)
+                            .clamp(1, 200),
+                    ),
+                ),
                 _ => raw_text(&e.children, out),
             },
         }
@@ -599,7 +765,16 @@ fn merge_runs(blocks: Vec<Block>) -> Vec<Block> {
     for b in blocks {
         match (out.last_mut(), b) {
             (Some(Block::Quote(a)), Block::Quote(mut b)) => a.append(&mut b),
-            (Some(Block::Code { lang: None, text: a }), Block::Code { lang: None, text: b }) => {
+            (
+                Some(Block::Code {
+                    lang: None,
+                    text: a,
+                }),
+                Block::Code {
+                    lang: None,
+                    text: b,
+                },
+            ) => {
                 a.push('\n');
                 a.push_str(&b);
             }
@@ -624,8 +799,14 @@ mod tests {
         let blocks = merge_runs(vec![
             Block::Quote(vec![Block::Para(vec![Inline::Text("a".into())])]),
             Block::Quote(vec![Block::Para(vec![Inline::Text("b".into())])]),
-            Block::Code { lang: None, text: "x".into() },
-            Block::Code { lang: None, text: "y".into() },
+            Block::Code {
+                lang: None,
+                text: "x".into(),
+            },
+            Block::Code {
+                lang: None,
+                text: "y".into(),
+            },
         ]);
         assert_eq!(blocks.len(), 2);
         assert!(matches!(&blocks[1], Block::Code { text, .. } if text == "x\ny"));
