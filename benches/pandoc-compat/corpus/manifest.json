@@ -3265,6 +3265,18 @@
    "cwd": ""
   },
   {
+   "id": "docx-lo-21",
+   "path": "docx/lo-21.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
    "id": "docx-lo-22",
    "path": "docx/lo-22.docx",
    "format": "docx",

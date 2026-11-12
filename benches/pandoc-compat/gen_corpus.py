@@ -89,7 +89,7 @@ def main():
         add("markdown-%02d" % i, rel, "markdown", "python generator (seeded)", "generated", "markdown")
         src = os.path.join(OUT, rel)
         if i <= 30:
-            html = pandoc(["-f", "markdown", "-t", "html5", "-s", "--metadata", "title=Seed %d" % i, src])
+            html = pandoc(["-f", "markdown", "-t", "html5", "-s", "--mathml", "--metadata", "title=Seed %d" % i, src])
             write("html/seed-%02d.html" % i, html)
             add("html-seed-%02d" % i, "html/seed-%02d.html" % i, "html", "pandoc 3.1.3 writer from a seed", "generated", "html")
         if i <= 22:
