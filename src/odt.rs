@@ -27,10 +27,10 @@ pub fn to_doc(data: &[u8]) -> Result<Doc, String> {
     styles.collect(&content);
     let mut r = Reader { styles, notes: 0 };
     let mut blocks = Vec::new();
-    if let Some(body) = content.find("office:body") {
-        if let Some(text) = body.find("office:text") {
-            r.body(&text.children, &mut blocks);
-        }
+    match content.find("office:body").and_then(|body| body.find("office:text")) {
+        Some(text) => r.body(&text.children, &mut blocks),
+        // Hand-made packages without the body wrapper: read the root's children.
+        None => r.body(&content.children, &mut blocks),
     }
     Ok(Doc { meta: Meta::default(), blocks: merge_runs(blocks) })
 }

@@ -774,11 +774,21 @@ mod tests {
         assert!(out.contains("| A | B |\n|---|---:|\n| 1 | 2 |"), "{out}");
     }
 
-    #[test]
-    fn footnote_refs_become_notes_and_math_is_kept() {
-        let out = md("<p>Text<a class=\"footnote-ref\" href=\"#fn1\" id=\"fnref1\" role=\"doc-noteref\"><sup>1</sup></a> and \
+    const NOTE_HTML: &str = "<p>Text<a class=\"footnote-ref\" href=\"#fn1\" id=\"fnref1\" role=\"doc-noteref\"><sup>1</sup></a> and \
             <span class=\"math inline\">\\(x^2\\)</span>.</p>\
-            <section class=\"footnotes\" role=\"doc-endnotes\"><ol><li id=\"fn1\"><p>The note.<a href=\"#fnref1\" class=\"footnote-back\" role=\"doc-backlink\">x</a></p></li></ol></section>");
+            <section class=\"footnotes\" role=\"doc-endnotes\"><ol><li id=\"fn1\"><p>The note.<a href=\"#fnref1\" class=\"footnote-back\" role=\"doc-backlink\">x</a></p></li></ol></section>";
+
+    #[test]
+    fn html_documents_keep_footnote_links_as_pandoc_does() {
+        // Pandoc's HTML reader keeps the reference as a link and the note list as a list.
+        let out = md(NOTE_HTML);
+        assert!(out.contains("[^1^](#fn1)"), "{out}");
+        assert!(out.contains("$x^2$"), "{out}");
+    }
+
+    #[test]
+    fn epub_footnote_refs_become_notes_and_math_is_kept() {
+        let out = crate::ast::to_markdown(&to_doc_epub(NOTE_HTML));
         assert!(out.contains("Text[^1] and $x^2$."), "{out}");
         assert!(out.contains("[^1]: The note."), "{out}");
         assert!(!out.contains("footnote"), "{out}");

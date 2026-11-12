@@ -1469,7 +1469,7 @@ mod tests {
             "content.xml",
             "<office:document><text:h>Title</text:h><text:p>Body</text:p></office:document>",
         )]);
-        assert_eq!(convert_bytes("odt", &odf).unwrap(), "## Title\n\nBody");
+        assert_eq!(convert_bytes("odt", &odf).unwrap().trim(), "# Title\n\nBody");
         let sheet = package(&[("content.xml", "<office:document><table:table table:name=\"Data\"><table:table-row><table:table-cell office:value=\"42\"/></table:table-row></table:table></office:document>")]);
         assert!(convert_bytes("ods", &sheet).unwrap().contains("| 42 |"));
 

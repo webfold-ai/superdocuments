@@ -8073,11 +8073,7 @@
 },
 {
 "detail": {
-"emph": [
-2,
-1
-],
-"sup": [
+"math_display": [
 1,
 0
 ]
@@ -8087,10 +8083,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9565217391304348,
-"fidelity": 0.9715063503194639,
-"structure": 0.96875,
-"text": 0.989247311827957
+"features": 0.9767441860465116,
+"fidelity": 0.9641683518705763,
+"math": 0.0,
+"structure": 0.9375,
+"text": 0.9782608695652174
 },
 "status": "ok"
 },
@@ -8232,16 +8229,16 @@
 },
 {
 "detail": {
-"emph": [
-6,
-4
+"math_display": [
+2,
+0
 ],
 "sub": [
 2,
 0
 ],
 "sup": [
-5,
+3,
 0
 ]
 },
@@ -8250,10 +8247,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.935251798561151,
-"fidelity": 0.9667288130280091,
-"structure": 0.9861111111111112,
-"text": 0.9788235294117648
+"features": 0.9473684210526315,
+"fidelity": 0.9598578294509036,
+"math": 0.0,
+"structure": 0.9583333333333334,
+"text": 0.9738717339667459
 },
 "status": "ok"
 },
@@ -8435,21 +8433,13 @@
 },
 {
 "detail": {
-"emph": [
-6,
-4
-],
-"strong": [
-0,
-1
-],
-"sub": [
+"math_inline": [
 2,
 0
 ],
 "sup": [
-3,
-0
+0,
+1
 ]
 },
 "format": "html",
@@ -8457,10 +8447,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.96,
-"fidelity": 0.9789879376287143,
+"features": 0.983957219251337,
+"fidelity": 0.9824718493161146,
+"math": 0.0,
 "structure": 0.9818181818181818,
-"text": 0.9951456310679612
+"text": 0.981640146878825
 },
 "status": "ok"
 },
@@ -8634,16 +8625,16 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
+"math_display": [
+1,
+0
 ],
 "sub": [
 1,
 0
 ],
 "sup": [
-4,
+3,
 0
 ]
 },
@@ -8652,10 +8643,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9642857142857143,
-"fidelity": 0.9782395396560508,
-"structure": 0.9836065573770492,
-"text": 0.9868263473053892
+"features": 0.9696969696969697,
+"fidelity": 0.9737554272678851,
+"math": 0.0,
+"structure": 0.9672131147540983,
+"text": 0.9843561973525873
 },
 "status": "ok"
 },
@@ -9057,21 +9049,17 @@
 },
 {
 "detail": {
-"emph": [
-7,
-5
-],
-"strong": [
-1,
-2
+"math_inline": [
+2,
+0
 ],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-6,
-0
+3,
+1
 ]
 },
 "format": "html",
@@ -9079,10 +9067,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9090909090909091,
-"fidelity": 0.9615892606617065,
+"features": 0.957983193277311,
+"fidelity": 0.9753647320661468,
+"math": 0.0,
 "structure": 0.9873417721518988,
-"text": 0.9883351007423118
+"text": 0.9807692307692307
 },
 "status": "ok"
 },
@@ -9439,21 +9428,17 @@
 },
 {
 "detail": {
-"emph": [
-13,
-9
-],
-"strong": [
-1,
-3
+"math_inline": [
+4,
+0
 ],
 "sub": [
-5,
+1,
 0
 ],
 "sup": [
-7,
-0
+1,
+2
 ]
 },
 "format": "html",
@@ -9461,10 +9446,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.8888888888888888,
-"fidelity": 0.9508318154219794,
+"features": 0.9558823529411765,
+"fidelity": 0.9639141074999253,
+"math": 0.0,
 "structure": 0.98,
-"text": 0.9836065573770492
+"text": 0.9558599695585996
 },
 "status": "ok"
 },
@@ -9646,21 +9632,17 @@
 },
 {
 "detail": {
-"emph": [
-7,
-5
-],
-"strong": [
-1,
-2
+"math_inline": [
+2,
+0
 ],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-5,
-0
+2,
+1
 ]
 },
 "format": "html",
@@ -9668,10 +9650,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9043478260869565,
-"fidelity": 0.9537811195441902,
+"features": 0.9607843137254902,
+"fidelity": 0.9682670756815764,
+"math": 0.0,
 "structure": 0.9767441860465116,
-"text": 0.9802513464991023
+"text": 0.9672727272727273
 },
 "status": "ok"
 },
@@ -9849,21 +9832,17 @@
 },
 {
 "detail": {
-"emph": [
-7,
-5
-],
-"strong": [
-1,
-2
+"math_inline": [
+2,
+0
 ],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-5,
-0
+2,
+1
 ]
 },
 "format": "html",
@@ -9871,10 +9850,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.8791208791208791,
-"fidelity": 0.9494482365707828,
+"features": 0.9487179487179487,
+"fidelity": 0.9694651226909291,
+"math": 0.0,
 "structure": 0.9838709677419355,
-"text": 0.9853528628495339
+"text": 0.9758064516129032
 },
 "status": "ok"
 },
@@ -10060,21 +10040,17 @@
 },
 {
 "detail": {
-"emph": [
-10,
-8
-],
-"strong": [
-4,
-5
+"math_inline": [
+2,
+0
 ],
 "sub": [
-6,
+4,
 0
 ],
 "sup": [
-8,
-0
+5,
+1
 ]
 },
 "format": "html",
@@ -10082,10 +10058,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9322709163346613,
-"fidelity": 0.9629786507513388,
+"features": 0.957983193277311,
+"fidelity": 0.9699533492601985,
+"math": 0.0,
 "structure": 0.9859154929577465,
-"text": 0.9707495429616088
+"text": 0.9659613615455381
 },
 "status": "ok"
 },
@@ -10276,8 +10253,8 @@
 {
 "detail": {
 "math_display": [
-0,
-1
+1,
+0
 ],
 "sup": [
 1,
@@ -10290,10 +10267,10 @@
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
 "features": 0.9795918367346939,
-"fidelity": 0.9756286425992835,
+"fidelity": 0.974648513305632,
 "math": 0.0,
 "structure": 0.9622641509433962,
-"text": 0.9850299401197605
+"text": 0.982089552238806
 },
 "status": "ok"
 },
@@ -11099,20 +11076,16 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
-],
 "math_display": [
-0,
-1
+2,
+0
 ],
 "sub": [
 1,
 0
 ],
 "sup": [
-2,
+1,
 0
 ]
 },
@@ -11121,11 +11094,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.946236559139785,
-"fidelity": 0.962159003918825,
+"features": 0.9555555555555556,
+"fidelity": 0.9592902172689407,
 "math": 0.0,
-"structure": 0.9642857142857143,
-"text": 0.9759547383309759
+"structure": 0.9464285714285714,
+"text": 0.975886524822695
 },
 "status": "ok"
 },
@@ -11348,16 +11321,16 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
+"math_display": [
+1,
+0
 ],
 "sub": [
 1,
 0
 ],
 "sup": [
-4,
+3,
 0
 ]
 },
@@ -11366,10 +11339,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9594594594594594,
-"fidelity": 0.9766548973619879,
-"structure": 0.9838709677419355,
-"text": 0.9866342648845686
+"features": 0.9655172413793104,
+"fidelity": 0.9724620536633886,
+"math": 0.0,
+"structure": 0.967741935483871,
+"text": 0.9841269841269841
 },
 "status": "ok"
 },
@@ -11938,16 +11912,12 @@
 },
 {
 "detail": {
-"emph": [
-2,
-1
-],
 "math_display": [
-0,
-2
+3,
+0
 ],
 "sup": [
-2,
+1,
 0
 ]
 },
@@ -11956,11 +11926,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.959349593495935,
-"fidelity": 0.9685930298793434,
+"features": 0.9666666666666667,
+"fidelity": 0.9641361572851398,
 "math": 0.0,
-"structure": 0.9634146341463414,
-"text": 0.9830148619957537
+"structure": 0.9512195121951219,
+"text": 0.9745222929936306
 },
 "status": "ok"
 },
@@ -11981,16 +11951,16 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
+"math_display": [
+1,
+0
 ],
 "sub": [
 1,
 0
 ],
 "sup": [
-3,
+2,
 0
 ]
 },
@@ -11999,10 +11969,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.965034965034965,
-"fidelity": 0.9765662595091585,
-"structure": 0.9807692307692307,
-"text": 0.9838945827232797
+"features": 0.9714285714285714,
+"fidelity": 0.9712737434386919,
+"math": 0.0,
+"structure": 0.9615384615384616,
+"text": 0.9808541973490427
 },
 "status": "ok"
 },
@@ -12023,16 +11994,16 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
+"math_display": [
+1,
+0
 ],
 "sub": [
 1,
 0
 ],
 "sup": [
-2,
+1,
 0
 ]
 },
@@ -12041,10 +12012,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9230769230769231,
-"fidelity": 0.9538803799093009,
-"structure": 0.967741935483871,
-"text": 0.9708222811671088
+"features": 0.9387755102040817,
+"fidelity": 0.9464689447516444,
+"math": 0.0,
+"structure": 0.9354838709677419,
+"text": 0.9651474530831099
 },
 "status": "ok"
 },
@@ -12066,8 +12038,8 @@
 {
 "detail": {
 "math_display": [
-0,
-2
+2,
+0
 ],
 "sub": [
 1,
@@ -12084,10 +12056,10 @@
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
 "features": 0.9595375722543352,
-"fidelity": 0.953789597294055,
+"fidelity": 0.9547061333289713,
 "math": 0.0,
 "structure": 0.9318181818181818,
-"text": 0.970013037809648
+"text": 0.9727626459143969
 },
 "status": "ok"
 },
@@ -12145,20 +12117,8 @@
 },
 {
 "detail": {
-"emph": [
-6,
-4
-],
-"strong": [
-0,
-1
-],
-"sub": [
+"math_inline": [
 2,
-0
-],
-"sup": [
-4,
 0
 ]
 },
@@ -12167,10 +12127,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9291338582677166,
-"fidelity": 0.9653246785447366,
+"features": 0.9824561403508771,
+"fidelity": 0.9760812287128077,
+"math": 0.0,
 "structure": 0.9743589743589743,
-"text": 0.9924812030075187
+"text": 0.9714285714285714
 },
 "status": "ok"
 },
@@ -13014,6 +12975,25 @@
 },
 {
 "detail": {
+"quote": [
+14,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-21",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.7741935483870968,
+"fidelity": 0.8807060255629945,
+"structure": 0.8679245283018868,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
 "emph": [
 1,
 0
@@ -13083,14 +13063,6 @@
 },
 {
 "detail": {
-"emph": [
-2,
-0
-],
-"math_display": [
-0,
-2
-],
 "quote": [
 24,
 0
@@ -13101,18 +13073,17 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.7846153846153846,
-"fidelity": 0.8721328969410811,
-"math": 0.0,
-"structure": 0.8478260869565217,
-"text": 0.983957219251337
+"features": 0.8095238095238095,
+"fidelity": 0.8930296756383713,
+"structure": 0.8695652173913043,
+"text": 1.0
 },
 "status": "ok"
 },
 {
 "detail": {
 "emph": [
-3,
+1,
 0
 ],
 "quote": [
@@ -13125,17 +13096,17 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.9007633587786259,
-"fidelity": 0.9345666090962883,
+"features": 0.9147286821705426,
+"fidelity": 0.9407120298593167,
 "structure": 0.9074074074074074,
-"text": 0.9955290611028316
+"text": 1.0
 },
 "status": "ok"
 },
 {
 "detail": {
 "emph": [
-3,
+1,
 0
 ],
 "quote": [
@@ -13148,10 +13119,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.75,
-"fidelity": 0.8691508212362843,
+"features": 0.782608695652174,
+"fidelity": 0.882760112481073,
 "structure": 0.8656716417910447,
-"text": 0.9917808219178083
+"text": 1.0
 },
 "status": "ok"
 },
@@ -13160,10 +13131,6 @@
 "emph": [
 1,
 0
-],
-"math_display": [
-0,
-2
 ],
 "quote": [
 4,
@@ -13175,11 +13142,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.9554140127388535,
-"fidelity": 0.9488252125205016,
-"math": 0.0,
-"structure": 0.9069767441860465,
-"text": 0.9840848806366048
+"features": 0.967741935483871,
+"fidelity": 0.9737434358589647,
+"structure": 0.9534883720930233,
+"text": 1.0
 },
 "status": "ok"
 },
@@ -13208,13 +13174,13 @@
 },
 {
 "detail": {
-"emph": [
-4,
-0
-],
 "quote": [
 9,
 0
+],
+"sup": [
+0,
+1
 ]
 },
 "format": "docx",
@@ -13222,10 +13188,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.8849557522123894,
-"fidelity": 0.9171340700920139,
+"features": 0.9090909090909091,
+"fidelity": 0.930937279774489,
 "structure": 0.8837209302325582,
-"text": 0.982725527831094
+"text": 1.0
 },
 "status": "ok"
 },
@@ -13733,10 +13699,6 @@
 },
 {
 "detail": {
-"math_display": [
-0,
-2
-],
 "strong": [
 0,
 4
@@ -13747,11 +13709,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
-"features": 0.7692307692307693,
-"fidelity": 0.8936060947397745,
-"math": 0.0,
-"structure": 0.9379310344827586,
-"text": 0.9736564805057956
+"features": 0.8333333333333334,
+"fidelity": 0.9295208362896741,
+"structure": 0.9655172413793104,
+"text": 0.9897119341563786
 },
 "status": "ok"
 },
@@ -13768,9 +13729,9 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 0.9375,
-"fidelity": 0.9551494278122975,
+"fidelity": 0.9566611730767228,
 "structure": 0.9574468085106383,
-"text": 0.9705014749262537
+"text": 0.9750367107195301
 },
 "status": "ok"
 },
@@ -13787,18 +13748,14 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 0.6666666666666666,
-"fidelity": 0.8540738720722358,
+"fidelity": 0.8567777627444789,
 "structure": 0.9473684210526315,
-"text": 0.9481865284974094
+"text": 0.9562982005141388
 },
 "status": "ok"
 },
 {
 "detail": {
-"math_display": [
-0,
-2
-],
 "strong": [
 0,
 4
@@ -13809,11 +13766,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
-"features": 0.9433962264150944,
-"fidelity": 0.9410118071808956,
-"math": 0.0,
-"structure": 0.9176470588235294,
-"text": 0.9619921363040629
+"features": 0.9615384615384616,
+"fidelity": 0.9681776591174834,
+"structure": 0.9647058823529412,
+"text": 0.9782886334610472
 },
 "status": "ok"
 },
@@ -13841,6 +13797,10 @@
 "strong": [
 0,
 4
+],
+"sup": [
+0,
+1
 ]
 },
 "format": "epub",
@@ -13848,10 +13808,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
-"features": 0.9285714285714286,
-"fidelity": 0.948418975876603,
+"features": 0.9122807017543859,
+"fidelity": 0.9512540610786225,
 "structure": 0.96,
-"text": 0.9566854990583804
+"text": 0.9814814814814815
 },
 "status": "ok"
 },
