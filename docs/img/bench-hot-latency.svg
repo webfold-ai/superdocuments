@@ -1,0 +1,87 @@
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="charton" role="img" aria-roledescription="chart" aria-labelledby="charton-1911bcae-title">
+<title id="charton-1911bcae-title">In-process conversion, hot median latency (lower is better)</title>
+<defs><clipPath id="charton-1911bcae-clip-0"><rect x="68.700" y="37.600" width="210.500" height="299.400" /></clipPath>
+<clipPath id="charton-1911bcae-clip-1"><rect x="279.200" y="0.000" width="220.800" height="400.000" /></clipPath>
+</defs>
+<g class="charton-background">
+<rect x="0.000" y="0.000" width="500.000" height="400.000" fill="rgba(255,255,255,1.000)" stroke="none" stroke-width="0.000" fill-opacity="1.000" stroke-opacity="1.000" />
+</g>
+<g class="charton-title">
+<text x="173.950" y="20.800" font-size="18.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="middle" font-weight="bold" font-style="normal" dominant-baseline="middle" transform="rotate(0 173.950 20.800)">In-process conversion, hot median latency (lower is better)</text>
+</g>
+<g class="charton-plot" clip-path="url(#charton-1911bcae-clip-0)">
+<g class="charton-mark charton-mark-0 charton-mark-bar" data-layer="0" data-mark="bar">
+<path d="M 84.488 337.000 L 84.488 329.298 L 109.046 329.298 L 109.046 337.000 Z" fill="rgba(31,119,180,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="HTML (54 fixtures)" data-series="superdocuments (via webfold)" />
+<path d="M 109.046 337.000 L 109.046 304.543 L 133.604 304.543 L 133.604 337.000 Z" fill="rgba(255,127,14,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="HTML (54 fixtures)" data-series="Firecrawl html-extractor" />
+<path d="M 133.604 337.000 L 133.604 337.000 L 158.163 337.000 L 158.163 337.000 Z" fill="rgba(44,160,44,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="HTML (54 fixtures)" data-series="anydoc" />
+<path d="M 189.738 337.000 L 189.738 286.206 L 214.296 286.206 L 214.296 337.000 Z" fill="rgba(31,119,180,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="Documents (45 fixtures)" data-series="superdocuments (via webfold)" />
+<path d="M 214.296 337.000 L 214.296 337.000 L 238.854 337.000 L 238.854 337.000 Z" fill="rgba(255,127,14,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="Documents (45 fixtures)" data-series="Firecrawl html-extractor" />
+<path d="M 238.854 337.000 L 238.854 51.857 L 263.413 51.857 L 263.413 337.000 Z" fill="rgba(44,160,44,1.000)" fill-opacity="1.000" fill-rule="evenodd" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" data-value="Documents (45 fixtures)" data-series="anydoc" />
+</g>
+</g>
+<g class="charton-axis charton-axis-x" data-axis="x">
+<g class="charton-axis-line">
+<path d="M 68.700 337.000 L 279.200 337.000" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g class="charton-tick">
+<path d="M 121.325 337.000 L 121.325 343.000" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 226.575 337.000 L 226.575 343.000" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g class="charton-tick-label">
+<text x="121.325" y="346.000" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="middle" font-weight="normal" font-style="normal" dominant-baseline="hanging" transform="rotate(0 121.325 346.000)" data-value="HTML (54 fixtures)">HTML (54 fixtures)</text>
+<text x="226.575" y="346.000" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="middle" font-weight="normal" font-style="normal" dominant-baseline="hanging" transform="rotate(0 226.575 346.000)" data-value="Documents (45 fixtures)">Documents (45 fixtures)</text>
+</g>
+<g class="charton-axis-title">
+<text x="173.950" y="369.000" font-size="15.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="middle" font-weight="bold" font-style="normal" dominant-baseline="hanging" transform="rotate(0 173.950 369.000)">series</text>
+</g>
+</g>
+<g class="charton-axis charton-axis-y" data-axis="y">
+<g class="charton-axis-line">
+<path d="M 68.700 37.600 L 68.700 337.000" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g class="charton-tick">
+<path d="M 68.700 337.000 L 62.700 337.000" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 68.700 245.314 L 62.700 245.314" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 68.700 153.628 L 62.700 153.628" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 68.700 61.943 L 62.700 61.943" fill="none" stroke="rgba(0,0,0,1.000)" stroke-width="1.000" stroke-opacity="1.000" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g class="charton-tick-label">
+<text x="59.700" y="337.000" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="end" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 59.700 337.000)" data-value="0">0</text>
+<text x="59.700" y="245.314" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="end" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 59.700 245.314)" data-value="50">50</text>
+<text x="59.700" y="153.628" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="end" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 59.700 153.628)" data-value="100">100</text>
+<text x="59.700" y="61.943" font-size="13.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="end" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 59.700 61.943)" data-value="150">150</text>
+</g>
+<g class="charton-axis-title">
+<text x="24.000" y="187.300" font-size="15.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="middle" font-weight="bold" font-style="normal" dominant-baseline="middle" transform="rotate(-90 24.000 187.300)">hot median per fixture (µs)</text>
+</g>
+</g>
+<g class="charton-legend" data-series="tool" clip-path="url(#charton-1911bcae-clip-1)">
+<g class="charton-legend-title">
+<text x="294.200" y="43.600" font-size="13.2" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="start" font-weight="bold" font-style="normal" dominant-baseline="central" transform="rotate(0 294.200 43.600)">tool</text>
+</g>
+<g class="charton-legend-entry">
+<g class="charton-legend-swatch">
+<circle cx="303.200" cy="66.800" r="5.000" fill="rgba(31,119,180,1.000)" stroke="none" stroke-width="0.000" fill-opacity="1.000" stroke-opacity="1.000" />
+</g>
+<g class="charton-legend-label">
+<text x="320.200" y="66.800" font-size="12.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="start" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 320.200 66.800)">superdocuments (via webfold)</text>
+</g>
+</g>
+<g class="charton-legend-entry">
+<g class="charton-legend-swatch">
+<circle cx="303.200" cy="87.800" r="5.000" fill="rgba(255,127,14,1.000)" stroke="none" stroke-width="0.000" fill-opacity="1.000" stroke-opacity="1.000" />
+</g>
+<g class="charton-legend-label">
+<text x="320.200" y="87.800" font-size="12.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="start" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 320.200 87.800)">Firecrawl html-extractor</text>
+</g>
+</g>
+<g class="charton-legend-entry">
+<g class="charton-legend-swatch">
+<circle cx="303.200" cy="108.800" r="5.000" fill="rgba(44,160,44,1.000)" stroke="none" stroke-width="0.000" fill-opacity="1.000" stroke-opacity="1.000" />
+</g>
+<g class="charton-legend-label">
+<text x="320.200" y="108.800" font-size="12.0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', Ubuntu, Cantarell, 'Noto Sans', sans-serif" fill="rgba(51,51,51,1.000)" fill-opacity="1.000" text-anchor="start" font-weight="normal" font-style="normal" dominant-baseline="central" transform="rotate(0 320.200 108.800)">anydoc</text>
+</g>
+</g>
+</g>
+</svg>
