@@ -869,3 +869,45 @@ fn filter_free_streams_answer_to_the_decode_ceiling() {
         "raw stream over the cap is refused"
     );
 }
+
+/// Two content streams (objects 4 and 6) that together read "SPLIT CONTENT", for the tests that
+/// reach them through an indirect `/Contents` array (object 7).
+fn split_content_objects() -> Vec<(u32, Vec<u8>)> {
+    let part = |s: &str| format!("<< /Length {} >>\nstream\n{s}\nendstream", s.len()).into_bytes();
+    let mut objs = page_objects("");
+    objs[3].1 = part("BT /F1 12 Tf 72 700 Td (SPLIT ) Tj");
+    objs.push((6, part("(CONTENT) Tj ET")));
+    objs
+}
+
+#[test]
+fn contents_may_be_an_indirect_array_of_streams() {
+    // 7.7.3.3: /Contents is a stream or an array of streams, and the array may itself be an indirect
+    // object. opendataloader-bench 01030000000086 and 01030000000113 (PyPDF2 output) are built this way and
+    // read as empty before this was handled.
+    let mut objs = split_content_objects();
+    objs[2].1 = b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 7 0 R \
+        /Resources << /Font << /F1 5 0 R >> >> >>"
+        .to_vec();
+    objs.push((7, b"[ 4 0 R 6 0 R ]".to_vec()));
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF with an indirect /Contents array");
+    assert!(md.contains("SPLIT CONTENT"), "indirect /Contents array not read: {md:?}");
+
+    // Control: the same two streams in a direct array.
+    let mut direct = split_content_objects();
+    direct[2].1 = b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents [4 0 R 6 0 R] \
+        /Resources << /Font << /F1 5 0 R >> >> >>"
+        .to_vec();
+    let md = text_of(&classic_pdf(&direct, 1, &[])).expect("direct array");
+    assert!(md.contains("SPLIT CONTENT"), "control: {md:?}");
+}
+
+#[test]
+fn kids_may_be_an_indirect_array() {
+    // The same indirection for the page tree: /Kids 7 0 R where object 7 is `[3 0 R]`.
+    let mut objs = page_objects("KIDS BY REFERENCE");
+    objs[1].1 = b"<< /Type /Pages /Kids 7 0 R /Count 1 >>".to_vec();
+    objs.push((7, b"[3 0 R]".to_vec()));
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF with an indirect /Kids array");
+    assert!(md.contains("KIDS BY REFERENCE"), "indirect /Kids array not read: {md:?}");
+}

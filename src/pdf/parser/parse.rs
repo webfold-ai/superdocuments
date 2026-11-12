@@ -1289,8 +1289,9 @@ impl Document {
             Some(Object::Name(t)) if t == "Page" => out.push(num),
             _ => {
                 if let Some(kids) = d.get(&"Kids".to_string()) {
-                    let kids = match kids {
-                        Object::Array(a) => a.clone(),
+                    // /Kids may itself be an indirect object (7.3.10): follow one reference to the array.
+                    let kids = match self.resolve(kids) {
+                        Some(Object::Array(a)) => a.clone(),
                         _ => return,
                     };
                     for k in &kids {
@@ -1306,24 +1307,31 @@ impl Document {
     fn page_content(&self, page: &Dict, cache: &mut ContentCache) -> Vec<u8> {
         let mut bytes = Vec::new();
         match page.get(&"Contents".to_string()) {
-            Some(Object::Ref(n, g)) => {
-                if let Some(b) = cache.stream(self, *n, *g) {
-                    bytes.extend_from_slice(&b);
-                }
-            }
-            Some(Object::Array(a)) => {
-                for r in a {
-                    if let Object::Ref(n, g) = r {
-                        if let Some(b) = cache.stream(self, *n, *g) {
-                            bytes.extend_from_slice(&b);
-                            bytes.push(b'\n');
-                        }
+            Some(Object::Ref(n, g)) => match self.ref_object(*n, *g) {
+                // 7.7.3.3: /Contents may be an indirect object holding the array of streams
+                // (PyPDF2 and some other writers produce this).
+                Some(Object::Array(a)) => self.push_content_array(a, cache, &mut bytes),
+                _ => {
+                    if let Some(b) = cache.stream(self, *n, *g) {
+                        bytes.extend_from_slice(&b);
                     }
                 }
-            }
+            },
+            Some(Object::Array(a)) => self.push_content_array(a, cache, &mut bytes),
             _ => {}
         }
         bytes
+    }
+
+    fn push_content_array(&self, a: &[Object], cache: &mut ContentCache, bytes: &mut Vec<u8>) {
+        for r in a {
+            if let Object::Ref(n, g) = r {
+                if let Some(b) = cache.stream(self, *n, *g) {
+                    bytes.extend_from_slice(&b);
+                    bytes.push(b'\n');
+                }
+            }
+        }
     }
 }
 
