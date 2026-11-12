@@ -17,6 +17,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Fixed
 
+- PDF native extraction: a page whose `/Contents` is an indirect reference to an array of content streams (`/Contents 13 0 R`, `13 0 obj [14 0 R 15 0 R] endobj`, as Aspose.Pdf 10.1.0 writes it) now yields its text. Before, such pages read as empty and callers fell back to OCR. On the 60 PDFs of the Federal Register's "Census and Statistics" titles, 34 returned under half of poppler's words before the fix and none after. Regression tests: `tests/pdf_contents_indirect_array.rs`.
 - `calamine` CFB reader: a truncated sector, a sector past the end of the file, a short directory entry, a header-driven allocation larger than the file, and a FAT chain that cycles or leaves the FAT now give errors instead of panics, aborts or endless loops. A BIFF dimensions record no longer reserves gigabytes up front.
 
 ## [0.9.0] - 2026-11-09
