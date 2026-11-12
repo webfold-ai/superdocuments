@@ -69,11 +69,32 @@ Document conversion in an agent or RAG pipeline usually means one of three shape
 
 Measured, not claimed. The harness is [`webfold-bench`](https://github.com/webfold-ai/webfold-bench) (private); every fixture corpus named below is public, and every number comes from a committed result JSON with a provenance record. The conversion tracks were measured through `webfold`, which re-exports superdocuments' `html` and `document` modules unchanged — the code measured is this crate's. Charts are regenerated from the same tables by `benches/readme-charts` (charton).
 
-### In-process latency
+### PDF to text, side by side with the incumbents
+
+Eight public fixtures, five tools, one harness: quality (character error rate against ground truth, lower is better) and median wall time per call (log scale). Run 2026-10-14 on superdocuments `786e8bd`, tesseract 5.3.4, pdftotext 24.02.0.
+
+<img src="docs/img/bench-pdf-cer.png" alt="Grouped bar chart, 8 fixtures: superdocuments holds CER 0.000-0.119 on every fixture while pdftotext degrades on rotated (0.678), fuzzy scan (0.628), mixed (0.212) and two-column (0.240); markitdown and tesseract each miss fixtures entirely" width="640">
+
+<img src="docs/img/bench-pdf-latency.png" alt="Log-scale grouped bar chart of median per-call milliseconds: superdocuments reads born-digital files at 0.1 ms where others need 15-1500 ms, and pays tesseract-class 1-2.6 s on scans" width="640">
+
+| Fixture | superdocuments | pdftotext | markitdown | tesseract |
+|---|---|---|---|---|
+| reportlab-invoice | **0.1 ms, 0.000** | 15.4 ms, 0.000 | 1548 ms, 0.000 | 1086 ms, 0.000 |
+| rotated-15deg | **0.1 ms, 0.000** | 15.9 ms, 0.678 | 1473 ms, 0.264 | 1018 ms, — |
+| scanned-text | 1014 ms, **0.000** | 16.2 ms, — | 1478 ms, — | 967 ms, 0.000 |
+| scanned-fuzzy | 1264 ms, **0.023** | 16.7 ms, 0.628 | 1479 ms, 0.628 | 1121 ms, 0.023 |
+| mixed-native-and-scanned | 2606 ms, 0.119 | 18.2 ms, 0.212 | 1481 ms, 0.212 | 2164 ms, **0.098** |
+| two-column | 2311 ms, **0.027** | 16.4 ms, 0.240 | 1781 ms, 0.027 | 2166 ms, 0.027 |
+| borderless-table | 1378 ms, **0.000** | 18.2 ms, 0.000 | 1497 ms, 0.000 | 1201 ms, 0.000 |
+| reportlab-ascii85 | 1275 ms, **0.000** | 19.1 ms, 0.000 | 1450 ms, 0.000 | 1203 ms, 0.000 |
+
+Cells are `median wall time, CER`. The shipped route is native parser first, OCR fallback when native finds nothing. `—` means the tool produced no text on that fixture. Honest reading, from the source report: the native parser alone reads 2 of the 8; the other 6 pay OCR at roughly raw-tesseract cost (1.0–2.6 s), and 3 of those 6 are born-digital files a native parser should read — a tracked gap. CER is alphanumeric-lowercase only (no reading-order or table scoring), and these are 8 small fixtures, not large real-world PDFs.
+
+### In-process conversion latency
 
 Hot median per fixture, CPU-pinned (i9-14900KF, one logical core), 2026-09-24/30:
 
-<img src="docs/img/bench-hot-latency.svg" alt="Grouped bar chart: superdocuments converts the 54-fixture HTML corpus in 4.2 µs vs 17.7 µs for Firecrawl's html-extractor, and the 45-fixture document corpus in 27.7 µs vs 155.5 µs for anydoc" width="640">
+<img src="docs/img/bench-hot-latency.png" alt="Grouped bar chart: superdocuments converts the 54-fixture HTML corpus in 4.2 µs vs 17.7 µs for Firecrawl's html-extractor, and the 45-fixture document corpus in 27.7 µs vs 155.5 µs for anydoc" width="640">
 
 | Corpus (public fixtures) | Tool | Hot median | Quality |
 |---|---|---:|---|
@@ -88,7 +109,7 @@ The HTML numbers are permissive assertion parity (expected lines found, forbidde
 
 Sustained docs/sec, sum across workers, high-repeat workload, 2026-09-25:
 
-<img src="docs/img/bench-throughput.svg" alt="Grouped bar chart: no-cache conversion rises from 24,302 docs/sec at 1 worker to 169,282 at 64 workers, while anydoc rises from 2,093 to 23,948" width="640">
+<img src="docs/img/bench-throughput.png" alt="Grouped bar chart: no-cache conversion rises from 24,302 docs/sec at 1 worker to 169,282 at 64 workers, while anydoc rises from 2,093 to 23,948" width="640">
 
 | Tool | 1 worker | 4 | 16 | 64 |
 |---|---:|---:|---:|---:|
@@ -101,15 +122,13 @@ The cached rows are the warm path — they require the same document to be conve
 
 ### Repeat-read cache
 
-Warm-path speedup of `DocumentCache::convert` over `convert_bytes`, 17 streaming fixtures, 2026-09-25:
-
-<img src="docs/img/bench-cache-speedup.svg" alt="Bar chart: median warm-path cache speedup of 3.6x for CSV, 4.0x for XLSX and 5.1x for DOCX" width="640">
-
-Per-fixture range 3.5×–11.8×. Honest reading: the cold path with a cache is a small regression on tiny files (<10 KB) — the BLAKE3-class identity plus table probe costs more than a microsecond parse. The win is the warm path, and it holds byte-identical output to `convert_bytes` (tested).
+Warm-path speedup of `DocumentCache::convert` over `convert_bytes`, 17 streaming fixtures, 2026-09-25: median 3.6× (CSV), 4.0× (XLSX), 5.1× (DOCX) per format family, per-fixture range 3.5×–11.8×. Honest reading: the cold path with a cache is a small regression on tiny files (<10 KB) — the BLAKE3-class identity plus table probe costs more than a microsecond parse. The win is the warm path, and it holds byte-identical output to `convert_bytes` (tested).
 
 ### Subprocess shape (what CI scripts see)
 
 Single call, subprocess per call, 17 fixtures, 2026-09-25:
+
+<img src="docs/img/bench-subprocess-latency.png" alt="Log-scale bar chart of per-call milliseconds: webfold convert 5.8 ms, pandoc 37 ms, markitdown 49,800 ms" width="640">
 
 | Tool | Per call | vs `webfold convert` |
 |---|---:|---:|
@@ -125,7 +144,7 @@ MarkItDown's number is dominated by Python startup in the one-shot-subprocess sh
 - Against pandoc 3.1.3 on 16 LaTeX and 5 BibTeX fixtures, structural counts agree except one starred figure environment; pandoc fails on three BibTeX inputs — [`benches/latex-vs-pandoc/`](benches/latex-vs-pandoc/).
 - `pdf::extract_images` image listings agree with poppler's `pdfimages` on the PDF fixtures — [`benches/pdf-images/`](benches/pdf-images/).
 
-OCR quality/latency against inference-stack targets (marker, docling, surya, liteparse, PaddleOCR-VL via gateways) is measured in the companion harness [`superdocuments-bench`](https://github.com/webfold-ai/superdocuments-bench) (private), on the same fixture substrate.
+OCR quality/latency against inference-stack targets (marker, docling, surya, liteparse, PaddleOCR-VL via gateways) is measured in the companion harness [`superdocuments-bench`](https://github.com/webfold-ai/superdocuments-bench) (private), on the same fixture substrate; its published runs will be quoted here with the same discipline as the table above.
 
 ## Format matrix
 
