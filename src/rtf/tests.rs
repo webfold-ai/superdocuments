@@ -873,3 +873,25 @@ fn random_bytes_never_panic() {
         exercise(&data);
     }
 }
+
+// ----- regressions found by webfold-bench/tests/formats-fidelity-v1 -----------------------------
+
+/// `\*` marks an ignorable destination only as the first thing in a group. LibreOffice writes
+/// `{\loch\f2\i0\b0\*\cs7 text}` for ordinary text; the whole group was dropped (Tika's
+/// testRTFIgnoredControlWord.rtf).
+#[test]
+fn star_after_formatting_words_is_not_an_ignorable_destination() {
+    let md = markdown_of(br"{\rtf1\ansi\deff0{\fonttbl{\f0 Times;}}\pard{\loch\f0\i0\b0\*\cs7 The quick brown fox}\par}");
+    assert!(md.contains("The quick brown fox"), "{md:?}");
+    // a real ignorable destination is still skipped
+    let md = markdown_of(br"{\rtf1\ansi{\*\generator Hidden;}Shown\par}");
+    assert!(md.contains("Shown") && !md.contains("Hidden"), "{md:?}");
+}
+
+/// A `\uN` fallback that is a control word (`舦 \tab}`) must not skip the first letter of the
+/// text after the group (Pandoc's test/rtf/list_multiparagraph.rtf read "irst item").
+#[test]
+fn unicode_fallback_does_not_cross_the_end_of_a_group() {
+    let md = markdown_of(br"{\rtf1\ansi\pard{\listtext\tab 舦 \tab}First item\par}");
+    assert!(md.contains("First item"), "{md:?}");
+}

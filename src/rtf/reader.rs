@@ -424,6 +424,9 @@ impl<'o> Reader<'o> {
         let Some(group) = self.groups.pop() else {
             return;
         };
+        // A `\uN` fallback that is a control word (`\u8226 \tab}`) never reaches a character: the
+        // pending skip must not cross the end of the group and eat the next word's first letter.
+        self.skip = 0;
         if group.owns_aux {
             self.finish_aux(group);
         }
@@ -846,8 +849,12 @@ impl<'o> Reader<'o> {
                     self.paragraph_break();
                 }
             }
+            // `\*` marks an ignorable destination only as the first thing in a group. Elsewhere
+            // (`{\b0\*\cs7 text}`, as LibreOffice writes) the group is ordinary text.
             b'*' => {
-                self.top_mut().star = true;
+                if self.top().fresh {
+                    self.top_mut().star = true;
+                }
             }
             // `\-` optional hyphen, `\:` index subentry and `\|` formula character produce no text.
             _ => {}
