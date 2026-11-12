@@ -1,0 +1,523 @@
+[
+{
+"diff": {
+"author": 3,
+"container-title": 1,
+"genre": 3,
+"publisher": 4,
+"title": 8,
+"type": 1
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.6857142857142857,
+"fields_equal": 36,
+"fields_ours": 49,
+"fields_pandoc": 56,
+"format": "bibtex",
+"id": "bib-01"
+},
+{
+"diff": {
+"author": 5,
+"container-title": 1,
+"genre": 2,
+"issue": 2,
+"number": 2,
+"publisher": 8,
+"title": 9,
+"type": 4
+},
+"entries": 9,
+"entries_exact": 0,
+"entries_found": 9,
+"failed": false,
+"field_f1": 0.5094339622641509,
+"fields_equal": 27,
+"fields_ours": 48,
+"fields_pandoc": 58,
+"format": "bibtex",
+"id": "bib-02"
+},
+{
+"diff": {
+"container-title": 1,
+"issue": 1,
+"number": 1,
+"publisher": 1,
+"title": 4
+},
+"entries": 4,
+"entries_exact": 0,
+"entries_found": 4,
+"failed": false,
+"field_f1": 0.7547169811320755,
+"fields_equal": 20,
+"fields_ours": 26,
+"fields_pandoc": 27,
+"format": "bibtex",
+"id": "bib-03"
+},
+{
+"diff": {
+"author": 4,
+"container-title": 2,
+"issue": 3,
+"number": 3,
+"publisher": 3,
+"title": 8
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.6942148760330579,
+"fields_equal": 42,
+"fields_ours": 59,
+"fields_pandoc": 62,
+"format": "bibtex",
+"id": "bib-04"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 1,
+"genre": 1,
+"publisher": 1,
+"title": 7
+},
+"entries": 7,
+"entries_exact": 0,
+"entries_found": 7,
+"failed": false,
+"field_f1": 0.8113207547169812,
+"fields_equal": 43,
+"fields_ours": 52,
+"fields_pandoc": 54,
+"format": "bibtex",
+"id": "bib-05"
+},
+{
+"diff": {
+"author": 5,
+"container-title": 1,
+"genre": 3,
+"issue": 1,
+"number": 1,
+"publisher": 6,
+"title": 8,
+"type": 2
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.5742574257425742,
+"fields_equal": 29,
+"fields_ours": 46,
+"fields_pandoc": 55,
+"format": "bibtex",
+"id": "bib-06"
+},
+{
+"diff": {
+"author": 2,
+"container-title": 1,
+"issue": 2,
+"number": 2,
+"publisher": 3,
+"title": 5,
+"type": 1
+},
+"entries": 5,
+"entries_exact": 0,
+"entries_found": 5,
+"failed": false,
+"field_f1": 0.6376811594202898,
+"fields_equal": 22,
+"fields_ours": 33,
+"fields_pandoc": 36,
+"format": "bibtex",
+"id": "bib-07"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 2,
+"genre": 1,
+"issue": 1,
+"number": 1,
+"publisher": 2,
+"title": 5
+},
+"entries": 5,
+"entries_exact": 0,
+"entries_found": 5,
+"failed": false,
+"field_f1": 0.6865671641791045,
+"fields_equal": 23,
+"fields_ours": 32,
+"fields_pandoc": 35,
+"format": "bibtex",
+"id": "bib-08"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 1,
+"genre": 2,
+"publisher": 3,
+"title": 6,
+"type": 1
+},
+"entries": 6,
+"entries_exact": 0,
+"entries_found": 6,
+"failed": false,
+"field_f1": 0.6933333333333334,
+"fields_equal": 26,
+"fields_ours": 35,
+"fields_pandoc": 40,
+"format": "bibtex",
+"id": "bib-09"
+},
+{
+"diff": {
+"author": 1,
+"genre": 2,
+"issue": 2,
+"number": 2,
+"publisher": 4,
+"title": 5
+},
+"entries": 5,
+"entries_exact": 0,
+"entries_found": 5,
+"failed": false,
+"field_f1": 0.6071428571428571,
+"fields_equal": 17,
+"fields_ours": 25,
+"fields_pandoc": 31,
+"format": "bibtex",
+"id": "bib-10"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 1,
+"issue": 1,
+"number": 1,
+"publisher": 3,
+"title": 8,
+"type": 2
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.7128712871287128,
+"fields_equal": 36,
+"fields_ours": 49,
+"fields_pandoc": 52,
+"format": "bibtex",
+"id": "bib-11"
+},
+{
+"diff": {
+"author": 3,
+"container-title": 1,
+"title": 4
+},
+"entries": 4,
+"entries_exact": 0,
+"entries_found": 4,
+"failed": false,
+"field_f1": 0.7142857142857143,
+"fields_equal": 20,
+"fields_ours": 28,
+"fields_pandoc": 28,
+"format": "bibtex",
+"id": "bib-12"
+},
+{
+"diff": {
+"container-title": 1,
+"genre": 1,
+"publisher": 6,
+"title": 7,
+"type": 5
+},
+"entries": 7,
+"entries_exact": 0,
+"entries_found": 7,
+"failed": false,
+"field_f1": 0.611764705882353,
+"fields_equal": 26,
+"fields_ours": 39,
+"fields_pandoc": 46,
+"format": "bibtex",
+"id": "bib-13"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 2,
+"issue": 2,
+"number": 2,
+"publisher": 2,
+"publisher-place": 2,
+"title": 6
+},
+"entries": 6,
+"entries_exact": 0,
+"entries_found": 6,
+"failed": false,
+"field_f1": 0.6753246753246753,
+"fields_equal": 26,
+"fields_ours": 36,
+"fields_pandoc": 41,
+"format": "bibtex",
+"id": "bib-14"
+},
+{
+"diff": {
+"author": 6,
+"container-title": 2,
+"genre": 1,
+"issue": 1,
+"number": 1,
+"publisher": 5,
+"publisher-place": 2,
+"title": 9,
+"type": 3
+},
+"entries": 9,
+"entries_exact": 0,
+"entries_found": 9,
+"failed": false,
+"field_f1": 0.5811965811965812,
+"fields_equal": 34,
+"fields_ours": 54,
+"fields_pandoc": 63,
+"format": "bibtex",
+"id": "bib-15"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 2,
+"genre": 1,
+"issue": 3,
+"number": 3,
+"publisher": 6,
+"publisher-place": 1,
+"title": 9,
+"type": 2
+},
+"entries": 9,
+"entries_exact": 0,
+"entries_found": 9,
+"failed": false,
+"field_f1": 0.6306306306306306,
+"fields_equal": 35,
+"fields_ours": 51,
+"fields_pandoc": 60,
+"format": "bibtex",
+"id": "bib-16"
+},
+{
+"diff": {
+"author": 3,
+"container-title": 3,
+"issue": 1,
+"number": 1,
+"publisher": 2,
+"title": 5,
+"type": 1
+},
+"entries": 5,
+"entries_exact": 0,
+"entries_found": 5,
+"failed": false,
+"field_f1": 0.5625,
+"fields_equal": 18,
+"fields_ours": 31,
+"fields_pandoc": 33,
+"format": "bibtex",
+"id": "bib-17"
+},
+{
+"diff": {
+"author": 5,
+"genre": 2,
+"issue": 3,
+"number": 3,
+"publisher": 8,
+"title": 8,
+"type": 3
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.52,
+"fields_equal": 26,
+"fields_ours": 45,
+"fields_pandoc": 55,
+"format": "bibtex",
+"id": "bib-18"
+},
+{
+"diff": {
+"author": 3,
+"container-title": 5,
+"genre": 1,
+"publisher": 3,
+"publisher-place": 2,
+"title": 10,
+"type": 2
+},
+"entries": 10,
+"entries_exact": 0,
+"entries_found": 10,
+"failed": false,
+"field_f1": 0.6861313868613139,
+"fields_equal": 47,
+"fields_ours": 64,
+"fields_pandoc": 73,
+"format": "bibtex",
+"id": "bib-19"
+},
+{
+"diff": {
+"author": 3,
+"container-title": 3,
+"publisher": 3,
+"publisher-place": 2,
+"title": 8,
+"type": 3
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.6605504587155964,
+"fields_equal": 36,
+"fields_ours": 51,
+"fields_pandoc": 58,
+"format": "bibtex",
+"id": "bib-20"
+},
+{
+"diff": {
+"author": 4,
+"container-title": 4,
+"genre": 2,
+"issue": 1,
+"number": 1,
+"publisher": 4,
+"publisher-place": 2,
+"title": 10,
+"type": 1
+},
+"entries": 10,
+"entries_exact": 0,
+"entries_found": 10,
+"failed": false,
+"field_f1": 0.6515151515151515,
+"fields_equal": 43,
+"fields_ours": 61,
+"fields_pandoc": 71,
+"format": "bibtex",
+"id": "bib-21"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 3,
+"genre": 1,
+"issue": 2,
+"number": 2,
+"publisher": 3,
+"publisher-place": 2,
+"title": 8
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.6732673267326733,
+"fields_equal": 34,
+"fields_ours": 47,
+"fields_pandoc": 54,
+"format": "bibtex",
+"id": "bib-22"
+},
+{
+"diff": {
+"author": 2,
+"container-title": 1,
+"genre": 1,
+"issue": 2,
+"number": 2,
+"publisher": 4,
+"publisher-place": 2,
+"title": 7,
+"type": 1
+},
+"entries": 7,
+"entries_exact": 0,
+"entries_found": 7,
+"failed": false,
+"field_f1": 0.6190476190476191,
+"fields_equal": 26,
+"fields_ours": 38,
+"fields_pandoc": 46,
+"format": "bibtex",
+"id": "bib-23"
+},
+{
+"diff": {
+"author": 3,
+"container-title": 2,
+"genre": 3,
+"issue": 1,
+"number": 1,
+"publisher": 5,
+"title": 7,
+"type": 1
+},
+"entries": 7,
+"entries_exact": 0,
+"entries_found": 7,
+"failed": false,
+"field_f1": 0.5384615384615384,
+"fields_equal": 21,
+"fields_ours": 35,
+"fields_pandoc": 43,
+"format": "bibtex",
+"id": "bib-24"
+},
+{
+"diff": {
+"author": 1,
+"container-title": 3,
+"genre": 3,
+"publisher": 3,
+"publisher-place": 2,
+"title": 8
+},
+"entries": 8,
+"entries_exact": 0,
+"entries_found": 8,
+"failed": false,
+"field_f1": 0.7102803738317757,
+"fields_equal": 38,
+"fields_ours": 49,
+"fields_pandoc": 58,
+"format": "bibtex",
+"id": "bib-25"
+}
+]

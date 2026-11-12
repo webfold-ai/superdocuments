@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,enumitem,listings}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newcommand{\Oh}[1]{\mathcal{O}\!\left(#1\right)}
+\newenvironment{keypoint}{\par\noindent\textbf{Key point.}\ }{\par}
+\title{Notes on Sorting}
+\author{Ruth Ng}
+\begin{document}
+\maketitle
+\tableofcontents
+\section{Comparison sorts}
+\begin{definition}[Comparison sort]
+A sort that orders its input only by comparing pairs of elements.
+\end{definition}
+\begin{keypoint}Any comparison sort needs $\Omega(n\log n)$ comparisons in the worst case.\end{keypoint}
+\subsection{Merge sort}
+Merge sort runs in $\Oh{n\log n}$ time and uses $\Oh{n}$ extra space.
+\begin{lstlisting}[language=Python]
+def merge_sort(xs):
+    if len(xs) <= 1:
+        return xs
+    mid = len(xs) // 2
+    return merge(merge_sort(xs[:mid]), merge_sort(xs[mid:]))
+\end{lstlisting}
+\begin{example}
+Sorting $[3,1,2]$ takes three comparisons.
+\end{example}
+\section{Counting sorts}
+\begin{description}
+  \item[Counting sort] stable, $\Oh{n+k}$.
+  \item[Radix sort] stable, $\Oh{d(n+k)}$.
+\end{description}
+\begin{tabular}{|l|r|r|}
+\hline
+Algorithm & Time & Space \\ \hline
+Merge & $n\log n$ & $n$ \\ \hline
+Counting & $n+k$ & $k$ \\ \hline
+\end{tabular}
+\end{document}
