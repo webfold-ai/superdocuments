@@ -594,7 +594,9 @@ impl<'o> Reader<'o> {
             | b"ud"
             | b"bkmkstart"
             | b"bkmkend"
-            | b"docvar" => Some(Dest::Skip),
+            | b"docvar"
+            // fallback text for readers without nested tables; a reader that nests tables skips it
+            | b"nonesttables" => Some(Dest::Skip),
             b"header" | b"headerl" | b"headerr" | b"headerf" | b"footer" | b"footerl"
             | b"footerr" | b"footerf" => {
                 let kind = match name {

@@ -895,3 +895,42 @@ fn unicode_fallback_does_not_cross_the_end_of_a_group() {
     let md = markdown_of(br"{\rtf1\ansi\pard{\listtext\tab \u8226 \tab}First item\par}");
     assert!(md.contains("First item"), "{md:?}");
 }
+
+/// A table inside a table cannot be a Markdown pipe table: it is written as HTML, every cell of the
+/// inner tables in its own element, and the `\nonesttables` fallback text (written for readers
+/// that cannot nest) is not read (Pandoc's test/rtf/table_nested.rtf: the old output joined the
+/// inner cells and both fallbacks into one pipe-table cell).
+#[test]
+fn nested_tables_are_written_as_html_and_fallback_text_is_dropped() {
+    let md = markdown_of(
+        br"{\rtf1\ansi
+\trowd\cellx5000
+\pard\intbl\itap2 Level two before\par
+\pard\intbl\itap3 Deep A\nestcell Deep B\nestcell
+{\*\nesttableprops\trowd\cellx2000\cellx4000\nestrow}
+{\nonesttables NESTED FALLBACK ONE\par}
+\pard\intbl\itap2 Level two after\nestcell
+{\*\nesttableprops\trowd\cellx4000\nestrow}
+{\nonesttables PARENT FALLBACK\par}
+\pard\intbl\itap1 Outer after\cell
+\row
+\pard\itap0 Outside table\par
+}",
+    );
+    assert!(md.starts_with("<table>"), "{md:?}");
+    assert!(
+        md.contains("<td>Deep A</td><td>Deep B</td>"),
+        "inner cells are separate elements: {md:?}"
+    );
+    assert!(md.contains("Level two before") && md.contains("Outer after"), "{md:?}");
+    assert!(!md.contains("FALLBACK"), "{md:?}");
+    assert!(md.contains("Outside table"), "{md:?}");
+    assert!(!md.contains("\n\n<"), "no blank line inside the HTML block: {md:?}");
+}
+
+/// A flat table is still a pipe table.
+#[test]
+fn flat_tables_stay_pipe_tables() {
+    let md = markdown_of(br"{\rtf1\ansi\trowd\cellx1000\cellx2000\pard\intbl A\cell B\cell\row}");
+    assert!(md.starts_with("| A | B |"), "{md:?}");
+}
