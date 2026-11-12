@@ -161,17 +161,25 @@ class Hostile(unittest.TestCase):
             with self.subTest(ext=ext):
                 self.check(docx, ext)
 
-    def test_a_valid_zip_given_to_the_wrong_ooxml_or_epub_converter_is_empty_not_a_crash(self):
-        # The library is lenient here: a well-formed package that lacks the parts the converter
-        # looks for yields empty Markdown rather than an error. Pin that, so a change is noticed.
-        docx = fixture("office/basic.docx")
-        for ext in ("xlsx", "pptx", "epub"):
-            with self.subTest(ext=ext):
-                try:
-                    out = sd.convert(docx, ext)
-                except ValueError:
+    def test_a_valid_package_of_another_format_is_an_error_not_empty_markdown(self):
+        # Every Office package handed to the converter of a different OOXML format, or to the
+        # EPUB converter, is refused: empty Markdown would look like a document that is empty.
+        fixtures = {
+            "docx": "office/basic.docx",
+            "xlsx": "office/basic.xlsx",
+            "pptx": "office/basic.pptx",
+        }
+        for real, path in fixtures.items():
+            data = fixture(path)
+            self.assertTrue(sd.convert(data, real).strip(), f"{path} is empty as {real}")
+            for wrong in ("docx", "xlsx", "pptx", "epub"):
+                if wrong == real:
                     continue
-                self.assertEqual(out.strip(), "", f"{ext} produced text from a .docx")
+                with self.subTest(real=real, wrong=wrong):
+                    with self.assertRaises(ValueError):
+                        sd.convert(data, wrong)
+        with self.assertRaises(ValueError):
+            sd.worksheets(fixture("office/basic.docx"))
 
     def test_random_bytes(self):
         junk = bytes((i * 131 + 7) % 256 for i in range(4096))

@@ -158,3 +158,34 @@ fn rtf_merged_cell_written_through_cellx_edges_keeps_its_columns() {
     assert!(md.contains("| Merged head |  | Third |"), "{md}");
     assert!(md.contains("| a | b | c |"), "{md}");
 }
+
+/// A valid Office package handed to the converter of another Office format is refused with an
+/// error naming the mismatch. It used to come back as empty Markdown, which a caller cannot
+/// tell from a document that is really empty.
+#[test]
+fn a_package_of_another_office_format_is_an_error_not_empty_markdown() {
+    let fixtures = [
+        ("docx", "basic.docx"),
+        ("docx", "rich.docx"),
+        ("xlsx", "basic.xlsx"),
+        ("xlsx", "lo.xlsx"),
+        ("pptx", "basic.pptx"),
+        ("pptx", "lo.pptx"),
+    ];
+    for (real, name) in fixtures {
+        let data = fs::read(format!("tests/fixtures/office/{name}")).expect("fixture");
+        for wrong in ["docx", "xlsx", "pptx", "epub"] {
+            let result = convert_bytes(wrong, &data);
+            if wrong == real {
+                let md = result.unwrap_or_else(|e| panic!("{name} as {wrong}: {e}"));
+                assert!(!md.trim().is_empty(), "{name} as {wrong} is empty");
+            } else {
+                let err = result.expect_err(&format!("{name} as {wrong} must be an error"));
+                assert!(
+                    err.starts_with("not a") || err.starts_with("not an"),
+                    "{name} as {wrong}: {err}"
+                );
+            }
+        }
+    }
+}

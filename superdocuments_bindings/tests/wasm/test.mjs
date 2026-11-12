@@ -133,11 +133,14 @@ ok("wrong extension where the format has a header check", () => {
   const docx = fixture("office/basic.docx");
   for (const ext of ["xls", "pdf", "rtf", "odt", "ods"]) rejects(docx, ext);
 });
-ok("a valid zip given to the wrong ooxml/epub converter is empty, not a crash", () => {
-  const docx = fixture("office/basic.docx");
-  for (const ext of ["xlsx", "pptx", "epub"]) {
-    try { assert.equal(sd.convert(docx, ext).trim(), ""); } catch (e) { assert.ok(e instanceof Error); }
+ok("a valid package of another format is an error, not empty markdown", () => {
+  const fixtures = { docx: "office/basic.docx", xlsx: "office/basic.xlsx", pptx: "office/basic.pptx" };
+  for (const [real, path] of Object.entries(fixtures)) {
+    const data = fixture(path);
+    assert.ok(sd.convert(data, real).trim().length > 0, `${path} is empty as ${real}`);
+    for (const wrong of ["docx", "xlsx", "pptx", "epub"]) if (wrong !== real) rejects(data, wrong);
   }
+  assert.throws(() => sd.worksheets(fixture("office/basic.docx")), Error);
   stillWorks();
 });
 ok("random bytes", () => {

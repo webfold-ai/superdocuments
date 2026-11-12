@@ -164,6 +164,42 @@ pub(crate) fn main_part(
     }
 }
 
+/// Check that `part` is the kind of document the caller reads, by its root element's local name
+/// (`document` for WordprocessingML, `workbook` for SpreadsheetML, `presentation` for
+/// PresentationML; ECMA-376 Parts 1 and 4). A package of another Office kind is an error: it is
+/// a valid file, but not one this reader can say anything true about, and reading it as if it
+/// were would return an empty document instead of refusing it.
+pub(crate) fn require_root(
+    zip: &mut ZipArchive<Cursor<&[u8]>>,
+    part: &str,
+    expected: &str,
+    format: &str,
+) -> Result<(), String> {
+    let xml = entry(zip, part)?;
+    let mut reader = Reader::from_reader(xml.as_slice());
+    let mut buf = Vec::new();
+    loop {
+        match reader
+            .read_event_into(&mut buf)
+            .map_err(|e| e.to_string())?
+        {
+            Event::Start(tag) | Event::Empty(tag) => {
+                let found = tag.local_name().as_ref().to_owned();
+                return if found == expected {
+                    Ok(())
+                } else {
+                    Err(format!(
+                        "not a {format} file: {part} is a <{found}> document, not a <{expected}>"
+                    ))
+                };
+            }
+            Event::Eof => return Err(format!("not a {format} file: {part} has no root element")),
+            _ => {}
+        }
+        buf.clear();
+    }
+}
+
 /// One inline piece of a paragraph.
 pub(crate) enum Seg {
     Text {

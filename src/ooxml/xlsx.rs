@@ -14,7 +14,7 @@ use std::collections::HashMap;
 use quick_xml::events::Event;
 use quick_xml::Reader;
 
-use super::{attr_local, attrs_local, main_part, read_rels, rels_path_of, resolve};
+use super::{attr_local, attrs_local, main_part, read_rels, rels_path_of, require_root, resolve};
 use crate::document::{archive, entry, push_ref, text};
 
 /// The most cells a single worksheet may allocate. `r="XFD1048576"` asks for 17 billion.
@@ -398,6 +398,9 @@ fn cell_text(
 pub(crate) fn read(data: &[u8]) -> Result<Vec<Sheet>, String> {
     let mut zip = archive(data)?;
     let workbook = main_part(&mut zip, "xl/workbook.xml").ok();
+    if let Some(workbook) = workbook.as_deref() {
+        require_root(&mut zip, workbook, "workbook", "XLSX")?;
+    }
     let mut declared: Vec<(String, String)> = Vec::new(); // (name, part)
     let mut formats = Formats::default();
     let mut strings_part = Some("xl/sharedStrings.xml".to_owned());
@@ -476,6 +479,10 @@ pub(crate) fn read(data: &[u8]) -> Result<Vec<Sheet>, String> {
             .into_iter()
             .map(|(n, part)| (format!("Sheet {n}"), part))
             .collect();
+    }
+    if declared.is_empty() {
+        // A workbook has at least one sheet (ECMA-376 Part 1, 18.2.20 `sheets`).
+        return Err("not an XLSX file: the package has no worksheets".into());
     }
     declared
         .into_iter()

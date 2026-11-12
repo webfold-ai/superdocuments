@@ -14,6 +14,8 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Changed
 
+- A valid Office package handed to the converter of another format is now an error, not empty Markdown: a `.docx` converted as `xlsx`, `pptx` or `epub`, an `.xlsx` as `docx` or `pptx`, and so on. The DOCX, XLSX and PPTX readers check the root element of the package's main part (`document`, `workbook`, `presentation`); an XLSX with no worksheet, a package with no presentation part and no slides, and an EPUB zip with no package document and no content documents are errors.
+
 - The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.
 
 ### Fixed

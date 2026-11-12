@@ -796,6 +796,7 @@ fn join_blocks(blocks: &[Block]) -> String {
 pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
     let mut zip = archive(data)?;
     let document = main_part(&mut zip, "word/document.xml")?;
+    super::require_root(&mut zip, &document, "document", "DOCX")?;
     let rels = read_rels(&mut zip, &rels_path_of(&document))?;
 
     let styles = match find_part(&rels, "styles", &document, "word/styles.xml", &mut zip) {

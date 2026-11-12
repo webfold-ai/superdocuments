@@ -357,7 +357,12 @@ pub(crate) fn slide_order(
     zip: &mut zip::ZipArchive<std::io::Cursor<&[u8]>>,
 ) -> Result<Vec<String>, String> {
     let mut ordered = Vec::new();
-    if let Ok(presentation) = main_part(zip, "ppt/presentation.xml") {
+    let main = main_part(zip, "ppt/presentation.xml").ok();
+    if let Some(presentation) = main.as_deref() {
+        super::require_root(zip, presentation, "presentation", "PPTX")?;
+    }
+    let has_main = main.is_some();
+    if let Some(presentation) = main {
         let rels = read_rels(zip, &rels_path_of(&presentation))?;
         let xml = entry(zip, &presentation)?;
         let mut reader = Reader::from_reader(xml.as_slice());
@@ -404,6 +409,9 @@ pub(crate) fn slide_order(
         }
     }
     numbered.sort();
+    if numbered.is_empty() && !has_main {
+        return Err("not a PPTX file: the package has no presentation part and no slides".into());
+    }
     Ok(numbered.into_iter().map(|(_, name)| name).collect())
 }
 

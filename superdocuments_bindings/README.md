@@ -50,6 +50,7 @@ EPUB, CSV, HTML, native-text PDF, structured worksheets; and hostile input (empt
 random bytes, a 400 MB deflate zip bomb) which must be an error, quickly, with the module still working
 afterwards.
 
-Known library behaviour, pinned by the tests: a *valid* Office zip handed to a different OOXML or EPUB
-converter (a `.docx` converted as `xlsx`) yields empty Markdown instead of an error. Formats with a header
-check (`xls`, `pdf`, `rtf`, `odt`, `ods`) do raise.
+A valid Office package handed to the wrong converter (a `.docx` converted as `xlsx`, `pptx` or `epub`, an
+`.xlsx` as `docx`, ...) is an error naming the mismatch, never empty Markdown. The OOXML readers check the
+root element of the package's main part (`document`, `workbook`, `presentation`); the EPUB reader refuses a
+zip with no package document and no content documents.
