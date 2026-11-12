@@ -2,6 +2,7 @@
 //! product-specific presentation and import policy belong to their callers.
 
 pub mod arxiv_source;
+pub mod ast;
 pub mod bibtex;
 pub mod document;
 pub mod epub;
@@ -9,13 +10,16 @@ pub mod graph;
 pub mod html;
 pub mod latex;
 pub mod markdown;
+pub(crate) mod mdwrite;
 pub mod mathml;
+pub mod odt;
 pub(crate) mod media;
 pub(crate) mod ooxml;
 pub mod pdf;
 pub mod rtf;
 pub mod tex_text;
 pub mod xlsx;
+pub(crate) mod xmltree;
 
 /// Optional native composition-to-frame/video renderer. Enable `framefold` to use it.
 #[cfg(feature = "framefold")]

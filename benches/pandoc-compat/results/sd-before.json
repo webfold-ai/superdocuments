@@ -5771,15 +5771,11 @@
 1,
 0
 ],
-"emph": [
-2,
-1
-],
 "h1": [
 3,
 2
 ],
-"sup": [
+"math_display": [
 1,
 0
 ]
@@ -5789,10 +5785,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.8888888888888888,
-"fidelity": 0.9324970131421745,
-"structure": 0.9354838709677419,
-"text": 0.9731182795698925
+"features": 0.9047619047619048,
+"fidelity": 0.9233147443175493,
+"math": 0.0,
+"structure": 0.9032258064516129,
+"text": 0.9619565217391305
 },
 "status": "ok"
 },
@@ -5808,7 +5805,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-01.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -5945,10 +5942,6 @@
 12,
 0
 ],
-"emph": [
-6,
-4
-],
 "h1": [
 5,
 4
@@ -5960,6 +5953,10 @@
 "link": [
 2,
 1
+],
+"math_display": [
+2,
+0
 ],
 "ol_item": [
 8,
@@ -5982,7 +5979,7 @@
 0
 ],
 "sup": [
-5,
+3,
 0
 ],
 "table": [
@@ -5995,10 +5992,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.6902654867256637,
-"fidelity": 0.8510885814980181,
-"structure": 0.8951048951048951,
-"text": 0.9678953626634959
+"features": 0.6915887850467289,
+"fidelity": 0.8405022554084048,
+"math": 0.0,
+"structure": 0.8671328671328671,
+"text": 0.9627851140456183
 },
 "status": "ok"
 },
@@ -6014,7 +6012,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-02.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -6231,29 +6229,21 @@
 39,
 0
 ],
-"emph": [
-6,
-4
-],
 "h1": [
 5,
 4
+],
+"math_inline": [
+2,
+0
 ],
 "row": [
 11,
 0
 ],
-"strong": [
+"sup": [
 0,
 1
-],
-"sub": [
-2,
-0
-],
-"sup": [
-3,
-0
 ],
 "table": [
 2,
@@ -6265,10 +6255,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.5714285714285714,
-"fidelity": 0.8038554397777699,
+"features": 0.5671641791044776,
+"fidelity": 0.7979044196731769,
+"math": 0.0,
 "structure": 0.8547008547008547,
-"text": 0.9854368932038835
+"text": 0.9718482252141983
 },
 "status": "ok"
 },
@@ -6284,7 +6275,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-03.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -6485,10 +6476,6 @@
 32,
 0
 ],
-"emph": [
-3,
-2
-],
 "h1": [
 5,
 4
@@ -6500,6 +6487,10 @@
 "link": [
 4,
 2
+],
+"math_display": [
+1,
+0
 ],
 "ol_item": [
 2,
@@ -6522,7 +6513,7 @@
 0
 ],
 "sup": [
-4,
+3,
 0
 ],
 "table": [
@@ -6535,10 +6526,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.46551724137931033,
-"fidelity": 0.7532678760505004,
-"structure": 0.8292682926829268,
-"text": 0.9650180940892642
+"features": 0.46017699115044247,
+"fidelity": 0.7443950404105811,
+"math": 0.0,
+"structure": 0.8130081300813008,
+"text": 0.96
 },
 "status": "ok"
 },
@@ -6554,7 +6546,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-04.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -6839,7 +6831,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-05.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -7039,10 +7031,6 @@
 1,
 0
 ],
-"emph": [
-7,
-5
-],
 "h1": [
 5,
 4
@@ -7054,6 +7042,10 @@
 "link": [
 8,
 6
+],
+"math_inline": [
+2,
+0
 ],
 "ol_item": [
 4,
@@ -7067,17 +7059,13 @@
 1,
 0
 ],
-"strong": [
-1,
-2
-],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-6,
-0
+3,
+1
 ]
 },
 "format": "html",
@@ -7085,10 +7073,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.8130081300813008,
-"fidelity": 0.9058008522207408,
+"features": 0.8545454545454545,
+"fidelity": 0.9163339660099918,
+"math": 0.0,
 "structure": 0.9333333333333333,
-"text": 0.9710610932475884
+"text": 0.9611231101511879
 },
 "status": "ok"
 },
@@ -7104,7 +7093,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-06.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -7377,7 +7366,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-07.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -7545,13 +7534,13 @@
 24,
 0
 ],
-"emph": [
-13,
-9
-],
 "h1": [
 4,
 3
+],
+"math_inline": [
+4,
+0
 ],
 "row": [
 6,
@@ -7561,17 +7550,13 @@
 1,
 0
 ],
-"strong": [
-1,
-3
-],
 "sub": [
-5,
+1,
 0
 ],
 "sup": [
-7,
-0
+1,
+2
 ],
 "table": [
 1,
@@ -7583,10 +7568,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.5736434108527132,
-"fidelity": 0.8128997153999036,
+"features": 0.5825242718446602,
+"fidelity": 0.8045669746241108,
+"math": 0.0,
 "structure": 0.8932038834951457,
-"text": 0.9718518518518519
+"text": 0.9379727685325264
 },
 "status": "ok"
 },
@@ -7602,7 +7588,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-08.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -7823,10 +7809,6 @@
 15,
 0
 ],
-"emph": [
-7,
-5
-],
 "h1": [
 4,
 3
@@ -7838,6 +7820,10 @@
 "link": [
 2,
 1
+],
+"math_inline": [
+2,
+0
 ],
 "ol_item": [
 4,
@@ -7851,17 +7837,13 @@
 1,
 0
 ],
-"strong": [
-1,
-2
-],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-5,
-0
+2,
+1
 ],
 "table": [
 2,
@@ -7873,10 +7855,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.5517241379310345,
-"fidelity": 0.779585733110259,
+"features": 0.5675675675675675,
+"fidelity": 0.7803964669246826,
+"math": 0.0,
 "structure": 0.8235294117647058,
-"text": 0.9635036496350365
+"text": 0.9500924214417745
 },
 "status": "ok"
 },
@@ -7892,7 +7875,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-09.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -8097,10 +8080,6 @@
 1,
 0
 ],
-"emph": [
-7,
-5
-],
 "h1": [
 5,
 4
@@ -8112,6 +8091,10 @@
 "link": [
 2,
 1
+],
+"math_inline": [
+2,
+0
 ],
 "ol_item": [
 10,
@@ -8125,17 +8108,13 @@
 1,
 0
 ],
-"strong": [
-1,
-2
-],
 "sub": [
-3,
+1,
 0
 ],
 "sup": [
-5,
-0
+2,
+1
 ]
 },
 "format": "html",
@@ -8143,10 +8122,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.7469879518072289,
-"fidelity": 0.8770968128778401,
+"features": 0.8,
+"fidelity": 0.8906148414290825,
+"math": 0.0,
 "structure": 0.9137931034482759,
-"text": 0.9705093833780161
+"text": 0.9580514208389715
 },
 "status": "ok"
 },
@@ -8162,7 +8142,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-10.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -8367,10 +8347,6 @@
 40,
 0
 ],
-"emph": [
-10,
-8
-],
 "h1": [
 5,
 4
@@ -8382,6 +8358,10 @@
 "link": [
 4,
 3
+],
+"math_inline": [
+2,
+0
 ],
 "ol_item": [
 8,
@@ -8395,17 +8375,13 @@
 4,
 0
 ],
-"strong": [
-4,
-5
-],
 "sub": [
-6,
+4,
 0
 ],
 "sup": [
-8,
-0
+5,
+1
 ],
 "table": [
 3,
@@ -8417,10 +8393,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.5355191256830601,
-"fidelity": 0.7729743867433375,
+"features": 0.5411764705882353,
+"fidelity": 0.7732323031560607,
+"math": 0.0,
 "structure": 0.8211920529801324,
-"text": 0.9622119815668203
+"text": 0.9573283858998145
 },
 "status": "ok"
 },
@@ -8436,7 +8413,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-11.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -8662,8 +8639,8 @@
 5
 ],
 "math_display": [
-0,
-1
+1,
+0
 ],
 "ol_item": [
 5,
@@ -8692,10 +8669,10 @@
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
 "features": 0.75,
-"fidelity": 0.8613045116883375,
+"fidelity": 0.8603250175511455,
 "math": 0.0,
 "structure": 0.8627450980392157,
-"text": 0.9711684370257967
+"text": 0.9682299546142209
 },
 "status": "ok"
 },
@@ -8711,7 +8688,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-12.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -8941,7 +8918,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-13.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9137,7 +9114,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-14.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9365,7 +9342,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-15.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9625,7 +9602,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-16.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9691,17 +9668,13 @@
 8,
 0
 ],
-"emph": [
-3,
-2
-],
 "h1": [
 5,
 4
 ],
 "math_display": [
-0,
-1
+2,
+0
 ],
 "quote": [
 1,
@@ -9720,7 +9693,7 @@
 0
 ],
 "sup": [
-2,
+1,
 0
 ],
 "table": [
@@ -9733,11 +9706,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.7012987012987013,
-"fidelity": 0.8548176246196048,
+"features": 0.7027027027027027,
+"fidelity": 0.8474139032649671,
 "math": 0.0,
-"structure": 0.8928571428571429,
-"text": 0.9702970297029703
+"structure": 0.875,
+"text": 0.9645390070921985
 },
 "status": "ok"
 },
@@ -9753,7 +9726,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-17.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9868,7 +9841,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-18.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -9938,10 +9911,6 @@
 12,
 0
 ],
-"emph": [
-3,
-2
-],
 "h1": [
 5,
 4
@@ -9953,6 +9922,10 @@
 "link": [
 10,
 8
+],
+"math_display": [
+1,
+0
 ],
 "ol_item": [
 2,
@@ -9971,7 +9944,7 @@
 0
 ],
 "sup": [
-4,
+3,
 0
 ],
 "table": [
@@ -9984,10 +9957,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.72,
-"fidelity": 0.8599350385708485,
-"structure": 0.9,
-"text": 0.9598051157125457
+"features": 0.7213114754098361,
+"fidelity": 0.8531190570147569,
+"math": 0.0,
+"structure": 0.8833333333333333,
+"text": 0.9547123623011016
 },
 "status": "ok"
 },
@@ -10003,7 +9977,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-19.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -10150,7 +10124,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-20.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -10244,7 +10218,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-21.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {},
@@ -10319,7 +10293,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/seed-22.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {},
@@ -10472,10 +10446,6 @@
 8,
 0
 ],
-"emph": [
-2,
-1
-],
 "h1": [
 5,
 4
@@ -10489,8 +10459,8 @@
 1
 ],
 "math_display": [
-0,
-2
+3,
+0
 ],
 "ol_item": [
 4,
@@ -10501,7 +10471,7 @@
 0
 ],
 "sup": [
-2,
+1,
 0
 ],
 "table": [
@@ -10514,11 +10484,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.7547169811320755,
-"fidelity": 0.8764613558768491,
+"features": 0.7572815533980582,
+"fidelity": 0.867533257595472,
 "math": 0.0,
-"structure": 0.9012345679012346,
-"text": 0.973432518597237
+"structure": 0.8888888888888888,
+"text": 0.9564293304994687
 },
 "status": "ok"
 },
@@ -10543,10 +10513,6 @@
 23,
 0
 ],
-"emph": [
-3,
-2
-],
 "h1": [
 4,
 3
@@ -10558,6 +10524,10 @@
 "link": [
 4,
 3
+],
+"math_display": [
+1,
+0
 ],
 "ol_item": [
 1,
@@ -10580,7 +10550,7 @@
 0
 ],
 "sup": [
-3,
+2,
 0
 ],
 "table": [
@@ -10593,10 +10563,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.5346534653465347,
-"fidelity": 0.7746758312965675,
-"structure": 0.819047619047619,
-"text": 0.9703264094955489
+"features": 0.5306122448979592,
+"fidelity": 0.7659254746674788,
+"math": 0.0,
+"structure": 0.8,
+"text": 0.9671641791044776
 },
 "status": "ok"
 },
@@ -10617,13 +10588,13 @@
 },
 {
 "detail": {
-"emph": [
-3,
-2
-],
 "h1": [
 3,
 2
+],
+"math_display": [
+1,
+0
 ],
 "strike": [
 1,
@@ -10634,7 +10605,7 @@
 0
 ],
 "sup": [
-2,
+1,
 0
 ]
 },
@@ -10643,10 +10614,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.88,
-"fidelity": 0.9243729520405125,
-"structure": 0.9333333333333333,
-"text": 0.9597855227882037
+"features": 0.8936170212765957,
+"fidelity": 0.9158488535239963,
+"math": 0.0,
+"structure": 0.9,
+"text": 0.9539295392953929
 },
 "status": "ok"
 },
@@ -10684,8 +10656,8 @@
 9
 ],
 "math_display": [
-0,
-2
+2,
+0
 ],
 "ol_item": [
 3,
@@ -10722,10 +10694,10 @@
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
 "features": 0.46153846153846156,
-"fidelity": 0.7156539208753353,
+"fidelity": 0.7091493652574217,
 "math": 0.0,
-"structure": 0.7415730337078652,
-"text": 0.9438502673796791
+"structure": 0.7191011235955056,
+"text": 0.9468085106382979
 },
 "status": "ok"
 },
@@ -10827,10 +10799,6 @@
 22,
 0
 ],
-"emph": [
-6,
-4
-],
 "h1": [
 3,
 2
@@ -10843,24 +10811,16 @@
 2,
 1
 ],
+"math_inline": [
+2,
+0
+],
 "ol_item": [
 5,
 4
 ],
 "row": [
 9,
-0
-],
-"strong": [
-0,
-1
-],
-"sub": [
-2,
-0
-],
-"sup": [
-4,
 0
 ],
 "table": [
@@ -10873,10 +10833,11 @@
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.4666666666666667,
-"fidelity": 0.7448028673835125,
+"features": 0.4675324675324675,
+"fidelity": 0.7378954378954378,
+"math": 0.0,
 "structure": 0.8,
-"text": 0.967741935483871
+"text": 0.9461538461538461
 },
 "status": "ok"
 },
@@ -11301,7 +11262,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-basic.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11315,7 +11276,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-code.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11329,7 +11290,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-table-grid.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11343,7 +11304,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-admonitions.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11357,7 +11318,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-fields.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11371,7 +11332,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-footnotes.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11385,7 +11346,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-math.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11399,7 +11360,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-quote-line.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11413,7 +11374,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-links.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11427,7 +11388,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-toc.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11441,7 +11402,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-substitution.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "failed": true,
@@ -11455,7 +11416,7 @@
 "structure": 0.0,
 "text": 0.0
 },
-"status": "error: cannot convert /home/user/superdocuments/benches/pandoc-compat/corpus/rst/rst-roles.rst: unsupported document extension: rst"
+"status": "error: unsupported document extension: rst"
 },
 {
 "detail": {
@@ -11643,6 +11604,25 @@
 {
 "detail": {
 "quote": [
+14,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-21",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.7741935483870968,
+"fidelity": 0.8800013039280404,
+"structure": 0.8679245283018868,
+"text": 0.9978858350951374
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
 5,
 0
 ]
@@ -11707,10 +11687,6 @@
 2,
 0
 ],
-"math_display": [
-0,
-2
-],
 "quote": [
 24,
 0
@@ -11721,11 +11697,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.7846153846153846,
-"fidelity": 0.8732069862504646,
-"math": 0.0,
-"structure": 0.8478260869565217,
-"text": 0.9871794871794872
+"features": 0.7903225806451613,
+"fidelity": 0.8866292660121552,
+"structure": 0.8695652173913043,
+"text": 1.0
 },
 "status": "ok"
 },
@@ -11745,10 +11720,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.9090909090909091,
-"fidelity": 0.9383374774657588,
+"features": 0.90625,
+"fidelity": 0.937391975308642,
 "structure": 0.9074074074074074,
-"text": 0.9985141158989599
+"text": 0.9985185185185185
 },
 "status": "ok"
 },
@@ -11764,10 +11739,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.8235294117647058,
-"fidelity": 0.8954920859718078,
+"features": 0.8085106382978723,
+"fidelity": 0.8904907509962153,
 "structure": 0.8656716417910447,
-"text": 0.997275204359673
+"text": 0.997289972899729
 },
 "status": "ok"
 },
@@ -11776,10 +11751,6 @@
 "link": [
 12,
 6
-],
-"math_display": [
-0,
-2
 ],
 "quote": [
 4,
@@ -11791,11 +11762,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.9210526315789473,
-"fidelity": 0.9360714387732717,
-"math": 0.0,
-"structure": 0.9069767441860465,
-"text": 0.9801849405548216
+"features": 0.9333333333333333,
+"fidelity": 0.9609869005217844,
+"structure": 0.9534883720930233,
+"text": 0.9961389961389961
 },
 "status": "ok"
 },
@@ -11831,6 +11801,10 @@
 "quote": [
 9,
 0
+],
+"sup": [
+0,
+1
 ]
 },
 "format": "docx",
@@ -11838,8 +11812,8 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
 "scores": {
-"features": 0.9043478260869565,
-"fidelity": 0.9293562521065049,
+"features": 0.8888888888888888,
+"fidelity": 0.9242032730404824,
 "structure": 0.8837209302325582,
 "text": 1.0
 },
@@ -12248,10 +12222,6 @@
 8,
 0
 ],
-"emph": [
-2,
-0
-],
 "h2": [
 4,
 7
@@ -12264,10 +12234,6 @@
 2,
 0
 ],
-"math_display": [
-0,
-2
-],
 "ol_item": [
 4,
 0
@@ -12277,7 +12243,7 @@
 0
 ],
 "sup": [
-2,
+1,
 0
 ],
 "table": [
@@ -12294,11 +12260,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
 "scores": {
-"features": 0.13559322033898305,
-"fidelity": 0.5527509767810767,
-"math": 0.0,
+"features": 0.14814814814814814,
+"fidelity": 0.5623122003611991,
 "structure": 0.5408805031446541,
-"text": 0.9817792068595927
+"text": 0.997907949790795
 },
 "status": "ok"
 },
@@ -12309,7 +12274,7 @@
 0
 ],
 "emph": [
-3,
+1,
 0
 ],
 "image": [
@@ -12349,7 +12314,7 @@
 0
 ],
 "sup": [
-3,
+2,
 0
 ],
 "table": [
@@ -12366,17 +12331,17 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
 "scores": {
-"features": 0.08823529411764706,
-"fidelity": 0.5474952558432657,
+"features": 0.09230769230769231,
+"fidelity": 0.5503831930061439,
 "structure": 0.5811965811965812,
-"text": 0.9730538922155688
+"text": 0.977645305514158
 },
 "status": "ok"
 },
 {
 "detail": {
 "emph": [
-3,
+1,
 0
 ],
 "image": [
@@ -12404,7 +12369,7 @@
 0
 ],
 "sup": [
-2,
+1,
 0
 ],
 "ul_item": [
@@ -12417,10 +12382,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
 "scores": {
-"features": 0.08695652173913043,
-"fidelity": 0.5666677888310975,
+"features": 0.1,
+"fidelity": 0.5737839221710189,
 "structure": 0.6428571428571429,
-"text": 0.9701897018970189
+"text": 0.978494623655914
 },
 "status": "ok"
 },
@@ -12466,10 +12431,6 @@
 3,
 0
 ],
-"math_display": [
-0,
-2
-],
 "ol_item": [
 3,
 0
@@ -12504,11 +12465,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
 "scores": {
-"features": 0.04597701149425287,
-"fidelity": 0.5391791283845256,
-"math": 0.0,
+"features": 0.047058823529411764,
+"fidelity": 0.5450275470260006,
 "structure": 0.6086956521739131,
-"text": 0.9628647214854111
+"text": 0.979328165374677
 },
 "status": "ok"
 },
@@ -12593,10 +12553,6 @@
 22,
 0
 ],
-"emph": [
-6,
-0
-],
 "h2": [
 2,
 3
@@ -12617,14 +12573,6 @@
 9,
 0
 ],
-"sub": [
-2,
-0
-],
-"sup": [
-4,
-0
-],
 "table": [
 2,
 0
@@ -12639,10 +12587,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
 "scores": {
-"features": 0.06451612903225806,
-"fidelity": 0.5116767507259867,
+"features": 0.11538461538461539,
+"fidelity": 0.5370533690817322,
 "structure": 0.5052631578947369,
-"text": 0.9652509652509652
+"text": 0.9905123339658444
 },
 "status": "ok"
 },
@@ -13004,10 +12952,6 @@
 6,
 0
 ],
-"math_display": [
-0,
-2
-],
 "row": [
 3,
 0
@@ -13023,10 +12967,9 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 0.0,
-"fidelity": 0.6362371341498476,
-"math": 0.0,
+"fidelity": 0.6416189642400162,
 "structure": 0.9290322580645162,
-"text": 0.9796791443850268
+"text": 0.9958246346555324
 },
 "status": "ok"
 },
@@ -13051,9 +12994,9 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 0.23529411764705882,
-"fidelity": 0.645173751902499,
+"fidelity": 0.6467046129779854,
 "structure": 0.7213114754098361,
-"text": 0.9789156626506024
+"text": 0.9835082458770614
 },
 "status": "ok"
 },
@@ -13065,9 +13008,9 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 1.0,
-"fidelity": 0.9636456733230926,
+"fidelity": 0.9664126984126984,
 "structure": 0.9285714285714286,
-"text": 0.9623655913978495
+"text": 0.9706666666666667
 },
 "status": "ok"
 },
@@ -13076,10 +13019,6 @@
 "cell": [
 27,
 0
-],
-"math_display": [
-0,
-2
 ],
 "row": [
 9,
@@ -13095,11 +13034,10 @@
 "kind": "generated",
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
-"features": 0.375,
-"fidelity": 0.6441758946569281,
-"math": 0.0,
+"features": 0.3870967741935484,
+"fidelity": 0.6536759256746031,
 "structure": 0.5882352941176471,
-"text": 0.9692923898531375
+"text": 0.9856957087126138
 },
 "status": "ok"
 },
@@ -13140,6 +13078,10 @@
 7,
 0
 ],
+"sup": [
+0,
+1
+],
 "table": [
 2,
 0
@@ -13151,9 +13093,9 @@
 "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
 "scores": {
 "features": 0.0,
-"fidelity": 0.5424984489617167,
+"fidelity": 0.5509242652509745,
 "structure": 0.660377358490566,
-"text": 0.9671179883945842
+"text": 0.9923954372623575
 },
 "status": "ok"
 },

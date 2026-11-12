@@ -87,6 +87,10 @@ pub struct Book {
     opf_path: String,
     /// Title from the OPF `<metadata><dc:title>`, if present.
     title: Option<String>,
+    /// `<dc:creator>` entries, in order.
+    creators: Vec<String>,
+    /// `<dc:date>`, if present.
+    date: Option<String>,
 }
 
 const MAX_ENTRY: u64 = 64 * 1024 * 1024;
@@ -140,7 +144,7 @@ pub fn read(bytes: &[u8]) -> Result<Book, String> {
 
     // 2. Read the OPF (package document). Build manifest + spine.
     let opf_bytes = read_bounded_entry(&mut zip, &opf_path)?;
-    let (manifest, spine_ids, title) = parse_package(&opf_bytes)?;
+    let (manifest, spine_ids, title, creators, date) = parse_package(&opf_bytes)?;
 
     // 3. Pre-resolve spine hrefs against the OPF directory. One O(1)
     //    apeiron::freq::Table lookup per idref.
@@ -168,6 +172,8 @@ pub fn read(bytes: &[u8]) -> Result<Book, String> {
         spine,
         opf_path,
         title,
+        creators,
+        date,
     })
 }
 
@@ -202,6 +208,37 @@ pub fn extract_text(book: &Book, bytes: &[u8]) -> Result<String, String> {
         out.push_str(&md);
     }
     Ok(out)
+}
+
+/// The book as a document tree: the OPF's title, creators and date as metadata, and every spine
+/// chapter read with the HTML document reader (footnote references become footnotes).
+pub fn extract_doc(book: &Book, bytes: &[u8]) -> Result<crate::ast::Doc, String> {
+    use crate::ast::{Inline, Meta};
+    if bytes.len() > MAX_TOTAL as usize {
+        return Err(format!("EPUB too large: {} bytes", bytes.len()));
+    }
+    let mut zip =
+        ZipArchive::new(Cursor::new(bytes)).map_err(|e| format!("invalid EPUB ZIP: {e}"))?;
+    let mut doc = crate::ast::Doc {
+        meta: Meta {
+            title: book.title.iter().map(|t| Inline::Text(t.clone())).collect(),
+            authors: book.creators.iter().map(|c| vec![Inline::Text(c.clone())]).collect(),
+            date: book.date.clone(),
+            abstract_blocks: Vec::new(),
+        },
+        blocks: Vec::new(),
+    };
+    let mut total = 0usize;
+    for item in &book.spine {
+        let raw = read_bounded_xhtml(&mut zip, &item.href)?;
+        total += raw.len();
+        if total > MAX_TEXT_BYTES as usize {
+            return Err(format!("spine text exceeds {MAX_TEXT_BYTES} bytes at {:?}", item.href));
+        }
+        let chapter = crate::html::reader::to_doc_epub(&String::from_utf8_lossy(&raw));
+        doc.blocks.extend(chapter.blocks);
+    }
+    Ok(doc)
 }
 
 /// Spine in reading order.
@@ -267,7 +304,13 @@ pub(crate) fn parse_container(bytes: &[u8]) -> Result<String, String> {
 
 /// A parsed OPF package: the manifest by item id, the spine's idrefs in order, and the package
 /// title when the OPF declares one.
-type Package = (Table<String, ManifestItem>, Vec<String>, Option<String>);
+type Package = (
+    Table<String, ManifestItem>,
+    Vec<String>,
+    Option<String>,
+    Vec<String>,
+    Option<String>,
+);
 
 fn parse_package(bytes: &[u8]) -> Result<Package, String> {
     let s = std::str::from_utf8(bytes).map_err(|e| format!("OPF is not UTF-8: {e}"))?;
@@ -276,6 +319,8 @@ fn parse_package(bytes: &[u8]) -> Result<Package, String> {
     let mut manifest = Table::<String, ManifestItem>::new();
     let mut spine_ids: Vec<String> = Vec::new();
     let mut title: Option<String> = None;
+    let mut creators: Vec<String> = Vec::new();
+    let mut date: Option<String> = None;
     let mut buf = Vec::with_capacity(1024);
     loop {
         match reader
@@ -311,12 +356,29 @@ fn parse_package(bytes: &[u8]) -> Result<Package, String> {
                     .map_err(|err| format!("OPF title read: {err}"))?;
                 title = Some(inner.into_owned().to_string());
             }
+            Event::Start(e) if e.local_name().as_ref().as_bytes() == b"creator" => {
+                let inner = reader
+                    .read_text(e.name())
+                    .map_err(|err| format!("OPF creator read: {err}"))?;
+                let name = inner.trim().to_string();
+                if !name.is_empty() {
+                    creators.push(name);
+                }
+            }
+            Event::Start(e) if e.local_name().as_ref().as_bytes() == b"date" => {
+                let inner = reader
+                    .read_text(e.name())
+                    .map_err(|err| format!("OPF date read: {err}"))?;
+                if date.is_none() && !inner.trim().is_empty() {
+                    date = Some(inner.trim().to_string());
+                }
+            }
             Event::Eof => break,
             _ => {}
         }
         buf.clear();
     }
-    Ok((manifest, spine_ids, title))
+    Ok((manifest, spine_ids, title, creators, date))
 }
 
 /// `<dir>` of an OPF path inside the ZIP. Pure string ops, no Path —
