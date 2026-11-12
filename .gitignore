@@ -1,3 +1,6 @@
 /target/
 benches/pandoc-compat/outputs/
 __pycache__/
+
+# bindings build output
+/superdocuments_bindings/dist/

@@ -45,3 +45,37 @@ jobs:
         run: cargo test --locked
       - name: Clippy
         run: cargo clippy --locked --all-targets -- -D warnings
+
+  language-bindings:
+    name: Python and WebAssembly bindings
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Authenticate private git dependencies
+        env:
+          SUBSTRATE_TOKEN: ${{ secrets.CARGO_SUBSTRATE_TOKEN }}
+        run: |
+          if [ -z "${SUBSTRATE_TOKEN:-}" ]; then
+            echo "::warning::CARGO_SUBSTRATE_TOKEN is not configured; private git dependencies cannot be fetched"
+            exit 0
+          fi
+          git config --global url."https://x-access-token:${SUBSTRATE_TOKEN}@github.com/".insteadOf "https://github.com/"
+      # The bindings need a newer Rust than the root crate's pin (PyO3, wasm-bindgen), so this job uses stable.
+      - name: Install Rust
+        run: rustup toolchain install stable --profile minimal --component clippy --target wasm32-unknown-unknown
+      - name: Clippy (this crate only; the root crate is checked above)
+        run: cargo clippy --locked -p superdocuments_bindings --no-deps --features python --all-targets -- -D warnings
+      - name: Rust tests
+        run: cargo test --locked -p superdocuments_bindings
+      - name: Python extension and its tests
+        run: superdocuments_bindings/scripts/test-python.sh
+      - name: Install the wasm-bindgen CLI at the locked version
+        run: |
+          v="$(grep -A1 '^name = "wasm-bindgen"$' Cargo.lock | sed -n 's/^version = "\(.*\)"/\1/p')"
+          cargo install --locked wasm-bindgen-cli --version "$v"
+      - name: WebAssembly module and its tests
+        run: |
+          superdocuments_bindings/scripts/build-wasm.sh
+          node superdocuments_bindings/tests/wasm/test.mjs

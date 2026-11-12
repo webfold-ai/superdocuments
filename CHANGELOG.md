@@ -6,6 +6,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Added
 
+- `superdocuments_bindings` workspace crate: Python (PyO3) and TypeScript/WebAssembly (wasm-bindgen) bindings for `convert`, `pdf_to_markdown`, `pdf_pages` and `worksheets`, tested against the built artifacts on the repository's own fixtures, including hostile input. No filesystem access and no OCR in the bindings. `apeiron` and `wirefold` pins move so the graph holds one apeiron that builds for `wasm32`.
 - Legacy `.xls` (BIFF) conversion through the in-repo `calamine/` crate, now a path dependency of the root crate (default features off). The output has the same Markdown shape as XLSX: one `## <sheet>` section per worksheet in tab order, error cells, booleans and formula results. `DocFormat::Xls` goes through `DocumentCache` and `convert_streaming`.
 
 - `document::extract_images` and `ExtractedImage` (`src/media.rs`): the pictures of DOCX, DOCM, PPTX, XLSX, XLSM, ODT, ODP, ODS and EPUB, with name, media type (from magic bytes), header size for PNG, JPEG, GIF and BMP, first referencing part and alt text. Limits and zip safety are described in the function's doc comment.
