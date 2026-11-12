@@ -888,10 +888,10 @@ fn star_after_formatting_words_is_not_an_ignorable_destination() {
     assert!(md.contains("Shown") && !md.contains("Hidden"), "{md:?}");
 }
 
-/// A `\uN` fallback that is a control word (`舦 \tab}`) must not skip the first letter of the
+/// A `\uN` fallback that is a control word (`\u8226 \tab}`) must not skip the first letter of the
 /// text after the group (Pandoc's test/rtf/list_multiparagraph.rtf read "irst item").
 #[test]
 fn unicode_fallback_does_not_cross_the_end_of_a_group() {
-    let md = markdown_of(br"{\rtf1\ansi\pard{\listtext\tab 舦 \tab}First item\par}");
+    let md = markdown_of(br"{\rtf1\ansi\pard{\listtext\tab \u8226 \tab}First item\par}");
     assert!(md.contains("First item"), "{md:?}");
 }
