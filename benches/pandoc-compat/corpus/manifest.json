@@ -1,0 +1,3864 @@
+{
+ "pandoc": "3.1.3",
+ "seed_note": "all seeds are fixed in gen_corpus.py / gen_latex.py / gen_other.py",
+ "items": [
+  {
+   "id": "latex-gen-001",
+   "path": "latex/gen-001.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-002",
+   "path": "latex/gen-002.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-003",
+   "path": "latex/gen-003.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-004",
+   "path": "latex/gen-004.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-005",
+   "path": "latex/gen-005.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-006",
+   "path": "latex/gen-006.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-007",
+   "path": "latex/gen-007.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-008",
+   "path": "latex/gen-008.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-009",
+   "path": "latex/gen-009.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-010",
+   "path": "latex/gen-010.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-011",
+   "path": "latex/gen-011.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-012",
+   "path": "latex/gen-012.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-013",
+   "path": "latex/gen-013.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-014",
+   "path": "latex/gen-014.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-015",
+   "path": "latex/gen-015.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-016",
+   "path": "latex/gen-016.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-017",
+   "path": "latex/gen-017.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-018",
+   "path": "latex/gen-018.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-019",
+   "path": "latex/gen-019.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-020",
+   "path": "latex/gen-020.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-021",
+   "path": "latex/gen-021.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-022",
+   "path": "latex/gen-022.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-023",
+   "path": "latex/gen-023.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-024",
+   "path": "latex/gen-024.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-025",
+   "path": "latex/gen-025.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-026",
+   "path": "latex/gen-026.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-027",
+   "path": "latex/gen-027.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-028",
+   "path": "latex/gen-028.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-029",
+   "path": "latex/gen-029.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-030",
+   "path": "latex/gen-030.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-031",
+   "path": "latex/gen-031.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-032",
+   "path": "latex/gen-032.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-033",
+   "path": "latex/gen-033.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-034",
+   "path": "latex/gen-034.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-035",
+   "path": "latex/gen-035.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-036",
+   "path": "latex/gen-036.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-037",
+   "path": "latex/gen-037.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-038",
+   "path": "latex/gen-038.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-039",
+   "path": "latex/gen-039.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-040",
+   "path": "latex/gen-040.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-041",
+   "path": "latex/gen-041.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-042",
+   "path": "latex/gen-042.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-043",
+   "path": "latex/gen-043.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-044",
+   "path": "latex/gen-044.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-045",
+   "path": "latex/gen-045.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-046",
+   "path": "latex/gen-046.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-047",
+   "path": "latex/gen-047.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-048",
+   "path": "latex/gen-048.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-049",
+   "path": "latex/gen-049.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-050",
+   "path": "latex/gen-050.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-051",
+   "path": "latex/gen-051.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-052",
+   "path": "latex/gen-052.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-053",
+   "path": "latex/gen-053.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-054",
+   "path": "latex/gen-054.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-055",
+   "path": "latex/gen-055.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-056",
+   "path": "latex/gen-056.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-057",
+   "path": "latex/gen-057.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-058",
+   "path": "latex/gen-058.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-059",
+   "path": "latex/gen-059.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-060",
+   "path": "latex/gen-060.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-061",
+   "path": "latex/gen-061.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-062",
+   "path": "latex/gen-062.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-063",
+   "path": "latex/gen-063.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-064",
+   "path": "latex/gen-064.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-065",
+   "path": "latex/gen-065.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-066",
+   "path": "latex/gen-066.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-067",
+   "path": "latex/gen-067.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-068",
+   "path": "latex/gen-068.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-069",
+   "path": "latex/gen-069.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-070",
+   "path": "latex/gen-070.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-071",
+   "path": "latex/gen-071.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-072",
+   "path": "latex/gen-072.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-073",
+   "path": "latex/gen-073.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-074",
+   "path": "latex/gen-074.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-075",
+   "path": "latex/gen-075.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-076",
+   "path": "latex/gen-076.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-077",
+   "path": "latex/gen-077.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-078",
+   "path": "latex/gen-078.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-079",
+   "path": "latex/gen-079.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-080",
+   "path": "latex/gen-080.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-081",
+   "path": "latex/gen-081.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-082",
+   "path": "latex/gen-082.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-083",
+   "path": "latex/gen-083.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-084",
+   "path": "latex/gen-084.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-085",
+   "path": "latex/gen-085.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-086",
+   "path": "latex/gen-086.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-087",
+   "path": "latex/gen-087.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-088",
+   "path": "latex/gen-088.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-089",
+   "path": "latex/gen-089.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-090",
+   "path": "latex/gen-090.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-091",
+   "path": "latex/gen-091.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-092",
+   "path": "latex/gen-092.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-093",
+   "path": "latex/gen-093.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-094",
+   "path": "latex/gen-094.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-095",
+   "path": "latex/gen-095.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-096",
+   "path": "latex/gen-096.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-097",
+   "path": "latex/gen-097.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-098",
+   "path": "latex/gen-098.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-099",
+   "path": "latex/gen-099.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-gen-100",
+   "path": "latex/gen-100.tex",
+   "format": "latex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-sparse-attention",
+   "path": "latex/paper-sparse-attention.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-notes-algorithms",
+   "path": "latex/paper-notes-algorithms.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-survey-cites",
+   "path": "latex/paper-survey-cites.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-biblatex",
+   "path": "latex/paper-biblatex.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-physics-notes",
+   "path": "latex/paper-physics-notes.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-paper-memo-lists",
+   "path": "latex/paper-memo-lists.tex",
+   "format": "latex",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "latex-proj01",
+   "path": "latex-projects/proj01/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj01"
+  },
+  {
+   "id": "latex-proj02",
+   "path": "latex-projects/proj02/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj02"
+  },
+  {
+   "id": "latex-proj03",
+   "path": "latex-projects/proj03/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj03"
+  },
+  {
+   "id": "latex-proj04",
+   "path": "latex-projects/proj04/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj04"
+  },
+  {
+   "id": "latex-proj05",
+   "path": "latex-projects/proj05/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj05"
+  },
+  {
+   "id": "latex-proj06",
+   "path": "latex-projects/proj06/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj06"
+  },
+  {
+   "id": "latex-proj07",
+   "path": "latex-projects/proj07/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj07"
+  },
+  {
+   "id": "latex-proj08",
+   "path": "latex-projects/proj08/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj08"
+  },
+  {
+   "id": "latex-proj09",
+   "path": "latex-projects/proj09/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj09"
+  },
+  {
+   "id": "latex-proj10",
+   "path": "latex-projects/proj10/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj10"
+  },
+  {
+   "id": "latex-proj11",
+   "path": "latex-projects/proj11/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj11"
+  },
+  {
+   "id": "latex-proj12",
+   "path": "latex-projects/proj12/main.tex",
+   "format": "latex",
+   "producer": "python generator (seeded), \\input/\\include project",
+   "kind": "generated",
+   "pandoc_from": "latex",
+   "pandoc_flags": [],
+   "cwd": "latex-projects/proj12"
+  },
+  {
+   "id": "bib-01",
+   "path": "bib/bib-01.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-02",
+   "path": "bib/bib-02.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-03",
+   "path": "bib/bib-03.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-04",
+   "path": "bib/bib-04.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-05",
+   "path": "bib/bib-05.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-06",
+   "path": "bib/bib-06.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-07",
+   "path": "bib/bib-07.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-08",
+   "path": "bib/bib-08.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-09",
+   "path": "bib/bib-09.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-10",
+   "path": "bib/bib-10.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-11",
+   "path": "bib/bib-11.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-12",
+   "path": "bib/bib-12.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-13",
+   "path": "bib/bib-13.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "bibtex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-14",
+   "path": "bib/bib-14.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-15",
+   "path": "bib/bib-15.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-16",
+   "path": "bib/bib-16.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-17",
+   "path": "bib/bib-17.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-18",
+   "path": "bib/bib-18.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-19",
+   "path": "bib/bib-19.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-20",
+   "path": "bib/bib-20.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-21",
+   "path": "bib/bib-21.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-22",
+   "path": "bib/bib-22.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-23",
+   "path": "bib/bib-23.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-24",
+   "path": "bib/bib-24.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "bib-25",
+   "path": "bib/bib-25.bib",
+   "format": "bibtex",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "biblatex",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-01",
+   "path": "markdown/md-01.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-01",
+   "path": "html/seed-01.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-01",
+   "path": "rst/seed-01.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-01",
+   "path": "docx/pandoc-01.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-01",
+   "path": "odt/pandoc-01.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-01",
+   "path": "epub/pandoc-01.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-02",
+   "path": "markdown/md-02.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-02",
+   "path": "html/seed-02.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-02",
+   "path": "rst/seed-02.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-02",
+   "path": "docx/pandoc-02.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-02",
+   "path": "odt/pandoc-02.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-02",
+   "path": "epub/pandoc-02.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-03",
+   "path": "markdown/md-03.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-03",
+   "path": "html/seed-03.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-03",
+   "path": "rst/seed-03.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-03",
+   "path": "docx/pandoc-03.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-03",
+   "path": "odt/pandoc-03.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-03",
+   "path": "epub/pandoc-03.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-04",
+   "path": "markdown/md-04.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-04",
+   "path": "html/seed-04.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-04",
+   "path": "rst/seed-04.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-04",
+   "path": "docx/pandoc-04.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-04",
+   "path": "odt/pandoc-04.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-04",
+   "path": "epub/pandoc-04.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-05",
+   "path": "markdown/md-05.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-05",
+   "path": "html/seed-05.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-05",
+   "path": "rst/seed-05.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-05",
+   "path": "docx/pandoc-05.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-05",
+   "path": "odt/pandoc-05.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-05",
+   "path": "epub/pandoc-05.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-06",
+   "path": "markdown/md-06.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-06",
+   "path": "html/seed-06.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-06",
+   "path": "rst/seed-06.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-06",
+   "path": "docx/pandoc-06.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-06",
+   "path": "odt/pandoc-06.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-06",
+   "path": "epub/pandoc-06.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-07",
+   "path": "markdown/md-07.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-07",
+   "path": "html/seed-07.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-07",
+   "path": "rst/seed-07.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-07",
+   "path": "docx/pandoc-07.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-07",
+   "path": "odt/pandoc-07.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-07",
+   "path": "epub/pandoc-07.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-08",
+   "path": "markdown/md-08.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-08",
+   "path": "html/seed-08.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-08",
+   "path": "rst/seed-08.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-08",
+   "path": "docx/pandoc-08.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-08",
+   "path": "odt/pandoc-08.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-08",
+   "path": "epub/pandoc-08.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-09",
+   "path": "markdown/md-09.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-09",
+   "path": "html/seed-09.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-09",
+   "path": "rst/seed-09.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-09",
+   "path": "docx/pandoc-09.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-09",
+   "path": "odt/pandoc-09.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-09",
+   "path": "epub/pandoc-09.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-10",
+   "path": "markdown/md-10.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-10",
+   "path": "html/seed-10.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-10",
+   "path": "rst/seed-10.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-10",
+   "path": "docx/pandoc-10.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-10",
+   "path": "odt/pandoc-10.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-10",
+   "path": "epub/pandoc-10.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-11",
+   "path": "markdown/md-11.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-11",
+   "path": "html/seed-11.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-11",
+   "path": "rst/seed-11.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-11",
+   "path": "docx/pandoc-11.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-11",
+   "path": "odt/pandoc-11.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-11",
+   "path": "epub/pandoc-11.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-12",
+   "path": "markdown/md-12.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-12",
+   "path": "html/seed-12.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-12",
+   "path": "rst/seed-12.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-12",
+   "path": "docx/pandoc-12.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-12",
+   "path": "odt/pandoc-12.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-12",
+   "path": "epub/pandoc-12.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-13",
+   "path": "markdown/md-13.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-13",
+   "path": "html/seed-13.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-13",
+   "path": "rst/seed-13.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-13",
+   "path": "docx/pandoc-13.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-13",
+   "path": "odt/pandoc-13.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-13",
+   "path": "epub/pandoc-13.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-14",
+   "path": "markdown/md-14.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-14",
+   "path": "html/seed-14.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-14",
+   "path": "rst/seed-14.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-14",
+   "path": "docx/pandoc-14.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-14",
+   "path": "odt/pandoc-14.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-14",
+   "path": "epub/pandoc-14.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-15",
+   "path": "markdown/md-15.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-15",
+   "path": "html/seed-15.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-15",
+   "path": "rst/seed-15.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-15",
+   "path": "docx/pandoc-15.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-pandoc-15",
+   "path": "odt/pandoc-15.odt",
+   "format": "odt",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-pandoc-15",
+   "path": "epub/pandoc-15.epub",
+   "format": "epub",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-16",
+   "path": "markdown/md-16.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-16",
+   "path": "html/seed-16.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-16",
+   "path": "rst/seed-16.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-16",
+   "path": "docx/pandoc-16.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-17",
+   "path": "markdown/md-17.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-17",
+   "path": "html/seed-17.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-17",
+   "path": "rst/seed-17.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-17",
+   "path": "docx/pandoc-17.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-18",
+   "path": "markdown/md-18.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-18",
+   "path": "html/seed-18.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-18",
+   "path": "rst/seed-18.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-18",
+   "path": "docx/pandoc-18.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-19",
+   "path": "markdown/md-19.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-19",
+   "path": "html/seed-19.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-19",
+   "path": "rst/seed-19.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-19",
+   "path": "docx/pandoc-19.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-20",
+   "path": "markdown/md-20.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-20",
+   "path": "html/seed-20.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-20",
+   "path": "rst/seed-20.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-pandoc-20",
+   "path": "docx/pandoc-20.docx",
+   "format": "docx",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-21",
+   "path": "markdown/md-21.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-21",
+   "path": "html/seed-21.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-21",
+   "path": "rst/seed-21.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-22",
+   "path": "markdown/md-22.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-22",
+   "path": "html/seed-22.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-seed-22",
+   "path": "rst/seed-22.rst",
+   "format": "rst",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-23",
+   "path": "markdown/md-23.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-23",
+   "path": "html/seed-23.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-24",
+   "path": "markdown/md-24.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-24",
+   "path": "html/seed-24.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-25",
+   "path": "markdown/md-25.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-25",
+   "path": "html/seed-25.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-26",
+   "path": "markdown/md-26.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-26",
+   "path": "html/seed-26.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-27",
+   "path": "markdown/md-27.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-27",
+   "path": "html/seed-27.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-28",
+   "path": "markdown/md-28.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-28",
+   "path": "html/seed-28.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-29",
+   "path": "markdown/md-29.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-29",
+   "path": "html/seed-29.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-30",
+   "path": "markdown/md-30.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-seed-30",
+   "path": "html/seed-30.html",
+   "format": "html",
+   "producer": "pandoc 3.1.3 writer from a seed",
+   "kind": "generated",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-31",
+   "path": "markdown/md-31.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-32",
+   "path": "markdown/md-32.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-33",
+   "path": "markdown/md-33.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-34",
+   "path": "markdown/md-34.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-35",
+   "path": "markdown/md-35.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-36",
+   "path": "markdown/md-36.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-37",
+   "path": "markdown/md-37.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-38",
+   "path": "markdown/md-38.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-39",
+   "path": "markdown/md-39.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "markdown-40",
+   "path": "markdown/md-40.md",
+   "format": "markdown",
+   "producer": "python generator (seeded)",
+   "kind": "generated",
+   "pandoc_from": "markdown",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-article",
+   "path": "html/html-article.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-recipe",
+   "path": "html/html-recipe.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-defs",
+   "path": "html/html-defs.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-table-span",
+   "path": "html/html-table-span.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-math",
+   "path": "html/html-math.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-nested",
+   "path": "html/html-nested.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-entities",
+   "path": "html/html-entities.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-form-page",
+   "path": "html/html-form-page.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-figure",
+   "path": "html/html-figure.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-headings",
+   "path": "html/html-headings.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-ordered",
+   "path": "html/html-ordered.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "html-hand-inline",
+   "path": "html/html-inline.html",
+   "format": "html",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "html",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-basic",
+   "path": "rst/rst-basic.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-code",
+   "path": "rst/rst-code.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-table-grid",
+   "path": "rst/rst-table-grid.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-admonitions",
+   "path": "rst/rst-admonitions.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-fields",
+   "path": "rst/rst-fields.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-footnotes",
+   "path": "rst/rst-footnotes.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-math",
+   "path": "rst/rst-math.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-quote-line",
+   "path": "rst/rst-quote-line.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-links",
+   "path": "rst/rst-links.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-toc",
+   "path": "rst/rst-toc.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-substitution",
+   "path": "rst/rst-substitution.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "rst-hand-roles",
+   "path": "rst/rst-roles.rst",
+   "format": "rst",
+   "producer": "hand-written",
+   "kind": "hand-written",
+   "pandoc_from": "rst",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-structure",
+   "path": "docx/raw-structure.docx",
+   "format": "docx",
+   "producer": "python zipfile, OOXML written for this corpus",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-tables",
+   "path": "docx/raw-tables.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-footnotes",
+   "path": "docx/raw-footnotes.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-endnotes",
+   "path": "docx/raw-endnotes.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-tracked",
+   "path": "docx/raw-tracked.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-tracked2",
+   "path": "docx/raw-tracked2.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-comments",
+   "path": "docx/raw-comments.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-comments-tracked",
+   "path": "docx/raw-comments-tracked.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-misc",
+   "path": "docx/raw-misc.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-headings",
+   "path": "docx/raw-headings.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-raw-math",
+   "path": "docx/raw-math.docx",
+   "format": "docx",
+   "producer": "python zipfile",
+   "kind": "hand-written",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-22",
+   "path": "docx/lo-22.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-23",
+   "path": "docx/lo-23.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-24",
+   "path": "docx/lo-24.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-25",
+   "path": "docx/lo-25.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-26",
+   "path": "docx/lo-26.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-27",
+   "path": "docx/lo-27.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-28",
+   "path": "docx/lo-28.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-29",
+   "path": "docx/lo-29.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-30",
+   "path": "docx/lo-30.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-article",
+   "path": "docx/lo-article.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-recipe",
+   "path": "docx/lo-recipe.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-defs",
+   "path": "docx/lo-defs.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-table-span",
+   "path": "docx/lo-table-span.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-nested",
+   "path": "docx/lo-nested.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-figure",
+   "path": "docx/lo-figure.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-headings",
+   "path": "docx/lo-headings.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-ordered",
+   "path": "docx/lo-ordered.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "docx-lo-inline",
+   "path": "docx/lo-inline.docx",
+   "format": "docx",
+   "producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+   "kind": "generated",
+   "pandoc_from": "docx",
+   "pandoc_flags": [
+    "--track-changes=accept"
+   ],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-21",
+   "path": "odt/lo-21.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-22",
+   "path": "odt/lo-22.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-23",
+   "path": "odt/lo-23.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-24",
+   "path": "odt/lo-24.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-25",
+   "path": "odt/lo-25.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-26",
+   "path": "odt/lo-26.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-27",
+   "path": "odt/lo-27.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-28",
+   "path": "odt/lo-28.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-29",
+   "path": "odt/lo-29.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-30",
+   "path": "odt/lo-30.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-article",
+   "path": "odt/lo-article.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-recipe",
+   "path": "odt/lo-recipe.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-defs",
+   "path": "odt/lo-defs.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-table-span",
+   "path": "odt/lo-table-span.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-nested",
+   "path": "odt/lo-nested.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-figure",
+   "path": "odt/lo-figure.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-headings",
+   "path": "odt/lo-headings.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-ordered",
+   "path": "odt/lo-ordered.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "odt-lo-inline",
+   "path": "odt/lo-inline.odt",
+   "format": "odt",
+   "producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+   "kind": "generated",
+   "pandoc_from": "odt",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-21",
+   "path": "epub/lo-21.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-22",
+   "path": "epub/lo-22.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-23",
+   "path": "epub/lo-23.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-24",
+   "path": "epub/lo-24.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-25",
+   "path": "epub/lo-25.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-26",
+   "path": "epub/lo-26.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-27",
+   "path": "epub/lo-27.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-28",
+   "path": "epub/lo-28.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-29",
+   "path": "epub/lo-29.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-30",
+   "path": "epub/lo-30.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-article",
+   "path": "epub/lo-article.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-recipe",
+   "path": "epub/lo-recipe.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-defs",
+   "path": "epub/lo-defs.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-table-span",
+   "path": "epub/lo-table-span.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-nested",
+   "path": "epub/lo-nested.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-figure",
+   "path": "epub/lo-figure.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-headings",
+   "path": "epub/lo-headings.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-ordered",
+   "path": "epub/lo-ordered.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  },
+  {
+   "id": "epub-lo-inline",
+   "path": "epub/lo-inline.epub",
+   "format": "epub",
+   "producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+   "kind": "generated",
+   "pandoc_from": "epub",
+   "pandoc_flags": [],
+   "cwd": ""
+  }
+ ]
+}
