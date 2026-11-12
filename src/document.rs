@@ -900,6 +900,7 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
             csv_rows(&decoded, csv_delimiter(&decoded)).map(|rows| markdown_table(&rows))
         }
         "html" | "htm" | "xhtml" => Ok(crate::html::reader::to_markdown_document(data)),
+        "rst" | "rest" => Ok(crate::rst::to_markdown(data)),
         "txt" | "md" | "markdown" => Ok(String::from_utf8_lossy(data).into_owned()),
         "tex" | "latex" | "ltx" => latex(data),
         "bib" | "bibtex" => bib(data),

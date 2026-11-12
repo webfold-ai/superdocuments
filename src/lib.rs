@@ -16,6 +16,7 @@ pub mod odt;
 pub(crate) mod media;
 pub(crate) mod ooxml;
 pub mod pdf;
+pub mod rst;
 pub mod rtf;
 pub mod tex_text;
 pub mod xlsx;
