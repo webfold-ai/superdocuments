@@ -104,11 +104,9 @@ impl Processor {
         &self.style
     }
 
-    /// Every reference id, sorted (for `nocite: @*`; the bibliography order is the style's).
+    /// Every reference id in the order the references were given (for `nocite: @*`).
     pub fn refs_in_order(&self) -> Vec<String> {
-        let mut ids: Vec<String> = self.refs.keys().cloned().collect();
-        ids.sort();
-        ids
+        self.input_order.clone()
     }
 
     /// Formats the citations and the bibliography of the works they cite (plus `nocite`, the
@@ -382,7 +380,19 @@ impl Processor {
         // The layout's own affixes and formatting wrap the whole citation.
         let mut r = eval::R { toks: out, called: 0, found: 0, hidden: false };
         decorate_layout(layout, &mut r);
-        normalize(r.toks)
+        let mut toks = normalize(r.toks);
+        if !self.style.class_in_text {
+            // A note starts a sentence: its first letter is a capital.
+            if let Some(Tok::Text(t)) = toks.iter_mut().find(|t| matches!(t, Tok::Text(x) if !x.is_empty())) {
+                if let Some(i) = t.char_indices().find(|(_, c)| c.is_alphabetic()).map(|(i, _)| i) {
+                    if t[..i].chars().all(|c| !c.is_alphanumeric()) {
+                        let c = t[i..].chars().next().unwrap_or(' ');
+                        t.replace_range(i..i + c.len_utf8(), &c.to_uppercase().collect::<String>());
+                    }
+                }
+            }
+        }
+        toks
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -445,7 +455,14 @@ impl Processor {
                 let rest = eval_layout_items(layout, &mut ctx);
                 let located = pieces[k].1.locator.is_some() || pieces[k - 1].1.locator.is_some();
                 out.push(Tok::Text(if located && year_delim_attr.is_none() { delim.to_string() } else { year_delim.to_string() }));
-                let rest = if mode != "year" && same_year(self.refs.get(&pieces[k - 1].1.id), Some(r)) {
+                let same = mode != "year" && same_year(self.refs.get(&pieces[k - 1].1.id), Some(r));
+                if same {
+                    // After a year with a suffix, only the suffix letters follow.
+                    if let (Some(d), Some(Tok::Text(last))) = (cit.attr("year-suffix-delimiter"), out.last_mut()) {
+                        *last = d.to_string();
+                    }
+                }
+                let rest = if same {
                     // Same year: only the suffix letter follows.
                     suffixes.get(&it.id).cloned().map(|s| text_toks(&s)).unwrap_or(rest)
                 } else {

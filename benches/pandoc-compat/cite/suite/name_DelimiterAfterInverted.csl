@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="minimal-two" default-locale="fr-FR">
+  <info>
+    <title>Delimiters with after-inverted-name</title>
+    <title-short>dates_ranges_ordinal_french</title-short>
+    <id>http://www.zotero.org/styles/delimter_after_inverted_name</id>
+    <link rel="self" href="http://www.zotero.org/styles/delimter_after_inverted_name"/>
+    <author>
+      <name/>
+    </author>
+    <category citation-format="author-date"/>
+    <updated>2020-06-27T10:27:51+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <citation>
+    <layout delimiter=" ; ">
+      <names variable="author">
+        <name name-as-sort-order="all" and="symbol" sort-separator=", " initialize-with=". " delimiter=", " delimiter-precedes-last="after-inverted-name"/>
+      </names>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <names variable="author">
+        <name name-as-sort-order="all" and="symbol" sort-separator=", " initialize-with=". " delimiter=", " delimiter-precedes-last="after-inverted-name"/>
+      </names>
+    </layout>
+  </bibliography>
+</style>

@@ -1,0 +1,1 @@
+[{"author": [{"family": "Doe", "given": "John Aloysius"}], "id": "ITEM-1", "issued": {"date-parts": [[1999]]}, "title": "John's Book", "type": "book"}, {"author": [{"family": "Roe", "given": "Jane Henrietta"}], "id": "ITEM-2", "issued": {"date-parts": [[2000]]}, "title": "Jane's Book", "type": "book"}]

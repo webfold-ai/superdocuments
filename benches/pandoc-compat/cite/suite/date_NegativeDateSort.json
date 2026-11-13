@@ -1,0 +1,1 @@
+[{"id": "ITEM-1", "issued": {"date-parts": [[-100, 7, 13]]}, "title": "BookA", "type": "book"}, {"id": "ITEM-2", "issued": {"date-parts": [[54, 10, 13]]}, "title": "BookB", "type": "book"}, {"id": "ITEM-3", "issued": {"date-parts": [[-44, 3, 15]]}, "title": "BookC", "type": "book"}, {"id": "ITEM-4", "issued": {"date-parts": [[68, 6, 11]]}, "title": "BookD", "type": "book"}]

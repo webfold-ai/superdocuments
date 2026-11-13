@@ -1,0 +1,48 @@
+<style
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="author">
+    <names variable="author">
+      <name form="short" />
+    </names>
+  </macro>
+  <citation>
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <choose>
+        <if type="personal_communication">
+          <group delimiter=", ">
+            <text macro="author" />
+            <text variable="title"/>
+          </group>
+        </if>
+        <else>
+          <text variable="citation-number"/>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <choose>
+        <if match="none" type="personal_communication">
+          <group delimiter=". ">
+            <text variable="citation-number"/>
+            <group delimiter=", ">
+              <text macro="author" />
+              <text variable="title"/>
+            </group>
+          </group>
+        </if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

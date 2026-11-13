@@ -1,0 +1,1 @@
+[{"author": [{"family": "Doe", "given": "John"}], "id": "ITEM-1", "issued": {"date-parts": [["1965"]]}, "title": "His Anonymous Life", "type": "book"}, {"author": [{"family": "Doe", "given": "Heroclitus"}], "id": "ITEM-2", "issued": {"date-parts": [["1965"]]}, "title": "His Anonymous Second Life", "type": "chapter"}]

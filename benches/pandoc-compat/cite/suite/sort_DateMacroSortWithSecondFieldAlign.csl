@@ -1,0 +1,34 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="issued">
+    <date variable="issued" form="text" date-parts="year" prefix="(" suffix=")"/>
+  </macro>
+  <citation>
+    <layout>
+      <names variable="author">
+        <name/>
+      </names>
+    </layout>
+  </citation>
+  <bibliography et-al-min="7" et-al-use-first="1" entry-spacing="0" second-field-align="flush">
+    <sort>
+      <key macro="issued"/>
+    </sort> 
+    <layout suffix=".">
+      <names variable="author"/>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text variable="title"/>
+        </group>
+        <text macro="issued"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

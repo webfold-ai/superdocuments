@@ -1,0 +1,57 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="editor">
+    <choose>
+      <if type="book">
+        <text macro="editor-short-label"/>
+      </if>
+      <else>
+        <text macro="editor-long-label"/>
+      </else>
+    </choose>
+    <names variable="editor">
+      <name/>
+      <label prefix=" "/>
+    </names>
+  </macro>
+  <macro name="editor-long-label">
+    <names variable="editor">
+      <name/>
+      <label prefix=" "/>
+    </names>
+  </macro>
+  <macro name="editor-short-label">
+    <names variable="editor">
+      <name/>
+      <label prefix=" " form="short"/>
+    </names>
+  </macro>
+  <citation>
+    <layout delimiter="; ">
+      <text variable="title"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout suffix=".">
+      <group delimiter=". ">
+        <names variable="translator">
+          <label form="verb" suffix=" "/>
+          <name/>
+          <substitute>
+            <text macro="editor"/>
+            <text variable="title" quotes="true"/>
+          </substitute>
+        </names>
+        <text variable="title" font-style="italic"/>
+        <text variable="publisher"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

@@ -1,0 +1,35 @@
+<style
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="shortdate">
+      <date variable="issued" delimiter="-">
+        <date-part name="year"/>
+        <date-part name="month" form="numeric"/>
+      </date>
+  </macro>
+  <macro name="longdate">
+      <date variable="issued" delimiter="-">
+        <date-part name="year"/>
+        <date-part name="month" form="numeric"/>
+        <date-part name="day" form="numeric"/>
+      </date>
+  </macro>
+  <citation>
+    <sort>
+      <key macro="shortdate"/>
+      <key variable="title"/>
+    </sort>
+    <layout delimiter=", ">
+      <group delimiter=" ">
+        <text variable="title"/>
+        <text macro="longdate" prefix="(" suffix=")"/>
+      </group>
+    </layout>
+  </citation>
+</style>

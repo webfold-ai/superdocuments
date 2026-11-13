@@ -104,7 +104,7 @@ impl Reference {
                 }
             } else {
                 let s = match val {
-                    Value::String(s) => s.clone(),
+                    Value::String(s) => smart(s),
                     Value::Number(n) => n.to_string(),
                     _ => continue,
                 };
@@ -117,8 +117,22 @@ impl Reference {
     }
 }
 
+/// Straight apostrophes between letters become typographic ones, as Pandoc reads CSL-JSON text.
+fn smart(s: &str) -> String {
+    let c: Vec<char> = s.chars().collect();
+    let mut out = String::with_capacity(s.len());
+    for (i, ch) in c.iter().enumerate() {
+        if *ch == '\'' && i > 0 && c[i - 1].is_alphanumeric() && c.get(i + 1).is_some_and(|n| n.is_alphanumeric()) {
+            out.push('\u{2019}');
+        } else {
+            out.push(*ch);
+        }
+    }
+    out
+}
+
 fn s(o: &serde_json::Map<String, Value>, k: &str) -> String {
-    o.get(k).and_then(Value::as_str).unwrap_or("").to_string()
+    smart(o.get(k).and_then(Value::as_str).unwrap_or(""))
 }
 
 fn name_from_json(v: &Value) -> Option<Name> {

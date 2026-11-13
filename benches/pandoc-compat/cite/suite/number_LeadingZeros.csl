@@ -1,0 +1,25 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0" page-range-format="chicago">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+    <layout delimiter="; ">
+      <group delimiter=" ">
+        <text variable="page"/>
+        <choose>
+          <if is-numeric="page">
+            <text value="(is-numeric)"/>
+          </if>
+          <else>
+            <text value="(non-numeric)"/>
+          </else>
+        </choose>
+      </group>
+    </layout>
+  </citation>
+</style>

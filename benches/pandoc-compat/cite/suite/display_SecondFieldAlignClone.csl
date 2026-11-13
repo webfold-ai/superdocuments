@@ -1,0 +1,39 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="in-text"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="author">
+    <names variable="author">
+      <name and="text" />
+    </names>
+  </macro>
+  <macro name="date">
+    <date variable="issued">
+      <date-part name="year" />
+    </date>
+    <text variable="year-suffix" />
+  </macro>
+  <citation>
+    <layout>
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <bibliography 
+         subsequent-author-substitute="">
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="]" display="left-margin"/>
+      <group delimiter=" " prefix=" " display="right-inline">
+       <group delimiter=", ">
+          <text macro="author"/>
+          <text variable="title" quotes="true"/>
+        </group>
+        <text macro="date" prefix="(" suffix=")"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

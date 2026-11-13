@@ -1,0 +1,31 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0"
+      demote-non-dropping-particle="sort-only">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="author">
+    <names variable="author">
+      <name/>
+    </names>
+  </macro>
+  <citation>
+    <layout>
+      <text value="Bogus"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <sort>
+       <key macro="author"/>
+    </sort>
+    <layout>
+      <names variable="author">
+        <name/>
+      </names>
+    </layout>
+  </bibliography>
+</style>

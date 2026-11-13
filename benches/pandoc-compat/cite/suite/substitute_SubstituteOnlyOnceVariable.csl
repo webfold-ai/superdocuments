@@ -1,0 +1,20 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2019-08-11T16:56:00+02:00</updated>
+  </info>
+  <citation>
+    <layout>
+      <names variable="author">
+        <substitute>
+          <text variable="title"/>
+          <text variable="container-title"/>
+        </substitute>
+      </names>
+    </layout>
+  </citation>
+</style>

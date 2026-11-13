@@ -1,0 +1,1 @@
+[@editor-translator-2]

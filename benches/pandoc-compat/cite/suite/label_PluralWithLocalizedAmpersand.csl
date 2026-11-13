@@ -1,0 +1,25 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0"
+      page-range-format="expanded">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <locale>
+    <terms>
+      <term name="and">and</term>
+      <term name="and" form="symbol">AMPERSAND</term>
+    </terms>
+  </locale>
+  <citation>
+    <layout>
+      <group delimiter=" ">
+        <label variable="locator"/>
+        <text variable="locator"/>
+      </group>
+    </layout>
+  </citation>
+</style>

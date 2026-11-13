@@ -1,0 +1,40 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation 
+         disambiguate-add-year-suffix="true">
+    <layout>
+      <names variable="author">
+        <name />
+      </names>
+      <date variable="issued">
+        <date-part name="year" />
+      </date>
+    </layout>
+  </citation>
+  <bibliography 
+         subsequent-author-substitute="">
+    <layout>
+      <group display="block">
+        <names variable="author">
+          <name and="text" />
+        </names>
+      </group>
+      <group display="left-margin">
+        <date variable="issued">
+          <date-part name="year" />
+        </date>
+        <text variable="year-suffix" />
+      </group>
+      <group display="right-inline">
+        <text variable="title" />
+      </group>
+    </layout>
+  </bibliography>
+</style>

@@ -1,0 +1,24 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="blob">
+    <text value="I AM A BLOB" />
+  </macro>
+  <citation>
+    <layout delimiter="; " prefix="[" suffix="]">
+      <names variable="editor">
+        <name />
+        <substitute>
+          <names variable="translator" />
+          <text macro="blob" />
+        </substitute>
+      </names>
+    </layout>
+  </citation>
+</style>
