@@ -2368,6 +2368,130 @@ impl Document {
     }
 }
 
+// ── page profiles: what a page is made of, for the "does this page need OCR" decision ──
+
+/// What one page is made of, as far as the OCR decision is concerned (see `crate::pdf::page_profile`).
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct PageGeometry {
+    /// Page width and height in points (the inherited `/MediaBox`; US Letter when absent).
+    pub width: f64,
+    pub height: f64,
+    /// Share of the page area painted by image XObjects invoked from the page's own content
+    /// stream (the sum of the drawn parallelograms, capped at 1.0). Images inside form XObjects
+    /// and inline images are not counted.
+    pub image_coverage: f64,
+}
+
+/// Image area painted by a content stream: tracks the CTM through `cm`/`q`/`Q` and adds the area of
+/// the unit square under the CTM (`|a*d - b*c|`, in square points) for every `Do` of a named image.
+fn image_area(content: &[u8], images: &Table<String, u32>) -> f64 {
+    let mut ctm = [1.0, 0.0, 0.0, 1.0, 0.0, 0.0];
+    let mut stack: Vec<[f64; 6]> = Vec::new();
+    let mut nums: Vec<f64> = Vec::new();
+    let mut name: Option<String> = None;
+    let mut area = 0.0;
+    let mut lex = Lex::new(content);
+    while let Some(t) = lex.next() {
+        match t {
+            Tok::Num(x) => nums.push(x),
+            Tok::Name(n) => name = Some(n),
+            Tok::Kw(op) => {
+                let n = nums.len();
+                match op.as_str() {
+                    "cm" if n >= 6 => {
+                        ctm = matmul(
+                            &[
+                                nums[n - 6],
+                                nums[n - 5],
+                                nums[n - 4],
+                                nums[n - 3],
+                                nums[n - 2],
+                                nums[n - 1],
+                            ],
+                            &ctm,
+                        )
+                    }
+                    "q" => stack.push(ctm),
+                    "Q" => {
+                        if let Some(s) = stack.pop() {
+                            ctm = s;
+                        }
+                    }
+                    "Do" => {
+                        if name.as_ref().is_some_and(|n| images.get(n).is_some()) {
+                            let a = (ctm[0] * ctm[3] - ctm[1] * ctm[2]).abs();
+                            if a.is_finite() {
+                                area += a;
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+                nums.clear();
+                name = None;
+            }
+            _ => {}
+        }
+    }
+    area
+}
+
+impl Document {
+    /// The `/MediaBox` size of a page, walking up `/Parent` for an inherited box.
+    fn page_size(&self, page: &Dict) -> (f64, f64) {
+        const LETTER: (f64, f64) = (612.0, 792.0);
+        let number = |o: &Object| match self.resolve(o) {
+            Some(Object::Int(n)) => Some(*n as f64),
+            Some(Object::Real(r)) => Some(*r),
+            _ => None,
+        };
+        let mut node = page;
+        for _ in 0..16 {
+            if let Some(Some(Object::Array(b))) = node
+                .get(&"MediaBox".to_string())
+                .map(|o| self.resolve(o))
+            {
+                let v: Vec<f64> = b.iter().filter_map(number).collect();
+                if let [x0, y0, x1, y1] = v[..] {
+                    let (w, h) = ((x1 - x0).abs(), (y1 - y0).abs());
+                    if w.is_finite() && h.is_finite() && w >= 1.0 && h >= 1.0 {
+                        return (w, h);
+                    }
+                }
+                return LETTER;
+            }
+            match self.as_dict(node.get(&"Parent".to_string())) {
+                Some(parent) => node = parent,
+                None => break,
+            }
+        }
+        LETTER
+    }
+
+    /// One `PageGeometry` per page, in the order and with the page set of `markdown_pages`.
+    pub fn page_geometry(&self) -> Vec<PageGeometry> {
+        let mut out = Vec::new();
+        let mut contents = ContentCache::new();
+        for pnum in self.page_numbers() {
+            if let Some(Object::Dict(page)) = self.object(pnum) {
+                let (width, height) = self.page_size(page);
+                let images = self.image_names(page);
+                let area = if images.is_empty() {
+                    0.0
+                } else {
+                    image_area(&self.page_content(page, &mut contents), &images)
+                };
+                out.push(PageGeometry {
+                    width,
+                    height,
+                    image_coverage: (area / (width * height)).clamp(0.0, 1.0),
+                });
+            }
+        }
+        out
+    }
+}
+
 #[cfg(test)]
 mod review_tests {
     use super::*;

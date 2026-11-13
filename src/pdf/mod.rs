@@ -1,5 +1,6 @@
 //! In-process PDF-to-Markdown extraction via Transcode's parser, plus the legacy
 //! `pdffold` process adapter for callers that still need it.
+use std::borrow::Cow;
 use std::fmt::Write as _;
 use std::io::{self, Read, Write};
 use std::panic::{catch_unwind, AssertUnwindSafe};
@@ -13,6 +14,7 @@ use std::time::{Duration, Instant};
 pub mod acroform;
 pub mod geometry;
 pub mod images;
+pub mod page_profile;
 pub mod page_walker;
 pub mod parser;
 pub mod transcode_populator;
@@ -60,34 +62,29 @@ pub fn extract_markdown(bytes: &[u8]) -> io::Result<String> {
 /// The native markdown of each page of PDF `bytes`, in page order (the pages `extract_markdown`
 /// concatenates). Size and header are checked first; a parser panic is returned as an error.
 fn native_pages_of_bytes(bytes: &[u8]) -> io::Result<Vec<String>> {
-    if bytes.len() > MAX_PDF_BYTES {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
-            "PDF exceeds size limit",
-        ));
-    }
-    if !bytes.starts_with(b"%PDF-") {
-        return Err(io::Error::new(
-            io::ErrorKind::InvalidData,
-            "invalid PDF header",
-        ));
-    }
-    let parsed = catch_unwind(AssertUnwindSafe(|| {
-        let document = crate::pdf::parser::Document::parse(bytes).map_err(|error| match error {
-            crate::pdf::parser::PdfError::Parse(message) => message,
-        })?;
-        if document.object_count() == 0 || document.root() == 0 {
-            return Err("PDF has no readable catalog".to_string());
-        }
-        Ok(document.markdown_pages())
-    }))
-    .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
-    parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
+    extract_pages_markdown(bytes)
 }
 
 /// Parse PDF bytes into one Markdown string per page (page order; empty for pages with no
 /// selectable text). Same limits and panic containment as `extract_markdown`.
 pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
+    parse_pages(bytes, |document| document.markdown_pages())
+}
+
+/// Parse once and return, per page, its native Markdown and its geometry (size and image
+/// coverage); the two vectors cover the same pages in the same order.
+fn pages_and_geometry(bytes: &[u8]) -> io::Result<(Vec<String>, Vec<parser::PageGeometry>)> {
+    parse_pages(bytes, |document| {
+        (document.markdown_pages(), document.page_geometry())
+    })
+}
+
+
+/// Size, header, catalog and panic checks shared by the page-level entry points.
+fn parse_pages<T>(
+    bytes: &[u8],
+    read: impl FnOnce(&crate::pdf::parser::Document) -> T,
+) -> io::Result<T> {
     if bytes.len() > MAX_PDF_BYTES {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
@@ -107,7 +104,7 @@ pub fn extract_pages_markdown(bytes: &[u8]) -> io::Result<Vec<String>> {
         if document.object_count() == 0 || document.root() == 0 {
             return Err("PDF has no readable catalog".to_string());
         }
-        Ok(document.markdown_pages())
+        Ok(read(&document))
     }))
     .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "PDF parser panicked"))?;
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
@@ -764,6 +761,25 @@ pub fn extract_file_with_ocr_options(
     options: &OcrOptions,
 ) -> io::Result<String> {
     let path = path.as_ref();
+    run_with_ocr(path, read_pdf_capped(path).map(Cow::Owned), options)
+}
+
+/// Like [`extract_file_with_ocr_options`], but the native text comes from `native_bytes` instead of
+/// the file's own bytes. A caller that repairs a PDF in memory first (expanding object streams,
+/// say) passes the repaired bytes here; OCR still renders the original file at `path`.
+pub fn extract_bytes_with_ocr_options(
+    path: impl AsRef<Path>,
+    native_bytes: &[u8],
+    options: &OcrOptions,
+) -> io::Result<String> {
+    run_with_ocr(path.as_ref(), Ok(Cow::Borrowed(native_bytes)), options)
+}
+
+fn run_with_ocr(
+    path: &Path,
+    bytes: io::Result<Cow<'_, [u8]>>,
+    options: &OcrOptions,
+) -> io::Result<String> {
     let guard = options
         .config
         .metrics
@@ -789,6 +805,7 @@ pub fn extract_file_with_ocr_options(
     let metrics_for_observer = options.config.metrics.clone();
     let result = extract_file_with_ocr_inner(
         path,
+        bytes,
         options,
         guard.as_ref().map(|g| g.metrics.clone()),
         move |stage, seconds, count, bytes| {
@@ -910,38 +927,38 @@ fn record_ocr_output(timings: &Mutex<PhaseTimings>, ocr_result: &io::Result<Stri
 
 fn extract_file_with_ocr_inner(
     path: &Path,
+    bytes: io::Result<Cow<'_, [u8]>>,
     options: &OcrOptions,
     metrics: Option<Arc<OcrMetrics>>,
     mut observer: impl FnMut(&str, f64, u64, u64),
     timings: Arc<Mutex<PhaseTimings>>,
 ) -> io::Result<String> {
-    let bytes = read_pdf_capped(path);
-    let native = match &bytes {
-        Ok(bytes) => extract_markdown(bytes),
+    let parsed = match &bytes {
+        Ok(bytes) => pages_and_geometry(bytes),
         Err(error) => Err(io::Error::new(error.kind(), error.to_string())),
     };
-    if let (Ok(markdown), Ok(bytes)) = (&native, &bytes) {
-        if has_embedded_text(markdown) {
-            // A document with some text-bearing pages and some without (a scan stapled to a
-            // born-digital file) must not lose the empty pages: OCR only those.
-            let page_texts = extract_pages_markdown(bytes).unwrap_or_default();
-            let empty_pages: Vec<u32> = page_texts
+    if let Ok((page_texts, geometry)) = &parsed {
+        if page_texts.iter().any(|page| has_embedded_text(page)) {
+            // Page-level routing (see `page_profile`): a page with no text, or a scan carrying only
+            // a stamp, is OCRed; every other page keeps its native text. A document that is a mix
+            // (a scan stapled to a born-digital file) is therefore never read by OCR as a whole.
+            let verdicts = page_profile::verdicts(geometry, page_texts);
+            let ocr_pages: Vec<u32> = verdicts
                 .iter()
-                .enumerate()
-                .filter(|(_, p)| !has_embedded_text(p))
-                .map(|(i, _)| i as u32 + 1)
+                .filter(|v| v.reason.is_some())
+                .map(|v| v.page)
                 .collect();
-            if empty_pages.is_empty() {
+            if ocr_pages.is_empty() {
                 if let Some(metrics) = metrics.as_ref() {
                     metrics.record_native_hit();
                 }
-                return Ok(markdown.clone());
+                return Ok(page_texts.concat());
             }
             return merge_native_and_ocr(
                 path,
                 options,
-                &page_texts,
-                &empty_pages,
+                page_texts,
+                &ocr_pages,
                 &mut observer,
                 &timings,
             );
@@ -955,7 +972,7 @@ fn extract_file_with_ocr_inner(
     record_ocr_output(&timings, &ocr_result);
     match ocr_result {
         Ok(markdown) => Ok(markdown),
-        Err(ocr_error) => match native {
+        Err(ocr_error) => match parsed {
             Err(native_error) => Err(io::Error::new(
                 ocr_error.kind(),
                 format!("PDF parser failed ({native_error}); OCR fallback failed ({ocr_error})"),
@@ -1265,7 +1282,7 @@ fn merge_native_and_ocr(
     path: &Path,
     options: &OcrOptions,
     page_texts: &[String],
-    empty_pages: &[u32],
+    ocr_pages: &[u32],
     observer: &mut impl FnMut(&str, f64, u64, u64),
     timings: &Arc<Mutex<PhaseTimings>>,
 ) -> io::Result<String> {
@@ -1273,7 +1290,7 @@ fn merge_native_and_ocr(
         .lock()
         .expect("phase timings mutex poisoned")
         .used_ocr = true;
-    let ocr = tesseract_ocr_pages(path, options, Some(empty_pages), &mut *observer)?;
+    let ocr = tesseract_ocr_pages(path, options, Some(ocr_pages), &mut *observer)?;
     {
         let mut t = timings.lock().expect("phase timings mutex poisoned");
         t.bytes_ocr = ocr.pages.iter().map(|(_, text)| text.len() as u64).sum();
@@ -1288,10 +1305,21 @@ fn merge_native_and_ocr(
     let mut out = String::new();
     for (i, native) in page_texts.iter().enumerate() {
         let number = i as u32 + 1;
-        let text = if has_embedded_text(native) {
-            native.trim()
+        let ocr_text = ocr_by_page.get(&number).copied().unwrap_or("").trim();
+        let text = if !ocr_pages.contains(&number) || ocr_text.is_empty() {
+            // Not routed to OCR, or OCR read nothing: the native text stays as it is.
+            native.trim().to_string()
+        } else if has_embedded_text(native) {
+            // A scan with a stamp: the OCR text is the page, the stamp stays after it (it can be
+            // the only record of a document identifier) without its image placeholders.
+            let stamp: Vec<&str> = native
+                .lines()
+                .map(str::trim_end)
+                .filter(|line| !line.trim_start().starts_with("![]("))
+                .collect();
+            format!("{ocr_text}\n\n{}", stamp.join("\n").trim())
         } else {
-            ocr_by_page.get(&number).copied().unwrap_or("")
+            ocr_text.to_string()
         };
         if text.is_empty() {
             continue;
