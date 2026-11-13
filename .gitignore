@@ -1,3 +1,4 @@
 /target/
 benches/pandoc-compat/outputs/
 __pycache__/
+benches/readme-charts/target/
