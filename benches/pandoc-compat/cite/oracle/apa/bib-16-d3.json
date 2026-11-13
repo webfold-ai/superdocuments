@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(e.g. Knuth & O’Brien, 1945; Turing, 1940)",
+"(Hopper & Lamport, 1943, p. 84; Knuth & O’Brien, 1945)",
+"(Hopper et al., 1990; Turing, 1940)",
+"(Hopper & Backus, 2008, p. 74)",
+"(Hopper & Backus, 2008, pp. 99–132)",
+"(Liskov & Knuth, 1954, p. 22)",
+"(Turing, 1940, Volume 39)",
+"Hopper et al. (1990, pp. 64–123)",
+"(Hamilton et al., 1956)",
+"(García et al., 2007; Hamilton et al., 1956; Liskov & Knuth, 1954)",
+"(Knuth & O’Brien, 1945, Section 64.102 and more)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Liskov, B., & Knuth, D. E. (1954). The art of computer programming. Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver",
+"Turing, A. M. (1940). Time, clocks, and the ordering of events [PhD thesis, University of Zurich]. https://example.org/model"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Knuth & O’Brien, 1945; Turing, 1940)",
+"(Hopper & Lamport, 1943, p. 84; Knuth & O’Brien, 1945)",
+"(Hopper et al., 1990; Turing, 1940)",
+"(Hopper & Backus, 2008, p. 74)",
+"(Hopper & Backus, 2008, pp. 99–132)",
+"(Liskov & Knuth, 1954, p. 22)",
+"(Turing, 1940, Volume 39)",
+"Hopper et al. (1990, pp. 64–123)",
+"(Hamilton et al., 1956)",
+"(García et al., 2007; Hamilton et al., 1956; Liskov & Knuth, 1954)",
+"(Knuth & O’Brien, 1945, Section 64.102 and more)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Liskov, B., & Knuth, D. E. (1954). The art of computer programming. Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver",
+"Turing, A. M. (1940). Time, clocks, and the ordering of events [PhD thesis, University of Zurich]. https://example.org/model"
+]
+}
+}

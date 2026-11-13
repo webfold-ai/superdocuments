@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"see [1]",
+"[2, p. 3]",
+"[3], [4], [5]",
+"[3], [6, p. 27]",
+"[5]",
+"[4, pp. 65–131]",
+"see [4, Ch. 20]",
+"[7, Vol. 37]",
+"see [1, Ch. 57]",
+"[3], [5], [8]",
+"[1]",
+"see [7, Ch. 98]"
+],
+"bibliography": [
+"[1] B. Liskov, J. Backus, and A. M. Turing, The education of a computer. MIT Press, 2004. Available: https://example.org/matrix",
+"[2] H. Müller and G. van Rossum, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 2, no. 11, pp. 86–362, 2020, doi: 10.7751/compiler.14.",
+"[3] J. Jr. Smith, “Notes on the analytical engine,” PhD thesis, University of Cambridge, 1972. Available: https://example.org/prior",
+"[4] G. van Rossum and M. de la Cruz, “Notes on the analytical engine,” Lab Transform, TR-39, 2012.",
+"[5] E. W. Dijkstra, “The apollo guidance computer.” https://example.org/prior, 1947.",
+"[6] M. de la Cruz and A. M. Turing, Go to statement considered harmful, 2nd ed. Springer, 1938.",
+"[7] F. O’Brien and G. Hopper, “On computable numbers.” https://example.org/network, 1955.",
+"[8] E. W. Dijkstra, C. A. R. Hoare, and G. van Rossum, “Time, clocks, and the ordering of events,” in Proceedings of the stream symposium, 2018, pp. 1–192."
+]
+},
+"bib": {
+"citations": [
+"see [1]",
+"[2, p. 3]",
+"[3], [4], [5]",
+"[3], [6, p. 27]",
+"[5]",
+"[4, pp. 65–131]",
+"see [4, Ch. 20]",
+"[7, Vol. 37]",
+"see [1, Ch. 57]",
+"[3], [5], [8]",
+"[1]",
+"see [7, Ch. 98]"
+],
+"bibliography": [
+"[1] B. Liskov, J. Backus, and A. M. Turing, The education of a computer. New York: MIT Press, 2004. Available: https://example.org/matrix",
+"[2] H. Müller and G. van Rossum, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 2, no. 11, pp. 86–362, 2020, doi: 10.7751/compiler.14.",
+"[3] J. Jr. Smith, “Notes on the analytical engine,” PhD thesis, University of Cambridge, 1972. Available: https://example.org/prior",
+"[4] G. van Rossum and M. de la Cruz, “Notes on the analytical engine,” Lab Transform, TR-39, 2012.",
+"[5] E. W. Dijkstra, “The apollo guidance computer.” https://example.org/prior, 1947.",
+"[6] M. de la Cruz and A. M. Turing, Go to statement considered harmful, 2nd ed. New York: Springer, 1938.",
+"[7] F. O’Brien and G. Hopper, “On computable numbers.” https://example.org/network, 1955.",
+"[8] E. W. Dijkstra, C. A. R. Hoare, and G. van Rossum, “Time, clocks, and the ordering of events,” in Proceedings of the stream symposium, 2018, pp. 1–192."
+]
+}
+}

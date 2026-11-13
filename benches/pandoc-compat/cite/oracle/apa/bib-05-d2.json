@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Smith & Hopper (2022)",
+"(e.g. Hoare et al., 1941; Liskov & Smith, 1936)",
+"(Turing, 1994, p. 61)",
+"(García & Rossum, 2010, pp. 34–132)",
+"(García & Rossum, 2010, Figure 2)",
+"Liskov & Smith (1936)",
+"(Müller, 1948; Turing, 1994, p. 2)"
+],
+"bibliography": [
+"García, L., & Rossum, G. van. (2010). On computable numbers (2nd ed.). Addison-Wesley.",
+"Hoare, C. A. R., Smith, J. Jr., & García, L. (1941). An axiomatic basis for computer programming (Second). Springer. https://example.org/experiment",
+"Liskov, B., & Smith, J. Jr. (1936). Can programming be liberated from the von neumann style. Journal of the ACM, 11(7), 127–305. https://doi.org/10.8852/decoder.67",
+"Müller, H. (1948). Data abstraction and hierarchy [PhD thesis]. University of Oxford.",
+"Smith, J. Jr., & Hopper, G. (2022). The education of a computer. Proceedings of the Convergence Symposium, 61–101.",
+"Turing, A. M. (1994). The art of computer programming. Springer. https://example.org/workload"
+]
+},
+"bib": {
+"citations": [
+"Smith & Hopper (2022)",
+"(e.g. Hoare et al., 1941; Liskov & Smith, 1936)",
+"(Turing, 1994, p. 61)",
+"(García & Rossum, 2010, pp. 34–132)",
+"(García & Rossum, 2010, Figure 2)",
+"Liskov & Smith (1936)",
+"(Müller, 1948; Turing, 1994, p. 2)"
+],
+"bibliography": [
+"García, L., & Rossum, G. van. (2010). On computable numbers (2nd ed.). Addison-Wesley.",
+"Hoare, C. A. R., Smith, J. Jr., & García, L. (1941). An axiomatic basis for computer programming (Second). Springer. https://example.org/experiment",
+"Liskov, B., & Smith, J. Jr. (1936). Can programming be liberated from the von neumann style. Journal of the ACM, 11(7), 127–305. https://doi.org/10.8852/decoder.67",
+"Müller, H. (1948). Data abstraction and hierarchy [PhD thesis]. University of Oxford.",
+"Smith, J. Jr., & Hopper, G. (2022). The education of a computer. Proceedings of the Convergence Symposium, 61–101.",
+"Turing, A. M. (1994). The art of computer programming. Springer. https://example.org/workload"
+]
+}
+}

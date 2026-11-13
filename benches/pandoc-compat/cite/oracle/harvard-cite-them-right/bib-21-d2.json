@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(Turing, 1949)",
+"(Lovelace, 1940; e.g. Dijkstra, Rossum and Lamport, 1970)",
+"Dijkstra, Rossum and Lamport (1970)",
+"Liskov, García and Müller (1992, p. 38)",
+"(Liskov, 1956, p. 86; Liskov, García and Müller, 1992)",
+"(see Hopper, Hamilton and Smith, 1939)",
+"(1992)",
+"(Turing, 1949)",
+"(see Liskov, 1956, ch. 24)",
+"(Dijkstra and García, 2004, vol. 30)",
+"(Hopper, Hamilton and Smith, 1939; Dijkstra, Rossum and Lamport, 1970, p. 46)",
+"(Lovelace, 1940, p. 22)",
+"(Hopper, Hamilton and Smith, 1939, pp. 50–124)"
+],
+"bibliography": [
+"Dijkstra, E.W. and García, L. (2004) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Dijkstra, E.W., Rossum, G. van and Lamport, L. (1970) Time, clocks, and the ordering of events. Springer.",
+"Hamilton, M., Liskov, B. and Rossum, G. van (1992) “An axiomatic basis for computer programming.” https://example.org/tree. Available at: https://example.org/heuristic.",
+"Hopper, G., Hamilton, M. and Smith, J.Jr. (1939) “The apollo guidance computer,” Proceedings of the vector symposium, pp. 95–188.",
+"Liskov, B. (1956) On computable numbers. TR-18. Lab Estimate. Available at: https://example.org/analysis.",
+"Liskov, B., García, L. and Müller, H. (1992) An axiomatic basis for computer programming. PhD thesis. University of Cambridge.",
+"Lovelace, A. (1940) “Can programming be liberated from the von neumann style,” ACM Computing Surveys, 33(8), pp. 183–370. Available at: https://doi.org/10.9422/heuristic.52.",
+"Turing, A.M. (1949) “The apollo guidance computer,” Journal of the ACM, 4(9), pp. 240–315. Available at: https://doi.org/10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(Turing, 1949)",
+"(Lovelace, 1940; e.g. Dijkstra, Rossum and Lamport, 1970)",
+"Dijkstra, Rossum and Lamport (1970)",
+"Liskov, García and Müller (1992, p. 38)",
+"(Liskov, 1956, p. 86; Liskov, García and Müller, 1992)",
+"(see Hopper, Hamilton and Smith, 1939)",
+"(1992)",
+"(Turing, 1949)",
+"(see Liskov, 1956, ch. 24)",
+"(Dijkstra and García, 2004, vol. 30)",
+"(Hopper, Hamilton and Smith, 1939; Dijkstra, Rossum and Lamport, 1970, p. 46)",
+"(Lovelace, 1940, p. 22)",
+"(Hopper, Hamilton and Smith, 1939, pp. 50–124)"
+],
+"bibliography": [
+"Dijkstra, E.W. and García, L. (2004) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Dijkstra, E.W., Rossum, G. van and Lamport, L. (1970) Time, clocks, and the ordering of events. London: Springer.",
+"Hamilton, M., Liskov, B. and Rossum, G. van (1992) “An axiomatic basis for computer programming.” https://example.org/tree. Available at: https://example.org/heuristic.",
+"Hopper, G., Hamilton, M. and Smith, J.Jr. (1939) “The apollo guidance computer,” Proceedings of the vector symposium, pp. 95–188.",
+"Liskov, B. (1956) On computable numbers. TR-18. Lab Estimate. Available at: https://example.org/analysis.",
+"Liskov, B., García, L. and Müller, H. (1992) An axiomatic basis for computer programming. PhD thesis. University of Cambridge.",
+"Lovelace, A. (1940) “Can programming be liberated from the von neumann style,” ACM Computing Surveys, 33(8), pp. 183–370. Available at: https://doi.org/10.9422/heuristic.52.",
+"Turing, A.M. (1949) “The apollo guidance computer,” Journal of the ACM, 4(9), pp. 240–315. Available at: https://doi.org/10.8223/index.77."
+]
+}
+}

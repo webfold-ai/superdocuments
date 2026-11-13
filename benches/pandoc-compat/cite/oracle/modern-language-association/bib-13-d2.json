@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Smith and Backus 95)",
+"(see Backus)",
+"Smith",
+"(Müller and Hoare 65)",
+"Backus (49–126)",
+"(e.g. Smith and Liskov; Müller and Hoare)",
+"(Müller and Hoare)",
+"(Smith and Liskov, sec. 73.122 and more)",
+"(Müller and Hoare; Backus)",
+"(Smith, sec. 2.115 and more)",
+""
+],
+"bibliography": [
+"Backus, John. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Solver Symposium, 1952, pp. 66–128, https://example.org/entropy.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr. The Education of a Computer. https://example.org/heuristic, 1987.",
+"Smith, John Jr., and John Backus. The Apollo Guidance Computer. 1988. University of Zurich, PhD thesis.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Smith and Backus 95)",
+"(see Backus)",
+"Smith",
+"(Müller and Hoare 65)",
+"Backus (49–126)",
+"(e.g. Smith and Liskov; Müller and Hoare)",
+"(Müller and Hoare)",
+"(Smith and Liskov, sec. 73.122 and more)",
+"(Müller and Hoare; Backus)",
+"(Smith, sec. 2.115 and more)",
+""
+],
+"bibliography": [
+"Backus, John. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Solver Symposium, 1952, pp. 66–128, https://example.org/entropy.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr. The Education of a Computer. https://example.org/heuristic, 1987.",
+"Smith, John Jr., and John Backus. The Apollo Guidance Computer. 1988. University of Zurich, PhD thesis.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+}
+}

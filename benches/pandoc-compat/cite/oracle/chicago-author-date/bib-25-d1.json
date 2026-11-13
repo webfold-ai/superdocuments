@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Müller 1992)",
+"(Lovelace 1984, vol. 46)",
+"(Knuth and Smith 1991, vol. 46)",
+"(Knuth 1955, 3)",
+"(see Müller 1992)",
+"Knuth (1955, 10)",
+"(Müller 1992)",
+"Hoare and Hamilton (1975)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. MIT Press.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Knuth, Donald E., and John Jr. Smith. 1991. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge. https://example.org/pipeline.",
+"Müller, Hans. 1992. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Distribution Symposium, 94–142."
+]
+},
+"bib": {
+"citations": [
+"(Müller 1992)",
+"(Lovelace 1984, vol. 46)",
+"(Knuth and Smith 1991, vol. 46)",
+"(Knuth 1955, 3)",
+"(see Müller 1992)",
+"Knuth (1955, 10)",
+"(Müller 1992)",
+"Hoare and Hamilton (1975)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. MIT Press.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Knuth, Donald E., and John Jr. Smith. 1991. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge. https://example.org/pipeline.",
+"Müller, Hans. 1992. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Distribution Symposium, 94–142."
+]
+}
+}

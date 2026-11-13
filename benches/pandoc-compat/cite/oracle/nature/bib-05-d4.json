@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1",
+"1",
+"2",
+"2,3",
+"4",
+"3",
+"3,5",
+"1,6",
+"2"
+],
+"bibliography": [
+"1. García, L. & Rossum, G. van. On Computable Numbers. (Addison-Wesley, London, 2010).",
+"2. Lovelace, A. & Hoare, C. A. R. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42, 59–345 (1970).",
+"3. Hoare, C. A. R., Smith, J. Jr. & García, L. An Axiomatic Basis for Computer Programming. (Springer, New York, 1941).",
+"4. Turing, A. M. The Art of Computer Programming. (Springer, Boston, 1994).",
+"5. Smith, J. Jr. & Hopper, G. The education of a computer. in Proceedings of the convergence symposium 61–101 (2022).",
+"6. Liskov, B. & Smith, J. Jr. Can programming be liberated from the von neumann style. Journal of the ACM 11, 127–305 (1936)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"1",
+"2",
+"2,3",
+"4",
+"3",
+"3,5",
+"1,6",
+"2"
+],
+"bibliography": [
+"1. García, L. & Rossum, G. van. On Computable Numbers. (Addison-Wesley, London, 2010).",
+"2. Lovelace, A. & Hoare, C. A. R. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42, 59–345 (1970).",
+"3. Hoare, C. A. R., Smith, J. Jr. & García, L. An Axiomatic Basis for Computer Programming. (Springer, New York, 1941).",
+"4. Turing, A. M. The Art of Computer Programming. (Springer, Boston, 1994).",
+"5. Smith, J. Jr. & Hopper, G. The education of a computer. in Proceedings of the convergence symposium 61–101 (2022).",
+"6. Liskov, B. & Smith, J. Jr. Can programming be liberated from the von neumann style. Journal of the ACM 11, 127–305 (1936)."
+]
+}
+}

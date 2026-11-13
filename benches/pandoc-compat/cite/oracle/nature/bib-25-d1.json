@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"3",
+"4",
+"see 1",
+"4",
+"1",
+"5"
+],
+"bibliography": [
+"1. Müller, H. Can programming be liberated from the von neumann style. in Proceedings of the distribution symposium 94–142 (1992).",
+"2. Lovelace, A. Can programming be liberated from the von neumann style. (University of Cambridge, 1984).",
+"3. Knuth, D. E. & Smith, J. Jr. Can programming be liberated from the von neumann style. (University of Cambridge, 1991).",
+"4. Knuth, D. E. Data abstraction and hierarchy. (University of Zurich, 1955).",
+"5. Hoare, C. A. R. & Hamilton, M. The Art of Computer Programming. (MIT Press, 1975)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"3",
+"4",
+"see 1",
+"4",
+"1",
+"5"
+],
+"bibliography": [
+"1. Müller, H. Can programming be liberated from the von neumann style. in Proceedings of the distribution symposium 94–142 (1992).",
+"2. Lovelace, A. Can programming be liberated from the von neumann style. (University of Cambridge, 1984).",
+"3. Knuth, D. E. & Smith, J. Jr. Can programming be liberated from the von neumann style. (University of Cambridge, 1991).",
+"4. Knuth, D. E. Data abstraction and hierarchy. (University of Zurich, 1955).",
+"5. Hoare, C. A. R. & Hamilton, M. The Art of Computer Programming. (MIT Press, New York, 1975)."
+]
+}
+}

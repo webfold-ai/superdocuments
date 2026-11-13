@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(García et al. 81)",
+"(see García et al.)",
+"(Cruz, Hopper, et al.; Smith; Rossum)",
+"(Rossum; Hamilton et al.; Dijkstra and Smith)",
+"(Rossum 77)",
+"(see García et al., ch. 70)",
+"(Cruz, O’Brien, et al.; Smith; Turing et al.)",
+"(Dijkstra and Smith, vol. 23)",
+"(Smith)",
+"(see Cruz, O’Brien, et al., ch. 90)",
+"(see Rossum, ch. 49)"
+],
+"bibliography": [
+"Cruz, Maria de la, Flann O’Brien, et al. Can Programming Be Liberated from the von Neumann Style. https://example.org/gradient, 1975.",
+"Cruz, Maria de la, Grace Hopper, et al. “The Apollo Guidance Computer.” Journal of the ACM, vol. 58, no. 12, 1958, pp. 24–338, https://doi.org/10.6528/vector.60.",
+"Dijkstra, Edsger W., and John Jr. Smith. “Time, Clocks, and the Ordering of Events.” Proceedings of the Window Symposium, 1988, pp. 81–126.",
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. TR-55, Lab Lattice, 1945.",
+"Hamilton, Margaret, et al. The Art of Computer Programming. 1947. University of Cambridge, PhD thesis.",
+"Rossum, Guido van. The Education of a Computer. https://example.org/function, 2019, https://example.org/latency.",
+"Smith, John Jr. The Apollo Guidance Computer. 2023. University of Cambridge, PhD thesis.",
+"Turing, Alan M., et al. Data Abstraction and Hierarchy. 2011, https://example.org/metric. University of Zurich, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(García et al. 81)",
+"(see García et al.)",
+"(Cruz, Hopper, et al.; Smith; Rossum)",
+"(Rossum; Hamilton et al.; Dijkstra and Smith)",
+"(Rossum 77)",
+"(see García et al., ch. 70)",
+"(Cruz, O’Brien, et al.; Smith; Turing et al.)",
+"(Dijkstra and Smith, vol. 23)",
+"(Smith)",
+"(see Cruz, O’Brien, et al., ch. 90)",
+"(see Rossum, ch. 49)"
+],
+"bibliography": [
+"Cruz, Maria de la, Flann O’Brien, et al. Can Programming Be Liberated from the von Neumann Style. https://example.org/gradient, 1975.",
+"Cruz, Maria de la, Grace Hopper, et al. “The Apollo Guidance Computer.” Journal of the ACM, vol. 58, no. 12, 1958, pp. 24–338, https://doi.org/10.6528/vector.60.",
+"Dijkstra, Edsger W., and John Jr. Smith. “Time, Clocks, and the Ordering of Events.” Proceedings of the Window Symposium, 1988, pp. 81–126.",
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. TR-55, Lab Lattice, 1945.",
+"Hamilton, Margaret, et al. The Art of Computer Programming. 1947. University of Cambridge, PhD thesis.",
+"Rossum, Guido van. The Education of a Computer. https://example.org/function, 2019, https://example.org/latency.",
+"Smith, John Jr. The Apollo Guidance Computer. 2023. University of Cambridge, PhD thesis.",
+"Turing, Alan M., et al. Data Abstraction and Hierarchy. 2011, https://example.org/metric. University of Zurich, PhD thesis."
+]
+}
+}

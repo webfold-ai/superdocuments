@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Müller and Dijkstra, fig. 29)",
+"(Müller and Dijkstra, vol. 88)",
+"Lovelace (56–138)",
+"(Lamport)",
+"(see O’Brien, ch. 64)",
+"Müller and Dijkstra",
+"(Rossum et al., vol. 40)",
+"(Lamport; Liskov 94)",
+"Dijkstra",
+"(Hopper 70)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Proceedings of the Query Symposium, 1946, pp. 51–197.",
+"Hopper, Grace. “On Computable Numbers.” ACM Computing Surveys, vol. 39, no. 7, 1986, pp. 151–379, https://doi.org/10.5661/experiment.46.",
+"Lamport, Leslie. The Education of a Computer. https://example.org/protocol, 1997, https://example.org/benchmark.",
+"Liskov, Barbara. “The Art of Computer Programming.” Proceedings of the London Mathematical Society, vol. 44, no. 12, 1992, pp. 132–356.",
+"Lovelace, Ada. The Education of a Computer. 1968. University of Cambridge, PhD thesis.",
+"Müller, Hans, and Edsger W. Dijkstra. “Go to Statement Considered Harmful.” Proceedings of the Approach Symposium, 1972, pp. 53–147.",
+"O’Brien, Flann. Go to Statement Considered Harmful. MIT Press, 1966.",
+"Rossum, Guido van, et al. “Go to Statement Considered Harmful.” Communications of the ACM, vol. 45, no. 8, 1979, pp. 289–314, https://doi.org/10.3569/latency.66."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Dijkstra, fig. 29)",
+"(Müller and Dijkstra, vol. 88)",
+"Lovelace (56–138)",
+"(Lamport)",
+"(see O’Brien, ch. 64)",
+"Müller and Dijkstra",
+"(Rossum et al., vol. 40)",
+"(Lamport; Liskov 94)",
+"Dijkstra",
+"(Hopper 70)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Proceedings of the Query Symposium, 1946, pp. 51–197.",
+"Hopper, Grace. “On Computable Numbers.” ACM Computing Surveys, vol. 39, no. 7, 1986, pp. 151–379, https://doi.org/10.5661/experiment.46.",
+"Lamport, Leslie. The Education of a Computer. https://example.org/protocol, 1997, https://example.org/benchmark.",
+"Liskov, Barbara. “The Art of Computer Programming.” Proceedings of the London Mathematical Society, vol. 44, no. 12, 1992, pp. 132–356.",
+"Lovelace, Ada. The Education of a Computer. 1968. University of Cambridge, PhD thesis.",
+"Müller, Hans, and Edsger W. Dijkstra. “Go to Statement Considered Harmful.” Proceedings of the Approach Symposium, 1972, pp. 53–147.",
+"O’Brien, Flann. Go to Statement Considered Harmful. MIT Press, 1966.",
+"Rossum, Guido van, et al. “Go to Statement Considered Harmful.” Communications of the ACM, vol. 45, no. 8, 1979, pp. 289–314, https://doi.org/10.3569/latency.66."
+]
+}
+}

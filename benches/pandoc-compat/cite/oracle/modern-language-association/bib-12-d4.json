@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style”)",
+"(O’Brien, “The Art of Computer Programming”)",
+"Lovelace and Hamilton (99)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style”; Lovelace and Hamilton)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style” 96–133)",
+"(O’Brien, “The Art of Computer Programming” 67–114)",
+"(Lovelace and Hamilton, vol. 62)",
+"(see Rossum and Cruz, ch. 32)",
+"(Rossum and Cruz 4)",
+"O’Brien (“The Art of Computer Programming” 73–100)",
+"Lovelace and Hamilton (28)",
+"(O’Brien, “The Art of Computer Programming,” sec. 76.123 and more)",
+"(Rossum and Cruz; “Can Programming Be Liberated from the von Neumann Style”)"
+],
+"bibliography": [
+"Lovelace, Ada, and Margaret Hamilton. Go to Statement Considered Harmful. Second, MIT Press, 2015.",
+"O’Brien, Flann. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Layer Symposium, 2011, pp. 72–147.",
+"———. “The Art of Computer Programming.” Journal of the ACM, vol. 25, no. 4, 1989, pp. 182–319, https://doi.org/10.9095/compiler.84.",
+"Rossum, Guido van, and Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press, 1954."
+]
+},
+"bib": {
+"citations": [
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style”)",
+"(O’Brien, “The Art of Computer Programming”)",
+"Lovelace and Hamilton (99)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style”; Lovelace and Hamilton)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style” 96–133)",
+"(O’Brien, “The Art of Computer Programming” 67–114)",
+"(Lovelace and Hamilton, vol. 62)",
+"(see Rossum and Cruz, ch. 32)",
+"(Rossum and Cruz 4)",
+"O’Brien (“The Art of Computer Programming” 73–100)",
+"Lovelace and Hamilton (28)",
+"(O’Brien, “The Art of Computer Programming,” sec. 76.123 and more)",
+"(Rossum and Cruz; “Can Programming Be Liberated from the von Neumann Style”)"
+],
+"bibliography": [
+"Lovelace, Ada, and Margaret Hamilton. Go to Statement Considered Harmful. Second, MIT Press, 2015.",
+"O’Brien, Flann. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Layer Symposium, 2011, pp. 72–147.",
+"———. “The Art of Computer Programming.” Journal of the ACM, vol. 25, no. 4, 1989, pp. 182–319, https://doi.org/10.9095/compiler.84.",
+"Rossum, Guido van, and Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press, 1954."
+]
+}
+}

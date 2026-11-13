@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"Dijkstra et al. (1970, 25–117)",
+"(Dijkstra et al. 1970)",
+"(Cruz 2007; Liskov et al. 1992; Lovelace 1940)",
+"(Lovelace 1940, fig. 34)",
+"(Cruz 2007; Dijkstra and García 2004, 39)",
+"(see Dijkstra et al. 1970)",
+"(Dijkstra et al. 1970; 1992)",
+"(see Dijkstra et al. 1970)",
+"Lovelace (1940)",
+"(Liskov 1956, 49–127)",
+"(Dijkstra and García 2004; Cruz 2007, 70)",
+"Cruz (2007, 99)",
+"(Dijkstra et al. 1970)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 81–115. https://example.org/cache.",
+"Dijkstra, Edsger W., and Luis García. 2004. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Liskov, Barbara, Luis García, and Hans Müller. 1992. “An Axiomatic Basis for Computer Programming.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33 (8): 183–370. https://doi.org/10.9422/heuristic.52."
+]
+},
+"bib": {
+"citations": [
+"Dijkstra et al. (1970, 25–117)",
+"(Dijkstra et al. 1970)",
+"(Cruz 2007; Liskov et al. 1992; Lovelace 1940)",
+"(Lovelace 1940, fig. 34)",
+"(Cruz 2007; Dijkstra and García 2004, 39)",
+"(see Dijkstra et al. 1970)",
+"(Dijkstra et al. 1970; 1992)",
+"(see Dijkstra et al. 1970)",
+"Lovelace (1940)",
+"(Liskov 1956, 49–127)",
+"(Dijkstra and García 2004; Cruz 2007, 70)",
+"Cruz (2007, 99)",
+"(Dijkstra et al. 1970)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 81–115. https://example.org/cache.",
+"Dijkstra, Edsger W., and Luis García. 2004. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Liskov, Barbara, Luis García, and Hans Müller. 1992. “An Axiomatic Basis for Computer Programming.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33 (8): 183–370. https://doi.org/10.9422/heuristic.52."
+]
+}
+}

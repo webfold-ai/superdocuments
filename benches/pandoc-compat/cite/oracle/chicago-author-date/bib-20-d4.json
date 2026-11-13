@@ -1,0 +1,30 @@
+{
+"csl": {
+"citations": [
+"(Müller and Liskov 2014)",
+"Hoare (2005)",
+"(Müller and Liskov 2014, sec. 70.107 and more)",
+"(see Hoare 2005, ch. 65)",
+"(Müller and Liskov 2014, 77)",
+"(see Müller and Liskov 2014, ch. 14)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33 (2): 72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Liskov 2014)",
+"Hoare (2005)",
+"(Müller and Liskov 2014, sec. 70.107 and more)",
+"(see Hoare 2005, ch. 65)",
+"(Müller and Liskov 2014, 77)",
+"(see Müller and Liskov 2014, ch. 14)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33 (2): 72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer."
+]
+}
+}

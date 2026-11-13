@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3",
+"2",
+"4",
+"5,6",
+"7",
+"see 8, ch. 12",
+"5,8"
+],
+"bibliography": [
+"1. Lamport, L., Dijkstra, E. W. & Hoare, C. A. R. Notes on the analytical engine. Journal of the ACM 33, 192–344 (1961).",
+"2. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007).",
+"3. Hopper, G. & Lamport, L. Go to Statement Considered Harmful. (Cambridge University Press, 1943).",
+"4. Hamilton, M., Lovelace, A. & Turing, A. M. An Axiomatic Basis for Computer Programming. (1956).",
+"5. Turing, A. M. Time, clocks, and the ordering of events. (University of Zurich, 1940).",
+"6. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990).",
+"7. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"8. Hopper, G. & Backus, J. Notes on the analytical engine. (2008)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3",
+"2",
+"4",
+"5,6",
+"7",
+"see 8, ch. 12",
+"5,8"
+],
+"bibliography": [
+"1. Lamport, L., Dijkstra, E. W. & Hoare, C. A. R. Notes on the analytical engine. Journal of the ACM 33, 192–344 (1961).",
+"2. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007).",
+"3. Hopper, G. & Lamport, L. Go to Statement Considered Harmful. (Cambridge University Press, London, 1943).",
+"4. Hamilton, M., Lovelace, A. & Turing, A. M. An Axiomatic Basis for Computer Programming. (1956).",
+"5. Turing, A. M. Time, clocks, and the ordering of events. (University of Zurich, 1940).",
+"6. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990).",
+"7. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"8. Hopper, G. & Backus, J. Notes on the analytical engine. (2008)."
+]
+}
+}

@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Lovelace and Hopper 1969, 98)",
+"(Hoare et al. 1948, fig. 55)",
+"Lovelace and Hopper (1969, 66–121)",
+"(see Lovelace and Hopper 1969)",
+"(Lovelace and Hopper 1969, fig. 94)",
+"(Smith et al. 1939, 75)",
+"Hoare et al. (1948, 10)",
+"(Hoare et al. 1948, fig. 44)",
+"(Lovelace and Hopper 1969; Lovelace and Hamilton 2017; Hoare et al. 1948)",
+"(Lovelace and Hamilton 2017, sec. 67.117 and more)",
+"(1939)",
+"(Lovelace and Hamilton 2017, 95–124)",
+"(Hoare et al. 1948; Smith et al. 1939; Lovelace and Hopper 1969)"
+],
+"bibliography": [
+"Hoare, C. A. R., Edsger W. Dijkstra, and Hans Müller. 1948. The Art of Computer Programming. TR-38. Lab Metric. https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. 2017. Notes on the Analytical Engine. MIT Press. https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. 1969. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 14–120.",
+"Smith, John Jr., John Backus, and C. A. R. Hoare. 1939. On Computable Numbers. Second. Cambridge University Press."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace and Hopper 1969, 98)",
+"(Hoare et al. 1948, fig. 55)",
+"Lovelace and Hopper (1969, 66–121)",
+"(see Lovelace and Hopper 1969)",
+"(Lovelace and Hopper 1969, fig. 94)",
+"(Smith et al. 1939, 75)",
+"Hoare et al. (1948, 10)",
+"(Hoare et al. 1948, fig. 44)",
+"(Lovelace and Hopper 1969; Lovelace and Hamilton 2017; Hoare et al. 1948)",
+"(Lovelace and Hamilton 2017, sec. 67.117 and more)",
+"(1939)",
+"(Lovelace and Hamilton 2017, 95–124)",
+"(Hoare et al. 1948; Smith et al. 1939; Lovelace and Hopper 1969)"
+],
+"bibliography": [
+"Hoare, C. A. R., Edsger W. Dijkstra, and Hans Müller. 1948. The Art of Computer Programming. TR-38. Lab Metric. https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. 2017. Notes on the Analytical Engine. MIT Press. https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. 1969. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 14–120.",
+"Smith, John Jr., John Backus, and C. A. R. Hoare. 1939. On Computable Numbers. Second. Cambridge University Press."
+]
+}
+}

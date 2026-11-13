@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"Müller et al.",
+"(see Rossum et al., ch. 77)",
+"(O’Brien et al.; Rossum et al.)",
+"(Rossum et al.; Lamport and Müller, Data Abstraction and Hierarchy 60)",
+"(Lamport and Müller, Data Abstraction and Hierarchy, vol. 30)",
+"(e.g. Lamport and Müller, Data Abstraction and Hierarchy; O’Brien et al.)",
+"(Müller et al. 2)",
+"(Rossum et al.; Müller et al.; Lamport et al.)",
+"(Dijkstra and Liskov 70–133)",
+"(O’Brien et al., sec. 14.137 and more)",
+"(Müller et al.; The Apollo Guidance Computer)",
+"(O’Brien et al.)",
+"Müller et al. (98–107)",
+"(Rossum et al.; Lamport et al.)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. The Art of Computer Programming. 2012. University of Oxford, PhD thesis.",
+"Lamport, Leslie, et al. The Education of a Computer. 2002. University of Zurich, PhD thesis.",
+"Lamport, Leslie, and Hans Müller. Data Abstraction and Hierarchy. 1965. University of Cambridge, PhD thesis.",
+"———. The Apollo Guidance Computer. TR-82, Lab Function, 1969.",
+"Müller, Hans, et al. The Art of Computer Programming. https://example.org/structure, 2019, https://example.org/policy.",
+"O’Brien, Flann, et al. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 1953, pp. 43–145.",
+"Rossum, Guido van, et al. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 1989, pp. 43–184."
+]
+},
+"bib": {
+"citations": [
+"Müller et al.",
+"(see Rossum et al., ch. 77)",
+"(O’Brien et al.; Rossum et al.)",
+"(Rossum et al.; Lamport and Müller, Data Abstraction and Hierarchy 60)",
+"(Lamport and Müller, Data Abstraction and Hierarchy, vol. 30)",
+"(e.g. Lamport and Müller, Data Abstraction and Hierarchy; O’Brien et al.)",
+"(Müller et al. 2)",
+"(Rossum et al.; Müller et al.; Lamport et al.)",
+"(Dijkstra and Liskov 70–133)",
+"(O’Brien et al., sec. 14.137 and more)",
+"(Müller et al.; The Apollo Guidance Computer)",
+"(O’Brien et al.)",
+"Müller et al. (98–107)",
+"(Rossum et al.; Lamport et al.)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. The Art of Computer Programming. 2012. University of Oxford, PhD thesis.",
+"Lamport, Leslie, et al. The Education of a Computer. 2002. University of Zurich, PhD thesis.",
+"Lamport, Leslie, and Hans Müller. Data Abstraction and Hierarchy. 1965. University of Cambridge, PhD thesis.",
+"———. The Apollo Guidance Computer. TR-82, Lab Function, 1969.",
+"Müller, Hans, et al. The Art of Computer Programming. https://example.org/structure, 2019, https://example.org/policy.",
+"O’Brien, Flann, et al. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 1953, pp. 43–145.",
+"Rossum, Guido van, et al. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 1989, pp. 43–184."
+]
+}
+}

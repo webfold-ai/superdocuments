@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1], [2]",
+"[1, p. 69]",
+"[3, Fig. 60]",
+"[4]",
+"[1]",
+"[4, Fig. 64]",
+"[2, Vol. 49]",
+"[1, p. 75], [4]"
+],
+"bibliography": [
+"[1] M. de la Cruz, Notes on the analytical engine. MIT Press, 1951.",
+"[2] E. W. Dijkstra, “The apollo guidance computer,” Journal of the ACM, vol. 33, no. 2, pp. 39–369, 1993.",
+"[3] J. Backus, D. E. Knuth, and B. Liskov, “Notes on the analytical engine,” Lab Estimate, TR-47, 1958. Available: https://example.org/convergence",
+"[4] L. Lamport, H. Müller, and E. W. Dijkstra, The education of a computer. Addison-Wesley, 2017."
+]
+},
+"bib": {
+"citations": [
+"[1], [2]",
+"[1, p. 69]",
+"[3, Fig. 60]",
+"[4]",
+"[1]",
+"[4, Fig. 64]",
+"[2, Vol. 49]",
+"[1, p. 75], [4]"
+],
+"bibliography": [
+"[1] M. de la Cruz, Notes on the analytical engine. Boston: MIT Press, 1951.",
+"[2] E. W. Dijkstra, “The apollo guidance computer,” Journal of the ACM, vol. 33, no. 2, pp. 39–369, 1993.",
+"[3] J. Backus, D. E. Knuth, and B. Liskov, “Notes on the analytical engine,” Lab Estimate, TR-47, 1958. Available: https://example.org/convergence",
+"[4] L. Lamport, H. Müller, and E. W. Dijkstra, The education of a computer. New York: Addison-Wesley, 2017."
+]
+}
+}

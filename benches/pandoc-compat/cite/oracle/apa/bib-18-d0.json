@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Hoare et al., 2016; 1968)",
+"(Hoare et al., 2016, p. 16)",
+"(Rossum & Hoare, 1967, Section 26.126 and more)",
+"(Cruz, 1941, Section 47.109 and more)",
+"(Turing & Rossum, 1968, Volume 38)",
+"(Cruz, 1941; Müller, 2013; Rossum & Hoare, 1967)",
+"(Müller, 2013, p. 83)",
+"(Cruz et al., 1971, pp. 19–131)",
+"(1966; Cruz, 1941)",
+"(Cruz et al., 1971; 1993)",
+"Cruz (1941)"
+],
+"bibliography": [
+"Backus, J., Hopper, G., & Lamport, L. (1966). Data abstraction and hierarchy [PhD thesis, University of Cambridge]. https://example.org/benchmark",
+"Cruz, M. de la. (1941). Time, clocks, and the ordering of events. https://example.org/bound.",
+"Cruz, M. de la, O’Brien, F., & Hopper, G. (1971). The art of computer programming (TR-84). Lab Throughput. https://example.org/complexity",
+"Hoare, C. A. R., Lovelace, A., & Turing, A. M. (2016). Notes on the analytical engine (TR-43). Lab Feature.",
+"Müller, H. (2013). Notes on the analytical engine (TR-96). Lab Bound. https://example.org/entropy",
+"Rossum, G. van, Backus, J., & Liskov, B. (1993). Go to statement considered harmful. https://example.org/latency. https://example.org/pipeline",
+"Rossum, G. van, & Hoare, C. A. R. (1967). Go to statement considered harmful. https://example.org/analysis. https://example.org/cache",
+"Turing, A. M., & Rossum, G. van. (1968). The art of computer programming [PhD thesis]. University of Cambridge."
+]
+},
+"bib": {
+"citations": [
+"(Hoare et al., 2016; 1968)",
+"(Hoare et al., 2016, p. 16)",
+"(Rossum & Hoare, 1967, Section 26.126 and more)",
+"(Cruz, 1941, Section 47.109 and more)",
+"(Turing & Rossum, 1968, Volume 38)",
+"(Cruz, 1941; Müller, 2013; Rossum & Hoare, 1967)",
+"(Müller, 2013, p. 83)",
+"(Cruz et al., 1971, pp. 19–131)",
+"(1966; Cruz, 1941)",
+"(Cruz et al., 1971; 1993)",
+"Cruz (1941)"
+],
+"bibliography": [
+"Backus, J., Hopper, G., & Lamport, L. (1966). Data abstraction and hierarchy [PhD thesis, University of Cambridge]. https://example.org/benchmark",
+"Cruz, M. de la. (1941). Time, clocks, and the ordering of events. https://example.org/bound.",
+"Cruz, M. de la, O’Brien, F., & Hopper, G. (1971). The art of computer programming (TR-84). Lab Throughput. https://example.org/complexity",
+"Hoare, C. A. R., Lovelace, A., & Turing, A. M. (2016). Notes on the analytical engine (TR-43). Lab Feature.",
+"Müller, H. (2013). Notes on the analytical engine (TR-96). Lab Bound. https://example.org/entropy",
+"Rossum, G. van, Backus, J., & Liskov, B. (1993). Go to statement considered harmful. https://example.org/latency. https://example.org/pipeline",
+"Rossum, G. van, & Hoare, C. A. R. (1967). Go to statement considered harmful. https://example.org/analysis. https://example.org/cache",
+"Turing, A. M., & Rossum, G. van. (1968). The art of computer programming [PhD thesis]. University of Cambridge."
+]
+}
+}

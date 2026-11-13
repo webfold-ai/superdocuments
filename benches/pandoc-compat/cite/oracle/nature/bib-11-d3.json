@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"3",
+"4",
+"5",
+"4",
+"3",
+"6,7"
+],
+"bibliography": [
+"1. García, L. & Knuth, D. E. An axiomatic basis for computer programming. in Proceedings of the transform symposium 2–133 (1936).",
+"2. Hopper, G., Müller, H. & Lovelace, A. The Apollo Guidance Computer. (Cambridge University Press, London, 1987).",
+"3. García, L., Lamport, L. & Liskov, B. The art of computer programming. (1998).",
+"4. O’Brien, F., Rossum, G. van & Smith, J. Jr. Time, Clocks, and the Ordering of Events. (Addison-Wesley, New York, 1975).",
+"5. Backus, J. On computable numbers. (1943).",
+"6. Smith, J. Jr. The Apollo Guidance Computer. (2006).",
+"7. Hoare, C. A. R. & Müller, H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7, 191–397 (2005)."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"3",
+"4",
+"5",
+"4",
+"3",
+"6,7"
+],
+"bibliography": [
+"1. García, L. & Knuth, D. E. An axiomatic basis for computer programming. in Proceedings of the transform symposium 2–133 (1936).",
+"2. Hopper, G., Müller, H. & Lovelace, A. The Apollo Guidance Computer. (Cambridge University Press, London, 1987).",
+"3. García, L., Lamport, L. & Liskov, B. The art of computer programming. (1998).",
+"4. O’Brien, F., Rossum, G. van & Smith, J. Jr. Time, Clocks, and the Ordering of Events. (Addison-Wesley, New York, 1975).",
+"5. Backus, J. On computable numbers. (1943).",
+"6. Smith, J. Jr. The Apollo Guidance Computer. (2006).",
+"7. Hoare, C. A. R. & Müller, H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7, 191–397 (2005)."
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Lamport et al.",
+"(Smith and Liskov; Müller and Hoare 32)",
+"(see Liskov)",
+"(Liskov; Müller and Hoare; Smith and Backus)",
+"(Smith and Backus, vol. 48)",
+"(Müller and Hoare, fig. 34)",
+"(Müller and Hoare, vol. 86)"
+],
+"bibliography": [
+"Lamport, Leslie, et al. Time, Clocks, and the Ordering of Events. https://example.org/retrieval, 2007.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr., and John Backus. The Apollo Guidance Computer. 1988. University of Zurich, PhD thesis.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"Lamport et al.",
+"(Smith and Liskov; Müller and Hoare 32)",
+"(see Liskov)",
+"(Liskov; Müller and Hoare; Smith and Backus)",
+"(Smith and Backus, vol. 48)",
+"(Müller and Hoare, fig. 34)",
+"(Müller and Hoare, vol. 86)"
+],
+"bibliography": [
+"Lamport, Leslie, et al. Time, Clocks, and the Ordering of Events. https://example.org/retrieval, 2007.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr., and John Backus. The Apollo Guidance Computer. 1988. University of Zurich, PhD thesis.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+}
+}

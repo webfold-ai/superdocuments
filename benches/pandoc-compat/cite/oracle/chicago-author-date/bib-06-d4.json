@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Hamilton et al. (1947, 91)",
+"(Cruz et al. 1975, 1958; Hamilton et al. 1947)",
+"(García et al. 1945, 7–131)",
+"(Turing et al. 2011, vol. 86)",
+"(Hamilton et al. 1947; Dijkstra and Smith 1988, 67)",
+"Dijkstra and Smith (1988, 66)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58 (12): 24–338. https://doi.org/10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. Can Programming Be Liberated from the von Neumann Style. Https://example.org/gradient.",
+"Dijkstra, Edsger W., and John Jr. Smith. 1988. “Time, Clocks, and the Ordering of Events.” Proceedings of the Window Symposium, 81–126.",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich. https://example.org/metric."
+]
+},
+"bib": {
+"citations": [
+"Hamilton et al. (1947, 91)",
+"(Cruz et al. 1975, 1958; Hamilton et al. 1947)",
+"(García et al. 1945, 7–131)",
+"(Turing et al. 2011, vol. 86)",
+"(Hamilton et al. 1947; Dijkstra and Smith 1988, 67)",
+"Dijkstra and Smith (1988, 66)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58 (12): 24–338. https://doi.org/10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. Can Programming Be Liberated from the von Neumann Style. Https://example.org/gradient.",
+"Dijkstra, Edsger W., and John Jr. Smith. 1988. “Time, Clocks, and the Ordering of Events.” Proceedings of the Window Symposium, 81–126.",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich. https://example.org/metric."
+]
+}
+}

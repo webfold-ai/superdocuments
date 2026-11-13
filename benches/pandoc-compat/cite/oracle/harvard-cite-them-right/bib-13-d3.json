@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Lamport, Hopper and Knuth (2007)",
+"(Smith and Liskov, 2024; Müller and Hoare, 2024, p. 32)",
+"(see Liskov, 1946)",
+"(Liskov, 1946; Smith and Backus, 1988; Müller and Hoare, 2024)",
+"(Smith and Backus, 1988, vol. 48)",
+"(Müller and Hoare, 2024, fig. 34)",
+"(Müller and Hoare, 2024, vol. 86)"
+],
+"bibliography": [
+"Lamport, L., Hopper, G. and Knuth, D.E. (2007) “Time, clocks, and the ordering of events.” https://example.org/retrieval.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. and Backus, J. (1988) The apollo guidance computer. PhD thesis. University of Zurich.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"Lamport, Hopper and Knuth (2007)",
+"(Smith and Liskov, 2024; Müller and Hoare, 2024, p. 32)",
+"(see Liskov, 1946)",
+"(Liskov, 1946; Smith and Backus, 1988; Müller and Hoare, 2024)",
+"(Smith and Backus, 1988, vol. 48)",
+"(Müller and Hoare, 2024, fig. 34)",
+"(Müller and Hoare, 2024, vol. 86)"
+],
+"bibliography": [
+"Lamport, L., Hopper, G. and Knuth, D.E. (2007) “Time, clocks, and the ordering of events.” https://example.org/retrieval.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. and Backus, J. (1988) The apollo guidance computer. PhD thesis. University of Zurich.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+}
+}

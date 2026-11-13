@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Hopper and Lamport 96)",
+"(see Hopper and Lamport)",
+"(Smith and Backus 50–105)",
+"(Hoare and Liskov, sec. 58.137 and more)",
+"Hopper and Lamport (58)",
+"(Hopper and Lamport; Hopper; Turing et al.)",
+"(Turing et al.; Hopper and Lamport 65)",
+"(Smith and Backus; Hoare and Liskov)",
+"(Hoare and Liskov, fig. 22)",
+"(Smith and Backus)",
+"Turing et al. (40)",
+"(Hopper, fig. 56)",
+"(see Smith and Backus, ch. 6)",
+"(Hoare and Liskov 30)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. “On Computable Numbers.” Proceedings of the Transform Symposium, 2005, pp. 71–122.",
+"Hopper, Grace. Time, Clocks, and the Ordering of Events. 1986. University of Oxford, PhD thesis.",
+"Hopper, Grace, and Leslie Lamport. “The Education of a Computer.” Proceedings of the Filter Symposium, 1942, pp. 37–181.",
+"Smith, John Jr., and John Backus. “The Education of a Computer.” ACM Computing Surveys, vol. 36, no. 12, 1981, pp. 64–305, https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., et al. Time, Clocks, and the Ordering of Events. TR-81, Lab Graph, 1969, https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(Hopper and Lamport 96)",
+"(see Hopper and Lamport)",
+"(Smith and Backus 50–105)",
+"(Hoare and Liskov, sec. 58.137 and more)",
+"Hopper and Lamport (58)",
+"(Hopper and Lamport; Hopper; Turing et al.)",
+"(Turing et al.; Hopper and Lamport 65)",
+"(Smith and Backus; Hoare and Liskov)",
+"(Hoare and Liskov, fig. 22)",
+"(Smith and Backus)",
+"Turing et al. (40)",
+"(Hopper, fig. 56)",
+"(see Smith and Backus, ch. 6)",
+"(Hoare and Liskov 30)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. “On Computable Numbers.” Proceedings of the Transform Symposium, 2005, pp. 71–122.",
+"Hopper, Grace. Time, Clocks, and the Ordering of Events. 1986. University of Oxford, PhD thesis.",
+"Hopper, Grace, and Leslie Lamport. “The Education of a Computer.” Proceedings of the Filter Symposium, 1942, pp. 37–181.",
+"Smith, John Jr., and John Backus. “The Education of a Computer.” ACM Computing Surveys, vol. 36, no. 12, 1981, pp. 64–305, https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., et al. Time, Clocks, and the Ordering of Events. TR-81, Lab Graph, 1969, https://example.org/workload."
+]
+}
+}

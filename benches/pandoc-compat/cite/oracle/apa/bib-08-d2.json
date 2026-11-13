@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Hoare & Liskov (2005)",
+"(Smith & Backus, 1981, Section 80.107 and more)",
+"Hopper (1986, p. 27)",
+"(Smith & Backus, 1981)",
+"(Hopper & Lamport, 1942, p. 93; Smith & Backus, 1981)",
+"(e.g. Hopper & Lamport, 1942; Turing et al., 1969)",
+"(Turing et al., 1969)",
+"Hoare & Liskov (2005, pp. 58–109)"
+],
+"bibliography": [
+"Hoare, C. A. R., & Liskov, B. (2005). On computable numbers. Proceedings of the Transform Symposium, 71–122.",
+"Hopper, G. (1986). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford.",
+"Hopper, G., & Lamport, L. (1942). The education of a computer. Proceedings of the Filter Symposium, 37–181.",
+"Smith, J. Jr., & Backus, J. (1981). The education of a computer. ACM Computing Surveys, 36(12), 64–305. https://doi.org/10.9730/kernel.12",
+"Turing, A. M., Smith, J. Jr., & Rossum, G. van. (1969). Time, clocks, and the ordering of events (TR-81). Lab Graph. https://example.org/workload"
+]
+},
+"bib": {
+"citations": [
+"Hoare & Liskov (2005)",
+"(Smith & Backus, 1981, Section 80.107 and more)",
+"Hopper (1986, p. 27)",
+"(Smith & Backus, 1981)",
+"(Hopper & Lamport, 1942, p. 93; Smith & Backus, 1981)",
+"(e.g. Hopper & Lamport, 1942; Turing et al., 1969)",
+"(Turing et al., 1969)",
+"Hoare & Liskov (2005, pp. 58–109)"
+],
+"bibliography": [
+"Hoare, C. A. R., & Liskov, B. (2005). On computable numbers. Proceedings of the Transform Symposium, 71–122.",
+"Hopper, G. (1986). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford.",
+"Hopper, G., & Lamport, L. (1942). The education of a computer. Proceedings of the Filter Symposium, 37–181.",
+"Smith, J. Jr., & Backus, J. (1981). The education of a computer. ACM Computing Surveys, 36(12), 64–305. https://doi.org/10.9730/kernel.12",
+"Turing, A. M., Smith, J. Jr., & Rossum, G. van. (1969). Time, clocks, and the ordering of events (TR-81). Lab Graph. https://example.org/workload"
+]
+}
+}

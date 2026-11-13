@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Rossum and Cruz; O’Brien, “The Art of Computer Programming” 7)",
+"Lovelace and Hamilton (39)",
+"Rossum and Cruz",
+"(e.g. Rossum and Cruz; O’Brien, “Can Programming Be Liberated from the von Neumann Style”)",
+"O’Brien (“The Art of Computer Programming” 89)",
+"O’Brien (“The Art of Computer Programming”)",
+"(Lovelace and Hamilton 74–135)",
+"Lovelace and Hamilton",
+"(see Rossum and Cruz, ch. 12)",
+"(see Lovelace and Hamilton, ch. 42)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style” 98–111)"
+],
+"bibliography": [
+"Lovelace, Ada, and Margaret Hamilton. Go to Statement Considered Harmful. Second, MIT Press, 2015.",
+"O’Brien, Flann. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Layer Symposium, 2011, pp. 72–147.",
+"———. “The Art of Computer Programming.” Journal of the ACM, vol. 25, no. 4, 1989, pp. 182–319, https://doi.org/10.9095/compiler.84.",
+"Rossum, Guido van, and Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press, 1954."
+]
+},
+"bib": {
+"citations": [
+"(Rossum and Cruz; O’Brien, “The Art of Computer Programming” 7)",
+"Lovelace and Hamilton (39)",
+"Rossum and Cruz",
+"(e.g. Rossum and Cruz; O’Brien, “Can Programming Be Liberated from the von Neumann Style”)",
+"O’Brien (“The Art of Computer Programming” 89)",
+"O’Brien (“The Art of Computer Programming”)",
+"(Lovelace and Hamilton 74–135)",
+"Lovelace and Hamilton",
+"(see Rossum and Cruz, ch. 12)",
+"(see Lovelace and Hamilton, ch. 42)",
+"(O’Brien, “Can Programming Be Liberated from the von Neumann Style” 98–111)"
+],
+"bibliography": [
+"Lovelace, Ada, and Margaret Hamilton. Go to Statement Considered Harmful. Second, MIT Press, 2015.",
+"O’Brien, Flann. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Layer Symposium, 2011, pp. 72–147.",
+"———. “The Art of Computer Programming.” Journal of the ACM, vol. 25, no. 4, 1989, pp. 182–319, https://doi.org/10.9095/compiler.84.",
+"Rossum, Guido van, and Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press, 1954."
+]
+}
+}

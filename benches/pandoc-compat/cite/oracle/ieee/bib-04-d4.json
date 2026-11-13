@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"[1, p. 95]",
+"[2, pp. 27–137]",
+"e.g. [3], [4]",
+"[5, p. 4]",
+"[1, Sec. 30.116] and more",
+"[5, Fig. 5]",
+"[6], [7]",
+"[6, pp. 71–140]",
+"[7, p. 77]",
+"[8]",
+"[7]",
+"e.g. [1], [2]",
+"see [3, Ch. 68]"
+],
+"bibliography": [
+"[1] M. de la Cruz, “The apollo guidance computer,” Lab Window, TR-20, 2014.",
+"[2] H. Müller, J. Backus, and L. Lamport, “Data abstraction and hierarchy,” Lab Matrix, TR-83, 1937.",
+"[3] J. Jr. Smith and F. O’Brien, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 39, no. 3, pp. 257–308, 1945, doi: 10.6600/trace.17.",
+"[4] D. E. Knuth and A. M. Turing, “Can programming be liberated from the von neumann style,” Lab Complexity, TR-69, 1975.",
+"[5] J. Jr. Smith and J. Backus, “On computable numbers,” in Proceedings of the schema symposium, 2024, pp. 24–188.",
+"[6] C. A. R. Hoare and H. Müller, “An axiomatic basis for computer programming,” Journal of the ACM, vol. 53, no. 8, pp. 203–390, 1994, doi: 10.4068/layer.20.",
+"[7] L. García, D. E. Knuth, and M. de la Cruz, “On computable numbers,” Communications of the ACM, vol. 44, no. 6, pp. 209–329, 1969.",
+"[8] G. van Rossum and G. Hopper, “Can programming be liberated from the von neumann style,” in Proceedings of the entropy symposium, 1987, pp. 98–186."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 95]",
+"[2, pp. 27–137]",
+"e.g. [3], [4]",
+"[5, p. 4]",
+"[1, Sec. 30.116] and more",
+"[5, Fig. 5]",
+"[6], [7]",
+"[6, pp. 71–140]",
+"[7, p. 77]",
+"[8]",
+"[7]",
+"e.g. [1], [2]",
+"see [3, Ch. 68]"
+],
+"bibliography": [
+"[1] M. de la Cruz, “The apollo guidance computer,” Lab Window, TR-20, 2014.",
+"[2] H. Müller, J. Backus, and L. Lamport, “Data abstraction and hierarchy,” Lab Matrix, TR-83, 1937.",
+"[3] J. Jr. Smith and F. O’Brien, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 39, no. 3, pp. 257–308, 1945, doi: 10.6600/trace.17.",
+"[4] D. E. Knuth and A. M. Turing, “Can programming be liberated from the von neumann style,” Lab Complexity, TR-69, 1975.",
+"[5] J. Jr. Smith and J. Backus, “On computable numbers,” in Proceedings of the schema symposium, 2024, pp. 24–188.",
+"[6] C. A. R. Hoare and H. Müller, “An axiomatic basis for computer programming,” Journal of the ACM, vol. 53, no. 8, pp. 203–390, 1994, doi: 10.4068/layer.20.",
+"[7] L. García, D. E. Knuth, and M. de la Cruz, “On computable numbers,” Communications of the ACM, vol. 44, no. 6, pp. 209–329, 1969.",
+"[8] G. van Rossum and G. Hopper, “Can programming be liberated from the von neumann style,” in Proceedings of the entropy symposium, 1987, pp. 98–186."
+]
+}
+}

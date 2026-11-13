@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1",
+"see 2",
+"3–5",
+"6",
+"3",
+"4",
+"7",
+"6",
+"5"
+],
+"bibliography": [
+"1. Cruz, M. de la. The Apollo Guidance Computer. (2014).",
+"2. Knuth, D. E. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (1975).",
+"3. García, L., Knuth, D. E. & Cruz, M. de la. On computable numbers. Communications of the ACM 44, 209–329 (1969).",
+"4. Rossum, G. van & Hopper, G. Can programming be liberated from the von neumann style. in Proceedings of the entropy symposium 98–186 (1987).",
+"5. Smith, J. Jr. & O’Brien, F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39, 257–308 (1945).",
+"6. Hoare, C. A. R. & Müller, H. An axiomatic basis for computer programming. Journal of the ACM 53, 203–390 (1994).",
+"7. Müller, H., Backus, J. & Lamport, L. Data Abstraction and Hierarchy. (1937)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"see 2",
+"3–5",
+"6",
+"3",
+"4",
+"7",
+"6",
+"5"
+],
+"bibliography": [
+"1. Cruz, M. de la. The Apollo Guidance Computer. (2014).",
+"2. Knuth, D. E. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (1975).",
+"3. García, L., Knuth, D. E. & Cruz, M. de la. On computable numbers. Communications of the ACM 44, 209–329 (1969).",
+"4. Rossum, G. van & Hopper, G. Can programming be liberated from the von neumann style. in Proceedings of the entropy symposium 98–186 (1987).",
+"5. Smith, J. Jr. & O’Brien, F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39, 257–308 (1945).",
+"6. Hoare, C. A. R. & Müller, H. An axiomatic basis for computer programming. Journal of the ACM 53, 203–390 (1994).",
+"7. Müller, H., Backus, J. & Lamport, L. Data Abstraction and Hierarchy. (1937)."
+]
+}
+}

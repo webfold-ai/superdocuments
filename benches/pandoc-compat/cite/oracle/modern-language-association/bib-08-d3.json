@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Smith and Backus, vol. 22)",
+"Hopper and Lamport (64)",
+"(Hopper; Turing et al. 4)",
+"(Turing et al.)",
+"(Smith and Backus 95)",
+"(Hopper, fig. 6)",
+"(see Turing et al.)",
+"(Turing et al. 9)",
+"(Hopper and Lamport 47)",
+"(Hopper; Smith and Backus 36)",
+"(see Turing et al., ch. 45)",
+"(Smith and Backus; Turing et al.; Hopper)",
+"(Turing et al. 69–117)",
+"(Turing et al.; Hoare and Liskov; Smith and Backus)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. “On Computable Numbers.” Proceedings of the Transform Symposium, 2005, pp. 71–122.",
+"Hopper, Grace. Time, Clocks, and the Ordering of Events. 1986. University of Oxford, PhD thesis.",
+"Hopper, Grace, and Leslie Lamport. “The Education of a Computer.” Proceedings of the Filter Symposium, 1942, pp. 37–181.",
+"Smith, John Jr., and John Backus. “The Education of a Computer.” ACM Computing Surveys, vol. 36, no. 12, 1981, pp. 64–305, https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., et al. Time, Clocks, and the Ordering of Events. TR-81, Lab Graph, 1969, https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(Smith and Backus, vol. 22)",
+"Hopper and Lamport (64)",
+"(Hopper; Turing et al. 4)",
+"(Turing et al.)",
+"(Smith and Backus 95)",
+"(Hopper, fig. 6)",
+"(see Turing et al.)",
+"(Turing et al. 9)",
+"(Hopper and Lamport 47)",
+"(Hopper; Smith and Backus 36)",
+"(see Turing et al., ch. 45)",
+"(Smith and Backus; Turing et al.; Hopper)",
+"(Turing et al. 69–117)",
+"(Turing et al.; Hoare and Liskov; Smith and Backus)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. “On Computable Numbers.” Proceedings of the Transform Symposium, 2005, pp. 71–122.",
+"Hopper, Grace. Time, Clocks, and the Ordering of Events. 1986. University of Oxford, PhD thesis.",
+"Hopper, Grace, and Leslie Lamport. “The Education of a Computer.” Proceedings of the Filter Symposium, 1942, pp. 37–181.",
+"Smith, John Jr., and John Backus. “The Education of a Computer.” ACM Computing Surveys, vol. 36, no. 12, 1981, pp. 64–305, https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., et al. Time, Clocks, and the Ordering of Events. TR-81, Lab Graph, 1969, https://example.org/workload."
+]
+}
+}

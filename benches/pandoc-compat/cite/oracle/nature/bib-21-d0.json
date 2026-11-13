@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"3,4",
+"1,4,5",
+"1",
+"2 and more",
+"e.g. 3,6",
+"4",
+"see 7",
+"7",
+"8",
+"2",
+"see 9, ch. 2",
+"4,e.g. 6"
+],
+"bibliography": [
+"1. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004).",
+"2. Cruz, M. de la. Go to statement considered harmful. in Proceedings of the network symposium 81–115 (2007).",
+"3. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992).",
+"4. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, 1970).",
+"5. Lovelace, A. Can programming be liberated from the von neumann style. ACM Computing Surveys 33, 183–370 (1940).",
+"6. Liskov, B. On Computable Numbers. https://example.org/analysis (1956).",
+"7. Hopper, G., Hamilton, M. & Smith, J. Jr. The apollo guidance computer. in Proceedings of the vector symposium 95–188 (1939).",
+"8. O’Brien, F. & Backus, J. Go to Statement Considered Harmful. (Addison-Wesley, 2024).",
+"9. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"3,4",
+"1,4,5",
+"1",
+"2 and more",
+"e.g. 3,6",
+"4",
+"see 7",
+"7",
+"8",
+"2",
+"see 9, ch. 2",
+"4,e.g. 6"
+],
+"bibliography": [
+"1. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004).",
+"2. Cruz, M. de la. Go to statement considered harmful. in Proceedings of the network symposium 81–115 (2007).",
+"3. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992).",
+"4. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, London, 1970).",
+"5. Lovelace, A. Can programming be liberated from the von neumann style. ACM Computing Surveys 33, 183–370 (1940).",
+"6. Liskov, B. On Computable Numbers. https://example.org/analysis (1956).",
+"7. Hopper, G., Hamilton, M. & Smith, J. Jr. The apollo guidance computer. in Proceedings of the vector symposium 95–188 (1939).",
+"8. O’Brien, F. & Backus, J. Go to Statement Considered Harmful. (Addison-Wesley, New York, 2024).",
+"9. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949)."
+]
+}
+}

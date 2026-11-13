@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(Hoare et al.)",
+"Lovelace and Hopper",
+"(e.g. Hoare et al.; Lovelace and Hopper)",
+"Hoare et al. (14)",
+"(Hoare et al. 84)",
+"(Lovelace and Hopper 70)",
+"(Lovelace and Hamilton 22)"
+],
+"bibliography": [
+"Hoare, C. A. R., et al. The Art of Computer Programming. TR-38, Lab Metric, 1948, https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. Notes on the Analytical Engine. MIT Press, 2017, https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 1969, pp. 14–120."
+]
+},
+"bib": {
+"citations": [
+"(Hoare et al.)",
+"Lovelace and Hopper",
+"(e.g. Hoare et al.; Lovelace and Hopper)",
+"Hoare et al. (14)",
+"(Hoare et al. 84)",
+"(Lovelace and Hopper 70)",
+"(Lovelace and Hamilton 22)"
+],
+"bibliography": [
+"Hoare, C. A. R., et al. The Art of Computer Programming. TR-38, Lab Metric, 1948, https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. Notes on the Analytical Engine. MIT Press, 2017, https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 1969, pp. 14–120."
+]
+}
+}

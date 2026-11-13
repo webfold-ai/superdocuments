@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Dijkstra and García 2004, vol. 71)",
+"(Dijkstra et al. 1970; 1949)",
+"(see O’Brien and Backus 2024)",
+"(Cruz 2007, sec. 47.110 and more)",
+"(Hamilton et al. 1992; O’Brien and Backus 2024, 56)",
+"(Cruz 2007, vol. 36)",
+"(see O’Brien and Backus 2024, ch. 45)",
+"O’Brien and Backus (2024, 71–115)",
+"(Hamilton et al. 1992)",
+"(O’Brien and Backus 2024; 1949)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 81–115. https://example.org/cache.",
+"Dijkstra, Edsger W., and Luis García. 2004. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Hamilton, Margaret, Barbara Liskov, and Guido van Rossum. 1992. An Axiomatic Basis for Computer Programming. Https://example.org/tree. https://example.org/heuristic.",
+"O’Brien, Flann, and John Backus. 2024. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4 (9): 240–315. https://doi.org/10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(Dijkstra and García 2004, vol. 71)",
+"(Dijkstra et al. 1970; 1949)",
+"(see O’Brien and Backus 2024)",
+"(Cruz 2007, sec. 47.110 and more)",
+"(Hamilton et al. 1992; O’Brien and Backus 2024, 56)",
+"(Cruz 2007, vol. 36)",
+"(see O’Brien and Backus 2024, ch. 45)",
+"O’Brien and Backus (2024, 71–115)",
+"(Hamilton et al. 1992)",
+"(O’Brien and Backus 2024; 1949)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 81–115. https://example.org/cache.",
+"Dijkstra, Edsger W., and Luis García. 2004. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Hamilton, Margaret, Barbara Liskov, and Guido van Rossum. 1992. An Axiomatic Basis for Computer Programming. Https://example.org/tree. https://example.org/heuristic.",
+"O’Brien, Flann, and John Backus. 2024. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4 (9): 240–315. https://doi.org/10.8223/index.77."
+]
+}
+}

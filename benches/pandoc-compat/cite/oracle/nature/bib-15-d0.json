@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"see 1, ch. 76",
+"2",
+"2",
+"2",
+"e.g. 3,4",
+"2",
+"1,5",
+"3",
+"6 and more",
+"7",
+"5,6",
+"6",
+"6"
+],
+"bibliography": [
+"1. Knuth, D. E., Cruz, M. de la & Smith, J. Jr. On computable numbers. (2020).",
+"2. Dijkstra, E. W., Hoare, C. A. R. & Rossum, G. van. Time, clocks, and the ordering of events. in Proceedings of the stream symposium 1–192 (2018).",
+"3. Cruz, M. de la & Turing, A. M. Go to Statement Considered Harmful. (Springer, 1938).",
+"4. Liskov, B., Backus, J. & Turing, A. M. The Education of a Computer. (MIT Press, 2004).",
+"5. Smith, J. Jr. Notes on the analytical engine. (University of Cambridge, 1972).",
+"6. Rossum, G. van & Cruz, M. de la. Notes on the Analytical Engine. (2012).",
+"7. Dijkstra, E. W. The apollo guidance computer. (1947)."
+]
+},
+"bib": {
+"citations": [
+"see 1, ch. 76",
+"2",
+"2",
+"2",
+"e.g. 3,4",
+"2",
+"1,5",
+"3",
+"6 and more",
+"7",
+"5,6",
+"6",
+"6"
+],
+"bibliography": [
+"1. Knuth, D. E., Cruz, M. de la & Smith, J. Jr. On computable numbers. (2020).",
+"2. Dijkstra, E. W., Hoare, C. A. R. & Rossum, G. van. Time, clocks, and the ordering of events. in Proceedings of the stream symposium 1–192 (2018).",
+"3. Cruz, M. de la & Turing, A. M. Go to Statement Considered Harmful. (Springer, New York, 1938).",
+"4. Liskov, B., Backus, J. & Turing, A. M. The Education of a Computer. (MIT Press, New York, 2004).",
+"5. Smith, J. Jr. Notes on the analytical engine. (University of Cambridge, 1972).",
+"6. Rossum, G. van & Cruz, M. de la. Notes on the Analytical Engine. (2012).",
+"7. Dijkstra, E. W. The apollo guidance computer. (1947)."
+]
+}
+}

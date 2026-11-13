@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(O’Brien 1948; Lamport and Dijkstra 1953, 45)",
+"(see Turing 2018, ch. 75)",
+"(García and Knuth 1995, fig. 54)",
+"(see Liskov et al. 1949, ch. 87)",
+"(1949)",
+"(e.g. García and Knuth 1995; Liskov et al. 1949)",
+"Turing (2018)",
+"(1999)",
+"(Lamport and Dijkstra 1953; Lamport and García 1999; O’Brien 1948)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50 (11): 159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Proceedings of the Array Symposium, 62–190."
+]
+},
+"bib": {
+"citations": [
+"(O’Brien 1948; Lamport and Dijkstra 1953, 45)",
+"(see Turing 2018, ch. 75)",
+"(García and Knuth 1995, fig. 54)",
+"(see Liskov et al. 1949, ch. 87)",
+"(1949)",
+"(e.g. García and Knuth 1995; Liskov et al. 1949)",
+"Turing (2018)",
+"(1999)",
+"(Lamport and Dijkstra 1953; Lamport and García 1999; O’Brien 1948)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50 (11): 159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Proceedings of the Array Symposium, 62–190."
+]
+}
+}

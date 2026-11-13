@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(e.g. Lamport 1992; Hoare and Hamilton 1975)",
+"Lamport (1992, 44–109)",
+"(Lovelace 1984, 85)",
+"(Hamilton et al. 1936; Lamport 1992; Lovelace 1984)",
+"(see Hoare and Hamilton 1975)",
+"(see Lovelace 1984)",
+"(Knuth 1955)",
+"(Lamport 1992)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Guido van Rossum. 1936. “On Computable Numbers.” Proceedings of the Token Symposium, 76–170.",
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. MIT Press.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Lamport, Leslie. 1992. Can Programming Be Liberated from the von Neumann Style. Springer. https://example.org/query.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge. https://example.org/pipeline."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Lamport 1992; Hoare and Hamilton 1975)",
+"Lamport (1992, 44–109)",
+"(Lovelace 1984, 85)",
+"(Hamilton et al. 1936; Lamport 1992; Lovelace 1984)",
+"(see Hoare and Hamilton 1975)",
+"(see Lovelace 1984)",
+"(Knuth 1955)",
+"(Lamport 1992)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Guido van Rossum. 1936. “On Computable Numbers.” Proceedings of the Token Symposium, 76–170.",
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. MIT Press.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Lamport, Leslie. 1992. Can Programming Be Liberated from the von Neumann Style. Springer. https://example.org/query.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge. https://example.org/pipeline."
+]
+}
+}

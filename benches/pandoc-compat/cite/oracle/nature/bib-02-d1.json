@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"see 1, ch. 52",
+"3",
+"3,4",
+"see 2",
+"5–7",
+"1",
+"2",
+"3"
+],
+"bibliography": [
+"1. Liskov, B., Müller, H. & Dijkstra, E. W. Notes on the analytical engine. in Proceedings of the compiler symposium 35–166 (2012).",
+"2. Dijkstra, E. W. The art of computer programming. (1973).",
+"3. Rossum, G. van & Turing, A. M. Notes on the analytical engine. (1990).",
+"4. Lovelace, A., Smith, J. Jr. & Backus, J. Time, clocks, and the ordering of events. (University of Oxford, 1969).",
+"5. Knuth, D. E., Lovelace, A. & Cruz, M. de la. Notes on the analytical engine. (1962).",
+"6. Smith, J. Jr., Cruz, M. de la & Lovelace, A. Go to Statement Considered Harmful. (1937).",
+"7. Liskov, B., Smith, J. Jr. & Cruz, M. de la. Time, clocks, and the ordering of events. (1963)."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"see 1, ch. 52",
+"3",
+"3,4",
+"see 2",
+"5–7",
+"1",
+"2",
+"3"
+],
+"bibliography": [
+"1. Liskov, B., Müller, H. & Dijkstra, E. W. Notes on the analytical engine. in Proceedings of the compiler symposium 35–166 (2012).",
+"2. Dijkstra, E. W. The art of computer programming. (1973).",
+"3. Rossum, G. van & Turing, A. M. Notes on the analytical engine. (1990).",
+"4. Lovelace, A., Smith, J. Jr. & Backus, J. Time, clocks, and the ordering of events. (University of Oxford, 1969).",
+"5. Knuth, D. E., Lovelace, A. & Cruz, M. de la. Notes on the analytical engine. (1962).",
+"6. Smith, J. Jr., Cruz, M. de la & Lovelace, A. Go to Statement Considered Harmful. (1937).",
+"7. Liskov, B., Smith, J. Jr. & Cruz, M. de la. Time, clocks, and the ordering of events. (1963)."
+]
+}
+}

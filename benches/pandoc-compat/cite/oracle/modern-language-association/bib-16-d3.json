@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(e.g. Knuth and O’Brien; Turing)",
+"(Knuth and O’Brien; Hopper and Lamport 84)",
+"(Turing; Hopper et al.)",
+"(Hopper and Backus 74)",
+"(Hopper and Backus 99–132)",
+"(Liskov and Knuth 22)",
+"(Turing, vol. 39)",
+"Hopper et al. (64–123)",
+"(Hamilton et al.)",
+"(García et al.; Liskov and Knuth; Hamilton et al.)",
+"(Knuth and O’Brien, sec. 64.102 and more)"
+],
+"bibliography": [
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. https://example.org/sparse, 2007.",
+"Hamilton, Margaret, et al. An Axiomatic Basis for Computer Programming. TR-41, Lab Scheduler, 1956.",
+"Hopper, Grace, et al. On Computable Numbers. TR-81, Lab Algorithm, 1990.",
+"Hopper, Grace, and John Backus. Notes on the Analytical Engine. https://example.org/vocabulary, 2008.",
+"Hopper, Grace, and Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press, 1943.",
+"Knuth, Donald E., and Flann O’Brien. An Axiomatic Basis for Computer Programming. TR-13, Lab Scheduler, 1945.",
+"Liskov, Barbara, and Donald E. Knuth. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 1954, pp. 14–128, https://example.org/solver.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. 1940, https://example.org/model. University of Zurich, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Knuth and O’Brien; Turing)",
+"(Knuth and O’Brien; Hopper and Lamport 84)",
+"(Turing; Hopper et al.)",
+"(Hopper and Backus 74)",
+"(Hopper and Backus 99–132)",
+"(Liskov and Knuth 22)",
+"(Turing, vol. 39)",
+"Hopper et al. (64–123)",
+"(Hamilton et al.)",
+"(García et al.; Liskov and Knuth; Hamilton et al.)",
+"(Knuth and O’Brien, sec. 64.102 and more)"
+],
+"bibliography": [
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. https://example.org/sparse, 2007.",
+"Hamilton, Margaret, et al. An Axiomatic Basis for Computer Programming. TR-41, Lab Scheduler, 1956.",
+"Hopper, Grace, et al. On Computable Numbers. TR-81, Lab Algorithm, 1990.",
+"Hopper, Grace, and John Backus. Notes on the Analytical Engine. https://example.org/vocabulary, 2008.",
+"Hopper, Grace, and Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press, 1943.",
+"Knuth, Donald E., and Flann O’Brien. An Axiomatic Basis for Computer Programming. TR-13, Lab Scheduler, 1945.",
+"Liskov, Barbara, and Donald E. Knuth. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 1954, pp. 14–128, https://example.org/solver.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. 1940, https://example.org/model. University of Zurich, PhD thesis."
+]
+}
+}

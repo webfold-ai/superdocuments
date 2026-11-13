@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"",
+"(Hopper, O’Brien, et al.; Smith and García; Hopper and Hamilton)",
+"(Smith and García)",
+"(e.g. Müller and Dijkstra; Hopper, Lamport, et al.)",
+"Liskov et al. (93)",
+"(Müller 5–117)",
+"(Hopper, Lamport, et al. 75–112)",
+"(Hopper, O’Brien, et al.; Hopper, Lamport, et al.; Knuth et al.)",
+"(see Hopper, Lamport, et al., ch. 87)",
+"(Hopper, Lamport, et al. 27)",
+"Smith and García (15–111)",
+"(Müller)",
+"(e.g. Hopper, Lamport, et al.; Hopper, O’Brien, et al.)"
+],
+"bibliography": [
+"Hopper, Grace, Flann O’Brien, et al. On Computable Numbers. 1941. University of Oxford, PhD thesis.",
+"Hopper, Grace, Leslie Lamport, et al. On Computable Numbers. Springer, 2019.",
+"Hopper, Grace, and Margaret Hamilton. On Computable Numbers. TR-98, Lab Agent, 1988.",
+"Knuth, Donald E., et al. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 1962, pp. 26–101, https://example.org/algorithm.",
+"Liskov, Barbara, et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 1988, pp. 70–197.",
+"Müller, Hans. Data Abstraction and Hierarchy. MIT Press, 1947.",
+"Müller, Hans, and Edsger W. Dijkstra. On Computable Numbers. TR-33, Lab Query, 2004.",
+"Smith, John Jr., and Luis García. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM, vol. 46, no. 5, 1993, pp. 223–398, https://doi.org/10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"",
+"(Hopper, O’Brien, et al.; Smith and García; Hopper and Hamilton)",
+"(Smith and García)",
+"(e.g. Müller and Dijkstra; Hopper, Lamport, et al.)",
+"Liskov et al. (93)",
+"(Müller 5–117)",
+"(Hopper, Lamport, et al. 75–112)",
+"(Hopper, O’Brien, et al.; Hopper, Lamport, et al.; Knuth et al.)",
+"(see Hopper, Lamport, et al., ch. 87)",
+"(Hopper, Lamport, et al. 27)",
+"Smith and García (15–111)",
+"(Müller)",
+"(e.g. Hopper, Lamport, et al.; Hopper, O’Brien, et al.)"
+],
+"bibliography": [
+"Hopper, Grace, Flann O’Brien, et al. On Computable Numbers. 1941. University of Oxford, PhD thesis.",
+"Hopper, Grace, Leslie Lamport, et al. On Computable Numbers. Springer, 2019.",
+"Hopper, Grace, and Margaret Hamilton. On Computable Numbers. TR-98, Lab Agent, 1988.",
+"Knuth, Donald E., et al. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 1962, pp. 26–101, https://example.org/algorithm.",
+"Liskov, Barbara, et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 1988, pp. 70–197.",
+"Müller, Hans. Data Abstraction and Hierarchy. MIT Press, 1947.",
+"Müller, Hans, and Edsger W. Dijkstra. On Computable Numbers. TR-33, Lab Query, 2004.",
+"Smith, John Jr., and Luis García. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM, vol. 46, no. 5, 1993, pp. 223–398, https://doi.org/10.4191/convergence.19."
+]
+}
+}

@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Rossum, 1937, pp. 84–114)",
+"(Backus & Lamport, 1956, Section 64.121 and more)",
+"(Hoare et al., 2010, Section 49.137 and more)",
+"(see Backus & Lamport, 1956, ch. 38)",
+"(Rossum, 1937, p. 30)",
+"(Hoare et al., 2010, pp. 16–114)",
+"Hoare & Rossum (1953, pp. 18–135)",
+"Hoare et al. (2010)",
+"Hoare & Rossum (1953, p. 91)",
+"(Hoare et al., 2010, Section 51.139 and more)",
+"Hoare et al. (2010, pp. 86–139)",
+"(Hopper, 2016, pp. 35–127)",
+"(e.g. Knuth, 2007; Rossum, 1937)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., Lovelace, A., & Smith, J. Jr. (2010). On computable numbers (3rd ed.). Addison-Wesley.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Hopper, G. (2016). The art of computer programming. IEEE Transactions on Software Engineering, 4(5), 238–320. https://doi.org/10.8087/bound.55",
+"Knuth, D. E. (2007). An axiomatic basis for computer programming. Proceedings of the Bound Symposium, 48–186.",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397."
+]
+},
+"bib": {
+"citations": [
+"(Rossum, 1937, pp. 84–114)",
+"(Backus & Lamport, 1956, Section 64.121 and more)",
+"(Hoare et al., 2010, Section 49.137 and more)",
+"(see Backus & Lamport, 1956, ch. 38)",
+"(Rossum, 1937, p. 30)",
+"(Hoare et al., 2010, pp. 16–114)",
+"Hoare & Rossum (1953, pp. 18–135)",
+"Hoare et al. (2010)",
+"Hoare & Rossum (1953, p. 91)",
+"(Hoare et al., 2010, Section 51.139 and more)",
+"Hoare et al. (2010, pp. 86–139)",
+"(Hopper, 2016, pp. 35–127)",
+"(e.g. Knuth, 2007; Rossum, 1937)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., Lovelace, A., & Smith, J. Jr. (2010). On computable numbers (3rd ed.). Addison-Wesley.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Hopper, G. (2016). The art of computer programming. IEEE Transactions on Software Engineering, 4(5), 238–320. https://doi.org/10.8087/bound.55",
+"Knuth, D. E. (2007). An axiomatic basis for computer programming. Proceedings of the Bound Symposium, 48–186.",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397."
+]
+}
+}

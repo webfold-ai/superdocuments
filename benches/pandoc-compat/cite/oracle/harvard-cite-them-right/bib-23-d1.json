@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Lamport, Müller and Dijkstra, 2017, sec. 69.102 and more)",
+"Liskov (1944, pp. 26–112)",
+"(Dijkstra, 1993, pp. 88–105)",
+"Dijkstra (1993, pp. 23–112)",
+"(Lamport, Müller and Dijkstra, 2017, vol. 20)",
+"(Cruz, 1951, p. 31)",
+"Liskov (1944, pp. 81–139)",
+"Dijkstra (1993, p. 73)"
+],
+"bibliography": [
+"Cruz, M. de la (1951) Notes on the analytical engine. MIT Press.",
+"Dijkstra, E.W. (1993) “The apollo guidance computer,” Journal of the ACM, 33(2), pp. 39–369.",
+"Lamport, L., Müller, H. and Dijkstra, E.W. (2017) The education of a computer. Addison-Wesley.",
+"Liskov, B. (1944) The art of computer programming. TR-62. Lab Optimizer."
+]
+},
+"bib": {
+"citations": [
+"(Lamport, Müller and Dijkstra, 2017, sec. 69.102 and more)",
+"Liskov (1944, pp. 26–112)",
+"(Dijkstra, 1993, pp. 88–105)",
+"Dijkstra (1993, pp. 23–112)",
+"(Lamport, Müller and Dijkstra, 2017, vol. 20)",
+"(Cruz, 1951, p. 31)",
+"Liskov (1944, pp. 81–139)",
+"Dijkstra (1993, p. 73)"
+],
+"bibliography": [
+"Cruz, M. de la (1951) Notes on the analytical engine. Boston: MIT Press.",
+"Dijkstra, E.W. (1993) “The apollo guidance computer,” Journal of the ACM, 33(2), pp. 39–369.",
+"Lamport, L., Müller, H. and Dijkstra, E.W. (2017) The education of a computer. New York: Addison-Wesley.",
+"Liskov, B. (1944) The art of computer programming. TR-62. Lab Optimizer."
+]
+}
+}

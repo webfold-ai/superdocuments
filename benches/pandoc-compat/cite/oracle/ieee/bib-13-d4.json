@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1, p. 65]",
+"[1], [2], [3]",
+"[4, pp. 2–119]",
+"[2]",
+"[3], [5]",
+"[1], e.g. [3]",
+"[2, Fig. 42]",
+"[6, p. 33]",
+"see [3]",
+"[2, p. 9]",
+"[4], e.g. [7]"
+],
+"bibliography": [
+"[1] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[2] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[3] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[4] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[5] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[6] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[7] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 65]",
+"[1], [2], [3]",
+"[4, pp. 2–119]",
+"[2]",
+"[3], [5]",
+"[1], e.g. [3]",
+"[2, Fig. 42]",
+"[6, p. 33]",
+"see [3]",
+"[2, p. 9]",
+"[4], e.g. [7]"
+],
+"bibliography": [
+"[1] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[2] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[3] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[4] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[5] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[6] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[7] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988."
+]
+}
+}

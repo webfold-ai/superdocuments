@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, p. 71]",
+"see [2]",
+"[3], [4], [5]",
+"[6, pp. 63–140]",
+"[3, Fig. 92]",
+"[4, p. 49]",
+"[7]",
+"[6, pp. 38–138]",
+"[5]"
+],
+"bibliography": [
+"[1] M. de la Cruz, “The apollo guidance computer,” Lab Window, TR-20, 2014.",
+"[2] D. E. Knuth and A. M. Turing, “Can programming be liberated from the von neumann style,” Lab Complexity, TR-69, 1975.",
+"[3] L. García, D. E. Knuth, and M. de la Cruz, “On computable numbers,” Communications of the ACM, vol. 44, no. 6, pp. 209–329, 1969.",
+"[4] G. van Rossum and G. Hopper, “Can programming be liberated from the von neumann style,” in Proceedings of the entropy symposium, 1987, pp. 98–186.",
+"[5] J. Jr. Smith and F. O’Brien, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 39, no. 3, pp. 257–308, 1945, doi: 10.6600/trace.17.",
+"[6] C. A. R. Hoare and H. Müller, “An axiomatic basis for computer programming,” Journal of the ACM, vol. 53, no. 8, pp. 203–390, 1994, doi: 10.4068/layer.20.",
+"[7] H. Müller, J. Backus, and L. Lamport, “Data abstraction and hierarchy,” Lab Matrix, TR-83, 1937."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 71]",
+"see [2]",
+"[3], [4], [5]",
+"[6, pp. 63–140]",
+"[3, Fig. 92]",
+"[4, p. 49]",
+"[7]",
+"[6, pp. 38–138]",
+"[5]"
+],
+"bibliography": [
+"[1] M. de la Cruz, “The apollo guidance computer,” Lab Window, TR-20, 2014.",
+"[2] D. E. Knuth and A. M. Turing, “Can programming be liberated from the von neumann style,” Lab Complexity, TR-69, 1975.",
+"[3] L. García, D. E. Knuth, and M. de la Cruz, “On computable numbers,” Communications of the ACM, vol. 44, no. 6, pp. 209–329, 1969.",
+"[4] G. van Rossum and G. Hopper, “Can programming be liberated from the von neumann style,” in Proceedings of the entropy symposium, 1987, pp. 98–186.",
+"[5] J. Jr. Smith and F. O’Brien, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 39, no. 3, pp. 257–308, 1945, doi: 10.6600/trace.17.",
+"[6] C. A. R. Hoare and H. Müller, “An axiomatic basis for computer programming,” Journal of the ACM, vol. 53, no. 8, pp. 203–390, 1994, doi: 10.4068/layer.20.",
+"[7] H. Müller, J. Backus, and L. Lamport, “Data abstraction and hierarchy,” Lab Matrix, TR-83, 1937."
+]
+}
+}

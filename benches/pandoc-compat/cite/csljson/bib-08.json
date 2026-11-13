@@ -1,0 +1,128 @@
+[
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1986
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "container-title": "Proceedings of the transform symposium",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "page": "71-122",
+    "title": "On computable numbers",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://example.org/workload",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1969
+        ]
+      ]
+    },
+    "number": "TR-81",
+    "publisher": "Lab Graph",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "report"
+  },
+  {
+    "DOI": "10.9730/kernel.12",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "container-title": "ACM Computing Surveys",
+    "id": "liskov1987",
+    "issue": "12",
+    "issued": {
+      "date-parts": [
+        [
+          1981
+        ]
+      ]
+    },
+    "page": "64-305",
+    "title": "The education of a computer",
+    "type": "article-journal",
+    "volume": "36"
+  },
+  {
+    "abstract": "Latency agent latency regression batch network parser entropy scheduler vocabulary feature baseline.",
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "container-title": "Proceedings of the filter symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1942
+        ]
+      ]
+    },
+    "page": "37-181",
+    "title": "The education of a computer",
+    "type": "paper-conference"
+  }
+]

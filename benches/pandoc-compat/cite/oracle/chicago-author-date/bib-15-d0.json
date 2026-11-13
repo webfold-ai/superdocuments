@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(see Knuth et al. 2020, ch. 76)",
+"(Dijkstra et al. 2018, 48)",
+"(Dijkstra et al. 2018)",
+"Dijkstra et al. (2018, 75)",
+"(e.g. Cruz and Turing 1938; Liskov et al. 2004)",
+"(Dijkstra et al. 2018, 89)",
+"(Knuth et al. 2020; Smith 1972)",
+"Cruz and Turing (1938, 87–113)",
+"(Rossum and Cruz 2012, sec. 79.113 and more)",
+"Dijkstra (1947)",
+"(Rossum and Cruz 2012; 1972)",
+"(Rossum and Cruz 2012, 31)",
+"(Rossum and Cruz 2012, 85–138)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. 1938. Go to Statement Considered Harmful. 2nd ed. Springer.",
+"Dijkstra, Edsger W. 1947. The Apollo Guidance Computer. Https://example.org/prior.",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 1–192.",
+"Knuth, Donald E., Maria de la Cruz, and John Jr. Smith. 2020. On Computable Numbers. Https://example.org/structure.",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. MIT Press. https://example.org/matrix.",
+"Rossum, Guido van, and Maria de la Cruz. 2012. Notes on the Analytical Engine. TR-39. Lab Transform.",
+"Smith, John Jr. 1972. “Notes on the Analytical Engine.” PhD thesis, University of Cambridge. https://example.org/prior."
+]
+},
+"bib": {
+"citations": [
+"(see Knuth et al. 2020, ch. 76)",
+"(Dijkstra et al. 2018, 48)",
+"(Dijkstra et al. 2018)",
+"Dijkstra et al. (2018, 75)",
+"(e.g. Cruz and Turing 1938; Liskov et al. 2004)",
+"(Dijkstra et al. 2018, 89)",
+"(Knuth et al. 2020; Smith 1972)",
+"Cruz and Turing (1938, 87–113)",
+"(Rossum and Cruz 2012, sec. 79.113 and more)",
+"Dijkstra (1947)",
+"(Rossum and Cruz 2012; 1972)",
+"(Rossum and Cruz 2012, 31)",
+"(Rossum and Cruz 2012, 85–138)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. 1938. Go to Statement Considered Harmful. 2nd ed. Springer.",
+"Dijkstra, Edsger W. 1947. The Apollo Guidance Computer. Https://example.org/prior.",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 1–192.",
+"Knuth, Donald E., Maria de la Cruz, and John Jr. Smith. 2020. On Computable Numbers. Https://example.org/structure.",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. MIT Press. https://example.org/matrix.",
+"Rossum, Guido van, and Maria de la Cruz. 2012. Notes on the Analytical Engine. TR-39. Lab Transform.",
+"Smith, John Jr. 1972. “Notes on the Analytical Engine.” PhD thesis, University of Cambridge. https://example.org/prior."
+]
+}
+}

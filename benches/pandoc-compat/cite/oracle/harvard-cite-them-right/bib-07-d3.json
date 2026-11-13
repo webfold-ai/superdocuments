@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Hoare, 1994, pp. 98–139)",
+"(Cruz and Knuth, 1959, sec. 56.111 and more)",
+"(Hoare, 1994)",
+"(Cruz and O’Brien, 1996, vol. 53)",
+"(e.g. Hoare, 1994; Cruz and O’Brien, 1996)",
+"(Hoare, 1994, fig. 83)",
+"(see Cruz and Knuth, 1959)",
+"(Hoare, 1994, p. 89)",
+"(Knuth, 1971; Cruz and O’Brien, 1996, p. 82)",
+"(Cruz and Knuth, 1959; Cruz and O’Brien, 1996, p. 98)",
+"Hoare (1994, p. 4)",
+"(Cruz and O’Brien, 1996, pp. 98–117)",
+"Hoare (1994, pp. 93–132)"
+],
+"bibliography": [
+"Cruz, M. de la and Knuth, D.E. (1959) “The education of a computer,” Proceedings of the London Mathematical Society, 31(7), pp. 150–375. Available at: https://doi.org/10.2214/heuristic.97.",
+"Cruz, M. de la and O’Brien, F. (1996) “Data abstraction and hierarchy.” https://example.org/algorithm. Available at: https://example.org/ranking.",
+"Hoare, C.A.R. (1994) Can programming be liberated from the von neumann style. TR-85. Lab Parser.",
+"Knuth, D.E. (1971) “Go to statement considered harmful,” Proceedings of the feature symposium, pp. 63–156."
+]
+},
+"bib": {
+"citations": [
+"(Hoare, 1994, pp. 98–139)",
+"(Cruz and Knuth, 1959, sec. 56.111 and more)",
+"(Hoare, 1994)",
+"(Cruz and O’Brien, 1996, vol. 53)",
+"(e.g. Hoare, 1994; Cruz and O’Brien, 1996)",
+"(Hoare, 1994, fig. 83)",
+"(see Cruz and Knuth, 1959)",
+"(Hoare, 1994, p. 89)",
+"(Knuth, 1971; Cruz and O’Brien, 1996, p. 82)",
+"(Cruz and Knuth, 1959; Cruz and O’Brien, 1996, p. 98)",
+"Hoare (1994, p. 4)",
+"(Cruz and O’Brien, 1996, pp. 98–117)",
+"Hoare (1994, pp. 93–132)"
+],
+"bibliography": [
+"Cruz, M. de la and Knuth, D.E. (1959) “The education of a computer,” Proceedings of the London Mathematical Society, 31(7), pp. 150–375. Available at: https://doi.org/10.2214/heuristic.97.",
+"Cruz, M. de la and O’Brien, F. (1996) “Data abstraction and hierarchy.” https://example.org/algorithm. Available at: https://example.org/ranking.",
+"Hoare, C.A.R. (1994) Can programming be liberated from the von neumann style. TR-85. Lab Parser.",
+"Knuth, D.E. (1971) “Go to statement considered harmful,” Proceedings of the feature symposium, pp. 63–156."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3",
+"2 and more",
+"3",
+"see 1",
+"4,5",
+"2",
+"4,5",
+"1,4,5",
+"see 5",
+"6",
+"6"
+],
+"bibliography": [
+"1. Hopper, G., Müller, H. & Lovelace, A. The Apollo Guidance Computer. (Cambridge University Press, London, 1987).",
+"2. O’Brien, F., Rossum, G. van & Smith, J. Jr. Time, Clocks, and the Ordering of Events. (Addison-Wesley, New York, 1975).",
+"3. Backus, J. On computable numbers. (1943).",
+"4. Hoare, C. A. R. & Müller, H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7, 191–397 (2005).",
+"5. García, L., Lamport, L. & Liskov, B. The art of computer programming. (1998).",
+"6. Hopper, G., Backus, J. & Müller, H. The Art of Computer Programming. (Addison-Wesley, New York, 1939)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3",
+"2 and more",
+"3",
+"see 1",
+"4,5",
+"2",
+"4,5",
+"1,4,5",
+"see 5",
+"6",
+"6"
+],
+"bibliography": [
+"1. Hopper, G., Müller, H. & Lovelace, A. The Apollo Guidance Computer. (Cambridge University Press, London, 1987).",
+"2. O’Brien, F., Rossum, G. van & Smith, J. Jr. Time, Clocks, and the Ordering of Events. (Addison-Wesley, New York, 1975).",
+"3. Backus, J. On computable numbers. (1943).",
+"4. Hoare, C. A. R. & Müller, H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7, 191–397 (2005).",
+"5. García, L., Lamport, L. & Liskov, B. The art of computer programming. (1998).",
+"6. Hopper, G., Backus, J. & Müller, H. The Art of Computer Programming. (Addison-Wesley, New York, 1939)."
+]
+}
+}

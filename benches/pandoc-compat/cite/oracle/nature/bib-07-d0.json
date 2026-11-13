@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"e.g. 2,3",
+"1",
+"see 4",
+"see 1",
+"1 and more",
+"3",
+"1,2,4",
+"see 3",
+"2"
+],
+"bibliography": [
+"1. Cruz, M. de la & O’Brien, F. Data abstraction and hierarchy. (1996).",
+"2. Knuth, D. E. Go to statement considered harmful. in Proceedings of the feature symposium 63–156 (1971).",
+"3. Dijkstra, E. W. On Computable Numbers. (2000).",
+"4. Hoare, C. A. R. Can Programming Be Liberated from the von Neumann Style. (1994)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"e.g. 2,3",
+"1",
+"see 4",
+"see 1",
+"1 and more",
+"3",
+"1,2,4",
+"see 3",
+"2"
+],
+"bibliography": [
+"1. Cruz, M. de la & O’Brien, F. Data abstraction and hierarchy. (1996).",
+"2. Knuth, D. E. Go to statement considered harmful. in Proceedings of the feature symposium 63–156 (1971).",
+"3. Dijkstra, E. W. On Computable Numbers. (2000).",
+"4. Hoare, C. A. R. Can Programming Be Liberated from the von Neumann Style. (1994)."
+]
+}
+}

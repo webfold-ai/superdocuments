@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Lovelace et al. 1969, sec. 16.139 and more)",
+"(Knuth et al. 1962, sec. 39.108 and more)",
+"Smith et al. (1937, 33)",
+"(Liskov et al. 1963; Smith et al. 1937, 98)",
+"(Smith et al. 1937; Liskov et al. 2012)",
+"(Dijkstra 1973, fig. 71)",
+"(see Dijkstra 1973, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. Notes on the Analytical Engine. Https://example.org/retrieval.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Smith, John Jr., Maria de la Cruz, and Ada Lovelace. 1937. Go to Statement Considered Harmful. TR-94. Lab Model."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace et al. 1969, sec. 16.139 and more)",
+"(Knuth et al. 1962, sec. 39.108 and more)",
+"Smith et al. (1937, 33)",
+"(Liskov et al. 1963; Smith et al. 1937, 98)",
+"(Smith et al. 1937; Liskov et al. 2012)",
+"(Dijkstra 1973, fig. 71)",
+"(see Dijkstra 1973, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. Notes on the Analytical Engine. Https://example.org/retrieval.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Smith, John Jr., Maria de la Cruz, and Ada Lovelace. 1937. Go to Statement Considered Harmful. TR-94. Lab Model."
+]
+}
+}

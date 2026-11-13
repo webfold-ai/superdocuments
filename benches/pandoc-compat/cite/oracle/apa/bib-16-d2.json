@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Hopper & Backus, 2008; Hopper & Lamport, 1943)",
+"(1961)",
+"(Hopper & Lamport, 1943)",
+"Hopper & Lamport (1943, p. 72)",
+"(Lamport et al., 1961)",
+"(e.g. García et al., 2007; Knuth & O’Brien, 1945)",
+"(García et al., 2007; e.g. Lamport et al., 1961)",
+"(see Hopper & Lamport, 1943, ch. 22)",
+"Hopper et al. (1990, p. 6)",
+"(Hopper & Backus, 2008; 1961)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Lamport, L., Dijkstra, E. W., & Hoare, C. A. R. (1961). Notes on the analytical engine. Journal of the ACM, 33(10), 192–344."
+]
+},
+"bib": {
+"citations": [
+"(Hopper & Backus, 2008; Hopper & Lamport, 1943)",
+"(1961)",
+"(Hopper & Lamport, 1943)",
+"Hopper & Lamport (1943, p. 72)",
+"(Lamport et al., 1961)",
+"(e.g. García et al., 2007; Knuth & O’Brien, 1945)",
+"(García et al., 2007; e.g. Lamport et al., 1961)",
+"(see Hopper & Lamport, 1943, ch. 22)",
+"Hopper et al. (1990, p. 6)",
+"(Hopper & Backus, 2008; 1961)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Lamport, L., Dijkstra, E. W., & Hoare, C. A. R. (1961). Notes on the analytical engine. Journal of the ACM, 33(10), 192–344."
+]
+}
+}

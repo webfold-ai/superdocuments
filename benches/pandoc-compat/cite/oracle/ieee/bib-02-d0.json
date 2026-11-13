@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1, Sec. 3.110] and more",
+"[1, Vol. 86]",
+"[1, Fig. 23]",
+"[2]",
+"[3, Fig. 66]",
+"[4, Fig. 47]",
+"[2], [5]",
+"[6]"
+],
+"bibliography": [
+"[1] B. Liskov, J. Jr. Smith, and M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/function, 1963. Available: https://example.org/density",
+"[2] D. E. Knuth, A. Lovelace, and M. de la Cruz, “Notes on the analytical engine.” https://example.org/retrieval, 1962.",
+"[3] E. W. Dijkstra, “The art of computer programming.” https://example.org/filter, 1973.",
+"[4] G. van Rossum and A. M. Turing, “Notes on the analytical engine.” https://example.org/sparse, 1990.",
+"[5] B. Liskov, H. Müller, and E. W. Dijkstra, “Notes on the analytical engine,” in Proceedings of the compiler symposium, 2012, pp. 35–166.",
+"[6] A. Lovelace, J. Jr. Smith, and J. Backus, “Time, clocks, and the ordering of events,” PhD thesis, University of Oxford, 1969."
+]
+},
+"bib": {
+"citations": [
+"[1, Sec. 3.110] and more",
+"[1, Vol. 86]",
+"[1, Fig. 23]",
+"[2]",
+"[3, Fig. 66]",
+"[4, Fig. 47]",
+"[2], [5]",
+"[6]"
+],
+"bibliography": [
+"[1] B. Liskov, J. Jr. Smith, and M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/function, 1963. Available: https://example.org/density",
+"[2] D. E. Knuth, A. Lovelace, and M. de la Cruz, “Notes on the analytical engine.” https://example.org/retrieval, 1962.",
+"[3] E. W. Dijkstra, “The art of computer programming.” https://example.org/filter, 1973.",
+"[4] G. van Rossum and A. M. Turing, “Notes on the analytical engine.” https://example.org/sparse, 1990.",
+"[5] B. Liskov, H. Müller, and E. W. Dijkstra, “Notes on the analytical engine,” in Proceedings of the compiler symposium, 2012, pp. 35–166.",
+"[6] A. Lovelace, J. Jr. Smith, and J. Backus, “Time, clocks, and the ordering of events,” PhD thesis, University of Oxford, 1969."
+]
+}
+}

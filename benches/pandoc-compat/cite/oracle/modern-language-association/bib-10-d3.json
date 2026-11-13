@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Hoare 45–118)",
+"Hoare (40)",
+"(Cruz and Hamilton 68)",
+"(see Cruz and Hamilton, ch. 14)",
+"Hoare",
+"Cruz and Hamilton",
+"(Müller; Hoare; Smith et al.)",
+"Smith et al. (77)",
+"(Smith et al. 75)",
+"",
+"(e.g. Liskov; Smith et al.)",
+"Cruz and Hamilton"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. Notes on the Analytical Engine. TR-4, Lab Throughput, 1975.",
+"Hoare, C. A. R. On Computable Numbers. 2011. University of Oxford, PhD thesis.",
+"Liskov, Barbara. Can Programming Be Liberated from the von Neumann Style. Springer, 1946, https://example.org/learning.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1968. University of Cambridge, PhD thesis.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-29, Lab Function, 1999."
+]
+},
+"bib": {
+"citations": [
+"(Hoare 45–118)",
+"Hoare (40)",
+"(Cruz and Hamilton 68)",
+"(see Cruz and Hamilton, ch. 14)",
+"Hoare",
+"Cruz and Hamilton",
+"(Müller; Hoare; Smith et al.)",
+"Smith et al. (77)",
+"(Smith et al. 75)",
+"",
+"(e.g. Liskov; Smith et al.)",
+"Cruz and Hamilton"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. Notes on the Analytical Engine. TR-4, Lab Throughput, 1975.",
+"Hoare, C. A. R. On Computable Numbers. 2011. University of Oxford, PhD thesis.",
+"Liskov, Barbara. Can Programming Be Liberated from the von Neumann Style. Springer, 1946, https://example.org/learning.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1968. University of Cambridge, PhD thesis.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-29, Lab Function, 1999."
+]
+}
+}

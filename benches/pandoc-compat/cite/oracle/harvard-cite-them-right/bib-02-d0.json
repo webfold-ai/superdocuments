@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Liskov, Smith and Cruz, 1963, sec. 3.110 and more)",
+"(Liskov, Smith and Cruz, 1963, vol. 86)",
+"(Liskov, Smith and Cruz, 1963, fig. 23)",
+"(1962)",
+"(Dijkstra, 1973, fig. 66)",
+"(Rossum and Turing, 1990, fig. 47)",
+"(1962; Liskov, Müller and Dijkstra, 2012)",
+"Lovelace, Smith and Backus (1969)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1973) “The art of computer programming.” https://example.org/filter.",
+"Knuth, D.E., Lovelace, A. and Cruz, M. de la (1962) “Notes on the analytical engine.” https://example.org/retrieval.",
+"Liskov, B., Müller, H. and Dijkstra, E.W. (2012) “Notes on the analytical engine,” Proceedings of the compiler symposium, pp. 35–166.",
+"Liskov, B., Smith, J.Jr. and Cruz, M. de la (1963) “Time, clocks, and the ordering of events.” https://example.org/function. Available at: https://example.org/density.",
+"Lovelace, A., Smith, J.Jr. and Backus, J. (1969) Time, clocks, and the ordering of events. PhD thesis. University of Oxford.",
+"Rossum, G. van and Turing, A.M. (1990) “Notes on the analytical engine.” https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Liskov, Smith and Cruz, 1963, sec. 3.110 and more)",
+"(Liskov, Smith and Cruz, 1963, vol. 86)",
+"(Liskov, Smith and Cruz, 1963, fig. 23)",
+"(1962)",
+"(Dijkstra, 1973, fig. 66)",
+"(Rossum and Turing, 1990, fig. 47)",
+"(1962; Liskov, Müller and Dijkstra, 2012)",
+"Lovelace, Smith and Backus (1969)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1973) “The art of computer programming.” https://example.org/filter.",
+"Knuth, D.E., Lovelace, A. and Cruz, M. de la (1962) “Notes on the analytical engine.” https://example.org/retrieval.",
+"Liskov, B., Müller, H. and Dijkstra, E.W. (2012) “Notes on the analytical engine,” Proceedings of the compiler symposium, pp. 35–166.",
+"Liskov, B., Smith, J.Jr. and Cruz, M. de la (1963) “Time, clocks, and the ordering of events.” https://example.org/function. Available at: https://example.org/density.",
+"Lovelace, A., Smith, J.Jr. and Backus, J. (1969) Time, clocks, and the ordering of events. PhD thesis. University of Oxford.",
+"Rossum, G. van and Turing, A.M. (1990) “Notes on the analytical engine.” https://example.org/sparse."
+]
+}
+}

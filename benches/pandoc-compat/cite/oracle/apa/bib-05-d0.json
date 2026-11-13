@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(see Müller, 1948)",
+"(Hoare et al., 1941, Section 33.117 and more)",
+"(see Smith & Hopper, 2022)",
+"(Lovelace & Hoare, 1970, Figure 16)",
+"(see Turing, 1994, ch. 11)",
+"(Lovelace & Hoare, 1970, Volume 71)",
+"(García & Rossum, 2010; Liskov & Smith, 1936)",
+"(Liskov & Smith, 1936; Lovelace & Hoare, 1970, p. 72)"
+],
+"bibliography": [
+"García, L., & Rossum, G. van. (2010). On computable numbers (2nd ed.). Addison-Wesley.",
+"Hoare, C. A. R., Smith, J. Jr., & García, L. (1941). An axiomatic basis for computer programming (Second). Springer. https://example.org/experiment",
+"Liskov, B., & Smith, J. Jr. (1936). Can programming be liberated from the von neumann style. Journal of the ACM, 11(7), 127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace, A., & Hoare, C. A. R. (1970). Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society, 42(8), 59–345. https://doi.org/10.4721/scheduler.33",
+"Müller, H. (1948). Data abstraction and hierarchy [PhD thesis]. University of Oxford.",
+"Smith, J. Jr., & Hopper, G. (2022). The education of a computer. Proceedings of the Convergence Symposium, 61–101.",
+"Turing, A. M. (1994). The art of computer programming. Springer. https://example.org/workload"
+]
+},
+"bib": {
+"citations": [
+"(see Müller, 1948)",
+"(Hoare et al., 1941, Section 33.117 and more)",
+"(see Smith & Hopper, 2022)",
+"(Lovelace & Hoare, 1970, Figure 16)",
+"(see Turing, 1994, ch. 11)",
+"(Lovelace & Hoare, 1970, Volume 71)",
+"(García & Rossum, 2010; Liskov & Smith, 1936)",
+"(Liskov & Smith, 1936; Lovelace & Hoare, 1970, p. 72)"
+],
+"bibliography": [
+"García, L., & Rossum, G. van. (2010). On computable numbers (2nd ed.). Addison-Wesley.",
+"Hoare, C. A. R., Smith, J. Jr., & García, L. (1941). An axiomatic basis for computer programming (Second). Springer. https://example.org/experiment",
+"Liskov, B., & Smith, J. Jr. (1936). Can programming be liberated from the von neumann style. Journal of the ACM, 11(7), 127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace, A., & Hoare, C. A. R. (1970). Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society, 42(8), 59–345. https://doi.org/10.4721/scheduler.33",
+"Müller, H. (1948). Data abstraction and hierarchy [PhD thesis]. University of Oxford.",
+"Smith, J. Jr., & Hopper, G. (2022). The education of a computer. Proceedings of the Convergence Symposium, 61–101.",
+"Turing, A. M. (1994). The art of computer programming. Springer. https://example.org/workload"
+]
+}
+}

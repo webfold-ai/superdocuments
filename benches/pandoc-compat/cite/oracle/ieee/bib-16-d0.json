@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, p. 79]",
+"[2], [3]",
+"[2]",
+"[4, Fig. 74]",
+"[5], [6]",
+"[7]",
+"see [8, Ch. 12]",
+"[5], [8]"
+],
+"bibliography": [
+"[1] L. Lamport, E. W. Dijkstra, and C. A. R. Hoare, “Notes on the analytical engine,” Journal of the ACM, vol. 33, no. 10, pp. 192–344, 1961.",
+"[2] L. García, M. Hamilton, and D. E. Knuth, “An axiomatic basis for computer programming.” https://example.org/sparse, 2007.",
+"[3] G. Hopper and L. Lamport, Go to statement considered harmful. Cambridge University Press, 1943.",
+"[4] M. Hamilton, A. Lovelace, and A. M. Turing, “An axiomatic basis for computer programming,” Lab Scheduler, TR-41, 1956.",
+"[5] A. M. Turing, “Time, clocks, and the ordering of events,” PhD thesis, University of Zurich, 1940. Available: https://example.org/model",
+"[6] G. Hopper, E. W. Dijkstra, and J. Backus, “On computable numbers,” Lab Algorithm, TR-81, 1990.",
+"[7] D. E. Knuth and F. O’Brien, “An axiomatic basis for computer programming,” Lab Scheduler, TR-13, 1945.",
+"[8] G. Hopper and J. Backus, “Notes on the analytical engine.” https://example.org/vocabulary, 2008."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 79]",
+"[2], [3]",
+"[2]",
+"[4, Fig. 74]",
+"[5], [6]",
+"[7]",
+"see [8, Ch. 12]",
+"[5], [8]"
+],
+"bibliography": [
+"[1] L. Lamport, E. W. Dijkstra, and C. A. R. Hoare, “Notes on the analytical engine,” Journal of the ACM, vol. 33, no. 10, pp. 192–344, 1961.",
+"[2] L. García, M. Hamilton, and D. E. Knuth, “An axiomatic basis for computer programming.” https://example.org/sparse, 2007.",
+"[3] G. Hopper and L. Lamport, Go to statement considered harmful. London: Cambridge University Press, 1943.",
+"[4] M. Hamilton, A. Lovelace, and A. M. Turing, “An axiomatic basis for computer programming,” Lab Scheduler, TR-41, 1956.",
+"[5] A. M. Turing, “Time, clocks, and the ordering of events,” PhD thesis, University of Zurich, 1940. Available: https://example.org/model",
+"[6] G. Hopper, E. W. Dijkstra, and J. Backus, “On computable numbers,” Lab Algorithm, TR-81, 1990.",
+"[7] D. E. Knuth and F. O’Brien, “An axiomatic basis for computer programming,” Lab Scheduler, TR-13, 1945.",
+"[8] G. Hopper and J. Backus, “Notes on the analytical engine.” https://example.org/vocabulary, 2008."
+]
+}
+}

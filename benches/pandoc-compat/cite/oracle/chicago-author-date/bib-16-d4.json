@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(e.g. Liskov and Knuth 1954; Hopper et al. 1990)",
+"(Knuth and O’Brien 1945)",
+"(1990)",
+"(Knuth and O’Brien 1945, vol. 19)",
+"(Hamilton et al. 1956; Knuth and O’Brien 1945)",
+"(see García et al. 2007)",
+"(Hamilton et al. 1956; 2007)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. An Axiomatic Basis for Computer Programming. Https://example.org/sparse.",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Liskov and Knuth 1954; Hopper et al. 1990)",
+"(Knuth and O’Brien 1945)",
+"(1990)",
+"(Knuth and O’Brien 1945, vol. 19)",
+"(Hamilton et al. 1956; Knuth and O’Brien 1945)",
+"(see García et al. 2007)",
+"(Hamilton et al. 1956; 2007)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. An Axiomatic Basis for Computer Programming. Https://example.org/sparse.",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver."
+]
+}
+}

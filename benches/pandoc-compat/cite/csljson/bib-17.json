@@ -1,0 +1,131 @@
+[
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the compiler symposium",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "page": "31-177",
+    "title": "The apollo guidance computer",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Filter sparse signal optimizer token vocabulary cluster layer feature segment signal stream.",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1970
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/cost",
+    "title": "Data abstraction and hierarchy",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/ranking",
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "Proceedings of the baseline symposium",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "page": "96-179",
+    "title": "The art of computer programming",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1962
+        ]
+      ]
+    },
+    "number": "TR-47",
+    "publisher": "Lab Encoder",
+    "title": "The apollo guidance computer",
+    "type": "report"
+  },
+  {
+    "abstract": "Operator solver tree vector distribution approach workload policy token cost network matrix.",
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "container-title": "Proceedings of the stream symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1945
+        ]
+      ]
+    },
+    "page": "40-129",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  }
+]

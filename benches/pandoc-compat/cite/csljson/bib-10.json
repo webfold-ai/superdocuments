@@ -1,0 +1,116 @@
+[
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1968
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1999
+        ]
+      ]
+    },
+    "number": "TR-29",
+    "publisher": "Lab Function",
+    "title": "Go to statement considered harmful",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "On computable numbers",
+    "type": "thesis"
+  },
+  {
+    "URL": "https://example.org/learning",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1946
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "publisher-place": "London",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1975
+        ]
+      ]
+    },
+    "number": "TR-4",
+    "publisher": "Lab Throughput",
+    "title": "Notes on the analytical engine",
+    "type": "report"
+  }
+]

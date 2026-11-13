@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Hopper and O’Brien; Hoare 7)",
+"(see Müller and Hoare)",
+"Smith and Backus",
+"(see O’Brien)",
+"Müller and Liskov (26–133)",
+"(Müller and Liskov; Hopper and O’Brien)",
+"(Smith and Backus, vol. 58)"
+],
+"bibliography": [
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. The Art of Computer Programming. 3rd ed., Cambridge University Press, 2013, https://example.org/structure.",
+"Smith, John Jr., and John Backus. The Art of Computer Programming. https://example.org/ranking, 1973."
+]
+},
+"bib": {
+"citations": [
+"(Hopper and O’Brien; Hoare 7)",
+"(see Müller and Hoare)",
+"Smith and Backus",
+"(see O’Brien)",
+"Müller and Liskov (26–133)",
+"(Müller and Liskov; Hopper and O’Brien)",
+"(Smith and Backus, vol. 58)"
+],
+"bibliography": [
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. The Art of Computer Programming. 3rd ed., Cambridge University Press, 2013, https://example.org/structure.",
+"Smith, John Jr., and John Backus. The Art of Computer Programming. https://example.org/ranking, 1973."
+]
+}
+}

@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2, Fig. 92]",
+"[1, p. 40]",
+"[2, p. 78]",
+"see [1]",
+"[1, p. 10]",
+"see [3]",
+"see [1, Ch. 45]"
+],
+"bibliography": [
+"[1] L. Lamport, M. de la Cruz, and G. Hopper, “The apollo guidance computer,” in Proceedings of the compiler symposium, 1994, pp. 31–177.",
+"[2] B. Liskov, F. O’Brien, and C. A. R. Hoare, “The apollo guidance computer,” Lab Encoder, TR-47, 1962.",
+"[3] L. García, “Can programming be liberated from the von neumann style,” in Proceedings of the stream symposium, 1945, pp. 40–129."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2, Fig. 92]",
+"[1, p. 40]",
+"[2, p. 78]",
+"see [1]",
+"[1, p. 10]",
+"see [3]",
+"see [1, Ch. 45]"
+],
+"bibliography": [
+"[1] L. Lamport, M. de la Cruz, and G. Hopper, “The apollo guidance computer,” in Proceedings of the compiler symposium, 1994, pp. 31–177.",
+"[2] B. Liskov, F. O’Brien, and C. A. R. Hoare, “The apollo guidance computer,” Lab Encoder, TR-47, 1962.",
+"[3] L. García, “Can programming be liberated from the von neumann style,” in Proceedings of the stream symposium, 1945, pp. 40–129."
+]
+}
+}

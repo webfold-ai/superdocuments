@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"e.g. 3,4",
+"1,3",
+"2",
+"3,4",
+"see 5",
+"2,4",
+"2,3,5",
+"2 and more",
+"2,5",
+"3,4"
+],
+"bibliography": [
+"1. Smith, J. Jr., Hoare, C. A. R. & Knuth, D. E. Go to Statement Considered Harmful. (1999).",
+"2. Liskov, B. Can Programming Be Liberated from the von Neumann Style. (Springer, London, 1946).",
+"3. Müller, H. Data abstraction and hierarchy. (University of Cambridge, 1968).",
+"4. Cruz, M. de la & Hamilton, M. Notes on the Analytical Engine. (1975).",
+"5. Hoare, C. A. R. On computable numbers. (University of Oxford, 2011)."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"e.g. 3,4",
+"1,3",
+"2",
+"3,4",
+"see 5",
+"2,4",
+"2,3,5",
+"2 and more",
+"2,5",
+"3,4"
+],
+"bibliography": [
+"1. Smith, J. Jr., Hoare, C. A. R. & Knuth, D. E. Go to Statement Considered Harmful. (1999).",
+"2. Liskov, B. Can Programming Be Liberated from the von Neumann Style. (Springer, London, 1946).",
+"3. Müller, H. Data abstraction and hierarchy. (University of Cambridge, 1968).",
+"4. Cruz, M. de la & Hamilton, M. Notes on the Analytical Engine. (1975).",
+"5. Hoare, C. A. R. On computable numbers. (University of Oxford, 2011)."
+]
+}
+}

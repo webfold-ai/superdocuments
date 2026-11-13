@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Hopper and Lamport 1942, 96)",
+"(see Hopper and Lamport 1942)",
+"(Smith and Backus 1981, 50–105)",
+"(Hoare and Liskov 2005, sec. 58.137 and more)",
+"Hopper and Lamport (1942, 58)",
+"(Hopper and Lamport 1942; Hopper 1986; Turing et al. 1969)",
+"(Turing et al. 1969; Hopper and Lamport 1942, 65)",
+"(Smith and Backus 1981; Hoare and Liskov 2005)",
+"(Hoare and Liskov 2005, fig. 22)",
+"(Smith and Backus 1981; 2005)",
+"Turing et al. (1969, 40)",
+"(Hopper 1986, fig. 56)",
+"(see Smith and Backus 1981, ch. 6)",
+"(Hoare and Liskov 2005, 30)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. 2005. “On Computable Numbers.” Proceedings of the Transform Symposium, 71–122.",
+"Hopper, Grace. 1986. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Proceedings of the Filter Symposium, 37–181.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36 (12): 64–305. https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(Hopper and Lamport 1942, 96)",
+"(see Hopper and Lamport 1942)",
+"(Smith and Backus 1981, 50–105)",
+"(Hoare and Liskov 2005, sec. 58.137 and more)",
+"Hopper and Lamport (1942, 58)",
+"(Hopper and Lamport 1942; Hopper 1986; Turing et al. 1969)",
+"(Turing et al. 1969; Hopper and Lamport 1942, 65)",
+"(Smith and Backus 1981; Hoare and Liskov 2005)",
+"(Hoare and Liskov 2005, fig. 22)",
+"(Smith and Backus 1981; 2005)",
+"Turing et al. (1969, 40)",
+"(Hopper 1986, fig. 56)",
+"(see Smith and Backus 1981, ch. 6)",
+"(Hoare and Liskov 2005, 30)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. 2005. “On Computable Numbers.” Proceedings of the Transform Symposium, 71–122.",
+"Hopper, Grace. 1986. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Proceedings of the Filter Symposium, 37–181.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36 (12): 64–305. https://doi.org/10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+}
+}

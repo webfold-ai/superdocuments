@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Cruz and O’Brien (1996)",
+"(Cruz and Knuth 1959)",
+"Hoare (1994, 4)",
+"(Cruz and Knuth 1959; Cruz and O’Brien 1996; Hoare 1994)",
+"(e.g. Cruz and O’Brien 1996; Cruz and Knuth 1959)",
+"Cruz and O’Brien (1996, 85–106)",
+"(Cruz and Knuth 1959; 1994)",
+"(Dijkstra 2000; Hoare 1994)",
+"(see Dijkstra 2000, ch. 94)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. 1959. “The Education of a Computer.” Proceedings of the London Mathematical Society 31 (7): 150–375. https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. 1996. Data Abstraction and Hierarchy. Https://example.org/algorithm. https://example.org/ranking.",
+"Dijkstra, Edsger W. 2000. On Computable Numbers. TR-13. Lab Estimate.",
+"Hoare, C. A. R. 1994. Can Programming Be Liberated from the von Neumann Style. TR-85. Lab Parser."
+]
+},
+"bib": {
+"citations": [
+"Cruz and O’Brien (1996)",
+"(Cruz and Knuth 1959)",
+"Hoare (1994, 4)",
+"(Cruz and Knuth 1959; Cruz and O’Brien 1996; Hoare 1994)",
+"(e.g. Cruz and O’Brien 1996; Cruz and Knuth 1959)",
+"Cruz and O’Brien (1996, 85–106)",
+"(Cruz and Knuth 1959; 1994)",
+"(Dijkstra 2000; Hoare 1994)",
+"(see Dijkstra 2000, ch. 94)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. 1959. “The Education of a Computer.” Proceedings of the London Mathematical Society 31 (7): 150–375. https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. 1996. Data Abstraction and Hierarchy. Https://example.org/algorithm. https://example.org/ranking.",
+"Dijkstra, Edsger W. 2000. On Computable Numbers. TR-13. Lab Estimate.",
+"Hoare, C. A. R. 1994. Can Programming Be Liberated from the von Neumann Style. TR-85. Lab Parser."
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Lovelace and Hopper, fig. 66)",
+"(Hoare et al. 61–106)",
+"(Hoare et al.)",
+"(Lovelace and Hamilton 32)",
+"(Smith et al. 51–128)",
+"Lovelace and Hamilton (63)",
+"(Lovelace and Hamilton, sec. 76.127 and more)",
+"Smith et al. (98)",
+"Smith et al.",
+"",
+"(Lovelace and Hamilton 34)",
+"(Lovelace and Hamilton 22–123)"
+],
+"bibliography": [
+"Hoare, C. A. R., et al. The Art of Computer Programming. TR-38, Lab Metric, 1948, https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. Notes on the Analytical Engine. MIT Press, 2017, https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 1969, pp. 14–120.",
+"Smith, John Jr., et al. On Computable Numbers. Second, Cambridge University Press, 1939."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace and Hopper, fig. 66)",
+"(Hoare et al. 61–106)",
+"(Hoare et al.)",
+"(Lovelace and Hamilton 32)",
+"(Smith et al. 51–128)",
+"Lovelace and Hamilton (63)",
+"(Lovelace and Hamilton, sec. 76.127 and more)",
+"Smith et al. (98)",
+"Smith et al.",
+"",
+"(Lovelace and Hamilton 34)",
+"(Lovelace and Hamilton 22–123)"
+],
+"bibliography": [
+"Hoare, C. A. R., et al. The Art of Computer Programming. TR-38, Lab Metric, 1948, https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. Notes on the Analytical Engine. MIT Press, 2017, https://example.org/tree.",
+"Lovelace, Ada, and Grace Hopper. “An Axiomatic Basis for Computer Programming.” Proceedings of the Array Symposium, 1969, pp. 14–120.",
+"Smith, John Jr., et al. On Computable Numbers. Second, Cambridge University Press, 1939."
+]
+}
+}

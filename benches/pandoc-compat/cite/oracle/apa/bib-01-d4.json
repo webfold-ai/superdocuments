@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(see Backus & Lamport, 1956)",
+"(Hoare & Rossum, 1953)",
+"(see Hoare & Rossum, 1953, ch. 94)",
+"(Rossum, 1937; e.g. Rossum et al., 1941)",
+"Backus & Lamport (1956, pp. 19–107)",
+"(Hoare & Rossum, 1953; Rossum, 1937)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397.",
+"Rossum, G. van, Turing, A. M., & Hopper, G. (1941). Go to statement considered harmful [PhD thesis]. University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(see Backus & Lamport, 1956)",
+"(Hoare & Rossum, 1953)",
+"(see Hoare & Rossum, 1953, ch. 94)",
+"(Rossum, 1937; e.g. Rossum et al., 1941)",
+"Backus & Lamport (1956, pp. 19–107)",
+"(Hoare & Rossum, 1953; Rossum, 1937)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397.",
+"Rossum, G. van, Turing, A. M., & Hopper, G. (1941). Go to statement considered harmful [PhD thesis]. University of Oxford."
+]
+}
+}

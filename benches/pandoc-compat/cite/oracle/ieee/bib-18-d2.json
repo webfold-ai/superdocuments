@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1], [2, p. 29]",
+"[2, p. 95]",
+"see [3]",
+"[4, p. 30]",
+"[4, pp. 8–127]",
+"[1], [4, p. 55]",
+"[3], [5], [6]"
+],
+"bibliography": [
+"[1] G. van Rossum, J. Backus, and B. Liskov, “Go to statement considered harmful.” https://example.org/latency, 1993. Available: https://example.org/pipeline",
+"[2] J. Backus, G. Hopper, and L. Lamport, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 1966. Available: https://example.org/benchmark",
+"[3] M. de la Cruz, F. O’Brien, and G. Hopper, “The art of computer programming,” Lab Throughput, TR-84, 1971. Available: https://example.org/complexity",
+"[4] C. A. R. Hoare, A. Lovelace, and A. M. Turing, “Notes on the analytical engine,” Lab Feature, TR-43, 2016.",
+"[5] H. Müller, “Notes on the analytical engine,” Lab Bound, TR-96, 2013. Available: https://example.org/entropy",
+"[6] G. van Rossum and C. A. R. Hoare, “Go to statement considered harmful.” https://example.org/analysis, 1967. Available: https://example.org/cache"
+]
+},
+"bib": {
+"citations": [
+"[1], [2, p. 29]",
+"[2, p. 95]",
+"see [3]",
+"[4, p. 30]",
+"[4, pp. 8–127]",
+"[1], [4, p. 55]",
+"[3], [5], [6]"
+],
+"bibliography": [
+"[1] G. van Rossum, J. Backus, and B. Liskov, “Go to statement considered harmful.” https://example.org/latency, 1993. Available: https://example.org/pipeline",
+"[2] J. Backus, G. Hopper, and L. Lamport, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 1966. Available: https://example.org/benchmark",
+"[3] M. de la Cruz, F. O’Brien, and G. Hopper, “The art of computer programming,” Lab Throughput, TR-84, 1971. Available: https://example.org/complexity",
+"[4] C. A. R. Hoare, A. Lovelace, and A. M. Turing, “Notes on the analytical engine,” Lab Feature, TR-43, 2016.",
+"[5] H. Müller, “Notes on the analytical engine,” Lab Bound, TR-96, 2013. Available: https://example.org/entropy",
+"[6] G. van Rossum and C. A. R. Hoare, “Go to statement considered harmful.” https://example.org/analysis, 1967. Available: https://example.org/cache"
+]
+}
+}

@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1], [2, p. 45]",
+"see [3, Ch. 75]",
+"[4, Fig. 54]",
+"see [5, Ch. 87]",
+"[5]",
+"e.g. [4], [5]",
+"[3]",
+"[6]",
+"[1], [2], [6]"
+],
+"bibliography": [
+"[1] F. O’Brien, “Time, clocks, and the ordering of events,” Lab Array, TR-87, 1948.",
+"[2] L. Lamport and E. W. Dijkstra, Data abstraction and hierarchy, Second. Springer, 1953.",
+"[3] A. M. Turing, “Go to statement considered harmful,” in Proceedings of the array symposium, 2018, pp. 62–190.",
+"[4] L. García and D. E. Knuth, “On computable numbers,” Lab Compiler, TR-47, 1995.",
+"[5] B. Liskov, M. Hamilton, and A. Lovelace, “The apollo guidance computer,” Communications of the ACM, vol. 50, no. 11, pp. 159–344, 1949.",
+"[6] L. Lamport and L. García, Notes on the analytical engine, 3rd ed. Cambridge University Press, 1999."
+]
+},
+"bib": {
+"citations": [
+"[1], [2, p. 45]",
+"see [3, Ch. 75]",
+"[4, Fig. 54]",
+"see [5, Ch. 87]",
+"[5]",
+"e.g. [4], [5]",
+"[3]",
+"[6]",
+"[1], [2], [6]"
+],
+"bibliography": [
+"[1] F. O’Brien, “Time, clocks, and the ordering of events,” Lab Array, TR-87, 1948.",
+"[2] L. Lamport and E. W. Dijkstra, Data abstraction and hierarchy, Second. London: Springer, 1953.",
+"[3] A. M. Turing, “Go to statement considered harmful,” in Proceedings of the array symposium, 2018, pp. 62–190.",
+"[4] L. García and D. E. Knuth, “On computable numbers,” Lab Compiler, TR-47, 1995.",
+"[5] B. Liskov, M. Hamilton, and A. Lovelace, “The apollo guidance computer,” Communications of the ACM, vol. 50, no. 11, pp. 159–344, 1949.",
+"[6] L. Lamport and L. García, Notes on the analytical engine, 3rd ed. New York: Cambridge University Press, 1999."
+]
+}
+}

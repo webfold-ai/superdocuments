@@ -1,0 +1,215 @@
+[
+  {
+    "abstract": "Sparse approach parser throughput node query density learning batch layer regression tree.",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          2014
+        ]
+      ]
+    },
+    "number": "TR-20",
+    "publisher": "Lab Window",
+    "title": "The apollo guidance computer",
+    "type": "report"
+  },
+  {
+    "DOI": "10.6600/trace.17",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "hopper1952",
+    "issue": "3",
+    "issued": {
+      "date-parts": [
+        [
+          1945
+        ]
+      ]
+    },
+    "page": "257-308",
+    "title": "Data abstraction and hierarchy",
+    "type": "article-journal",
+    "volume": "39"
+  },
+  {
+    "abstract": "Objective solver baseline regression block gradient trace retrieval stream encoder segment retrieval.",
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1975
+        ]
+      ]
+    },
+    "number": "TR-69",
+    "publisher": "Lab Complexity",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the entropy symposium",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "page": "98-186",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Protocol benchmark block convergence convergence parser function complexity framework experiment stream token.",
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1937
+        ]
+      ]
+    },
+    "number": "TR-83",
+    "publisher": "Lab Matrix",
+    "title": "Data abstraction and hierarchy",
+    "type": "report"
+  },
+  {
+    "DOI": "10.4068/layer.20",
+    "abstract": "Density sparse feature tree block cluster heuristic encoder vocabulary entropy prior feature.",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "turing1936",
+    "issue": "8",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "page": "203-390",
+    "title": "An axiomatic basis for computer programming",
+    "type": "article-journal",
+    "volume": "53"
+  },
+  {
+    "abstract": "Cluster agent matrix matrix retrieval encoder analysis ranking distribution density estimate entropy.",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "container-title": "Proceedings of the schema symposium",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "page": "24-188",
+    "title": "On computable numbers",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Latency channel index cost metric batch query window protocol regression window batch.",
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "container-title": "Communications of the ACM",
+    "id": "hoare1969",
+    "issue": "6",
+    "issued": {
+      "date-parts": [
+        [
+          1969
+        ]
+      ]
+    },
+    "page": "209-329",
+    "title": "On computable numbers",
+    "type": "article-journal",
+    "volume": "44"
+  }
+]

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Liskov, 1944, ch. 8)",
+"(Cruz, 1951, p. 18)",
+"Dijkstra (1993)",
+"(Dijkstra, 1993, p. 40; Lamport, Müller and Dijkstra, 2017)",
+"(Liskov, 1944; 2017)",
+"(Lamport, Müller and Dijkstra, 2017, sec. 10.130 and more)",
+"(Turing, 1968, vol. 46)"
+],
+"bibliography": [
+"Cruz, M. de la (1951) Notes on the analytical engine. MIT Press.",
+"Dijkstra, E.W. (1993) “The apollo guidance computer,” Journal of the ACM, 33(2), pp. 39–369.",
+"Lamport, L., Müller, H. and Dijkstra, E.W. (2017) The education of a computer. Addison-Wesley.",
+"Liskov, B. (1944) The art of computer programming. TR-62. Lab Optimizer.",
+"Turing, A.M. (1968) “Time, clocks, and the ordering of events.” https://example.org/solver."
+]
+},
+"bib": {
+"citations": [
+"(see Liskov, 1944, ch. 8)",
+"(Cruz, 1951, p. 18)",
+"Dijkstra (1993)",
+"(Dijkstra, 1993, p. 40; Lamport, Müller and Dijkstra, 2017)",
+"(Liskov, 1944; 2017)",
+"(Lamport, Müller and Dijkstra, 2017, sec. 10.130 and more)",
+"(Turing, 1968, vol. 46)"
+],
+"bibliography": [
+"Cruz, M. de la (1951) Notes on the analytical engine. Boston: MIT Press.",
+"Dijkstra, E.W. (1993) “The apollo guidance computer,” Journal of the ACM, 33(2), pp. 39–369.",
+"Lamport, L., Müller, H. and Dijkstra, E.W. (2017) The education of a computer. New York: Addison-Wesley.",
+"Liskov, B. (1944) The art of computer programming. TR-62. Lab Optimizer.",
+"Turing, A.M. (1968) “Time, clocks, and the ordering of events.” https://example.org/solver."
+]
+}
+}

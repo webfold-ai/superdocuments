@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Lamport and Turing (1938, p. 38)",
+"(Hamilton, Backus and Turing, 2008, pp. 96–110)",
+"(Hamilton, Backus and Turing, 2008; 2017)",
+"Hamilton, Backus and Turing (2008, pp. 95–104)",
+"(Smith, 2017, p. 48)",
+"(Hamilton, Backus and Turing, 2008, pp. 34–109)",
+"(see Lamport and Turing, 1938, ch. 64)",
+"(Lamport and Turing, 1938, p. 62)",
+"(Lamport and Turing, 1938; Turing, Lamport and Lovelace, 1979, p. 29)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J. and Turing, A.M. (2008) Can programming be liberated from the von neumann style. 3rd ed. New York: Springer.",
+"Lamport, L. and Turing, A.M. (1938) “Go to statement considered harmful,” Proceedings of the distribution symposium, pp. 67–141.",
+"Smith, J.Jr. (2017) The education of a computer. PhD thesis. University of Oxford.",
+"Turing, A.M., Lamport, L. and Lovelace, A. (1979) “The art of computer programming.” https://example.org/index."
+]
+},
+"bib": {
+"citations": [
+"Lamport and Turing (1938, p. 38)",
+"(Hamilton, Backus and Turing, 2008, pp. 96–110)",
+"(Hamilton, Backus and Turing, 2008; 2017)",
+"Hamilton, Backus and Turing (2008, pp. 95–104)",
+"(Smith, 2017, p. 48)",
+"(Hamilton, Backus and Turing, 2008, pp. 34–109)",
+"(see Lamport and Turing, 1938, ch. 64)",
+"(Lamport and Turing, 1938, p. 62)",
+"(Lamport and Turing, 1938; Turing, Lamport and Lovelace, 1979, p. 29)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J. and Turing, A.M. (2008) Can programming be liberated from the von neumann style. 3rd ed. New York: Springer.",
+"Lamport, L. and Turing, A.M. (1938) “Go to statement considered harmful,” Proceedings of the distribution symposium, pp. 67–141.",
+"Smith, J.Jr. (2017) The education of a computer. PhD thesis. University of Oxford.",
+"Turing, A.M., Lamport, L. and Lovelace, A. (1979) “The art of computer programming.” https://example.org/index."
+]
+}
+}

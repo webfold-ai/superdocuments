@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Lovelace, Smith and Backus, 1969, sec. 16.139 and more)",
+"(Knuth, Lovelace and Cruz, 1962, sec. 39.108 and more)",
+"Smith, Cruz and Lovelace (1937, p. 33)",
+"(Smith, Cruz and Lovelace, 1937, p. 98; Liskov, Smith and Cruz, 1963)",
+"(Smith, Cruz and Lovelace, 1937; Liskov, Müller and Dijkstra, 2012)",
+"(Dijkstra, 1973, fig. 71)",
+"(see Dijkstra, 1973, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1973) “The art of computer programming.” https://example.org/filter.",
+"Knuth, D.E., Lovelace, A. and Cruz, M. de la (1962) “Notes on the analytical engine.” https://example.org/retrieval.",
+"Liskov, B., Müller, H. and Dijkstra, E.W. (2012) “Notes on the analytical engine,” Proceedings of the compiler symposium, pp. 35–166.",
+"Liskov, B., Smith, J.Jr. and Cruz, M. de la (1963) “Time, clocks, and the ordering of events.” https://example.org/function. Available at: https://example.org/density.",
+"Lovelace, A., Smith, J.Jr. and Backus, J. (1969) Time, clocks, and the ordering of events. PhD thesis. University of Oxford.",
+"Smith, J.Jr., Cruz, M. de la and Lovelace, A. (1937) Go to statement considered harmful. TR-94. Lab Model."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace, Smith and Backus, 1969, sec. 16.139 and more)",
+"(Knuth, Lovelace and Cruz, 1962, sec. 39.108 and more)",
+"Smith, Cruz and Lovelace (1937, p. 33)",
+"(Smith, Cruz and Lovelace, 1937, p. 98; Liskov, Smith and Cruz, 1963)",
+"(Smith, Cruz and Lovelace, 1937; Liskov, Müller and Dijkstra, 2012)",
+"(Dijkstra, 1973, fig. 71)",
+"(see Dijkstra, 1973, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1973) “The art of computer programming.” https://example.org/filter.",
+"Knuth, D.E., Lovelace, A. and Cruz, M. de la (1962) “Notes on the analytical engine.” https://example.org/retrieval.",
+"Liskov, B., Müller, H. and Dijkstra, E.W. (2012) “Notes on the analytical engine,” Proceedings of the compiler symposium, pp. 35–166.",
+"Liskov, B., Smith, J.Jr. and Cruz, M. de la (1963) “Time, clocks, and the ordering of events.” https://example.org/function. Available at: https://example.org/density.",
+"Lovelace, A., Smith, J.Jr. and Backus, J. (1969) Time, clocks, and the ordering of events. PhD thesis. University of Oxford.",
+"Smith, J.Jr., Cruz, M. de la and Lovelace, A. (1937) Go to statement considered harmful. TR-94. Lab Model."
+]
+}
+}

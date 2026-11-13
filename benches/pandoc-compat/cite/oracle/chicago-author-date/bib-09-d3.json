@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Lamport and Turing (1938, 38)",
+"(Hamilton et al. 2008, 96–110)",
+"(Hamilton et al. 2008; 2017)",
+"Hamilton et al. (2008, 95–104)",
+"(Smith 2017, 48)",
+"(Hamilton et al. 2008, 34–109)",
+"(see Lamport and Turing 1938, ch. 64)",
+"(Lamport and Turing 1938, 62)",
+"(Lamport and Turing 1938; Turing et al. 1979, 29)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Proceedings of the Distribution Symposium, 67–141.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. The Art of Computer Programming. Https://example.org/index."
+]
+},
+"bib": {
+"citations": [
+"Lamport and Turing (1938, 38)",
+"(Hamilton et al. 2008, 96–110)",
+"(Hamilton et al. 2008; 2017)",
+"Hamilton et al. (2008, 95–104)",
+"(Smith 2017, 48)",
+"(Hamilton et al. 2008, 34–109)",
+"(see Lamport and Turing 1938, ch. 64)",
+"(Lamport and Turing 1938, 62)",
+"(Lamport and Turing 1938; Turing et al. 1979, 29)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Proceedings of the Distribution Symposium, 67–141.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. The Art of Computer Programming. Https://example.org/index."
+]
+}
+}

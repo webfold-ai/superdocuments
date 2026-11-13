@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"2,3",
+"2",
+"3",
+"2",
+"see 1, ch. 64",
+"1",
+"1,4"
+],
+"bibliography": [
+"1. Lamport, L. & Turing, A. M. Go to statement considered harmful. in Proceedings of the distribution symposium 67–141 (1938).",
+"2. Hamilton, M., Backus, J. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (Springer, New York, 2008).",
+"3. Smith, J. Jr. The education of a computer. (University of Oxford, 2017).",
+"4. Turing, A. M., Lamport, L. & Lovelace, A. The art of computer programming. (1979)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"2,3",
+"2",
+"3",
+"2",
+"see 1, ch. 64",
+"1",
+"1,4"
+],
+"bibliography": [
+"1. Lamport, L. & Turing, A. M. Go to statement considered harmful. in Proceedings of the distribution symposium 67–141 (1938).",
+"2. Hamilton, M., Backus, J. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (Springer, New York, 2008).",
+"3. Smith, J. Jr. The education of a computer. (University of Oxford, 2017).",
+"4. Turing, A. M., Lamport, L. & Lovelace, A. The art of computer programming. (1979)."
+]
+}
+}

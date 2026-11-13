@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(O’Brien, Rossum and Smith, 1975, vol. 15)",
+"Smith (2006, pp. 28–131)",
+"(see Smith, 2006)",
+"(Hopper, Müller and Lovelace, 1987, vol. 23)",
+"Hopper, Müller and Lovelace (1987)",
+"(Smith, 2006, sec. 43.112 and more)",
+"García and Knuth (1936, pp. 48–105)",
+"(Backus, 1943, pp. 18–103)",
+"(García and Knuth, 1936; Hopper, Müller and Lovelace, 1987)",
+"(Hopper, Backus and Müller, 1939; 2005)",
+"(O’Brien, Rossum and Smith, 1975, p. 85; Hopper, Müller and Lovelace, 1987)",
+"(O’Brien, Rossum and Smith, 1975; 1987)"
+],
+"bibliography": [
+"Backus, J. (1943) “On computable numbers.” https://example.org/algorithm.",
+"García, L. and Knuth, D.E. (1936) “An axiomatic basis for computer programming,” Proceedings of the transform symposium, pp. 2–133.",
+"Hoare, C.A.R. and Müller, H. (2005) “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, 7(9), pp. 191–397. Available at: https://doi.org/10.4589/gradient.17.",
+"Hopper, G., Backus, J. and Müller, H. (1939) The art of computer programming. New York: Addison-Wesley.",
+"Hopper, G., Müller, H. and Lovelace, A. (1987) The apollo guidance computer. 3rd ed. London: Cambridge University Press.",
+"O’Brien, F., Rossum, G. van and Smith, J.Jr. (1975) Time, clocks, and the ordering of events. New York: Addison-Wesley.",
+"Smith, J.Jr. (2006) The apollo guidance computer. TR-83. Lab Layer."
+]
+},
+"bib": {
+"citations": [
+"(O’Brien, Rossum and Smith, 1975, vol. 15)",
+"Smith (2006, pp. 28–131)",
+"(see Smith, 2006)",
+"(Hopper, Müller and Lovelace, 1987, vol. 23)",
+"Hopper, Müller and Lovelace (1987)",
+"(Smith, 2006, sec. 43.112 and more)",
+"García and Knuth (1936, pp. 48–105)",
+"(Backus, 1943, pp. 18–103)",
+"(García and Knuth, 1936; Hopper, Müller and Lovelace, 1987)",
+"(Hopper, Backus and Müller, 1939; 2005)",
+"(O’Brien, Rossum and Smith, 1975, p. 85; Hopper, Müller and Lovelace, 1987)",
+"(O’Brien, Rossum and Smith, 1975; 1987)"
+],
+"bibliography": [
+"Backus, J. (1943) “On computable numbers.” https://example.org/algorithm.",
+"García, L. and Knuth, D.E. (1936) “An axiomatic basis for computer programming,” Proceedings of the transform symposium, pp. 2–133.",
+"Hoare, C.A.R. and Müller, H. (2005) “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, 7(9), pp. 191–397. Available at: https://doi.org/10.4589/gradient.17.",
+"Hopper, G., Backus, J. and Müller, H. (1939) The art of computer programming. New York: Addison-Wesley.",
+"Hopper, G., Müller, H. and Lovelace, A. (1987) The apollo guidance computer. 3rd ed. London: Cambridge University Press.",
+"O’Brien, F., Rossum, G. van and Smith, J.Jr. (1975) Time, clocks, and the ordering of events. New York: Addison-Wesley.",
+"Smith, J.Jr. (2006) The apollo guidance computer. TR-83. Lab Layer."
+]
+}
+}

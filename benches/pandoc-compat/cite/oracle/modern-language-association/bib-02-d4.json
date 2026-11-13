@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(Lovelace et al. 36–101)",
+"(Dijkstra, sec. 25.122 and more)",
+"(Lovelace et al.)",
+"(Liskov et al., vol. 20)",
+"(Dijkstra 78)",
+"(e.g. Lovelace et al.; Dijkstra)",
+"(Backus et al., vol. 54)"
+],
+"bibliography": [
+"Backus, John, et al. On Computable Numbers. TR-4, Lab Heuristic, 2007, https://example.org/benchmark.",
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Liskov, Barbara, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace et al. 36–101)",
+"(Dijkstra, sec. 25.122 and more)",
+"(Lovelace et al.)",
+"(Liskov et al., vol. 20)",
+"(Dijkstra 78)",
+"(e.g. Lovelace et al.; Dijkstra)",
+"(Backus et al., vol. 54)"
+],
+"bibliography": [
+"Backus, John, et al. On Computable Numbers. TR-4, Lab Heuristic, 2007, https://example.org/benchmark.",
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Liskov, Barbara, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis."
+]
+}
+}

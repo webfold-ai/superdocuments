@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(Lovelace et al., 1969, pp. 36–101)",
+"(Dijkstra, 1973, Section 25.122 and more)",
+"(Lovelace et al., 1969)",
+"(Liskov et al., 1963, Volume 20)",
+"(Dijkstra, 1973, p. 78)",
+"(Dijkstra, 1973; e.g. Lovelace et al., 1969)",
+"(Backus et al., 2007, Volume 54)"
+],
+"bibliography": [
+"Backus, J., Knuth, D. E., & Müller, H. (2007). On computable numbers (TR-4). Lab Heuristic. https://example.org/benchmark",
+"Dijkstra, E. W. (1973). The art of computer programming. https://example.org/filter.",
+"Liskov, B., Smith, J. Jr., & Cruz, M. de la. (1963). Time, clocks, and the ordering of events. https://example.org/function. https://example.org/density",
+"Lovelace, A., Smith, J. Jr., & Backus, J. (1969). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace et al., 1969, pp. 36–101)",
+"(Dijkstra, 1973, Section 25.122 and more)",
+"(Lovelace et al., 1969)",
+"(Liskov et al., 1963, Volume 20)",
+"(Dijkstra, 1973, p. 78)",
+"(Dijkstra, 1973; e.g. Lovelace et al., 1969)",
+"(Backus et al., 2007, Volume 54)"
+],
+"bibliography": [
+"Backus, J., Knuth, D. E., & Müller, H. (2007). On computable numbers (TR-4). Lab Heuristic. https://example.org/benchmark",
+"Dijkstra, E. W. (1973). The art of computer programming. https://example.org/filter.",
+"Liskov, B., Smith, J. Jr., & Cruz, M. de la. (1963). Time, clocks, and the ordering of events. https://example.org/function. https://example.org/density",
+"Lovelace, A., Smith, J. Jr., & Backus, J. (1969). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford."
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"Lamport et al. (1961, p. 79)",
+"(García et al., 2007; 1943)",
+"(García et al., 2007)",
+"(Hamilton et al., 1956, Figure 74)",
+"(Hopper et al., 1990; Turing, 1940)",
+"(Knuth & O’Brien, 1945)",
+"(see Hopper & Backus, 2008, ch. 12)",
+"(Hopper & Backus, 2008; 1940)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Lamport, L., Dijkstra, E. W., & Hoare, C. A. R. (1961). Notes on the analytical engine. Journal of the ACM, 33(10), 192–344.",
+"Turing, A. M. (1940). Time, clocks, and the ordering of events [PhD thesis, University of Zurich]. https://example.org/model"
+]
+},
+"bib": {
+"citations": [
+"Lamport et al. (1961, p. 79)",
+"(García et al., 2007; 1943)",
+"(García et al., 2007)",
+"(Hamilton et al., 1956, Figure 74)",
+"(Hopper et al., 1990; Turing, 1940)",
+"(Knuth & O’Brien, 1945)",
+"(see Hopper & Backus, 2008, ch. 12)",
+"(Hopper & Backus, 2008; 1940)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., & Backus, J. (2008). Notes on the analytical engine. https://example.org/vocabulary.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Hopper, G., & Lamport, L. (1943). Go to statement considered harmful. Cambridge University Press.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Lamport, L., Dijkstra, E. W., & Hoare, C. A. R. (1961). Notes on the analytical engine. Journal of the ACM, 33(10), 192–344.",
+"Turing, A. M. (1940). Time, clocks, and the ordering of events [PhD thesis, University of Zurich]. https://example.org/model"
+]
+}
+}

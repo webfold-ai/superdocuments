@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1",
+"2 and more",
+"3",
+"2",
+"2,4",
+"e.g. 4,5",
+"5",
+"1"
+],
+"bibliography": [
+"1. Hoare, C. A. R. & Liskov, B. On computable numbers. in Proceedings of the transform symposium 71–122 (2005).",
+"2. Smith, J. Jr. & Backus, J. The education of a computer. ACM Computing Surveys 36, 64–305 (1981).",
+"3. Hopper, G. Time, clocks, and the ordering of events. (University of Oxford, 1986).",
+"4. Hopper, G. & Lamport, L. The education of a computer. in Proceedings of the filter symposium 37–181 (1942).",
+"5. Turing, A. M., Smith, J. Jr. & Rossum, G. van. Time, Clocks, and the Ordering of Events. https://example.org/workload (1969)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2 and more",
+"3",
+"2",
+"2,4",
+"e.g. 4,5",
+"5",
+"1"
+],
+"bibliography": [
+"1. Hoare, C. A. R. & Liskov, B. On computable numbers. in Proceedings of the transform symposium 71–122 (2005).",
+"2. Smith, J. Jr. & Backus, J. The education of a computer. ACM Computing Surveys 36, 64–305 (1981).",
+"3. Hopper, G. Time, clocks, and the ordering of events. (University of Oxford, 1986).",
+"4. Hopper, G. & Lamport, L. The education of a computer. in Proceedings of the filter symposium 37–181 (1942).",
+"5. Turing, A. M., Smith, J. Jr. & Rossum, G. van. Time, Clocks, and the Ordering of Events. https://example.org/workload (1969)."
+]
+}
+}

@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(Cruz et al. 97)",
+"(Hoare et al. 38–111)",
+"Hoare et al. (20–118)",
+"(see Cruz et al., ch. 72)",
+"(Cruz et al., sec. 34.124 and more)",
+"(Cruz et al. 76–128)",
+"(Backus et al.; Hoare et al.; Müller)",
+"",
+"(Turing and Rossum; Backus et al.)",
+"(Müller, sec. 96.110 and more)",
+"(Rossum and Hoare, vol. 19)",
+"(Rossum et al., sec. 61.108 and more)",
+"(Rossum et al., fig. 56)",
+""
+],
+"bibliography": [
+"Backus, John, et al. Data Abstraction and Hierarchy. 1966, https://example.org/benchmark. University of Cambridge, PhD thesis.",
+"Cruz, Maria de la, et al. The Art of Computer Programming. TR-84, Lab Throughput, 1971, https://example.org/complexity.",
+"Hoare, C. A. R., et al. Notes on the Analytical Engine. TR-43, Lab Feature, 2016.",
+"Müller, Hans. Notes on the Analytical Engine. TR-96, Lab Bound, 2013, https://example.org/entropy.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. https://example.org/latency, 1993, https://example.org/pipeline.",
+"Rossum, Guido van, and C. A. R. Hoare. Go to Statement Considered Harmful. https://example.org/analysis, 1967, https://example.org/cache.",
+"Turing, Alan M., and Guido van Rossum. The Art of Computer Programming. 1968. University of Cambridge, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(Cruz et al. 97)",
+"(Hoare et al. 38–111)",
+"Hoare et al. (20–118)",
+"(see Cruz et al., ch. 72)",
+"(Cruz et al., sec. 34.124 and more)",
+"(Cruz et al. 76–128)",
+"(Backus et al.; Hoare et al.; Müller)",
+"",
+"(Turing and Rossum; Backus et al.)",
+"(Müller, sec. 96.110 and more)",
+"(Rossum and Hoare, vol. 19)",
+"(Rossum et al., sec. 61.108 and more)",
+"(Rossum et al., fig. 56)",
+""
+],
+"bibliography": [
+"Backus, John, et al. Data Abstraction and Hierarchy. 1966, https://example.org/benchmark. University of Cambridge, PhD thesis.",
+"Cruz, Maria de la, et al. The Art of Computer Programming. TR-84, Lab Throughput, 1971, https://example.org/complexity.",
+"Hoare, C. A. R., et al. Notes on the Analytical Engine. TR-43, Lab Feature, 2016.",
+"Müller, Hans. Notes on the Analytical Engine. TR-96, Lab Bound, 2013, https://example.org/entropy.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. https://example.org/latency, 1993, https://example.org/pipeline.",
+"Rossum, Guido van, and C. A. R. Hoare. Go to Statement Considered Harmful. https://example.org/analysis, 1967, https://example.org/cache.",
+"Turing, Alan M., and Guido van Rossum. The Art of Computer Programming. 1968. University of Cambridge, PhD thesis."
+]
+}
+}

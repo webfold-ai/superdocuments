@@ -1,0 +1,166 @@
+[
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1988
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "The apollo guidance computer",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1946
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/retrieval",
+    "title": "Data abstraction and hierarchy",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/block",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/retrieval",
+    "title": "Time, clocks, and the ordering of events",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/sparse",
+    "abstract": "Bound dataset estimate encoder cache approach prior signal solver latency convergence array.",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/tree",
+    "title": "Notes on the analytical engine",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/heuristic",
+    "title": "The education of a computer",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/entropy",
+    "abstract": "Decoder vector solver stream regression agent estimate pipeline domain baseline learning vector.",
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "container-title": "Proceedings of the solver symposium",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1952
+        ]
+      ]
+    },
+    "page": "66-128",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  }
+]

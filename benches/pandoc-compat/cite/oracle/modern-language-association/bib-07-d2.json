@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"Cruz and Knuth",
+"Cruz and O’Brien",
+"Cruz and O’Brien (59)",
+"(Cruz and O’Brien)",
+"(Cruz and Knuth, fig. 68)",
+"(Dijkstra 93)",
+"(see Cruz and Knuth, ch. 92)",
+"(see Cruz and Knuth, ch. 43)",
+"",
+"(see Cruz and O’Brien)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. “The Education of a Computer.” Proceedings of the London Mathematical Society, vol. 31, no. 7, 1959, pp. 150–375, https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. Data Abstraction and Hierarchy. https://example.org/algorithm, 1996, https://example.org/ranking.",
+"Dijkstra, Edsger W. On Computable Numbers. TR-13, Lab Estimate, 2000.",
+"Knuth, Donald E. “Go to Statement Considered Harmful.” Proceedings of the Feature Symposium, 1971, pp. 63–156."
+]
+},
+"bib": {
+"citations": [
+"Cruz and Knuth",
+"Cruz and O’Brien",
+"Cruz and O’Brien (59)",
+"(Cruz and O’Brien)",
+"(Cruz and Knuth, fig. 68)",
+"(Dijkstra 93)",
+"(see Cruz and Knuth, ch. 92)",
+"(see Cruz and Knuth, ch. 43)",
+"",
+"(see Cruz and O’Brien)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. “The Education of a Computer.” Proceedings of the London Mathematical Society, vol. 31, no. 7, 1959, pp. 150–375, https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. Data Abstraction and Hierarchy. https://example.org/algorithm, 1996, https://example.org/ranking.",
+"Dijkstra, Edsger W. On Computable Numbers. TR-13, Lab Estimate, 2000.",
+"Knuth, Donald E. “Go to Statement Considered Harmful.” Proceedings of the Feature Symposium, 1971, pp. 63–156."
+]
+}
+}

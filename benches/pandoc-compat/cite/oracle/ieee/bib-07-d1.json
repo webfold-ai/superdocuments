@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[3, p. 4]",
+"[1], [2], [3]",
+"e.g. [1], [2]",
+"[1, pp. 85–106]",
+"[2], [3]",
+"[3], [4]",
+"see [4, Ch. 94]"
+],
+"bibliography": [
+"[1] M. de la Cruz and F. O’Brien, “Data abstraction and hierarchy.” https://example.org/algorithm, 1996. Available: https://example.org/ranking",
+"[2] M. de la Cruz and D. E. Knuth, “The education of a computer,” Proceedings of the London Mathematical Society, vol. 31, no. 7, pp. 150–375, 1959, doi: 10.2214/heuristic.97.",
+"[3] C. A. R. Hoare, “Can programming be liberated from the von neumann style,” Lab Parser, TR-85, 1994.",
+"[4] E. W. Dijkstra, “On computable numbers,” Lab Estimate, TR-13, 2000."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[3, p. 4]",
+"[1], [2], [3]",
+"e.g. [1], [2]",
+"[1, pp. 85–106]",
+"[2], [3]",
+"[3], [4]",
+"see [4, Ch. 94]"
+],
+"bibliography": [
+"[1] M. de la Cruz and F. O’Brien, “Data abstraction and hierarchy.” https://example.org/algorithm, 1996. Available: https://example.org/ranking",
+"[2] M. de la Cruz and D. E. Knuth, “The education of a computer,” Proceedings of the London Mathematical Society, vol. 31, no. 7, pp. 150–375, 1959, doi: 10.2214/heuristic.97.",
+"[3] C. A. R. Hoare, “Can programming be liberated from the von neumann style,” Lab Parser, TR-85, 1994.",
+"[4] E. W. Dijkstra, “On computable numbers,” Lab Estimate, TR-13, 2000."
+]
+}
+}

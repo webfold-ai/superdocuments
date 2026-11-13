@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"Müller, García and Cruz (2019)",
+"(see Rossum, Smith and Backus, 1989, ch. 77)",
+"(O’Brien, Hoare and Hopper, 1953; Rossum, Smith and Backus, 1989)",
+"(Lamport and Müller, 1965, p. 60; Rossum, Smith and Backus, 1989)",
+"(Lamport and Müller, 1965, vol. 30)",
+"(O’Brien, Hoare and Hopper, 1953; e.g. Lamport and Müller, 1965)",
+"(Müller, García and Cruz, 2019, p. 2)",
+"(Rossum, Smith and Backus, 1989; Lamport, Dijkstra and Hamilton, 2002; Müller, García and Cruz, 2019)",
+"(Dijkstra and Liskov, 2012, pp. 70–133)",
+"(O’Brien, Hoare and Hopper, 1953, sec. 14.137 and more)",
+"(1969; Müller, García and Cruz, 2019)",
+"(O’Brien, Hoare and Hopper, 1953)",
+"Müller, García and Cruz (2019, pp. 98–107)",
+"(Rossum, Smith and Backus, 1989; Lamport, Dijkstra and Hamilton, 2002)"
+],
+"bibliography": [
+"Dijkstra, E.W. and Liskov, B. (2012) The art of computer programming. PhD thesis. University of Oxford.",
+"Lamport, L., Dijkstra, E.W. and Hamilton, M. (2002) The education of a computer. PhD thesis. University of Zurich.",
+"Lamport, L. and Müller, H. (1965) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Lamport, L. and Müller, H. (1969) The apollo guidance computer. TR-82. Lab Function.",
+"Müller, H., García, L. and Cruz, M. de la (2019) “The art of computer programming.” https://example.org/structure. Available at: https://example.org/policy.",
+"O’Brien, F., Hoare, C.A.R. and Hopper, G. (1953) “On computable numbers,” Proceedings of the optimizer symposium, pp. 43–145.",
+"Rossum, G. van, Smith, J.Jr. and Backus, J. (1989) “Can programming be liberated from the von neumann style,” Proceedings of the compiler symposium, pp. 43–184."
+]
+},
+"bib": {
+"citations": [
+"Müller, García and Cruz (2019)",
+"(see Rossum, Smith and Backus, 1989, ch. 77)",
+"(O’Brien, Hoare and Hopper, 1953; Rossum, Smith and Backus, 1989)",
+"(Lamport and Müller, 1965, p. 60; Rossum, Smith and Backus, 1989)",
+"(Lamport and Müller, 1965, vol. 30)",
+"(O’Brien, Hoare and Hopper, 1953; e.g. Lamport and Müller, 1965)",
+"(Müller, García and Cruz, 2019, p. 2)",
+"(Rossum, Smith and Backus, 1989; Lamport, Dijkstra and Hamilton, 2002; Müller, García and Cruz, 2019)",
+"(Dijkstra and Liskov, 2012, pp. 70–133)",
+"(O’Brien, Hoare and Hopper, 1953, sec. 14.137 and more)",
+"(1969; Müller, García and Cruz, 2019)",
+"(O’Brien, Hoare and Hopper, 1953)",
+"Müller, García and Cruz (2019, pp. 98–107)",
+"(Rossum, Smith and Backus, 1989; Lamport, Dijkstra and Hamilton, 2002)"
+],
+"bibliography": [
+"Dijkstra, E.W. and Liskov, B. (2012) The art of computer programming. PhD thesis. University of Oxford.",
+"Lamport, L., Dijkstra, E.W. and Hamilton, M. (2002) The education of a computer. PhD thesis. University of Zurich.",
+"Lamport, L. and Müller, H. (1965) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Lamport, L. and Müller, H. (1969) The apollo guidance computer. TR-82. Lab Function.",
+"Müller, H., García, L. and Cruz, M. de la (2019) “The art of computer programming.” https://example.org/structure. Available at: https://example.org/policy.",
+"O’Brien, F., Hoare, C.A.R. and Hopper, G. (1953) “On computable numbers,” Proceedings of the optimizer symposium, pp. 43–145.",
+"Rossum, G. van, Smith, J.Jr. and Backus, J. (1989) “Can programming be liberated from the von neumann style,” Proceedings of the compiler symposium, pp. 43–184."
+]
+}
+}

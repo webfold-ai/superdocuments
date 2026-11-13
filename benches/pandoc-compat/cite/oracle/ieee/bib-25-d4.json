@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2, pp. 91–132]",
+"[3, pp. 53–100]",
+"[3, p. 77], [4]",
+"[3, pp. 95–139]",
+"see [3]",
+"[5, Fig. 94]",
+"see [6, Ch. 44]",
+"[3], e.g. [6]",
+"[7]"
+],
+"bibliography": [
+"[1] H. Müller, “Can programming be liberated from the von neumann style,” in Proceedings of the distribution symposium, 1992, pp. 94–142.",
+"[2] C. A. R. Hoare and M. Hamilton, The art of computer programming, 2nd ed. MIT Press, 1975.",
+"[3] M. Hamilton, J. Backus, and G. van Rossum, “On computable numbers,” in Proceedings of the token symposium, 1936, pp. 76–170.",
+"[4] A. Lovelace, “Can programming be liberated from the von neumann style,” PhD thesis, University of Cambridge, 1984. Available: https://example.org/pipeline",
+"[5] L. Lamport, Can programming be liberated from the von neumann style. Springer, 1992. Available: https://example.org/query",
+"[6] C. A. R. Hoare, J. Jr. Smith, and H. Müller, “On computable numbers,” IEEE Transactions on Software Engineering, vol. 59, no. 1, pp. 57–370, 1994, doi: 10.2998/function.87.",
+"[7] D. E. Knuth, “Data abstraction and hierarchy,” PhD thesis, University of Zurich, 1955."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2, pp. 91–132]",
+"[3, pp. 53–100]",
+"[3, p. 77], [4]",
+"[3, pp. 95–139]",
+"see [3]",
+"[5, Fig. 94]",
+"see [6, Ch. 44]",
+"[3], e.g. [6]",
+"[7]"
+],
+"bibliography": [
+"[1] H. Müller, “Can programming be liberated from the von neumann style,” in Proceedings of the distribution symposium, 1992, pp. 94–142.",
+"[2] C. A. R. Hoare and M. Hamilton, The art of computer programming, 2nd ed. New York: MIT Press, 1975.",
+"[3] M. Hamilton, J. Backus, and G. van Rossum, “On computable numbers,” in Proceedings of the token symposium, 1936, pp. 76–170.",
+"[4] A. Lovelace, “Can programming be liberated from the von neumann style,” PhD thesis, University of Cambridge, 1984. Available: https://example.org/pipeline",
+"[5] L. Lamport, Can programming be liberated from the von neumann style. New York: Springer, 1992. Available: https://example.org/query",
+"[6] C. A. R. Hoare, J. Jr. Smith, and H. Müller, “On computable numbers,” IEEE Transactions on Software Engineering, vol. 59, no. 1, pp. 57–370, 1994, doi: 10.2998/function.87.",
+"[7] D. E. Knuth, “Data abstraction and hierarchy,” PhD thesis, University of Zurich, 1955."
+]
+}
+}

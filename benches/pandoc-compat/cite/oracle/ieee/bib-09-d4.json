@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, Sec. 93.114] and more",
+"[1], [2]",
+"[3], [4, p. 50]",
+"[2, p. 94]",
+"[5, pp. 96–128]",
+"[4, p. 60]",
+"[4, p. 31]",
+"[6, Sec. 69.121] and more",
+"e.g. [3], [5]",
+"[1]"
+],
+"bibliography": [
+"[1] A. M. Turing, L. Lamport, and A. Lovelace, “The art of computer programming.” https://example.org/index, 1979.",
+"[2] M. Hamilton, J. Backus, and A. M. Turing, Can programming be liberated from the von neumann style, 3rd ed. New York: Springer, 2008.",
+"[3] J. Jr. Smith, “The education of a computer,” PhD thesis, University of Oxford, 2017.",
+"[4] F. O’Brien, M. de la Cruz, and G. Hopper, An axiomatic basis for computer programming. Boston: Springer, 1956. Available: https://example.org/filter",
+"[5] C. A. R. Hoare, “The art of computer programming,” PhD thesis, University of Cambridge, 1947.",
+"[6] L. Lamport and A. M. Turing, “Go to statement considered harmful,” in Proceedings of the distribution symposium, 1938, pp. 67–141."
+]
+},
+"bib": {
+"citations": [
+"[1, Sec. 93.114] and more",
+"[1], [2]",
+"[3], [4, p. 50]",
+"[2, p. 94]",
+"[5, pp. 96–128]",
+"[4, p. 60]",
+"[4, p. 31]",
+"[6, Sec. 69.121] and more",
+"e.g. [3], [5]",
+"[1]"
+],
+"bibliography": [
+"[1] A. M. Turing, L. Lamport, and A. Lovelace, “The art of computer programming.” https://example.org/index, 1979.",
+"[2] M. Hamilton, J. Backus, and A. M. Turing, Can programming be liberated from the von neumann style, 3rd ed. New York: Springer, 2008.",
+"[3] J. Jr. Smith, “The education of a computer,” PhD thesis, University of Oxford, 2017.",
+"[4] F. O’Brien, M. de la Cruz, and G. Hopper, An axiomatic basis for computer programming. Boston: Springer, 1956. Available: https://example.org/filter",
+"[5] C. A. R. Hoare, “The art of computer programming,” PhD thesis, University of Cambridge, 1947.",
+"[6] L. Lamport and A. M. Turing, “Go to statement considered harmful,” in Proceedings of the distribution symposium, 1938, pp. 67–141."
+]
+}
+}

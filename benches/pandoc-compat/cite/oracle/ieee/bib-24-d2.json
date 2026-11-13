@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1, Fig. 64]",
+"[2, Vol. 91]",
+"[3, Fig. 37]",
+"see [2]",
+"[3, Sec. 86.127] and more",
+"[1]",
+"[1, p. 75], [4]",
+"[1, Fig. 61]",
+"[5]",
+"[3], [4]",
+"[4, Fig. 61]",
+"[5, pp. 74–110]",
+"[1, Vol. 73]"
+],
+"bibliography": [
+"[1] H. Müller, L. García, and M. de la Cruz, “The art of computer programming.” https://example.org/structure, 2019. Available: https://example.org/policy",
+"[2] G. van Rossum, J. Jr. Smith, and J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the compiler symposium, 1989, pp. 43–184.",
+"[3] L. Lamport, E. W. Dijkstra, and M. Hamilton, “The education of a computer,” PhD thesis, University of Zurich, 2002.",
+"[4] F. O’Brien, C. A. R. Hoare, and G. Hopper, “On computable numbers,” in Proceedings of the optimizer symposium, 1953, pp. 43–145.",
+"[5] E. W. Dijkstra and B. Liskov, “The art of computer programming,” PhD thesis, University of Oxford, 2012."
+]
+},
+"bib": {
+"citations": [
+"[1, Fig. 64]",
+"[2, Vol. 91]",
+"[3, Fig. 37]",
+"see [2]",
+"[3, Sec. 86.127] and more",
+"[1]",
+"[1, p. 75], [4]",
+"[1, Fig. 61]",
+"[5]",
+"[3], [4]",
+"[4, Fig. 61]",
+"[5, pp. 74–110]",
+"[1, Vol. 73]"
+],
+"bibliography": [
+"[1] H. Müller, L. García, and M. de la Cruz, “The art of computer programming.” https://example.org/structure, 2019. Available: https://example.org/policy",
+"[2] G. van Rossum, J. Jr. Smith, and J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the compiler symposium, 1989, pp. 43–184.",
+"[3] L. Lamport, E. W. Dijkstra, and M. Hamilton, “The education of a computer,” PhD thesis, University of Zurich, 2002.",
+"[4] F. O’Brien, C. A. R. Hoare, and G. Hopper, “On computable numbers,” in Proceedings of the optimizer symposium, 1953, pp. 43–145.",
+"[5] E. W. Dijkstra and B. Liskov, “The art of computer programming,” PhD thesis, University of Oxford, 2012."
+]
+}
+}

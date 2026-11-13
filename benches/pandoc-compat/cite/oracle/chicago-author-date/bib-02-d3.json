@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al. 2012; 1963, 98)",
+"(Rossum and Turing 1990; 1969)",
+"(Rossum and Turing 1990; Backus et al. 2007, 66)",
+"(Müller and O’Brien 2010, 42)",
+"(Müller and O’Brien 2010, vol. 69)",
+"(Backus et al. 2007, fig. 16)",
+"(Backus et al. 2007, 11–109)",
+"(Backus et al. 2007)",
+"(1990)",
+"(Dijkstra 1973, vol. 72)",
+"(see Backus et al. 2007, ch. 88)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. Notes on the Analytical Engine. Https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al. 2012; 1963, 98)",
+"(Rossum and Turing 1990; 1969)",
+"(Rossum and Turing 1990; Backus et al. 2007, 66)",
+"(Müller and O’Brien 2010, 42)",
+"(Müller and O’Brien 2010, vol. 69)",
+"(Backus et al. 2007, fig. 16)",
+"(Backus et al. 2007, 11–109)",
+"(Backus et al. 2007)",
+"(1990)",
+"(Dijkstra 1973, vol. 72)",
+"(see Backus et al. 2007, ch. 88)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. Notes on the Analytical Engine. Https://example.org/sparse."
+]
+}
+}

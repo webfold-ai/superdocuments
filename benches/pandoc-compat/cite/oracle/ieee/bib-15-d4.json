@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"[1, pp. 36–134]",
+"[2]",
+"[2, Vol. 59]",
+"see [2]",
+"[3], [4, p. 86]",
+"[3, pp. 41–114]",
+"[2], [3]",
+"e.g. [2], [5]",
+"[1]",
+"[5, Vol. 63]",
+"see [6, Ch. 83]"
+],
+"bibliography": [
+"[1] D. E. Knuth, M. de la Cruz, and J. Jr. Smith, “On computable numbers.” https://example.org/structure, 2020.",
+"[2] H. Müller and G. van Rossum, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 2, no. 11, pp. 86–362, 2020, doi: 10.7751/compiler.14.",
+"[3] G. van Rossum and M. de la Cruz, “Notes on the analytical engine,” Lab Transform, TR-39, 2012.",
+"[4] M. de la Cruz and A. M. Turing, Go to statement considered harmful, 2nd ed. Springer, 1938.",
+"[5] B. Liskov, J. Backus, and A. M. Turing, The education of a computer. MIT Press, 2004. Available: https://example.org/matrix",
+"[6] E. W. Dijkstra, C. A. R. Hoare, and G. van Rossum, “Time, clocks, and the ordering of events,” in Proceedings of the stream symposium, 2018, pp. 1–192."
+]
+},
+"bib": {
+"citations": [
+"[1, pp. 36–134]",
+"[2]",
+"[2, Vol. 59]",
+"see [2]",
+"[3], [4, p. 86]",
+"[3, pp. 41–114]",
+"[2], [3]",
+"e.g. [2], [5]",
+"[1]",
+"[5, Vol. 63]",
+"see [6, Ch. 83]"
+],
+"bibliography": [
+"[1] D. E. Knuth, M. de la Cruz, and J. Jr. Smith, “On computable numbers.” https://example.org/structure, 2020.",
+"[2] H. Müller and G. van Rossum, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 2, no. 11, pp. 86–362, 2020, doi: 10.7751/compiler.14.",
+"[3] G. van Rossum and M. de la Cruz, “Notes on the analytical engine,” Lab Transform, TR-39, 2012.",
+"[4] M. de la Cruz and A. M. Turing, Go to statement considered harmful, 2nd ed. New York: Springer, 1938.",
+"[5] B. Liskov, J. Backus, and A. M. Turing, The education of a computer. New York: MIT Press, 2004. Available: https://example.org/matrix",
+"[6] E. W. Dijkstra, C. A. R. Hoare, and G. van Rossum, “Time, clocks, and the ordering of events,” in Proceedings of the stream symposium, 2018, pp. 1–192."
+]
+}
+}

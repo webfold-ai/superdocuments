@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Backus & Lamport, 1956; Hoare et al., 2010; Knuth, 2007)",
+"(2007; Rossum, 1937)",
+"(Rossum et al., 1941, pp. 41–127)",
+"(Hoare & Rossum, 1953; Rossum, 1937)",
+"Rossum (1937, p. 4)",
+"(Backus & Lamport, 1956; Hoare & Rossum, 1953)",
+"(Hoare & Rossum, 1953; e.g. Knuth, 2007)",
+"Backus & Lamport (1956)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., Lovelace, A., & Smith, J. Jr. (2010). On computable numbers (3rd ed.). Addison-Wesley.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Knuth, D. E. (2007). An axiomatic basis for computer programming. Proceedings of the Bound Symposium, 48–186.",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397.",
+"Rossum, G. van, Turing, A. M., & Hopper, G. (1941). Go to statement considered harmful [PhD thesis]. University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(Backus & Lamport, 1956; Hoare et al., 2010; Knuth, 2007)",
+"(2007; Rossum, 1937)",
+"(Rossum et al., 1941, pp. 41–127)",
+"(Hoare & Rossum, 1953; Rossum, 1937)",
+"Rossum (1937, p. 4)",
+"(Backus & Lamport, 1956; Hoare & Rossum, 1953)",
+"(Hoare & Rossum, 1953; e.g. Knuth, 2007)",
+"Backus & Lamport (1956)"
+],
+"bibliography": [
+"Backus, J., & Lamport, L. (1956). An axiomatic basis for computer programming. https://example.org/operator.",
+"Hoare, C. A. R., Lovelace, A., & Smith, J. Jr. (2010). On computable numbers (3rd ed.). Addison-Wesley.",
+"Hoare, C. A. R., & Rossum, G. van. (1953). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/experiment",
+"Knuth, D. E. (2007). An axiomatic basis for computer programming. Proceedings of the Bound Symposium, 48–186.",
+"Rossum, G. van. (1937). Can programming be liberated from the von neumann style. Journal of the ACM, 27(4), 248–397.",
+"Rossum, G. van, Turing, A. M., & Hopper, G. (1941). Go to statement considered harmful [PhD thesis]. University of Oxford."
+]
+}
+}

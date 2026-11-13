@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(see Liskov, Backus and Turing, 2004)",
+"Müller and Rossum (2020, p. 3)",
+"(Dijkstra, 1947; Smith, 1972; Rossum and Cruz, 2012)",
+"(Cruz and Turing, 1938, p. 27; Smith, 1972)",
+"Dijkstra (1947)",
+"(Rossum and Cruz, 2012, pp. 65–131)",
+"(see Rossum and Cruz, 2012, ch. 20)",
+"(O’Brien and Hopper, 1955, vol. 37)",
+"(see Liskov, Backus and Turing, 2004, ch. 57)",
+"(Dijkstra, 1947; Smith, 1972; Dijkstra, Hoare and Rossum, 2018)",
+"Liskov, Backus and Turing (2004)",
+"(see O’Brien and Hopper, 1955, ch. 98)"
+],
+"bibliography": [
+"Cruz, M. de la and Turing, A.M. (1938) Go to statement considered harmful. 2nd ed. Springer.",
+"Dijkstra, E.W. (1947) “The apollo guidance computer.” https://example.org/prior.",
+"Dijkstra, E.W., Hoare, C.A.R. and Rossum, G. van (2018) “Time, clocks, and the ordering of events,” Proceedings of the stream symposium, pp. 1–192.",
+"Liskov, B., Backus, J. and Turing, A.M. (2004) The education of a computer. MIT Press. Available at: https://example.org/matrix.",
+"Müller, H. and Rossum, G. van (2020) “The education of a computer,” IEEE Transactions on Software Engineering, 2(11), pp. 86–362. Available at: https://doi.org/10.7751/compiler.14.",
+"O’Brien, F. and Hopper, G. (1955) “On computable numbers.” https://example.org/network.",
+"Rossum, G. van and Cruz, M. de la (2012) Notes on the analytical engine. TR-39. Lab Transform.",
+"Smith, J.Jr. (1972) Notes on the analytical engine. PhD thesis. University of Cambridge. Available at: https://example.org/prior."
+]
+},
+"bib": {
+"citations": [
+"(see Liskov, Backus and Turing, 2004)",
+"Müller and Rossum (2020, p. 3)",
+"(Dijkstra, 1947; Smith, 1972; Rossum and Cruz, 2012)",
+"(Cruz and Turing, 1938, p. 27; Smith, 1972)",
+"Dijkstra (1947)",
+"(Rossum and Cruz, 2012, pp. 65–131)",
+"(see Rossum and Cruz, 2012, ch. 20)",
+"(O’Brien and Hopper, 1955, vol. 37)",
+"(see Liskov, Backus and Turing, 2004, ch. 57)",
+"(Dijkstra, 1947; Smith, 1972; Dijkstra, Hoare and Rossum, 2018)",
+"Liskov, Backus and Turing (2004)",
+"(see O’Brien and Hopper, 1955, ch. 98)"
+],
+"bibliography": [
+"Cruz, M. de la and Turing, A.M. (1938) Go to statement considered harmful. 2nd ed. New York: Springer.",
+"Dijkstra, E.W. (1947) “The apollo guidance computer.” https://example.org/prior.",
+"Dijkstra, E.W., Hoare, C.A.R. and Rossum, G. van (2018) “Time, clocks, and the ordering of events,” Proceedings of the stream symposium, pp. 1–192.",
+"Liskov, B., Backus, J. and Turing, A.M. (2004) The education of a computer. New York: MIT Press. Available at: https://example.org/matrix.",
+"Müller, H. and Rossum, G. van (2020) “The education of a computer,” IEEE Transactions on Software Engineering, 2(11), pp. 86–362. Available at: https://doi.org/10.7751/compiler.14.",
+"O’Brien, F. and Hopper, G. (1955) “On computable numbers.” https://example.org/network.",
+"Rossum, G. van and Cruz, M. de la (2012) Notes on the analytical engine. TR-39. Lab Transform.",
+"Smith, J.Jr. (1972) Notes on the analytical engine. PhD thesis. University of Cambridge. Available at: https://example.org/prior."
+]
+}
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "URL": "https://example.org/pipeline",
+    "abstract": "Complexity experiment operator channel policy baseline analysis token solver benchmark encoder encoder.",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1984
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "thesis"
+  },
+  {
+    "DOI": "10.2998/function.87",
+    "URL": "https://example.org/corpus",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "container-title": "IEEE Transactions on Software Engineering",
+    "id": "hopper1952",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "page": "57-370",
+    "title": "On computable numbers",
+    "type": "article-journal",
+    "volume": "59"
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "container-title": "Proceedings of the distribution symposium",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "page": "94-142",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1991
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "edition": "2",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1975
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "The art of computer programming",
+    "type": "book"
+  },
+  {
+    "abstract": "Optimizer metric solver function lattice vocabulary analysis signal tree policy approach estimate.",
+    "author": [
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "Proceedings of the token symposium",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1936
+        ]
+      ]
+    },
+    "page": "76-170",
+    "title": "On computable numbers",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://example.org/query",
+    "abstract": "Cost distribution framework learning graph corpus learning node dataset parser filter workload.",
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1955
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  }
+]

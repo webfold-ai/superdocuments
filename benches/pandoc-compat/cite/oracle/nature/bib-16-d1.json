@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"1",
+"e.g. 2,3",
+"4",
+"5",
+"3",
+"5,6",
+"7"
+],
+"bibliography": [
+"1. Hopper, G. & Lamport, L. Go to Statement Considered Harmful. (Cambridge University Press, 1943).",
+"2. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"3. Liskov, B. & Knuth, D. E. The art of computer programming. in Proceedings of the pipeline symposium 14–128 (1954).",
+"4. Turing, A. M. Time, clocks, and the ordering of events. (University of Zurich, 1940).",
+"5. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007).",
+"6. Lamport, L., Dijkstra, E. W. & Hoare, C. A. R. Notes on the analytical engine. Journal of the ACM 33, 192–344 (1961).",
+"7. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"e.g. 2,3",
+"4",
+"5",
+"3",
+"5,6",
+"7"
+],
+"bibliography": [
+"1. Hopper, G. & Lamport, L. Go to Statement Considered Harmful. (Cambridge University Press, London, 1943).",
+"2. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"3. Liskov, B. & Knuth, D. E. The art of computer programming. in Proceedings of the pipeline symposium 14–128 (1954).",
+"4. Turing, A. M. Time, clocks, and the ordering of events. (University of Zurich, 1940).",
+"5. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007).",
+"6. Lamport, L., Dijkstra, E. W. & Hoare, C. A. R. Notes on the analytical engine. Journal of the ACM 33, 192–344 (1961).",
+"7. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990)."
+]
+}
+}

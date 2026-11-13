@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"(Turing and Liskov 14)",
+"(O’Brien 69–108)",
+"(see Turing and Liskov, ch. 8)",
+"(e.g. O’Brien; Cruz and García)",
+"(Turing and Liskov 22)",
+"(Lovelace)",
+"Turing and Liskov",
+"(Turing and Liskov; Hopper; Lovelace)",
+"Cruz and García (50)",
+"(Dijkstra; Turing and Liskov; Cruz and García)",
+"(see O’Brien)",
+"(O’Brien)",
+"(Lovelace 40–135)",
+"(see Lamport, ch. 45)",
+"(Rossum et al.; Dijkstra)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. The Apollo Guidance Computer. https://example.org/framework, 1984.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Proceedings of the Query Symposium, 1946, pp. 51–197.",
+"Hopper, Grace. “On Computable Numbers.” ACM Computing Surveys, vol. 39, no. 7, 1986, pp. 151–379, https://doi.org/10.5661/experiment.46.",
+"Lamport, Leslie. The Education of a Computer. https://example.org/protocol, 1997, https://example.org/benchmark.",
+"Lovelace, Ada. The Education of a Computer. 1968. University of Cambridge, PhD thesis.",
+"O’Brien, Flann. Go to Statement Considered Harmful. MIT Press, 1966.",
+"Rossum, Guido van, et al. “Go to Statement Considered Harmful.” Communications of the ACM, vol. 45, no. 8, 1979, pp. 289–314, https://doi.org/10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. On Computable Numbers. MIT Press, 2018."
+]
+},
+"bib": {
+"citations": [
+"(Turing and Liskov 14)",
+"(O’Brien 69–108)",
+"(see Turing and Liskov, ch. 8)",
+"(e.g. O’Brien; Cruz and García)",
+"(Turing and Liskov 22)",
+"(Lovelace)",
+"Turing and Liskov",
+"(Turing and Liskov; Hopper; Lovelace)",
+"Cruz and García (50)",
+"(Dijkstra; Turing and Liskov; Cruz and García)",
+"(see O’Brien)",
+"(O’Brien)",
+"(Lovelace 40–135)",
+"(see Lamport, ch. 45)",
+"(Rossum et al.; Dijkstra)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. The Apollo Guidance Computer. https://example.org/framework, 1984.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Proceedings of the Query Symposium, 1946, pp. 51–197.",
+"Hopper, Grace. “On Computable Numbers.” ACM Computing Surveys, vol. 39, no. 7, 1986, pp. 151–379, https://doi.org/10.5661/experiment.46.",
+"Lamport, Leslie. The Education of a Computer. https://example.org/protocol, 1997, https://example.org/benchmark.",
+"Lovelace, Ada. The Education of a Computer. 1968. University of Cambridge, PhD thesis.",
+"O’Brien, Flann. Go to Statement Considered Harmful. MIT Press, 1966.",
+"Rossum, Guido van, et al. “Go to Statement Considered Harmful.” Communications of the ACM, vol. 45, no. 8, 1979, pp. 289–314, https://doi.org/10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. On Computable Numbers. MIT Press, 2018."
+]
+}
+}

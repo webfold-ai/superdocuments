@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"2",
+"3",
+"4",
+"3",
+"3 and more",
+"4",
+"4",
+"3",
+"3",
+"3"
+],
+"bibliography": [
+"1. Lovelace, A. & Hopper, G. An axiomatic basis for computer programming. in Proceedings of the array symposium 14–120 (1969).",
+"2. Hoare, C. A. R., Dijkstra, E. W. & Müller, H. The Art of Computer Programming. https://example.org/memory (1948).",
+"3. Lovelace, A. & Hamilton, M. Notes on the Analytical Engine. (MIT Press, New York, 2017).",
+"4. Smith, J. Jr., Backus, J. & Hoare, C. A. R. On Computable Numbers. (Cambridge University Press, London, 1939)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"2",
+"3",
+"4",
+"3",
+"3 and more",
+"4",
+"4",
+"3",
+"3",
+"3"
+],
+"bibliography": [
+"1. Lovelace, A. & Hopper, G. An axiomatic basis for computer programming. in Proceedings of the array symposium 14–120 (1969).",
+"2. Hoare, C. A. R., Dijkstra, E. W. & Müller, H. The Art of Computer Programming. https://example.org/memory (1948).",
+"3. Lovelace, A. & Hamilton, M. Notes on the Analytical Engine. (MIT Press, New York, 2017).",
+"4. Smith, J. Jr., Backus, J. & Hoare, C. A. R. On Computable Numbers. (Cambridge University Press, London, 1939)."
+]
+}
+}

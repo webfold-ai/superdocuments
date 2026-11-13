@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Cruz and Hamilton)",
+"Liskov (12)",
+"(Hoare 47)",
+"(Smith et al. 44)",
+"(Hoare, sec. 11.126 and more)",
+"(Cruz and Hamilton, sec. 63.125 and more)",
+"(Smith et al.)",
+"Smith et al.",
+"(see Cruz and Hamilton, ch. 17)",
+"Cruz and Hamilton",
+"Liskov"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. Notes on the Analytical Engine. TR-4, Lab Throughput, 1975.",
+"Hoare, C. A. R. On Computable Numbers. 2011. University of Oxford, PhD thesis.",
+"Liskov, Barbara. Can Programming Be Liberated from the von Neumann Style. Springer, 1946, https://example.org/learning.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-29, Lab Function, 1999."
+]
+},
+"bib": {
+"citations": [
+"(Cruz and Hamilton)",
+"Liskov (12)",
+"(Hoare 47)",
+"(Smith et al. 44)",
+"(Hoare, sec. 11.126 and more)",
+"(Cruz and Hamilton, sec. 63.125 and more)",
+"(Smith et al.)",
+"Smith et al.",
+"(see Cruz and Hamilton, ch. 17)",
+"Cruz and Hamilton",
+"Liskov"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. Notes on the Analytical Engine. TR-4, Lab Throughput, 1975.",
+"Hoare, C. A. R. On Computable Numbers. 2011. University of Oxford, PhD thesis.",
+"Liskov, Barbara. Can Programming Be Liberated from the von Neumann Style. Springer, 1946, https://example.org/learning.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-29, Lab Function, 1999."
+]
+}
+}

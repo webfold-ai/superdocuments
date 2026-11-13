@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"see [1]",
+"[2]",
+"see [2, Ch. 94]",
+"e.g. [3], [4]",
+"[1, pp. 19–107]",
+"[2], [4]"
+],
+"bibliography": [
+"[1] J. Backus and L. Lamport, “An axiomatic basis for computer programming.” https://example.org/operator, 1956.",
+"[2] C. A. R. Hoare and G. van Rossum, “Data abstraction and hierarchy,” PhD thesis, University of Zurich, 1953. Available: https://example.org/experiment",
+"[3] G. van Rossum, A. M. Turing, and G. Hopper, “Go to statement considered harmful,” PhD thesis, University of Oxford, 1941.",
+"[4] G. van Rossum, “Can programming be liberated from the von neumann style,” Journal of the ACM, vol. 27, no. 4, pp. 248–397, 1937."
+]
+},
+"bib": {
+"citations": [
+"see [1]",
+"[2]",
+"see [2, Ch. 94]",
+"e.g. [3], [4]",
+"[1, pp. 19–107]",
+"[2], [4]"
+],
+"bibliography": [
+"[1] J. Backus and L. Lamport, “An axiomatic basis for computer programming.” https://example.org/operator, 1956.",
+"[2] C. A. R. Hoare and G. van Rossum, “Data abstraction and hierarchy,” PhD thesis, University of Zurich, 1953. Available: https://example.org/experiment",
+"[3] G. van Rossum, A. M. Turing, and G. Hopper, “Go to statement considered harmful,” PhD thesis, University of Oxford, 1941.",
+"[4] G. van Rossum, “Can programming be liberated from the von neumann style,” Journal of the ACM, vol. 27, no. 4, pp. 248–397, 1937."
+]
+}
+}

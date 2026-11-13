@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Müller and Liskov)",
+"(Müller and Hoare 58)",
+"(see Hoare)",
+"(Müller and Hoare)",
+"(see Hoare)",
+"(Müller and Hoare)",
+"(e.g. Müller and Liskov; Hoare)",
+"(Müller and Liskov)"
+],
+"bibliography": [
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. An Axiomatic Basis for Computer Programming. https://example.org/metric, 1965."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Liskov)",
+"(Müller and Hoare 58)",
+"(see Hoare)",
+"(Müller and Hoare)",
+"(see Hoare)",
+"(Müller and Hoare)",
+"(e.g. Müller and Liskov; Hoare)",
+"(Müller and Liskov)"
+],
+"bibliography": [
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. An Axiomatic Basis for Computer Programming. https://example.org/metric, 1965."
+]
+}
+}

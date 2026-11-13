@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1], [2]",
+"[3, p. 38]",
+"[4, pp. 57–119]",
+"[5, pp. 74–129]",
+"[4]",
+"[3, p. 18]",
+"[6], [7]"
+],
+"bibliography": [
+"[1] L. García and D. E. Knuth, “An axiomatic basis for computer programming,” in Proceedings of the transform symposium, 1936, pp. 2–133.",
+"[2] G. Hopper, H. Müller, and A. Lovelace, The apollo guidance computer, 3rd ed. London: Cambridge University Press, 1987.",
+"[3] L. García, L. Lamport, and B. Liskov, “The art of computer programming.” https://example.org/experiment, 1998.",
+"[4] F. O’Brien, G. van Rossum, and J. Jr. Smith, Time, clocks, and the ordering of events. New York: Addison-Wesley, 1975.",
+"[5] J. Backus, “On computable numbers.” https://example.org/algorithm, 1943.",
+"[6] J. Jr. Smith, “The apollo guidance computer,” Lab Layer, TR-83, 2006.",
+"[7] C. A. R. Hoare and H. Müller, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 7, no. 9, pp. 191–397, 2005, doi: 10.4589/gradient.17."
+]
+},
+"bib": {
+"citations": [
+"[1], [2]",
+"[3, p. 38]",
+"[4, pp. 57–119]",
+"[5, pp. 74–129]",
+"[4]",
+"[3, p. 18]",
+"[6], [7]"
+],
+"bibliography": [
+"[1] L. García and D. E. Knuth, “An axiomatic basis for computer programming,” in Proceedings of the transform symposium, 1936, pp. 2–133.",
+"[2] G. Hopper, H. Müller, and A. Lovelace, The apollo guidance computer, 3rd ed. London: Cambridge University Press, 1987.",
+"[3] L. García, L. Lamport, and B. Liskov, “The art of computer programming.” https://example.org/experiment, 1998.",
+"[4] F. O’Brien, G. van Rossum, and J. Jr. Smith, Time, clocks, and the ordering of events. New York: Addison-Wesley, 1975.",
+"[5] J. Backus, “On computable numbers.” https://example.org/algorithm, 1943.",
+"[6] J. Jr. Smith, “The apollo guidance computer,” Lab Layer, TR-83, 2006.",
+"[7] C. A. R. Hoare and H. Müller, “Data abstraction and hierarchy,” Proceedings of the London Mathematical Society, vol. 7, no. 9, pp. 191–397, 2005, doi: 10.4589/gradient.17."
+]
+}
+}

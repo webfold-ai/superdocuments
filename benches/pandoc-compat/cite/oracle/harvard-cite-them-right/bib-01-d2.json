@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Backus and Lamport, 1956; Knuth, 2007; Hoare, Lovelace and Smith, 2010)",
+"(Rossum, 1937; 2007)",
+"(Rossum, Turing and Hopper, 1941, pp. 41–127)",
+"(Rossum, 1937; Hoare and Rossum, 1953)",
+"Rossum (1937, p. 4)",
+"(Hoare and Rossum, 1953; Backus and Lamport, 1956)",
+"(Hoare and Rossum, 1953; e.g. Knuth, 2007)",
+"Backus and Lamport (1956)"
+],
+"bibliography": [
+"Backus, J. and Lamport, L. (1956) “An axiomatic basis for computer programming.” https://example.org/operator.",
+"Hoare, C.A.R., Lovelace, A. and Smith, J.Jr. (2010) On computable numbers. 3rd ed. New York: Addison-Wesley.",
+"Hoare, C.A.R. and Rossum, G. van (1953) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/experiment.",
+"Knuth, D.E. (2007) “An axiomatic basis for computer programming,” Proceedings of the bound symposium, pp. 48–186.",
+"Rossum, G. van (1937) “Can programming be liberated from the von neumann style,” Journal of the ACM, 27(4), pp. 248–397.",
+"Rossum, G. van, Turing, A.M. and Hopper, G. (1941) Go to statement considered harmful. PhD thesis. University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(Backus and Lamport, 1956; Knuth, 2007; Hoare, Lovelace and Smith, 2010)",
+"(Rossum, 1937; 2007)",
+"(Rossum, Turing and Hopper, 1941, pp. 41–127)",
+"(Rossum, 1937; Hoare and Rossum, 1953)",
+"Rossum (1937, p. 4)",
+"(Hoare and Rossum, 1953; Backus and Lamport, 1956)",
+"(Hoare and Rossum, 1953; e.g. Knuth, 2007)",
+"Backus and Lamport (1956)"
+],
+"bibliography": [
+"Backus, J. and Lamport, L. (1956) “An axiomatic basis for computer programming.” https://example.org/operator.",
+"Hoare, C.A.R., Lovelace, A. and Smith, J.Jr. (2010) On computable numbers. 3rd ed. New York: Addison-Wesley.",
+"Hoare, C.A.R. and Rossum, G. van (1953) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/experiment.",
+"Knuth, D.E. (2007) “An axiomatic basis for computer programming,” Proceedings of the bound symposium, pp. 48–186.",
+"Rossum, G. van (1937) “Can programming be liberated from the von neumann style,” Journal of the ACM, 27(4), pp. 248–397.",
+"Rossum, G. van, Turing, A.M. and Hopper, G. (1941) Go to statement considered harmful. PhD thesis. University of Oxford."
+]
+}
+}

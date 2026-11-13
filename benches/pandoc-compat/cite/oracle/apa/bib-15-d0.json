@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(see Knuth et al., 2020, ch. 76)",
+"(Dijkstra et al., 2018, p. 48)",
+"(Dijkstra et al., 2018)",
+"Dijkstra et al. (2018, p. 75)",
+"(e.g. Cruz & Turing, 1938; Liskov et al., 2004)",
+"(Dijkstra et al., 2018, p. 89)",
+"(Knuth et al., 2020; Smith, 1972)",
+"Cruz & Turing (1938, pp. 87–113)",
+"(Rossum & Cruz, 2012, Section 79.113 and more)",
+"Dijkstra (1947)",
+"(Rossum & Cruz, 2012; 1972)",
+"(Rossum & Cruz, 2012, p. 31)",
+"(Rossum & Cruz, 2012, pp. 85–138)"
+],
+"bibliography": [
+"Cruz, M. de la, & Turing, A. M. (1938). Go to statement considered harmful (2nd ed.). Springer.",
+"Dijkstra, E. W. (1947). The apollo guidance computer. https://example.org/prior.",
+"Dijkstra, E. W., Hoare, C. A. R., & Rossum, G. van. (2018). Time, clocks, and the ordering of events. Proceedings of the Stream Symposium, 1–192.",
+"Knuth, D. E., Cruz, M. de la, & Smith, J. Jr. (2020). On computable numbers. https://example.org/structure.",
+"Liskov, B., Backus, J., & Turing, A. M. (2004). The education of a computer. MIT Press. https://example.org/matrix",
+"Rossum, G. van, & Cruz, M. de la. (2012). Notes on the analytical engine (TR-39). Lab Transform.",
+"Smith, J. Jr. (1972). Notes on the analytical engine [PhD thesis, University of Cambridge]. https://example.org/prior"
+]
+},
+"bib": {
+"citations": [
+"(see Knuth et al., 2020, ch. 76)",
+"(Dijkstra et al., 2018, p. 48)",
+"(Dijkstra et al., 2018)",
+"Dijkstra et al. (2018, p. 75)",
+"(e.g. Cruz & Turing, 1938; Liskov et al., 2004)",
+"(Dijkstra et al., 2018, p. 89)",
+"(Knuth et al., 2020; Smith, 1972)",
+"Cruz & Turing (1938, pp. 87–113)",
+"(Rossum & Cruz, 2012, Section 79.113 and more)",
+"Dijkstra (1947)",
+"(Rossum & Cruz, 2012; 1972)",
+"(Rossum & Cruz, 2012, p. 31)",
+"(Rossum & Cruz, 2012, pp. 85–138)"
+],
+"bibliography": [
+"Cruz, M. de la, & Turing, A. M. (1938). Go to statement considered harmful (2nd ed.). Springer.",
+"Dijkstra, E. W. (1947). The apollo guidance computer. https://example.org/prior.",
+"Dijkstra, E. W., Hoare, C. A. R., & Rossum, G. van. (2018). Time, clocks, and the ordering of events. Proceedings of the Stream Symposium, 1–192.",
+"Knuth, D. E., Cruz, M. de la, & Smith, J. Jr. (2020). On computable numbers. https://example.org/structure.",
+"Liskov, B., Backus, J., & Turing, A. M. (2004). The education of a computer. MIT Press. https://example.org/matrix",
+"Rossum, G. van, & Cruz, M. de la. (2012). Notes on the analytical engine (TR-39). Lab Transform.",
+"Smith, J. Jr. (1972). Notes on the analytical engine [PhD thesis, University of Cambridge]. https://example.org/prior"
+]
+}
+}

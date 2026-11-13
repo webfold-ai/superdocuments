@@ -1,0 +1,30 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"1 and more",
+"see 2, ch. 65",
+"1",
+"see 1, ch. 14"
+],
+"bibliography": [
+"1. Müller, H. & Liskov, B. The Apollo Guidance Computer. (Springer, 2014).",
+"2. Hoare, C. A. R. The apollo guidance computer. Proceedings of the London Mathematical Society 33, 72–308 (2005)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"1 and more",
+"see 2, ch. 65",
+"1",
+"see 1, ch. 14"
+],
+"bibliography": [
+"1. Müller, H. & Liskov, B. The Apollo Guidance Computer. (Springer, London, 2014).",
+"2. Hoare, C. A. R. The apollo guidance computer. Proceedings of the London Mathematical Society 33, 72–308 (2005)."
+]
+}
+}

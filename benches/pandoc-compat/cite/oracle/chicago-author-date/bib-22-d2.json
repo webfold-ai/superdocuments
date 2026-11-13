@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(e.g. Knuth et al. 1962; Hopper and Hamilton 1988)",
+"(Hopper et al. 1941; Müller 1947)",
+"(Hopper et al. 2019; Knuth et al. 1962, 85)",
+"(Smith and García 1993, 48)",
+"(1988)",
+"(Knuth et al. 1962, 88)",
+"(Liskov et al. 1988, 12–106)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. Springer.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 26–101. https://example.org/algorithm.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 70–197.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46 (5): 223–398. https://doi.org/10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Knuth et al. 1962; Hopper and Hamilton 1988)",
+"(Hopper et al. 1941; Müller 1947)",
+"(Hopper et al. 2019; Knuth et al. 1962, 85)",
+"(Smith and García 1993, 48)",
+"(1988)",
+"(Knuth et al. 1962, 88)",
+"(Liskov et al. 1988, 12–106)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. Springer.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 26–101. https://example.org/algorithm.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 70–197.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46 (5): 223–398. https://doi.org/10.4191/convergence.19."
+]
+}
+}

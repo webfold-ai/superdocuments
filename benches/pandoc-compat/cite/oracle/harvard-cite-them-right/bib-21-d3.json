@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Dijkstra and García, 2004, vol. 71)",
+"(1949; Dijkstra, Rossum and Lamport, 1970)",
+"(see O’Brien and Backus, 2024)",
+"(Cruz, 2007, sec. 47.110 and more)",
+"(Hamilton, Liskov and Rossum, 1992; O’Brien and Backus, 2024, p. 56)",
+"(Cruz, 2007, vol. 36)",
+"(see O’Brien and Backus, 2024, ch. 45)",
+"O’Brien and Backus (2024, pp. 71–115)",
+"(Hamilton, Liskov and Rossum, 1992)",
+"(1949; O’Brien and Backus, 2024)"
+],
+"bibliography": [
+"Cruz, M. de la (2007) “Go to statement considered harmful,” Proceedings of the network symposium, pp. 81–115. Available at: https://example.org/cache.",
+"Dijkstra, E.W. and García, L. (2004) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Dijkstra, E.W., Rossum, G. van and Lamport, L. (1970) Time, clocks, and the ordering of events. Springer.",
+"Hamilton, M., Liskov, B. and Rossum, G. van (1992) “An axiomatic basis for computer programming.” https://example.org/tree. Available at: https://example.org/heuristic.",
+"O’Brien, F. and Backus, J. (2024) Go to statement considered harmful. 2nd ed. Addison-Wesley.",
+"Turing, A.M. (1949) “The apollo guidance computer,” Journal of the ACM, 4(9), pp. 240–315. Available at: https://doi.org/10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(Dijkstra and García, 2004, vol. 71)",
+"(1949; Dijkstra, Rossum and Lamport, 1970)",
+"(see O’Brien and Backus, 2024)",
+"(Cruz, 2007, sec. 47.110 and more)",
+"(Hamilton, Liskov and Rossum, 1992; O’Brien and Backus, 2024, p. 56)",
+"(Cruz, 2007, vol. 36)",
+"(see O’Brien and Backus, 2024, ch. 45)",
+"O’Brien and Backus (2024, pp. 71–115)",
+"(Hamilton, Liskov and Rossum, 1992)",
+"(1949; O’Brien and Backus, 2024)"
+],
+"bibliography": [
+"Cruz, M. de la (2007) “Go to statement considered harmful,” Proceedings of the network symposium, pp. 81–115. Available at: https://example.org/cache.",
+"Dijkstra, E.W. and García, L. (2004) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Dijkstra, E.W., Rossum, G. van and Lamport, L. (1970) Time, clocks, and the ordering of events. London: Springer.",
+"Hamilton, M., Liskov, B. and Rossum, G. van (1992) “An axiomatic basis for computer programming.” https://example.org/tree. Available at: https://example.org/heuristic.",
+"O’Brien, F. and Backus, J. (2024) Go to statement considered harmful. 2nd ed. New York: Addison-Wesley.",
+"Turing, A.M. (1949) “The apollo guidance computer,” Journal of the ACM, 4(9), pp. 240–315. Available at: https://doi.org/10.8223/index.77."
+]
+}
+}

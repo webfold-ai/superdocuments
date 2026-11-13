@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Liskov, Müller, et al.; Dijkstra)",
+"(see Liskov, Müller, et al., ch. 52)",
+"(Rossum and Turing 68)",
+"(Rossum and Turing; Lovelace et al. 92)",
+"(see Dijkstra)",
+"(Knuth et al.; Smith et al.; Liskov, Smith, et al.)",
+"(Liskov, Müller, et al. 95)",
+"Dijkstra (26)",
+"(Rossum and Turing 32)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Knuth, Donald E., et al. Notes on the Analytical Engine. https://example.org/retrieval, 1962.",
+"Liskov, Barbara, Hans Müller, et al. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 2012, pp. 35–166.",
+"Liskov, Barbara, John Jr. Smith, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis.",
+"Rossum, Guido van, and Alan M. Turing. Notes on the Analytical Engine. https://example.org/sparse, 1990.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-94, Lab Model, 1937."
+]
+},
+"bib": {
+"citations": [
+"(Liskov, Müller, et al.; Dijkstra)",
+"(see Liskov, Müller, et al., ch. 52)",
+"(Rossum and Turing 68)",
+"(Rossum and Turing; Lovelace et al. 92)",
+"(see Dijkstra)",
+"(Knuth et al.; Smith et al.; Liskov, Smith, et al.)",
+"(Liskov, Müller, et al. 95)",
+"Dijkstra (26)",
+"(Rossum and Turing 32)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Knuth, Donald E., et al. Notes on the Analytical Engine. https://example.org/retrieval, 1962.",
+"Liskov, Barbara, Hans Müller, et al. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 2012, pp. 35–166.",
+"Liskov, Barbara, John Jr. Smith, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis.",
+"Rossum, Guido van, and Alan M. Turing. Notes on the Analytical Engine. https://example.org/sparse, 1990.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-94, Lab Model, 1937."
+]
+}
+}

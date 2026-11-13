@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(e.g. Dijkstra 1993; Backus et al. 1958)",
+"(e.g. Liskov 1944; Rossum and Backus 1979)",
+"(1968)",
+"(Cruz 1951, fig. 83)",
+"(e.g. Liskov 1944; Turing 1968)",
+"(see Backus et al. 1958)",
+"Backus et al. (1958, 10)",
+"(Turing 1968, 40)",
+"(Liskov 1944, 48–118)",
+"(Dijkstra 1993, fig. 14)",
+"Turing (1968, 84)",
+"(1979)",
+"(Dijkstra 1993; 1968)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33 (2): 39–369.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M. 1968. Time, Clocks, and the Ordering of Events. Https://example.org/solver."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Dijkstra 1993; Backus et al. 1958)",
+"(e.g. Liskov 1944; Rossum and Backus 1979)",
+"(1968)",
+"(Cruz 1951, fig. 83)",
+"(e.g. Liskov 1944; Turing 1968)",
+"(see Backus et al. 1958)",
+"Backus et al. (1958, 10)",
+"(Turing 1968, 40)",
+"(Liskov 1944, 48–118)",
+"(Dijkstra 1993, fig. 14)",
+"Turing (1968, 84)",
+"(1979)",
+"(Dijkstra 1993; 1968)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33 (2): 39–369.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M. 1968. Time, Clocks, and the Ordering of Events. Https://example.org/solver."
+]
+}
+}

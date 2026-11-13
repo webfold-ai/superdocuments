@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(e.g. Knuth et al.; Hopper and Hamilton)",
+"(Hopper, O’Brien, et al.; Müller)",
+"(Hopper, Lamport, et al.; Knuth et al. 85)",
+"(Smith and García 48)",
+"",
+"(Knuth et al. 88)",
+"(Liskov et al. 12–106)"
+],
+"bibliography": [
+"Hopper, Grace, Flann O’Brien, et al. On Computable Numbers. 1941. University of Oxford, PhD thesis.",
+"Hopper, Grace, Leslie Lamport, et al. On Computable Numbers. Springer, 2019.",
+"Hopper, Grace, and Margaret Hamilton. On Computable Numbers. TR-98, Lab Agent, 1988.",
+"Knuth, Donald E., et al. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 1962, pp. 26–101, https://example.org/algorithm.",
+"Liskov, Barbara, et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 1988, pp. 70–197.",
+"Müller, Hans. Data Abstraction and Hierarchy. MIT Press, 1947.",
+"Smith, John Jr., and Luis García. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM, vol. 46, no. 5, 1993, pp. 223–398, https://doi.org/10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Knuth et al.; Hopper and Hamilton)",
+"(Hopper, O’Brien, et al.; Müller)",
+"(Hopper, Lamport, et al.; Knuth et al. 85)",
+"(Smith and García 48)",
+"",
+"(Knuth et al. 88)",
+"(Liskov et al. 12–106)"
+],
+"bibliography": [
+"Hopper, Grace, Flann O’Brien, et al. On Computable Numbers. 1941. University of Oxford, PhD thesis.",
+"Hopper, Grace, Leslie Lamport, et al. On Computable Numbers. Springer, 2019.",
+"Hopper, Grace, and Margaret Hamilton. On Computable Numbers. TR-98, Lab Agent, 1988.",
+"Knuth, Donald E., et al. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 1962, pp. 26–101, https://example.org/algorithm.",
+"Liskov, Barbara, et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Experiment Symposium, 1988, pp. 70–197.",
+"Müller, Hans. Data Abstraction and Hierarchy. MIT Press, 1947.",
+"Smith, John Jr., and Luis García. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM, vol. 46, no. 5, 1993, pp. 223–398, https://doi.org/10.4191/convergence.19."
+]
+}
+}

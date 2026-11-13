@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"García (1986)",
+"O’Brien (1965, 85–128)",
+"(García 1986, 3–111)",
+"(see O’Brien 1965, ch. 71)",
+"Müller and Liskov (2014)",
+"(see Müller and Liskov 2014, ch. 31)",
+"(O’Brien 2013, 81–114)",
+"(O’Brien 2013)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 30–177.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. An Axiomatic Basis for Computer Programming. Https://example.org/metric.",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. Cambridge University Press. https://example.org/structure."
+]
+},
+"bib": {
+"citations": [
+"García (1986)",
+"O’Brien (1965, 85–128)",
+"(García 1986, 3–111)",
+"(see O’Brien 1965, ch. 71)",
+"Müller and Liskov (2014)",
+"(see Müller and Liskov 2014, ch. 31)",
+"(O’Brien 2013, 81–114)",
+"(O’Brien 2013)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 30–177.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. An Axiomatic Basis for Computer Programming. Https://example.org/metric.",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. Cambridge University Press. https://example.org/structure."
+]
+}
+}
