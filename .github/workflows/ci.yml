@@ -33,9 +33,9 @@ jobs:
           fi
           git config --global url."https://x-access-token:${SUBSTRATE_TOKEN}@github.com/".insteadOf "https://github.com/"
       # Minimum supported Rust version (rust-version in Cargo.toml).
-      - uses: dtolnay/rust-toolchain@cfcaf53ba4c621917ec7f78a66bff7a8848ddad4 # 1.85.0 branch head
+      - uses: dtolnay/rust-toolchain@599c45df1a24c1c63ae1129a7e59f46654b8fb66 # 1.89.0 branch head
         with:
-          toolchain: 1.85.0
+          toolchain: 1.89.0
           components: rustfmt, clippy
       - name: Format
         run: cargo fmt --all -- --check

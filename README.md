@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/webfold-ai/superdocuments/actions/workflows/ci.yml/badge.svg)](https://github.com/webfold-ai/superdocuments/actions/workflows/ci.yml)
 [![Licence: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![MSRV 1.85](https://img.shields.io/badge/Rust-1.85+-dea584.svg)](Cargo.toml)
+[![MSRV 1.89](https://img.shields.io/badge/Rust-1.89+-dea584.svg)](Cargo.toml)
 
 [Formats](docs/FORMATS.md) · [Architecture](docs/ARCHITECTURE.md) · [Benchmarks](#benchmarks) · [Changelog](CHANGELOG.md) · [Contributing](CONTRIBUTING.md)
 
@@ -219,7 +219,7 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo fmt --all -- --check
 ```
 
-The minimum supported Rust version is 1.85 (`rust-version` in `Cargo.toml`). At the repository root these commands cover the `superdocuments` package; the `calamine/` workspace member is built only with `-p calamine` or `--workspace`.
+The minimum supported Rust version is 1.89 (`rust-version` in `Cargo.toml`). At the repository root these commands cover the `superdocuments` package; the `calamine/` workspace member is built only with `-p calamine` or `--workspace`.
 
 The README benchmark charts are regenerated from the published result tables with:
 

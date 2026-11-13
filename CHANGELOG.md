@@ -30,6 +30,8 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Changed
 
+- Minimum supported Rust version is 1.89 (`rust-version`, CI, release and supply-chain workflows). The git dependencies `apeiron` and `wirefold` require 1.89, `calamine`, `zip` and `encoding_rs` require 1.88, so the previous 1.85 pin could not build.
+
 - The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.
 
 ### Fixed
