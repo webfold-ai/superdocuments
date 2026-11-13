@@ -188,7 +188,7 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `serde`, `serde_json` | crates.io | `1` | Required | Geometry types and JSON output in `pdf` and `graph` |
 | `wirefold` | git, `webfold-ai/wirefold` | rev `98df8bfb8051fb24ca43ce3ddc446641684ef8f9` | Required (`syntax` feature) | Syntax codec (YAML surface) for Markdown front matter |
 | `apeiron` | git, `webfold-ai/apeiron` | rev `1c3d4a1da565cde409f6f3cb343086aa6853eb9c` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`); `apeiron::map::hashtrinity::Table` is the hash map used by the cache, HTML extractor and PDF parser |
-| `framefold` | git, `Ptyktos/framefold` | rev `5a097c2e2448640c79d43b37b9246d0f7baea0d4` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
+| `framefold` | git, `Ptyktos/framefold` | rev `263c8e15baf1f301b0b21defb23ce1343d9f11ab` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
 | `transcode` | git, `Ptyktos/transcode` | rev `8e65c5afeb8adb9663511760b80e19156970207e` | Features `media-codecs`, `images` | Codec re-export as `media_codecs`; embedded PDF image decode and PNG encode |
 | `calamine` (local) | `calamine/` in this repository | version 0.36.1 | Required | Path dependency with default features off, for the legacy `.xls` reader (`document::xls`); see below |
 
