@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Written for superdocuments' golden tests; Apache-2.0, like the rest of the repository. -->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" initialize-with=". ">
+  <info>
+    <title>Lite note</title>
+    <id>urn:superdocuments:lite-note</id>
+    <updated>2026-11-13T00:00:00+00:00</updated>
+  </info>
+  <macro name="authors">
+    <names variable="author">
+      <name and="text" delimiter-precedes-last="never"/>
+      <substitute>
+        <text variable="title" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <citation>
+    <layout delimiter="; " suffix=".">
+      <group delimiter=", ">
+        <text macro="authors"/>
+        <text variable="title" quotes="true"/>
+        <group delimiter=" ">
+          <text value="vol."/>
+          <text variable="volume"/>
+        </group>
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+        <group delimiter=" ">
+          <label variable="locator" form="short"/>
+          <text variable="locator"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+  <bibliography>
+    <sort>
+      <key macro="authors"/>
+      <key variable="issued"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=", ">
+        <text macro="authors"/>
+        <text variable="title" font-style="italic"/>
+        <text variable="publisher"/>
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </group>
+    </layout>
+  </bibliography>
+</style>

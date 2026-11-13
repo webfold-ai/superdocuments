@@ -1,0 +1,8 @@
+- `lovelace1843` — John Backus (1943). On Computable Numbers. *\\urlhttps://example.org/algorithm*.
+- `hopper1952` — Grace Hopper, Hans Müller and Ada Lovelace (1987). The Apollo Guidance Computer. Cambridge University Press.
+- `knuth1984` — John Jr. Smith (2006). The Apollo Guidance Computer. *Lab Layer*.
+- `liskov1987` — Grace Hopper, John Backus and Hans Müller (1939). The Art of Computer Programming. Addison-Wesley.
+- `dijkstra1968` — Luis García, Leslie Lamport and Barbara Liskov (1998). The Art of Computer Programming. *\\urlhttps://example.org/experiment*.
+- `turing1936` — C. A. R. Hoare and Hans Müller (2005). Data Abstraction and Hierarchy. *Proceedings of the London Mathematical Society* 7(9), 191–397. <https://doi.org/10.4589/gradient.17>
+- `lamport1978` — Flann O'Brien, Guido van Rossum and John Jr. Smith (1975). Time, Clocks, and the Ordering of Events. Addison-Wesley.
+- `hoare1969` — Luis García and Donald E. Knuth (1936). An Axiomatic Basis for Computer Programming. *Proceedings of the Transform Symposium*, 2–133.

@@ -1,0 +1,246 @@
+[
+  {
+    "abstract": "Metric node network analysis scheduler agent distribution window parser node workload solver.",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "container-title": "Proceedings of the compiler symposium",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          2012
+        ]
+      ]
+    },
+    "page": "35-166",
+    "title": "Notes on the analytical engine",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1937
+        ]
+      ]
+    },
+    "number": "TR-94",
+    "publisher": "Lab Model",
+    "title": "Go to statement considered harmful",
+    "type": "report"
+  },
+  {
+    "abstract": "Latency optimizer policy scheduler query bound signal convergence entropy distribution structure baseline.",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1969
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "thesis"
+  },
+  {
+    "URL": "https://example.org/benchmark",
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "number": "TR-4",
+    "publisher": "Lab Heuristic",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1990
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/sparse",
+    "title": "Notes on the analytical engine",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1962
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/retrieval",
+    "title": "Notes on the analytical engine",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "On computable numbers",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1973
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/filter",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/density",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "hamilton1969",
+    "issued": {
+      "date-parts": [
+        [
+          1963
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/function",
+    "title": "Time, clocks, and the ordering of events",
+    "type": ""
+  }
+]

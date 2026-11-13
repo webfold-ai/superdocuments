@@ -302,6 +302,7 @@ impl<'a> Slide<'a> {
             bold: b,
             italic: i,
             href: h,
+            ..
         }) = para.segs.last_mut()
         {
             if *b == bold && *i == italic && *h == href {
@@ -313,6 +314,7 @@ impl<'a> Slide<'a> {
             text: value.to_owned(),
             bold,
             italic,
+            marks: 0,
             href,
         });
     }

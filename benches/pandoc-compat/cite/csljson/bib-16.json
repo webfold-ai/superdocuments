@@ -1,0 +1,235 @@
+[
+  {
+    "abstract": "Estimate model estimate framework density sequence ranking learning bound trace function heuristic.",
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1945
+        ]
+      ]
+    },
+    "number": "TR-13",
+    "publisher": "Lab Scheduler",
+    "title": "An axiomatic basis for computer programming",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1990
+        ]
+      ]
+    },
+    "number": "TR-81",
+    "publisher": "Lab Algorithm",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "URL": "https://example.org/model",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1940
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1943
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "title": "Go to statement considered harmful",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/vocabulary",
+    "title": "Notes on the analytical engine",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/sparse",
+    "title": "An axiomatic basis for computer programming",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "lamport1978",
+    "issue": "10",
+    "issued": {
+      "date-parts": [
+        [
+          1961
+        ]
+      ]
+    },
+    "page": "192-344",
+    "title": "Notes on the analytical engine",
+    "type": "article-journal",
+    "volume": "33"
+  },
+  {
+    "URL": "https://example.org/solver",
+    "abstract": "Kernel retrieval dataset decoder adaptive scheduler density cost trace distribution query estimate.",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "container-title": "Proceedings of the pipeline symposium",
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1954
+        ]
+      ]
+    },
+    "page": "14-128",
+    "title": "The art of computer programming",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "hamilton1969",
+    "issued": {
+      "date-parts": [
+        [
+          1956
+        ]
+      ]
+    },
+    "number": "TR-41",
+    "publisher": "Lab Scheduler",
+    "title": "An axiomatic basis for computer programming",
+    "type": "report"
+  }
+]

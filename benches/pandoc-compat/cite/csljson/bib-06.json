@@ -1,0 +1,219 @@
+[
+  {
+    "URL": "https://example.org/latency",
+    "abstract": "Trace queue entropy block experiment optimizer learning structure node kernel analysis retrieval.",
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/function",
+    "title": "The education of a computer",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "container-title": "Proceedings of the window symposium",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1988
+        ]
+      ]
+    },
+    "page": "81-126",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "The apollo guidance computer",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1945
+        ]
+      ]
+    },
+    "number": "TR-55",
+    "publisher": "Lab Lattice",
+    "title": "An axiomatic basis for computer programming",
+    "type": "report"
+  },
+  {
+    "URL": "https://example.org/metric",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "abstract": "Workload network scheduler cache optimizer adaptive bound retrieval throughput parser sparse window.",
+    "author": [
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1947
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "The art of computer programming",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1975
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/gradient",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": ""
+  },
+  {
+    "DOI": "10.6528/vector.60",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "hoare1969",
+    "issue": "12",
+    "issued": {
+      "date-parts": [
+        [
+          1958
+        ]
+      ]
+    },
+    "page": "24-338",
+    "title": "The apollo guidance computer",
+    "type": "article-journal",
+    "volume": "58"
+  }
+]

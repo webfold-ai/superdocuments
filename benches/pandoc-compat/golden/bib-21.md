@@ -1,0 +1,10 @@
+- `lovelace1843` — Margaret Hamilton, Barbara Liskov and Guido van Rossum (1992). An Axiomatic Basis for Computer Programming. *\\urlhttps://example.org/tree*. <https://example.org/heuristic>
+- `hopper1952` — Alan M. Turing (1949). The Apollo Guidance Computer. *Journal of the ACM* 4(9), 240–315. <https://doi.org/10.8223/index.77>
+- `knuth1984` — Barbara Liskov, Luis García and Hans Müller (1992). An Axiomatic Basis for Computer Programming. *University of Cambridge*.
+- `liskov1987` — Edsger W. Dijkstra and Luis García (2004). Data Abstraction and Hierarchy. *University of Cambridge*.
+- `dijkstra1968` — Flann O'Brien and John Backus (2024). Go To Statement Considered Harmful. Addison-Wesley.
+- `turing1936` — Edsger W. Dijkstra, Guido van Rossum and Leslie Lamport (1970). Time, Clocks, and the Ordering of Events. Springer.
+- `lamport1978` — Maria de la Cruz (2007). Go To Statement Considered Harmful. *Proceedings of the Network Symposium*, 81–115. <https://example.org/cache>
+- `hoare1969` — Barbara Liskov (1956). On Computable Numbers. *Lab Estimate*. <https://example.org/analysis>
+- `hamilton1969` — Grace Hopper, Margaret Hamilton and John Jr. Smith (1939). The Apollo Guidance Computer. *Proceedings of the Vector Symposium*, 95–188.
+- `backus1978` — Ada Lovelace (1940). Can Programming Be Liberated from the von Neumann Style. *ACM Computing Surveys* 33(8), 183–370. <https://doi.org/10.9422/heuristic.52>

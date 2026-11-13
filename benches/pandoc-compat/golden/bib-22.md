@@ -1,0 +1,8 @@
+- `lovelace1843` — Grace Hopper and Margaret Hamilton (1988). On Computable Numbers. *Lab Agent*.
+- `hopper1952` — Grace Hopper, Flann O'Brien and Maria de la Cruz (1941). On Computable Numbers. *University of Oxford*.
+- `knuth1984` — Hans Müller and Edsger W. Dijkstra (2004). On Computable Numbers. *Lab Query*.
+- `liskov1987` — John Jr. Smith and Luis García (1993). Can Programming Be Liberated from the von Neumann Style. *Communications of the ACM* 46(5), 223–398. <https://doi.org/10.4191/convergence.19>
+- `dijkstra1968` — Grace Hopper, Leslie Lamport and John Jr. Smith (2019). On Computable Numbers. Springer.
+- `turing1936` — Barbara Liskov, C. A. R. Hoare and Hans Müller (1988). Time, Clocks, and the Ordering of Events. *Proceedings of the Experiment Symposium*, 70–197.
+- `lamport1978` — Hans Müller (1947). Data Abstraction and Hierarchy. MIT Press.
+- `hoare1969` — Donald E. Knuth, John Jr. Smith and Edsger W. Dijkstra (1962). An Axiomatic Basis for Computer Programming. *Proceedings of the Latency Symposium*, 26–101. <https://example.org/algorithm>

@@ -1,0 +1,186 @@
+[
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1989
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/decoder",
+    "title": "The apollo guidance computer",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/structure",
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "edition": "3",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          2013
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "title": "The art of computer programming",
+    "type": "book"
+  },
+  {
+    "URL": "https://example.org/throughput",
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "container-title": "IEEE Transactions on Software Engineering",
+    "id": "knuth1984",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          1963
+        ]
+      ]
+    },
+    "page": "135-397",
+    "title": "The education of a computer",
+    "type": "article-journal",
+    "volume": "45"
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "edition": "Second",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2014
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "The apollo guidance computer",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1973
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/ranking",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/trace",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "turing1936",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "page": "72-308",
+    "title": "The apollo guidance computer",
+    "type": "article-journal",
+    "volume": "33"
+  },
+  {
+    "abstract": "Learning model analysis sparse schema window window structure pipeline parser gradient benchmark.",
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1965
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/metric",
+    "title": "An axiomatic basis for computer programming",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "container-title": "Proceedings of the node symposium",
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1986
+        ]
+      ]
+    },
+    "page": "30-177",
+    "title": "The apollo guidance computer",
+    "type": "paper-conference"
+  }
+]

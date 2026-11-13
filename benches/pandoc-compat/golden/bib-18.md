@@ -1,0 +1,8 @@
+- `lovelace1843` — John Backus, Grace Hopper and Leslie Lamport (1966). Data Abstraction and Hierarchy. *University of Cambridge*. <https://example.org/benchmark>
+- `hopper1952` — Hans Müller (2013). Notes on the Analytical Engine. *Lab Bound*. <https://example.org/entropy>
+- `knuth1984` — Guido van Rossum, John Backus and Barbara Liskov (1993). Go To Statement Considered Harmful. *\\urlhttps://example.org/latency*. <https://example.org/pipeline>
+- `liskov1987` — C. A. R. Hoare, Ada Lovelace and Alan M. Turing (2016). Notes on the Analytical Engine. *Lab Feature*.
+- `dijkstra1968` — Guido van Rossum and C. A. R. Hoare (1967). Go To Statement Considered Harmful. *\\urlhttps://example.org/analysis*. <https://example.org/cache>
+- `turing1936` — Maria de la Cruz, Flann O'Brien and Grace Hopper (1971). The Art of Computer Programming. *Lab Throughput*. <https://example.org/complexity>
+- `lamport1978` — Maria de la Cruz (1941). Time, Clocks, and the Ordering of Events. *\\urlhttps://example.org/bound*.
+- `hoare1969` — Alan M. Turing and Guido van Rossum (1968). The Art of Computer Programming. *University of Cambridge*.

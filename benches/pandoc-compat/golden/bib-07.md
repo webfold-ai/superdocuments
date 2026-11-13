@@ -1,0 +1,5 @@
+- `lovelace1843` — Maria de la Cruz and Donald E. Knuth (1959). The Education of a Computer. *Proceedings of the London Mathematical Society* 31(7), 150–375. <https://doi.org/10.2214/heuristic.97>
+- `hopper1952` — Maria de la Cruz and Flann O'Brien (1996). Data Abstraction and Hierarchy. *\\urlhttps://example.org/algorithm*. <https://example.org/ranking>
+- `knuth1984` — C. A. R. Hoare (1994). Can Programming Be Liberated from the von Neumann Style. *Lab Parser*.
+- `liskov1987` — Edsger W. Dijkstra (2000). On Computable Numbers. *Lab Estimate*.
+- `dijkstra1968` — Donald E. Knuth (1971). Go To Statement Considered Harmful. *Proceedings of the Feature Symposium*, 63–156.

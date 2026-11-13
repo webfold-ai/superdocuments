@@ -1,0 +1,254 @@
+[
+  {
+    "URL": "https://example.org/heuristic",
+    "author": [
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/tree",
+    "title": "An axiomatic basis for computer programming",
+    "type": ""
+  },
+  {
+    "DOI": "10.8223/index.77",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "hopper1952",
+    "issue": "9",
+    "issued": {
+      "date-parts": [
+        [
+          1949
+        ]
+      ]
+    },
+    "page": "240-315",
+    "title": "The apollo guidance computer",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "An axiomatic basis for computer programming",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "edition": "2",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "title": "Go to statement considered harmful",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1970
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "book"
+  },
+  {
+    "URL": "https://example.org/cache",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "container-title": "Proceedings of the network symposium",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "page": "81-115",
+    "title": "Go to statement considered harmful",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://example.org/analysis",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1956
+        ]
+      ]
+    },
+    "number": "TR-18",
+    "publisher": "Lab Estimate",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "container-title": "Proceedings of the vector symposium",
+    "id": "hamilton1969",
+    "issued": {
+      "date-parts": [
+        [
+          1939
+        ]
+      ]
+    },
+    "page": "95-188",
+    "title": "The apollo guidance computer",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.9422/heuristic.52",
+    "URL": "https://example.org/query",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "container-title": "ACM Computing Surveys",
+    "id": "backus1978",
+    "issue": "8",
+    "issued": {
+      "date-parts": [
+        [
+          1940
+        ]
+      ]
+    },
+    "page": "183-370",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "article-journal",
+    "volume": "33"
+  }
+]

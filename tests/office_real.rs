@@ -25,7 +25,8 @@ fn entity_references_are_kept_in_every_xml_format() {
     assert!(ods.contains("A & B"), "{ods}");
     assert!(ods.contains("C<D"), "{ods}");
     let odt = convert("basic.odt");
-    assert!(odt.contains("Tom & Jerry said x < y > z"), "{odt}");
+    // Pandoc-flavoured Markdown escapes `<` and `>`.
+    assert!(odt.replace('\\', "").contains("Tom & Jerry said x < y > z"), "{odt}");
 }
 
 #[test]
@@ -33,7 +34,8 @@ fn docx_structure_comes_from_styles_numbering_and_tables() {
     let md = convert("basic.docx");
     println!("{md}");
     assert!(
-        md.starts_with("# Quarterly Report\n\n# Overview\n\n"),
+        // The Title style is metadata, as Pandoc reads it.
+        md.starts_with("---\ntitle: \"Quarterly Report\"\n---\n\n# Overview\n\n"),
         "{md}"
     );
     assert!(md.contains("**Bold part** and *italic part*"), "{md}");

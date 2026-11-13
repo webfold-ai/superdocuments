@@ -1,0 +1,8 @@
+- `lovelace1843` — Grace Hopper (2016). The Art of Computer Programming. *IEEE Transactions on Software Engineering* 4(5), 238–320. <https://doi.org/10.8087/bound.55>
+- `hopper1952` — John Backus and Leslie Lamport (1956). An Axiomatic Basis for Computer Programming. *\\urlhttps://example.org/operator*.
+- `knuth1984` — C. A. R. Hoare and Guido van Rossum (1953). Data Abstraction and Hierarchy. *University of Zurich*. <https://example.org/experiment>
+- `liskov1987` — Guido van Rossum, Alan M. Turing and Grace Hopper (1941). Go To Statement Considered Harmful. *University of Oxford*.
+- `dijkstra1968` — Donald E. Knuth (2007). An Axiomatic Basis for Computer Programming. *Proceedings of the Bound Symposium*, 48–186.
+- `turing1936` — Alan M. Turing (1948). Data Abstraction and Hierarchy. *University of Cambridge*.
+- `lamport1978` — C. A. R. Hoare, Ada Lovelace and John Jr. Smith (2010). On Computable Numbers. Addison-Wesley.
+- `hoare1969` — Guido van Rossum (1937). Can Programming Be Liberated from the von Neumann Style. *Journal of the ACM* 27(4), 248–397.

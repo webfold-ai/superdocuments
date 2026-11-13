@@ -1,0 +1,8 @@
+- `lovelace1843` — Guido van Rossum (2019). The Education of a Computer. *\\urlhttps://example.org/function*. <https://example.org/latency>
+- `hopper1952` — Edsger W. Dijkstra and John Jr. Smith (1988). Time, Clocks, and the Ordering of Events. *Proceedings of the Window Symposium*, 81–126.
+- `knuth1984` — John Jr. Smith (2023). The Apollo Guidance Computer. *University of Cambridge*.
+- `liskov1987` — Luis García, Guido van Rossum and Ada Lovelace (1945). An Axiomatic Basis for Computer Programming. *Lab Lattice*.
+- `dijkstra1968` — Alan M. Turing, Flann O'Brien and Barbara Liskov (2011). Data Abstraction and Hierarchy. *University of Zurich*. <https://example.org/metric>
+- `turing1936` — Margaret Hamilton, Luis García and Barbara Liskov (1947). The Art of Computer Programming. *University of Cambridge*.
+- `lamport1978` — Maria de la Cruz, Flann O'Brien and Guido van Rossum (1975). Can Programming Be Liberated from the von Neumann Style. *\\urlhttps://example.org/gradient*.
+- `hoare1969` — Maria de la Cruz, Grace Hopper and Guido van Rossum (1958). The Apollo Guidance Computer. *Journal of the ACM* 58(12), 24–338. <https://doi.org/10.6528/vector.60>

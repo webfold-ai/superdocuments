@@ -1,0 +1,5 @@
+- `lovelace1843` — Grace Hopper (1986). Time, Clocks, and the Ordering of Events. *University of Oxford*.
+- `hopper1952` — C. A. R. Hoare and Barbara Liskov (2005). On Computable Numbers. *Proceedings of the Transform Symposium*, 71–122.
+- `knuth1984` — Alan M. Turing, John Jr. Smith and Guido van Rossum (1969). Time, Clocks, and the Ordering of Events. *Lab Graph*. <https://example.org/workload>
+- `liskov1987` — John Jr. Smith and John Backus (1981). The Education of a Computer. *ACM Computing Surveys* 36(12), 64–305. <https://doi.org/10.9730/kernel.12>
+- `dijkstra1968` — Grace Hopper and Leslie Lamport (1942). The Education of a Computer. *Proceedings of the Filter Symposium*, 37–181.

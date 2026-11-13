@@ -1,0 +1,9 @@
+- `lovelace1843` — Donald E. Knuth and Flann O'Brien (1945). An Axiomatic Basis for Computer Programming. *Lab Scheduler*.
+- `hopper1952` — Grace Hopper, Edsger W. Dijkstra and John Backus (1990). On Computable Numbers. *Lab Algorithm*.
+- `knuth1984` — Alan M. Turing (1940). Time, Clocks, and the Ordering of Events. *University of Zurich*. <https://example.org/model>
+- `liskov1987` — Grace Hopper and Leslie Lamport (1943). Go To Statement Considered Harmful. Cambridge University Press.
+- `dijkstra1968` — Grace Hopper and John Backus (2008). Notes on the Analytical Engine. *\\urlhttps://example.org/vocabulary*.
+- `turing1936` — Luis García, Margaret Hamilton and Donald E. Knuth (2007). An Axiomatic Basis for Computer Programming. *\\urlhttps://example.org/sparse*.
+- `lamport1978` — Leslie Lamport, Edsger W. Dijkstra and C. A. R. Hoare (1961). Notes on the Analytical Engine. *Journal of the ACM* 33(10), 192–344.
+- `hoare1969` — Barbara Liskov and Donald E. Knuth (1954). The Art of Computer Programming. *Proceedings of the Pipeline Symposium*, 14–128. <https://example.org/solver>
+- `hamilton1969` — Margaret Hamilton, Ada Lovelace and Alan M. Turing (1956). An Axiomatic Basis for Computer Programming. *Lab Scheduler*.

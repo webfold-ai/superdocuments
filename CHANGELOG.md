@@ -15,6 +15,19 @@ All notable changes to this project are recorded here. The format follows [Keep 
 - `document::extract_images` and `ExtractedImage` (`src/media.rs`): the pictures of DOCX, DOCM, PPTX, XLSX, XLSM, ODT, ODP, ODS and EPUB, with name, media type (from magic bytes), header size for PNG, JPEG, GIF and BMP, first referencing part and alt text. Limits and zip safety are described in the function's doc comment.
 - DOCX and PPTX Markdown writes each picture as `![alt](media/<name>)` where its drawing is. The alt text is the drawing's `descr`; a drawing without a picture still gets its description as text, as before.
 
+### Added (Pandoc compatibility)
+
+- `src/citeproc/`: a CSL citation processor with Pandoc's citation syntax (see `docs/CITEPROC.md`); `bibtex::csl_json_pandoc` and `bibtex::looks_like_biblatex`.
+- `src/rst.rs`: a reStructuredText reader (`.rst`), on the shared tree in `src/ast.rs`.
+- `src/ooxml/omml.rs`: Office Math to TeX in DOCX; DOCX block quotes, code blocks, strike, super/subscript, internal links, list start and numbering style, and Title/Author/Date as YAML metadata.
+- `latex::RenderOptions::pandoc` (used by `convert_bytes`): LaTeX as Pandoc reads it (YAML metadata, heading levels, `[@key]` citations, reference links, definition lists, table and figure captions, super/subscript, theorem layout). `latex::Section::division`, `latex::Inline::{Sup, Sub, Strike}`.
+- `benches/pandoc-compat`: the benchmark (README there), `tests/pandoc_compat_golden.rs`.
+
+### Changed (Pandoc compatibility)
+
+- `convert_bytes` for `.tex` now writes the Pandoc layout above (a document title is YAML metadata, not a level-1 heading; sections start at level 1). Callers of `latex::render_markdown` are unchanged (`RenderOptions::pandoc` is off by default).
+- HTML and EPUB keep footnote back-links as links in HTML, drop the EPUB title page, and read `<span class="math">` as math only when it holds TeX.
+
 ### Changed
 
 - The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.

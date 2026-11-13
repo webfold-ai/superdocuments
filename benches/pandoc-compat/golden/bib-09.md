@@ -1,0 +1,6 @@
+- `lovelace1843` — Alan M. Turing, Leslie Lamport and Ada Lovelace (1979). The Art of Computer Programming. *\\urlhttps://example.org/index*.
+- `hopper1952` — Flann O'Brien, Maria de la Cruz and Grace Hopper (1956). An Axiomatic Basis for Computer Programming. Springer. <https://example.org/filter>
+- `knuth1984` — John Jr. Smith (2017). The Education of a Computer. *University of Oxford*.
+- `liskov1987` — Leslie Lamport and Alan M. Turing (1938). Go To Statement Considered Harmful. *Proceedings of the Distribution Symposium*, 67–141.
+- `dijkstra1968` — C. A. R. Hoare (1947). The Art of Computer Programming. *University of Cambridge*.
+- `turing1936` — Margaret Hamilton, John Backus and Alan M. Turing (2008). Can Programming Be Liberated from the von Neumann Style. Springer.

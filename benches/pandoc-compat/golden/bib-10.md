@@ -1,0 +1,5 @@
+- `lovelace1843` — Hans Müller (1968). Data Abstraction and Hierarchy. *University of Cambridge*.
+- `hopper1952` — John Jr. Smith, C. A. R. Hoare and Donald E. Knuth (1999). Go To Statement Considered Harmful. *Lab Function*.
+- `knuth1984` — C. A. R. Hoare (2011). On Computable Numbers. *University of Oxford*.
+- `liskov1987` — Barbara Liskov (1946). Can Programming Be Liberated from the von Neumann Style. Springer. <https://example.org/learning>
+- `dijkstra1968` — Maria de la Cruz and Margaret Hamilton (1975). Notes on the Analytical Engine. *Lab Throughput*.

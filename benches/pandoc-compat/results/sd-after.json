@@ -1,0 +1,7419 @@
+[
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-001",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-002",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.993223560523108,
+"math": 1.0,
+"structure": 0.9896907216494846,
+"text": 0.9899799599198397
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-003",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8888888888888888,
+"fidelity": 0.9408137600908685,
+"math": 0.0,
+"structure": 0.9696969696969697,
+"text": 0.963855421686747
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+23,
+24
+]
+},
+"format": "latex",
+"id": "latex-gen-004",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9911504424778761,
+"fidelity": 0.990433108617522,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9801488833746899
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-005",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.998531571218796,
+"structure": 1.0,
+"text": 0.9955947136563876
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-006",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9990147783251232,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9970443349753695
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-007",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9951456310679611,
+"math": 0.8,
+"structure": 1.0,
+"text": 0.9854368932038835
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-008",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9920634920634921,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9761904761904762
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-009",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9939070723970861,
+"math": 0.5,
+"structure": 0.9863013698630136,
+"text": 0.9954198473282443
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-010",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9972406181015453,
+"math": 0.5,
+"structure": 1.0,
+"text": 0.9917218543046358
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-011",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9978612893369997,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9935838680109991
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-012",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9994162288382954,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9982486865148862
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-013",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9908415922546038,
+"math": 1.0,
+"structure": 0.9767441860465116,
+"text": 0.9957805907172996
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+2,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-014",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9056603773584906,
+"fidelity": 0.9539385755500457,
+"math": 0.5,
+"structure": 0.9887640449438202,
+"text": 0.967391304347826
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-015",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.875,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+2
+],
+"code_block": [
+0,
+2
+],
+"math_inline": [
+4,
+0
+],
+"strong": [
+1,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-016",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.7727272727272727,
+"fidelity": 0.8937414144363557,
+"math": 0.0,
+"structure": 0.9736842105263158,
+"text": 0.9348127600554785
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-017",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9952651515151515,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9857954545454546
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-018",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.7777777777777778,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-019",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9879518072289156,
+"fidelity": 0.9943459341049702,
+"structure": 1.0,
+"text": 0.995085995085995
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-020",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.99375,
+"structure": 1.0,
+"text": 0.98125
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+2
+],
+"code_block": [
+0,
+2
+],
+"math_inline": [
+5,
+1
+],
+"strong": [
+0,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-021",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8979591836734694,
+"fidelity": 0.9278665266404623,
+"math": 0.3333333333333333,
+"structure": 0.9705882352941176,
+"text": 0.9150521609538003
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+6,
+4
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-022",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9019607843137255,
+"fidelity": 0.9499627695511315,
+"math": 0.6666666666666666,
+"structure": 0.9850746268656716,
+"text": 0.962852897473997
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-023",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9982363315696648,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9947089947089947
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+2
+],
+"code_block": [
+0,
+2
+],
+"math_inline": [
+4,
+0
+],
+"strong": [
+1,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-024",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8076923076923077,
+"fidelity": 0.9013202450702451,
+"math": 0.25,
+"structure": 0.972972972972973,
+"text": 0.9232954545454546
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+22,
+24
+]
+},
+"format": "latex",
+"id": "latex-gen-025",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9850746268656716,
+"fidelity": 0.991588449505052,
+"math": 1.0,
+"structure": 0.9896907216494846,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-026",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9950980392156863,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9852941176470589
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-027",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9973262032085563,
+"math": 0.5,
+"structure": 1.0,
+"text": 0.9919786096256684
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-028",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8387096774193549,
+"fidelity": 0.9233071688044158,
+"math": 0.0,
+"structure": 0.9803921568627451,
+"text": 0.9508196721311475
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-029",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9841269841269841,
+"fidelity": 0.992230679963022,
+"structure": 1.0,
+"text": 0.9925650557620818
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-030",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-031",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.946236559139785,
+"fidelity": 0.9690956594058514,
+"math": 0.3333333333333333,
+"structure": 0.9887640449438202,
+"text": 0.9722863741339491
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-032",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9941657690926808,
+"math": 0.75,
+"structure": 0.9850746268656716,
+"text": 0.9974226804123711
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-033",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.993939393939394,
+"math": 1.0,
+"structure": 0.9818181818181818,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-034",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9974226804123711,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9922680412371134
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-035",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9382716049382716,
+"fidelity": 0.9593732572106196,
+"math": 0.3333333333333333,
+"structure": 0.975609756097561,
+"text": 0.9642384105960264
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-036",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9978425026968716,
+"structure": 1.0,
+"text": 0.9935275080906149
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-037",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.75,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-038",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9905188648613547,
+"math": 0.3333333333333333,
+"structure": 0.9830508474576272,
+"text": 0.9885057471264368
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-039",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9922552255225523,
+"structure": 0.9866666666666667,
+"text": 0.9900990099009901
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-040",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8148148148148148,
+"fidelity": 0.9085256846738634,
+"math": 0.5,
+"structure": 0.9787234042553191,
+"text": 0.9320388349514563
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-041",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9937999835105945,
+"structure": 0.9846153846153847,
+"text": 0.9967845659163987
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-042",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9887640449438202,
+"fidelity": 0.9942442272852542,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9939686369119421
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-043",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9915966386554622,
+"fidelity": 0.9969245311293241,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9991769547325103
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+26,
+27
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+4,
+2
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-044",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9605263157894737,
+"fidelity": 0.9729831618466923,
+"math": 0.5,
+"structure": 0.9911504424778761,
+"text": 0.9672727272727273
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+44,
+45
+]
+},
+"format": "latex",
+"id": "latex-gen-045",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9953051643192489,
+"fidelity": 0.9946594344926084,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.988673139158576
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-046",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9985663082437276,
+"math": 0.5,
+"structure": 1.0,
+"text": 0.9956989247311828
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-047",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9803921568627451,
+"fidelity": 0.9844550432785727,
+"math": 1.0,
+"structure": 0.972972972972973,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-048",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9945175438596491,
+"math": 0.5,
+"structure": 1.0,
+"text": 0.9835526315789473
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+11,
+12
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-049",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.925,
+"fidelity": 0.9507902298850576,
+"math": 0.0,
+"structure": 0.96875,
+"text": 0.9586206896551724
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-050",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9977246871444824,
+"math": 0.6666666666666666,
+"structure": 1.0,
+"text": 0.9931740614334471
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+29,
+30
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+2,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-051",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9473684210526315,
+"fidelity": 0.9565276459757808,
+"math": 0.0,
+"structure": 0.9642857142857143,
+"text": 0.9579288025889967
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-052",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9941520467836257,
+"structure": 0.9824561403508771,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-053",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.998911860718172,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9967355821545157
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-054",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.6666666666666666,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+5,
+3
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-055",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9557522123893806,
+"fidelity": 0.9685311607435502,
+"math": 0.8333333333333334,
+"structure": 0.9841269841269841,
+"text": 0.9657142857142857
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-056",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.8,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+2
+],
+"code_block": [
+0,
+2
+],
+"math_inline": [
+10,
+6
+],
+"strong": [
+0,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-057",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8333333333333334,
+"fidelity": 0.9106337215402371,
+"math": 0.7,
+"structure": 0.9722222222222222,
+"text": 0.9263456090651558
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-058",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9964890362468566,
+"math": 0.75,
+"structure": 0.9904761904761905,
+"text": 0.9989909182643795
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-059",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9971202303815695,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9913606911447084
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-060",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9908256880733946,
+"fidelity": 0.9937187753550041,
+"math": 0.3333333333333333,
+"structure": 0.991304347826087,
+"text": 0.9990262901655307
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-061",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9968253968253968,
+"math": 1.0,
+"structure": 0.9904761904761905,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-062",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9984744469870327,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9954233409610984
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+27,
+28
+]
+},
+"format": "latex",
+"id": "latex-gen-063",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9906542056074766,
+"fidelity": 0.9916854284433935,
+"structure": 1.0,
+"text": 0.9844020797227037
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-064",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9991624790619765,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9974874371859297
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-065",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8717948717948718,
+"fidelity": 0.9346890041377165,
+"math": 0.0,
+"structure": 0.9811320754716981,
+"text": 0.9511400651465798
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+17,
+18
+]
+},
+"format": "latex",
+"id": "latex-gen-066",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9906542056074766,
+"fidelity": 0.9928927192344283,
+"math": 0.75,
+"structure": 1.0,
+"text": 0.9880239520958084
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+31,
+33
+]
+},
+"format": "latex",
+"id": "latex-gen-067",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9868421052631579,
+"fidelity": 0.9949392712550608,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9979757085020243
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-068",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9983579638752053,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9950738916256158
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-069",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9964444444444444,
+"structure": 1.0,
+"text": 0.9893333333333333
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-070",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-071",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.990990990990991,
+"structure": 1.0,
+"text": 0.972972972972973
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-072",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.998639455782313,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9959183673469387
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-073",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9850746268656716,
+"fidelity": 0.9920619126589276,
+"structure": 1.0,
+"text": 0.9911111111111112
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-074",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9972144846796658,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9916434540389972
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+11,
+12
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+2,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-075",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9302325581395349,
+"fidelity": 0.9619330014240063,
+"math": 0.5,
+"structure": 0.987012987012987,
+"text": 0.9685534591194969
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-076",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9333333333333333,
+"fidelity": 0.9606099717369333,
+"math": 0.0,
+"structure": 0.987012987012987,
+"text": 0.9614835948644793
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-077",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9969078540507113,
+"math": 0.75,
+"structure": 1.0,
+"text": 0.9907235621521335
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+3,
+1
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-078",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9253731343283582,
+"fidelity": 0.9596263690547427,
+"math": 0.6666666666666666,
+"structure": 0.9821428571428571,
+"text": 0.9713631156930126
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-079",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9994425863991081,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9983277591973244
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-080",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9830508474576272,
+"fidelity": 0.9865983445013796,
+"structure": 0.9767441860465116,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+11,
+12
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+8,
+6
+],
+"strong": [
+2,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-081",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9454545454545454,
+"fidelity": 0.9692425221836986,
+"math": 0.875,
+"structure": 0.989010989010989,
+"text": 0.9732620320855615
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-082",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9943247161543599,
+"math": 1.0,
+"structure": 0.9894736842105263,
+"text": 0.9935004642525533
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-083",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.7368421052631579,
+"fidelity": 0.8910685805422647,
+"math": 0.0,
+"structure": 0.9818181818181818,
+"text": 0.9545454545454546
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"cell": [
+11,
+12
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+6,
+4
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-084",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.94,
+"fidelity": 0.96622428761843,
+"math": 0.8333333333333334,
+"structure": 0.9894736842105263,
+"text": 0.9691991786447639
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-085",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9333333333333333,
+"fidelity": 0.9630281546673185,
+"math": 0.3333333333333333,
+"structure": 0.9876543209876543,
+"text": 0.9680968096809681
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-086",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9993894993894994,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9981684981684982
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-087",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.996774193548387,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9903225806451613
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-088",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9925883573682316,
+"math": 0.0,
+"structure": 0.9811320754716981,
+"text": 0.9966329966329966
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+23,
+24
+]
+},
+"format": "latex",
+"id": "latex-gen-089",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9887640449438202,
+"fidelity": 0.9877076731009314,
+"math": 1.0,
+"structure": 0.9743589743589743,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-090",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.989247311827957,
+"fidelity": 0.9952482282859098,
+"math": 0.6666666666666666,
+"structure": 1.0,
+"text": 0.9964973730297724
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-091",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9948979591836734,
+"math": 0.3333333333333333,
+"structure": 1.0,
+"text": 0.9846938775510204
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+5,
+3
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-092",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9090909090909091,
+"fidelity": 0.9548431271389632,
+"math": 0.6,
+"structure": 0.9885057471264368,
+"text": 0.9669327251995439
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-093",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9993757802746567,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.99812734082397
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-094",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9926692539887884,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9780077619663649
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+2
+],
+"code_block": [
+0,
+2
+],
+"math_inline": [
+7,
+3
+],
+"strong": [
+0,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-095",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8780487804878049,
+"fidelity": 0.928660367684758,
+"math": 0.5,
+"structure": 0.972972972972973,
+"text": 0.9349593495934959
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+1,
+2
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+2,
+3
+]
+},
+"format": "latex",
+"id": "latex-gen-096",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.954954954954955,
+"fidelity": 0.9739561562370233,
+"math": 0.0,
+"structure": 0.9904761904761905,
+"text": 0.9764373232799246
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+4,
+2
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-gen-097",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.8888888888888888,
+"fidelity": 0.9450808295466979,
+"math": 0.75,
+"structure": 0.9830508474576272,
+"text": 0.963302752293578
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:\\begin{algorithmic} \\State $x \\gets 0$ \\For{$i = 1$ to ": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"math_inline": [
+2,
+0
+],
+"strong": [
+1,
+2
+]
+},
+"format": "latex",
+"id": "latex-gen-098",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9206349206349206,
+"fidelity": 0.9613781929571402,
+"math": 0.5,
+"structure": 0.9894736842105263,
+"text": 0.974025974025974
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "latex",
+"id": "latex-gen-099",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.9906542056074766,
+"fidelity": 0.9962708616604418,
+"math": 0.8333333333333334,
+"structure": 1.0,
+"text": 0.998158379373849
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-gen-100",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"footnote": [
+2,
+1
+]
+},
+"format": "latex",
+"id": "latex-paper-sparse-attention",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.9915966386554622,
+"fidelity": 0.9843453640978325,
+"math": 0.95,
+"structure": 0.9787234042553191,
+"text": 0.9827160493827161
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+2,
+0
+]
+},
+"format": "latex",
+"id": "latex-paper-notes-algorithms",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.9705882352941176,
+"fidelity": 0.9901960784313726,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+7
+],
+"emph": [
+0,
+3
+],
+"h1": [
+2,
+3
+],
+"link": [
+0,
+3
+],
+"linktarget:https://example.org/channel": [
+0,
+1
+],
+"linktarget:https://example.org/estimate": [
+0,
+1
+],
+"linktarget:https://example.org/gradient": [
+0,
+1
+],
+"ul_item": [
+0,
+7
+]
+},
+"format": "latex",
+"id": "latex-paper-survey-cites",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.4782608695652174,
+"fidelity": 0.49511100178340817,
+"structure": 0.5714285714285714,
+"text": 0.43564356435643564
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+4
+],
+"emph": [
+0,
+3
+],
+"h1": [
+1,
+2
+],
+"link": [
+0,
+2
+],
+"linktarget:https://example.org/estimate": [
+0,
+1
+],
+"linktarget:https://example.org/framework": [
+0,
+1
+],
+"ul_item": [
+0,
+4
+]
+},
+"format": "latex",
+"id": "latex-paper-biblatex",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.38461538461538464,
+"fidelity": 0.31776336113685516,
+"structure": 0.4,
+"text": 0.1686746987951807
+},
+"status": "ok"
+},
+{
+"detail": {
+"sup": [
+3,
+0
+]
+},
+"format": "latex",
+"id": "latex-paper-physics-notes",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.9361702127659575,
+"fidelity": 0.8892695436150179,
+"math": 0.8,
+"structure": 0.8333333333333334,
+"text": 0.8983050847457628
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-paper-memo-lists",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+2
+],
+"emph": [
+0,
+1
+],
+"h1": [
+3,
+4
+],
+"link": [
+0,
+1
+],
+"linktarget:https://doi.org/10.4095/model.68": [
+0,
+1
+],
+"ul_item": [
+3,
+5
+]
+},
+"format": "latex",
+"id": "latex-proj01",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9298245614035088,
+"fidelity": 0.9237635099966321,
+"math": 0.0,
+"structure": 0.92,
+"text": 0.9214659685863874
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+1,
+3
+],
+"emph": [
+0,
+3
+],
+"h1": [
+4,
+5
+],
+"link": [
+0,
+1
+],
+"linktarget:https://doi.org/10.1966/ranking.98": [
+0,
+1
+],
+"strong": [
+0,
+1
+],
+"ul_item": [
+4,
+6
+]
+},
+"format": "latex",
+"id": "latex-proj02",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.7659574468085106,
+"fidelity": 0.8795562381380481,
+"math": 0.3333333333333333,
+"structure": 0.9375,
+"text": 0.9352112676056338
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-proj03",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9890989182558269,
+"math": 0.0,
+"structure": 0.9795918367346939,
+"text": 0.9877049180327869
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+1
+],
+"emph": [
+0,
+2
+],
+"h1": [
+3,
+4
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/encoder": [
+0,
+1
+],
+"strong": [
+0,
+1
+],
+"ul_item": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-proj04",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.84,
+"fidelity": 0.9093263456709247,
+"structure": 0.9302325581395349,
+"text": 0.9577464788732394
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+3,
+6
+],
+"emph": [
+0,
+3
+],
+"h1": [
+3,
+4
+],
+"link": [
+2,
+3
+],
+"linktarget:https://doi.org/10.1770/regression.77": [
+0,
+1
+],
+"ul_item": [
+10,
+13
+]
+},
+"format": "latex",
+"id": "latex-proj05",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.8181818181818182,
+"fidelity": 0.8727605894022686,
+"structure": 0.927536231884058,
+"text": 0.8725637181409296
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+1,
+3
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-proj06",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9433962264150944,
+"fidelity": 0.9712387564419586,
+"math": 0.0,
+"structure": 0.9787234042553191,
+"text": 0.9915966386554622
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-proj07",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9857142857142858,
+"math": 0.0,
+"structure": 1.0,
+"text": 0.9571428571428572
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+0,
+1
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-proj08",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9523809523809523,
+"fidelity": 0.9800117577895356,
+"structure": 1.0,
+"text": 0.9876543209876543
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "latex",
+"id": "latex-proj09",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9853412734768666,
+"structure": 0.972972972972973,
+"text": 0.9830508474576272
+},
+"status": "ok"
+},
+{
+"detail": {
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-proj10",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9090909090909091,
+"fidelity": 0.9442516770761046,
+"structure": 1.0,
+"text": 0.9236641221374046
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+2,
+4
+],
+"strong": [
+0,
+2
+]
+},
+"format": "latex",
+"id": "latex-proj11",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9047619047619048,
+"fidelity": 0.960261490585891,
+"math": 0.3333333333333333,
+"structure": 1.0,
+"text": 0.9760225669957687
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+0,
+1
+],
+"strong": [
+0,
+1
+]
+},
+"format": "latex",
+"id": "latex-proj12",
+"kind": "generated",
+"producer": "python generator (seeded), \\input/\\include project",
+"scores": {
+"features": 0.9833333333333333,
+"fidelity": 0.983009338669716,
+"math": 0.0,
+"structure": 0.9811320754716981,
+"text": 0.9845626072041166
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+7
+],
+"link": [
+0,
+2
+],
+"linktarget:https://doi.org/10.8087/bound.55": [
+0,
+1
+],
+"linktarget:https://example.org/experiment": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-01",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+9
+],
+"emph": [
+0,
+9
+],
+"link": [
+0,
+2
+],
+"linktarget:https://example.org/benchmark": [
+0,
+1
+],
+"linktarget:https://example.org/density": [
+0,
+1
+],
+"ul_item": [
+0,
+9
+]
+},
+"format": "bibtex",
+"id": "bib-02",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+4
+],
+"emph": [
+0,
+2
+],
+"link": [
+0,
+2
+],
+"linktarget:https://example.org/memory": [
+0,
+1
+],
+"linktarget:https://example.org/tree": [
+0,
+1
+],
+"ul_item": [
+0,
+4
+]
+},
+"format": "bibtex",
+"id": "bib-03",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+2
+],
+"linktarget:https://doi.org/10.4068/layer.20": [
+0,
+1
+],
+"linktarget:https://doi.org/10.6600/trace.17": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-04",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+7
+],
+"emph": [
+0,
+4
+],
+"link": [
+0,
+4
+],
+"linktarget:https://doi.org/10.4721/scheduler.33": [
+0,
+1
+],
+"linktarget:https://doi.org/10.8852/decoder.67": [
+0,
+1
+],
+"linktarget:https://example.org/experiment": [
+0,
+1
+],
+"linktarget:https://example.org/workload": [
+0,
+1
+],
+"ul_item": [
+0,
+7
+]
+},
+"format": "bibtex",
+"id": "bib-05",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+3
+],
+"linktarget:https://doi.org/10.6528/vector.60": [
+0,
+1
+],
+"linktarget:https://example.org/latency": [
+0,
+1
+],
+"linktarget:https://example.org/metric": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-06",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+5
+],
+"emph": [
+0,
+5
+],
+"link": [
+0,
+2
+],
+"linktarget:https://doi.org/10.2214/heuristic.97": [
+0,
+1
+],
+"linktarget:https://example.org/ranking": [
+0,
+1
+],
+"ul_item": [
+0,
+5
+]
+},
+"format": "bibtex",
+"id": "bib-07",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+5
+],
+"emph": [
+0,
+5
+],
+"link": [
+0,
+2
+],
+"linktarget:https://doi.org/10.9730/kernel.12": [
+0,
+1
+],
+"linktarget:https://example.org/workload": [
+0,
+1
+],
+"ul_item": [
+0,
+5
+]
+},
+"format": "bibtex",
+"id": "bib-08",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+6
+],
+"emph": [
+0,
+4
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/filter": [
+0,
+1
+],
+"ul_item": [
+0,
+6
+]
+},
+"format": "bibtex",
+"id": "bib-09",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+5
+],
+"emph": [
+0,
+4
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/learning": [
+0,
+1
+],
+"ul_item": [
+0,
+5
+]
+},
+"format": "bibtex",
+"id": "bib-10",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+5
+],
+"link": [
+0,
+1
+],
+"linktarget:https://doi.org/10.4589/gradient.17": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-11",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+4
+],
+"emph": [
+0,
+2
+],
+"link": [
+0,
+1
+],
+"linktarget:https://doi.org/10.9095/compiler.84": [
+0,
+1
+],
+"ul_item": [
+0,
+4
+]
+},
+"format": "bibtex",
+"id": "bib-12",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+7
+],
+"emph": [
+0,
+7
+],
+"link": [
+0,
+2
+],
+"linktarget:https://example.org/entropy": [
+0,
+1
+],
+"linktarget:https://example.org/sparse": [
+0,
+1
+],
+"ul_item": [
+0,
+7
+]
+},
+"format": "bibtex",
+"id": "bib-13",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+6
+],
+"emph": [
+0,
+4
+],
+"ul_item": [
+0,
+6
+]
+},
+"format": "bibtex",
+"id": "bib-14",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+9
+],
+"emph": [
+0,
+7
+],
+"link": [
+0,
+3
+],
+"linktarget:https://doi.org/10.7751/compiler.14": [
+0,
+1
+],
+"linktarget:https://example.org/matrix": [
+0,
+1
+],
+"linktarget:https://example.org/prior": [
+0,
+1
+],
+"ul_item": [
+0,
+9
+]
+},
+"format": "bibtex",
+"id": "bib-15",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+9
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+2
+],
+"linktarget:https://example.org/model": [
+0,
+1
+],
+"linktarget:https://example.org/solver": [
+0,
+1
+],
+"ul_item": [
+0,
+9
+]
+},
+"format": "bibtex",
+"id": "bib-16",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+5
+],
+"emph": [
+0,
+5
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/ranking": [
+0,
+1
+],
+"ul_item": [
+0,
+5
+]
+},
+"format": "bibtex",
+"id": "bib-17",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+5
+],
+"linktarget:https://example.org/benchmark": [
+0,
+1
+],
+"linktarget:https://example.org/cache": [
+0,
+1
+],
+"linktarget:https://example.org/complexity": [
+0,
+1
+],
+"linktarget:https://example.org/entropy": [
+0,
+1
+],
+"linktarget:https://example.org/pipeline": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-18",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+10
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+3
+],
+"linktarget:https://doi.org/10.3569/latency.66": [
+0,
+1
+],
+"linktarget:https://doi.org/10.5661/experiment.46": [
+0,
+1
+],
+"linktarget:https://example.org/benchmark": [
+0,
+1
+],
+"ul_item": [
+0,
+10
+]
+},
+"format": "bibtex",
+"id": "bib-19",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+6
+],
+"link": [
+0,
+3
+],
+"linktarget:https://example.org/structure": [
+0,
+1
+],
+"linktarget:https://example.org/throughput": [
+0,
+1
+],
+"linktarget:https://example.org/trace": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-20",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+10
+],
+"emph": [
+0,
+8
+],
+"link": [
+0,
+5
+],
+"linktarget:https://doi.org/10.8223/index.77": [
+0,
+1
+],
+"linktarget:https://doi.org/10.9422/heuristic.52": [
+0,
+1
+],
+"linktarget:https://example.org/analysis": [
+0,
+1
+],
+"linktarget:https://example.org/cache": [
+0,
+1
+],
+"linktarget:https://example.org/heuristic": [
+0,
+1
+],
+"ul_item": [
+0,
+10
+]
+},
+"format": "bibtex",
+"id": "bib-21",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+6
+],
+"link": [
+0,
+2
+],
+"linktarget:https://doi.org/10.4191/convergence.19": [
+0,
+1
+],
+"linktarget:https://example.org/algorithm": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-22",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+7
+],
+"emph": [
+0,
+5
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/convergence": [
+0,
+1
+],
+"ul_item": [
+0,
+7
+]
+},
+"format": "bibtex",
+"id": "bib-23",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+7
+],
+"emph": [
+0,
+7
+],
+"link": [
+0,
+1
+],
+"linktarget:https://example.org/policy": [
+0,
+1
+],
+"ul_item": [
+0,
+7
+]
+},
+"format": "bibtex",
+"id": "bib-24",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+8
+],
+"emph": [
+0,
+6
+],
+"link": [
+0,
+3
+],
+"linktarget:https://doi.org/10.2998/function.87": [
+0,
+1
+],
+"linktarget:https://example.org/pipeline": [
+0,
+1
+],
+"linktarget:https://example.org/query": [
+0,
+1
+],
+"ul_item": [
+0,
+8
+]
+},
+"format": "bibtex",
+"id": "bib-25",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 0.0,
+"fidelity": 0.0,
+"structure": 0.0,
+"text": 0.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-01",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-01",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-01",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9990503323836658,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9971509971509972
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-01",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:objective = 99 print(convergence)": [
+0,
+1
+],
+"code_block": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-01",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9473684210526315,
+"fidelity": 0.9609507640067911,
+"structure": 0.9354838709677419,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+2,
+1
+]
+},
+"format": "epub",
+"id": "epub-pandoc-01",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9777777777777777,
+"fidelity": 0.9776672194582643,
+"structure": 0.9552238805970149,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-02",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-02",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-02",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-02",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+1
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-02",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9841269841269841,
+"fidelity": 0.9815639551850582,
+"structure": 0.9629629629629629,
+"text": 0.9976019184652278
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+6,
+4
+]
+},
+"format": "epub",
+"id": "epub-pandoc-02",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9852941176470589,
+"fidelity": 0.9834430275606746,
+"structure": 0.965034965034965,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-03",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-03",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-03",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9987357774968394,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9962073324905183
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-03",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:throughput = 86 print(complexity)": [
+0,
+1
+],
+"CODE:trace = 74 print(queue)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-03",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9717514124293786,
+"fidelity": 0.9634137345640227,
+"structure": 0.9272727272727272,
+"text": 0.9912170639899623
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-03",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9855072463768115,
+"structure": 0.9565217391304348,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-04",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-04",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-04",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-04",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:decoder = 12 print(vocabulary)": [
+0,
+1
+],
+"CODE:lattice = 61 print(latency)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+1
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-04",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9594594594594594,
+"fidelity": 0.954801732629554,
+"structure": 0.9122807017543859,
+"text": 0.9926650366748166
+},
+"status": "ok"
+},
+{
+"detail": {
+"emph": [
+3,
+2
+]
+},
+"format": "epub",
+"id": "epub-pandoc-04",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9936305732484076,
+"fidelity": 0.9838712555085728,
+"structure": 0.957983193277311,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-05",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-05",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-05",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9967320261437909,
+"structure": 1.0,
+"text": 0.9901960784313726
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-05",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:convergence = 11 print(kernel)": [
+0,
+1
+],
+"CODE:corpus = 13 print(regression)": [
+0,
+1
+],
+"CODE:encoder = 45 print(scheduler)": [
+0,
+1
+],
+"code_block": [
+0,
+3
+]
+},
+"format": "odt",
+"id": "odt-pandoc-05",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9166666666666666,
+"fidelity": 0.9230418943533697,
+"structure": 0.8524590163934426,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-05",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9841269841269842,
+"structure": 0.9523809523809523,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-06",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-06",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-06",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9992690058479532,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9978070175438597
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-06",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:sequence = 6 print(convergence)": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"quote": [
+4,
+2
+]
+},
+"format": "odt",
+"id": "odt-pandoc-06",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9615384615384616,
+"fidelity": 0.9761419595856683,
+"structure": 0.9668874172185431,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-06",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.989247311827957,
+"structure": 0.967741935483871,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-07",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-07",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-07",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-07",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:bound = 72 print(benchmark)": [
+0,
+1
+],
+"CODE:decoder = 40 print(filter)": [
+0,
+1
+],
+"CODE:feature = 35 print(baseline)": [
+0,
+1
+],
+"CODE:policy = 35 print(bound)": [
+0,
+1
+],
+"CODE:structure = 18 print(tree)": [
+0,
+1
+],
+"code_block": [
+0,
+5
+],
+"hr": [
+0,
+1
+],
+"quote": [
+4,
+2
+]
+},
+"format": "odt",
+"id": "odt-pandoc-07",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.6486486486486487,
+"fidelity": 0.8083730789613143,
+"structure": 0.7764705882352941,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-07",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9841269841269842,
+"structure": 0.9523809523809523,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-08",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-08",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-08",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9994683678894205,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9984051036682615
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-08",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:experiment = 78 print(protocol)": [
+0,
+1
+],
+"CODE:gradient = 93 print(tree)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-08",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.96,
+"fidelity": 0.9578902953586498,
+"structure": 0.92,
+"text": 0.9936708860759493
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-08",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9871794871794872,
+"structure": 0.9615384615384616,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-09",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-09",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-09",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-09",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-09",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.989010989010989,
+"fidelity": 0.9846630334435212,
+"structure": 0.9743589743589743,
+"text": 0.9906191369606003
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-09",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9841269841269842,
+"structure": 0.9523809523809523,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-10",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-10",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-10",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-10",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:agent = 24 print(transform)": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"hr": [
+0,
+1
+],
+"quote": [
+6,
+3
+]
+},
+"format": "odt",
+"id": "odt-pandoc-10",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9117647058823529,
+"fidelity": 0.9483660130718955,
+"structure": 0.9333333333333333,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-10",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.986449864498645,
+"structure": 0.959349593495935,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-11",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-11",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-11",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9996916435399322,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9990749306197965
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-11",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+2
+]
+},
+"format": "odt",
+"id": "odt-pandoc-11",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9913793103448276,
+"fidelity": 0.9850096761095748,
+"structure": 0.9701492537313433,
+"text": 0.9935004642525533
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-11",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9881796690307328,
+"structure": 0.9645390070921985,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-12",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-12",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-12",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9989680082559339,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9969040247678018
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-12",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+5
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-12",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9285714285714286,
+"fidelity": 0.9338474321026121,
+"structure": 0.8775510204081632,
+"text": 0.9954198473282443
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-12",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9841269841269842,
+"structure": 0.9523809523809523,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-13",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-13",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-13",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-13",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-pandoc-13",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.98989898989899,
+"fidelity": 0.9915023248356581,
+"structure": 0.98989898989899,
+"text": 0.9947089947089947
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-13",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9902912621359223,
+"structure": 0.970873786407767,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-14",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-14",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-14",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9990393852065322,
+"structure": 1.0,
+"text": 0.9971181556195965
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-14",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+4,
+2
+]
+},
+"format": "odt",
+"id": "odt-pandoc-14",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9824561403508771,
+"fidelity": 0.9873571238702817,
+"structure": 0.9824561403508771,
+"text": 0.9971590909090909
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-14",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9887005649717514,
+"structure": 0.9661016949152542,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-15",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-15",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-15",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9981916817359856,
+"structure": 1.0,
+"text": 0.9945750452079566
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-15",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+2
+],
+"quote": [
+4,
+2
+]
+},
+"format": "odt",
+"id": "odt-pandoc-15",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 0.9583333333333334,
+"fidelity": 0.9578978444636808,
+"structure": 0.918918918918919,
+"text": 0.99644128113879
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-pandoc-15",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.982905982905983,
+"structure": 0.9487179487179487,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-16",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-16",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-16",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-16",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-17",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-17",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-17",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-17",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-18",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-18",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-18",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.999298245614035,
+"structure": 1.0,
+"text": 0.9978947368421053
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-18",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-19",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-19",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-19",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9987515605493135,
+"math": 1.0,
+"structure": 1.0,
+"text": 0.9962546816479401
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-19",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-20",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-20",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-20",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9995147986414361,
+"structure": 1.0,
+"text": 0.9985443959243085
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-pandoc-20",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-21",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-21",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-21",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9992831541218639,
+"structure": 1.0,
+"text": 0.9978494623655914
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-22",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-22",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-seed-22",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 0.998435054773083,
+"structure": 1.0,
+"text": 0.9953051643192489
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-23",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-23",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-24",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-24",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-25",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-25",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-26",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-26",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-27",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-27",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-28",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-28",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-29",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-29",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-30",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-seed-30",
+"kind": "generated",
+"producer": "pandoc 3.1.3 writer from a seed",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-31",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-32",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-33",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-34",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-35",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-36",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-37",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-38",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-39",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "markdown",
+"id": "markdown-40",
+"kind": "generated",
+"producer": "python generator (seeded)",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-article",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-recipe",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9758454106280193,
+"structure": 1.0,
+"text": 0.927536231884058
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-defs",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+11,
+12
+]
+},
+"format": "html",
+"id": "html-hand-table-span",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.9714285714285714,
+"fidelity": 0.9904761904761905,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"math_display": [
+0,
+1
+],
+"math_inline": [
+1,
+2
+]
+},
+"format": "html",
+"id": "html-hand-math",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.6666666666666666,
+"fidelity": 0.7407407407407408,
+"math": 0.5,
+"structure": 1.0,
+"text": 0.5555555555555556
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-nested",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-entities",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-form-page",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9327731092436974,
+"structure": 0.8571428571428571,
+"text": 0.9411764705882353
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-figure",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.967741935483871,
+"structure": 1.0,
+"text": 0.9032258064516129
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-headings",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "html",
+"id": "html-hand-ordered",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+1,
+2
+]
+},
+"format": "html",
+"id": "html-hand-inline",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 0.9411764705882353,
+"fidelity": 0.9803921568627452,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-basic",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-code",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-table-grid",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-admonitions",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9904761904761905,
+"structure": 1.0,
+"text": 0.9714285714285714
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-fields",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9824561403508771,
+"structure": 0.9473684210526315,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-footnotes",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-math",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-quote-line",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-links",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-toc",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-substitution",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9047619047619048,
+"structure": 0.8571428571428571,
+"text": 0.8571428571428571
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "rst",
+"id": "rst-hand-roles",
+"kind": "hand-written",
+"producer": "hand-written",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-structure",
+"kind": "hand-written",
+"producer": "python zipfile, OOXML written for this corpus",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+12,
+15
+]
+},
+"format": "docx",
+"id": "docx-raw-tables",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 0.9411764705882353,
+"fidelity": 0.9741028486866444,
+"structure": 1.0,
+"text": 0.9811320754716981
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-footnotes",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-endnotes",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-tracked",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-tracked2",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-comments",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-comments-tracked",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-misc",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-headings",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-raw-math",
+"kind": "hand-written",
+"producer": "python zipfile",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"math": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+14,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-21",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.7741935483870968,
+"fidelity": 0.8800013039280404,
+"structure": 0.8679245283018868,
+"text": 0.9978858350951374
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+5,
+2
+]
+},
+"format": "docx",
+"id": "docx-lo-22",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.970873786407767,
+"fidelity": 0.975027686772019,
+"structure": 0.958904109589041,
+"text": 0.9953051643192489
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+19,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-23",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.7710843373493976,
+"fidelity": 0.8713531813203227,
+"structure": 0.8429752066115702,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+18,
+1
+]
+},
+"format": "docx",
+"id": "docx-lo-24",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.7901234567901234,
+"fidelity": 0.8783980349008965,
+"structure": 0.8468468468468469,
+"text": 0.9982238010657194
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+24,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-25",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.8095238095238095,
+"fidelity": 0.8930296756383713,
+"structure": 0.8695652173913043,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+10,
+1
+]
+},
+"format": "docx",
+"id": "docx-lo-26",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9312977099236641,
+"fidelity": 0.949082473700911,
+"structure": 0.9174311926605505,
+"text": 0.9985185185185185
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+9,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-27",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.8085106382978723,
+"fidelity": 0.8904907509962153,
+"structure": 0.8656716417910447,
+"text": 0.997289972899729
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+4,
+1
+]
+},
+"format": "docx",
+"id": "docx-lo-28",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9808917197452229,
+"fidelity": 0.980849319087843,
+"structure": 0.9655172413793104,
+"text": 0.9961389961389961
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+5,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-29",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9848942598187311,
+"fidelity": 0.9787422669460267,
+"structure": 0.9541284403669725,
+"text": 0.9972041006523765
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+9,
+0
+],
+"sup": [
+0,
+1
+]
+},
+"format": "docx",
+"id": "docx-lo-30",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9090909090909091,
+"fidelity": 0.9352142110762801,
+"structure": 0.896551724137931,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+7,
+1
+]
+},
+"format": "docx",
+"id": "docx-lo-article",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9032258064516129,
+"fidelity": 0.9242636746143057,
+"structure": 0.8695652173913043,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+3,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-recipe",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.8421052631578947,
+"fidelity": 0.8585137728759497,
+"structure": 0.8181818181818182,
+"text": 0.9152542372881356
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-lo-defs",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+10,
+12
+]
+},
+"format": "docx",
+"id": "docx-lo-table-span",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.9411764705882353,
+"fidelity": 0.9803921568627452,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-lo-nested",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+2,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-figure",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.75,
+"fidelity": 0.8434065934065934,
+"structure": 0.8571428571428571,
+"text": 0.9230769230769231
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-lo-headings",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"quote": [
+6,
+0
+]
+},
+"format": "docx",
+"id": "docx-lo-ordered",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 0.6666666666666666,
+"fidelity": 0.8055555555555555,
+"structure": 0.75,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "docx",
+"id": "docx-lo-inline",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to docx:MS Word 2007 XML) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:policy = 21 print(node)": [
+0,
+1
+],
+"CODE:sequence = 29 print(transform)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+3
+]
+},
+"format": "odt",
+"id": "odt-lo-21",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.8571428571428571,
+"fidelity": 0.9100095640793316,
+"structure": 0.875,
+"text": 0.9978858350951374
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+1
+],
+"hr": [
+0,
+3
+],
+"quote": [
+4,
+2
+]
+},
+"format": "odt",
+"id": "odt-lo-22",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9444444444444444,
+"fidelity": 0.9436533016876231,
+"structure": 0.8974358974358975,
+"text": 0.9890795631825273
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:queue = 17 print(signal)": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"code_inline": [
+0,
+1
+],
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-23",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9411764705882353,
+"fidelity": 0.9642109270892822,
+"structure": 0.9514563106796117,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+2
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-24",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9577464788732394,
+"fidelity": 0.9818270108829944,
+"structure": 0.9894736842105263,
+"text": 0.9982608695652174
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:batch = 17 print(gradient)": [
+0,
+1
+],
+"CODE:density = 94 print(metric)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+3
+]
+},
+"format": "odt",
+"id": "odt-lo-25",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9306930693069307,
+"fidelity": 0.9518100957968029,
+"structure": 0.926829268292683,
+"text": 0.997907949790795
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:pipeline = 84 print(sequence)": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"code_inline": [
+0,
+1
+],
+"hr": [
+0,
+2
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-26",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.953125,
+"fidelity": 0.9547774956250477,
+"structure": 0.9230769230769231,
+"text": 0.9881305637982196
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+1
+],
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-27",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.95,
+"fidelity": 0.9713333333333333,
+"structure": 0.9666666666666667,
+"text": 0.9973333333333333
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+1
+],
+"hr": [
+0,
+1
+],
+"quote": [
+2,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-28",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9818181818181818,
+"fidelity": 0.9785841372048268,
+"structure": 0.9655172413793104,
+"text": 0.9884169884169884
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+2
+],
+"hr": [
+0,
+2
+]
+},
+"format": "odt",
+"id": "odt-lo-29",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9880952380952381,
+"fidelity": 0.9774438697659672,
+"structure": 0.9629629629629629,
+"text": 0.9812734082397003
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:heuristic = 98 print(structure)": [
+0,
+1
+],
+"CODE:protocol = 96 print(sequence)": [
+0,
+1
+],
+"code_block": [
+0,
+2
+],
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-30",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9504950495049505,
+"fidelity": 0.9461477603022308,
+"structure": 0.8974358974358975,
+"text": 0.9905123339658444
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:get(key) -> value": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"emph": [
+2,
+1
+],
+"linktarget:../../../../../../../../": [
+1,
+0
+],
+"linktarget:../../../../../../../../../": [
+0,
+1
+],
+"linktarget:../../../../../../../../../about": [
+0,
+1
+],
+"linktarget:../../../../../../../../about": [
+1,
+0
+]
+},
+"format": "odt",
+"id": "odt-lo-article",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.8813559322033898,
+"fidelity": 0.9373750543242069,
+"structure": 0.95,
+"text": 0.9807692307692307
+},
+"status": "ok"
+},
+{
+"detail": {
+"hr": [
+0,
+1
+]
+},
+"format": "odt",
+"id": "odt-lo-recipe",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.9333333333333333,
+"fidelity": 0.8953914141414141,
+"structure": 0.9090909090909091,
+"text": 0.84375
+},
+"status": "ok"
+},
+{
+"detail": {
+"CODE:line one line two indented": [
+0,
+1
+],
+"code_block": [
+0,
+1
+],
+"code_inline": [
+0,
+1
+],
+"emph": [
+1,
+0
+],
+"quote": [
+2,
+0
+]
+},
+"format": "odt",
+"id": "odt-lo-defs",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.25,
+"fidelity": 0.65,
+"structure": 0.7,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+15,
+12
+],
+"row": [
+5,
+4
+]
+},
+"format": "odt",
+"id": "odt-lo-table-span",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.8947368421052632,
+"fidelity": 0.9649122807017544,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "odt",
+"id": "odt-lo-nested",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "odt",
+"id": "odt-lo-figure",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9876543209876543,
+"structure": 1.0,
+"text": 0.9629629629629629
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "odt",
+"id": "odt-lo-headings",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "odt",
+"id": "odt-lo-ordered",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"code_inline": [
+0,
+2
+],
+"emph": [
+5,
+2
+]
+},
+"format": "odt",
+"id": "odt-lo-inline",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to odt:writer8) from HTML",
+"scores": {
+"features": 0.7368421052631579,
+"fidelity": 0.912280701754386,
+"structure": 1.0,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-21",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9963369963369964,
+"structure": 0.989010989010989,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-22",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9919040166927492,
+"structure": 0.9866666666666667,
+"text": 0.9890453834115805
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-23",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9927571573524383,
+"structure": 0.9896907216494846,
+"text": 0.9885807504078303
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-24",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9879765795206973,
+"structure": 0.9882352941176471,
+"text": 0.9756944444444444
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-25",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9977628635346756,
+"structure": 0.9932885906040269,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-26",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9930861769631417,
+"structure": 0.9896907216494846,
+"text": 0.9895678092399404
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-27",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.988193730155181,
+"structure": 0.9830508474576272,
+"text": 0.9815303430079155
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-28",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9931500399002741,
+"structure": 0.9885057471264368,
+"text": 0.9909443725743855
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-29",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9924402907580477,
+"structure": 0.9906542056074766,
+"text": 0.9866666666666667
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-30",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9956709956709956,
+"structure": 0.987012987012987,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-article",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9818166790643855,
+"structure": 0.972972972972973,
+"text": 0.9724770642201835
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-recipe",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9866666666666667,
+"structure": 0.96,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-defs",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9866666666666667,
+"structure": 0.96,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {
+"cell": [
+10,
+12
+]
+},
+"format": "epub",
+"id": "epub-lo-table-span",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 0.9375,
+"fidelity": 0.9488636363636364,
+"structure": 0.9090909090909091,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-nested",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9777777777777779,
+"structure": 0.9333333333333333,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-figure",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9777777777777779,
+"structure": 0.9333333333333333,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-headings",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9885057471264368,
+"structure": 0.9655172413793104,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-ordered",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9803921568627452,
+"structure": 0.9411764705882353,
+"text": 1.0
+},
+"status": "ok"
+},
+{
+"detail": {},
+"format": "epub",
+"id": "epub-lo-inline",
+"kind": "generated",
+"producer": "LibreOffice Writer (convert-to epub:EPUB) from HTML",
+"scores": {
+"features": 1.0,
+"fidelity": 0.9523809523809524,
+"structure": 0.8571428571428571,
+"text": 1.0
+},
+"status": "ok"
+}
+]
