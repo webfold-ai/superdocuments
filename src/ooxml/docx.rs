@@ -481,7 +481,10 @@ impl<'a> Parser<'a> {
             "blip" => self.picture(tag, "embed"),
             "imagedata" => self.picture(tag, "id"),
             "OLEObject" => {
-                if let Some(kind) = attr_local(tag, "ProgID") {
+                // An embedded picture (Word.Picture.8, Paint.Picture, PBrush) is already emitted
+                // as the image of its `v:imagedata`; the placeholder would be stray text. Other
+                // embedded objects (a spreadsheet, a document) stay, named by their ProgID.
+                if let Some(kind) = attr_local(tag, "ProgID").filter(|k| !is_picture_progid(k)) {
                     self.add_text(&format!("Embedded object: {kind}"));
                 }
             }
@@ -726,6 +729,12 @@ impl<'a> Parser<'a> {
         }
         Ok(())
     }
+}
+
+/// ProgIDs of embedded pictures: `Word.Picture.8`, `Paint.Picture`, `PBrush`, `MSPhotoEd.3`.
+fn is_picture_progid(prog_id: &str) -> bool {
+    let id = prog_id.trim().to_ascii_lowercase();
+    id.contains(".picture") || id == "pbrush" || id.starts_with("msphotoed")
 }
 
 fn val_of(tag: &BytesStart<'_>, name: &str) -> Option<String> {

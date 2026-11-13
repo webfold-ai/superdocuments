@@ -15,6 +15,7 @@ use crate::document::{entry, text};
 
 pub(crate) mod docx;
 pub(crate) mod pptx;
+pub(crate) mod numfmt;
 pub(crate) mod xlsx;
 
 /// An attribute by local name: `val` finds `w:val`, `val` and `ns0:val`.

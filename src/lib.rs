@@ -4,6 +4,7 @@
 pub mod arxiv_source;
 pub mod ast;
 pub mod bibtex;
+pub mod doc;
 pub mod document;
 pub mod epub;
 pub mod graph;
