@@ -928,7 +928,7 @@ fn extract_file_with_ocr_inner(
             let empty_pages: Vec<u32> = page_texts
                 .iter()
                 .enumerate()
-                .filter(|(_, p)| page_needs_ocr(p))
+                .filter(|(_, p)| !has_embedded_text(p))
                 .map(|(i, _)| i as u32 + 1)
                 .collect();
             if empty_pages.is_empty() {
@@ -1288,7 +1288,7 @@ fn merge_native_and_ocr(
     let mut out = String::new();
     for (i, native) in page_texts.iter().enumerate() {
         let number = i as u32 + 1;
-        let text = if !page_needs_ocr(native) {
+        let text = if has_embedded_text(native) {
             native.trim()
         } else {
             ocr_by_page.get(&number).copied().unwrap_or("")
@@ -1308,26 +1308,6 @@ fn merge_native_and_ocr(
         ));
     }
     Ok(out)
-}
-
-/// A page whose text layer is only a stamp, a header or a title over a picture is a scan: it has an image
-/// and fewer than this many letters and digits outside the image markers.
-const SCAN_TEXT_MAX: usize = 100;
-
-/// Does this page need OCR: no text at all, or an image with next to no text beside it?
-fn page_needs_ocr(markdown: &str) -> bool {
-    if !has_embedded_text(markdown) {
-        return true;
-    }
-    let has_image = markdown.lines().any(|l| l.trim().starts_with("![]("));
-    has_image
-        && markdown
-            .lines()
-            .filter(|l| !l.trim().starts_with("![]("))
-            .flat_map(str::chars)
-            .filter(|c| c.is_alphanumeric())
-            .count()
-            < SCAN_TEXT_MAX
 }
 
 fn has_embedded_text(markdown: &str) -> bool {
@@ -1633,24 +1613,6 @@ mod tests {
             out.contains("OCR stopped at the configured limit of 1 pages"),
             "{out:?}"
         );
-    }
-
-    #[test]
-    fn a_title_over_a_scanned_image_is_a_page_that_needs_ocr() {
-        // scanned-fuzzy.pdf: a text title ("Fuzzy Scanned Page") and a full-page image of the body. The
-        // title made the whole document "readable" and the body was never OCRed (CER 0.581 against 0.023).
-        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
-        let bytes = std::fs::read(fixtures.join("scanned-fuzzy.pdf")).unwrap();
-        let pages = extract_pages_markdown(&bytes).unwrap();
-        assert!(has_embedded_text(&pages[0]), "{:?}", pages[0]);
-        assert!(page_needs_ocr(&pages[0]), "{:?}", pages[0]);
-        // pages with real text, with or without a picture, are not scans
-        assert!(!page_needs_ocr(&format!(
-            "{}\n![](img_1.png)\n",
-            "word ".repeat(40)
-        )));
-        assert!(!page_needs_ocr(&"A sentence of ordinary text. ".repeat(10)));
-        assert!(page_needs_ocr("![](img_1.png)\n"));
     }
 
     #[test]
