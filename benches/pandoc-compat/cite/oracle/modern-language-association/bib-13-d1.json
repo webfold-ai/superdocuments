@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Müller and Hoare, ch. 39)",
+"(Smith and Liskov; Backus)",
+"(Liskov; Lamport et al.)",
+"(Müller and Hoare; Lamport et al. 11)",
+"(Lamport et al., sec. 32.117 and more)",
+"(Lamport et al. 46)",
+"(Backus, fig. 67)"
+],
+"bibliography": [
+"Backus, John. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Solver Symposium, 1952, pp. 66–128, https://example.org/entropy.",
+"Lamport, Leslie, et al. Time, Clocks, and the Ordering of Events. https://example.org/retrieval, 2007.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(see Müller and Hoare, ch. 39)",
+"(Smith and Liskov; Backus)",
+"(Liskov; Lamport et al.)",
+"(Müller and Hoare; Lamport et al. 11)",
+"(Lamport et al., sec. 32.117 and more)",
+"(Lamport et al. 46)",
+"(Backus, fig. 67)"
+],
+"bibliography": [
+"Backus, John. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Solver Symposium, 1952, pp. 66–128, https://example.org/entropy.",
+"Lamport, Leslie, et al. Time, Clocks, and the Ordering of Events. https://example.org/retrieval, 2007.",
+"Liskov, Barbara. Data Abstraction and Hierarchy. https://example.org/retrieval, 1946.",
+"Müller, Hans, and C. A. R. Hoare. The Art of Computer Programming. https://example.org/block, 2024.",
+"Smith, John Jr., and Barbara Liskov. Notes on the Analytical Engine. https://example.org/tree, 2024, https://example.org/sparse."
+]
+}
+}

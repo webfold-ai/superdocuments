@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Smith and Backus, 1988, p. 95)",
+"(see Backus, 1952)",
+"Smith (1987)",
+"(Müller and Hoare, 2024, p. 65)",
+"Backus (1952, pp. 49–126)",
+"(e.g. Smith and Liskov, 2024; Müller and Hoare, 2024)",
+"(Müller and Hoare, 2024)",
+"(Smith and Liskov, 2024, sec. 73.122 and more)",
+"(Backus, 1952; Müller and Hoare, 2024)",
+"(Smith, 1987, sec. 2.115 and more)",
+"(1946)"
+],
+"bibliography": [
+"Backus, J. (1952) “Can programming be liberated from the von neumann style,” Proceedings of the solver symposium, pp. 66–128. Available at: https://example.org/entropy.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. (1987) “The education of a computer.” https://example.org/heuristic.",
+"Smith, J.Jr. and Backus, J. (1988) The apollo guidance computer. PhD thesis. University of Zurich.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Smith and Backus, 1988, p. 95)",
+"(see Backus, 1952)",
+"Smith (1987)",
+"(Müller and Hoare, 2024, p. 65)",
+"Backus (1952, pp. 49–126)",
+"(e.g. Smith and Liskov, 2024; Müller and Hoare, 2024)",
+"(Müller and Hoare, 2024)",
+"(Smith and Liskov, 2024, sec. 73.122 and more)",
+"(Backus, 1952; Müller and Hoare, 2024)",
+"(Smith, 1987, sec. 2.115 and more)",
+"(1946)"
+],
+"bibliography": [
+"Backus, J. (1952) “Can programming be liberated from the von neumann style,” Proceedings of the solver symposium, pp. 66–128. Available at: https://example.org/entropy.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. (1987) “The education of a computer.” https://example.org/heuristic.",
+"Smith, J.Jr. and Backus, J. (1988) The apollo guidance computer. PhD thesis. University of Zurich.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+}
+}

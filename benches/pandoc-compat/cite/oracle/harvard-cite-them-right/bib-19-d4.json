@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Müller and Dijkstra, 1972, fig. 29)",
+"(Müller and Dijkstra, 1972, vol. 88)",
+"Lovelace (1968, pp. 56–138)",
+"(Lamport, 1997)",
+"(see O’Brien, 1966, ch. 64)",
+"Müller and Dijkstra (1972)",
+"(Rossum, García and Lovelace, 1979, vol. 40)",
+"(Liskov, 1992, p. 94; Lamport, 1997)",
+"Dijkstra (1946)",
+"(Hopper, 1986, p. 70)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1946) “The apollo guidance computer,” Proceedings of the query symposium, pp. 51–197.",
+"Hopper, G. (1986) “On computable numbers,” ACM Computing Surveys, 39(7), pp. 151–379. Available at: https://doi.org/10.5661/experiment.46.",
+"Lamport, L. (1997) “The education of a computer.” https://example.org/protocol. Available at: https://example.org/benchmark.",
+"Liskov, B. (1992) “The art of computer programming,” Proceedings of the London Mathematical Society, 44(12), pp. 132–356.",
+"Lovelace, A. (1968) The education of a computer. PhD thesis. University of Cambridge.",
+"Müller, H. and Dijkstra, E.W. (1972) “Go to statement considered harmful,” Proceedings of the approach symposium, pp. 53–147.",
+"O’Brien, F. (1966) Go to statement considered harmful. MIT Press.",
+"Rossum, G. van, García, L. and Lovelace, A. (1979) “Go to statement considered harmful,” Communications of the ACM, 45(8), pp. 289–314. Available at: https://doi.org/10.3569/latency.66."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Dijkstra, 1972, fig. 29)",
+"(Müller and Dijkstra, 1972, vol. 88)",
+"Lovelace (1968, pp. 56–138)",
+"(Lamport, 1997)",
+"(see O’Brien, 1966, ch. 64)",
+"Müller and Dijkstra (1972)",
+"(Rossum, García and Lovelace, 1979, vol. 40)",
+"(Liskov, 1992, p. 94; Lamport, 1997)",
+"Dijkstra (1946)",
+"(Hopper, 1986, p. 70)"
+],
+"bibliography": [
+"Dijkstra, E.W. (1946) “The apollo guidance computer,” Proceedings of the query symposium, pp. 51–197.",
+"Hopper, G. (1986) “On computable numbers,” ACM Computing Surveys, 39(7), pp. 151–379. Available at: https://doi.org/10.5661/experiment.46.",
+"Lamport, L. (1997) “The education of a computer.” https://example.org/protocol. Available at: https://example.org/benchmark.",
+"Liskov, B. (1992) “The art of computer programming,” Proceedings of the London Mathematical Society, 44(12), pp. 132–356.",
+"Lovelace, A. (1968) The education of a computer. PhD thesis. University of Cambridge.",
+"Müller, H. and Dijkstra, E.W. (1972) “Go to statement considered harmful,” Proceedings of the approach symposium, pp. 53–147.",
+"O’Brien, F. (1966) Go to statement considered harmful. London: MIT Press.",
+"Rossum, G. van, García, L. and Lovelace, A. (1979) “Go to statement considered harmful,” Communications of the ACM, 45(8), pp. 289–314. Available at: https://doi.org/10.3569/latency.66."
+]
+}
+}

@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"see 1, ch. 8",
+"e.g. 2,3",
+"1",
+"4",
+"1",
+"1,4,5",
+"3",
+"1,3,6",
+"see 2",
+"2",
+"4",
+"see 7, ch. 45",
+"6,8"
+],
+"bibliography": [
+"1. Turing, A. M. & Liskov, B. On Computable Numbers. (MIT Press, 2018).",
+"2. O’Brien, F. Go to Statement Considered Harmful. (MIT Press, 1966).",
+"3. Cruz, M. de la & García, L. The apollo guidance computer. (1984).",
+"4. Lovelace, A. The education of a computer. (University of Cambridge, 1968).",
+"5. Hopper, G. On computable numbers. ACM Computing Surveys 39, 151–379 (1986).",
+"6. Dijkstra, E. W. The apollo guidance computer. in Proceedings of the query symposium 51–197 (1946).",
+"7. Lamport, L. The education of a computer. (1997).",
+"8. Rossum, G. van, García, L. & Lovelace, A. Go to statement considered harmful. Communications of the ACM 45, 289–314 (1979)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"see 1, ch. 8",
+"e.g. 2,3",
+"1",
+"4",
+"1",
+"1,4,5",
+"3",
+"1,3,6",
+"see 2",
+"2",
+"4",
+"see 7, ch. 45",
+"6,8"
+],
+"bibliography": [
+"1. Turing, A. M. & Liskov, B. On Computable Numbers. (MIT Press, New York, 2018).",
+"2. O’Brien, F. Go to Statement Considered Harmful. (MIT Press, London, 1966).",
+"3. Cruz, M. de la & García, L. The apollo guidance computer. (1984).",
+"4. Lovelace, A. The education of a computer. (University of Cambridge, 1968).",
+"5. Hopper, G. On computable numbers. ACM Computing Surveys 39, 151–379 (1986).",
+"6. Dijkstra, E. W. The apollo guidance computer. in Proceedings of the query symposium 51–197 (1946).",
+"7. Lamport, L. The education of a computer. (1997).",
+"8. Rossum, G. van, García, L. & Lovelace, A. Go to statement considered harmful. Communications of the ACM 45, 289–314 (1979)."
+]
+}
+}

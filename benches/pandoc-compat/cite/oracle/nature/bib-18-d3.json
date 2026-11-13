@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"see 1",
+"see 2",
+"3",
+"4",
+"see 3, ch. 5",
+"2",
+"e.g. 5,6",
+"3,6",
+"4",
+"see 7",
+"2"
+],
+"bibliography": [
+"1. Hoare, C. A. R., Lovelace, A. & Turing, A. M. Notes on the Analytical Engine. (2016).",
+"2. Cruz, M. de la. Time, clocks, and the ordering of events. (1941).",
+"3. Rossum, G. van & Hoare, C. A. R. Go to statement considered harmful. (1967).",
+"4. Müller, H. Notes on the Analytical Engine. https://example.org/entropy (2013).",
+"5. Turing, A. M. & Rossum, G. van. The art of computer programming. (University of Cambridge, 1968).",
+"6. Rossum, G. van, Backus, J. & Liskov, B. Go to statement considered harmful. (1993).",
+"7. Cruz, M. de la, O’Brien, F. & Hopper, G. The Art of Computer Programming. https://example.org/complexity (1971)."
+]
+},
+"bib": {
+"citations": [
+"see 1",
+"see 2",
+"3",
+"4",
+"see 3, ch. 5",
+"2",
+"e.g. 5,6",
+"3,6",
+"4",
+"see 7",
+"2"
+],
+"bibliography": [
+"1. Hoare, C. A. R., Lovelace, A. & Turing, A. M. Notes on the Analytical Engine. (2016).",
+"2. Cruz, M. de la. Time, clocks, and the ordering of events. (1941).",
+"3. Rossum, G. van & Hoare, C. A. R. Go to statement considered harmful. (1967).",
+"4. Müller, H. Notes on the Analytical Engine. https://example.org/entropy (2013).",
+"5. Turing, A. M. & Rossum, G. van. The art of computer programming. (University of Cambridge, 1968).",
+"6. Rossum, G. van, Backus, J. & Liskov, B. Go to statement considered harmful. (1993).",
+"7. Cruz, M. de la, O’Brien, F. & Hopper, G. The Art of Computer Programming. https://example.org/complexity (1971)."
+]
+}
+}

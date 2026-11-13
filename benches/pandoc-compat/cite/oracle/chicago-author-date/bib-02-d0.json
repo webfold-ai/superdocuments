@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al. 1963, sec. 3.110 and more)",
+"(Liskov et al. 1963, vol. 86)",
+"(Liskov et al. 1963, fig. 23)",
+"(1962)",
+"(Dijkstra 1973, fig. 66)",
+"(Rossum and Turing 1990, fig. 47)",
+"(Liskov et al. 2012; 1962)",
+"Lovelace et al. (1969)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. Notes on the Analytical Engine. Https://example.org/retrieval.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Rossum, Guido van, and Alan M. Turing. 1990. Notes on the Analytical Engine. Https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al. 1963, sec. 3.110 and more)",
+"(Liskov et al. 1963, vol. 86)",
+"(Liskov et al. 1963, fig. 23)",
+"(1962)",
+"(Dijkstra 1973, fig. 66)",
+"(Rossum and Turing 1990, fig. 47)",
+"(Liskov et al. 2012; 1962)",
+"Lovelace et al. (1969)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. The Art of Computer Programming. Https://example.org/filter.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. Notes on the Analytical Engine. Https://example.org/retrieval.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. Time, Clocks, and the Ordering of Events. Https://example.org/function. https://example.org/density.",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Rossum, Guido van, and Alan M. Turing. 1990. Notes on the Analytical Engine. Https://example.org/sparse."
+]
+}
+}

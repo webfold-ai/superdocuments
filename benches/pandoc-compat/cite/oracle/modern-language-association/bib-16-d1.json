@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Hopper and Lamport 57)",
+"(e.g. Knuth and O’Brien; Liskov and Knuth)",
+"Turing",
+"García et al. (46)",
+"Liskov and Knuth (71)",
+"(Lamport et al.)",
+"(Hopper et al., fig. 60)"
+],
+"bibliography": [
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. https://example.org/sparse, 2007.",
+"Hopper, Grace, et al. On Computable Numbers. TR-81, Lab Algorithm, 1990.",
+"Hopper, Grace, and Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press, 1943.",
+"Knuth, Donald E., and Flann O’Brien. An Axiomatic Basis for Computer Programming. TR-13, Lab Scheduler, 1945.",
+"Lamport, Leslie, et al. “Notes on the Analytical Engine.” Journal of the ACM, vol. 33, no. 10, 1961, pp. 192–344.",
+"Liskov, Barbara, and Donald E. Knuth. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 1954, pp. 14–128, https://example.org/solver.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. 1940, https://example.org/model. University of Zurich, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(Hopper and Lamport 57)",
+"(e.g. Knuth and O’Brien; Liskov and Knuth)",
+"Turing",
+"García et al. (46)",
+"Liskov and Knuth (71)",
+"(Lamport et al.)",
+"(Hopper et al., fig. 60)"
+],
+"bibliography": [
+"García, Luis, et al. An Axiomatic Basis for Computer Programming. https://example.org/sparse, 2007.",
+"Hopper, Grace, et al. On Computable Numbers. TR-81, Lab Algorithm, 1990.",
+"Hopper, Grace, and Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press, 1943.",
+"Knuth, Donald E., and Flann O’Brien. An Axiomatic Basis for Computer Programming. TR-13, Lab Scheduler, 1945.",
+"Lamport, Leslie, et al. “Notes on the Analytical Engine.” Journal of the ACM, vol. 33, no. 10, 1961, pp. 192–344.",
+"Liskov, Barbara, and Donald E. Knuth. “The Art of Computer Programming.” Proceedings of the Pipeline Symposium, 1954, pp. 14–128, https://example.org/solver.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. 1940, https://example.org/model. University of Zurich, PhD thesis."
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Hoare and Müller, vol. 72)",
+"(García et al. 96)",
+"(see Knuth and Turing, ch. 27)",
+"(see Hoare and Müller, ch. 79)",
+"(see Smith and O’Brien)",
+"(García et al. 82–134)",
+"(García et al. 87)",
+"(García et al. 6)"
+],
+"bibliography": [
+"García, Luis, et al. “On Computable Numbers.” Communications of the ACM, vol. 44, no. 6, 1969, pp. 209–329.",
+"Hoare, C. A. R., and Hans Müller. “An Axiomatic Basis for Computer Programming.” Journal of the ACM, vol. 53, no. 8, 1994, pp. 203–390, https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. TR-69, Lab Complexity, 1975.",
+"Smith, John Jr., and Flann O’Brien. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society, vol. 39, no. 3, 1945, pp. 257–308, https://doi.org/10.6600/trace.17."
+]
+},
+"bib": {
+"citations": [
+"(Hoare and Müller, vol. 72)",
+"(García et al. 96)",
+"(see Knuth and Turing, ch. 27)",
+"(see Hoare and Müller, ch. 79)",
+"(see Smith and O’Brien)",
+"(García et al. 82–134)",
+"(García et al. 87)",
+"(García et al. 6)"
+],
+"bibliography": [
+"García, Luis, et al. “On Computable Numbers.” Communications of the ACM, vol. 44, no. 6, 1969, pp. 209–329.",
+"Hoare, C. A. R., and Hans Müller. “An Axiomatic Basis for Computer Programming.” Journal of the ACM, vol. 53, no. 8, 1994, pp. 203–390, https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. TR-69, Lab Complexity, 1975.",
+"Smith, John Jr., and Flann O’Brien. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society, vol. 39, no. 3, 1945, pp. 257–308, https://doi.org/10.6600/trace.17."
+]
+}
+}

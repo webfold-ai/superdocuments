@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"e.g. [1], [2]",
+"[1], [3, p. 84]",
+"[2], [4]",
+"[5, p. 74]",
+"[5, pp. 99–132]",
+"[6, p. 22]",
+"[2, Vol. 39]",
+"[4, pp. 64–123]",
+"[7]",
+"[6], [7], [8]",
+"[1, Sec. 64.102] and more"
+],
+"bibliography": [
+"[1] D. E. Knuth and F. O’Brien, “An axiomatic basis for computer programming,” Lab Scheduler, TR-13, 1945.",
+"[2] A. M. Turing, “Time, clocks, and the ordering of events,” PhD thesis, University of Zurich, 1940. Available: https://example.org/model",
+"[3] G. Hopper and L. Lamport, Go to statement considered harmful. Cambridge University Press, 1943.",
+"[4] G. Hopper, E. W. Dijkstra, and J. Backus, “On computable numbers,” Lab Algorithm, TR-81, 1990.",
+"[5] G. Hopper and J. Backus, “Notes on the analytical engine.” https://example.org/vocabulary, 2008.",
+"[6] B. Liskov and D. E. Knuth, “The art of computer programming,” in Proceedings of the pipeline symposium, 1954, pp. 14–128. Available: https://example.org/solver",
+"[7] M. Hamilton, A. Lovelace, and A. M. Turing, “An axiomatic basis for computer programming,” Lab Scheduler, TR-41, 1956.",
+"[8] L. García, M. Hamilton, and D. E. Knuth, “An axiomatic basis for computer programming.” https://example.org/sparse, 2007."
+]
+},
+"bib": {
+"citations": [
+"e.g. [1], [2]",
+"[1], [3, p. 84]",
+"[2], [4]",
+"[5, p. 74]",
+"[5, pp. 99–132]",
+"[6, p. 22]",
+"[2, Vol. 39]",
+"[4, pp. 64–123]",
+"[7]",
+"[6], [7], [8]",
+"[1, Sec. 64.102] and more"
+],
+"bibliography": [
+"[1] D. E. Knuth and F. O’Brien, “An axiomatic basis for computer programming,” Lab Scheduler, TR-13, 1945.",
+"[2] A. M. Turing, “Time, clocks, and the ordering of events,” PhD thesis, University of Zurich, 1940. Available: https://example.org/model",
+"[3] G. Hopper and L. Lamport, Go to statement considered harmful. London: Cambridge University Press, 1943.",
+"[4] G. Hopper, E. W. Dijkstra, and J. Backus, “On computable numbers,” Lab Algorithm, TR-81, 1990.",
+"[5] G. Hopper and J. Backus, “Notes on the analytical engine.” https://example.org/vocabulary, 2008.",
+"[6] B. Liskov and D. E. Knuth, “The art of computer programming,” in Proceedings of the pipeline symposium, 1954, pp. 14–128. Available: https://example.org/solver",
+"[7] M. Hamilton, A. Lovelace, and A. M. Turing, “An axiomatic basis for computer programming,” Lab Scheduler, TR-41, 1956.",
+"[8] L. García, M. Hamilton, and D. E. Knuth, “An axiomatic basis for computer programming.” https://example.org/sparse, 2007."
+]
+}
+}

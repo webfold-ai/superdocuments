@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2], [3, p. 32]",
+"see [4]",
+"[3], [4], [5]",
+"[5, Vol. 48]",
+"[3, Fig. 34]",
+"[3, Vol. 86]"
+],
+"bibliography": [
+"[1] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[2] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[3] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[4] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[5] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2], [3, p. 32]",
+"see [4]",
+"[3], [4], [5]",
+"[5, Vol. 48]",
+"[3, Fig. 34]",
+"[3, Vol. 86]"
+],
+"bibliography": [
+"[1] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[2] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[3] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[4] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[5] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988."
+]
+}
+}

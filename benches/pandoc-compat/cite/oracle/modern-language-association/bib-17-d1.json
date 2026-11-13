@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(García 71–112)",
+"(Lamport et al.; Backus et al.)",
+"(García 26)",
+"(Liskov et al.)",
+"Liskov et al. (66–100)",
+"(Backus et al. 52)",
+"(Lovelace 4)",
+"(García, sec. 35.139 and more)",
+"(Lovelace, fig. 59)",
+"(Lamport et al. 95)",
+"Liskov et al.",
+"(García)",
+"(Backus et al.)",
+"(Backus et al.; Liskov et al.; García)"
+],
+"bibliography": [
+"Backus, John, et al. “The Art of Computer Programming.” Proceedings of the Baseline Symposium, 2015, pp. 96–179, https://example.org/ranking.",
+"García, Luis. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Stream Symposium, 1945, pp. 40–129.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962.",
+"Lovelace, Ada. Data Abstraction and Hierarchy. https://example.org/cost, 1970."
+]
+},
+"bib": {
+"citations": [
+"(García 71–112)",
+"(Lamport et al.; Backus et al.)",
+"(García 26)",
+"(Liskov et al.)",
+"Liskov et al. (66–100)",
+"(Backus et al. 52)",
+"(Lovelace 4)",
+"(García, sec. 35.139 and more)",
+"(Lovelace, fig. 59)",
+"(Lamport et al. 95)",
+"Liskov et al.",
+"(García)",
+"(Backus et al.)",
+"(Backus et al.; Liskov et al.; García)"
+],
+"bibliography": [
+"Backus, John, et al. “The Art of Computer Programming.” Proceedings of the Baseline Symposium, 2015, pp. 96–179, https://example.org/ranking.",
+"García, Luis. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Stream Symposium, 1945, pp. 40–129.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962.",
+"Lovelace, Ada. Data Abstraction and Hierarchy. https://example.org/cost, 1970."
+]
+}
+}

@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(see Backus and Lamport)",
+"(Hoare and Rossum)",
+"(see Hoare and Rossum, ch. 94)",
+"(e.g. Rossum et al.; Rossum)",
+"Backus and Lamport (19–107)",
+"(Hoare and Rossum; Rossum)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. An Axiomatic Basis for Computer Programming. https://example.org/operator, 1956.",
+"Hoare, C. A. R., and Guido van Rossum. Data Abstraction and Hierarchy. 1953, https://example.org/experiment. University of Zurich, PhD thesis.",
+"Rossum, Guido van. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 27, no. 4, 1937, pp. 248–397.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. 1941. University of Oxford, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(see Backus and Lamport)",
+"(Hoare and Rossum)",
+"(see Hoare and Rossum, ch. 94)",
+"(e.g. Rossum et al.; Rossum)",
+"Backus and Lamport (19–107)",
+"(Hoare and Rossum; Rossum)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. An Axiomatic Basis for Computer Programming. https://example.org/operator, 1956.",
+"Hoare, C. A. R., and Guido van Rossum. Data Abstraction and Hierarchy. 1953, https://example.org/experiment. University of Zurich, PhD thesis.",
+"Rossum, Guido van. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 27, no. 4, 1937, pp. 248–397.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. 1941. University of Oxford, PhD thesis."
+]
+}
+}

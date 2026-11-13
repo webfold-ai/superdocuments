@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Hoare and Müller 1994; 1937)",
+"García et al. (1969, 58–140)",
+"(see Müller et al. 1937, ch. 71)",
+"(e.g. Knuth and Turing 1975; Hoare and Müller 1994)",
+"(e.g. Rossum and Hopper 1987; Smith and Backus 2024)",
+"(Cruz 2014; 1945)",
+"(Müller et al. 1937, vol. 49)",
+"(Smith and O’Brien 1945; Rossum and Hopper 1987, 88)",
+"(Knuth and Turing 1975)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"García, Luis, Donald E. Knuth, and Maria de la Cruz. 1969. “On Computable Numbers.” Communications of the ACM 44 (6): 209–329.",
+"Hoare, C. A. R., and Hans Müller. 1994. “An Axiomatic Basis for Computer Programming.” Journal of the ACM 53 (8): 203–390. https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. 1975. Can Programming Be Liberated from the von Neumann Style. TR-69. Lab Complexity.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Rossum, Guido van, and Grace Hopper. 1987. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Entropy Symposium, 98–186.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Proceedings of the Schema Symposium, 24–188.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39 (3): 257–308. https://doi.org/10.6600/trace.17."
+]
+},
+"bib": {
+"citations": [
+"(Hoare and Müller 1994; 1937)",
+"García et al. (1969, 58–140)",
+"(see Müller et al. 1937, ch. 71)",
+"(e.g. Knuth and Turing 1975; Hoare and Müller 1994)",
+"(e.g. Rossum and Hopper 1987; Smith and Backus 2024)",
+"(Cruz 2014; 1945)",
+"(Müller et al. 1937, vol. 49)",
+"(Smith and O’Brien 1945; Rossum and Hopper 1987, 88)",
+"(Knuth and Turing 1975)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"García, Luis, Donald E. Knuth, and Maria de la Cruz. 1969. “On Computable Numbers.” Communications of the ACM 44 (6): 209–329.",
+"Hoare, C. A. R., and Hans Müller. 1994. “An Axiomatic Basis for Computer Programming.” Journal of the ACM 53 (8): 203–390. https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. 1975. Can Programming Be Liberated from the von Neumann Style. TR-69. Lab Complexity.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Rossum, Guido van, and Grace Hopper. 1987. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Entropy Symposium, 98–186.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Proceedings of the Schema Symposium, 24–188.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39 (3): 257–308. https://doi.org/10.6600/trace.17."
+]
+}
+}

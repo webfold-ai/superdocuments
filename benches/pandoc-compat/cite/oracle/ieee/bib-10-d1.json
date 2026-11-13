@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2, p. 12]",
+"[3, p. 47]",
+"[4, p. 44]",
+"[3, Sec. 11.126] and more",
+"[1, Sec. 63.125] and more",
+"[1], [4]",
+"[4]",
+"see [1, Ch. 17]",
+"[1]",
+"[2]"
+],
+"bibliography": [
+"[1] M. de la Cruz and M. Hamilton, “Notes on the analytical engine,” Lab Throughput, TR-4, 1975.",
+"[2] B. Liskov, Can programming be liberated from the von neumann style. London: Springer, 1946. Available: https://example.org/learning",
+"[3] C. A. R. Hoare, “On computable numbers,” PhD thesis, University of Oxford, 2011.",
+"[4] J. Jr. Smith, C. A. R. Hoare, and D. E. Knuth, “Go to statement considered harmful,” Lab Function, TR-29, 1999."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2, p. 12]",
+"[3, p. 47]",
+"[4, p. 44]",
+"[3, Sec. 11.126] and more",
+"[1, Sec. 63.125] and more",
+"[1], [4]",
+"[4]",
+"see [1, Ch. 17]",
+"[1]",
+"[2]"
+],
+"bibliography": [
+"[1] M. de la Cruz and M. Hamilton, “Notes on the analytical engine,” Lab Throughput, TR-4, 1975.",
+"[2] B. Liskov, Can programming be liberated from the von neumann style. London: Springer, 1946. Available: https://example.org/learning",
+"[3] C. A. R. Hoare, “On computable numbers,” PhD thesis, University of Oxford, 2011.",
+"[4] J. Jr. Smith, C. A. R. Hoare, and D. E. Knuth, “Go to statement considered harmful,” Lab Function, TR-29, 1999."
+]
+}
+}

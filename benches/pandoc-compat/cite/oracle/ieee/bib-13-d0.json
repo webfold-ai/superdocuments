@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, pp. 54–105]",
+"[2, pp. 25–102]",
+"[3], [4], [5]",
+"[2]",
+"[1, Sec. 61.106] and more",
+"[6, Sec. 67.131] and more",
+"[2], [5, p. 75]",
+"[4], [6]",
+"[6, p. 96]",
+"[4], [5]"
+],
+"bibliography": [
+"[1] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[2] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[3] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[4] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[5] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[6] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024."
+]
+},
+"bib": {
+"citations": [
+"[1, pp. 54–105]",
+"[2, pp. 25–102]",
+"[3], [4], [5]",
+"[2]",
+"[1, Sec. 61.106] and more",
+"[6, Sec. 67.131] and more",
+"[2], [5, p. 75]",
+"[4], [6]",
+"[6, p. 96]",
+"[4], [5]"
+],
+"bibliography": [
+"[1] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[2] L. Lamport, G. Hopper, and D. E. Knuth, “Time, clocks, and the ordering of events.” https://example.org/retrieval, 2007.",
+"[3] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[4] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[5] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946.",
+"[6] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024."
+]
+}
+}

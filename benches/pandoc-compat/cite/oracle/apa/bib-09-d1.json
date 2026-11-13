@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Hoare, 1947; Lamport & Turing, 1938; O’Brien et al., 1956)",
+"(O’Brien et al., 1956, p. 93; Turing et al., 1979)",
+"Lamport & Turing (1938, p. 57)",
+"Hamilton et al. (2008, p. 32)",
+"(Hoare, 1947, p. 47)",
+"(Hoare, 1947; Smith, 2017, p. 42)",
+"(O’Brien et al., 1956, Volume 65)",
+"(Smith, 2017, p. 32)",
+"(Lamport & Turing, 1938; e.g. Turing et al., 1979)",
+"(see Smith, 2017, ch. 48)",
+"(Turing et al., 1979, Section 25.110 and more)",
+"(Hamilton et al., 2008; Turing et al., 1979, p. 2)",
+"O’Brien et al. (1956, p. 14)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J., & Turing, A. M. (2008). Can programming be liberated from the von neumann style (3rd ed.). Springer.",
+"Hoare, C. A. R. (1947). The art of computer programming [PhD thesis]. University of Cambridge.",
+"Lamport, L., & Turing, A. M. (1938). Go to statement considered harmful. Proceedings of the Distribution Symposium, 67–141.",
+"O’Brien, F., Cruz, M. de la, & Hopper, G. (1956). An axiomatic basis for computer programming. Springer. https://example.org/filter",
+"Smith, J. Jr. (2017). The education of a computer [PhD thesis]. University of Oxford.",
+"Turing, A. M., Lamport, L., & Lovelace, A. (1979). The art of computer programming. https://example.org/index."
+]
+},
+"bib": {
+"citations": [
+"(Hoare, 1947; Lamport & Turing, 1938; O’Brien et al., 1956)",
+"(O’Brien et al., 1956, p. 93; Turing et al., 1979)",
+"Lamport & Turing (1938, p. 57)",
+"Hamilton et al. (2008, p. 32)",
+"(Hoare, 1947, p. 47)",
+"(Hoare, 1947; Smith, 2017, p. 42)",
+"(O’Brien et al., 1956, Volume 65)",
+"(Smith, 2017, p. 32)",
+"(Lamport & Turing, 1938; e.g. Turing et al., 1979)",
+"(see Smith, 2017, ch. 48)",
+"(Turing et al., 1979, Section 25.110 and more)",
+"(Hamilton et al., 2008; Turing et al., 1979, p. 2)",
+"O’Brien et al. (1956, p. 14)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J., & Turing, A. M. (2008). Can programming be liberated from the von neumann style (3rd ed.). Springer.",
+"Hoare, C. A. R. (1947). The art of computer programming [PhD thesis]. University of Cambridge.",
+"Lamport, L., & Turing, A. M. (1938). Go to statement considered harmful. Proceedings of the Distribution Symposium, 67–141.",
+"O’Brien, F., Cruz, M. de la, & Hopper, G. (1956). An axiomatic basis for computer programming. Springer. https://example.org/filter",
+"Smith, J. Jr. (2017). The education of a computer [PhD thesis]. University of Oxford.",
+"Turing, A. M., Lamport, L., & Lovelace, A. (1979). The art of computer programming. https://example.org/index."
+]
+}
+}

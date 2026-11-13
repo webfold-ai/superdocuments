@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Backus et al., 1966, p. 29; Rossum et al., 1993)",
+"(Backus et al., 1966, p. 95)",
+"(see Cruz et al., 1971)",
+"(Hoare et al., 2016, p. 30)",
+"(Hoare et al., 2016, pp. 8–127)",
+"(Hoare et al., 2016, p. 55; Rossum et al., 1993)",
+"(Cruz et al., 1971; Müller, 2013; Rossum & Hoare, 1967)"
+],
+"bibliography": [
+"Backus, J., Hopper, G., & Lamport, L. (1966). Data abstraction and hierarchy [PhD thesis, University of Cambridge]. https://example.org/benchmark",
+"Cruz, M. de la, O’Brien, F., & Hopper, G. (1971). The art of computer programming (TR-84). Lab Throughput. https://example.org/complexity",
+"Hoare, C. A. R., Lovelace, A., & Turing, A. M. (2016). Notes on the analytical engine (TR-43). Lab Feature.",
+"Müller, H. (2013). Notes on the analytical engine (TR-96). Lab Bound. https://example.org/entropy",
+"Rossum, G. van, Backus, J., & Liskov, B. (1993). Go to statement considered harmful. https://example.org/latency. https://example.org/pipeline",
+"Rossum, G. van, & Hoare, C. A. R. (1967). Go to statement considered harmful. https://example.org/analysis. https://example.org/cache"
+]
+},
+"bib": {
+"citations": [
+"(Backus et al., 1966, p. 29; Rossum et al., 1993)",
+"(Backus et al., 1966, p. 95)",
+"(see Cruz et al., 1971)",
+"(Hoare et al., 2016, p. 30)",
+"(Hoare et al., 2016, pp. 8–127)",
+"(Hoare et al., 2016, p. 55; Rossum et al., 1993)",
+"(Cruz et al., 1971; Müller, 2013; Rossum & Hoare, 1967)"
+],
+"bibliography": [
+"Backus, J., Hopper, G., & Lamport, L. (1966). Data abstraction and hierarchy [PhD thesis, University of Cambridge]. https://example.org/benchmark",
+"Cruz, M. de la, O’Brien, F., & Hopper, G. (1971). The art of computer programming (TR-84). Lab Throughput. https://example.org/complexity",
+"Hoare, C. A. R., Lovelace, A., & Turing, A. M. (2016). Notes on the analytical engine (TR-43). Lab Feature.",
+"Müller, H. (2013). Notes on the analytical engine (TR-96). Lab Bound. https://example.org/entropy",
+"Rossum, G. van, Backus, J., & Liskov, B. (1993). Go to statement considered harmful. https://example.org/latency. https://example.org/pipeline",
+"Rossum, G. van, & Hoare, C. A. R. (1967). Go to statement considered harmful. https://example.org/analysis. https://example.org/cache"
+]
+}
+}

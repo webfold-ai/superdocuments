@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Knuth & Smith, 1991, p. 29)",
+"(Müller, 1992, p. 97)",
+"(1994; Knuth, 1955)",
+"(see Knuth & Smith, 1991)",
+"Lamport (1992, pp. 34–117)",
+"(see Müller, 1992, ch. 32)",
+"(see Knuth, 1955, ch. 76)",
+"(Hamilton et al., 1936; 1975)",
+"Müller (1992)",
+"(Lamport, 1992, p. 82)",
+"(Lamport, 1992, Figure 2)",
+"(see Lovelace, 1984)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J., & Rossum, G. van. (1936). On computable numbers. Proceedings of the Token Symposium, 76–170.",
+"Hoare, C. A. R., & Hamilton, M. (1975). The art of computer programming (2nd ed.). MIT Press.",
+"Hoare, C. A. R., Smith, J. Jr., & Müller, H. (1994). On computable numbers. IEEE Transactions on Software Engineering, 59(1), 57–370. https://doi.org/10.2998/function.87",
+"Knuth, D. E. (1955). Data abstraction and hierarchy [PhD thesis]. University of Zurich.",
+"Knuth, D. E., & Smith, J. Jr. (1991). Can programming be liberated from the von neumann style [PhD thesis]. University of Cambridge.",
+"Lamport, L. (1992). Can programming be liberated from the von neumann style. Springer. https://example.org/query",
+"Lovelace, A. (1984). Can programming be liberated from the von neumann style [PhD thesis, University of Cambridge]. https://example.org/pipeline",
+"Müller, H. (1992). Can programming be liberated from the von neumann style. Proceedings of the Distribution Symposium, 94–142."
+]
+},
+"bib": {
+"citations": [
+"(Knuth & Smith, 1991, p. 29)",
+"(Müller, 1992, p. 97)",
+"(1994; Knuth, 1955)",
+"(see Knuth & Smith, 1991)",
+"Lamport (1992, pp. 34–117)",
+"(see Müller, 1992, ch. 32)",
+"(see Knuth, 1955, ch. 76)",
+"(Hamilton et al., 1936; 1975)",
+"Müller (1992)",
+"(Lamport, 1992, p. 82)",
+"(Lamport, 1992, Figure 2)",
+"(see Lovelace, 1984)"
+],
+"bibliography": [
+"Hamilton, M., Backus, J., & Rossum, G. van. (1936). On computable numbers. Proceedings of the Token Symposium, 76–170.",
+"Hoare, C. A. R., & Hamilton, M. (1975). The art of computer programming (2nd ed.). MIT Press.",
+"Hoare, C. A. R., Smith, J. Jr., & Müller, H. (1994). On computable numbers. IEEE Transactions on Software Engineering, 59(1), 57–370. https://doi.org/10.2998/function.87",
+"Knuth, D. E. (1955). Data abstraction and hierarchy [PhD thesis]. University of Zurich.",
+"Knuth, D. E., & Smith, J. Jr. (1991). Can programming be liberated from the von neumann style [PhD thesis]. University of Cambridge.",
+"Lamport, L. (1992). Can programming be liberated from the von neumann style. Springer. https://example.org/query",
+"Lovelace, A. (1984). Can programming be liberated from the von neumann style [PhD thesis, University of Cambridge]. https://example.org/pipeline",
+"Müller, H. (1992). Can programming be liberated from the von neumann style. Proceedings of the Distribution Symposium, 94–142."
+]
+}
+}

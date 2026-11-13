@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"3",
+"2",
+"3",
+"3,4",
+"see 5",
+"4,5"
+],
+"bibliography": [
+"1. Liskov, B. & Knuth, D. E. The art of computer programming. in Proceedings of the pipeline symposium 14–128 (1954).",
+"2. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990).",
+"3. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"4. Hamilton, M., Lovelace, A. & Turing, A. M. An Axiomatic Basis for Computer Programming. (1956).",
+"5. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007)."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"3",
+"2",
+"3",
+"3,4",
+"see 5",
+"4,5"
+],
+"bibliography": [
+"1. Liskov, B. & Knuth, D. E. The art of computer programming. in Proceedings of the pipeline symposium 14–128 (1954).",
+"2. Hopper, G., Dijkstra, E. W. & Backus, J. On Computable Numbers. (1990).",
+"3. Knuth, D. E. & O’Brien, F. An Axiomatic Basis for Computer Programming. (1945).",
+"4. Hamilton, M., Lovelace, A. & Turing, A. M. An Axiomatic Basis for Computer Programming. (1956).",
+"5. García, L., Hamilton, M. & Knuth, D. E. An axiomatic basis for computer programming. (2007)."
+]
+}
+}

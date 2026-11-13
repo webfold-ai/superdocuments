@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Hoare)",
+"(Hoare, fig. 78)",
+"(Dijkstra 16–116)",
+"(e.g. Cruz and O’Brien; Hoare)",
+"(see Hoare)",
+"(Knuth; Cruz and O’Brien 47)",
+"(see Hoare, ch. 92)",
+"Dijkstra (23)",
+"(Knuth 63–134)",
+"(Cruz and Knuth, vol. 55)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. “The Education of a Computer.” Proceedings of the London Mathematical Society, vol. 31, no. 7, 1959, pp. 150–375, https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. Data Abstraction and Hierarchy. https://example.org/algorithm, 1996, https://example.org/ranking.",
+"Dijkstra, Edsger W. On Computable Numbers. TR-13, Lab Estimate, 2000.",
+"Hoare, C. A. R. Can Programming Be Liberated from the von Neumann Style. TR-85, Lab Parser, 1994.",
+"Knuth, Donald E. “Go to Statement Considered Harmful.” Proceedings of the Feature Symposium, 1971, pp. 63–156."
+]
+},
+"bib": {
+"citations": [
+"(Hoare)",
+"(Hoare, fig. 78)",
+"(Dijkstra 16–116)",
+"(e.g. Cruz and O’Brien; Hoare)",
+"(see Hoare)",
+"(Knuth; Cruz and O’Brien 47)",
+"(see Hoare, ch. 92)",
+"Dijkstra (23)",
+"(Knuth 63–134)",
+"(Cruz and Knuth, vol. 55)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Donald E. Knuth. “The Education of a Computer.” Proceedings of the London Mathematical Society, vol. 31, no. 7, 1959, pp. 150–375, https://doi.org/10.2214/heuristic.97.",
+"Cruz, Maria de la, and Flann O’Brien. Data Abstraction and Hierarchy. https://example.org/algorithm, 1996, https://example.org/ranking.",
+"Dijkstra, Edsger W. On Computable Numbers. TR-13, Lab Estimate, 2000.",
+"Hoare, C. A. R. Can Programming Be Liberated from the von Neumann Style. TR-85, Lab Parser, 1994.",
+"Knuth, Donald E. “Go to Statement Considered Harmful.” Proceedings of the Feature Symposium, 1971, pp. 63–156."
+]
+}
+}

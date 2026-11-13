@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Smith and Hopper",
+"(e.g. Hoare et al.; Liskov and Smith)",
+"(Turing 61)",
+"(García and Rossum 34–132)",
+"(García and Rossum, fig. 2)",
+"Liskov and Smith",
+"(Müller; Turing 2)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. On Computable Numbers. 2nd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., et al. An Axiomatic Basis for Computer Programming. Second, Springer, 1941, https://example.org/experiment.",
+"Liskov, Barbara, and John Jr. Smith. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 11, no. 7, 1936, pp. 127–305, https://doi.org/10.8852/decoder.67.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1948. University of Oxford, PhD thesis.",
+"Smith, John Jr., and Grace Hopper. “The Education of a Computer.” Proceedings of the Convergence Symposium, 2022, pp. 61–101.",
+"Turing, Alan M. The Art of Computer Programming. Springer, 1994, https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"Smith and Hopper",
+"(e.g. Hoare et al.; Liskov and Smith)",
+"(Turing 61)",
+"(García and Rossum 34–132)",
+"(García and Rossum, fig. 2)",
+"Liskov and Smith",
+"(Müller; Turing 2)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. On Computable Numbers. 2nd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., et al. An Axiomatic Basis for Computer Programming. Second, Springer, 1941, https://example.org/experiment.",
+"Liskov, Barbara, and John Jr. Smith. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 11, no. 7, 1936, pp. 127–305, https://doi.org/10.8852/decoder.67.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1948. University of Oxford, PhD thesis.",
+"Smith, John Jr., and Grace Hopper. “The Education of a Computer.” Proceedings of the Convergence Symposium, 2022, pp. 61–101.",
+"Turing, Alan M. The Art of Computer Programming. Springer, 1994, https://example.org/workload."
+]
+}
+}

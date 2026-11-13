@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"1",
+"e.g. 2,3",
+"2",
+"4",
+"4,5",
+"see 6",
+"7",
+"1",
+"see 5, ch. 24",
+"8",
+"2,6",
+"3",
+"6"
+],
+"bibliography": [
+"1. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949).",
+"2. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, 1970).",
+"3. Lovelace, A. Can programming be liberated from the von neumann style. ACM Computing Surveys 33, 183–370 (1940).",
+"4. Liskov, B., García, L. & Müller, H. An axiomatic basis for computer programming. (University of Cambridge, 1992).",
+"5. Liskov, B. On Computable Numbers. https://example.org/analysis (1956).",
+"6. Hopper, G., Hamilton, M. & Smith, J. Jr. The apollo guidance computer. in Proceedings of the vector symposium 95–188 (1939).",
+"7. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992).",
+"8. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"e.g. 2,3",
+"2",
+"4",
+"4,5",
+"see 6",
+"7",
+"1",
+"see 5, ch. 24",
+"8",
+"2,6",
+"3",
+"6"
+],
+"bibliography": [
+"1. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949).",
+"2. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, London, 1970).",
+"3. Lovelace, A. Can programming be liberated from the von neumann style. ACM Computing Surveys 33, 183–370 (1940).",
+"4. Liskov, B., García, L. & Müller, H. An axiomatic basis for computer programming. (University of Cambridge, 1992).",
+"5. Liskov, B. On Computable Numbers. https://example.org/analysis (1956).",
+"6. Hopper, G., Hamilton, M. & Smith, J. Jr. The apollo guidance computer. in Proceedings of the vector symposium 95–188 (1939).",
+"7. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992).",
+"8. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004)."
+]
+}
+}

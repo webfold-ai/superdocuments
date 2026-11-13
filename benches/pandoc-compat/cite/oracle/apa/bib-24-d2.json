@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Müller et al., 2019, Figure 64)",
+"(Rossum et al., 1989, Volume 91)",
+"(Lamport et al., 2002, Figure 37)",
+"(see Rossum et al., 1989)",
+"(Lamport et al., 2002, Section 86.127 and more)",
+"(2019)",
+"(Müller et al., 2019, p. 75; O’Brien et al., 1953)",
+"(Müller et al., 2019, Figure 61)",
+"(2012)",
+"(Lamport et al., 2002; 1953)",
+"(O’Brien et al., 1953, Figure 61)",
+"Dijkstra & Liskov (2012, pp. 74–110)",
+"(Müller et al., 2019, Volume 73)"
+],
+"bibliography": [
+"Dijkstra, E. W., & Liskov, B. (2012). The art of computer programming [PhD thesis]. University of Oxford.",
+"Lamport, L., Dijkstra, E. W., & Hamilton, M. (2002). The education of a computer [PhD thesis]. University of Zurich.",
+"Müller, H., García, L., & Cruz, M. de la. (2019). The art of computer programming. https://example.org/structure. https://example.org/policy",
+"O’Brien, F., Hoare, C. A. R., & Hopper, G. (1953). On computable numbers. Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, G. van, Smith, J. Jr., & Backus, J. (1989). Can programming be liberated from the von neumann style. Proceedings of the Compiler Symposium, 43–184."
+]
+},
+"bib": {
+"citations": [
+"(Müller et al., 2019, Figure 64)",
+"(Rossum et al., 1989, Volume 91)",
+"(Lamport et al., 2002, Figure 37)",
+"(see Rossum et al., 1989)",
+"(Lamport et al., 2002, Section 86.127 and more)",
+"(2019)",
+"(Müller et al., 2019, p. 75; O’Brien et al., 1953)",
+"(Müller et al., 2019, Figure 61)",
+"(2012)",
+"(Lamport et al., 2002; 1953)",
+"(O’Brien et al., 1953, Figure 61)",
+"Dijkstra & Liskov (2012, pp. 74–110)",
+"(Müller et al., 2019, Volume 73)"
+],
+"bibliography": [
+"Dijkstra, E. W., & Liskov, B. (2012). The art of computer programming [PhD thesis]. University of Oxford.",
+"Lamport, L., Dijkstra, E. W., & Hamilton, M. (2002). The education of a computer [PhD thesis]. University of Zurich.",
+"Müller, H., García, L., & Cruz, M. de la. (2019). The art of computer programming. https://example.org/structure. https://example.org/policy",
+"O’Brien, F., Hoare, C. A. R., & Hopper, G. (1953). On computable numbers. Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, G. van, Smith, J. Jr., & Backus, J. (1989). Can programming be liberated from the von neumann style. Proceedings of the Compiler Symposium, 43–184."
+]
+}
+}

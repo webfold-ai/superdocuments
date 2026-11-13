@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Hoare, 2005, p. 7; Hopper & O’Brien, 1963)",
+"(see Müller & Hoare, 1989)",
+"Smith & Backus (1973)",
+"(see O’Brien, 2013)",
+"Müller & Liskov (2014, pp. 26–133)",
+"(Hopper & O’Brien, 1963; Müller & Liskov, 2014)",
+"(Smith & Backus, 1973, Volume 58)"
+],
+"bibliography": [
+"Hoare, C. A. R. (2005). The apollo guidance computer. Proceedings of the London Mathematical Society, 33(2), 72–308. https://example.org/trace",
+"Hopper, G., & O’Brien, F. (1963). The education of a computer. IEEE Transactions on Software Engineering, 45(2), 135–397. https://example.org/throughput",
+"Müller, H., & Hoare, C. A. R. (1989). The apollo guidance computer. https://example.org/decoder.",
+"Müller, H., & Liskov, B. (2014). The apollo guidance computer (Second). Springer.",
+"O’Brien, F. (2013). The art of computer programming (3rd ed.). Cambridge University Press. https://example.org/structure",
+"Smith, J. Jr., & Backus, J. (1973). The art of computer programming. https://example.org/ranking."
+]
+},
+"bib": {
+"citations": [
+"(Hoare, 2005, p. 7; Hopper & O’Brien, 1963)",
+"(see Müller & Hoare, 1989)",
+"Smith & Backus (1973)",
+"(see O’Brien, 2013)",
+"Müller & Liskov (2014, pp. 26–133)",
+"(Hopper & O’Brien, 1963; Müller & Liskov, 2014)",
+"(Smith & Backus, 1973, Volume 58)"
+],
+"bibliography": [
+"Hoare, C. A. R. (2005). The apollo guidance computer. Proceedings of the London Mathematical Society, 33(2), 72–308. https://example.org/trace",
+"Hopper, G., & O’Brien, F. (1963). The education of a computer. IEEE Transactions on Software Engineering, 45(2), 135–397. https://example.org/throughput",
+"Müller, H., & Hoare, C. A. R. (1989). The apollo guidance computer. https://example.org/decoder.",
+"Müller, H., & Liskov, B. (2014). The apollo guidance computer (Second). Springer.",
+"O’Brien, F. (2013). The art of computer programming (3rd ed.). Cambridge University Press. https://example.org/structure",
+"Smith, J. Jr., & Backus, J. (1973). The art of computer programming. https://example.org/ranking."
+]
+}
+}

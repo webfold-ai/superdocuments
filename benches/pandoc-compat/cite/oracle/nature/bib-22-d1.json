@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"see 1",
+"2,3",
+"1,4",
+"5",
+"3",
+"4",
+"6",
+"2",
+"5"
+],
+"bibliography": [
+"1. Hopper, G. & Hamilton, M. On Computable Numbers. (1988).",
+"2. Knuth, D. E., Smith, J. Jr. & Dijkstra, E. W. An axiomatic basis for computer programming. in Proceedings of the latency symposium 26–101 (1962).",
+"3. Hopper, G., O’Brien, F. & Cruz, M. de la. On computable numbers. (University of Oxford, 1941).",
+"4. Smith, J. Jr. & García, L. Can programming be liberated from the von neumann style. Communications of the ACM 46, 223–398 (1993).",
+"5. Müller, H. Data Abstraction and Hierarchy. (MIT Press, 1947).",
+"6. Hopper, G., Lamport, L. & Smith, J. Jr. On Computable Numbers. (Springer, 2019)."
+]
+},
+"bib": {
+"citations": [
+"see 1",
+"2,3",
+"1,4",
+"5",
+"3",
+"4",
+"6",
+"2",
+"5"
+],
+"bibliography": [
+"1. Hopper, G. & Hamilton, M. On Computable Numbers. (1988).",
+"2. Knuth, D. E., Smith, J. Jr. & Dijkstra, E. W. An axiomatic basis for computer programming. in Proceedings of the latency symposium 26–101 (1962).",
+"3. Hopper, G., O’Brien, F. & Cruz, M. de la. On computable numbers. (University of Oxford, 1941).",
+"4. Smith, J. Jr. & García, L. Can programming be liberated from the von neumann style. Communications of the ACM 46, 223–398 (1993).",
+"5. Müller, H. Data Abstraction and Hierarchy. (MIT Press, London, 1947).",
+"6. Hopper, G., Lamport, L. & Smith, J. Jr. On Computable Numbers. (Springer, New York, 2019)."
+]
+}
+}

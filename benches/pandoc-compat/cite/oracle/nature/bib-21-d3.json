@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3",
+"see 4",
+"5 and more",
+"4,6",
+"5",
+"see 4, ch. 45",
+"4",
+"6",
+"3,4"
+],
+"bibliography": [
+"1. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004).",
+"2. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, 1970).",
+"3. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949).",
+"4. O’Brien, F. & Backus, J. Go to Statement Considered Harmful. (Addison-Wesley, 2024).",
+"5. Cruz, M. de la. Go to statement considered harmful. in Proceedings of the network symposium 81–115 (2007).",
+"6. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3",
+"see 4",
+"5 and more",
+"4,6",
+"5",
+"see 4, ch. 45",
+"4",
+"6",
+"3,4"
+],
+"bibliography": [
+"1. Dijkstra, E. W. & García, L. Data abstraction and hierarchy. (University of Cambridge, 2004).",
+"2. Dijkstra, E. W., Rossum, G. van & Lamport, L. Time, Clocks, and the Ordering of Events. (Springer, London, 1970).",
+"3. Turing, A. M. The apollo guidance computer. Journal of the ACM 4, 240–315 (1949).",
+"4. O’Brien, F. & Backus, J. Go to Statement Considered Harmful. (Addison-Wesley, New York, 2024).",
+"5. Cruz, M. de la. Go to statement considered harmful. in Proceedings of the network symposium 81–115 (2007).",
+"6. Hamilton, M., Liskov, B. & Rossum, G. van. An axiomatic basis for computer programming. (1992)."
+]
+}
+}

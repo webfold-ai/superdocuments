@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3",
+"see 4",
+"3–5",
+"5",
+"3",
+"3"
+],
+"bibliography": [
+"1. Lamport, L., Hopper, G. & Knuth, D. E. Time, clocks, and the ordering of events. (2007).",
+"2. Smith, J. Jr. & Liskov, B. Notes on the analytical engine. (2024).",
+"3. Müller, H. & Hoare, C. A. R. The art of computer programming. (2024).",
+"4. Liskov, B. Data abstraction and hierarchy. (1946).",
+"5. Smith, J. Jr. & Backus, J. The apollo guidance computer. (University of Zurich, 1988)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3",
+"see 4",
+"3–5",
+"5",
+"3",
+"3"
+],
+"bibliography": [
+"1. Lamport, L., Hopper, G. & Knuth, D. E. Time, clocks, and the ordering of events. (2007).",
+"2. Smith, J. Jr. & Liskov, B. Notes on the analytical engine. (2024).",
+"3. Müller, H. & Hoare, C. A. R. The art of computer programming. (2024).",
+"4. Liskov, B. Data abstraction and hierarchy. (1946).",
+"5. Smith, J. Jr. & Backus, J. The apollo guidance computer. (University of Zurich, 1988)."
+]
+}
+}

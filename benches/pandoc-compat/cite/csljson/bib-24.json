@@ -1,0 +1,189 @@
+[
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1969
+        ]
+      ]
+    },
+    "number": "TR-82",
+    "publisher": "Lab Function",
+    "title": "The apollo guidance computer",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          2002
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "The education of a computer",
+    "type": "thesis"
+  },
+  {
+    "URL": "https://example.org/policy",
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/structure",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the optimizer symposium",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1953
+        ]
+      ]
+    },
+    "page": "43-145",
+    "title": "On computable numbers",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1965
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "container-title": "Proceedings of the compiler symposium",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1989
+        ]
+      ]
+    },
+    "page": "43-184",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2012
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "The art of computer programming",
+    "type": "thesis"
+  }
+]

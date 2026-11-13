@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Lovelace & Hopper, 1969, Figure 66)",
+"(Hoare et al., 1948, pp. 61–106)",
+"(Hoare et al., 1948)",
+"(Lovelace & Hamilton, 2017, p. 32)",
+"(Smith et al., 1939, pp. 51–128)",
+"Lovelace & Hamilton (2017, p. 63)",
+"(Lovelace & Hamilton, 2017, Section 76.127 and more)",
+"Smith et al. (1939, p. 98)",
+"Smith et al. (1939)",
+"(2017)",
+"(Lovelace & Hamilton, 2017, p. 34)",
+"(Lovelace & Hamilton, 2017, pp. 22–123)"
+],
+"bibliography": [
+"Hoare, C. A. R., Dijkstra, E. W., & Müller, H. (1948). The art of computer programming (TR-38). Lab Metric. https://example.org/memory",
+"Lovelace, A., & Hamilton, M. (2017). Notes on the analytical engine. MIT Press. https://example.org/tree",
+"Lovelace, A., & Hopper, G. (1969). An axiomatic basis for computer programming. Proceedings of the Array Symposium, 14–120.",
+"Smith, J. Jr., Backus, J., & Hoare, C. A. R. (1939). On computable numbers (Second). Cambridge University Press."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace & Hopper, 1969, Figure 66)",
+"(Hoare et al., 1948, pp. 61–106)",
+"(Hoare et al., 1948)",
+"(Lovelace & Hamilton, 2017, p. 32)",
+"(Smith et al., 1939, pp. 51–128)",
+"Lovelace & Hamilton (2017, p. 63)",
+"(Lovelace & Hamilton, 2017, Section 76.127 and more)",
+"Smith et al. (1939, p. 98)",
+"Smith et al. (1939)",
+"(2017)",
+"(Lovelace & Hamilton, 2017, p. 34)",
+"(Lovelace & Hamilton, 2017, pp. 22–123)"
+],
+"bibliography": [
+"Hoare, C. A. R., Dijkstra, E. W., & Müller, H. (1948). The art of computer programming (TR-38). Lab Metric. https://example.org/memory",
+"Lovelace, A., & Hamilton, M. (2017). Notes on the analytical engine. MIT Press. https://example.org/tree",
+"Lovelace, A., & Hopper, G. (1969). An axiomatic basis for computer programming. Proceedings of the Array Symposium, 14–120.",
+"Smith, J. Jr., Backus, J., & Hoare, C. A. R. (1939). On computable numbers (Second). Cambridge University Press."
+]
+}
+}

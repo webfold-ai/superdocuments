@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Lamport & Dijkstra, 1953, p. 45; O’Brien, 1948)",
+"(see Turing, 2018, ch. 75)",
+"(García & Knuth, 1995, Figure 54)",
+"(see Liskov et al., 1949, ch. 87)",
+"(1949)",
+"(e.g. García & Knuth, 1995; Liskov et al., 1949)",
+"Turing (2018)",
+"(1999)",
+"(Lamport & Dijkstra, 1953; Lamport & García, 1999; O’Brien, 1948)"
+],
+"bibliography": [
+"García, L., & Knuth, D. E. (1995). On computable numbers (TR-47). Lab Compiler.",
+"Lamport, L., & Dijkstra, E. W. (1953). Data abstraction and hierarchy (Second). Springer.",
+"Lamport, L., & García, L. (1999). Notes on the analytical engine (3rd ed.). Cambridge University Press.",
+"Liskov, B., Hamilton, M., & Lovelace, A. (1949). The apollo guidance computer. Communications of the ACM, 50(11), 159–344.",
+"O’Brien, F. (1948). Time, clocks, and the ordering of events (TR-87). Lab Array.",
+"Turing, A. M. (2018). Go to statement considered harmful. Proceedings of the Array Symposium, 62–190."
+]
+},
+"bib": {
+"citations": [
+"(Lamport & Dijkstra, 1953, p. 45; O’Brien, 1948)",
+"(see Turing, 2018, ch. 75)",
+"(García & Knuth, 1995, Figure 54)",
+"(see Liskov et al., 1949, ch. 87)",
+"(1949)",
+"(e.g. García & Knuth, 1995; Liskov et al., 1949)",
+"Turing (2018)",
+"(1999)",
+"(Lamport & Dijkstra, 1953; Lamport & García, 1999; O’Brien, 1948)"
+],
+"bibliography": [
+"García, L., & Knuth, D. E. (1995). On computable numbers (TR-47). Lab Compiler.",
+"Lamport, L., & Dijkstra, E. W. (1953). Data abstraction and hierarchy (Second). Springer.",
+"Lamport, L., & García, L. (1999). Notes on the analytical engine (3rd ed.). Cambridge University Press.",
+"Liskov, B., Hamilton, M., & Lovelace, A. (1949). The apollo guidance computer. Communications of the ACM, 50(11), 159–344.",
+"O’Brien, F. (1948). Time, clocks, and the ordering of events (TR-87). Lab Array.",
+"Turing, A. M. (2018). Go to statement considered harmful. Proceedings of the Array Symposium, 62–190."
+]
+}
+}

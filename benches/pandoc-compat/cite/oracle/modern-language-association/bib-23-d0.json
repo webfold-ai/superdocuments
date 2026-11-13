@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Liskov, ch. 8)",
+"(Cruz 18)",
+"Dijkstra",
+"(Lamport et al.; Dijkstra 40)",
+"(Liskov)",
+"(Lamport et al., sec. 10.130 and more)",
+"(Turing, vol. 46)"
+],
+"bibliography": [
+"Cruz, Maria de la. Notes on the Analytical Engine. MIT Press, 1951.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Journal of the ACM, vol. 33, no. 2, 1993, pp. 39–369.",
+"Lamport, Leslie, et al. The Education of a Computer. Addison-Wesley, 2017.",
+"Liskov, Barbara. The Art of Computer Programming. TR-62, Lab Optimizer, 1944.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. https://example.org/solver, 1968."
+]
+},
+"bib": {
+"citations": [
+"(see Liskov, ch. 8)",
+"(Cruz 18)",
+"Dijkstra",
+"(Lamport et al.; Dijkstra 40)",
+"(Liskov)",
+"(Lamport et al., sec. 10.130 and more)",
+"(Turing, vol. 46)"
+],
+"bibliography": [
+"Cruz, Maria de la. Notes on the Analytical Engine. MIT Press, 1951.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Journal of the ACM, vol. 33, no. 2, 1993, pp. 39–369.",
+"Lamport, Leslie, et al. The Education of a Computer. Addison-Wesley, 2017.",
+"Liskov, Barbara. The Art of Computer Programming. TR-62, Lab Optimizer, 1944.",
+"Turing, Alan M. Time, Clocks, and the Ordering of Events. https://example.org/solver, 1968."
+]
+}
+}

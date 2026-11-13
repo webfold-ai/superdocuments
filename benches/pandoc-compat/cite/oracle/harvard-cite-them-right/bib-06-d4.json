@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Hamilton, García and Liskov (1947, p. 91)",
+"(Hamilton, García and Liskov, 1947; Cruz, Hopper and Rossum, 1958; Cruz, O’Brien and Rossum, 1975)",
+"(García, Rossum and Lovelace, 1945, pp. 7–131)",
+"(Turing, O’Brien and Liskov, 2011, vol. 86)",
+"(Hamilton, García and Liskov, 1947; Dijkstra and Smith, 1988, p. 67)",
+"Dijkstra and Smith (1988, p. 66)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G. and Rossum, G. van (1958) “The apollo guidance computer,” Journal of the ACM, 58(12), pp. 24–338. Available at: https://doi.org/10.6528/vector.60.",
+"Cruz, M. de la, O’Brien, F. and Rossum, G. van (1975) “Can programming be liberated from the von neumann style.” https://example.org/gradient.",
+"Dijkstra, E.W. and Smith, J.Jr. (1988) “Time, clocks, and the ordering of events,” Proceedings of the window symposium, pp. 81–126.",
+"García, L., Rossum, G. van and Lovelace, A. (1945) An axiomatic basis for computer programming. TR-55. Lab Lattice.",
+"Hamilton, M., García, L. and Liskov, B. (1947) The art of computer programming. PhD thesis. University of Cambridge.",
+"Turing, A.M., O’Brien, F. and Liskov, B. (2011) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/metric."
+]
+},
+"bib": {
+"citations": [
+"Hamilton, García and Liskov (1947, p. 91)",
+"(Hamilton, García and Liskov, 1947; Cruz, Hopper and Rossum, 1958; Cruz, O’Brien and Rossum, 1975)",
+"(García, Rossum and Lovelace, 1945, pp. 7–131)",
+"(Turing, O’Brien and Liskov, 2011, vol. 86)",
+"(Hamilton, García and Liskov, 1947; Dijkstra and Smith, 1988, p. 67)",
+"Dijkstra and Smith (1988, p. 66)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G. and Rossum, G. van (1958) “The apollo guidance computer,” Journal of the ACM, 58(12), pp. 24–338. Available at: https://doi.org/10.6528/vector.60.",
+"Cruz, M. de la, O’Brien, F. and Rossum, G. van (1975) “Can programming be liberated from the von neumann style.” https://example.org/gradient.",
+"Dijkstra, E.W. and Smith, J.Jr. (1988) “Time, clocks, and the ordering of events,” Proceedings of the window symposium, pp. 81–126.",
+"García, L., Rossum, G. van and Lovelace, A. (1945) An axiomatic basis for computer programming. TR-55. Lab Lattice.",
+"Hamilton, M., García, L. and Liskov, B. (1947) The art of computer programming. PhD thesis. University of Cambridge.",
+"Turing, A.M., O’Brien, F. and Liskov, B. (2011) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/metric."
+]
+}
+}

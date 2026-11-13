@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1], [2]",
+"[3, p. 58]",
+"see [4]",
+"[3]",
+"see [4]",
+"[2], [3]",
+"e.g. [1], [4]",
+"[1], [5]"
+],
+"bibliography": [
+"[1] H. Müller and B. Liskov, The apollo guidance computer, Second. Springer, 2014.",
+"[2] F. O’Brien, “An axiomatic basis for computer programming.” https://example.org/metric, 1965.",
+"[3] H. Müller and C. A. R. Hoare, “The apollo guidance computer.” https://example.org/decoder, 1989.",
+"[4] C. A. R. Hoare, “The apollo guidance computer,” Proceedings of the London Mathematical Society, vol. 33, no. 2, pp. 72–308, 2005, Available: https://example.org/trace",
+"[5] G. Hopper and F. O’Brien, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 45, no. 2, pp. 135–397, 1963, Available: https://example.org/throughput"
+]
+},
+"bib": {
+"citations": [
+"[1], [2]",
+"[3, p. 58]",
+"see [4]",
+"[3]",
+"see [4]",
+"[2], [3]",
+"e.g. [1], [4]",
+"[1], [5]"
+],
+"bibliography": [
+"[1] H. Müller and B. Liskov, The apollo guidance computer, Second. London: Springer, 2014.",
+"[2] F. O’Brien, “An axiomatic basis for computer programming.” https://example.org/metric, 1965.",
+"[3] H. Müller and C. A. R. Hoare, “The apollo guidance computer.” https://example.org/decoder, 1989.",
+"[4] C. A. R. Hoare, “The apollo guidance computer,” Proceedings of the London Mathematical Society, vol. 33, no. 2, pp. 72–308, 2005, Available: https://example.org/trace",
+"[5] G. Hopper and F. O’Brien, “The education of a computer,” IEEE Transactions on Software Engineering, vol. 45, no. 2, pp. 135–397, 1963, Available: https://example.org/throughput"
+]
+}
+}

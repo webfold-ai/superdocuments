@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"[1, p. 95]",
+"see [2]",
+"[3]",
+"[4, p. 65]",
+"[2, pp. 49–126]",
+"[4], e.g. [5]",
+"[4]",
+"[5, Sec. 73.122] and more",
+"[2], [4]",
+"[3, Sec. 2.115] and more",
+"[6]"
+],
+"bibliography": [
+"[1] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988.",
+"[2] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[3] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[4] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[5] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[6] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 95]",
+"see [2]",
+"[3]",
+"[4, p. 65]",
+"[2, pp. 49–126]",
+"[4], e.g. [5]",
+"[4]",
+"[5, Sec. 73.122] and more",
+"[2], [4]",
+"[3, Sec. 2.115] and more",
+"[6]"
+],
+"bibliography": [
+"[1] J. Jr. Smith and J. Backus, “The apollo guidance computer,” PhD thesis, University of Zurich, 1988.",
+"[2] J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the solver symposium, 1952, pp. 66–128. Available: https://example.org/entropy",
+"[3] J. Jr. Smith, “The education of a computer.” https://example.org/heuristic, 1987.",
+"[4] H. Müller and C. A. R. Hoare, “The art of computer programming.” https://example.org/block, 2024.",
+"[5] J. Jr. Smith and B. Liskov, “Notes on the analytical engine.” https://example.org/tree, 2024. Available: https://example.org/sparse",
+"[6] B. Liskov, “Data abstraction and hierarchy.” https://example.org/retrieval, 1946."
+]
+}
+}

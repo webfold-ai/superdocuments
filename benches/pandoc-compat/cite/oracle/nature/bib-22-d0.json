@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"see 3, ch. 25",
+"4",
+"see 4",
+"4",
+"5",
+"1",
+"2",
+"see 4",
+"see 3",
+"3"
+],
+"bibliography": [
+"1. Knuth, D. E., Smith, J. Jr. & Dijkstra, E. W. An axiomatic basis for computer programming. in Proceedings of the latency symposium 26–101 (1962).",
+"2. Hopper, G. & Hamilton, M. On Computable Numbers. (1988).",
+"3. Liskov, B., Hoare, C. A. R. & Müller, H. Time, clocks, and the ordering of events. in Proceedings of the experiment symposium 70–197 (1988).",
+"4. Hopper, G., O’Brien, F. & Cruz, M. de la. On computable numbers. (University of Oxford, 1941).",
+"5. Smith, J. Jr. & García, L. Can programming be liberated from the von neumann style. Communications of the ACM 46, 223–398 (1993)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"see 3, ch. 25",
+"4",
+"see 4",
+"4",
+"5",
+"1",
+"2",
+"see 4",
+"see 3",
+"3"
+],
+"bibliography": [
+"1. Knuth, D. E., Smith, J. Jr. & Dijkstra, E. W. An axiomatic basis for computer programming. in Proceedings of the latency symposium 26–101 (1962).",
+"2. Hopper, G. & Hamilton, M. On Computable Numbers. (1988).",
+"3. Liskov, B., Hoare, C. A. R. & Müller, H. Time, clocks, and the ordering of events. in Proceedings of the experiment symposium 70–197 (1988).",
+"4. Hopper, G., O’Brien, F. & Cruz, M. de la. On computable numbers. (University of Oxford, 1941).",
+"5. Smith, J. Jr. & García, L. Can programming be liberated from the von neumann style. Communications of the ACM 46, 223–398 (1993)."
+]
+}
+}

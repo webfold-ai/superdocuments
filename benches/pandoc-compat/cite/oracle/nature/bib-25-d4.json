@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"3",
+"3,4",
+"3",
+"see 3",
+"5",
+"see 6, ch. 44",
+"3,e.g. 6",
+"7"
+],
+"bibliography": [
+"1. Müller, H. Can programming be liberated from the von neumann style. in Proceedings of the distribution symposium 94–142 (1992).",
+"2. Hoare, C. A. R. & Hamilton, M. The Art of Computer Programming. (MIT Press, 1975).",
+"3. Hamilton, M., Backus, J. & Rossum, G. van. On computable numbers. in Proceedings of the token symposium 76–170 (1936).",
+"4. Lovelace, A. Can programming be liberated from the von neumann style. (University of Cambridge, 1984).",
+"5. Lamport, L. Can Programming Be Liberated from the von Neumann Style. (Springer, 1992).",
+"6. Hoare, C. A. R., Smith, J. Jr. & Müller, H. On computable numbers. IEEE Transactions on Software Engineering 59, 57–370 (1994).",
+"7. Knuth, D. E. Data abstraction and hierarchy. (University of Zurich, 1955)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"3",
+"3,4",
+"3",
+"see 3",
+"5",
+"see 6, ch. 44",
+"3,e.g. 6",
+"7"
+],
+"bibliography": [
+"1. Müller, H. Can programming be liberated from the von neumann style. in Proceedings of the distribution symposium 94–142 (1992).",
+"2. Hoare, C. A. R. & Hamilton, M. The Art of Computer Programming. (MIT Press, New York, 1975).",
+"3. Hamilton, M., Backus, J. & Rossum, G. van. On computable numbers. in Proceedings of the token symposium 76–170 (1936).",
+"4. Lovelace, A. Can programming be liberated from the von neumann style. (University of Cambridge, 1984).",
+"5. Lamport, L. Can Programming Be Liberated from the von Neumann Style. (Springer, New York, 1992).",
+"6. Hoare, C. A. R., Smith, J. Jr. & Müller, H. On computable numbers. IEEE Transactions on Software Engineering 59, 57–370 (1994).",
+"7. Knuth, D. E. Data abstraction and hierarchy. (University of Zurich, 1955)."
+]
+}
+}

@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"(Turing & Liskov, 2018, p. 14)",
+"(O’Brien, 1966, pp. 69–108)",
+"(see Turing & Liskov, 2018, ch. 8)",
+"(Cruz & García, 1984; e.g. O’Brien, 1966)",
+"(Turing & Liskov, 2018, p. 22)",
+"(Lovelace, 1968)",
+"Turing & Liskov (2018)",
+"(Hopper, 1986; Lovelace, 1968; Turing & Liskov, 2018)",
+"Cruz & García (1984, p. 50)",
+"(Cruz & García, 1984; Dijkstra, 1946; Turing & Liskov, 2018)",
+"(see O’Brien, 1966)",
+"(O’Brien, 1966)",
+"(Lovelace, 1968, pp. 40–135)",
+"(see Lamport, 1997, ch. 45)",
+"(Dijkstra, 1946; Rossum et al., 1979)"
+],
+"bibliography": [
+"Cruz, M. de la, & García, L. (1984). The apollo guidance computer. https://example.org/framework.",
+"Dijkstra, E. W. (1946). The apollo guidance computer. Proceedings of the Query Symposium, 51–197.",
+"Hopper, G. (1986). On computable numbers. ACM Computing Surveys, 39(7), 151–379. https://doi.org/10.5661/experiment.46",
+"Lamport, L. (1997). The education of a computer. https://example.org/protocol. https://example.org/benchmark",
+"Lovelace, A. (1968). The education of a computer [PhD thesis]. University of Cambridge.",
+"O’Brien, F. (1966). Go to statement considered harmful. MIT Press.",
+"Rossum, G. van, García, L., & Lovelace, A. (1979). Go to statement considered harmful. Communications of the ACM, 45(8), 289–314. https://doi.org/10.3569/latency.66",
+"Turing, A. M., & Liskov, B. (2018). On computable numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(Turing & Liskov, 2018, p. 14)",
+"(O’Brien, 1966, pp. 69–108)",
+"(see Turing & Liskov, 2018, ch. 8)",
+"(Cruz & García, 1984; e.g. O’Brien, 1966)",
+"(Turing & Liskov, 2018, p. 22)",
+"(Lovelace, 1968)",
+"Turing & Liskov (2018)",
+"(Hopper, 1986; Lovelace, 1968; Turing & Liskov, 2018)",
+"Cruz & García (1984, p. 50)",
+"(Cruz & García, 1984; Dijkstra, 1946; Turing & Liskov, 2018)",
+"(see O’Brien, 1966)",
+"(O’Brien, 1966)",
+"(Lovelace, 1968, pp. 40–135)",
+"(see Lamport, 1997, ch. 45)",
+"(Dijkstra, 1946; Rossum et al., 1979)"
+],
+"bibliography": [
+"Cruz, M. de la, & García, L. (1984). The apollo guidance computer. https://example.org/framework.",
+"Dijkstra, E. W. (1946). The apollo guidance computer. Proceedings of the Query Symposium, 51–197.",
+"Hopper, G. (1986). On computable numbers. ACM Computing Surveys, 39(7), 151–379. https://doi.org/10.5661/experiment.46",
+"Lamport, L. (1997). The education of a computer. https://example.org/protocol. https://example.org/benchmark",
+"Lovelace, A. (1968). The education of a computer [PhD thesis]. University of Cambridge.",
+"O’Brien, F. (1966). Go to statement considered harmful. MIT Press.",
+"Rossum, G. van, García, L., & Lovelace, A. (1979). Go to statement considered harmful. Communications of the ACM, 45(8), 289–314. https://doi.org/10.3569/latency.66",
+"Turing, A. M., & Liskov, B. (2018). On computable numbers. MIT Press."
+]
+}
+}

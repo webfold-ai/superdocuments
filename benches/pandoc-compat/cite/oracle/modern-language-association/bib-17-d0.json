@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"",
+"(Liskov et al., fig. 92)",
+"(Lamport et al. 40)",
+"Liskov et al. (78)",
+"(see Lamport et al.)",
+"(Lamport et al. 10)",
+"(see García)",
+"(see Lamport et al., ch. 45)"
+],
+"bibliography": [
+"García, Luis. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Stream Symposium, 1945, pp. 40–129.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962."
+]
+},
+"bib": {
+"citations": [
+"",
+"(Liskov et al., fig. 92)",
+"(Lamport et al. 40)",
+"Liskov et al. (78)",
+"(see Lamport et al.)",
+"(Lamport et al. 10)",
+"(see García)",
+"(see Lamport et al., ch. 45)"
+],
+"bibliography": [
+"García, Luis. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Stream Symposium, 1945, pp. 40–129.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962."
+]
+}
+}

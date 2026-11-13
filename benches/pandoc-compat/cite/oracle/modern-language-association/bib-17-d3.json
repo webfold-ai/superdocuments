@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(see Liskov et al., ch. 83)",
+"(Liskov et al.)",
+"(Lovelace)",
+"(Backus et al.; Liskov et al.)",
+"(Liskov et al., sec. 98.129 and more)",
+"(Backus et al., sec. 36.102 and more)",
+""
+],
+"bibliography": [
+"Backus, John, et al. “The Art of Computer Programming.” Proceedings of the Baseline Symposium, 2015, pp. 96–179, https://example.org/ranking.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962.",
+"Lovelace, Ada. Data Abstraction and Hierarchy. https://example.org/cost, 1970."
+]
+},
+"bib": {
+"citations": [
+"(see Liskov et al., ch. 83)",
+"(Liskov et al.)",
+"(Lovelace)",
+"(Backus et al.; Liskov et al.)",
+"(Liskov et al., sec. 98.129 and more)",
+"(Backus et al., sec. 36.102 and more)",
+""
+],
+"bibliography": [
+"Backus, John, et al. “The Art of Computer Programming.” Proceedings of the Baseline Symposium, 2015, pp. 96–179, https://example.org/ranking.",
+"Lamport, Leslie, et al. “The Apollo Guidance Computer.” Proceedings of the Compiler Symposium, 1994, pp. 31–177.",
+"Liskov, Barbara, et al. The Apollo Guidance Computer. TR-47, Lab Encoder, 1962.",
+"Lovelace, Ada. Data Abstraction and Hierarchy. https://example.org/cost, 1970."
+]
+}
+}

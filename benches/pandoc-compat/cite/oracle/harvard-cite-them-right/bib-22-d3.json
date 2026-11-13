@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(1947)",
+"(Hopper, O’Brien and Cruz, 1941; Hopper and Hamilton, 1988; Smith and García, 1993)",
+"(Smith and García, 1993)",
+"(e.g. Müller and Dijkstra, 2004; Hopper, Lamport and Smith, 2019)",
+"Liskov, Hoare and Müller (1988, p. 93)",
+"(Müller, 1947, pp. 5–117)",
+"(Hopper, Lamport and Smith, 2019, pp. 75–112)",
+"(Hopper, O’Brien and Cruz, 1941; Knuth, Smith and Dijkstra, 1962; Hopper, Lamport and Smith, 2019)",
+"(see Hopper, Lamport and Smith, 2019, ch. 87)",
+"(Hopper, Lamport and Smith, 2019, p. 27)",
+"Smith and García (1993, pp. 15–111)",
+"(Müller, 1947)",
+"(Hopper, O’Brien and Cruz, 1941; e.g. Hopper, Lamport and Smith, 2019)"
+],
+"bibliography": [
+"Hopper, G. and Hamilton, M. (1988) On computable numbers. TR-98. Lab Agent.",
+"Hopper, G., Lamport, L. and Smith, J.Jr. (2019) On computable numbers. Springer.",
+"Hopper, G., O’Brien, F. and Cruz, M. de la (1941) On computable numbers. PhD thesis. University of Oxford.",
+"Knuth, D.E., Smith, J.Jr. and Dijkstra, E.W. (1962) “An axiomatic basis for computer programming,” Proceedings of the latency symposium, pp. 26–101. Available at: https://example.org/algorithm.",
+"Liskov, B., Hoare, C.A.R. and Müller, H. (1988) “Time, clocks, and the ordering of events,” Proceedings of the experiment symposium, pp. 70–197.",
+"Müller, H. (1947) Data abstraction and hierarchy. MIT Press.",
+"Müller, H. and Dijkstra, E.W. (2004) On computable numbers. TR-33. Lab Query.",
+"Smith, J.Jr. and García, L. (1993) “Can programming be liberated from the von neumann style,” Communications of the ACM, 46(5), pp. 223–398. Available at: https://doi.org/10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(1947)",
+"(Hopper, O’Brien and Cruz, 1941; Hopper and Hamilton, 1988; Smith and García, 1993)",
+"(Smith and García, 1993)",
+"(e.g. Müller and Dijkstra, 2004; Hopper, Lamport and Smith, 2019)",
+"Liskov, Hoare and Müller (1988, p. 93)",
+"(Müller, 1947, pp. 5–117)",
+"(Hopper, Lamport and Smith, 2019, pp. 75–112)",
+"(Hopper, O’Brien and Cruz, 1941; Knuth, Smith and Dijkstra, 1962; Hopper, Lamport and Smith, 2019)",
+"(see Hopper, Lamport and Smith, 2019, ch. 87)",
+"(Hopper, Lamport and Smith, 2019, p. 27)",
+"Smith and García (1993, pp. 15–111)",
+"(Müller, 1947)",
+"(Hopper, O’Brien and Cruz, 1941; e.g. Hopper, Lamport and Smith, 2019)"
+],
+"bibliography": [
+"Hopper, G. and Hamilton, M. (1988) On computable numbers. TR-98. Lab Agent.",
+"Hopper, G., Lamport, L. and Smith, J.Jr. (2019) On computable numbers. New York: Springer.",
+"Hopper, G., O’Brien, F. and Cruz, M. de la (1941) On computable numbers. PhD thesis. University of Oxford.",
+"Knuth, D.E., Smith, J.Jr. and Dijkstra, E.W. (1962) “An axiomatic basis for computer programming,” Proceedings of the latency symposium, pp. 26–101. Available at: https://example.org/algorithm.",
+"Liskov, B., Hoare, C.A.R. and Müller, H. (1988) “Time, clocks, and the ordering of events,” Proceedings of the experiment symposium, pp. 70–197.",
+"Müller, H. (1947) Data abstraction and hierarchy. London: MIT Press.",
+"Müller, H. and Dijkstra, E.W. (2004) On computable numbers. TR-33. Lab Query.",
+"Smith, J.Jr. and García, L. (1993) “Can programming be liberated from the von neumann style,” Communications of the ACM, 46(5), pp. 223–398. Available at: https://doi.org/10.4191/convergence.19."
+]
+}
+}

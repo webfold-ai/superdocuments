@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Rossum et al. 68–129)",
+"Rossum et al.",
+"(see Müller et al.)",
+"(Müller et al., vol. 43)",
+"(Data Abstraction and Hierarchy)",
+"(Dijkstra and Liskov 2)",
+"(Müller et al. 51)",
+"Lamport and Müller (The Apollo Guidance Computer)",
+"(Rossum et al.)",
+"(Lamport and Müller, The Apollo Guidance Computer; Rossum et al.; O’Brien et al.)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. The Art of Computer Programming. 2012. University of Oxford, PhD thesis.",
+"Lamport, Leslie, and Hans Müller. Data Abstraction and Hierarchy. 1965. University of Cambridge, PhD thesis.",
+"———. The Apollo Guidance Computer. TR-82, Lab Function, 1969.",
+"Müller, Hans, et al. The Art of Computer Programming. https://example.org/structure, 2019, https://example.org/policy.",
+"O’Brien, Flann, et al. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 1953, pp. 43–145.",
+"Rossum, Guido van, et al. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 1989, pp. 43–184."
+]
+},
+"bib": {
+"citations": [
+"(Rossum et al. 68–129)",
+"Rossum et al.",
+"(see Müller et al.)",
+"(Müller et al., vol. 43)",
+"(Data Abstraction and Hierarchy)",
+"(Dijkstra and Liskov 2)",
+"(Müller et al. 51)",
+"Lamport and Müller (The Apollo Guidance Computer)",
+"(Rossum et al.)",
+"(Lamport and Müller, The Apollo Guidance Computer; Rossum et al.; O’Brien et al.)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. The Art of Computer Programming. 2012. University of Oxford, PhD thesis.",
+"Lamport, Leslie, and Hans Müller. Data Abstraction and Hierarchy. 1965. University of Cambridge, PhD thesis.",
+"———. The Apollo Guidance Computer. TR-82, Lab Function, 1969.",
+"Müller, Hans, et al. The Art of Computer Programming. https://example.org/structure, 2019, https://example.org/policy.",
+"O’Brien, Flann, et al. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 1953, pp. 43–145.",
+"Rossum, Guido van, et al. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 1989, pp. 43–184."
+]
+}
+}

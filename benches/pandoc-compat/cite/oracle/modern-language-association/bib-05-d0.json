@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(see Müller)",
+"(Hoare et al., sec. 33.117 and more)",
+"(see Smith and Hopper)",
+"(Lovelace and Hoare, fig. 16)",
+"(see Turing, ch. 11)",
+"(Lovelace and Hoare, vol. 71)",
+"(Liskov and Smith; García and Rossum)",
+"(Liskov and Smith; Lovelace and Hoare 72)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. On Computable Numbers. 2nd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., et al. An Axiomatic Basis for Computer Programming. Second, Springer, 1941, https://example.org/experiment.",
+"Liskov, Barbara, and John Jr. Smith. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 11, no. 7, 1936, pp. 127–305, https://doi.org/10.8852/decoder.67.",
+"Lovelace, Ada, and C. A. R. Hoare. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society, vol. 42, no. 8, 1970, pp. 59–345, https://doi.org/10.4721/scheduler.33.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1948. University of Oxford, PhD thesis.",
+"Smith, John Jr., and Grace Hopper. “The Education of a Computer.” Proceedings of the Convergence Symposium, 2022, pp. 61–101.",
+"Turing, Alan M. The Art of Computer Programming. Springer, 1994, https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(see Müller)",
+"(Hoare et al., sec. 33.117 and more)",
+"(see Smith and Hopper)",
+"(Lovelace and Hoare, fig. 16)",
+"(see Turing, ch. 11)",
+"(Lovelace and Hoare, vol. 71)",
+"(Liskov and Smith; García and Rossum)",
+"(Liskov and Smith; Lovelace and Hoare 72)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. On Computable Numbers. 2nd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., et al. An Axiomatic Basis for Computer Programming. Second, Springer, 1941, https://example.org/experiment.",
+"Liskov, Barbara, and John Jr. Smith. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 11, no. 7, 1936, pp. 127–305, https://doi.org/10.8852/decoder.67.",
+"Lovelace, Ada, and C. A. R. Hoare. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society, vol. 42, no. 8, 1970, pp. 59–345, https://doi.org/10.4721/scheduler.33.",
+"Müller, Hans. Data Abstraction and Hierarchy. 1948. University of Oxford, PhD thesis.",
+"Smith, John Jr., and Grace Hopper. “The Education of a Computer.” Proceedings of the Convergence Symposium, 2022, pp. 61–101.",
+"Turing, Alan M. The Art of Computer Programming. Springer, 1994, https://example.org/workload."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"Hopper et al. (1987, p. 19)",
+"(1943; O’Brien et al., 1975)",
+"(O’Brien et al., 1975, Section 15.119 and more)",
+"(Backus, 1943)",
+"(see Hopper et al., 1987)",
+"(García et al., 1998, p. 24; Hoare & Müller, 2005)",
+"(1975)",
+"(García et al., 1998, p. 69; Hoare & Müller, 2005)",
+"(García et al., 1998; Hoare & Müller, 2005; Hopper et al., 1987)",
+"(see García et al., 1998)",
+"Hopper et al. (1939, pp. 53–103)",
+"(1939)"
+],
+"bibliography": [
+"Backus, J. (1943). On computable numbers. https://example.org/algorithm.",
+"García, L., Lamport, L., & Liskov, B. (1998). The art of computer programming. https://example.org/experiment.",
+"Hoare, C. A. R., & Müller, H. (2005). Data abstraction and hierarchy. Proceedings of the London Mathematical Society, 7(9), 191–397. https://doi.org/10.4589/gradient.17",
+"Hopper, G., Backus, J., & Müller, H. (1939). The art of computer programming. Addison-Wesley.",
+"Hopper, G., Müller, H., & Lovelace, A. (1987). The apollo guidance computer (3rd ed.). Cambridge University Press.",
+"O’Brien, F., Rossum, G. van, & Smith, J. Jr. (1975). Time, clocks, and the ordering of events. Addison-Wesley."
+]
+},
+"bib": {
+"citations": [
+"Hopper et al. (1987, p. 19)",
+"(1943; O’Brien et al., 1975)",
+"(O’Brien et al., 1975, Section 15.119 and more)",
+"(Backus, 1943)",
+"(see Hopper et al., 1987)",
+"(García et al., 1998, p. 24; Hoare & Müller, 2005)",
+"(1975)",
+"(García et al., 1998, p. 69; Hoare & Müller, 2005)",
+"(García et al., 1998; Hoare & Müller, 2005; Hopper et al., 1987)",
+"(see García et al., 1998)",
+"Hopper et al. (1939, pp. 53–103)",
+"(1939)"
+],
+"bibliography": [
+"Backus, J. (1943). On computable numbers. https://example.org/algorithm.",
+"García, L., Lamport, L., & Liskov, B. (1998). The art of computer programming. https://example.org/experiment.",
+"Hoare, C. A. R., & Müller, H. (2005). Data abstraction and hierarchy. Proceedings of the London Mathematical Society, 7(9), 191–397. https://doi.org/10.4589/gradient.17",
+"Hopper, G., Backus, J., & Müller, H. (1939). The art of computer programming. Addison-Wesley.",
+"Hopper, G., Müller, H., & Lovelace, A. (1987). The apollo guidance computer (3rd ed.). Cambridge University Press.",
+"O’Brien, F., Rossum, G. van, & Smith, J. Jr. (1975). Time, clocks, and the ordering of events. Addison-Wesley."
+]
+}
+}

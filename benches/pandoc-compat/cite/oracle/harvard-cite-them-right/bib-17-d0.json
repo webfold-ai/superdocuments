@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(1994)",
+"(Liskov, O’Brien and Hoare, 1962, fig. 92)",
+"(Lamport, Cruz and Hopper, 1994, p. 40)",
+"Liskov, O’Brien and Hoare (1962, p. 78)",
+"(see Lamport, Cruz and Hopper, 1994)",
+"(Lamport, Cruz and Hopper, 1994, p. 10)",
+"(see García, 1945)",
+"(see Lamport, Cruz and Hopper, 1994, ch. 45)"
+],
+"bibliography": [
+"García, L. (1945) “Can programming be liberated from the von neumann style,” Proceedings of the stream symposium, pp. 40–129.",
+"Lamport, L., Cruz, M. de la and Hopper, G. (1994) “The apollo guidance computer,” Proceedings of the compiler symposium, pp. 31–177.",
+"Liskov, B., O’Brien, F. and Hoare, C.A.R. (1962) The apollo guidance computer. TR-47. Lab Encoder."
+]
+},
+"bib": {
+"citations": [
+"(1994)",
+"(Liskov, O’Brien and Hoare, 1962, fig. 92)",
+"(Lamport, Cruz and Hopper, 1994, p. 40)",
+"Liskov, O’Brien and Hoare (1962, p. 78)",
+"(see Lamport, Cruz and Hopper, 1994)",
+"(Lamport, Cruz and Hopper, 1994, p. 10)",
+"(see García, 1945)",
+"(see Lamport, Cruz and Hopper, 1994, ch. 45)"
+],
+"bibliography": [
+"García, L. (1945) “Can programming be liberated from the von neumann style,” Proceedings of the stream symposium, pp. 40–129.",
+"Lamport, L., Cruz, M. de la and Hopper, G. (1994) “The apollo guidance computer,” Proceedings of the compiler symposium, pp. 31–177.",
+"Liskov, B., O’Brien, F. and Hoare, C.A.R. (1962) The apollo guidance computer. TR-47. Lab Encoder."
+]
+}
+}

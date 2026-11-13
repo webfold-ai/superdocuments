@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"",
+"O’Brien (An Axiomatic Basis for Computer Programming 39–140)",
+"Hopper and O’Brien (72–132)",
+"O’Brien (The Art of Computer Programming 3)",
+"(Müller and Hoare)",
+"Müller and Hoare",
+"(Hoare; García; Smith and Backus)",
+"(see O’Brien, An Axiomatic Basis for Computer Programming, ch. 64)",
+"(O’Brien, An Axiomatic Basis for Computer Programming; Hopper and O’Brien)",
+"(Smith and Backus, fig. 59)",
+"(see García, ch. 36)",
+"(Müller and Liskov; García)"
+],
+"bibliography": [
+"García, Luis. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 1986, pp. 30–177.",
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. An Axiomatic Basis for Computer Programming. https://example.org/metric, 1965.",
+"———. The Art of Computer Programming. 3rd ed., Cambridge University Press, 2013, https://example.org/structure.",
+"Smith, John Jr., and John Backus. The Art of Computer Programming. https://example.org/ranking, 1973."
+]
+},
+"bib": {
+"citations": [
+"",
+"O’Brien (An Axiomatic Basis for Computer Programming 39–140)",
+"Hopper and O’Brien (72–132)",
+"O’Brien (The Art of Computer Programming 3)",
+"(Müller and Hoare)",
+"Müller and Hoare",
+"(Hoare; García; Smith and Backus)",
+"(see O’Brien, An Axiomatic Basis for Computer Programming, ch. 64)",
+"(O’Brien, An Axiomatic Basis for Computer Programming; Hopper and O’Brien)",
+"(Smith and Backus, fig. 59)",
+"(see García, ch. 36)",
+"(Müller and Liskov; García)"
+],
+"bibliography": [
+"García, Luis. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 1986, pp. 30–177.",
+"Hoare, C. A. R. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society, vol. 33, no. 2, 2005, pp. 72–308, https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 45, no. 2, 1963, pp. 135–397, https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. The Apollo Guidance Computer. https://example.org/decoder, 1989.",
+"Müller, Hans, and Barbara Liskov. The Apollo Guidance Computer. Second, Springer, 2014.",
+"O’Brien, Flann. An Axiomatic Basis for Computer Programming. https://example.org/metric, 1965.",
+"———. The Art of Computer Programming. 3rd ed., Cambridge University Press, 2013, https://example.org/structure.",
+"Smith, John Jr., and John Backus. The Art of Computer Programming. https://example.org/ranking, 1973."
+]
+}
+}

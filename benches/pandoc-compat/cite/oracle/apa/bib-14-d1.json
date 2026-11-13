@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al., 1949, Volume 87)",
+"(Lamport & Dijkstra, 1953, p. 83)",
+"Lamport & Dijkstra (1953, pp. 53–125)",
+"Liskov et al. (1949)",
+"(García & Knuth, 1995; Lamport & Dijkstra, 1953)",
+"(1995)",
+"Turing (2018, pp. 54–128)",
+"(García & Knuth, 1995, Volume 64)",
+"García & Knuth (1995)",
+"(1949)",
+"(García & Knuth, 1995)"
+],
+"bibliography": [
+"García, L., & Knuth, D. E. (1995). On computable numbers (TR-47). Lab Compiler.",
+"Lamport, L., & Dijkstra, E. W. (1953). Data abstraction and hierarchy (Second). Springer.",
+"Liskov, B., Hamilton, M., & Lovelace, A. (1949). The apollo guidance computer. Communications of the ACM, 50(11), 159–344.",
+"Turing, A. M. (2018). Go to statement considered harmful. Proceedings of the Array Symposium, 62–190."
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al., 1949, Volume 87)",
+"(Lamport & Dijkstra, 1953, p. 83)",
+"Lamport & Dijkstra (1953, pp. 53–125)",
+"Liskov et al. (1949)",
+"(García & Knuth, 1995; Lamport & Dijkstra, 1953)",
+"(1995)",
+"Turing (2018, pp. 54–128)",
+"(García & Knuth, 1995, Volume 64)",
+"García & Knuth (1995)",
+"(1949)",
+"(García & Knuth, 1995)"
+],
+"bibliography": [
+"García, L., & Knuth, D. E. (1995). On computable numbers (TR-47). Lab Compiler.",
+"Lamport, L., & Dijkstra, E. W. (1953). Data abstraction and hierarchy (Second). Springer.",
+"Liskov, B., Hamilton, M., & Lovelace, A. (1949). The apollo guidance computer. Communications of the ACM, 50(11), 159–344.",
+"Turing, A. M. (2018). Go to statement considered harmful. Proceedings of the Array Symposium, 62–190."
+]
+}
+}

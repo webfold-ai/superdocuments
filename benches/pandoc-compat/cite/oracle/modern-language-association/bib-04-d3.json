@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Smith and O’Brien; Knuth and Turing; Müller et al.)",
+"(Rossum and Hopper 39)",
+"Knuth and Turing (53–110)",
+"(Müller et al. 13–100)",
+"(Knuth and Turing; Cruz)",
+"Hoare and Müller (80–136)",
+"(Cruz 38–135)",
+"(Smith and O’Brien)",
+"(Cruz, vol. 18)",
+"(Smith and Backus; García et al.)"
+],
+"bibliography": [
+"Cruz, Maria de la. The Apollo Guidance Computer. TR-20, Lab Window, 2014.",
+"García, Luis, et al. “On Computable Numbers.” Communications of the ACM, vol. 44, no. 6, 1969, pp. 209–329.",
+"Hoare, C. A. R., and Hans Müller. “An Axiomatic Basis for Computer Programming.” Journal of the ACM, vol. 53, no. 8, 1994, pp. 203–390, https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. TR-69, Lab Complexity, 1975.",
+"Müller, Hans, et al. Data Abstraction and Hierarchy. TR-83, Lab Matrix, 1937.",
+"Rossum, Guido van, and Grace Hopper. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Entropy Symposium, 1987, pp. 98–186.",
+"Smith, John Jr., and John Backus. “On Computable Numbers.” Proceedings of the Schema Symposium, 2024, pp. 24–188.",
+"Smith, John Jr., and Flann O’Brien. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society, vol. 39, no. 3, 1945, pp. 257–308, https://doi.org/10.6600/trace.17."
+]
+},
+"bib": {
+"citations": [
+"(Smith and O’Brien; Knuth and Turing; Müller et al.)",
+"(Rossum and Hopper 39)",
+"Knuth and Turing (53–110)",
+"(Müller et al. 13–100)",
+"(Knuth and Turing; Cruz)",
+"Hoare and Müller (80–136)",
+"(Cruz 38–135)",
+"(Smith and O’Brien)",
+"(Cruz, vol. 18)",
+"(Smith and Backus; García et al.)"
+],
+"bibliography": [
+"Cruz, Maria de la. The Apollo Guidance Computer. TR-20, Lab Window, 2014.",
+"García, Luis, et al. “On Computable Numbers.” Communications of the ACM, vol. 44, no. 6, 1969, pp. 209–329.",
+"Hoare, C. A. R., and Hans Müller. “An Axiomatic Basis for Computer Programming.” Journal of the ACM, vol. 53, no. 8, 1994, pp. 203–390, https://doi.org/10.4068/layer.20.",
+"Knuth, Donald E., and Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. TR-69, Lab Complexity, 1975.",
+"Müller, Hans, et al. Data Abstraction and Hierarchy. TR-83, Lab Matrix, 1937.",
+"Rossum, Guido van, and Grace Hopper. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Entropy Symposium, 1987, pp. 98–186.",
+"Smith, John Jr., and John Backus. “On Computable Numbers.” Proceedings of the Schema Symposium, 2024, pp. 24–188.",
+"Smith, John Jr., and Flann O’Brien. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society, vol. 39, no. 3, 1945, pp. 257–308, https://doi.org/10.6600/trace.17."
+]
+}
+}

@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(García, Rossum and Lovelace, 1945; Cruz, O’Brien and Rossum, 1975; Smith, 2023)",
+"Rossum (2019, pp. 45–139)",
+"(1988; Rossum, 2019)",
+"(Cruz, O’Brien and Rossum, 1975; e.g. Turing, O’Brien and Liskov, 2011)",
+"(Smith, 2023, sec. 95.102 and more)",
+"(see Dijkstra and Smith, 1988, ch. 58)",
+"(Hamilton, García and Liskov, 1947; Cruz, Hopper and Rossum, 1958)",
+"(Turing, O’Brien and Liskov, 2011, vol. 15)",
+"(Cruz, O’Brien and Rossum, 1975)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G. and Rossum, G. van (1958) “The apollo guidance computer,” Journal of the ACM, 58(12), pp. 24–338. Available at: https://doi.org/10.6528/vector.60.",
+"Cruz, M. de la, O’Brien, F. and Rossum, G. van (1975) “Can programming be liberated from the von neumann style.” https://example.org/gradient.",
+"Dijkstra, E.W. and Smith, J.Jr. (1988) “Time, clocks, and the ordering of events,” Proceedings of the window symposium, pp. 81–126.",
+"García, L., Rossum, G. van and Lovelace, A. (1945) An axiomatic basis for computer programming. TR-55. Lab Lattice.",
+"Hamilton, M., García, L. and Liskov, B. (1947) The art of computer programming. PhD thesis. University of Cambridge.",
+"Rossum, G. van (2019) “The education of a computer.” https://example.org/function. Available at: https://example.org/latency.",
+"Smith, J.Jr. (2023) The apollo guidance computer. PhD thesis. University of Cambridge.",
+"Turing, A.M., O’Brien, F. and Liskov, B. (2011) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/metric."
+]
+},
+"bib": {
+"citations": [
+"(García, Rossum and Lovelace, 1945; Cruz, O’Brien and Rossum, 1975; Smith, 2023)",
+"Rossum (2019, pp. 45–139)",
+"(1988; Rossum, 2019)",
+"(Cruz, O’Brien and Rossum, 1975; e.g. Turing, O’Brien and Liskov, 2011)",
+"(Smith, 2023, sec. 95.102 and more)",
+"(see Dijkstra and Smith, 1988, ch. 58)",
+"(Hamilton, García and Liskov, 1947; Cruz, Hopper and Rossum, 1958)",
+"(Turing, O’Brien and Liskov, 2011, vol. 15)",
+"(Cruz, O’Brien and Rossum, 1975)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G. and Rossum, G. van (1958) “The apollo guidance computer,” Journal of the ACM, 58(12), pp. 24–338. Available at: https://doi.org/10.6528/vector.60.",
+"Cruz, M. de la, O’Brien, F. and Rossum, G. van (1975) “Can programming be liberated from the von neumann style.” https://example.org/gradient.",
+"Dijkstra, E.W. and Smith, J.Jr. (1988) “Time, clocks, and the ordering of events,” Proceedings of the window symposium, pp. 81–126.",
+"García, L., Rossum, G. van and Lovelace, A. (1945) An axiomatic basis for computer programming. TR-55. Lab Lattice.",
+"Hamilton, M., García, L. and Liskov, B. (1947) The art of computer programming. PhD thesis. University of Cambridge.",
+"Rossum, G. van (2019) “The education of a computer.” https://example.org/function. Available at: https://example.org/latency.",
+"Smith, J.Jr. (2023) The apollo guidance computer. PhD thesis. University of Cambridge.",
+"Turing, A.M., O’Brien, F. and Liskov, B. (2011) Data abstraction and hierarchy. PhD thesis. University of Zurich. Available at: https://example.org/metric."
+]
+}
+}

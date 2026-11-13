@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Cruz; Dijkstra)",
+"Cruz (69)",
+"(Backus et al., fig. 60)",
+"Lamport et al.",
+"(Cruz)",
+"(Lamport et al., fig. 64)",
+"(Dijkstra, vol. 49)",
+"(Lamport et al.; Cruz 75)"
+],
+"bibliography": [
+"Backus, John, et al. Notes on the Analytical Engine. TR-47, Lab Estimate, 1958, https://example.org/convergence.",
+"Cruz, Maria de la. Notes on the Analytical Engine. MIT Press, 1951.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Journal of the ACM, vol. 33, no. 2, 1993, pp. 39–369.",
+"Lamport, Leslie, et al. The Education of a Computer. Addison-Wesley, 2017."
+]
+},
+"bib": {
+"citations": [
+"(Cruz; Dijkstra)",
+"Cruz (69)",
+"(Backus et al., fig. 60)",
+"Lamport et al.",
+"(Cruz)",
+"(Lamport et al., fig. 64)",
+"(Dijkstra, vol. 49)",
+"(Lamport et al.; Cruz 75)"
+],
+"bibliography": [
+"Backus, John, et al. Notes on the Analytical Engine. TR-47, Lab Estimate, 1958, https://example.org/convergence.",
+"Cruz, Maria de la. Notes on the Analytical Engine. MIT Press, 1951.",
+"Dijkstra, Edsger W. “The Apollo Guidance Computer.” Journal of the ACM, vol. 33, no. 2, 1993, pp. 39–369.",
+"Lamport, Leslie, et al. The Education of a Computer. Addison-Wesley, 2017."
+]
+}
+}

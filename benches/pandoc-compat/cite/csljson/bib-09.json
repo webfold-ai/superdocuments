@@ -1,0 +1,155 @@
+[
+  {
+    "abstract": "Estimate density vector batch stream adaptive sequence solver workload sequence block signal.",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1979
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/index",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/filter",
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1956
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "publisher-place": "Boston",
+    "title": "An axiomatic basis for computer programming",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "The education of a computer",
+    "type": "thesis"
+  },
+  {
+    "abstract": "Adaptive solver queue latency structure pipeline model latency pipeline queue tree optimizer.",
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "container-title": "Proceedings of the distribution symposium",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1938
+        ]
+      ]
+    },
+    "page": "67-141",
+    "title": "Go to statement considered harmful",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1947
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "The art of computer programming",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "edition": "3",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          2008
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "publisher-place": "New York",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "book"
+  }
+]

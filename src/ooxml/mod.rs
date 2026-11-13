@@ -14,6 +14,7 @@ use zip::ZipArchive;
 use crate::document::{entry, text};
 
 pub(crate) mod docx;
+pub(crate) mod omml;
 pub(crate) mod pptx;
 pub(crate) mod xlsx;
 
@@ -170,23 +171,45 @@ pub(crate) enum Seg {
         text: String,
         bold: bool,
         italic: bool,
+        /// `MARK_*` bits: strikeout, superscript, subscript, inline code.
+        marks: u8,
         href: Option<String>,
     },
     Br,
     Raw(String),
 }
 
-fn emphasise(text: &str, bold: bool, italic: bool) -> String {
+pub(crate) const MARK_STRIKE: u8 = 1;
+pub(crate) const MARK_SUP: u8 = 2;
+pub(crate) const MARK_SUB: u8 = 4;
+pub(crate) const MARK_CODE: u8 = 8;
+
+fn emphasise(text: &str, bold: bool, italic: bool, marks: u8) -> String {
     let core = text.trim();
-    if core.is_empty() || (!bold && !italic) {
+    if core.is_empty() || (!bold && !italic && marks == 0) {
         return text.to_owned();
     }
     let lead = &text[..text.len() - text.trim_start().len()];
     let tail = &text[text.trim_end().len()..];
+    let mut core = core.to_owned();
+    if marks & MARK_CODE != 0 {
+        let ticks = if core.contains('`') { "``" } else { "`" };
+        core = format!("{ticks}{core}{ticks}");
+    }
+    if marks & MARK_SUP != 0 {
+        core = format!("^{}^", core.replace(' ', "\\ "));
+    }
+    if marks & MARK_SUB != 0 {
+        core = format!("~{}~", core.replace(' ', "\\ "));
+    }
+    if marks & MARK_STRIKE != 0 {
+        core = format!("~~{core}~~");
+    }
     let mark = match (bold, italic) {
         (true, true) => "***",
         (true, false) => "**",
-        _ => "*",
+        (false, true) => "*",
+        _ => "",
     };
     format!("{lead}{mark}{core}{mark}{tail}")
 }
@@ -217,13 +240,14 @@ pub(crate) fn render(segs: &[Seg], line_break: &str, emphasis: bool) -> String {
                     text,
                     bold,
                     italic,
+                    marks,
                     href: h,
                 }) = segs.get(end)
                 {
                     if h != href {
                         break;
                     }
-                    inner.push_str(&emphasise(text, *bold && emphasis, *italic && emphasis));
+                    inner.push_str(&emphasise(text, *bold && emphasis, *italic && emphasis, if emphasis { *marks } else { 0 }));
                     end += 1;
                 }
                 match href {

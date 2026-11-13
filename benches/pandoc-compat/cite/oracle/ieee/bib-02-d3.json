@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1], [2, p. 98]",
+"[3], [4]",
+"[3], [5, p. 66]",
+"[6, p. 42]",
+"[6, Vol. 69]",
+"[5, Fig. 16]",
+"[5, pp. 11–109]",
+"[5]",
+"[3]",
+"[7, Vol. 72]",
+"see [5, Ch. 88]"
+],
+"bibliography": [
+"[1] B. Liskov, H. Müller, and E. W. Dijkstra, “Notes on the analytical engine,” in Proceedings of the compiler symposium, 2012, pp. 35–166.",
+"[2] B. Liskov, J. Jr. Smith, and M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/function, 1963. Available: https://example.org/density",
+"[3] G. van Rossum and A. M. Turing, “Notes on the analytical engine.” https://example.org/sparse, 1990.",
+"[4] A. Lovelace, J. Jr. Smith, and J. Backus, “Time, clocks, and the ordering of events,” PhD thesis, University of Oxford, 1969.",
+"[5] J. Backus, D. E. Knuth, and H. Müller, “On computable numbers,” Lab Heuristic, TR-4, 2007. Available: https://example.org/benchmark",
+"[6] H. Müller and F. O’Brien, “On computable numbers,” PhD thesis, University of Cambridge, 2010.",
+"[7] E. W. Dijkstra, “The art of computer programming.” https://example.org/filter, 1973."
+]
+},
+"bib": {
+"citations": [
+"[1], [2, p. 98]",
+"[3], [4]",
+"[3], [5, p. 66]",
+"[6, p. 42]",
+"[6, Vol. 69]",
+"[5, Fig. 16]",
+"[5, pp. 11–109]",
+"[5]",
+"[3]",
+"[7, Vol. 72]",
+"see [5, Ch. 88]"
+],
+"bibliography": [
+"[1] B. Liskov, H. Müller, and E. W. Dijkstra, “Notes on the analytical engine,” in Proceedings of the compiler symposium, 2012, pp. 35–166.",
+"[2] B. Liskov, J. Jr. Smith, and M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/function, 1963. Available: https://example.org/density",
+"[3] G. van Rossum and A. M. Turing, “Notes on the analytical engine.” https://example.org/sparse, 1990.",
+"[4] A. Lovelace, J. Jr. Smith, and J. Backus, “Time, clocks, and the ordering of events,” PhD thesis, University of Oxford, 1969.",
+"[5] J. Backus, D. E. Knuth, and H. Müller, “On computable numbers,” Lab Heuristic, TR-4, 2007. Available: https://example.org/benchmark",
+"[6] H. Müller and F. O’Brien, “On computable numbers,” PhD thesis, University of Cambridge, 2010.",
+"[7] E. W. Dijkstra, “The art of computer programming.” https://example.org/filter, 1973."
+]
+}
+}

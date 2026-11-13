@@ -1,0 +1,96 @@
+[
+  {
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "edition": "Second",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "publisher-place": "New York",
+    "title": "Go to statement considered harmful",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "container-title": "Proceedings of the layer symposium",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          2011
+        ]
+      ]
+    },
+    "page": "72-147",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.9095/compiler.84",
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "knuth1984",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          1989
+        ]
+      ]
+    },
+    "page": "182-319",
+    "title": "The art of computer programming",
+    "type": "article-journal",
+    "volume": "25"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1954
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "publisher-place": "New York",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "book"
+  }
+]

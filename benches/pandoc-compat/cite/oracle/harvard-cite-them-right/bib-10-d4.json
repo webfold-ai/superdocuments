@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Müller, 1968, p. 59)",
+"(1968; Smith, Hoare and Knuth, 1999)",
+"(see Hoare, 2011, ch. 63)",
+"(Smith, Hoare and Knuth, 1999, pp. 77–140)",
+"Liskov (1946, p. 65)",
+"(Cruz and Hamilton, 1975; e.g. Hoare, 2011)",
+"(Hoare, 2011, p. 23)",
+"(1968; Smith, Hoare and Knuth, 1999)",
+"(Hoare, 2011)",
+"(Cruz and Hamilton, 1975; Hoare, 2011, p. 52)",
+"(Hoare, 2011, vol. 60)",
+"Hoare (2011, pp. 40–127)",
+"(Cruz and Hamilton, 1975; e.g. Smith, Hoare and Knuth, 1999)"
+],
+"bibliography": [
+"Cruz, M. de la and Hamilton, M. (1975) Notes on the analytical engine. TR-4. Lab Throughput.",
+"Hoare, C.A.R. (2011) On computable numbers. PhD thesis. University of Oxford.",
+"Liskov, B. (1946) Can programming be liberated from the von neumann style. London: Springer. Available at: https://example.org/learning.",
+"Müller, H. (1968) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Smith, J.Jr., Hoare, C.A.R. and Knuth, D.E. (1999) Go to statement considered harmful. TR-29. Lab Function."
+]
+},
+"bib": {
+"citations": [
+"(Müller, 1968, p. 59)",
+"(1968; Smith, Hoare and Knuth, 1999)",
+"(see Hoare, 2011, ch. 63)",
+"(Smith, Hoare and Knuth, 1999, pp. 77–140)",
+"Liskov (1946, p. 65)",
+"(Cruz and Hamilton, 1975; e.g. Hoare, 2011)",
+"(Hoare, 2011, p. 23)",
+"(1968; Smith, Hoare and Knuth, 1999)",
+"(Hoare, 2011)",
+"(Cruz and Hamilton, 1975; Hoare, 2011, p. 52)",
+"(Hoare, 2011, vol. 60)",
+"Hoare (2011, pp. 40–127)",
+"(Cruz and Hamilton, 1975; e.g. Smith, Hoare and Knuth, 1999)"
+],
+"bibliography": [
+"Cruz, M. de la and Hamilton, M. (1975) Notes on the analytical engine. TR-4. Lab Throughput.",
+"Hoare, C.A.R. (2011) On computable numbers. PhD thesis. University of Oxford.",
+"Liskov, B. (1946) Can programming be liberated from the von neumann style. London: Springer. Available at: https://example.org/learning.",
+"Müller, H. (1968) Data abstraction and hierarchy. PhD thesis. University of Cambridge.",
+"Smith, J.Jr., Hoare, C.A.R. and Knuth, D.E. (1999) Go to statement considered harmful. TR-29. Lab Function."
+]
+}
+}

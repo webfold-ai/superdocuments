@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Knuth and Smith 29)",
+"(Müller 97)",
+"(Knuth)",
+"(see Knuth and Smith)",
+"Lamport (34–117)",
+"(see Müller, ch. 32)",
+"(see Knuth, ch. 76)",
+"(Hamilton et al.)",
+"Müller",
+"(Lamport 82)",
+"(Lamport, fig. 2)",
+"(see Lovelace)"
+],
+"bibliography": [
+"Hamilton, Margaret, et al. “On Computable Numbers.” Proceedings of the Token Symposium, 1936, pp. 76–170.",
+"Hoare, C. A. R., et al. “On Computable Numbers.” IEEE Transactions on Software Engineering, vol. 59, no. 1, 1994, pp. 57–370, https://doi.org/10.2998/function.87.",
+"Hoare, C. A. R., and Margaret Hamilton. The Art of Computer Programming. 2nd ed., MIT Press, 1975.",
+"Knuth, Donald E. Data Abstraction and Hierarchy. 1955. University of Zurich, PhD thesis.",
+"Knuth, Donald E., and John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. 1991. University of Cambridge, PhD thesis.",
+"Lamport, Leslie. Can Programming Be Liberated from the von Neumann Style. Springer, 1992, https://example.org/query.",
+"Lovelace, Ada. Can Programming Be Liberated from the von Neumann Style. 1984, https://example.org/pipeline. University of Cambridge, PhD thesis.",
+"Müller, Hans. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Distribution Symposium, 1992, pp. 94–142."
+]
+},
+"bib": {
+"citations": [
+"(Knuth and Smith 29)",
+"(Müller 97)",
+"(Knuth)",
+"(see Knuth and Smith)",
+"Lamport (34–117)",
+"(see Müller, ch. 32)",
+"(see Knuth, ch. 76)",
+"(Hamilton et al.)",
+"Müller",
+"(Lamport 82)",
+"(Lamport, fig. 2)",
+"(see Lovelace)"
+],
+"bibliography": [
+"Hamilton, Margaret, et al. “On Computable Numbers.” Proceedings of the Token Symposium, 1936, pp. 76–170.",
+"Hoare, C. A. R., et al. “On Computable Numbers.” IEEE Transactions on Software Engineering, vol. 59, no. 1, 1994, pp. 57–370, https://doi.org/10.2998/function.87.",
+"Hoare, C. A. R., and Margaret Hamilton. The Art of Computer Programming. 2nd ed., MIT Press, 1975.",
+"Knuth, Donald E. Data Abstraction and Hierarchy. 1955. University of Zurich, PhD thesis.",
+"Knuth, Donald E., and John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. 1991. University of Cambridge, PhD thesis.",
+"Lamport, Leslie. Can Programming Be Liberated from the von Neumann Style. Springer, 1992, https://example.org/query.",
+"Lovelace, Ada. Can Programming Be Liberated from the von Neumann Style. 1984, https://example.org/pipeline. University of Cambridge, PhD thesis.",
+"Müller, Hans. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Distribution Symposium, 1992, pp. 94–142."
+]
+}
+}

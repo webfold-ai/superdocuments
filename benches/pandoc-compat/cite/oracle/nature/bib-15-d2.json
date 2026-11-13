@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"e.g. 3,4",
+"1 and more",
+"1,4",
+"5",
+"6",
+"3–5",
+"2,3,7",
+"8 and more",
+"9"
+],
+"bibliography": [
+"1. Rossum, G. van & Cruz, M. de la. Notes on the Analytical Engine. (2012).",
+"2. Müller, H. & Rossum, G. van. The education of a computer. IEEE Transactions on Software Engineering 2, 86–362 (2020).",
+"3. Liskov, B., Backus, J. & Turing, A. M. The Education of a Computer. (MIT Press, 2004).",
+"4. Dijkstra, E. W. The apollo guidance computer. (1947).",
+"5. Dijkstra, E. W., Hoare, C. A. R. & Rossum, G. van. Time, clocks, and the ordering of events. in Proceedings of the stream symposium 1–192 (2018).",
+"6. Cruz, M. de la & Turing, A. M. Go to Statement Considered Harmful. (Springer, 1938).",
+"7. Knuth, D. E., Cruz, M. de la & Smith, J. Jr. On computable numbers. (2020).",
+"8. O’Brien, F. & Hopper, G. On computable numbers. (1955).",
+"9. Smith, J. Jr. Notes on the analytical engine. (University of Cambridge, 1972)."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"e.g. 3,4",
+"1 and more",
+"1,4",
+"5",
+"6",
+"3–5",
+"2,3,7",
+"8 and more",
+"9"
+],
+"bibliography": [
+"1. Rossum, G. van & Cruz, M. de la. Notes on the Analytical Engine. (2012).",
+"2. Müller, H. & Rossum, G. van. The education of a computer. IEEE Transactions on Software Engineering 2, 86–362 (2020).",
+"3. Liskov, B., Backus, J. & Turing, A. M. The Education of a Computer. (MIT Press, New York, 2004).",
+"4. Dijkstra, E. W. The apollo guidance computer. (1947).",
+"5. Dijkstra, E. W., Hoare, C. A. R. & Rossum, G. van. Time, clocks, and the ordering of events. in Proceedings of the stream symposium 1–192 (2018).",
+"6. Cruz, M. de la & Turing, A. M. Go to Statement Considered Harmful. (Springer, New York, 1938).",
+"7. Knuth, D. E., Cruz, M. de la & Smith, J. Jr. On computable numbers. (2020).",
+"8. O’Brien, F. & Hopper, G. On computable numbers. (1955).",
+"9. Smith, J. Jr. Notes on the analytical engine. (University of Cambridge, 1972)."
+]
+}
+}

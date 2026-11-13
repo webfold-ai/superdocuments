@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"Hopper et al. (2019, 20)",
+"(Müller and Dijkstra 2004, sec. 75.137 and more)",
+"Müller (1947)",
+"(e.g. Hopper et al. 2019; Smith and García 1993)",
+"(Hopper et al. 1941, vol. 67)",
+"(Müller and Dijkstra 2004; Knuth et al. 1962)",
+"(e.g. Knuth et al. 1962; Müller 1947)",
+"(Knuth et al. 1962, vol. 64)",
+"(Hopper et al. 2019, sec. 36.121 and more)",
+"(Hopper and Hamilton 1988, 8)",
+"(Smith and García 1993, 50–111)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. Springer.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 26–101. https://example.org/algorithm.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46 (5): 223–398. https://doi.org/10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"Hopper et al. (2019, 20)",
+"(Müller and Dijkstra 2004, sec. 75.137 and more)",
+"Müller (1947)",
+"(e.g. Hopper et al. 2019; Smith and García 1993)",
+"(Hopper et al. 1941, vol. 67)",
+"(Müller and Dijkstra 2004; Knuth et al. 1962)",
+"(e.g. Knuth et al. 1962; Müller 1947)",
+"(Knuth et al. 1962, vol. 64)",
+"(Hopper et al. 2019, sec. 36.121 and more)",
+"(Hopper and Hamilton 1988, 8)",
+"(Smith and García 1993, 50–111)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. Springer.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Proceedings of the Latency Symposium, 26–101. https://example.org/algorithm.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46 (5): 223–398. https://doi.org/10.4191/convergence.19."
+]
+}
+}

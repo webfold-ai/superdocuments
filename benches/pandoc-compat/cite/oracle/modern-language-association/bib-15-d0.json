@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(see Knuth et al., ch. 76)",
+"(Dijkstra et al. 48)",
+"(Dijkstra et al.)",
+"Dijkstra et al. (75)",
+"(e.g. Cruz and Turing; Liskov et al.)",
+"(Dijkstra et al. 89)",
+"(Knuth et al.; Smith)",
+"Cruz and Turing (87–113)",
+"(Rossum and Cruz, sec. 79.113 and more)",
+"Dijkstra",
+"(Rossum and Cruz)",
+"(Rossum and Cruz 31)",
+"(Rossum and Cruz 85–138)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. Go to Statement Considered Harmful. 2nd ed., Springer, 1938.",
+"Dijkstra, Edsger W. The Apollo Guidance Computer. https://example.org/prior, 1947.",
+"Dijkstra, Edsger W., et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 2018, pp. 1–192.",
+"Knuth, Donald E., et al. On Computable Numbers. https://example.org/structure, 2020.",
+"Liskov, Barbara, et al. The Education of a Computer. MIT Press, 2004, https://example.org/matrix.",
+"Rossum, Guido van, and Maria de la Cruz. Notes on the Analytical Engine. TR-39, Lab Transform, 2012.",
+"Smith, John Jr. Notes on the Analytical Engine. 1972, https://example.org/prior. University of Cambridge, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(see Knuth et al., ch. 76)",
+"(Dijkstra et al. 48)",
+"(Dijkstra et al.)",
+"Dijkstra et al. (75)",
+"(e.g. Cruz and Turing; Liskov et al.)",
+"(Dijkstra et al. 89)",
+"(Knuth et al.; Smith)",
+"Cruz and Turing (87–113)",
+"(Rossum and Cruz, sec. 79.113 and more)",
+"Dijkstra",
+"(Rossum and Cruz)",
+"(Rossum and Cruz 31)",
+"(Rossum and Cruz 85–138)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. Go to Statement Considered Harmful. 2nd ed., Springer, 1938.",
+"Dijkstra, Edsger W. The Apollo Guidance Computer. https://example.org/prior, 1947.",
+"Dijkstra, Edsger W., et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 2018, pp. 1–192.",
+"Knuth, Donald E., et al. On Computable Numbers. https://example.org/structure, 2020.",
+"Liskov, Barbara, et al. The Education of a Computer. MIT Press, 2004, https://example.org/matrix.",
+"Rossum, Guido van, and Maria de la Cruz. Notes on the Analytical Engine. TR-39, Lab Transform, 2012.",
+"Smith, John Jr. Notes on the Analytical Engine. 1972, https://example.org/prior. University of Cambridge, PhD thesis."
+]
+}
+}

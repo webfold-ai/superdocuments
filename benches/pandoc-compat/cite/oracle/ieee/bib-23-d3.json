@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"e.g. [1], [2]",
+"e.g. [3], [4]",
+"[5]",
+"[6, Fig. 83]",
+"e.g. [3], [5]",
+"see [2]",
+"[2, p. 10]",
+"[5, p. 40]",
+"[3, pp. 48–118]",
+"[1, Fig. 14]",
+"[5, p. 84]",
+"[4]",
+"[1], [5]"
+],
+"bibliography": [
+"[1] E. W. Dijkstra, “The apollo guidance computer,” Journal of the ACM, vol. 33, no. 2, pp. 39–369, 1993.",
+"[2] J. Backus, D. E. Knuth, and B. Liskov, “Notes on the analytical engine,” Lab Estimate, TR-47, 1958. Available: https://example.org/convergence",
+"[3] B. Liskov, “The art of computer programming,” Lab Optimizer, TR-62, 1944.",
+"[4] G. van Rossum and J. Backus, “The education of a computer,” PhD thesis, University of Cambridge, 1979.",
+"[5] A. M. Turing, “Time, clocks, and the ordering of events.” https://example.org/solver, 1968.",
+"[6] M. de la Cruz, Notes on the analytical engine. MIT Press, 1951."
+]
+},
+"bib": {
+"citations": [
+"e.g. [1], [2]",
+"e.g. [3], [4]",
+"[5]",
+"[6, Fig. 83]",
+"e.g. [3], [5]",
+"see [2]",
+"[2, p. 10]",
+"[5, p. 40]",
+"[3, pp. 48–118]",
+"[1, Fig. 14]",
+"[5, p. 84]",
+"[4]",
+"[1], [5]"
+],
+"bibliography": [
+"[1] E. W. Dijkstra, “The apollo guidance computer,” Journal of the ACM, vol. 33, no. 2, pp. 39–369, 1993.",
+"[2] J. Backus, D. E. Knuth, and B. Liskov, “Notes on the analytical engine,” Lab Estimate, TR-47, 1958. Available: https://example.org/convergence",
+"[3] B. Liskov, “The art of computer programming,” Lab Optimizer, TR-62, 1944.",
+"[4] G. van Rossum and J. Backus, “The education of a computer,” PhD thesis, University of Cambridge, 1979.",
+"[5] A. M. Turing, “Time, clocks, and the ordering of events.” https://example.org/solver, 1968.",
+"[6] M. de la Cruz, Notes on the analytical engine. Boston: MIT Press, 1951."
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(1953; Rossum et al., 1989)",
+"(Lamport & Müller, 1965, p. 15; Rossum et al., 1989)",
+"(see Lamport et al., 2002)",
+"O’Brien et al. (1953, p. 87)",
+"(Lamport et al., 2002; Lamport & Müller, 1969; O’Brien et al., 1953)",
+"(Dijkstra & Liskov, 2012, Section 96.119 and more)",
+"(see O’Brien et al., 1953)",
+"(2002)"
+],
+"bibliography": [
+"Dijkstra, E. W., & Liskov, B. (2012). The art of computer programming [PhD thesis]. University of Oxford.",
+"Lamport, L., Dijkstra, E. W., & Hamilton, M. (2002). The education of a computer [PhD thesis]. University of Zurich.",
+"Lamport, L., & Müller, H. (1965). Data abstraction and hierarchy [PhD thesis]. University of Cambridge.",
+"Lamport, L., & Müller, H. (1969). The apollo guidance computer (TR-82). Lab Function.",
+"O’Brien, F., Hoare, C. A. R., & Hopper, G. (1953). On computable numbers. Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, G. van, Smith, J. Jr., & Backus, J. (1989). Can programming be liberated from the von neumann style. Proceedings of the Compiler Symposium, 43–184."
+]
+},
+"bib": {
+"citations": [
+"(1953; Rossum et al., 1989)",
+"(Lamport & Müller, 1965, p. 15; Rossum et al., 1989)",
+"(see Lamport et al., 2002)",
+"O’Brien et al. (1953, p. 87)",
+"(Lamport et al., 2002; Lamport & Müller, 1969; O’Brien et al., 1953)",
+"(Dijkstra & Liskov, 2012, Section 96.119 and more)",
+"(see O’Brien et al., 1953)",
+"(2002)"
+],
+"bibliography": [
+"Dijkstra, E. W., & Liskov, B. (2012). The art of computer programming [PhD thesis]. University of Oxford.",
+"Lamport, L., Dijkstra, E. W., & Hamilton, M. (2002). The education of a computer [PhD thesis]. University of Zurich.",
+"Lamport, L., & Müller, H. (1965). Data abstraction and hierarchy [PhD thesis]. University of Cambridge.",
+"Lamport, L., & Müller, H. (1969). The apollo guidance computer (TR-82). Lab Function.",
+"O’Brien, F., Hoare, C. A. R., & Hopper, G. (1953). On computable numbers. Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, G. van, Smith, J. Jr., & Backus, J. (1989). Can programming be liberated from the von neumann style. Proceedings of the Compiler Symposium, 43–184."
+]
+}
+}

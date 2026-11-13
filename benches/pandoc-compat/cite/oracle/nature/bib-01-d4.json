@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"see 1",
+"2",
+"see 2, ch. 94",
+"e.g. 3,4",
+"1",
+"2,4"
+],
+"bibliography": [
+"1. Backus, J. & Lamport, L. An axiomatic basis for computer programming. (1956).",
+"2. Hoare, C. A. R. & Rossum, G. van. Data abstraction and hierarchy. (University of Zurich, 1953).",
+"3. Rossum, G. van, Turing, A. M. & Hopper, G. Go to statement considered harmful. (University of Oxford, 1941).",
+"4. Rossum, G. van. Can programming be liberated from the von neumann style. Journal of the ACM 27, 248–397 (1937)."
+]
+},
+"bib": {
+"citations": [
+"see 1",
+"2",
+"see 2, ch. 94",
+"e.g. 3,4",
+"1",
+"2,4"
+],
+"bibliography": [
+"1. Backus, J. & Lamport, L. An axiomatic basis for computer programming. (1956).",
+"2. Hoare, C. A. R. & Rossum, G. van. Data abstraction and hierarchy. (University of Zurich, 1953).",
+"3. Rossum, G. van, Turing, A. M. & Hopper, G. Go to statement considered harmful. (University of Oxford, 1941).",
+"4. Rossum, G. van. Can programming be liberated from the von neumann style. Journal of the ACM 27, 248–397 (1937)."
+]
+}
+}

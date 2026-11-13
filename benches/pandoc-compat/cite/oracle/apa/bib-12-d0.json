@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(see O’Brien, 1989)",
+"(Lovelace & Hamilton, 2015, p. 70; O’Brien, 2011)",
+"(Lovelace & Hamilton, 2015, p. 52)",
+"(see Rossum & Cruz, 1954, ch. 23)",
+"O’Brien (2011)",
+"(see Rossum & Cruz, 1954, ch. 61)",
+"(see O’Brien, 1989, ch. 74)",
+"(Lovelace & Hamilton, 2015; O’Brien, 1989)",
+"(O’Brien, 2011; Rossum & Cruz, 1954)"
+],
+"bibliography": [
+"Lovelace, A., & Hamilton, M. (2015). Go to statement considered harmful (Second). MIT Press.",
+"O’Brien, F. (1989). The art of computer programming. Journal of the ACM, 25(4), 182–319. https://doi.org/10.9095/compiler.84",
+"O’Brien, F. (2011). Can programming be liberated from the von neumann style. Proceedings of the Layer Symposium, 72–147.",
+"Rossum, G. van, & Cruz, M. de la. (1954). Can programming be liberated from the von neumann style. Cambridge University Press."
+]
+},
+"bib": {
+"citations": [
+"(see O’Brien, 1989)",
+"(Lovelace & Hamilton, 2015, p. 70; O’Brien, 2011)",
+"(Lovelace & Hamilton, 2015, p. 52)",
+"(see Rossum & Cruz, 1954, ch. 23)",
+"O’Brien (2011)",
+"(see Rossum & Cruz, 1954, ch. 61)",
+"(see O’Brien, 1989, ch. 74)",
+"(Lovelace & Hamilton, 2015; O’Brien, 1989)",
+"(O’Brien, 2011; Rossum & Cruz, 1954)"
+],
+"bibliography": [
+"Lovelace, A., & Hamilton, M. (2015). Go to statement considered harmful (Second). MIT Press.",
+"O’Brien, F. (1989). The art of computer programming. Journal of the ACM, 25(4), 182–319. https://doi.org/10.9095/compiler.84",
+"O’Brien, F. (2011). Can programming be liberated from the von neumann style. Proceedings of the Layer Symposium, 72–147.",
+"Rossum, G. van, & Cruz, M. de la. (1954). Can programming be liberated from the von neumann style. Cambridge University Press."
+]
+}
+}

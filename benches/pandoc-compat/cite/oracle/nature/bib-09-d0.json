@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"1",
+"2",
+"1",
+"3",
+"4",
+"see 2, ch. 39",
+"3,e.g. 5",
+"3",
+"2 and more"
+],
+"bibliography": [
+"1. Lamport, L. & Turing, A. M. Go to statement considered harmful. in Proceedings of the distribution symposium 67–141 (1938).",
+"2. Hamilton, M., Backus, J. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (Springer, New York, 2008).",
+"3. Turing, A. M., Lamport, L. & Lovelace, A. The art of computer programming. (1979).",
+"4. O’Brien, F., Cruz, M. de la & Hopper, G. An Axiomatic Basis for Computer Programming. (Springer, Boston, 1956).",
+"5. Smith, J. Jr. The education of a computer. (University of Oxford, 2017)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2",
+"1",
+"3",
+"4",
+"see 2, ch. 39",
+"3,e.g. 5",
+"3",
+"2 and more"
+],
+"bibliography": [
+"1. Lamport, L. & Turing, A. M. Go to statement considered harmful. in Proceedings of the distribution symposium 67–141 (1938).",
+"2. Hamilton, M., Backus, J. & Turing, A. M. Can Programming Be Liberated from the von Neumann Style. (Springer, New York, 2008).",
+"3. Turing, A. M., Lamport, L. & Lovelace, A. The art of computer programming. (1979).",
+"4. O’Brien, F., Cruz, M. de la & Hopper, G. An Axiomatic Basis for Computer Programming. (Springer, Boston, 1956).",
+"5. Smith, J. Jr. The education of a computer. (University of Oxford, 2017)."
+]
+}
+}

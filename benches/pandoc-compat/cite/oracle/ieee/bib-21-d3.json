@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, Vol. 71]",
+"[2], [3]",
+"see [4]",
+"[5, Sec. 47.110] and more",
+"[4, p. 56], [6]",
+"[5, Vol. 36]",
+"see [4, Ch. 45]",
+"[4, pp. 71–115]",
+"[6]",
+"[3], [4]"
+],
+"bibliography": [
+"[1] E. W. Dijkstra and L. García, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 2004.",
+"[2] E. W. Dijkstra, G. van Rossum, and L. Lamport, Time, clocks, and the ordering of events. Springer, 1970.",
+"[3] A. M. Turing, “The apollo guidance computer,” Journal of the ACM, vol. 4, no. 9, pp. 240–315, 1949, doi: 10.8223/index.77.",
+"[4] F. O’Brien and J. Backus, Go to statement considered harmful, 2nd ed. Addison-Wesley, 2024.",
+"[5] M. de la Cruz, “Go to statement considered harmful,” in Proceedings of the network symposium, 2007, pp. 81–115. Available: https://example.org/cache",
+"[6] M. Hamilton, B. Liskov, and G. van Rossum, “An axiomatic basis for computer programming.” https://example.org/tree, 1992. Available: https://example.org/heuristic"
+]
+},
+"bib": {
+"citations": [
+"[1, Vol. 71]",
+"[2], [3]",
+"see [4]",
+"[5, Sec. 47.110] and more",
+"[4, p. 56], [6]",
+"[5, Vol. 36]",
+"see [4, Ch. 45]",
+"[4, pp. 71–115]",
+"[6]",
+"[3], [4]"
+],
+"bibliography": [
+"[1] E. W. Dijkstra and L. García, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 2004.",
+"[2] E. W. Dijkstra, G. van Rossum, and L. Lamport, Time, clocks, and the ordering of events. London: Springer, 1970.",
+"[3] A. M. Turing, “The apollo guidance computer,” Journal of the ACM, vol. 4, no. 9, pp. 240–315, 1949, doi: 10.8223/index.77.",
+"[4] F. O’Brien and J. Backus, Go to statement considered harmful, 2nd ed. New York: Addison-Wesley, 2024.",
+"[5] M. de la Cruz, “Go to statement considered harmful,” in Proceedings of the network symposium, 2007, pp. 81–115. Available: https://example.org/cache",
+"[6] M. Hamilton, B. Liskov, and G. van Rossum, “An axiomatic basis for computer programming.” https://example.org/tree, 1992. Available: https://example.org/heuristic"
+]
+}
+}

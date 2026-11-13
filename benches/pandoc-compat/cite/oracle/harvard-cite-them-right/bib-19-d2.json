@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Müller and Dijkstra, 1972, pp. 70–119)",
+"Müller and Dijkstra (1972, pp. 28–123)",
+"Müller and Dijkstra (1972, pp. 6–112)",
+"Müller and Dijkstra (1972, pp. 54–106)",
+"(see Turing and Liskov, 2018, ch. 21)",
+"(Turing and Liskov, 2018, p. 90)",
+"(Turing and Liskov, 2018, sec. 44.108 and more)",
+"Müller and Dijkstra (1972, pp. 73–121)",
+"Liskov (1992, p. 56)",
+"(see Cruz and García, 1984)",
+"Lovelace (1968)"
+],
+"bibliography": [
+"Cruz, M. de la and García, L. (1984) “The apollo guidance computer.” https://example.org/framework.",
+"Liskov, B. (1992) “The art of computer programming,” Proceedings of the London Mathematical Society, 44(12), pp. 132–356.",
+"Lovelace, A. (1968) The education of a computer. PhD thesis. University of Cambridge.",
+"Müller, H. and Dijkstra, E.W. (1972) “Go to statement considered harmful,” Proceedings of the approach symposium, pp. 53–147.",
+"Turing, A.M. and Liskov, B. (2018) On computable numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Dijkstra, 1972, pp. 70–119)",
+"Müller and Dijkstra (1972, pp. 28–123)",
+"Müller and Dijkstra (1972, pp. 6–112)",
+"Müller and Dijkstra (1972, pp. 54–106)",
+"(see Turing and Liskov, 2018, ch. 21)",
+"(Turing and Liskov, 2018, p. 90)",
+"(Turing and Liskov, 2018, sec. 44.108 and more)",
+"Müller and Dijkstra (1972, pp. 73–121)",
+"Liskov (1992, p. 56)",
+"(see Cruz and García, 1984)",
+"Lovelace (1968)"
+],
+"bibliography": [
+"Cruz, M. de la and García, L. (1984) “The apollo guidance computer.” https://example.org/framework.",
+"Liskov, B. (1992) “The art of computer programming,” Proceedings of the London Mathematical Society, 44(12), pp. 132–356.",
+"Lovelace, A. (1968) The education of a computer. PhD thesis. University of Cambridge.",
+"Müller, H. and Dijkstra, E.W. (1972) “Go to statement considered harmful,” Proceedings of the approach symposium, pp. 53–147.",
+"Turing, A.M. and Liskov, B. (2018) On computable numbers. New York: MIT Press."
+]
+}
+}

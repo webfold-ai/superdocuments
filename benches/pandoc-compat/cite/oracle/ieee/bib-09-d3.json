@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1, p. 38]",
+"[2, pp. 96–110]",
+"[2], [3]",
+"[2, pp. 95–104]",
+"[3, p. 48]",
+"[2, pp. 34–109]",
+"see [1, Ch. 64]",
+"[1, p. 62]",
+"[1], [4, p. 29]"
+],
+"bibliography": [
+"[1] L. Lamport and A. M. Turing, “Go to statement considered harmful,” in Proceedings of the distribution symposium, 1938, pp. 67–141.",
+"[2] M. Hamilton, J. Backus, and A. M. Turing, Can programming be liberated from the von neumann style, 3rd ed. New York: Springer, 2008.",
+"[3] J. Jr. Smith, “The education of a computer,” PhD thesis, University of Oxford, 2017.",
+"[4] A. M. Turing, L. Lamport, and A. Lovelace, “The art of computer programming.” https://example.org/index, 1979."
+]
+},
+"bib": {
+"citations": [
+"[1, p. 38]",
+"[2, pp. 96–110]",
+"[2], [3]",
+"[2, pp. 95–104]",
+"[3, p. 48]",
+"[2, pp. 34–109]",
+"see [1, Ch. 64]",
+"[1, p. 62]",
+"[1], [4, p. 29]"
+],
+"bibliography": [
+"[1] L. Lamport and A. M. Turing, “Go to statement considered harmful,” in Proceedings of the distribution symposium, 1938, pp. 67–141.",
+"[2] M. Hamilton, J. Backus, and A. M. Turing, Can programming be liberated from the von neumann style, 3rd ed. New York: Springer, 2008.",
+"[3] J. Jr. Smith, “The education of a computer,” PhD thesis, University of Oxford, 2017.",
+"[4] A. M. Turing, L. Lamport, and A. Lovelace, “The art of computer programming.” https://example.org/index, 1979."
+]
+}
+}

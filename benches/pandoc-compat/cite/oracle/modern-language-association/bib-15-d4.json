@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"Knuth et al. (36–134)",
+"Müller and Rossum",
+"(Müller and Rossum, vol. 59)",
+"(see Müller and Rossum)",
+"(Rossum and Cruz; Cruz and Turing 86)",
+"(Rossum and Cruz 41–114)",
+"(Rossum and Cruz)",
+"(e.g. Müller and Rossum; Liskov et al.)",
+"",
+"(Liskov et al., vol. 63)",
+"(see Dijkstra et al., ch. 83)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. Go to Statement Considered Harmful. 2nd ed., Springer, 1938.",
+"Dijkstra, Edsger W., et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 2018, pp. 1–192.",
+"Knuth, Donald E., et al. On Computable Numbers. https://example.org/structure, 2020.",
+"Liskov, Barbara, et al. The Education of a Computer. MIT Press, 2004, https://example.org/matrix.",
+"Müller, Hans, and Guido van Rossum. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 2, no. 11, 2020, pp. 86–362, https://doi.org/10.7751/compiler.14.",
+"Rossum, Guido van, and Maria de la Cruz. Notes on the Analytical Engine. TR-39, Lab Transform, 2012."
+]
+},
+"bib": {
+"citations": [
+"Knuth et al. (36–134)",
+"Müller and Rossum",
+"(Müller and Rossum, vol. 59)",
+"(see Müller and Rossum)",
+"(Rossum and Cruz; Cruz and Turing 86)",
+"(Rossum and Cruz 41–114)",
+"(Rossum and Cruz)",
+"(e.g. Müller and Rossum; Liskov et al.)",
+"",
+"(Liskov et al., vol. 63)",
+"(see Dijkstra et al., ch. 83)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. Go to Statement Considered Harmful. 2nd ed., Springer, 1938.",
+"Dijkstra, Edsger W., et al. “Time, Clocks, and the Ordering of Events.” Proceedings of the Stream Symposium, 2018, pp. 1–192.",
+"Knuth, Donald E., et al. On Computable Numbers. https://example.org/structure, 2020.",
+"Liskov, Barbara, et al. The Education of a Computer. MIT Press, 2004, https://example.org/matrix.",
+"Müller, Hans, and Guido van Rossum. “The Education of a Computer.” IEEE Transactions on Software Engineering, vol. 2, no. 11, 2020, pp. 86–362, https://doi.org/10.7751/compiler.14.",
+"Rossum, Guido van, and Maria de la Cruz. Notes on the Analytical Engine. TR-39, Lab Transform, 2012."
+]
+}
+}

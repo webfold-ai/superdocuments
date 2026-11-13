@@ -1,0 +1,166 @@
+[
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1979
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "The education of a computer",
+    "type": "thesis"
+  },
+  {
+    "URL": "https://example.org/convergence",
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1958
+        ]
+      ]
+    },
+    "number": "TR-47",
+    "publisher": "Lab Estimate",
+    "title": "Notes on the analytical engine",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "knuth1984",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    },
+    "page": "39-369",
+    "title": "The apollo guidance computer",
+    "type": "article-journal",
+    "volume": "33"
+  },
+  {
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1944
+        ]
+      ]
+    },
+    "number": "TR-62",
+    "publisher": "Lab Optimizer",
+    "title": "The art of computer programming",
+    "type": "report"
+  },
+  {
+    "abstract": "Pipeline tree learning index learning kernel corpus decoder queue block network trace.",
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "title": "The education of a computer",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1951
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "Notes on the analytical engine",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1968
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/solver",
+    "title": "Time, clocks, and the ordering of events",
+    "type": ""
+  }
+]

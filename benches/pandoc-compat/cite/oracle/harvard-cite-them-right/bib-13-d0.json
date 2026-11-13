@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"Smith (1987, pp. 54–105)",
+"(Lamport, Hopper and Knuth, 2007, pp. 25–102)",
+"(Liskov, 1946; Backus, 1952; Smith and Liskov, 2024)",
+"Lamport, Hopper and Knuth (2007)",
+"(Smith, 1987, sec. 61.106 and more)",
+"(Müller and Hoare, 2024, sec. 67.131 and more)",
+"(Liskov, 1946, p. 75; Lamport, Hopper and Knuth, 2007)",
+"(Backus, 1952; Müller and Hoare, 2024)",
+"Müller and Hoare (2024, p. 96)",
+"(Liskov, 1946; Backus, 1952)"
+],
+"bibliography": [
+"Backus, J. (1952) “Can programming be liberated from the von neumann style,” Proceedings of the solver symposium, pp. 66–128. Available at: https://example.org/entropy.",
+"Lamport, L., Hopper, G. and Knuth, D.E. (2007) “Time, clocks, and the ordering of events.” https://example.org/retrieval.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. (1987) “The education of a computer.” https://example.org/heuristic.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"Smith (1987, pp. 54–105)",
+"(Lamport, Hopper and Knuth, 2007, pp. 25–102)",
+"(Liskov, 1946; Backus, 1952; Smith and Liskov, 2024)",
+"Lamport, Hopper and Knuth (2007)",
+"(Smith, 1987, sec. 61.106 and more)",
+"(Müller and Hoare, 2024, sec. 67.131 and more)",
+"(Liskov, 1946, p. 75; Lamport, Hopper and Knuth, 2007)",
+"(Backus, 1952; Müller and Hoare, 2024)",
+"Müller and Hoare (2024, p. 96)",
+"(Liskov, 1946; Backus, 1952)"
+],
+"bibliography": [
+"Backus, J. (1952) “Can programming be liberated from the von neumann style,” Proceedings of the solver symposium, pp. 66–128. Available at: https://example.org/entropy.",
+"Lamport, L., Hopper, G. and Knuth, D.E. (2007) “Time, clocks, and the ordering of events.” https://example.org/retrieval.",
+"Liskov, B. (1946) “Data abstraction and hierarchy.” https://example.org/retrieval.",
+"Müller, H. and Hoare, C.A.R. (2024) “The art of computer programming.” https://example.org/block.",
+"Smith, J.Jr. (1987) “The education of a computer.” https://example.org/heuristic.",
+"Smith, J.Jr. and Liskov, B. (2024) “Notes on the analytical engine.” https://example.org/tree. Available at: https://example.org/sparse."
+]
+}
+}

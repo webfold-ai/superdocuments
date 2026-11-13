@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Rossum 1937, 84–114)",
+"(Backus and Lamport 1956, sec. 64.121 and more)",
+"(Hoare et al. 2010, sec. 49.137 and more)",
+"(see Backus and Lamport 1956, ch. 38)",
+"(Rossum 1937, 30)",
+"(Hoare et al. 2010, 16–114)",
+"Hoare and Rossum (1953, 18–135)",
+"Hoare et al. (2010)",
+"Hoare and Rossum (1953, 91)",
+"(Hoare et al. 2010, sec. 51.139 and more)",
+"Hoare et al. (2010, 86–139)",
+"(Hopper 2016, 35–127)",
+"(e.g. Knuth 2007; Rossum 1937)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. An Axiomatic Basis for Computer Programming. Https://example.org/operator.",
+"Hoare, C. A. R., Ada Lovelace, and John Jr. Smith. 2010. On Computable Numbers. 3rd ed. Addison-Wesley.",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich. https://example.org/experiment.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4 (5): 238–320. https://doi.org/10.8087/bound.55.",
+"Knuth, Donald E. 2007. “An Axiomatic Basis for Computer Programming.” Proceedings of the Bound Symposium, 48–186.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27 (4): 248–397."
+]
+},
+"bib": {
+"citations": [
+"(Rossum 1937, 84–114)",
+"(Backus and Lamport 1956, sec. 64.121 and more)",
+"(Hoare et al. 2010, sec. 49.137 and more)",
+"(see Backus and Lamport 1956, ch. 38)",
+"(Rossum 1937, 30)",
+"(Hoare et al. 2010, 16–114)",
+"Hoare and Rossum (1953, 18–135)",
+"Hoare et al. (2010)",
+"Hoare and Rossum (1953, 91)",
+"(Hoare et al. 2010, sec. 51.139 and more)",
+"Hoare et al. (2010, 86–139)",
+"(Hopper 2016, 35–127)",
+"(e.g. Knuth 2007; Rossum 1937)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. An Axiomatic Basis for Computer Programming. Https://example.org/operator.",
+"Hoare, C. A. R., Ada Lovelace, and John Jr. Smith. 2010. On Computable Numbers. 3rd ed. Addison-Wesley.",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich. https://example.org/experiment.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4 (5): 238–320. https://doi.org/10.8087/bound.55.",
+"Knuth, Donald E. 2007. “An Axiomatic Basis for Computer Programming.” Proceedings of the Bound Symposium, 48–186.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27 (4): 248–397."
+]
+}
+}

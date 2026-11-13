@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(García et al., 1945, p. 81)",
+"(Rossum, 2019, Figure 41)",
+"(Hamilton et al., 1947)",
+"(2019)",
+"Dijkstra & Smith (1988, pp. 35–101)",
+"(1945)",
+"(Cruz et al., 1958, Section 92.133 and more)",
+"(Rossum, 2019, p. 23)",
+"(Rossum, 2019; Turing et al., 2011)",
+"(Turing et al., 2011, p. 83)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G., & Rossum, G. van. (1958). The apollo guidance computer. Journal of the ACM, 58(12), 24–338. https://doi.org/10.6528/vector.60",
+"Dijkstra, E. W., & Smith, J. Jr. (1988). Time, clocks, and the ordering of events. Proceedings of the Window Symposium, 81–126.",
+"García, L., Rossum, G. van, & Lovelace, A. (1945). An axiomatic basis for computer programming (TR-55). Lab Lattice.",
+"Hamilton, M., García, L., & Liskov, B. (1947). The art of computer programming [PhD thesis]. University of Cambridge.",
+"Rossum, G. van. (2019). The education of a computer. https://example.org/function. https://example.org/latency",
+"Turing, A. M., O’Brien, F., & Liskov, B. (2011). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/metric"
+]
+},
+"bib": {
+"citations": [
+"(García et al., 1945, p. 81)",
+"(Rossum, 2019, Figure 41)",
+"(Hamilton et al., 1947)",
+"(2019)",
+"Dijkstra & Smith (1988, pp. 35–101)",
+"(1945)",
+"(Cruz et al., 1958, Section 92.133 and more)",
+"(Rossum, 2019, p. 23)",
+"(Rossum, 2019; Turing et al., 2011)",
+"(Turing et al., 2011, p. 83)"
+],
+"bibliography": [
+"Cruz, M. de la, Hopper, G., & Rossum, G. van. (1958). The apollo guidance computer. Journal of the ACM, 58(12), 24–338. https://doi.org/10.6528/vector.60",
+"Dijkstra, E. W., & Smith, J. Jr. (1988). Time, clocks, and the ordering of events. Proceedings of the Window Symposium, 81–126.",
+"García, L., Rossum, G. van, & Lovelace, A. (1945). An axiomatic basis for computer programming (TR-55). Lab Lattice.",
+"Hamilton, M., García, L., & Liskov, B. (1947). The art of computer programming [PhD thesis]. University of Cambridge.",
+"Rossum, G. van. (2019). The education of a computer. https://example.org/function. https://example.org/latency",
+"Turing, A. M., O’Brien, F., & Liskov, B. (2011). Data abstraction and hierarchy [PhD thesis, University of Zurich]. https://example.org/metric"
+]
+}
+}

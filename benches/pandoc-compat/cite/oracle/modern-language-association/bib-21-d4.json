@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al. 21)",
+"",
+"(see Liskov et al.)",
+"(Turing; Dijkstra and García 87)",
+"Dijkstra et al.",
+"(Lovelace 47)",
+"(Turing; O’Brien and Backus 36)",
+"(see Hamilton et al., ch. 96)",
+"(see Lovelace)",
+"(Turing; O’Brien and Backus)",
+"(Cruz 89)",
+"(e.g. Liskov; Liskov et al.)"
+],
+"bibliography": [
+"Cruz, Maria de la. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 2007, pp. 81–115, https://example.org/cache.",
+"Dijkstra, Edsger W., et al. Time, Clocks, and the Ordering of Events. Springer, 1970.",
+"Dijkstra, Edsger W., and Luis García. Data Abstraction and Hierarchy. 2004. University of Cambridge, PhD thesis.",
+"Hamilton, Margaret, et al. An Axiomatic Basis for Computer Programming. https://example.org/tree, 1992, https://example.org/heuristic.",
+"Liskov, Barbara, et al. An Axiomatic Basis for Computer Programming. 1992. University of Cambridge, PhD thesis.",
+"Liskov, Barbara. On Computable Numbers. TR-18, Lab Estimate, 1956, https://example.org/analysis.",
+"Lovelace, Ada. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys, vol. 33, no. 8, 1940, pp. 183–370, https://doi.org/10.9422/heuristic.52.",
+"O’Brien, Flann, and John Backus. Go to Statement Considered Harmful. 2nd ed., Addison-Wesley, 2024.",
+"Turing, Alan M. “The Apollo Guidance Computer.” Journal of the ACM, vol. 4, no. 9, 1949, pp. 240–315, https://doi.org/10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al. 21)",
+"",
+"(see Liskov et al.)",
+"(Turing; Dijkstra and García 87)",
+"Dijkstra et al.",
+"(Lovelace 47)",
+"(Turing; O’Brien and Backus 36)",
+"(see Hamilton et al., ch. 96)",
+"(see Lovelace)",
+"(Turing; O’Brien and Backus)",
+"(Cruz 89)",
+"(e.g. Liskov; Liskov et al.)"
+],
+"bibliography": [
+"Cruz, Maria de la. “Go to Statement Considered Harmful.” Proceedings of the Network Symposium, 2007, pp. 81–115, https://example.org/cache.",
+"Dijkstra, Edsger W., et al. Time, Clocks, and the Ordering of Events. Springer, 1970.",
+"Dijkstra, Edsger W., and Luis García. Data Abstraction and Hierarchy. 2004. University of Cambridge, PhD thesis.",
+"Hamilton, Margaret, et al. An Axiomatic Basis for Computer Programming. https://example.org/tree, 1992, https://example.org/heuristic.",
+"Liskov, Barbara, et al. An Axiomatic Basis for Computer Programming. 1992. University of Cambridge, PhD thesis.",
+"Liskov, Barbara. On Computable Numbers. TR-18, Lab Estimate, 1956, https://example.org/analysis.",
+"Lovelace, Ada. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys, vol. 33, no. 8, 1940, pp. 183–370, https://doi.org/10.9422/heuristic.52.",
+"O’Brien, Flann, and John Backus. Go to Statement Considered Harmful. 2nd ed., Addison-Wesley, 2024.",
+"Turing, Alan M. “The Apollo Guidance Computer.” Journal of the ACM, vol. 4, no. 9, 1949, pp. 240–315, https://doi.org/10.8223/index.77."
+]
+}
+}

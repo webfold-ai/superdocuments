@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1",
+"1–3",
+"4",
+"2",
+"3,5",
+"1,e.g. 3",
+"2",
+"6",
+"see 3",
+"2",
+"4,e.g. 7"
+],
+"bibliography": [
+"1. Smith, J. Jr. & Liskov, B. Notes on the analytical engine. (2024).",
+"2. Lamport, L., Hopper, G. & Knuth, D. E. Time, clocks, and the ordering of events. (2007).",
+"3. Liskov, B. Data abstraction and hierarchy. (1946).",
+"4. Backus, J. Can programming be liberated from the von neumann style. in Proceedings of the solver symposium 66–128 (1952).",
+"5. Müller, H. & Hoare, C. A. R. The art of computer programming. (2024).",
+"6. Smith, J. Jr. The education of a computer. (1987).",
+"7. Smith, J. Jr. & Backus, J. The apollo guidance computer. (University of Zurich, 1988)."
+]
+},
+"bib": {
+"citations": [
+"1",
+"1–3",
+"4",
+"2",
+"3,5",
+"1,e.g. 3",
+"2",
+"6",
+"see 3",
+"2",
+"4,e.g. 7"
+],
+"bibliography": [
+"1. Smith, J. Jr. & Liskov, B. Notes on the analytical engine. (2024).",
+"2. Lamport, L., Hopper, G. & Knuth, D. E. Time, clocks, and the ordering of events. (2007).",
+"3. Liskov, B. Data abstraction and hierarchy. (1946).",
+"4. Backus, J. Can programming be liberated from the von neumann style. in Proceedings of the solver symposium 66–128 (1952).",
+"5. Müller, H. & Hoare, C. A. R. The art of computer programming. (2024).",
+"6. Smith, J. Jr. The education of a computer. (1987).",
+"7. Smith, J. Jr. & Backus, J. The apollo guidance computer. (University of Zurich, 1988)."
+]
+}
+}

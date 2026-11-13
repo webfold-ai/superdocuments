@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Rossum, sec. 9.131 and more)",
+"(Rossum et al., sec. 62.124 and more)",
+"(Hopper)",
+"(Rossum)",
+"(Knuth)",
+"(Backus and Lamport; Hoare et al.)",
+"(Knuth, vol. 72)",
+"(Knuth)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. An Axiomatic Basis for Computer Programming. https://example.org/operator, 1956.",
+"Hoare, C. A. R., et al. On Computable Numbers. 3rd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., and Guido van Rossum. Data Abstraction and Hierarchy. 1953, https://example.org/experiment. University of Zurich, PhD thesis.",
+"Hopper, Grace. “The Art of Computer Programming.” IEEE Transactions on Software Engineering, vol. 4, no. 5, 2016, pp. 238–320, https://doi.org/10.8087/bound.55.",
+"Knuth, Donald E. “An Axiomatic Basis for Computer Programming.” Proceedings of the Bound Symposium, 2007, pp. 48–186.",
+"Rossum, Guido van. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 27, no. 4, 1937, pp. 248–397.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. 1941. University of Oxford, PhD thesis."
+]
+},
+"bib": {
+"citations": [
+"(Rossum, sec. 9.131 and more)",
+"(Rossum et al., sec. 62.124 and more)",
+"(Hopper)",
+"(Rossum)",
+"(Knuth)",
+"(Backus and Lamport; Hoare et al.)",
+"(Knuth, vol. 72)",
+"(Knuth)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. An Axiomatic Basis for Computer Programming. https://example.org/operator, 1956.",
+"Hoare, C. A. R., et al. On Computable Numbers. 3rd ed., Addison-Wesley, 2010.",
+"Hoare, C. A. R., and Guido van Rossum. Data Abstraction and Hierarchy. 1953, https://example.org/experiment. University of Zurich, PhD thesis.",
+"Hopper, Grace. “The Art of Computer Programming.” IEEE Transactions on Software Engineering, vol. 4, no. 5, 2016, pp. 238–320, https://doi.org/10.8087/bound.55.",
+"Knuth, Donald E. “An Axiomatic Basis for Computer Programming.” Proceedings of the Bound Symposium, 2007, pp. 48–186.",
+"Rossum, Guido van. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM, vol. 27, no. 4, 1937, pp. 248–397.",
+"Rossum, Guido van, et al. Go to Statement Considered Harmful. 1941. University of Oxford, PhD thesis."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"see [1]",
+"see [2]",
+"[3, p. 49]",
+"[4]",
+"see [3, Ch. 5]",
+"[2]",
+"e.g. [5], [6]",
+"[3], [6]",
+"[4, p. 90]",
+"see [7]",
+"[2, p. 2]"
+],
+"bibliography": [
+"[1] C. A. R. Hoare, A. Lovelace, and A. M. Turing, “Notes on the analytical engine,” Lab Feature, TR-43, 2016.",
+"[2] M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/bound, 1941.",
+"[3] G. van Rossum and C. A. R. Hoare, “Go to statement considered harmful.” https://example.org/analysis, 1967. Available: https://example.org/cache",
+"[4] H. Müller, “Notes on the analytical engine,” Lab Bound, TR-96, 2013. Available: https://example.org/entropy",
+"[5] A. M. Turing and G. van Rossum, “The art of computer programming,” PhD thesis, University of Cambridge, 1968.",
+"[6] G. van Rossum, J. Backus, and B. Liskov, “Go to statement considered harmful.” https://example.org/latency, 1993. Available: https://example.org/pipeline",
+"[7] M. de la Cruz, F. O’Brien, and G. Hopper, “The art of computer programming,” Lab Throughput, TR-84, 1971. Available: https://example.org/complexity"
+]
+},
+"bib": {
+"citations": [
+"see [1]",
+"see [2]",
+"[3, p. 49]",
+"[4]",
+"see [3, Ch. 5]",
+"[2]",
+"e.g. [5], [6]",
+"[3], [6]",
+"[4, p. 90]",
+"see [7]",
+"[2, p. 2]"
+],
+"bibliography": [
+"[1] C. A. R. Hoare, A. Lovelace, and A. M. Turing, “Notes on the analytical engine,” Lab Feature, TR-43, 2016.",
+"[2] M. de la Cruz, “Time, clocks, and the ordering of events.” https://example.org/bound, 1941.",
+"[3] G. van Rossum and C. A. R. Hoare, “Go to statement considered harmful.” https://example.org/analysis, 1967. Available: https://example.org/cache",
+"[4] H. Müller, “Notes on the analytical engine,” Lab Bound, TR-96, 2013. Available: https://example.org/entropy",
+"[5] A. M. Turing and G. van Rossum, “The art of computer programming,” PhD thesis, University of Cambridge, 1968.",
+"[6] G. van Rossum, J. Backus, and B. Liskov, “Go to statement considered harmful.” https://example.org/latency, 1993. Available: https://example.org/pipeline",
+"[7] M. de la Cruz, F. O’Brien, and G. Hopper, “The art of computer programming,” Lab Throughput, TR-84, 1971. Available: https://example.org/complexity"
+]
+}
+}

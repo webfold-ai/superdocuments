@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1, pp. 68–129]",
+"[1]",
+"see [2]",
+"[2, Vol. 43]",
+"[3]",
+"[4, p. 2]",
+"[2, p. 51]",
+"[5]",
+"[1]",
+"[1], [5], [6]"
+],
+"bibliography": [
+"[1] G. van Rossum, J. Jr. Smith, and J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the compiler symposium, 1989, pp. 43–184.",
+"[2] H. Müller, L. García, and M. de la Cruz, “The art of computer programming.” https://example.org/structure, 2019. Available: https://example.org/policy",
+"[3] L. Lamport and H. Müller, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 1965.",
+"[4] E. W. Dijkstra and B. Liskov, “The art of computer programming,” PhD thesis, University of Oxford, 2012.",
+"[5] L. Lamport and H. Müller, “The apollo guidance computer,” Lab Function, TR-82, 1969.",
+"[6] F. O’Brien, C. A. R. Hoare, and G. Hopper, “On computable numbers,” in Proceedings of the optimizer symposium, 1953, pp. 43–145."
+]
+},
+"bib": {
+"citations": [
+"[1, pp. 68–129]",
+"[1]",
+"see [2]",
+"[2, Vol. 43]",
+"[3]",
+"[4, p. 2]",
+"[2, p. 51]",
+"[5]",
+"[1]",
+"[1], [5], [6]"
+],
+"bibliography": [
+"[1] G. van Rossum, J. Jr. Smith, and J. Backus, “Can programming be liberated from the von neumann style,” in Proceedings of the compiler symposium, 1989, pp. 43–184.",
+"[2] H. Müller, L. García, and M. de la Cruz, “The art of computer programming.” https://example.org/structure, 2019. Available: https://example.org/policy",
+"[3] L. Lamport and H. Müller, “Data abstraction and hierarchy,” PhD thesis, University of Cambridge, 1965.",
+"[4] E. W. Dijkstra and B. Liskov, “The art of computer programming,” PhD thesis, University of Oxford, 2012.",
+"[5] L. Lamport and H. Müller, “The apollo guidance computer,” Lab Function, TR-82, 1969.",
+"[6] F. O’Brien, C. A. R. Hoare, and G. Hopper, “On computable numbers,” in Proceedings of the optimizer symposium, 1953, pp. 43–145."
+]
+}
+}

@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Lovelace et al., sec. 16.139 and more)",
+"(Knuth et al., sec. 39.108 and more)",
+"Smith et al. (33)",
+"(Liskov, Smith, et al.; Smith et al. 98)",
+"(Smith et al.; Liskov, Müller, et al.)",
+"(Dijkstra, fig. 71)",
+"(see Dijkstra, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Knuth, Donald E., et al. Notes on the Analytical Engine. https://example.org/retrieval, 1962.",
+"Liskov, Barbara, Hans Müller, et al. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 2012, pp. 35–166.",
+"Liskov, Barbara, John Jr. Smith, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-94, Lab Model, 1937."
+]
+},
+"bib": {
+"citations": [
+"(Lovelace et al., sec. 16.139 and more)",
+"(Knuth et al., sec. 39.108 and more)",
+"Smith et al. (33)",
+"(Liskov, Smith, et al.; Smith et al. 98)",
+"(Smith et al.; Liskov, Müller, et al.)",
+"(Dijkstra, fig. 71)",
+"(see Dijkstra, ch. 49)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. The Art of Computer Programming. https://example.org/filter, 1973.",
+"Knuth, Donald E., et al. Notes on the Analytical Engine. https://example.org/retrieval, 1962.",
+"Liskov, Barbara, Hans Müller, et al. “Notes on the Analytical Engine.” Proceedings of the Compiler Symposium, 2012, pp. 35–166.",
+"Liskov, Barbara, John Jr. Smith, et al. Time, Clocks, and the Ordering of Events. https://example.org/function, 1963, https://example.org/density.",
+"Lovelace, Ada, et al. Time, Clocks, and the Ordering of Events. 1969. University of Oxford, PhD thesis.",
+"Smith, John Jr., et al. Go to Statement Considered Harmful. TR-94, Lab Model, 1937."
+]
+}
+}

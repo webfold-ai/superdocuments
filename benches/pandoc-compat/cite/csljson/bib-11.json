@@ -1,0 +1,207 @@
+[
+  {
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1943
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/algorithm",
+    "title": "On computable numbers",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "edition": "3",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1987
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "publisher-place": "London",
+    "title": "The apollo guidance computer",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2006
+        ]
+      ]
+    },
+    "number": "TR-83",
+    "publisher": "Lab Layer",
+    "title": "The apollo guidance computer",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1939
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "publisher-place": "New York",
+    "title": "The art of computer programming",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1998
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/experiment",
+    "title": "The art of computer programming",
+    "type": ""
+  },
+  {
+    "DOI": "10.4589/gradient.17",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "turing1936",
+    "issue": "9",
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "page": "191-397",
+    "title": "Data abstraction and hierarchy",
+    "type": "article-journal",
+    "volume": "7"
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1975
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "publisher-place": "New York",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "container-title": "Proceedings of the transform symposium",
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1936
+        ]
+      ]
+    },
+    "page": "2-133",
+    "title": "An axiomatic basis for computer programming",
+    "type": "paper-conference"
+  }
+]

@@ -1,0 +1,30 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[1, Sec. 70.107] and more",
+"see [2, Ch. 65]",
+"[1, p. 77]",
+"see [1, Ch. 14]"
+],
+"bibliography": [
+"[1] H. Müller and B. Liskov, The apollo guidance computer, Second. Springer, 2014.",
+"[2] C. A. R. Hoare, “The apollo guidance computer,” Proceedings of the London Mathematical Society, vol. 33, no. 2, pp. 72–308, 2005, Available: https://example.org/trace"
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[1, Sec. 70.107] and more",
+"see [2, Ch. 65]",
+"[1, p. 77]",
+"see [1, Ch. 14]"
+],
+"bibliography": [
+"[1] H. Müller and B. Liskov, The apollo guidance computer, Second. London: Springer, 2014.",
+"[2] C. A. R. Hoare, “The apollo guidance computer,” Proceedings of the London Mathematical Society, vol. 33, no. 2, pp. 72–308, 2005, Available: https://example.org/trace"
+]
+}
+}

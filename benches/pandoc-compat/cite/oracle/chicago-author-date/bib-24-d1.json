@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(e.g. Lamport and Müller 1969; Lamport et al. 2002)",
+"(Lamport and Müller 1969; Dijkstra and Liskov 2012)",
+"(Lamport and Müller 1965, 1969; Müller et al. 2019)",
+"(Lamport and Müller 1965, sec. 85.122 and more)",
+"Rossum et al. (1989, 73)",
+"(Müller et al. 2019, 11–139)",
+"(Lamport and Müller 1969; 1989)",
+"(Lamport and Müller 1965; 1953)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. 2012. “The Art of Computer Programming.” PhD thesis, University of Oxford.",
+"Lamport, Leslie, Edsger W. Dijkstra, and Margaret Hamilton. 2002. “The Education of a Computer.” PhD thesis, University of Zurich.",
+"Lamport, Leslie, and Hans Müller. 1965. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie, and Hans Müller. 1969. The Apollo Guidance Computer. TR-82. Lab Function.",
+"Müller, Hans, Luis García, and Maria de la Cruz. 2019. The Art of Computer Programming. Https://example.org/structure. https://example.org/policy.",
+"O’Brien, Flann, C. A. R. Hoare, and Grace Hopper. 1953. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, Guido van, John Jr. Smith, and John Backus. 1989. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 43–184."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Lamport and Müller 1969; Lamport et al. 2002)",
+"(Lamport and Müller 1969; Dijkstra and Liskov 2012)",
+"(Lamport and Müller 1965, 1969; Müller et al. 2019)",
+"(Lamport and Müller 1965, sec. 85.122 and more)",
+"Rossum et al. (1989, 73)",
+"(Müller et al. 2019, 11–139)",
+"(Lamport and Müller 1969; 1989)",
+"(Lamport and Müller 1965; 1953)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. 2012. “The Art of Computer Programming.” PhD thesis, University of Oxford.",
+"Lamport, Leslie, Edsger W. Dijkstra, and Margaret Hamilton. 2002. “The Education of a Computer.” PhD thesis, University of Zurich.",
+"Lamport, Leslie, and Hans Müller. 1965. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie, and Hans Müller. 1969. The Apollo Guidance Computer. TR-82. Lab Function.",
+"Müller, Hans, Luis García, and Maria de la Cruz. 2019. The Art of Computer Programming. Https://example.org/structure. https://example.org/policy.",
+"O’Brien, Flann, C. A. R. Hoare, and Grace Hopper. 1953. “On Computable Numbers.” Proceedings of the Optimizer Symposium, 43–145.",
+"Rossum, Guido van, John Jr. Smith, and John Backus. 1989. “Can Programming Be Liberated from the von Neumann Style.” Proceedings of the Compiler Symposium, 43–184."
+]
+}
+}

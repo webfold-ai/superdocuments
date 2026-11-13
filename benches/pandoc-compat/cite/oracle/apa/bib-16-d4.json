@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Hopper et al., 1990; e.g. Liskov & Knuth, 1954)",
+"(Knuth & O’Brien, 1945)",
+"(1990)",
+"(Knuth & O’Brien, 1945, Volume 19)",
+"(Hamilton et al., 1956; Knuth & O’Brien, 1945)",
+"(see García et al., 2007)",
+"(2007; Hamilton et al., 1956)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Liskov, B., & Knuth, D. E. (1954). The art of computer programming. Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver"
+]
+},
+"bib": {
+"citations": [
+"(Hopper et al., 1990; e.g. Liskov & Knuth, 1954)",
+"(Knuth & O’Brien, 1945)",
+"(1990)",
+"(Knuth & O’Brien, 1945, Volume 19)",
+"(Hamilton et al., 1956; Knuth & O’Brien, 1945)",
+"(see García et al., 2007)",
+"(2007; Hamilton et al., 1956)"
+],
+"bibliography": [
+"García, L., Hamilton, M., & Knuth, D. E. (2007). An axiomatic basis for computer programming. https://example.org/sparse.",
+"Hamilton, M., Lovelace, A., & Turing, A. M. (1956). An axiomatic basis for computer programming (TR-41). Lab Scheduler.",
+"Hopper, G., Dijkstra, E. W., & Backus, J. (1990). On computable numbers (TR-81). Lab Algorithm.",
+"Knuth, D. E., & O’Brien, F. (1945). An axiomatic basis for computer programming (TR-13). Lab Scheduler.",
+"Liskov, B., & Knuth, D. E. (1954). The art of computer programming. Proceedings of the Pipeline Symposium, 14–128. https://example.org/solver"
+]
+}
+}

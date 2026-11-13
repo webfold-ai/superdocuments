@@ -17,7 +17,7 @@ use quick_xml::Reader;
 
 use super::{
     attr_local, attrs_local, image_refs, main_part, markdown_alt, media_name, read_rels,
-    rels_path_of, render, resolve, Rel, Seg,
+    rels_path_of, render, resolve, Rel, Seg, MARK_CODE, MARK_STRIKE, MARK_SUB, MARK_SUP,
 };
 use crate::document::{archive, entry, markdown_table, push_ref, text, xml_text};
 
@@ -145,6 +145,8 @@ struct Numbering {
     nums: HashMap<String, String>,
     /// abstractNumId -> ilvl -> numFmt
     formats: HashMap<String, HashMap<u32, String>>,
+    /// abstractNumId -> ilvl -> first number
+    starts: HashMap<String, HashMap<u32, u32>>,
 }
 
 impl Numbering {
@@ -178,6 +180,13 @@ impl Numbering {
                                 .or_insert(f);
                         }
                     }
+                    "start" => {
+                        if let (Some(a), Some(l), Some(v)) =
+                            (abstract_id.as_ref(), level, attr_local(&tag, "val").and_then(|v| v.parse().ok()))
+                        {
+                            out.starts.entry(a.clone()).or_default().entry(l).or_insert(v);
+                        }
+                    }
                     "num" => num_id = attr_local(&tag, "numId"),
                     "abstractNumId" if abstract_id.is_none() => {
                         if let (Some(n), Some(a)) = (num_id.as_ref(), attr_local(&tag, "val")) {
@@ -203,6 +212,14 @@ impl Numbering {
         Ok(out)
     }
 
+    /// The number format and first number of a numbered level (`decimal`, `lowerLetter`, ...).
+    fn format_and_start(&self, num_id: &str, level: u32) -> (String, u32) {
+        let abs = self.nums.get(num_id);
+        let fmt = abs.and_then(|a| self.formats.get(a)).and_then(|l| l.get(&level)).cloned().unwrap_or_else(|| "decimal".into());
+        let start = abs.and_then(|a| self.starts.get(a)).and_then(|l| l.get(&level)).copied().unwrap_or(1);
+        (fmt, start)
+    }
+
     /// `Some(true)` for a bullet, `Some(false)` for a numbered level, `None` when the level is
     /// numbered `none` (a plain paragraph).
     fn is_bullet(&self, num_id: &str, level: u32) -> Option<bool> {
@@ -225,13 +242,18 @@ struct Para {
     style: Option<String>,
     outline: Option<u32>,
     num: Option<(String, Option<u32>)>,
+    /// `w:ind`: left indent minus hanging indent, in twentieths of a point.
+    indent: i32,
 }
 
 enum Block {
     Heading(String),
     Para(String),
-    Item(String),
+    /// A list item: its Markdown, the list's `numId` and its level.
+    Item(String, String, u32),
     Table(String),
+    Code(String),
+    Quote(String),
 }
 
 #[derive(Default)]
@@ -250,6 +272,7 @@ struct RunState {
     in_t: bool,
     bold: bool,
     italic: bool,
+    marks: u8,
 }
 
 #[derive(Default)]
@@ -274,6 +297,8 @@ struct Parser<'a> {
     skip: usize,
     counters: HashMap<(String, u32), u32>,
     references: Vec<String>,
+    /// Title, subtitle, author, date and abstract paragraphs (Word's `Title`, `Author`, ... styles).
+    meta: Vec<(&'static str, String)>,
     note: Option<String>,
     notes: Vec<(String, Vec<Block>)>,
     outer: Vec<Block>,
@@ -302,6 +327,7 @@ impl<'a> Parser<'a> {
             skip: 0,
             counters: HashMap::new(),
             references: Vec::new(),
+            meta: Vec::new(),
             note: None,
             notes: Vec::new(),
             outer: Vec::new(),
@@ -318,7 +344,7 @@ impl<'a> Parser<'a> {
             .hyperlink
             .clone()
             .or_else(|| self.fields.iter().rev().find_map(|f| f.href.clone()));
-        let (bold, italic) = (self.run.bold, self.run.italic);
+        let (bold, italic, marks) = (self.run.bold, self.run.italic, self.run.marks);
         let Some(para) = self.paras.last_mut() else {
             return;
         };
@@ -326,10 +352,11 @@ impl<'a> Parser<'a> {
             text,
             bold: b,
             italic: i,
+            marks: m,
             href: h,
         }) = para.segs.last_mut()
         {
-            if *b == bold && *i == italic && *h == href {
+            if *b == bold && *i == italic && *m == marks && *h == href {
                 text.push_str(value);
                 return;
             }
@@ -338,6 +365,7 @@ impl<'a> Parser<'a> {
             text: value.to_owned(),
             bold,
             italic,
+            marks,
             href,
         });
     }
@@ -394,6 +422,13 @@ impl<'a> Parser<'a> {
                     p.style = val();
                 }
             }
+            "ind" if self.in_ppr => {
+                let num = |names: &[&str]| names.iter().find_map(|n| attr_local(tag, n)).and_then(|v| v.parse::<i32>().ok()).unwrap_or(0);
+                let (left, hanging) = (num(&["left", "start"]), num(&["hanging"]));
+                if let Some(p) = self.paras.last_mut() {
+                    p.indent = left - hanging;
+                }
+            }
             "outlineLvl" if self.in_ppr => {
                 if let Some(p) = self.paras.last_mut() {
                     p.outline = val().and_then(|v| v.parse().ok());
@@ -415,10 +450,21 @@ impl<'a> Parser<'a> {
                 self.run.in_run = true;
                 self.run.bold = false;
                 self.run.italic = false;
+                self.run.marks = 0;
             }
             "rPr" if self.run.in_run && !self.in_ppr => self.run.in_rpr = true,
             "b" if self.run.in_rpr => self.run.bold = !is_off(val().as_deref()),
             "i" if self.run.in_rpr => self.run.italic = !is_off(val().as_deref()),
+            "strike" | "dstrike" if self.run.in_rpr => {
+                if !is_off(val().as_deref()) {
+                    self.run.marks |= MARK_STRIKE;
+                }
+            }
+            "vertAlign" if self.run.in_rpr => match val().as_deref() {
+                Some("superscript") => self.run.marks |= MARK_SUP,
+                Some("subscript") => self.run.marks |= MARK_SUB,
+                _ => {}
+            },
             "rStyle" if self.run.in_rpr => {
                 let style = self.styles.name(&val().unwrap_or_default());
                 if style.contains("strong") {
@@ -426,6 +472,9 @@ impl<'a> Parser<'a> {
                 }
                 if style.contains("emphasis") {
                     self.run.italic = true;
+                }
+                if matches!(style.as_str(), "verbatim char") {
+                    self.run.marks |= MARK_CODE;
                 }
             }
             "t" => self.run.in_t = true, // lenient: older writers emit `t` outside `r`
@@ -465,7 +514,8 @@ impl<'a> Parser<'a> {
             "hyperlink" => {
                 self.hyperlink = attrs_local(tag, "id")
                     .iter()
-                    .find_map(|id| self.links.get(id).cloned());
+                    .find_map(|id| self.links.get(id).cloned())
+                    .or_else(|| attr_local(tag, "anchor").map(|a| format!("#{a}")));
             }
             "docPr" => {
                 self.drawing_alt = attr_local(tag, "descr")
@@ -619,6 +669,29 @@ impl<'a> Parser<'a> {
         let Some(para) = self.paras.pop() else { return };
         let in_cell = !self.tables.is_empty();
         let style = para.style.clone().unwrap_or_default();
+        let meta_key = match self.styles.name(&style).as_str() {
+            "title" => Some("title"),
+            "subtitle" => Some("subtitle"),
+            "author" => Some("author"),
+            "date" => Some("date"),
+            "abstract" => Some("abstract"),
+            _ => match style.as_str() {
+                "Title" => Some("title"),
+                "Subtitle" => Some("subtitle"),
+                "Author" => Some("author"),
+                "Date" => Some("date"),
+                "Abstract" => Some("abstract"),
+                _ => None,
+            },
+        };
+        if let (Some(key), true) = (meta_key, self.tables.is_empty() && self.note.is_none()) {
+            let line = render(&para.segs, " ", false);
+            let line = line.trim();
+            if !line.is_empty() {
+                self.meta.push((key, line.to_owned()));
+            }
+            return;
+        }
         let heading = match para.outline {
             Some(level) => (level < 9).then(|| (level as usize + 1).min(6)),
             None => self.styles.heading_level(&style),
@@ -637,6 +710,35 @@ impl<'a> Parser<'a> {
             }
             return;
         }
+        let style_name = self.styles.name(&style);
+        let is_code = matches!(
+            style_name.as_str(),
+            "source code" | "sourcecode"
+        ) || matches!(style.as_str(), "SourceCode");
+        let is_quote = matches!(
+            style_name.as_str(),
+            "block text" | "block quote" | "block quotation" | "quote" | "intense quote" | "quotations"
+        ) || matches!(style.as_str(), "BlockText" | "Quote" | "IntenseQuote");
+        // Pandoc reads a paragraph that is indented (and not in a list) as a block quote.
+        let is_quote = is_quote || (para.indent > 0 && para.num.is_none() && self.styles.list(&style).is_none() && !is_code);
+        if is_code && self.tables.is_empty() {
+            let mut code = String::new();
+            for seg in &para.segs {
+                match seg {
+                    Seg::Text { text, .. } => code.push_str(text),
+                    Seg::Br => code.push('\n'),
+                    Seg::Raw(_) => {}
+                }
+            }
+            let code = code.trim_end_matches('\n').to_owned();
+            if let Some(Block::Code(prev)) = self.blocks.last_mut() {
+                prev.push('\n');
+                prev.push_str(&code);
+            } else {
+                self.blocks.push(Block::Code(code));
+            }
+            return;
+        }
         let list = match &para.num {
             Some((id, level)) => Some((id.clone(), level.unwrap_or(0))),
             None => self.styles.list(&style),
@@ -647,15 +749,24 @@ impl<'a> Parser<'a> {
         if line.is_empty() {
             return;
         }
+        let list_id = list.as_ref().map(|(id, level)| (id.clone(), *level));
         let prefix = list.and_then(|(id, level)| {
             let bullet = self.numbering.is_bullet(&id, level)?;
             let marker = if bullet {
                 "- ".to_owned()
             } else {
                 self.counters.retain(|(n, l), _| !(*n == id && *l > level));
-                let count = self.counters.entry((id.clone(), level)).or_insert(0);
+                let (fmt, start) = self.numbering.format_and_start(&id, level);
+                let count = self.counters.entry((id.clone(), level)).or_insert(start.saturating_sub(1));
                 *count += 1;
-                format!("{count}. ")
+                let n = *count;
+                match fmt.as_str() {
+                    "lowerLetter" => format!("{}. ", letter(n, false)),
+                    "upperLetter" => format!("{}. ", letter(n, true)),
+                    "lowerRoman" => format!("{}. ", roman(n).to_lowercase()),
+                    "upperRoman" => format!("{}. ", roman(n)),
+                    _ => format!("{n}. "),
+                }
             };
             Some(if in_cell {
                 marker
@@ -666,10 +777,19 @@ impl<'a> Parser<'a> {
         if let Some(t) = self.tables.last_mut() {
             t.cell.push(format!("{}{line}", prefix.unwrap_or_default()));
         } else if let Some(prefix) = prefix {
-            self.blocks.push(Block::Item(format!(
-                "{prefix}{}",
-                line.replace("  \n", " ")
-            )));
+            let (id, level) = list_id.unwrap_or_default();
+            self.blocks.push(Block::Item(
+                format!("{prefix}{}", line.replace("  \n", " ")),
+                id,
+                level,
+            ));
+        } else if is_quote {
+            if let Some(Block::Quote(prev)) = self.blocks.last_mut() {
+                prev.push_str("\n\n");
+                prev.push_str(line);
+            } else {
+                self.blocks.push(Block::Quote(line.to_owned()));
+            }
         } else {
             self.blocks.push(Block::Para(line.to_owned()));
         }
@@ -683,6 +803,26 @@ impl<'a> Parser<'a> {
                 .read_event_into(&mut buf)
                 .map_err(|e| e.to_string())?
             {
+                Event::Start(tag) if self.skip == 0 && matches!(tag.local_name().as_ref(), "oMath" | "oMathPara") => {
+                    let display = tag.local_name().as_ref() == "oMathPara";
+                    let name = tag.name().as_ref().to_owned();
+                    let from = reader.buffer_position() as usize;
+                    let mut scratch = Vec::new();
+                    reader
+                        .read_to_end_into(quick_xml::name::QName(name.as_str()), &mut scratch)
+                        .map_err(|e| e.to_string())?;
+                    let to = (reader.buffer_position() as usize).saturating_sub(name.len() + 3).max(from);
+                    let inner = String::from_utf8_lossy(&xml[from..to]).into_owned();
+                    let wrapped = format!("<x:wrap xmlns:m=\"m\" xmlns:x=\"x\"><m:{} >{inner}</m:{}></x:wrap>", if display { "oMathPara" } else { "oMath" }, if display { "oMathPara" } else { "oMath" });
+                    if let Ok(root) = crate::xmltree::parse(wrapped.as_bytes()) {
+                        if let Some(m) = root.elems().next() {
+                            let tex = super::omml::to_tex(m);
+                            if !tex.is_empty() {
+                                self.push_seg(Seg::Raw(if display { format!("$${tex}$$") } else { format!("${tex}$") }));
+                            }
+                        }
+                    }
+                }
                 Event::Start(tag) => self.start(&tag),
                 Event::Empty(tag) => {
                     let name = tag.local_name().as_ref().to_owned();
@@ -768,27 +908,78 @@ fn links_of(rels: &[Rel]) -> HashMap<String, String> {
 
 /// Whether a list-item line starts with a number marker rather than a bullet.
 fn ordered_item(line: &str) -> bool {
-    line.trim_start().starts_with(|c: char| c.is_ascii_digit())
+    let t = line.trim_start();
+    let end = t.find(|c: char| !c.is_ascii_alphanumeric()).unwrap_or(0);
+    end > 0 && t[end..].starts_with(". ")
+}
+
+fn letter(n: u32, upper: bool) -> String {
+    let mut n = n.max(1) - 1;
+    let mut out = String::new();
+    loop {
+        let c = (b'a' + (n % 26) as u8) as char;
+        out.insert(0, if upper { c.to_ascii_uppercase() } else { c });
+        if n < 26 {
+            break;
+        }
+        n = n / 26 - 1;
+    }
+    out
+}
+
+fn roman(mut n: u32) -> String {
+    let table = [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")];
+    let mut out = String::new();
+    for (v, r) in table {
+        while n >= v {
+            out.push_str(r);
+            n -= v;
+        }
+    }
+    out
 }
 
 fn join_blocks(blocks: &[Block]) -> String {
     let mut out = String::new();
-    let mut previous_item = false;
+    let mut previous: Option<(&str, u32, bool)> = None;
     let mut previous_ordered = false;
     for block in blocks {
-        let (body, item) = match block {
-            Block::Heading(t) | Block::Para(t) | Block::Table(t) => (t.as_str(), false),
-            Block::Item(t) => (t.as_str(), true),
+        let owned;
+        let (body, item): (&str, Option<(&str, u32)>) = match block {
+            Block::Heading(t) | Block::Para(t) | Block::Table(t) => (t.as_str(), None),
+            Block::Item(t, id, level) => (t.as_str(), Some((id.as_str(), *level))),
+            Block::Code(t) => {
+                let fence = if t.contains("```") { "~~~~" } else { "```" };
+                owned = format!("{fence}\n{t}\n{fence}");
+                (owned.as_str(), None)
+            }
+            Block::Quote(t) => {
+                owned = t.lines().map(|l| if l.is_empty() { ">".to_owned() } else { format!("> {l}") }).collect::<Vec<_>>().join("\n");
+                (owned.as_str(), None)
+            }
         };
         if !out.is_empty() {
             // Items of one list sit on consecutive lines; a bullet list followed by a numbered
-            // one (or the reverse) is two lists and gets a blank line between them.
-            let same_list = item && previous_item && ordered_item(body) == previous_ordered;
-            out.push_str(if same_list { "\n" } else { "\n\n" });
+            // one (or the reverse), or a second list with its own numbering, is a new list: a
+            // blank line (and an empty comment) keeps a Markdown reader from joining them.
+            let ordered = item.is_some() && ordered_item(body);
+            let same_list = match (item, previous) {
+                (Some((id, level)), Some((pid, plevel, _))) => {
+                    ordered == previous_ordered && (level > 0 || plevel > 0 || id == pid)
+                }
+                _ => false,
+            };
+            if same_list {
+                out.push('\n');
+            } else if item.is_some() && previous.is_some() && ordered == previous_ordered {
+                out.push_str("\n\n<!-- -->\n\n");
+            } else {
+                out.push_str("\n\n");
+            }
         }
         out.push_str(body);
-        previous_item = item;
-        previous_ordered = item && ordered_item(body);
+        previous = item.map(|(id, level)| (id, level, true));
+        previous_ordered = item.is_some() && ordered_item(body);
     }
     out
 }
@@ -821,6 +1012,34 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
         .collect();
     main.run_xml(&xml)?;
     let mut output = join_blocks(&main.blocks);
+    if !main.meta.is_empty() {
+        let quote = |s: &str| format!("\"{}\"", s.replace('\\', "\\\\").replace('"', "\\\""));
+        let mut y = String::from("---\n");
+        for key in ["title", "subtitle"] {
+            if let Some((_, v)) = main.meta.iter().find(|(k, _)| *k == key) {
+                y.push_str(&format!("{key}: {}\n", quote(v)));
+            }
+        }
+        let authors: Vec<&String> = main.meta.iter().filter(|(k, _)| *k == "author").map(|(_, v)| v).collect();
+        if !authors.is_empty() {
+            y.push_str("author:\n");
+            for a in authors {
+                y.push_str(&format!("- {}\n", quote(a)));
+            }
+        }
+        if let Some((_, v)) = main.meta.iter().find(|(k, _)| *k == "date") {
+            y.push_str(&format!("date: {}\n", quote(v)));
+        }
+        let abs: Vec<&String> = main.meta.iter().filter(|(k, _)| *k == "abstract").map(|(_, v)| v).collect();
+        if !abs.is_empty() {
+            y.push_str("abstract: |\n");
+            for a in abs {
+                y.push_str(&format!("  {a}\n"));
+            }
+        }
+        y.push_str("---\n\n");
+        output = format!("{y}{output}");
+    }
 
     // Notes that the body refers to, in order of first reference.
     let mut notes: HashMap<String, String> = HashMap::new();
@@ -992,6 +1211,23 @@ mod tests {
         let md = docx_with(
             r#"<x:p><x:pPr><x:pStyle x:val="Title"/></x:pPr><x:r><x:t>T</x:t></x:r></x:p><x:p><x:pPr><x:pStyle x:val="Heading3"/></x:pPr><x:r><x:t>H</x:t></x:r></x:p>"#,
         );
-        assert_eq!(md, "# T\n\n### H");
+        // The Title style is document metadata, as Pandoc reads it.
+        assert_eq!(md, "---\ntitle: \"T\"\n---\n\n### H");
+    }
+
+    #[test]
+    fn code_quote_script_and_list_numbering() {
+        let md = docx_with(
+            r#"<x:p><x:pPr><x:pStyle x:val="SourceCode"/></x:pPr><x:r><x:t>a = 1</x:t></x:r></x:p><x:p><x:pPr><x:pStyle x:val="SourceCode"/></x:pPr><x:r><x:t>b = 2</x:t></x:r></x:p><x:p><x:pPr><x:pStyle x:val="BlockText"/></x:pPr><x:r><x:t>quoted</x:t></x:r></x:p><x:p><x:r><x:rPr><x:vertAlign x:val="superscript"/></x:rPr><x:t>2</x:t></x:r><x:r><x:rPr><x:strike/></x:rPr><x:t>gone</x:t></x:r></x:p>"#,
+        );
+        assert_eq!(md, "```\na = 1\nb = 2\n```\n\n> quoted\n\n^2^~~gone~~");
+    }
+
+    #[test]
+    fn office_math_becomes_tex() {
+        let md = docx_with(
+            r#"<x:p><x:r><x:t>Ratio </x:t></x:r><m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:f><m:num><m:r><m:t>a</m:t></m:r></m:num><m:den><m:r><m:t>b</m:t></m:r></m:den></m:f></m:oMath></x:p>"#,
+        );
+        assert_eq!(md, "Ratio $\\frac{a}{b}$");
     }
 }

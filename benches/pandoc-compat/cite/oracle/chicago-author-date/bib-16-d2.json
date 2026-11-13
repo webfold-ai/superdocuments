@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Hopper and Lamport 1943; Hopper and Backus 2008)",
+"(1961)",
+"(Hopper and Lamport 1943)",
+"Hopper and Lamport (1943, 72)",
+"(Lamport et al. 1961)",
+"(e.g. García et al. 2007; Knuth and O’Brien 1945)",
+"(e.g. Lamport et al. 1961; García et al. 2007)",
+"(see Hopper and Lamport 1943, ch. 22)",
+"Hopper et al. (1990, 6)",
+"(Hopper and Backus 2008; 1961)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. An Axiomatic Basis for Computer Programming. Https://example.org/sparse.",
+"Hopper, Grace, and John Backus. 2008. Notes on the Analytical Engine. Https://example.org/vocabulary.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. Cambridge University Press.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33 (10): 192–344."
+]
+},
+"bib": {
+"citations": [
+"(Hopper and Lamport 1943; Hopper and Backus 2008)",
+"(1961)",
+"(Hopper and Lamport 1943)",
+"Hopper and Lamport (1943, 72)",
+"(Lamport et al. 1961)",
+"(e.g. García et al. 2007; Knuth and O’Brien 1945)",
+"(e.g. Lamport et al. 1961; García et al. 2007)",
+"(see Hopper and Lamport 1943, ch. 22)",
+"Hopper et al. (1990, 6)",
+"(Hopper and Backus 2008; 1961)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. An Axiomatic Basis for Computer Programming. Https://example.org/sparse.",
+"Hopper, Grace, and John Backus. 2008. Notes on the Analytical Engine. Https://example.org/vocabulary.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. Cambridge University Press.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33 (10): 192–344."
+]
+}
+}

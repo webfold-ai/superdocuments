@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(1948)",
+"(see Turing, 2018)",
+"Liskov, Hamilton and Lovelace (1949)",
+"(Lamport and García, 1999, p. 50)",
+"(see Lamport and García, 1999, ch. 58)",
+"Lamport and García (1999, pp. 62–121)",
+"(O’Brien, 1948, sec. 45.121 and more)",
+"(1948)",
+"(Turing, 2018, fig. 77)",
+"(Lamport and Dijkstra, 1953; García and Knuth, 1995; Turing, 2018)"
+],
+"bibliography": [
+"García, L. and Knuth, D.E. (1995) On computable numbers. TR-47. Lab Compiler.",
+"Lamport, L. and Dijkstra, E.W. (1953) Data abstraction and hierarchy. Second. Springer.",
+"Lamport, L. and García, L. (1999) Notes on the analytical engine. 3rd ed. Cambridge University Press.",
+"Liskov, B., Hamilton, M. and Lovelace, A. (1949) “The apollo guidance computer,” Communications of the ACM, 50(11), pp. 159–344.",
+"O’Brien, F. (1948) Time, clocks, and the ordering of events. TR-87. Lab Array.",
+"Turing, A.M. (2018) “Go to statement considered harmful,” Proceedings of the array symposium, pp. 62–190."
+]
+},
+"bib": {
+"citations": [
+"(1948)",
+"(see Turing, 2018)",
+"Liskov, Hamilton and Lovelace (1949)",
+"(Lamport and García, 1999, p. 50)",
+"(see Lamport and García, 1999, ch. 58)",
+"Lamport and García (1999, pp. 62–121)",
+"(O’Brien, 1948, sec. 45.121 and more)",
+"(1948)",
+"(Turing, 2018, fig. 77)",
+"(Lamport and Dijkstra, 1953; García and Knuth, 1995; Turing, 2018)"
+],
+"bibliography": [
+"García, L. and Knuth, D.E. (1995) On computable numbers. TR-47. Lab Compiler.",
+"Lamport, L. and Dijkstra, E.W. (1953) Data abstraction and hierarchy. Second. London: Springer.",
+"Lamport, L. and García, L. (1999) Notes on the analytical engine. 3rd ed. New York: Cambridge University Press.",
+"Liskov, B., Hamilton, M. and Lovelace, A. (1949) “The apollo guidance computer,” Communications of the ACM, 50(11), pp. 159–344.",
+"O’Brien, F. (1948) Time, clocks, and the ordering of events. TR-87. Lab Array.",
+"Turing, A.M. (2018) “Go to statement considered harmful,” Proceedings of the array symposium, pp. 62–190."
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al., 1963, Section 3.110 and more)",
+"(Liskov et al., 1963, Volume 86)",
+"(Liskov et al., 1963, Figure 23)",
+"(1962)",
+"(Dijkstra, 1973, Figure 66)",
+"(Rossum & Turing, 1990, Figure 47)",
+"(1962; Liskov et al., 2012)",
+"Lovelace et al. (1969)"
+],
+"bibliography": [
+"Dijkstra, E. W. (1973). The art of computer programming. https://example.org/filter.",
+"Knuth, D. E., Lovelace, A., & Cruz, M. de la. (1962). Notes on the analytical engine. https://example.org/retrieval.",
+"Liskov, B., Müller, H., & Dijkstra, E. W. (2012). Notes on the analytical engine. Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, B., Smith, J. Jr., & Cruz, M. de la. (1963). Time, clocks, and the ordering of events. https://example.org/function. https://example.org/density",
+"Lovelace, A., Smith, J. Jr., & Backus, J. (1969). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford.",
+"Rossum, G. van, & Turing, A. M. (1990). Notes on the analytical engine. https://example.org/sparse."
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al., 1963, Section 3.110 and more)",
+"(Liskov et al., 1963, Volume 86)",
+"(Liskov et al., 1963, Figure 23)",
+"(1962)",
+"(Dijkstra, 1973, Figure 66)",
+"(Rossum & Turing, 1990, Figure 47)",
+"(1962; Liskov et al., 2012)",
+"Lovelace et al. (1969)"
+],
+"bibliography": [
+"Dijkstra, E. W. (1973). The art of computer programming. https://example.org/filter.",
+"Knuth, D. E., Lovelace, A., & Cruz, M. de la. (1962). Notes on the analytical engine. https://example.org/retrieval.",
+"Liskov, B., Müller, H., & Dijkstra, E. W. (2012). Notes on the analytical engine. Proceedings of the Compiler Symposium, 35–166.",
+"Liskov, B., Smith, J. Jr., & Cruz, M. de la. (1963). Time, clocks, and the ordering of events. https://example.org/function. https://example.org/density",
+"Lovelace, A., Smith, J. Jr., & Backus, J. (1969). Time, clocks, and the ordering of events [PhD thesis]. University of Oxford.",
+"Rossum, G. van, & Turing, A. M. (1990). Notes on the analytical engine. https://example.org/sparse."
+]
+}
+}

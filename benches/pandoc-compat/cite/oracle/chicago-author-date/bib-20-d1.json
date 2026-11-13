@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(1963)",
+"O’Brien (1965, 39–140)",
+"Hopper and O’Brien (1963, 72–132)",
+"O’Brien (2013, 3)",
+"(Müller and Hoare 1989)",
+"Müller and Hoare (1989)",
+"(Hoare 2005; García 1986; Smith and Backus 1973)",
+"(see O’Brien 1965, ch. 64)",
+"(O’Brien 1965; Hopper and O’Brien 1963)",
+"(Smith and Backus 1973, fig. 59)",
+"(see García 1986, ch. 36)",
+"(Müller and Liskov 2014; García 1986)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 30–177.",
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33 (2): 72–308. https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. 1963. “The Education of a Computer.” IEEE Transactions on Software Engineering 45 (2): 135–397. https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. 1989. The Apollo Guidance Computer. Https://example.org/decoder.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. An Axiomatic Basis for Computer Programming. Https://example.org/metric.",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. Cambridge University Press. https://example.org/structure.",
+"Smith, John Jr., and John Backus. 1973. The Art of Computer Programming. Https://example.org/ranking."
+]
+},
+"bib": {
+"citations": [
+"(1963)",
+"O’Brien (1965, 39–140)",
+"Hopper and O’Brien (1963, 72–132)",
+"O’Brien (2013, 3)",
+"(Müller and Hoare 1989)",
+"Müller and Hoare (1989)",
+"(Hoare 2005; García 1986; Smith and Backus 1973)",
+"(see O’Brien 1965, ch. 64)",
+"(O’Brien 1965; Hopper and O’Brien 1963)",
+"(Smith and Backus 1973, fig. 59)",
+"(see García 1986, ch. 36)",
+"(Müller and Liskov 2014; García 1986)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Proceedings of the Node Symposium, 30–177.",
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33 (2): 72–308. https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. 1963. “The Education of a Computer.” IEEE Transactions on Software Engineering 45 (2): 135–397. https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. 1989. The Apollo Guidance Computer. Https://example.org/decoder.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. An Axiomatic Basis for Computer Programming. Https://example.org/metric.",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. Cambridge University Press. https://example.org/structure.",
+"Smith, John Jr., and John Backus. 1973. The Art of Computer Programming. Https://example.org/ranking."
+]
+}
+}
