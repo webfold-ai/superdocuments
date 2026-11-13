@@ -115,3 +115,12 @@ fn garbage_and_damaged_xls_are_errors_not_aborts() {
         }
     }
 }
+
+/// An XLS cell is shown the way its number format shows it, as the XLSX reader does: currency with its
+/// symbol, thousands separators and fixed decimals. The reader printed the stored number (`500`) (webfold-bench formats-fidelity-v1).
+#[test]
+fn xls_cells_use_their_number_format() {
+    let md = convert_bytes("xls", &fixture("euses-cs101-bad-dunn-q1.xls")).unwrap();
+    assert!(md.contains("$500.00"), "{md}");
+    assert!(md.contains("$8.25"), "{md}");
+}
