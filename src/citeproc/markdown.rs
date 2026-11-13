@@ -51,22 +51,33 @@ fn parse_key(s: &str, at: usize) -> Option<(String, usize)> {
     Some((key.to_string(), at + 1 + key.len()))
 }
 
-/// Splits a suffix into locator label, locator and the rest.
+/// Splits a suffix into locator label, locator and the rest, with the labels built in.
 pub fn parse_locator(suffix: &str) -> (Option<String>, Option<String>, String) {
+    parse_locator_with(suffix, &|w| LOCATOR_LABELS.iter().find(|(l, _)| l.eq_ignore_ascii_case(w)).map(|(_, n)| (*n).to_string()))
+}
+
+/// The same with a caller-supplied label lookup (the words the style's own locale uses).
+pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>) -> (Option<String>, Option<String>, String) {
     let t = suffix.trim_start_matches([',', ' ']);
     // A label word (with its dot) followed by a space.
     let mut label: Option<String> = None;
     let mut rest = t;
-    let first_word_end = t.find(' ').unwrap_or(t.len());
+    let mut first_word_end = t.find(' ').unwrap_or(t.len());
+    // "p.3": a label ending in a full stop may run into the number.
+    if let Some(dot) = t.find('.') {
+        if dot < first_word_end && dot + 1 < t.len() && t[dot + 1..].starts_with(|c: char| c.is_ascii_digit()) && lookup(&t[..=dot]).is_some() {
+            first_word_end = dot + 1;
+        }
+    }
     let first = &t[..first_word_end];
-    if let Some((_, name)) = LOCATOR_LABELS.iter().find(|(l, _)| l.eq_ignore_ascii_case(first)) {
-        label = Some((*name).to_string());
+    if let Some(name) = lookup(first) {
+        label = Some(name);
         rest = t[first_word_end..].trim_start();
     } else if first.starts_with('\u{a7}') || first.starts_with('\u{b6}') {
         // "§3" without a space.
         let sym: String = first.chars().take_while(|c| *c == '\u{a7}' || *c == '\u{b6}').collect();
-        if let Some((_, name)) = LOCATOR_LABELS.iter().find(|(l, _)| *l == sym) {
-            label = Some((*name).to_string());
+        if let Some(name) = lookup(&sym) {
+            label = Some(name);
             rest = &t[sym.len()..];
         }
     }
@@ -127,7 +138,10 @@ pub fn parse_locator(suffix: &str) -> (Option<String>, Option<String>, String) {
 }
 
 fn item_from(prefix: &str, suppress: bool, key: String, suffix: &str, in_text: bool) -> CitationItem {
-    let (label, locator, rest) = parse_locator(suffix);
+    // The locator is read later, with the labels of the style that formats the citation.
+    let (label, locator, rest) = (None, None, suffix.to_string());
+    let prefix = prefix.trim_start();
+    let prefix = if prefix.trim().is_empty() { "" } else { prefix };
     CitationItem {
         id: key,
         prefix: prefix.to_string(),
@@ -136,6 +150,7 @@ fn item_from(prefix: &str, suppress: bool, key: String, suffix: &str, in_text: b
         locator,
         suppress_author: suppress,
         author_in_text: in_text,
+        unparsed: true,
     }
 }
 
@@ -357,9 +372,8 @@ mod tests {
         assert_eq!(it.len(), 3);
         assert_eq!((it[0].id.as_str(), it[0].prefix.as_str()), ("a", "see "));
         assert!(it[1].suppress_author);
-        assert_eq!(it[1].label.as_deref(), Some("page"));
-        assert_eq!(it[1].locator.as_deref(), Some("4"));
-        assert_eq!(it[1].suffix.trim(), "and more");
+        let (label, locator, rest) = parse_locator(&it[1].suffix);
+        assert_eq!((label.as_deref(), locator.as_deref(), rest.trim()), (Some("page"), Some("4"), "and more"));
     }
 
     #[test]
@@ -367,12 +381,13 @@ mod tests {
         let f = parse_citations("@smith2000 [p. 3] said mail me at a@b.com, `@no` and \\@no.");
         assert_eq!(f.len(), 1);
         assert!(f[0].citation.items[0].author_in_text);
-        assert_eq!(f[0].citation.items[0].locator.as_deref(), Some("3"));
+        assert_eq!(parse_locator(&f[0].citation.items[0].suffix).1.as_deref(), Some("3"));
     }
 
     #[test]
     fn locator_labels_and_ranges() {
         assert_eq!(parse_locator(", chap. 2, pp. 3").0.as_deref(), Some("chapter"));
+        assert_eq!(parse_locator(", p.3").1.as_deref(), Some("3"));
         let (l, loc, rest) = parse_locator(", pp. 33-35, with notes");
         assert_eq!((l.as_deref(), loc.as_deref()), (Some("page"), Some("33-35")));
         assert_eq!(rest.trim_start_matches([',', ' ']), "with notes");
