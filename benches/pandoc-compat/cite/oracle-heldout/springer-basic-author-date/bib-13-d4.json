@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Lamport et al. 2007, p. 79; Smith and Liskov 2024)",
+"(Müller and Hoare 2024, sec. 31.112 and more)",
+"(Smith 1987; Smith and Liskov 2024, p. 36)",
+"(Smith 1987, fig. 45)",
+"(Smith 1987, fig. 63)",
+"(2024)",
+"(Smith 1987; 1988)",
+"(Smith 1987; Lamport et al. 2007, p. 53)"
+],
+"bibliography": [
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"(Lamport et al. 2007, p. 79; Smith and Liskov 2024)",
+"(Müller and Hoare 2024, sec. 31.112 and more)",
+"(Smith 1987; Smith and Liskov 2024, p. 36)",
+"(Smith 1987, fig. 45)",
+"(Smith 1987, fig. 63)",
+"(2024)",
+"(Smith 1987; 1988)",
+"(Smith 1987; Lamport et al. 2007, p. 53)"
+],
+"bibliography": [
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+}
+}

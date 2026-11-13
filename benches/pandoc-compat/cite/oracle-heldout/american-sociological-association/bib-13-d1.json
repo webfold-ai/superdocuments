@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Liskov (1946:11–106)",
+"(Smith and Liskov 2024:89)",
+"(Lamport, Hopper, and Knuth 2007; e.g. Müller and Hoare 2024)",
+"(Backus 1952:2; Smith and Liskov 2024)",
+"(Smith and Liskov 2024:62–114)",
+"(Müller and Hoare 2024:87)",
+"(Smith 1987:46)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Liskov, Barbara. 1946. “Data Abstraction and Hierarchy.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"Liskov (1946:11–106)",
+"(Smith and Liskov 2024:89)",
+"(Lamport, Hopper, and Knuth 2007; e.g. Müller and Hoare 2024)",
+"(Backus 1952:2; Smith and Liskov 2024)",
+"(Smith and Liskov 2024:62–114)",
+"(Müller and Hoare 2024:87)",
+"(Smith 1987:46)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Liskov, Barbara. 1946. “Data Abstraction and Hierarchy.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+}
+}

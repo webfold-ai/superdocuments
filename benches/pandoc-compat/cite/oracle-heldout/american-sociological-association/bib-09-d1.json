@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(e.g. Lamport and Turing 1938; Turing, Lamport, and Lovelace 1979)",
+"(Lamport and Turing 1938:97–116)",
+"(see Hamilton, Backus, and Turing 2008)",
+"(O’Brien, Cruz, and Hopper 1956:50)",
+"Smith (2017:69–124)",
+"(Turing et al. 1979:34)",
+"Turing et al. (1979:89–109)",
+"(see Smith 2017)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. New York: Springer.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Pp. 67–141 in Proceedings of the distribution symposium.",
+"O’Brien, Flann, Maria de la Cruz, and Grace Hopper. 1956. An Axiomatic Basis for Computer Programming. Boston: Springer.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. “The Art of Computer Programming.”"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Lamport and Turing 1938; Turing, Lamport, and Lovelace 1979)",
+"(Lamport and Turing 1938:97–116)",
+"(see Hamilton, Backus, and Turing 2008)",
+"(O’Brien, Cruz, and Hopper 1956:50)",
+"Smith (2017:69–124)",
+"(Turing et al. 1979:34)",
+"Turing et al. (1979:89–109)",
+"(see Smith 2017)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. New York: Springer.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Pp. 67–141 in Proceedings of the distribution symposium.",
+"O’Brien, Flann, Maria de la Cruz, and Grace Hopper. 1956. An Axiomatic Basis for Computer Programming. Boston: Springer.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. “The Art of Computer Programming.”"
+]
+}
+}

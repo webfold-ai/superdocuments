@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1,2]",
+"[3,4]",
+"[2]",
+"[see 2, ch. 30]",
+"[see 2, ch. 16]",
+"[1,5]",
+"[5]",
+"[4,5]",
+"[4,5]"
+],
+"bibliography": [
+"[1] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[2] Backus J. Can programming be liberated from the von neumann style. Proceedings of the solver symposium, 1952, p. 66–128.",
+"[3] Smith JJr, Liskov B. Notes on the analytical engine 2024.",
+"[4] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988.",
+"[5] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1,2]",
+"[3,4]",
+"[2]",
+"[see 2, ch. 30]",
+"[see 2, ch. 16]",
+"[1,5]",
+"[5]",
+"[4,5]",
+"[4,5]"
+],
+"bibliography": [
+"[1] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[2] Backus J. Can programming be liberated from the von neumann style. Proceedings of the solver symposium, 1952, p. 66–128.",
+"[3] Smith JJr, Liskov B. Notes on the analytical engine 2024.",
+"[4] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988.",
+"[5] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007."
+]
+}
+}

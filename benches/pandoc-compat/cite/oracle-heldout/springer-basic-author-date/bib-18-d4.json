@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Rossum and Hoare 1967; Cruz et al. 1971; Müller 2013)",
+"(see Cruz 1941)",
+"(Cruz et al. 1971; Hoare et al. 2016)",
+"(Rossum and Hoare 1967, p. 85)",
+"Rossum et al. (1993, pp. 55–122)",
+"(Cruz 1941, sec. 90.131 and more)",
+"(1993)",
+"(Backus et al. 1966, p. 10)",
+"(1993)"
+],
+"bibliography": [
+"Backus J, Hopper G, Lamport L (1966) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Müller H (2013) Notes on the analytical engine. Lab Bound",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful"
+]
+},
+"bib": {
+"citations": [
+"(Rossum and Hoare 1967; Cruz et al. 1971; Müller 2013)",
+"(see Cruz 1941)",
+"(Cruz et al. 1971; Hoare et al. 2016)",
+"(Rossum and Hoare 1967, p. 85)",
+"Rossum et al. (1993, pp. 55–122)",
+"(Cruz 1941, sec. 90.131 and more)",
+"(1993)",
+"(Backus et al. 1966, p. 10)",
+"(1993)"
+],
+"bibliography": [
+"Backus J, Hopper G, Lamport L (1966) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Müller H (2013) Notes on the analytical engine. Lab Bound",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful"
+]
+}
+}

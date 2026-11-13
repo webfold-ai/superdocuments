@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Knuth and Smith 1991, fig. 74)",
+"(Hamilton et al. 1936; 1992)",
+"(Hamilton et al. 1936; Knuth 1955; Lamport 1992)",
+"Hoare and Hamilton (1975)",
+"(Lamport 1992, sec. 39.117 and more)",
+"Hamilton et al. (1936, p. 70)",
+"Lamport (1992, p. 50)",
+"(Knuth 1955; e.g. Hoare and Hamilton 1975)",
+"(Knuth 1955, fig. 80)",
+"Knuth (1955, pp. 13–139)",
+"(Hamilton et al. 1936; Knuth 1955; Knuth and Smith 1991)",
+"(Hoare and Hamilton 1975, vol. 68)",
+"Hoare and Hamilton (1975)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Rossum G van (1936) On computable numbers. In: Proceedings of the token symposium. pp 76–170",
+"Hoare CAR, Hamilton M (1975) The art of computer programming, 2nd edn. MIT Press",
+"Knuth DE (1955) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Knuth DE, Smith JJr (1991) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Lamport L (1992) Can programming be liberated from the von neumann style. Springer"
+]
+},
+"bib": {
+"citations": [
+"(Knuth and Smith 1991, fig. 74)",
+"(Hamilton et al. 1936; 1992)",
+"(Hamilton et al. 1936; Knuth 1955; Lamport 1992)",
+"Hoare and Hamilton (1975)",
+"(Lamport 1992, sec. 39.117 and more)",
+"Hamilton et al. (1936, p. 70)",
+"Lamport (1992, p. 50)",
+"(Knuth 1955; e.g. Hoare and Hamilton 1975)",
+"(Knuth 1955, fig. 80)",
+"Knuth (1955, pp. 13–139)",
+"(Hamilton et al. 1936; Knuth 1955; Knuth and Smith 1991)",
+"(Hoare and Hamilton 1975, vol. 68)",
+"Hoare and Hamilton (1975)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Rossum G van (1936) On computable numbers. In: Proceedings of the token symposium. pp 76–170",
+"Hoare CAR, Hamilton M (1975) The art of computer programming, 2nd edn. MIT Press, New York",
+"Knuth DE (1955) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Knuth DE, Smith JJr (1991) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Lamport L (1992) Can programming be liberated from the von neumann style. Springer, New York"
+]
+}
+}

@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"Liskov (1946, pp. 11–106)",
+"(Smith and Liskov 2024, vol. 89)",
+"(Lamport et al. 2007; e.g. Müller and Hoare 2024)",
+"(Backus 1952, p. 2; Smith and Liskov 2024)",
+"(Smith and Liskov 2024, pp. 62–114)",
+"(Müller and Hoare 2024, fig. 87)",
+"(Smith 1987, fig. 46)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Liskov B (1946) Data abstraction and hierarchy",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"Liskov (1946, pp. 11–106)",
+"(Smith and Liskov 2024, vol. 89)",
+"(Lamport et al. 2007; e.g. Müller and Hoare 2024)",
+"(Backus 1952, p. 2; Smith and Liskov 2024)",
+"(Smith and Liskov 2024, pp. 62–114)",
+"(Müller and Hoare 2024, fig. 87)",
+"(Smith 1987, fig. 46)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Liskov B (1946) Data abstraction and hierarchy",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+}
+}

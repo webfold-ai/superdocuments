@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[see 1, ch. 81]",
+"[2]",
+"[1]",
+"[see 3, ch. 89]",
+"[4]",
+"[5]",
+"[6]",
+"[1,4]"
+],
+"bibliography": [
+"[1] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[2] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[3] Dijkstra EW, Rossum G van, Lamport L. Time, clocks, and the ordering of events. Springer; 1970.",
+"[4] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[5] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[6] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"[see 1, ch. 81]",
+"[2]",
+"[1]",
+"[see 3, ch. 89]",
+"[4]",
+"[5]",
+"[6]",
+"[1,4]"
+],
+"bibliography": [
+"[1] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[2] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[3] Dijkstra EW, Rossum G van, Lamport L. Time, clocks, and the ordering of events. London: Springer; 1970.",
+"[4] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[5] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[6] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77."
+]
+}
+}

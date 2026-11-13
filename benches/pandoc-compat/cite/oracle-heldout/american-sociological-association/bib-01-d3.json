@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Hopper 2016:59)",
+"Rossum (1937:21–112)",
+"Rossum, Turing, and Hopper (1941)",
+"(see Knuth 2007)",
+"(Backus and Lamport 1956:47–120)",
+"(see Hoare and Rossum 1953, ch. 19)",
+"(Hoare, Lovelace, and Smith 2010; e.g. Hoare and Rossum 1953)",
+"(Backus and Lamport 1956:42)",
+"(2016)",
+"(Hoare et al. 2010:25)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. “An Axiomatic Basis for Computer Programming.”",
+"Hoare, C. A. R., Ada Lovelace, and John Jr. Smith. 2010. On Computable Numbers. 3rd ed. New York: Addison-Wesley.",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4(5):238–320. doi:10.8087/bound.55.",
+"Knuth, Donald E. 2007. “An Axiomatic Basis for Computer Programming.” Pp. 48–186 in Proceedings of the bound symposium.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27(4):248–397.",
+"Rossum, Guido van, Alan M. Turing, and Grace Hopper. 1941. “Go to Statement Considered Harmful.” PhD thesis, University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(Hopper 2016:59)",
+"Rossum (1937:21–112)",
+"Rossum, Turing, and Hopper (1941)",
+"(see Knuth 2007)",
+"(Backus and Lamport 1956:47–120)",
+"(see Hoare and Rossum 1953, ch. 19)",
+"(Hoare, Lovelace, and Smith 2010; e.g. Hoare and Rossum 1953)",
+"(Backus and Lamport 1956:42)",
+"(2016)",
+"(Hoare et al. 2010:25)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. “An Axiomatic Basis for Computer Programming.”",
+"Hoare, C. A. R., Ada Lovelace, and John Jr. Smith. 2010. On Computable Numbers. 3rd ed. New York: Addison-Wesley.",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4(5):238–320. doi:10.8087/bound.55.",
+"Knuth, Donald E. 2007. “An Axiomatic Basis for Computer Programming.” Pp. 48–186 in Proceedings of the bound symposium.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27(4):248–397.",
+"Rossum, Guido van, Alan M. Turing, and Grace Hopper. 1941. “Go to Statement Considered Harmful.” PhD thesis, University of Oxford."
+]
+}
+}

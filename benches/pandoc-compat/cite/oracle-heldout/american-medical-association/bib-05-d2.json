@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"1,3,4",
+"1(fig82)",
+"2,5",
+"2,4,5",
+"3(pp93-123)",
+"6",
+"3(p37)",
+"4,e.g. 6",
+"see 2, ch. 26"
+],
+"bibliography": [
+"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"3. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"4. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"5. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"6. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67"
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"1,3,4",
+"1(fig82)",
+"2,5",
+"2,4,5",
+"3(pp93-123)",
+"6",
+"3(p37)",
+"4,e.g. 6",
+"see 2, ch. 26"
+],
+"bibliography": [
+"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"3. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"4. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"5. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"6. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67"
+]
+}
+}

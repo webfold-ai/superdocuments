@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4 and more]",
+"[see 2]",
+"[5]",
+"[6]",
+"[4]",
+"[3]"
+],
+"bibliography": [
+"[1] Hoare CAR, Lovelace A, Turing AM. Notes on the analytical engine. Lab Feature; 2016.",
+"[2] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[3] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[4] Cruz M de la. Time, clocks, and the ordering of events 1941.",
+"[5] Turing AM, Rossum G van. The art of computer programming. PhD thesis. University of Cambridge, 1968.",
+"[6] Rossum G van, Hoare CAR. Go to statement considered harmful 1967."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4 and more]",
+"[see 2]",
+"[5]",
+"[6]",
+"[4]",
+"[3]"
+],
+"bibliography": [
+"[1] Hoare CAR, Lovelace A, Turing AM. Notes on the analytical engine. Lab Feature; 2016.",
+"[2] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[3] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[4] Cruz M de la. Time, clocks, and the ordering of events 1941.",
+"[5] Turing AM, Rossum G van. The art of computer programming. PhD thesis. University of Cambridge, 1968.",
+"[6] Rossum G van, Hoare CAR. Go to statement considered harmful 1967."
+]
+}
+}

@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1",
+"1(p63)",
+"2,3",
+"4–6",
+"4,6",
+"4(p96)",
+"6(p92)",
+"1,5",
+"4(vol10)"
+],
+"bibliography": [
+"1. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"2. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"3. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"4. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"5. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"6. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache"
+]
+},
+"bib": {
+"citations": [
+"1",
+"1(p63)",
+"2,3",
+"4–6",
+"4,6",
+"4(p96)",
+"6(p92)",
+"1,5",
+"4(vol10)"
+],
+"bibliography": [
+"1. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"2. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"3. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"4. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"5. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"6. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache"
+]
+}
+}

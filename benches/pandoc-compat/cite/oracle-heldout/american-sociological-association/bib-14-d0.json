@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(O’Brien 1948:20)",
+"Liskov, Hamilton, and Lovelace (1949:61–135)",
+"(see Turing 2018)",
+"(1953; Liskov et al. 1949)",
+"(García and Knuth 1995; Turing 2018)",
+"(Liskov et al. 1949:90)",
+"(O’Brien 1948:3.121 and more)",
+"(García and Knuth 1995; Lamport and García 1999)",
+"García and Knuth (1995)",
+"(Lamport and Dijkstra 1953; e.g. Liskov et al. 1949)",
+"(1953)",
+"(Lamport and Dijkstra 1953; e.g. Liskov et al. 1949)",
+"(Liskov et al. 1949:60)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50(11):159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Pp. 62–190 in Proceedings of the array symposium."
+]
+},
+"bib": {
+"citations": [
+"(O’Brien 1948:20)",
+"Liskov, Hamilton, and Lovelace (1949:61–135)",
+"(see Turing 2018)",
+"(1953; Liskov et al. 1949)",
+"(García and Knuth 1995; Turing 2018)",
+"(Liskov et al. 1949:90)",
+"(O’Brien 1948:3.121 and more)",
+"(García and Knuth 1995; Lamport and García 1999)",
+"García and Knuth (1995)",
+"(Lamport and Dijkstra 1953; e.g. Liskov et al. 1949)",
+"(1953)",
+"(Lamport and Dijkstra 1953; e.g. Liskov et al. 1949)",
+"(Liskov et al. 1949:60)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. London: Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. New York: Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50(11):159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Pp. 62–190 in Proceedings of the array symposium."
+]
+}
+}

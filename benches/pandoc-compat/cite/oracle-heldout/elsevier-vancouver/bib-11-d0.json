@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1–3]",
+"[see 3, ch. 72]",
+"[2,3]",
+"[1]",
+"[2]",
+"[1]",
+"[1,4]",
+"[1,4]"
+],
+"bibliography": [
+"[1] Backus J. On computable numbers 1943.",
+"[2] Smith JJr. The apollo guidance computer. Lab Layer; 2006.",
+"[3] Hopper G, Backus J, Müller H. The art of computer programming. New York: Addison-Wesley; 1939.",
+"[4] García L, Lamport L, Liskov B. The art of computer programming 1998."
+]
+},
+"bib": {
+"citations": [
+"[1–3]",
+"[see 3, ch. 72]",
+"[2,3]",
+"[1]",
+"[2]",
+"[1]",
+"[1,4]",
+"[1,4]"
+],
+"bibliography": [
+"[1] Backus J. On computable numbers 1943.",
+"[2] Smith JJr. The apollo guidance computer. Lab Layer; 2006.",
+"[3] Hopper G, Backus J, Müller H. The art of computer programming. New York: Addison-Wesley; 1939.",
+"[4] García L, Lamport L, Liskov B. The art of computer programming 1998."
+]
+}
+}

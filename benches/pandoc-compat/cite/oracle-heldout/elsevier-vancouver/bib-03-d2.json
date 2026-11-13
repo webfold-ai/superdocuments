@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1]",
+"[2]",
+"[2]",
+"[1]",
+"[2]",
+"[see 3, ch. 42]",
+"[1,e.g. 4]",
+"[1,e.g. 4]",
+"[1,2]"
+],
+"bibliography": [
+"[1] Smith JJr, Backus J, Hoare CAR. On computable numbers. Second. London: Cambridge University Press; 1939.",
+"[2] Lovelace A, Hamilton M. Notes on the analytical engine. New York: MIT Press; 2017.",
+"[3] Lovelace A, Hopper G. An axiomatic basis for computer programming. Proceedings of the array symposium, 1969, p. 14–120.",
+"[4] Hoare CAR, Dijkstra EW, Müller H. The art of computer programming. Lab Metric; 1948."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1]",
+"[2]",
+"[2]",
+"[1]",
+"[2]",
+"[see 3, ch. 42]",
+"[1,e.g. 4]",
+"[1,e.g. 4]",
+"[1,2]"
+],
+"bibliography": [
+"[1] Smith JJr, Backus J, Hoare CAR. On computable numbers. Second. London: Cambridge University Press; 1939.",
+"[2] Lovelace A, Hamilton M. Notes on the analytical engine. New York: MIT Press; 2017.",
+"[3] Lovelace A, Hopper G. An axiomatic basis for computer programming. Proceedings of the array symposium, 1969, p. 14–120.",
+"[4] Hoare CAR, Dijkstra EW, Müller H. The art of computer programming. Lab Metric; 1948."
+]
+}
+}

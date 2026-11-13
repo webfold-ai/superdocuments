@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1(p46)",
+"2,3",
+"4",
+"1,2",
+"3(pp7-102)",
+"4(pp97-103)",
+"3,5(p27)",
+"1",
+"5(sec31.129) and more",
+"2,3,5",
+"3(vol40)",
+"2(pp48-139)"
+],
+"bibliography": [
+"1. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
+"2. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"3. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"4. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"5. Ada Lovelace. Data abstraction and hierarchy. Published online 1970."
+]
+},
+"bib": {
+"citations": [
+"1(p46)",
+"2,3",
+"4",
+"1,2",
+"3(pp7-102)",
+"4(pp97-103)",
+"3,5(p27)",
+"1",
+"5(sec31.129) and more",
+"2,3,5",
+"3(vol40)",
+"2(pp48-139)"
+],
+"bibliography": [
+"1. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
+"2. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"3. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"4. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"5. Ada Lovelace. Data abstraction and hierarchy. Published online 1970."
+]
+}
+}

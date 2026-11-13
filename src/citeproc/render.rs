@@ -48,6 +48,11 @@ pub fn normalize(toks: Toks) -> Toks {
                             s.remove(0);
                         }
                     }
+                } else if let Some(first) = s.chars().next().filter(|c| matches!(c, ':' | ';' | ',')) {
+                    // The same punctuation mark twice in a row is one.
+                    if visible_last(&out) == Some(first) {
+                        s.remove(0);
+                    }
                 }
                 if s.is_empty() {
                     i += 1;

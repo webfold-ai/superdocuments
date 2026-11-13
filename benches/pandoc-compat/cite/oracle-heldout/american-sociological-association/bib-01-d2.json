@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Turing 1948:63)",
+"Hoare and Rossum (1953:47–138)",
+"(e.g. Backus and Lamport 1956; Turing 1948)",
+"Rossum (1937)",
+"Rossum (1937:74)",
+"(Hopper 2016)",
+"Hoare and Rossum (1953:48)",
+"(Hoare and Rossum 1953)",
+"(Hoare and Rossum 1953:4)",
+"(Hopper 2016)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. “An Axiomatic Basis for Computer Programming.”",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4(5):238–320. doi:10.8087/bound.55.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27(4):248–397.",
+"Turing, Alan M. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge."
+]
+},
+"bib": {
+"citations": [
+"(Turing 1948:63)",
+"Hoare and Rossum (1953:47–138)",
+"(e.g. Backus and Lamport 1956; Turing 1948)",
+"Rossum (1937)",
+"Rossum (1937:74)",
+"(Hopper 2016)",
+"Hoare and Rossum (1953:48)",
+"(Hoare and Rossum 1953)",
+"(Hoare and Rossum 1953:4)",
+"(Hopper 2016)"
+],
+"bibliography": [
+"Backus, John, and Leslie Lamport. 1956. “An Axiomatic Basis for Computer Programming.”",
+"Hoare, C. A. R., and Guido van Rossum. 1953. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Hopper, Grace. 2016. “The Art of Computer Programming.” IEEE Transactions on Software Engineering 4(5):238–320. doi:10.8087/bound.55.",
+"Rossum, Guido van. 1937. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 27(4):248–397.",
+"Turing, Alan M. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge."
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"Rossum and Turing (1990, p. 19)",
+"(see Rossum and Turing 1990)",
+"(e.g. Smith et al. 1937; Knuth et al. 1962)",
+"Knuth et al. (1962)",
+"(Knuth et al. 1962, fig. 37)",
+"(Backus et al. 2007, p. 26)",
+"(Backus et al. 2007; Liskov et al. 2012, p. 13)",
+"(Smith et al. 1937; Dijkstra 1973)",
+"(Liskov et al. 1963)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Dijkstra EW (1973) The art of computer programming",
+"Knuth DE, Lovelace A, Cruz M de la (1962) Notes on the analytical engine",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+},
+"bib": {
+"citations": [
+"Rossum and Turing (1990, p. 19)",
+"(see Rossum and Turing 1990)",
+"(e.g. Smith et al. 1937; Knuth et al. 1962)",
+"Knuth et al. (1962)",
+"(Knuth et al. 1962, fig. 37)",
+"(Backus et al. 2007, p. 26)",
+"(Backus et al. 2007; Liskov et al. 2012, p. 13)",
+"(Smith et al. 1937; Dijkstra 1973)",
+"(Liskov et al. 1963)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Dijkstra EW (1973) The art of computer programming",
+"Knuth DE, Lovelace A, Cruz M de la (1962) Notes on the analytical engine",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+}
+}

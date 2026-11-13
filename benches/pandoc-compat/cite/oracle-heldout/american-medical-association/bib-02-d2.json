@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"1(pp69-130)",
+"see 1",
+"2,3",
+"4,5",
+"1(fig90)",
+"3(vol72)",
+"6(sec81.125) and more",
+"see 7, ch. 83",
+"5,6",
+"1(pp60-124)",
+"8(p2)",
+"5(p24)",
+"6(pp73-134)"
+],
+"bibliography": [
+"1. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"3. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
+"4. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"5. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"6. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"7. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"8. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937."
+]
+},
+"bib": {
+"citations": [
+"1(pp69-130)",
+"see 1",
+"2,3",
+"4,5",
+"1(fig90)",
+"3(vol72)",
+"6(sec81.125) and more",
+"see 7, ch. 83",
+"5,6",
+"1(pp60-124)",
+"8(p2)",
+"5(p24)",
+"6(pp73-134)"
+],
+"bibliography": [
+"1. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"3. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
+"4. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"5. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"6. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"7. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"8. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937."
+]
+}
+}

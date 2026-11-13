@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Backus 1952; Lamport et al. 2007)",
+"(Liskov 1946, sec. 73.109 and more)",
+"(see Backus 1952, ch. 13)",
+"(e.g. Liskov 1946; Lamport et al. 2007)",
+"(Liskov 1946, fig. 57)",
+"(see Smith and Liskov 2024, ch. 27)",
+"(Smith 1987, pp. 46–120)",
+"(Liskov 1946; Müller and Hoare 2024; Smith and Liskov 2024)",
+"(Liskov 1946; Smith 1987; Smith and Backus 1988)",
+"(Liskov 1946; Lamport et al. 2007)",
+"(Müller and Hoare 2024; 2024)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Liskov B (1946) Data abstraction and hierarchy",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"(Backus 1952; Lamport et al. 2007)",
+"(Liskov 1946, sec. 73.109 and more)",
+"(see Backus 1952, ch. 13)",
+"(e.g. Liskov 1946; Lamport et al. 2007)",
+"(Liskov 1946, fig. 57)",
+"(see Smith and Liskov 2024, ch. 27)",
+"(Smith 1987, pp. 46–120)",
+"(Liskov 1946; Müller and Hoare 2024; Smith and Liskov 2024)",
+"(Liskov 1946; Smith 1987; Smith and Backus 1988)",
+"(Liskov 1946; Lamport et al. 2007)",
+"(Müller and Hoare 2024; 2024)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Liskov B (1946) Data abstraction and hierarchy",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr (1987) The education of a computer",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+}
+}

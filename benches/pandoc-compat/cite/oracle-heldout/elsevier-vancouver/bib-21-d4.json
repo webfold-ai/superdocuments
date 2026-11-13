@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"[1 and more]",
+"[2]",
+"[1,3]",
+"[1]",
+"[see 4, ch. 31]",
+"[1]",
+"[e.g. 1,2]",
+"[see 1]",
+"[1]",
+"[e.g. 3,5]",
+"[6]",
+"[7]",
+"[4]"
+],
+"bibliography": [
+"[1] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[2] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[3] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[4] O’Brien F, Backus J. Go to statement considered harmful. 2nd ed. Addison-Wesley; 2024.",
+"[5] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[6] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[7] Dijkstra EW, Rossum G van, Lamport L. Time, clocks, and the ordering of events. Springer; 1970."
+]
+},
+"bib": {
+"citations": [
+"[1 and more]",
+"[2]",
+"[1,3]",
+"[1]",
+"[see 4, ch. 31]",
+"[1]",
+"[e.g. 1,2]",
+"[see 1]",
+"[1]",
+"[e.g. 3,5]",
+"[6]",
+"[7]",
+"[4]"
+],
+"bibliography": [
+"[1] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[2] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[3] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[4] O’Brien F, Backus J. Go to statement considered harmful. 2nd ed. New York: Addison-Wesley; 2024.",
+"[5] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[6] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[7] Dijkstra EW, Rossum G van, Lamport L. Time, clocks, and the ordering of events. London: Springer; 1970."
+]
+}
+}

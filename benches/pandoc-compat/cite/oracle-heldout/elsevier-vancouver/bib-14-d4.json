@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[1,4,5]",
+"[5]",
+"[5,6]",
+"[1,2,6]",
+"[3]"
+],
+"bibliography": [
+"[1] García L, Knuth DE. On computable numbers. Lab Compiler; 1995.",
+"[2] Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM 1949;50:159–344.",
+"[3] Lamport L, Dijkstra EW. Data abstraction and hierarchy. Second. Springer; 1953.",
+"[4] Lamport L, García L. Notes on the analytical engine. 3rd ed. Cambridge University Press; 1999.",
+"[5] O’Brien F. Time, clocks, and the ordering of events. Lab Array; 1948.",
+"[6] Turing AM. Go to statement considered harmful. Proceedings of the array symposium, 2018, p. 62–190."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[1,4,5]",
+"[5]",
+"[5,6]",
+"[1,2,6]",
+"[3]"
+],
+"bibliography": [
+"[1] García L, Knuth DE. On computable numbers. Lab Compiler; 1995.",
+"[2] Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM 1949;50:159–344.",
+"[3] Lamport L, Dijkstra EW. Data abstraction and hierarchy. Second. London: Springer; 1953.",
+"[4] Lamport L, García L. Notes on the analytical engine. 3rd ed. New York: Cambridge University Press; 1999.",
+"[5] O’Brien F. Time, clocks, and the ordering of events. Lab Array; 1948.",
+"[6] Turing AM. Go to statement considered harmful. Proceedings of the array symposium, 2018, p. 62–190."
+]
+}
+}

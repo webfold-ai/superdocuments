@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(e.g. Hoare, Lovelace, and Turing 2016; Rossum, Backus, and Liskov 1993)",
+"(see Cruz, O’Brien, and Hopper 1971)",
+"(Turing and Rossum 1968)",
+"(see Hoare et al. 2016)",
+"(Hoare et al. 2016:97.118 and more)",
+"(see Rossum et al. 1993, ch. 35)",
+"(e.g. Rossum and Hoare 1967; Turing and Rossum 1968)",
+"Hoare et al. (2016:41–126)",
+"(Hoare et al. 2016:65; Turing and Rossum 1968)",
+"(1993)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Hoare, C. A. R., Ada Lovelace, and Alan M. Turing. 2016. Notes on the Analytical Engine. TR-43. Lab Feature.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”",
+"Turing, Alan M., and Guido van Rossum. 1968. “The Art of Computer Programming.” PhD thesis, University of Cambridge."
+]
+},
+"bib": {
+"citations": [
+"(e.g. Hoare, Lovelace, and Turing 2016; Rossum, Backus, and Liskov 1993)",
+"(see Cruz, O’Brien, and Hopper 1971)",
+"(Turing and Rossum 1968)",
+"(see Hoare et al. 2016)",
+"(Hoare et al. 2016:97.118 and more)",
+"(see Rossum et al. 1993, ch. 35)",
+"(e.g. Rossum and Hoare 1967; Turing and Rossum 1968)",
+"Hoare et al. (2016:41–126)",
+"(Hoare et al. 2016:65; Turing and Rossum 1968)",
+"(1993)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Hoare, C. A. R., Ada Lovelace, and Alan M. Turing. 2016. Notes on the Analytical Engine. TR-43. Lab Feature.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”",
+"Turing, Alan M., and Guido van Rossum. 1968. “The Art of Computer Programming.” PhD thesis, University of Cambridge."
+]
+}
+}

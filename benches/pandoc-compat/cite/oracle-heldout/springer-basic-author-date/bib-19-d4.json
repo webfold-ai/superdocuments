@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Lamport 1997, p. 22)",
+"O’Brien (1966, pp. 40–131)",
+"(Cruz and García 1984)",
+"(Turing and Liskov 2018, pp. 75–138)",
+"(Turing and Liskov 2018, p. 26)",
+"Dijkstra (1946, pp. 56–133)",
+"(Dijkstra 1946; Lovelace 1968; Liskov 1992)",
+"(see Liskov 1992, ch. 95)",
+"(see Turing and Liskov 2018)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press"
+]
+},
+"bib": {
+"citations": [
+"(Lamport 1997, p. 22)",
+"O’Brien (1966, pp. 40–131)",
+"(Cruz and García 1984)",
+"(Turing and Liskov 2018, pp. 75–138)",
+"(Turing and Liskov 2018, p. 26)",
+"Dijkstra (1946, pp. 56–133)",
+"(Dijkstra 1946; Lovelace 1968; Liskov 1992)",
+"(see Liskov 1992, ch. 95)",
+"(see Turing and Liskov 2018)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press, London",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press, New York"
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(e.g. Cruz 1941; Cruz, O’Brien, and Hopper 1971)",
+"(Cruz et al. 1971:55–120)",
+"Rossum, Backus, and Liskov (1993:8–134)",
+"Rossum et al. (1993)",
+"(see Cruz et al. 1971, ch. 16)",
+"(Cruz 1941; e.g. Rossum and Hoare 1967)",
+"(Backus, Hopper, and Lamport 1966:74)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Leslie Lamport. 1966. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Cruz, Maria de la. 1941. “Time, Clocks, and the Ordering of Events.”",
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Cruz 1941; Cruz, O’Brien, and Hopper 1971)",
+"(Cruz et al. 1971:55–120)",
+"Rossum, Backus, and Liskov (1993:8–134)",
+"Rossum et al. (1993)",
+"(see Cruz et al. 1971, ch. 16)",
+"(Cruz 1941; e.g. Rossum and Hoare 1967)",
+"(Backus, Hopper, and Lamport 1966:74)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Leslie Lamport. 1966. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Cruz, Maria de la. 1941. “Time, Clocks, and the Ordering of Events.”",
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”"
+]
+}
+}

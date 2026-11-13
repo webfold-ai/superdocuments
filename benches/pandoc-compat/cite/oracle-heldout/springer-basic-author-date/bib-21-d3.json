@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Liskov 1956)",
+"(Turing 1949, p. 20; Cruz 2007)",
+"O’Brien and Backus (2024, p. 30)",
+"(Lovelace 1940, p. 94)",
+"(Liskov et al. 1992)",
+"(see Lovelace 1940)",
+"(see O’Brien and Backus 2024)",
+"(Hopper et al. 1939, vol. 20)",
+"(1956)",
+"Cruz (2007, pp. 64–116)",
+"Liskov et al. (1992, pp. 19–119)",
+"(see Dijkstra and García 2004, ch. 75)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, García L (2004) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Hopper G, Hamilton M, Smith JJr (1939) The apollo guidance computer. In: Proceedings of the vector symposium. pp 95–188",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Liskov B, García L, Müller H (1992) An axiomatic basis for computer programming. PhD thesis, University of Cambridge",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"O’Brien F, Backus J (2024) Go to statement considered harmful, 2nd edn. Addison-Wesley",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+},
+"bib": {
+"citations": [
+"(Liskov 1956)",
+"(Turing 1949, p. 20; Cruz 2007)",
+"O’Brien and Backus (2024, p. 30)",
+"(Lovelace 1940, p. 94)",
+"(Liskov et al. 1992)",
+"(see Lovelace 1940)",
+"(see O’Brien and Backus 2024)",
+"(Hopper et al. 1939, vol. 20)",
+"(1956)",
+"Cruz (2007, pp. 64–116)",
+"Liskov et al. (1992, pp. 19–119)",
+"(see Dijkstra and García 2004, ch. 75)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, García L (2004) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Hopper G, Hamilton M, Smith JJr (1939) The apollo guidance computer. In: Proceedings of the vector symposium. pp 95–188",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Liskov B, García L, Müller H (1992) An axiomatic basis for computer programming. PhD thesis, University of Cambridge",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"O’Brien F, Backus J (2024) Go to statement considered harmful, 2nd edn. Addison-Wesley, New York",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+}
+}

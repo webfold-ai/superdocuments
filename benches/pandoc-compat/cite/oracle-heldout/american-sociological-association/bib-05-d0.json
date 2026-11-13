@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(see Müller 1948, ch. 54)",
+"(see Hoare, Smith, and García 1941)",
+"(see Lovelace and Hoare 1970)",
+"(Müller 1948:40)",
+"(Müller 1948)",
+"(Müller 1948)",
+"(Müller 1948:16)"
+],
+"bibliography": [
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Lovelace, Ada, and C. A. R. Hoare. 1970. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society 42(8):59–345. doi:10.4721/scheduler.33.",
+"Müller, Hans. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(see Müller 1948, ch. 54)",
+"(see Hoare, Smith, and García 1941)",
+"(see Lovelace and Hoare 1970)",
+"(Müller 1948:40)",
+"(Müller 1948)",
+"(Müller 1948)",
+"(Müller 1948:16)"
+],
+"bibliography": [
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Lovelace, Ada, and C. A. R. Hoare. 1970. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society 42(8):59–345. doi:10.4721/scheduler.33.",
+"Müller, Hans. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Oxford."
+]
+}
+}

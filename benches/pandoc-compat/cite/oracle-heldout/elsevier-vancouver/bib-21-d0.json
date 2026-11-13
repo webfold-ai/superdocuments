@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1]",
+"[2,3]",
+"[4–6]",
+"[4,6]",
+"[4]",
+"[6]",
+"[1,5]",
+"[4]"
+],
+"bibliography": [
+"[1] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[2] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[3] Hamilton M, Liskov B, Rossum G van. An axiomatic basis for computer programming 1992.",
+"[4] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[5] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[6] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1]",
+"[2,3]",
+"[4–6]",
+"[4,6]",
+"[4]",
+"[6]",
+"[1,5]",
+"[4]"
+],
+"bibliography": [
+"[1] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[2] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[3] Hamilton M, Liskov B, Rossum G van. An axiomatic basis for computer programming 1992.",
+"[4] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[5] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[6] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1(pp19-133)",
+"1,2",
+"3,4(p41)",
+"5",
+"see 6, ch. 81",
+"2(fig21)",
+"2,4,6",
+"3(p5)",
+"e.g. 4,5",
+"2(p57)",
+"2(vol52)",
+"4"
+],
+"bibliography": [
+"1. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"2. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"3. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
+"4. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
+]
+},
+"bib": {
+"citations": [
+"1(pp19-133)",
+"1,2",
+"3,4(p41)",
+"5",
+"see 6, ch. 81",
+"2(fig21)",
+"2,4,6",
+"3(p5)",
+"e.g. 4,5",
+"2(p57)",
+"2(vol52)",
+"4"
+],
+"bibliography": [
+"1. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"2. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"3. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
+"4. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
+]
+}
+}

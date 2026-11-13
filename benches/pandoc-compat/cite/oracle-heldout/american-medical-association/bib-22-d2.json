@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1(pp15-110)",
+"2(p44)",
+"3(vol4)",
+"3,4",
+"5(p93)",
+"2(sec49.103) and more",
+"4(pp73-115)",
+"2,5,6",
+"4(pp84-125)",
+"2,6"
+],
+"bibliography": [
+"1. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
+"2. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"5. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"6. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197."
+]
+},
+"bib": {
+"citations": [
+"1(pp15-110)",
+"2(p44)",
+"3(vol4)",
+"3,4",
+"5(p93)",
+"2(sec49.103) and more",
+"4(pp73-115)",
+"2,5,6",
+"4(pp84-125)",
+"2,6"
+],
+"bibliography": [
+"1. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
+"2. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"5. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"6. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197."
+]
+}
+}

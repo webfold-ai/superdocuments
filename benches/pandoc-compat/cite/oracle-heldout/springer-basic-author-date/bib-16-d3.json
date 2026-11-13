@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"(Lamport et al. 1961, vol. 47)",
+"(Hopper and Lamport 1943)",
+"(Liskov and Knuth 1954, sec. 50.123 and more)",
+"(see Hopper and Backus 2008, ch. 30)",
+"(Hopper and Lamport 1943, sec. 43.117 and more)",
+"(Knuth and O’Brien 1945; García et al. 2007)",
+"(García et al. 2007)",
+"(Hamilton et al. 1956; García et al. 2007; Hopper and Backus 2008)",
+"(Hopper and Lamport 1943; Liskov and Knuth 1954; Hopper and Backus 2008)",
+"(see García et al. 2007)",
+"(Knuth and O’Brien 1945; Hopper et al. 1990)",
+"(Hopper and Backus 2008)",
+"(1990)",
+"Knuth and O’Brien (1945)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Backus J (2008) Notes on the analytical engine",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128"
+]
+},
+"bib": {
+"citations": [
+"(Lamport et al. 1961, vol. 47)",
+"(Hopper and Lamport 1943)",
+"(Liskov and Knuth 1954, sec. 50.123 and more)",
+"(see Hopper and Backus 2008, ch. 30)",
+"(Hopper and Lamport 1943, sec. 43.117 and more)",
+"(Knuth and O’Brien 1945; García et al. 2007)",
+"(García et al. 2007)",
+"(Hamilton et al. 1956; García et al. 2007; Hopper and Backus 2008)",
+"(Hopper and Lamport 1943; Liskov and Knuth 1954; Hopper and Backus 2008)",
+"(see García et al. 2007)",
+"(Knuth and O’Brien 1945; Hopper et al. 1990)",
+"(Hopper and Backus 2008)",
+"(1990)",
+"Knuth and O’Brien (1945)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Backus J (2008) Notes on the analytical engine",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press, London",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128"
+]
+}
+}

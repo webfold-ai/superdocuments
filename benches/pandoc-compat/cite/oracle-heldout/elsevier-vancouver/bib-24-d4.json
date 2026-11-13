@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1–3]",
+"[1,3]",
+"[4]",
+"[4,e.g. 5]",
+"[3]",
+"[3]",
+"[6]",
+"[1]",
+"[4 and more]",
+"[6]",
+"[4]"
+],
+"bibliography": [
+"[1] Lamport L, Dijkstra EW, Hamilton M. The education of a computer. PhD thesis. University of Zurich, 2002.",
+"[2] Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. Proceedings of the compiler symposium, 1989, p. 43–184.",
+"[3] O’Brien F, Hoare CAR, Hopper G. On computable numbers. Proceedings of the optimizer symposium, 1953, p. 43–145.",
+"[4] Müller H, García L, Cruz M de la. The art of computer programming 2019.",
+"[5] Lamport L, Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1965.",
+"[6] Dijkstra EW, Liskov B. The art of computer programming. PhD thesis. University of Oxford, 2012."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1–3]",
+"[1,3]",
+"[4]",
+"[4,e.g. 5]",
+"[3]",
+"[3]",
+"[6]",
+"[1]",
+"[4 and more]",
+"[6]",
+"[4]"
+],
+"bibliography": [
+"[1] Lamport L, Dijkstra EW, Hamilton M. The education of a computer. PhD thesis. University of Zurich, 2002.",
+"[2] Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. Proceedings of the compiler symposium, 1989, p. 43–184.",
+"[3] O’Brien F, Hoare CAR, Hopper G. On computable numbers. Proceedings of the optimizer symposium, 1953, p. 43–145.",
+"[4] Müller H, García L, Cruz M de la. The art of computer programming 2019.",
+"[5] Lamport L, Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1965.",
+"[6] Dijkstra EW, Liskov B. The art of computer programming. PhD thesis. University of Oxford, 2012."
+]
+}
+}

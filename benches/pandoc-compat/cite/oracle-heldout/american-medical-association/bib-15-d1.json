@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"1,2(p82)",
+"3",
+"1,4(p92)",
+"3,5",
+"1(fig51)",
+"1(fig59)",
+"2,6",
+"3(pp96-125)",
+"2",
+"7(sec33.115) and more",
+"1,e.g. 8",
+"5(vol17)"
+],
+"bibliography": [
+"1. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
+"2. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"3. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"4. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
+"5. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
+"6. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"7. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"8. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955."
+]
+},
+"bib": {
+"citations": [
+"1,2(p82)",
+"3",
+"1,4(p92)",
+"3,5",
+"1(fig51)",
+"1(fig59)",
+"2,6",
+"3(pp96-125)",
+"2",
+"7(sec33.115) and more",
+"1,e.g. 8",
+"5(vol17)"
+],
+"bibliography": [
+"1. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
+"2. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"3. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"4. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
+"5. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
+"6. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"7. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"8. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955."
+]
+}
+}

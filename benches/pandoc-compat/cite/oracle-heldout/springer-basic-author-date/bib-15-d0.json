@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"Rossum and Cruz (2012)",
+"(see O’Brien and Hopper 1955)",
+"(1947)",
+"Müller and Rossum (2020, pp. 79–101)",
+"(Smith 1972, sec. 86.105 and more)",
+"(O’Brien and Hopper 1955, vol. 44)",
+"(Müller and Rossum 2020, p. 7)",
+"(O’Brien and Hopper 1955; Dijkstra et al. 2018; Knuth et al. 2020)",
+"Rossum and Cruz (2012, pp. 68–122)",
+"(Liskov et al. 2004, sec. 2.112 and more)",
+"(Dijkstra 1947; e.g. Knuth et al. 2020)",
+"(Knuth et al. 2020, pp. 28–123)",
+"(Dijkstra 1947, fig. 49)",
+"(2004; Knuth et al. 2020)"
+],
+"bibliography": [
+"Dijkstra EW (1947) The apollo guidance computer",
+"Dijkstra EW, Hoare CAR, Rossum G van (2018) Time, clocks, and the ordering of events. In: Proceedings of the stream symposium. pp 1–192",
+"Knuth DE, Cruz M de la, Smith JJr (2020) On computable numbers",
+"Liskov B, Backus J, Turing AM (2004) The education of a computer. MIT Press",
+"Müller H, Rossum G van (2020) The education of a computer. IEEE Transactions on Software Engineering 2:86–362. https://doi.org/10.7751/compiler.14",
+"O’Brien F, Hopper G (1955) On computable numbers",
+"Rossum G van, Cruz M de la (2012) Notes on the analytical engine. Lab Transform",
+"Smith JJr (1972) Notes on the analytical engine. PhD thesis, University of Cambridge"
+]
+},
+"bib": {
+"citations": [
+"Rossum and Cruz (2012)",
+"(see O’Brien and Hopper 1955)",
+"(1947)",
+"Müller and Rossum (2020, pp. 79–101)",
+"(Smith 1972, sec. 86.105 and more)",
+"(O’Brien and Hopper 1955, vol. 44)",
+"(Müller and Rossum 2020, p. 7)",
+"(O’Brien and Hopper 1955; Dijkstra et al. 2018; Knuth et al. 2020)",
+"Rossum and Cruz (2012, pp. 68–122)",
+"(Liskov et al. 2004, sec. 2.112 and more)",
+"(Dijkstra 1947; e.g. Knuth et al. 2020)",
+"(Knuth et al. 2020, pp. 28–123)",
+"(Dijkstra 1947, fig. 49)",
+"(2004; Knuth et al. 2020)"
+],
+"bibliography": [
+"Dijkstra EW (1947) The apollo guidance computer",
+"Dijkstra EW, Hoare CAR, Rossum G van (2018) Time, clocks, and the ordering of events. In: Proceedings of the stream symposium. pp 1–192",
+"Knuth DE, Cruz M de la, Smith JJr (2020) On computable numbers",
+"Liskov B, Backus J, Turing AM (2004) The education of a computer. MIT Press, New York",
+"Müller H, Rossum G van (2020) The education of a computer. IEEE Transactions on Software Engineering 2:86–362. https://doi.org/10.7751/compiler.14",
+"O’Brien F, Hopper G (1955) On computable numbers",
+"Rossum G van, Cruz M de la (2012) Notes on the analytical engine. Lab Transform",
+"Smith JJr (1972) Notes on the analytical engine. PhD thesis, University of Cambridge"
+]
+}
+}

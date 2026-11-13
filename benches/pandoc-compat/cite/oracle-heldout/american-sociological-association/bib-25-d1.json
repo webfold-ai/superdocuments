@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Lamport 1992:10.130 and more)",
+"(Hamilton, Backus, and Rossum 1936; e.g. Müller 1992)",
+"(Hoare and Hamilton 1975; Lamport 1992; Müller 1992)",
+"(Hoare and Hamilton 1975:18)",
+"(see Müller 1992)",
+"(Hoare and Hamilton 1975; Knuth and Smith 1991; Lovelace 1984)",
+"(Knuth and Smith 1991:83.100 and more)",
+"Knuth (1955:35)",
+"(Lovelace 1984:8)",
+"(Hoare and Hamilton 1975; e.g. Lovelace 1984)",
+"(Hoare, Smith, and Müller 1994; Müller 1992)",
+"(Hoare and Hamilton 1975; Knuth 1955; Lamport 1992)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Guido van Rossum. 1936. “On Computable Numbers.” Pp. 76–170 in Proceedings of the token symposium.",
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. MIT Press.",
+"Hoare, C. A. R., John Jr. Smith, and Hans Müller. 1994. “On Computable Numbers.” IEEE Transactions on Software Engineering 59(1):57–370. doi:10.2998/function.87.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Knuth, Donald E., and John Jr. Smith. 1991. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie. 1992. Can Programming Be Liberated from the von Neumann Style. Springer.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Müller, Hans. 1992. “Can Programming Be Liberated from the von Neumann Style.” Pp. 94–142 in Proceedings of the distribution symposium."
+]
+},
+"bib": {
+"citations": [
+"(Lamport 1992:10.130 and more)",
+"(Hamilton, Backus, and Rossum 1936; e.g. Müller 1992)",
+"(Hoare and Hamilton 1975; Lamport 1992; Müller 1992)",
+"(Hoare and Hamilton 1975:18)",
+"(see Müller 1992)",
+"(Hoare and Hamilton 1975; Knuth and Smith 1991; Lovelace 1984)",
+"(Knuth and Smith 1991:83.100 and more)",
+"Knuth (1955:35)",
+"(Lovelace 1984:8)",
+"(Hoare and Hamilton 1975; e.g. Lovelace 1984)",
+"(Hoare, Smith, and Müller 1994; Müller 1992)",
+"(Hoare and Hamilton 1975; Knuth 1955; Lamport 1992)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Guido van Rossum. 1936. “On Computable Numbers.” Pp. 76–170 in Proceedings of the token symposium.",
+"Hoare, C. A. R., and Margaret Hamilton. 1975. The Art of Computer Programming. 2nd ed. New York: MIT Press.",
+"Hoare, C. A. R., John Jr. Smith, and Hans Müller. 1994. “On Computable Numbers.” IEEE Transactions on Software Engineering 59(1):57–370. doi:10.2998/function.87.",
+"Knuth, Donald E. 1955. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich.",
+"Knuth, Donald E., and John Jr. Smith. 1991. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie. 1992. Can Programming Be Liberated from the von Neumann Style. New York: Springer.",
+"Lovelace, Ada. 1984. “Can Programming Be Liberated from the von Neumann Style.” PhD thesis, University of Cambridge.",
+"Müller, Hans. 1992. “Can Programming Be Liberated from the von Neumann Style.” Pp. 94–142 in Proceedings of the distribution symposium."
+]
+}
+}

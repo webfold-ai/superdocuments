@@ -64,7 +64,8 @@ pub struct Ctx<'a> {
     /// Variables already used by a `substitute` and so not printed again.
     pub suppressed: HashSet<String>,
     /// Name-list overrides from disambiguation: names to show instead of et al.
-    pub names_min_override: Option<usize>,
+    /// Disambiguation: show this many names before "et al." (instead of `et-al-use-first`).
+    pub names_use_first_override: Option<usize>,
     depth: usize,
     /// Set while rendering the author part for `author_only` (names output is kept, the rest
     /// dropped) or the rest for `suppress_author` (names output is dropped).
@@ -73,6 +74,15 @@ pub struct Ctx<'a> {
     pub captured: Option<Toks>,
     /// Rendering a sort key: names are in sort order.
     pub sorting: bool,
+    /// The cite is still ambiguous after the names were expanded: `choose disambiguate="true"` holds.
+    pub disambiguate: bool,
+    /// Read `<names>` without a `<name>` child with the CSL defaults and not the options set on
+    /// `style`, `citation` or `bibliography` (what Pandoc's citeproc does).
+    pub names_without_inheritance: bool,
+    /// Depth of `substitute` blocks being evaluated.
+    pub sub_depth: usize,
+    /// The author names printed outside any `substitute` (the part `collapse` compares).
+    pub captured_direct: Option<Toks>,
 }
 
 impl<'a> Ctx<'a> {
@@ -85,11 +95,15 @@ impl<'a> Ctx<'a> {
             citation_number: None,
             year_suffix: None,
             suppressed: HashSet::new(),
-            names_min_override: None,
+            names_use_first_override: None,
             depth: 0,
             names_seen: 0,
             captured: None,
             sorting: false,
+            disambiguate: false,
+            sub_depth: 0,
+            names_without_inheritance: false,
+            captured_direct: None,
         }
     }
 }
@@ -353,7 +367,17 @@ fn variable_text(var: &str, form: &str, ctx: &mut Ctx) -> Option<String> {
     }
     match var {
         "locator" => {
-            return if ctx.mode == Mode::Citation { ctx.item.locator.clone().filter(|l| !l.is_empty()).map(|l| format_page_ranges(&l, "expanded")) } else { None };
+            return if ctx.mode == Mode::Citation {
+                let fmt = ctx.style.citation().and_then(|c| c.attr("page-range-format")).or(ctx.style.inherited("page-range-format", &[]));
+                ctx.item.locator.clone().filter(|l| !l.is_empty()).map(|l| {
+                    range_delimiter(ctx.style, match fmt {
+                        Some(f) => format_page_ranges(&l, f),
+                        None => page_dash(&l),
+                    })
+                })
+            } else {
+                None
+            };
         }
         "citation-number" => return ctx.citation_number.map(|n| n.to_string()),
         "year-suffix" => return ctx.year_suffix.clone(),
@@ -374,15 +398,27 @@ fn variable_text(var: &str, form: &str, ctx: &mut Ctx) -> Option<String> {
     match r.fields.get(var) {
         Some(Field::Text(t)) if !t.is_empty() => {
             if var == "page" {
-                let fmt = ctx.style.inherited("page-range-format", &[]).unwrap_or("");
-                let fmt = ctx.style.citation().filter(|_| ctx.mode == Mode::Citation).and_then(|c| c.attr("page-range-format")).or(ctx.style.bibliography().filter(|_| ctx.mode == Mode::Bibliography).and_then(|c| c.attr("page-range-format"))).unwrap_or(fmt);
-                return Some(format_page_ranges(t, fmt));
+                // Without a `page-range-format` the pages are printed as they were given.
+                let fmt = ctx.style.citation().filter(|_| ctx.mode == Mode::Citation).and_then(|c| c.attr("page-range-format")).or(ctx.style.bibliography().filter(|_| ctx.mode == Mode::Bibliography).and_then(|c| c.attr("page-range-format"))).or(ctx.style.inherited("page-range-format", &[]));
+                let out = match fmt {
+                    Some(f) => format_page_ranges(t, f),
+                    None => page_dash(t),
+                };
+                return Some(range_delimiter(ctx.style, out));
             }
             Some(t.clone())
         }
         Some(Field::Date(d)) if !d.is_empty() => Some(date_plain(d)),
         Some(Field::Names(n)) if !n.is_empty() => Some(n.iter().map(|x| name_display(x, false, "", false)).collect::<Vec<_>>().join(", ")),
         _ => None,
+    }
+}
+
+/// The style's `page-range-delimiter` term (an en dash unless it says otherwise).
+fn range_delimiter(style: &Style, s: String) -> String {
+    match style.term("page-range-delimiter", "long", false) {
+        Some(d) if d != "\u{2013}" => s.replace('\u{2013}', &d),
+        _ => s,
     }
 }
 
@@ -556,6 +592,9 @@ fn format_range(a: &str, b: &str, format: &str) -> String {
         // `321-28` means 321-328: restore the dropped leading digits first.
         let full = format!("{}{}", &a[..a.len() - b.len()], b);
         return format_range(a, &full, format);
+    }
+    if a.len() != b.len() {
+        return format!("{a}{dash}{b}");
     }
     let common = a.chars().zip(b.chars()).take_while(|(x, y)| x == y).count();
     let tail = |keep: usize| -> String {
@@ -731,8 +770,8 @@ fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
     }
     if let Some(t) = c.attr("disambiguate") {
         has = true;
-        let _ = t;
-        results.push(combine((false, false)));
+        let want = t == "true";
+        results.push(combine((ctx.disambiguate == want, ctx.disambiguate == want)));
     }
     if c.attr("object-type").is_some() {
         has = true;
@@ -796,7 +835,7 @@ fn eval_choose(e: &XElem, ctx: &mut Ctx) -> R {
 
 const STOP_WORDS: &[&str] = &[
     "a", "an", "and", "as", "at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on", "onto", "or",
-    "over", "so", "the", "till", "to", "up", "via", "with", "yet",
+    "over", "so", "the", "till", "to", "up", "via", "with", "yet", "von", "van", "de", "der", "den", "du", "des", "di", "da", "del", "della", "la", "le",
 ];
 
 fn capitalize_word(w: &str) -> String {
@@ -1048,19 +1087,25 @@ fn name_opts(names_el: &XElem, name_el: Option<&XElem>, ctx: &Ctx) -> NameOpts {
     if let Some(s) = scope {
         chain.push(s);
     }
-    let get = |a: &str| -> Option<String> { ctx.style.inherited(a, &chain).map(str::to_string) };
+    let bare = name_el.is_none() && ctx.names_without_inheritance;
+    let get = |a: &str| -> Option<String> {
+        if bare && !a.starts_with("et-al") {
+            return None;
+        }
+        ctx.style.inherited(a, &chain).map(str::to_string)
+    };
     let min = get("et-al-min").and_then(|v| v.parse().ok()).unwrap_or(usize::MAX);
     let use_first = get("et-al-use-first").and_then(|v| v.parse().ok()).unwrap_or(1);
-    let (min, use_first) = match (ctx.names_min_override, ctx.item.position != Position::First) {
-        (Some(o), _) => (o, o.min(use_first)),
-        (None, true) => (
+    let use_first = ctx.names_use_first_override.unwrap_or(use_first);
+    let (min, use_first) = match ctx.item.position != Position::First {
+        true => (
             get("et-al-subsequent-min").and_then(|v| v.parse().ok()).unwrap_or(min),
-            get("et-al-subsequent-use-first").and_then(|v| v.parse().ok()).unwrap_or(use_first),
+            ctx.names_use_first_override.or_else(|| get("et-al-subsequent-use-first").and_then(|v| v.parse().ok())).unwrap_or(use_first),
         ),
-        _ => (min, use_first),
+        false => (min, use_first),
     };
     // A sort key is the names in order, with no connecting words.
-    let and = if ctx.sorting { None } else { name_el.and_then(|n| n.attr("and")).or_else(|| ctx.style.inherited("and", &chain)).map(str::to_string) };
+    let and = if ctx.sorting || bare { None } else { name_el.and_then(|n| n.attr("and")).or_else(|| ctx.style.inherited("and", &chain)).map(str::to_string) };
     NameOpts {
         and,
         delimiter: name_el.and_then(|n| n.attr("delimiter")).map(str::to_string).or_else(|| get("name-delimiter")).unwrap_or_else(|| ", ".into()),
@@ -1097,7 +1142,7 @@ fn initials(given: &str, with: &str, init: bool) -> String {
                 // A particle ("de", "van") stays a word.
                 out.push_str(p);
             } else if p.ends_with('.') && letters > 1 {
-                out.push_str(p);
+                out.push_str(if trimmed_with.is_empty() && between.is_empty() { p.trim_end_matches('.') } else { p });
             } else if let Some(f) = p.chars().next() {
                 out.push(f);
                 out.push_str(trimmed_with);
@@ -1218,6 +1263,7 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
             let _ = u;
         }
     } else if let Some(sub) = e.find("substitute") {
+        ctx.sub_depth += 1;
         for c in sub.elems() {
             let before = ctx.suppressed.clone();
             let r = if c.name == "names" {
@@ -1273,14 +1319,22 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
                 break;
             }
         }
+        ctx.sub_depth -= 1;
     }
-    // author-only: only the author names are kept; suppress-author: they are dropped.
-    if is_author_names && ctx.mode == Mode::Citation {
-        ctx.names_seen += 1;
+    // author-only: the author names are captured; suppress-author: they are dropped (citations).
+    if is_author_names {
+        if ctx.names_seen < usize::MAX {
+            ctx.names_seen += 1;
+        }
         if ctx.item.author_only && ctx.captured.is_none() && !out.toks.is_empty() {
             ctx.captured = Some(out.toks.clone());
         }
-        if ctx.item.suppress_author {
+        // The names of the cite as the style prints them directly (not through a substitute): what
+        // `collapse` groups by.
+        if ctx.sub_depth == 0 && ctx.captured_direct.is_none() && !out.toks.is_empty() {
+            ctx.captured_direct = Some(out.toks.clone());
+        }
+        if ctx.mode == Mode::Citation && ctx.item.suppress_author {
             let had = !out.toks.is_empty();
             out.toks.clear();
             out.hidden = had;
@@ -1348,7 +1402,7 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
         }
         out.extend(toks.clone());
     }
-    if et_al && !use_last {
+    if et_al && !use_last && !ctx.sorting {
         let term = et_al_el.and_then(|e| e.attr("term")).unwrap_or("et-al");
         let t = ctx.style.term(term, "long", false).unwrap_or_else(|| "et al.".into());
         let precede = match o.delimiter_precedes_et_al.as_str() {

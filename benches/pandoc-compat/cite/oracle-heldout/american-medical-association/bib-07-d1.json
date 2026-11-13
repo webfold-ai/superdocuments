@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1",
+"e.g. 2,3",
+"3",
+"1,2,4",
+"3,4(p4)",
+"5(fig74)",
+"1",
+"5(pp56-114)"
+],
+"bibliography": [
+"1. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
+"2. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
+"3. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"4. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
+]
+},
+"bib": {
+"citations": [
+"1",
+"e.g. 2,3",
+"3",
+"1,2,4",
+"3,4(p4)",
+"5(fig74)",
+"1",
+"5(pp56-114)"
+],
+"bibliography": [
+"1. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
+"2. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
+"3. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"4. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
+]
+}
+}

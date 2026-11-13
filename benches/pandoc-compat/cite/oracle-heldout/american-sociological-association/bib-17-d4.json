@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Liskov, O’Brien, and Hoare 1962:97)",
+"(Backus, Hopper, and Rossum 2015:70)",
+"(Lamport, Cruz, and Hopper 1994; 1962)",
+"(Lamport et al. 1994; Liskov et al. 1962)",
+"(1970)",
+"(Backus et al. 2015:45)",
+"(Backus et al. 2015:12–128)",
+"García (1945:16)",
+"(Backus et al. 2015; Liskov et al. 1962)",
+"(see Backus et al. 2015, ch. 14)",
+"Lovelace (1970)",
+"(Backus et al. 2015; Lamport et al. 1994; Lovelace 1970)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Guido van Rossum. 2015. “The Art of Computer Programming.” Pp. 96–179 in Proceedings of the baseline symposium.",
+"García, Luis. 1945. “Can Programming Be Liberated from the von Neumann Style.” Pp. 40–129 in Proceedings of the stream symposium.",
+"Lamport, Leslie, Maria de la Cruz, and Grace Hopper. 1994. “The Apollo Guidance Computer.” Pp. 31–177 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, Flann O’Brien, and C. A. R. Hoare. 1962. The Apollo Guidance Computer. TR-47. Lab Encoder.",
+"Lovelace, Ada. 1970. “Data Abstraction and Hierarchy.”"
+]
+},
+"bib": {
+"citations": [
+"(Liskov, O’Brien, and Hoare 1962:97)",
+"(Backus, Hopper, and Rossum 2015:70)",
+"(Lamport, Cruz, and Hopper 1994; 1962)",
+"(Lamport et al. 1994; Liskov et al. 1962)",
+"(1970)",
+"(Backus et al. 2015:45)",
+"(Backus et al. 2015:12–128)",
+"García (1945:16)",
+"(Backus et al. 2015; Liskov et al. 1962)",
+"(see Backus et al. 2015, ch. 14)",
+"Lovelace (1970)",
+"(Backus et al. 2015; Lamport et al. 1994; Lovelace 1970)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Guido van Rossum. 2015. “The Art of Computer Programming.” Pp. 96–179 in Proceedings of the baseline symposium.",
+"García, Luis. 1945. “Can Programming Be Liberated from the von Neumann Style.” Pp. 40–129 in Proceedings of the stream symposium.",
+"Lamport, Leslie, Maria de la Cruz, and Grace Hopper. 1994. “The Apollo Guidance Computer.” Pp. 31–177 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, Flann O’Brien, and C. A. R. Hoare. 1962. The Apollo Guidance Computer. TR-47. Lab Encoder.",
+"Lovelace, Ada. 1970. “Data Abstraction and Hierarchy.”"
+]
+}
+}

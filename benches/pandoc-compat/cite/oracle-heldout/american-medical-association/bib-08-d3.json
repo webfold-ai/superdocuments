@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1(vol99)",
+"2(p82)",
+"1(sec63.134) and more",
+"3(sec75.108) and more",
+"1(pp61-137)",
+"2(p32)",
+"2(p61)",
+"4(pp70-131)",
+"4(fig38)"
+],
+"bibliography": [
+"1. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
+"4. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122."
+]
+},
+"bib": {
+"citations": [
+"1(vol99)",
+"2(p82)",
+"1(sec63.134) and more",
+"3(sec75.108) and more",
+"1(pp61-137)",
+"2(p32)",
+"2(p61)",
+"4(pp70-131)",
+"4(fig38)"
+],
+"bibliography": [
+"1. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
+"4. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122."
+]
+}
+}

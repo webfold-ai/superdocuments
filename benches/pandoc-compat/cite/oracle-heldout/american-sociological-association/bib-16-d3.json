@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"(Lamport, Dijkstra, and Hoare 1961:47)",
+"(Hopper and Lamport 1943)",
+"(Liskov and Knuth 1954:50.123 and more)",
+"(see Hopper and Backus 2008, ch. 30)",
+"(Hopper and Lamport 1943:43.117 and more)",
+"(García, Hamilton, and Knuth 2007; Knuth and O’Brien 1945)",
+"(García et al. 2007)",
+"(García et al. 2007; Hamilton, Lovelace, and Turing 1956; Hopper and Backus 2008)",
+"(Hopper and Backus 2008; Hopper and Lamport 1943; Liskov and Knuth 1954)",
+"(see García et al. 2007)",
+"(Hopper, Dijkstra, and Backus 1990; Knuth and O’Brien 1945)",
+"(Hopper and Backus 2008)",
+"(1990)",
+"Knuth and O’Brien (1945)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. Cambridge University Press.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33(10):192–344.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium."
+]
+},
+"bib": {
+"citations": [
+"(Lamport, Dijkstra, and Hoare 1961:47)",
+"(Hopper and Lamport 1943)",
+"(Liskov and Knuth 1954:50.123 and more)",
+"(see Hopper and Backus 2008, ch. 30)",
+"(Hopper and Lamport 1943:43.117 and more)",
+"(García, Hamilton, and Knuth 2007; Knuth and O’Brien 1945)",
+"(García et al. 2007)",
+"(García et al. 2007; Hamilton, Lovelace, and Turing 1956; Hopper and Backus 2008)",
+"(Hopper and Backus 2008; Hopper and Lamport 1943; Liskov and Knuth 1954)",
+"(see García et al. 2007)",
+"(Hopper, Dijkstra, and Backus 1990; Knuth and O’Brien 1945)",
+"(Hopper and Backus 2008)",
+"(1990)",
+"Knuth and O’Brien (1945)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. London: Cambridge University Press.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33(10):192–344.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium."
+]
+}
+}

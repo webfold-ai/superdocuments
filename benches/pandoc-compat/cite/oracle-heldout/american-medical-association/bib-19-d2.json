@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"see 1, ch. 62",
+"2",
+"see 3",
+"4(p48)",
+"5(sec31.118) and more",
+"6(p77)",
+"see 7",
+"5,8",
+"2,6,9",
+"5(p94)",
+"5(p51)",
+"5(pp98-137)"
+],
+"bibliography": [
+"1. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"2. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"5. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"6. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"7. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+]
+},
+"bib": {
+"citations": [
+"see 1, ch. 62",
+"2",
+"see 3",
+"4(p48)",
+"5(sec31.118) and more",
+"6(p77)",
+"see 7",
+"5,8",
+"2,6,9",
+"5(p94)",
+"5(p51)",
+"5(pp98-137)"
+],
+"bibliography": [
+"1. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"2. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"5. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"6. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"7. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+]
+}
+}

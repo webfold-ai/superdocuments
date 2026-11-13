@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1(p22)",
+"2(pp40-131)",
+"3",
+"4(pp75-138)",
+"4(p26)",
+"5(pp56-133)",
+"5–7",
+"see 7, ch. 95",
+"see 4"
+],
+"bibliography": [
+"1. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"2. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"4. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"6. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"7. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356."
+]
+},
+"bib": {
+"citations": [
+"1(p22)",
+"2(pp40-131)",
+"3",
+"4(pp75-138)",
+"4(p26)",
+"5(pp56-133)",
+"5–7",
+"see 7, ch. 95",
+"see 4"
+],
+"bibliography": [
+"1. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"2. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"4. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"6. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"7. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356."
+]
+}
+}

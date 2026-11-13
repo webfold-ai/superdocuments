@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Hopper 1986, vol. 48)",
+"(see Hopper and Lamport 1942, ch. 81)",
+"Hopper and Lamport (1942, p. 72)",
+"(Hopper 1986)",
+"(Hopper 1986)",
+"(Turing et al. 1969, vol. 3)",
+"(Hopper and Lamport 1942)",
+"(Smith and Backus 1981, vol. 6)",
+"(see Hopper and Lamport 1942, ch. 52)",
+"(Smith and Backus 1981)",
+"(see Smith and Backus 1981)"
+],
+"bibliography": [
+"Hopper G (1986) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Hopper G, Lamport L (1942) The education of a computer. In: Proceedings of the filter symposium. pp 37–181",
+"Smith JJr, Backus J (1981) The education of a computer. ACM Computing Surveys 36:64–305. https://doi.org/10.9730/kernel.12",
+"Turing AM, Smith JJr, Rossum G van (1969) Time, clocks, and the ordering of events. Lab Graph"
+]
+},
+"bib": {
+"citations": [
+"(Hopper 1986, vol. 48)",
+"(see Hopper and Lamport 1942, ch. 81)",
+"Hopper and Lamport (1942, p. 72)",
+"(Hopper 1986)",
+"(Hopper 1986)",
+"(Turing et al. 1969, vol. 3)",
+"(Hopper and Lamport 1942)",
+"(Smith and Backus 1981, vol. 6)",
+"(see Hopper and Lamport 1942, ch. 52)",
+"(Smith and Backus 1981)",
+"(see Smith and Backus 1981)"
+],
+"bibliography": [
+"Hopper G (1986) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Hopper G, Lamport L (1942) The education of a computer. In: Proceedings of the filter symposium. pp 37–181",
+"Smith JJr, Backus J (1981) The education of a computer. ACM Computing Surveys 36:64–305. https://doi.org/10.9730/kernel.12",
+"Turing AM, Smith JJr, Rossum G van (1969) Time, clocks, and the ordering of events. Lab Graph"
+]
+}
+}

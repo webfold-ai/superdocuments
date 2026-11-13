@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3 and more]",
+"[4]",
+"[2,5,6]",
+"[2,3]",
+"[7]",
+"[1]",
+"[2]",
+"[4,6]",
+"[7]"
+],
+"bibliography": [
+"[1] Liskov B. Data abstraction and hierarchy 1946.",
+"[2] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988.",
+"[3] Smith JJr. The education of a computer 1987.",
+"[4] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007.",
+"[5] Backus J. Can programming be liberated from the von neumann style. Proceedings of the solver symposium, 1952, p. 66–128.",
+"[6] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[7] Smith JJr, Liskov B. Notes on the analytical engine 2024."
+]
+},
+"bib": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3 and more]",
+"[4]",
+"[2,5,6]",
+"[2,3]",
+"[7]",
+"[1]",
+"[2]",
+"[4,6]",
+"[7]"
+],
+"bibliography": [
+"[1] Liskov B. Data abstraction and hierarchy 1946.",
+"[2] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988.",
+"[3] Smith JJr. The education of a computer 1987.",
+"[4] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007.",
+"[5] Backus J. Can programming be liberated from the von neumann style. Proceedings of the solver symposium, 1952, p. 66–128.",
+"[6] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[7] Smith JJr, Liskov B. Notes on the analytical engine 2024."
+]
+}
+}

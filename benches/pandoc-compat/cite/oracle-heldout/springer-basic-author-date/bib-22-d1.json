@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Müller 1947)",
+"(Hopper and Hamilton 1988, fig. 13)",
+"(Hopper and Hamilton 1988; Liskov et al. 1988; Müller and Dijkstra 2004)",
+"(Knuth et al. 1962, fig. 85)",
+"(see Hopper and Hamilton 1988)",
+"(Smith and García 1993, fig. 51)",
+"Hopper and Hamilton (1988, p. 50)",
+"(Knuth et al. 1962, p. 84)",
+"(Knuth et al. 1962, sec. 21.140 and more)",
+"Müller and Dijkstra (2004, p. 17)",
+"(Hopper et al. 2019, p. 82)",
+"(Knuth et al. 1962; e.g. Liskov et al. 1988)",
+"(Knuth et al. 1962, vol. 66)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, Lamport L, Smith JJr (2019) On computable numbers. Springer",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+},
+"bib": {
+"citations": [
+"(Müller 1947)",
+"(Hopper and Hamilton 1988, fig. 13)",
+"(Hopper and Hamilton 1988; Liskov et al. 1988; Müller and Dijkstra 2004)",
+"(Knuth et al. 1962, fig. 85)",
+"(see Hopper and Hamilton 1988)",
+"(Smith and García 1993, fig. 51)",
+"Hopper and Hamilton (1988, p. 50)",
+"(Knuth et al. 1962, p. 84)",
+"(Knuth et al. 1962, sec. 21.140 and more)",
+"Müller and Dijkstra (2004, p. 17)",
+"(Hopper et al. 2019, p. 82)",
+"(Knuth et al. 1962; e.g. Liskov et al. 1988)",
+"(Knuth et al. 1962, vol. 66)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, Lamport L, Smith JJr (2019) On computable numbers. Springer, New York",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press, London",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+}
+}

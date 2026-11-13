@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(p77)",
+"1",
+"2(fig10)",
+"3(p86)",
+"4,5(p92)",
+"1(vol31)",
+"5",
+"6(pp42-109)",
+"1(p70)"
+],
+"bibliography": [
+"1. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"2. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"3. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"6. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975."
+]
+},
+"bib": {
+"citations": [
+"1(p77)",
+"1",
+"2(fig10)",
+"3(p86)",
+"4,5(p92)",
+"1(vol31)",
+"5",
+"6(pp42-109)",
+"1(p70)"
+],
+"bibliography": [
+"1. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"2. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"3. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"6. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975."
+]
+}
+}

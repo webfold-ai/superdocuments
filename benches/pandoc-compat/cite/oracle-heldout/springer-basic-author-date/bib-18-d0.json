@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Hoare et al. 2016)",
+"(Cruz et al. 1971; 1993)",
+"(Cruz 1941, sec. 82.139 and more)",
+"(see Cruz et al. 1971)",
+"Turing and Rossum (1968, p. 3)",
+"Rossum and Hoare (1967, pp. 46–130)",
+"(1941)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful",
+"Turing AM, Rossum G van (1968) The art of computer programming. PhD thesis, University of Cambridge"
+]
+},
+"bib": {
+"citations": [
+"(Hoare et al. 2016)",
+"(Cruz et al. 1971; 1993)",
+"(Cruz 1941, sec. 82.139 and more)",
+"(see Cruz et al. 1971)",
+"Turing and Rossum (1968, p. 3)",
+"Rossum and Hoare (1967, pp. 46–130)",
+"(1941)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful",
+"Turing AM, Rossum G van (1968) The art of computer programming. PhD thesis, University of Cambridge"
+]
+}
+}

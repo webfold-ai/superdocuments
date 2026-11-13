@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1(p19)",
+"see 1",
+"e.g. 2,3",
+"3",
+"3(fig37)",
+"4(p26)",
+"4,5(p13)",
+"2,6",
+"7"
+],
+"bibliography": [
+"1. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"2. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
+"3. Donald E. Knuth, Ada Lovelace, Maria de la Cruz. Notes on the analytical engine. Published online 1962.",
+"4. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"5. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"6. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"7. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density"
+]
+},
+"bib": {
+"citations": [
+"1(p19)",
+"see 1",
+"e.g. 2,3",
+"3",
+"3(fig37)",
+"4(p26)",
+"4,5(p13)",
+"2,6",
+"7"
+],
+"bibliography": [
+"1. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"2. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
+"3. Donald E. Knuth, Ada Lovelace, Maria de la Cruz. Notes on the analytical engine. Published online 1962.",
+"4. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"5. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"6. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"7. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density"
+]
+}
+}

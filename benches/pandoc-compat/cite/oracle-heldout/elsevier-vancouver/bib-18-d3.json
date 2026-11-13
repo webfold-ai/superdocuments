@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[e.g. 1,2]",
+"[2]",
+"[3]",
+"[3]",
+"[see 2, ch. 16]",
+"[1,e.g. 4]",
+"[5]"
+],
+"bibliography": [
+"[1] Cruz M de la. Time, clocks, and the ordering of events 1941.",
+"[2] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[3] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[4] Rossum G van, Hoare CAR. Go to statement considered harmful 1967.",
+"[5] Backus J, Hopper G, Lamport L. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1966."
+]
+},
+"bib": {
+"citations": [
+"[e.g. 1,2]",
+"[2]",
+"[3]",
+"[3]",
+"[see 2, ch. 16]",
+"[1,e.g. 4]",
+"[5]"
+],
+"bibliography": [
+"[1] Cruz M de la. Time, clocks, and the ordering of events 1941.",
+"[2] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[3] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[4] Rossum G van, Hoare CAR. Go to statement considered harmful 1967.",
+"[5] Backus J, Hopper G, Lamport L. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1966."
+]
+}
+}

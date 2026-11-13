@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(2011)",
+"Smith, Hoare, and Knuth (1999:21)",
+"(Hoare 2011; Smith et al. 1999:73)",
+"(see Smith et al. 1999)",
+"(Liskov 1946; Müller 1968:75)",
+"(Cruz and Hamilton 1975; e.g. Liskov 1946)",
+"(Cruz and Hamilton 1975:75.140 and more)",
+"(Hoare 2011; Liskov 1946)",
+"(Liskov 1946:65–138)",
+"(Cruz and Hamilton 1975; Müller 1968:37)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. 1975. Notes on the Analytical Engine. TR-4. Lab Throughput.",
+"Hoare, C. A. R. 2011. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Liskov, Barbara. 1946. Can Programming Be Liberated from the von Neumann Style. London: Springer.",
+"Müller, Hans. 1968. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Smith, John Jr., C. A. R. Hoare, and Donald E. Knuth. 1999. Go to Statement Considered Harmful. TR-29. Lab Function."
+]
+},
+"bib": {
+"citations": [
+"(2011)",
+"Smith, Hoare, and Knuth (1999:21)",
+"(Hoare 2011; Smith et al. 1999:73)",
+"(see Smith et al. 1999)",
+"(Liskov 1946; Müller 1968:75)",
+"(Cruz and Hamilton 1975; e.g. Liskov 1946)",
+"(Cruz and Hamilton 1975:75.140 and more)",
+"(Hoare 2011; Liskov 1946)",
+"(Liskov 1946:65–138)",
+"(Cruz and Hamilton 1975; Müller 1968:37)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. 1975. Notes on the Analytical Engine. TR-4. Lab Throughput.",
+"Hoare, C. A. R. 2011. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Liskov, Barbara. 1946. Can Programming Be Liberated from the von Neumann Style. London: Springer.",
+"Müller, Hans. 1968. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Smith, John Jr., C. A. R. Hoare, and Donald E. Knuth. 1999. Go to Statement Considered Harmful. TR-29. Lab Function."
+]
+}
+}

@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3(p50)",
+"4(pp79-129)",
+"5",
+"1,6",
+"2(sec65.117) and more",
+"2",
+"6(fig15)",
+"5(pp17-100)",
+"1(p79),3",
+"6,7",
+"6",
+"5(pp44-120)"
+],
+"bibliography": [
+"1. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"4. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
+"5. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
+"6. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3(p50)",
+"4(pp79-129)",
+"5",
+"1,6",
+"2(sec65.117) and more",
+"2",
+"6(fig15)",
+"5(pp17-100)",
+"1(p79),3",
+"6,7",
+"6",
+"5(pp44-120)"
+],
+"bibliography": [
+"1. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"4. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
+"5. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
+"6. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
+]
+}
+}

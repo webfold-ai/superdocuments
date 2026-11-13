@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al. 1988, fig. 7)",
+"Hopper et al. (1941, p. 70)",
+"(Liskov et al. 1988, fig. 36)",
+"(Hopper et al. 1941; Smith and García 1993)",
+"(1941; Liskov et al. 1988)",
+"Smith and García (1993)",
+"Hopper and Hamilton (1988, p. 82)",
+"Liskov et al. (1988)",
+"(Liskov et al. 1988; Müller and Dijkstra 2004, p. 63)",
+"(see Hopper et al. 1941, ch. 93)",
+"(Hopper et al. 1941, sec. 19.112 and more)",
+"(see Müller and Dijkstra 2004, ch. 55)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, O’Brien F, Cruz M de la (1941) On computable numbers. PhD thesis, University of Oxford",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al. 1988, fig. 7)",
+"Hopper et al. (1941, p. 70)",
+"(Liskov et al. 1988, fig. 36)",
+"(Hopper et al. 1941; Smith and García 1993)",
+"(1941; Liskov et al. 1988)",
+"Smith and García (1993)",
+"Hopper and Hamilton (1988, p. 82)",
+"Liskov et al. (1988)",
+"(Liskov et al. 1988; Müller and Dijkstra 2004, p. 63)",
+"(see Hopper et al. 1941, ch. 93)",
+"(Hopper et al. 1941, sec. 19.112 and more)",
+"(see Müller and Dijkstra 2004, ch. 55)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, O’Brien F, Cruz M de la (1941) On computable numbers. PhD thesis, University of Oxford",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+}
+}

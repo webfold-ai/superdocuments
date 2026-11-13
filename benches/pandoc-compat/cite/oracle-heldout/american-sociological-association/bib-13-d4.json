@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Lamport, Hopper, and Knuth 2007:79; Smith and Liskov 2024)",
+"(Müller and Hoare 2024:31.112 and more)",
+"(Smith 1987; Smith and Liskov 2024:36)",
+"(Smith 1987:45)",
+"(Smith 1987:63)",
+"(2024)",
+"(Smith 1987; 1988)",
+"(Lamport et al. 2007:53; Smith 1987)"
+],
+"bibliography": [
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"(Lamport, Hopper, and Knuth 2007:79; Smith and Liskov 2024)",
+"(Müller and Hoare 2024:31.112 and more)",
+"(Smith 1987; Smith and Liskov 2024:36)",
+"(Smith 1987:45)",
+"(Smith 1987:63)",
+"(2024)",
+"(Smith 1987; 1988)",
+"(Lamport et al. 2007:53; Smith 1987)"
+],
+"bibliography": [
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+}
+}

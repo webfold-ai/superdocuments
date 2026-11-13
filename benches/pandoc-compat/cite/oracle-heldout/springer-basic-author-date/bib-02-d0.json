@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(see Rossum and Turing 1990, ch. 87)",
+"Knuth et al. (1962, p. 65)",
+"(Liskov et al. 1963, fig. 63)",
+"(Backus et al. 2007, fig. 17)",
+"(1990; Liskov et al. 2012)",
+"(Knuth et al. 1962, vol. 26)",
+"(Lovelace et al. 1969; Backus et al. 2007; Müller and O’Brien 2010)",
+"(Knuth et al. 1962)",
+"(1962; Liskov et al. 2012)",
+"(Liskov et al. 2012, p. 75)",
+"(Müller and O’Brien 2010)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Knuth DE, Lovelace A, Cruz M de la (1962) Notes on the analytical engine",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"(see Rossum and Turing 1990, ch. 87)",
+"Knuth et al. (1962, p. 65)",
+"(Liskov et al. 1963, fig. 63)",
+"(Backus et al. 2007, fig. 17)",
+"(1990; Liskov et al. 2012)",
+"(Knuth et al. 1962, vol. 26)",
+"(Lovelace et al. 1969; Backus et al. 2007; Müller and O’Brien 2010)",
+"(Knuth et al. 1962)",
+"(1962; Liskov et al. 2012)",
+"(Liskov et al. 2012, p. 75)",
+"(Müller and O’Brien 2010)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Knuth DE, Lovelace A, Cruz M de la (1962) Notes on the analytical engine",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine"
+]
+}
+}

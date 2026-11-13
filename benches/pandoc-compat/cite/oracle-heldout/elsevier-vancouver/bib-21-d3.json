@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[5]",
+"[6]",
+"[see 5]",
+"[see 4]",
+"[7]",
+"[1]",
+"[2]",
+"[6]",
+"[see 8, ch. 75]"
+],
+"bibliography": [
+"[1] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[2] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[3] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[4] O’Brien F, Backus J. Go to statement considered harmful. 2nd ed. Addison-Wesley; 2024.",
+"[5] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[6] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[7] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[8] Dijkstra EW, García L. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 2004."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[5]",
+"[6]",
+"[see 5]",
+"[see 4]",
+"[7]",
+"[1]",
+"[2]",
+"[6]",
+"[see 8, ch. 75]"
+],
+"bibliography": [
+"[1] Liskov B. On computable numbers. Lab Estimate; 1956.",
+"[2] Cruz M de la. Go to statement considered harmful. Proceedings of the network symposium, 2007, p. 81–115.",
+"[3] Turing AM. The apollo guidance computer. Journal of the ACM 1949;4:240–315. https://doi.org/10.8223/index.77.",
+"[4] O’Brien F, Backus J. Go to statement considered harmful. 2nd ed. New York: Addison-Wesley; 2024.",
+"[5] Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys 1940;33:183–370. https://doi.org/10.9422/heuristic.52.",
+"[6] Liskov B, García L, Müller H. An axiomatic basis for computer programming. PhD thesis. University of Cambridge, 1992.",
+"[7] Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. Proceedings of the vector symposium, 1939, p. 95–188.",
+"[8] Dijkstra EW, García L. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 2004."
+]
+}
+}

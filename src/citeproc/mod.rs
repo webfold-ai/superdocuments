@@ -75,12 +75,29 @@ pub struct Processed {
 pub struct Processor {
     style: Style,
     refs: HashMap<String, Reference>,
+    /// Reference ids in the order they were given (ties in sorting keep this order).
+    input_order: Vec<String>,
+    /// Per reference: names to show before "et al." after disambiguation.
+    names_override: std::cell::RefCell<HashMap<String, usize>>,
+    /// Pandoc's reading of `<names>` without `<name>` (see `Ctx::names_without_inheritance`).
+    pandoc_names: bool,
+    /// References whose cite is still ambiguous after the names step.
+    ambiguous: std::cell::RefCell<std::collections::HashSet<String>>,
 }
 
 impl Processor {
     pub fn new(style: Style, references: Vec<Reference>) -> Self {
+        let input_order = references.iter().map(|r| r.id.clone()).collect();
         let refs = references.into_iter().map(|r| (r.id.clone(), r)).collect();
-        Processor { style, refs }
+        Processor { style, refs, input_order, pandoc_names: false, names_override: Default::default(), ambiguous: Default::default() }
+    }
+
+    /// Read `<names>` without a `<name>` child the way Pandoc does: with the CSL defaults, ignoring
+    /// the name options set on `style`, `citation` or `bibliography`. Off by default: those options
+    /// are meant to apply to the implicit name, and a style such as AMA relies on it.
+    pub fn with_pandoc_names(mut self, on: bool) -> Self {
+        self.pandoc_names = on;
+        self
     }
 
     pub fn style(&self) -> &Style {
@@ -118,9 +135,14 @@ impl Processor {
         // Bibliography order.
         let mut bib_order = order.clone();
         if let Some(sort) = self.style.bibliography().and_then(|b| b.find("sort")) {
+            // Ties keep the order the references were given in.
+            bib_order.sort_by_key(|id| self.input_order.iter().position(|x| x == id).unwrap_or(usize::MAX));
             self.sort_ids(&mut bib_order, sort, Mode::Bibliography, &numbers);
         }
-        // Year suffixes.
+        // Ambiguous cites: show more names, then year suffixes.
+        self.names_override.borrow_mut().clear();
+        self.ambiguous.borrow_mut().clear();
+        self.disambiguate_names(&bib_order, &numbers);
         let suffixes = self.year_suffixes(&bib_order[..], &numbers, cited_count.max(order.len()));
         // Citations.
         let mut seen: Vec<String> = Vec::new();
@@ -144,6 +166,8 @@ impl Processor {
                 for id in &bib_order {
                     let Some(r) = self.refs.get(id) else { continue };
                     let mut ctx = Ctx::new(&self.style, r, Mode::Bibliography);
+                    ctx.names_without_inheritance = self.pandoc_names;
+                    ctx.names_use_first_override = self.names_override.borrow().get(id).copied();
                     ctx.citation_number = numbers.get(id).copied();
                     ctx.year_suffix = suffixes.get(id).cloned();
                     let mut toks = if bib.attr("second-field-align").is_some() {
@@ -167,6 +191,8 @@ impl Processor {
                     };
                     if let Some(sub) = sub {
                         let mut actx = Ctx::new(&self.style, r, Mode::Bibliography);
+                        actx.names_without_inheritance = self.pandoc_names;
+                        actx.names_use_first_override = ctx.names_use_first_override;
                         actx.item.author_only = true;
                         actx.year_suffix = ctx.year_suffix.clone();
                         actx.citation_number = ctx.citation_number;
@@ -218,6 +244,9 @@ impl Processor {
 
     fn item_ctx<'a>(&'a self, r: &'a Reference, it: &CitationItem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Ctx<'a> {
         let mut ctx = Ctx::new(&self.style, r, Mode::Citation);
+        ctx.names_without_inheritance = self.pandoc_names;
+        ctx.names_use_first_override = self.names_override.borrow().get(&it.id).copied();
+        ctx.disambiguate = self.ambiguous.borrow().contains(&it.id);
         ctx.citation_number = numbers.get(&it.id).copied();
         ctx.year_suffix = suffixes.get(&it.id).cloned();
         ctx.item = ItemCtx {
@@ -241,7 +270,8 @@ impl Processor {
             actx.item.suppress_author = false;
             actx.item.author_only = true;
             let _ = eval_layout_items(layout, &mut actx);
-            let author = actx.captured.take().or_else(|| self.author_from_bibliography(r));
+            // A style whose cites print no author (numeric styles) prints none for `@key` either.
+            let author = actx.captured.take();
             let mut rctx = self.item_ctx(r, it, numbers, suffixes, position);
             rctx.item.suppress_author = true;
             (author, eval_layout_items(layout, &mut rctx))
@@ -323,7 +353,10 @@ impl Processor {
             } else {
                 Position::Subsequent
             };
-            pieces.push((self.render_item(it, layout, numbers, suffixes, position), it));
+            let toks = self.render_item(it, layout, numbers, suffixes, position);
+            if !toks.is_empty() {
+                pieces.push((toks, it));
+            }
         }
         let collapse = cit.attr("collapse").unwrap_or("");
         let mut out: Toks = Vec::new();
@@ -354,19 +387,43 @@ impl Processor {
 
     #[allow(clippy::too_many_arguments)]
     fn collapse_years(&self, pieces: &[(Toks, &CitationItem)], layout: &XElem, cit: &XElem, delim: &str, mode: &str, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>) -> Toks {
-        // Group consecutive items with the same author text.
-        let mut authors: Vec<String> = Vec::new();
-        for (_, it) in pieces {
-            let a = self.refs.get(&it.id).map(|r| {
-                let mut ctx = self.item_ctx(r, it, numbers, suffixes, Position::First);
-                ctx.item.author_only = true;
-                let _ = eval_layout_items(layout, &mut ctx);
-                ctx.captured.map(|t| plain(&t)).unwrap_or_default()
-            });
-            authors.push(a.unwrap_or_default());
+        // Cites whose author names print the same are moved next to each other (in the place of
+        // the first). The names compared are those the layout prints directly, not through a
+        // `substitute`.
+        let author_key = |it: &CitationItem| -> String {
+            let Some(r) = self.refs.get(&it.id) else { return String::new() };
+            let mut ctx = self.item_ctx(r, it, numbers, suffixes, Position::First);
+            ctx.item.suppress_author = false;
+            let _ = eval_layout_items(layout, &mut ctx);
+            match ctx.captured_direct {
+                Some(t) => plain(&t),
+                // Names that stand in through a `substitute` compare as the underlying names.
+                None if r.names("author").is_empty() => String::new(),
+                None => format!("{:?}", r.names("author")),
+            }
+        };
+        let keys: Vec<String> = pieces.iter().map(|(_, it)| author_key(it)).collect();
+        let mut order: Vec<usize> = Vec::new();
+        for i in 0..pieces.len() {
+            if order.contains(&i) {
+                continue;
+            }
+            order.push(i);
+            if keys[i].is_empty() {
+                continue;
+            }
+            for j in i + 1..pieces.len() {
+                if !order.contains(&j) && keys[j] == keys[i] && !pieces[j].1.author_in_text {
+                    order.push(j);
+                }
+            }
         }
+        let authors: Vec<String> = order.iter().map(|i| keys[*i].clone()).collect();
+        let pieces: Vec<(Toks, &CitationItem)> = order.iter().map(|i| (pieces[*i].0.clone(), pieces[*i].1)).collect();
+        let pieces = &pieces[..];
         let group_delim = cit.attr("after-collapse-delimiter").unwrap_or(delim);
-        let year_delim = cit.attr("cite-group-delimiter").unwrap_or(", ");
+        let year_delim_attr = cit.attr("cite-group-delimiter");
+        let year_delim = year_delim_attr.unwrap_or(", ");
         let mut out = Toks::new();
         let mut i = 0;
         let mut first_group = true;
@@ -386,7 +443,8 @@ impl Processor {
                 let mut ctx = self.item_ctx(r, it, numbers, suffixes, Position::First);
                 ctx.item.suppress_author = true;
                 let rest = eval_layout_items(layout, &mut ctx);
-                out.push(Tok::Text(year_delim.to_string()));
+                let located = pieces[k].1.locator.is_some() || pieces[k - 1].1.locator.is_some();
+                out.push(Tok::Text(if located && year_delim_attr.is_none() { delim.to_string() } else { year_delim.to_string() }));
                 let rest = if mode != "year" && same_year(self.refs.get(&pieces[k - 1].1.id), Some(r)) {
                     // Same year: only the suffix letter follows.
                     suffixes.get(&it.id).cloned().map(|s| text_toks(&s)).unwrap_or(rest)
@@ -447,6 +505,70 @@ impl Processor {
     }
 
     // ---- disambiguation ---------------------------------------------------------------------
+
+    /// `disambiguate-add-names`: when two different references print the same cite, show more of
+    /// the names of the colliding ones, one at a time, until the cites differ or the names run out.
+    fn disambiguate_names(&self, bib_order: &[String], numbers: &HashMap<String, usize>) {
+        let Some(cit) = self.style.citation() else { return };
+        let Some(layout) = cit.find("layout") else { return };
+        if cit.attr("disambiguate-add-names") != Some("true") {
+            self.mark_ambiguous(layout, bib_order, numbers);
+            return;
+        }
+        for _ in 0..30 {
+            let mut groups: Vec<(String, Vec<String>)> = Vec::new();
+            for id in bib_order {
+                let Some(r) = self.refs.get(id) else { continue };
+                let it = CitationItem { id: id.clone(), ..Default::default() };
+                let mut ctx = self.item_ctx(r, &it, numbers, &HashMap::new(), Position::First);
+                let key = plain(&eval_layout_items(layout, &mut ctx));
+                match groups.iter_mut().find(|(k, _)| *k == key) {
+                    Some((_, v)) => v.push(id.clone()),
+                    None => groups.push((key, vec![id.clone()])),
+                }
+            }
+            let mut changed = false;
+            for (_, ids) in groups.iter().filter(|(_, v)| v.len() > 1) {
+                for id in ids {
+                    let Some(r) = self.refs.get(id) else { continue };
+                    let total = r.names("author").len();
+                    let current = self.names_override.borrow().get(id).copied();
+                    let shown = current.unwrap_or_else(|| self.default_use_first(cit));
+                    // Every member of an ambiguous group that still hides names shows one more.
+                    if shown < total {
+                        self.names_override.borrow_mut().insert(id.clone(), shown + 1);
+                        changed = true;
+                    }
+                }
+            }
+            if !changed {
+                break;
+            }
+        }
+        self.mark_ambiguous(layout, bib_order, numbers);
+    }
+
+    /// Fills `ambiguous` with the references that still print the same cite as another one.
+    fn mark_ambiguous(&self, layout: &XElem, bib_order: &[String], numbers: &HashMap<String, usize>) {
+        let mut groups: Vec<(String, Vec<String>)> = Vec::new();
+        for id in bib_order {
+            let Some(r) = self.refs.get(id) else { continue };
+            let it = CitationItem { id: id.clone(), ..Default::default() };
+            let mut ctx = self.item_ctx(r, &it, numbers, &HashMap::new(), Position::First);
+            let key = plain(&eval_layout_items(layout, &mut ctx));
+            match groups.iter_mut().find(|(k, _)| *k == key) {
+                Some((_, v)) => v.push(id.clone()),
+                None => groups.push((key, vec![id.clone()])),
+            }
+        }
+        for (_, ids) in groups.into_iter().filter(|(_, v)| v.len() > 1) {
+            self.ambiguous.borrow_mut().extend(ids);
+        }
+    }
+
+    fn default_use_first(&self, cit: &XElem) -> usize {
+        cit.attr("et-al-use-first").or_else(|| self.style.root.attr("et-al-use-first")).and_then(|v| v.parse().ok()).unwrap_or(1)
+    }
 
     fn year_suffixes(&self, bib_order: &[String], numbers: &HashMap<String, usize>, _n: usize) -> HashMap<String, String> {
         let mut out = HashMap::new();

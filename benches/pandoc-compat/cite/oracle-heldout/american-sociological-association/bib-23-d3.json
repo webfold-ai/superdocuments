@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(see Backus, Knuth, and Liskov 1958)",
+"Cruz (1951:81–126)",
+"(see Liskov 1944)",
+"Cruz (1951)",
+"Cruz (1951:30–127)",
+"(Cruz 1951; Rossum and Backus 1979)",
+"(see Dijkstra 1993, ch. 39)",
+"(Backus et al. 1958; Cruz 1951)",
+"(Backus et al. 1958; Lamport, Müller, and Dijkstra 2017)",
+"Lamport et al. (2017)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)",
+"(Lamport et al. 2017:36–122)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33(2):39–369.",
+"Lamport, Leslie, Hans Müller, and Edsger W. Dijkstra. 2017. The Education of a Computer. Addison-Wesley.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge."
+]
+},
+"bib": {
+"citations": [
+"(see Backus, Knuth, and Liskov 1958)",
+"Cruz (1951:81–126)",
+"(see Liskov 1944)",
+"Cruz (1951)",
+"Cruz (1951:30–127)",
+"(Cruz 1951; Rossum and Backus 1979)",
+"(see Dijkstra 1993, ch. 39)",
+"(Backus et al. 1958; Cruz 1951)",
+"(Backus et al. 1958; Lamport, Müller, and Dijkstra 2017)",
+"Lamport et al. (2017)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)",
+"(Lamport et al. 2017:36–122)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. Boston: MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33(2):39–369.",
+"Lamport, Leslie, Hans Müller, and Edsger W. Dijkstra. 2017. The Education of a Computer. New York: Addison-Wesley.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge."
+]
+}
+}

@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"1–3",
+"3(p26)",
+"see 2, ch. 72",
+"2(pp19-140)",
+"4",
+"1(p23)",
+"3"
+],
+"bibliography": [
+"1. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"2. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"3. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
+"4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
+]
+},
+"bib": {
+"citations": [
+"1–3",
+"3(p26)",
+"see 2, ch. 72",
+"2(pp19-140)",
+"4",
+"1(p23)",
+"3"
+],
+"bibliography": [
+"1. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"2. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"3. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
+"4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
+]
+}
+}

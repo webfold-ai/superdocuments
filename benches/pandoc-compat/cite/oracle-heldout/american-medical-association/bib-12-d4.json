@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(p85)",
+"2",
+"1",
+"1–3",
+"4",
+"3,4",
+"1(pp4-136)",
+"see 3",
+"see 3, ch. 16",
+"3",
+"4"
+],
+"bibliography": [
+"1. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
+"2. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"3. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"4. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147."
+]
+},
+"bib": {
+"citations": [
+"1(p85)",
+"2",
+"1",
+"1–3",
+"4",
+"3,4",
+"1(pp4-136)",
+"see 3",
+"see 3, ch. 16",
+"3",
+"4"
+],
+"bibliography": [
+"1. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
+"2. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"3. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"4. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147."
+]
+}
+}

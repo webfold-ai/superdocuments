@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Hopper and O’Brien 1963:15)",
+"(1963)",
+"(Hopper and O’Brien 1963)",
+"(Smith and Backus 1973:47)",
+"Müller and Hoare (1989:17)",
+"(Hoare 2005; Müller and Liskov 2014; O’Brien 1965)",
+"(Müller and Hoare 1989:72)",
+"(Müller and Liskov 2014:16)",
+"(1973)",
+"(Müller and Hoare 1989; Smith and Backus 1973:33)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. 1963. “The Education of a Computer.” IEEE Transactions on Software Engineering 45(2):135–397. https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. 1989. “The Apollo Guidance Computer.”",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+},
+"bib": {
+"citations": [
+"(Hopper and O’Brien 1963:15)",
+"(1963)",
+"(Hopper and O’Brien 1963)",
+"(Smith and Backus 1973:47)",
+"Müller and Hoare (1989:17)",
+"(Hoare 2005; Müller and Liskov 2014; O’Brien 1965)",
+"(Müller and Hoare 1989:72)",
+"(Müller and Liskov 2014:16)",
+"(1973)",
+"(Müller and Hoare 1989; Smith and Backus 1973:33)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Hopper, Grace, and Flann O’Brien. 1963. “The Education of a Computer.” IEEE Transactions on Software Engineering 45(2):135–397. https://example.org/throughput.",
+"Müller, Hans, and C. A. R. Hoare. 1989. “The Apollo Guidance Computer.”",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. London: Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+}
+}

@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"1(p70)",
+"3(pp88-138)",
+"2(fig74)",
+"see 4",
+"5(pp7-133)",
+"6",
+"7(p90)"
+],
+"bibliography": [
+"1. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"2. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
+"3. Guido van Rossum, John Backus. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
+"4. Maria de la Cruz. Notes on the Analytical Engine. MIT Press; 1951.",
+"5. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
+"6. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
+"7. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"1(p70)",
+"3(pp88-138)",
+"2(fig74)",
+"see 4",
+"5(pp7-133)",
+"6",
+"7(p90)"
+],
+"bibliography": [
+"1. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"2. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
+"3. Guido van Rossum, John Backus. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
+"4. Maria de la Cruz. Notes on the Analytical Engine. MIT Press; 1951.",
+"5. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
+"6. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
+"7. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
+]
+}
+}

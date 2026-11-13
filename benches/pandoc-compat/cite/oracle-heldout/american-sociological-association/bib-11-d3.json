@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"García and Knuth (1936)",
+"O’Brien, Rossum, and Smith (1975:55–114)",
+"(Hopper, Backus, and Müller 1939; O’Brien et al. 1975:15)",
+"(see García and Knuth 1936, ch. 30)",
+"(Smith 2006)",
+"(O’Brien et al. 1975:59.134 and more)",
+"(Backus 1943:81; Hopper, Müller, and Lovelace 1987)",
+"(see O’Brien et al. 1975, ch. 64)",
+"(1939, 1987)",
+"(García and Knuth 1936:96.137 and more)",
+"(2005)",
+"(Hopper et al. 1987:17)"
+],
+"bibliography": [
+"Backus, John. 1943. “On Computable Numbers.”",
+"García, Luis, and Donald E. Knuth. 1936. “An Axiomatic Basis for Computer Programming.” Pp. 2–133 in Proceedings of the transform symposium.",
+"Hoare, C. A. R., and Hans Müller. 2005. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 7(9):191–397. doi:10.4589/gradient.17.",
+"Hopper, Grace, John Backus, and Hans Müller. 1939. The Art of Computer Programming. New York: Addison-Wesley.",
+"Hopper, Grace, Hans Müller, and Ada Lovelace. 1987. The Apollo Guidance Computer. 3rd ed. London: Cambridge University Press.",
+"O’Brien, Flann, Guido van Rossum, and John Jr. Smith. 1975. Time, Clocks, and the Ordering of Events. New York: Addison-Wesley.",
+"Smith, John Jr. 2006. The Apollo Guidance Computer. TR-83. Lab Layer."
+]
+},
+"bib": {
+"citations": [
+"García and Knuth (1936)",
+"O’Brien, Rossum, and Smith (1975:55–114)",
+"(Hopper, Backus, and Müller 1939; O’Brien et al. 1975:15)",
+"(see García and Knuth 1936, ch. 30)",
+"(Smith 2006)",
+"(O’Brien et al. 1975:59.134 and more)",
+"(Backus 1943:81; Hopper, Müller, and Lovelace 1987)",
+"(see O’Brien et al. 1975, ch. 64)",
+"(1939, 1987)",
+"(García and Knuth 1936:96.137 and more)",
+"(2005)",
+"(Hopper et al. 1987:17)"
+],
+"bibliography": [
+"Backus, John. 1943. “On Computable Numbers.”",
+"García, Luis, and Donald E. Knuth. 1936. “An Axiomatic Basis for Computer Programming.” Pp. 2–133 in Proceedings of the transform symposium.",
+"Hoare, C. A. R., and Hans Müller. 2005. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 7(9):191–397. doi:10.4589/gradient.17.",
+"Hopper, Grace, John Backus, and Hans Müller. 1939. The Art of Computer Programming. New York: Addison-Wesley.",
+"Hopper, Grace, Hans Müller, and Ada Lovelace. 1987. The Apollo Guidance Computer. 3rd ed. London: Cambridge University Press.",
+"O’Brien, Flann, Guido van Rossum, and John Jr. Smith. 1975. Time, Clocks, and the Ordering of Events. New York: Addison-Wesley.",
+"Smith, John Jr. 2006. The Apollo Guidance Computer. TR-83. Lab Layer."
+]
+}
+}

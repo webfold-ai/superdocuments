@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Müller and Hoare 2024, fig. 69)",
+"(1952; Müller and Hoare 2024)",
+"(Smith and Backus 1988; Smith and Liskov 2024)",
+"(Backus 1952)",
+"(see Backus 1952, ch. 30)",
+"(see Backus 1952, ch. 16)",
+"(Lamport et al. 2007, p. 12; Müller and Hoare 2024)",
+"(Lamport et al. 2007, fig. 93)",
+"(Smith and Backus 1988, p. 86; Lamport et al. 2007)",
+"(1988; Lamport et al. 2007)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"(Müller and Hoare 2024, fig. 69)",
+"(1952; Müller and Hoare 2024)",
+"(Smith and Backus 1988; Smith and Liskov 2024)",
+"(Backus 1952)",
+"(see Backus 1952, ch. 30)",
+"(see Backus 1952, ch. 16)",
+"(Lamport et al. 2007, p. 12; Müller and Hoare 2024)",
+"(Lamport et al. 2007, fig. 93)",
+"(Smith and Backus 1988, p. 86; Lamport et al. 2007)",
+"(1988; Lamport et al. 2007)"
+],
+"bibliography": [
+"Backus J (1952) Can programming be liberated from the von neumann style. In: Proceedings of the solver symposium. pp 66–128",
+"Lamport L, Hopper G, Knuth DE (2007) Time, clocks, and the ordering of events",
+"Müller H, Hoare CAR (2024) The art of computer programming",
+"Smith JJr, Backus J (1988) The apollo guidance computer. PhD thesis, University of Zurich",
+"Smith JJr, Liskov B (2024) Notes on the analytical engine"
+]
+}
+}

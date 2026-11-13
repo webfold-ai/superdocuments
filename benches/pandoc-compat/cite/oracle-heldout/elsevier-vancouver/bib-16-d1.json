@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[4]",
+"[2]",
+"[1]",
+"[2]",
+"[3,4]",
+"[3]",
+"[5]",
+"[6]",
+"[1]",
+"[1]"
+],
+"bibliography": [
+"[1] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128.",
+"[2] Hopper G, Lamport L. Go to statement considered harmful. Cambridge University Press; 1943.",
+"[3] Hopper G, Backus J. Notes on the analytical engine 2008.",
+"[4] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[5] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[6] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[4]",
+"[2]",
+"[1]",
+"[2]",
+"[3,4]",
+"[3]",
+"[5]",
+"[6]",
+"[1]",
+"[1]"
+],
+"bibliography": [
+"[1] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128.",
+"[2] Hopper G, Lamport L. Go to statement considered harmful. London: Cambridge University Press; 1943.",
+"[3] Hopper G, Backus J. Notes on the analytical engine 2008.",
+"[4] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[5] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[6] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990."
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"1(fig15)",
+"1",
+"1",
+"2(vol47)",
+"3(p17)",
+"4–6",
+"3(vol72)",
+"4(fig16)",
+"2",
+"2(p33),3"
+],
+"bibliography": [
+"1. Grace Hopper, Flann O’Brien. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
+"2. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
+"3. Hans Müller, C. A. R. Hoare. The apollo guidance computer. Published online 1989.",
+"4. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
+"5. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"6. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
+]
+},
+"bib": {
+"citations": [
+"1(fig15)",
+"1",
+"1",
+"2(vol47)",
+"3(p17)",
+"4–6",
+"3(vol72)",
+"4(fig16)",
+"2",
+"2(p33),3"
+],
+"bibliography": [
+"1. Grace Hopper, Flann O’Brien. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
+"2. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
+"3. Hans Müller, C. A. R. Hoare. The apollo guidance computer. Published online 1989.",
+"4. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
+"5. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"6. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
+]
+}
+}

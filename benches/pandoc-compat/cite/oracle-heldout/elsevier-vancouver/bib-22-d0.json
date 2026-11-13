@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[1]",
+"[2,3]",
+"[1,2]",
+"[3]",
+"[4]",
+"[1]",
+"[1,5]",
+"[see 2, ch. 93]",
+"[2 and more]",
+"[see 5, ch. 55]"
+],
+"bibliography": [
+"[1] Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. Proceedings of the experiment symposium, 1988, p. 70–197.",
+"[2] Hopper G, O’Brien F, Cruz M de la. On computable numbers. PhD thesis. University of Oxford, 1941.",
+"[3] Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM 1993;46:223–398. https://doi.org/10.4191/convergence.19.",
+"[4] Hopper G, Hamilton M. On computable numbers. Lab Agent; 1988.",
+"[5] Müller H, Dijkstra EW. On computable numbers. Lab Query; 2004."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[1]",
+"[2,3]",
+"[1,2]",
+"[3]",
+"[4]",
+"[1]",
+"[1,5]",
+"[see 2, ch. 93]",
+"[2 and more]",
+"[see 5, ch. 55]"
+],
+"bibliography": [
+"[1] Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. Proceedings of the experiment symposium, 1988, p. 70–197.",
+"[2] Hopper G, O’Brien F, Cruz M de la. On computable numbers. PhD thesis. University of Oxford, 1941.",
+"[3] Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM 1993;46:223–398. https://doi.org/10.4191/convergence.19.",
+"[4] Hopper G, Hamilton M. On computable numbers. Lab Agent; 1988.",
+"[5] Müller H, Dijkstra EW. On computable numbers. Lab Query; 2004."
+]
+}
+}

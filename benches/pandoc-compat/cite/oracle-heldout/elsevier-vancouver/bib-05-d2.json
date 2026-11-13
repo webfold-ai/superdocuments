@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[1,3,4]",
+"[1]",
+"[2,5]",
+"[2,4,5]",
+"[3]",
+"[6]",
+"[3]",
+"[4,e.g. 6]",
+"[see 2, ch. 26]"
+],
+"bibliography": [
+"[1] García L, Rossum G van. On computable numbers. 2nd ed. London: Addison-Wesley; 2010.",
+"[2] Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 1970;42:59–345. https://doi.org/10.4721/scheduler.33.",
+"[3] Turing AM. The art of computer programming. Boston: Springer; 1994.",
+"[4] Smith JJr, Hopper G. The education of a computer. Proceedings of the convergence symposium, 2022, p. 61–101.",
+"[5] Hoare CAR, Smith JJr, García L. An axiomatic basis for computer programming. Second. New York: Springer; 1941.",
+"[6] Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM 1936;11:127–305. https://doi.org/10.8852/decoder.67."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[1,3,4]",
+"[1]",
+"[2,5]",
+"[2,4,5]",
+"[3]",
+"[6]",
+"[3]",
+"[4,e.g. 6]",
+"[see 2, ch. 26]"
+],
+"bibliography": [
+"[1] García L, Rossum G van. On computable numbers. 2nd ed. London: Addison-Wesley; 2010.",
+"[2] Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 1970;42:59–345. https://doi.org/10.4721/scheduler.33.",
+"[3] Turing AM. The art of computer programming. Boston: Springer; 1994.",
+"[4] Smith JJr, Hopper G. The education of a computer. Proceedings of the convergence symposium, 2022, p. 61–101.",
+"[5] Hoare CAR, Smith JJr, García L. An axiomatic basis for computer programming. Second. New York: Springer; 1941.",
+"[6] Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM 1936;11:127–305. https://doi.org/10.8852/decoder.67."
+]
+}
+}

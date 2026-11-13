@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[e.g. 2,3]",
+"[3]",
+"[1,2,4]",
+"[3,4]",
+"[5]",
+"[1]",
+"[5]"
+],
+"bibliography": [
+"[1] Knuth DE. Go to statement considered harmful. Proceedings of the feature symposium, 1971, p. 63–156.",
+"[2] Dijkstra EW. On computable numbers. Lab Estimate; 2000.",
+"[3] Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society 1959;31:150–375. https://doi.org/10.2214/heuristic.97.",
+"[4] Cruz M de la, O’Brien F. Data abstraction and hierarchy 1996.",
+"[5] Hoare CAR. Can programming be liberated from the von neumann style. Lab Parser; 1994."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[e.g. 2,3]",
+"[3]",
+"[1,2,4]",
+"[3,4]",
+"[5]",
+"[1]",
+"[5]"
+],
+"bibliography": [
+"[1] Knuth DE. Go to statement considered harmful. Proceedings of the feature symposium, 1971, p. 63–156.",
+"[2] Dijkstra EW. On computable numbers. Lab Estimate; 2000.",
+"[3] Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society 1959;31:150–375. https://doi.org/10.2214/heuristic.97.",
+"[4] Cruz M de la, O’Brien F. Data abstraction and hierarchy 1996.",
+"[5] Hoare CAR. Can programming be liberated from the von neumann style. Lab Parser; 1994."
+]
+}
+}

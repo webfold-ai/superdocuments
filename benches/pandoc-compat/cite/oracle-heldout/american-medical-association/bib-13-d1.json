@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1(pp11-106)",
+"2(vol89)",
+"e.g. 3,4",
+"2,5(p2)",
+"2(pp62-114)",
+"3(fig87)",
+"6(fig46)"
+],
+"bibliography": [
+"1. Barbara Liskov. Data abstraction and hierarchy. Published online 1946.",
+"2. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"3. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
+"4. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
+"5. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"6. John Jr. Smith. The education of a computer. Published online 1987."
+]
+},
+"bib": {
+"citations": [
+"1(pp11-106)",
+"2(vol89)",
+"e.g. 3,4",
+"2,5(p2)",
+"2(pp62-114)",
+"3(fig87)",
+"6(fig46)"
+],
+"bibliography": [
+"1. Barbara Liskov. Data abstraction and hierarchy. Published online 1946.",
+"2. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"3. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
+"4. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
+"5. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"6. John Jr. Smith. The education of a computer. Published online 1987."
+]
+}
+}

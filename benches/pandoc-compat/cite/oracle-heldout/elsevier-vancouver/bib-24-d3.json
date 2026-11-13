@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[3]",
+"[4]",
+"[1]",
+"[5]",
+"[1]",
+"[6]",
+"[7]",
+"[7]"
+],
+"bibliography": [
+"[1] Lamport L, Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1965.",
+"[2] Müller H, García L, Cruz M de la. The art of computer programming 2019.",
+"[3] Lamport L, Dijkstra EW, Hamilton M. The education of a computer. PhD thesis. University of Zurich, 2002.",
+"[4] Lamport L, Müller H. The apollo guidance computer. Lab Function; 1969.",
+"[5] Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. Proceedings of the compiler symposium, 1989, p. 43–184.",
+"[6] Dijkstra EW, Liskov B. The art of computer programming. PhD thesis. University of Oxford, 2012.",
+"[7] O’Brien F, Hoare CAR, Hopper G. On computable numbers. Proceedings of the optimizer symposium, 1953, p. 43–145."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[3]",
+"[4]",
+"[1]",
+"[5]",
+"[1]",
+"[6]",
+"[7]",
+"[7]"
+],
+"bibliography": [
+"[1] Lamport L, Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1965.",
+"[2] Müller H, García L, Cruz M de la. The art of computer programming 2019.",
+"[3] Lamport L, Dijkstra EW, Hamilton M. The education of a computer. PhD thesis. University of Zurich, 2002.",
+"[4] Lamport L, Müller H. The apollo guidance computer. Lab Function; 1969.",
+"[5] Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. Proceedings of the compiler symposium, 1989, p. 43–184.",
+"[6] Dijkstra EW, Liskov B. The art of computer programming. PhD thesis. University of Oxford, 2012.",
+"[7] O’Brien F, Hoare CAR, Hopper G. On computable numbers. Proceedings of the optimizer symposium, 1953, p. 43–145."
+]
+}
+}

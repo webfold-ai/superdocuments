@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(see Liskov 1946)",
+"(Smith and Backus 1988:92)",
+"(Smith 1987:47.130 and more)",
+"(Lamport, Hopper, and Knuth 2007:31)",
+"(Backus 1952; Müller and Hoare 2024; Smith and Backus 1988)",
+"(1987; Smith and Backus 1988)",
+"(Smith and Liskov 2024:50)",
+"(Liskov 1946:53)",
+"(1988)",
+"(Lamport et al. 2007; Müller and Hoare 2024:55)",
+"(Smith and Liskov 2024)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Liskov, Barbara. 1946. “Data Abstraction and Hierarchy.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"(see Liskov 1946)",
+"(Smith and Backus 1988:92)",
+"(Smith 1987:47.130 and more)",
+"(Lamport, Hopper, and Knuth 2007:31)",
+"(Backus 1952; Müller and Hoare 2024; Smith and Backus 1988)",
+"(1987; Smith and Backus 1988)",
+"(Smith and Liskov 2024:50)",
+"(Liskov 1946:53)",
+"(1988)",
+"(Lamport et al. 2007; Müller and Hoare 2024:55)",
+"(Smith and Liskov 2024)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Liskov, Barbara. 1946. “Data Abstraction and Hierarchy.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr. 1987. “The Education of a Computer.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+}
+}

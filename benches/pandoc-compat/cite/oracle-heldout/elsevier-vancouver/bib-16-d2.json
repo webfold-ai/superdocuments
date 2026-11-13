@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2 and more]",
+"[see 3, ch. 84]",
+"[2,4]",
+"[4,5]",
+"[5 and more]",
+"[6]",
+"[3]",
+"[7]",
+"[1,5]",
+"[see 6]",
+"[3 and more]"
+],
+"bibliography": [
+"[1] Hopper G, Backus J. Notes on the analytical engine 2008.",
+"[2] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[3] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[4] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[5] Hamilton M, Lovelace A, Turing AM. An axiomatic basis for computer programming. Lab Scheduler; 1956.",
+"[6] Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM 1961;33:192–344.",
+"[7] Knuth DE, O’Brien F. An axiomatic basis for computer programming. Lab Scheduler; 1945."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2 and more]",
+"[see 3, ch. 84]",
+"[2,4]",
+"[4,5]",
+"[5 and more]",
+"[6]",
+"[3]",
+"[7]",
+"[1,5]",
+"[see 6]",
+"[3 and more]"
+],
+"bibliography": [
+"[1] Hopper G, Backus J. Notes on the analytical engine 2008.",
+"[2] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[3] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[4] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[5] Hamilton M, Lovelace A, Turing AM. An axiomatic basis for computer programming. Lab Scheduler; 1956.",
+"[6] Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM 1961;33:192–344.",
+"[7] Knuth DE, O’Brien F. An axiomatic basis for computer programming. Lab Scheduler; 1945."
+]
+}
+}

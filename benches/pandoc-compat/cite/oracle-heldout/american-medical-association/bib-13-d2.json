@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(fig69)",
+"1,2",
+"3,4",
+"2",
+"see 2, ch. 30",
+"see 2, ch. 16",
+"1,5(p12)",
+"5(fig93)",
+"4(p86),5",
+"4,5"
+],
+"bibliography": [
+"1. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
+"2. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"3. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"4. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
+"5. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007."
+]
+},
+"bib": {
+"citations": [
+"1(fig69)",
+"1,2",
+"3,4",
+"2",
+"see 2, ch. 30",
+"see 2, ch. 16",
+"1,5(p12)",
+"5(fig93)",
+"4(p86),5",
+"4,5"
+],
+"bibliography": [
+"1. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
+"2. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"3. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"4. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
+"5. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007."
+]
+}
+}

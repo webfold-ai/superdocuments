@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"see 1, ch. 46",
+"2(pp26-139)",
+"see 3, ch. 99",
+"see 4, ch. 75",
+"2,e.g. 5",
+"5(sec59.116) and more",
+"3,5",
+"5(vol32)",
+"see 4, ch. 57"
+],
+"bibliography": [
+"1. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"2. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"see 1, ch. 46",
+"2(pp26-139)",
+"see 3, ch. 99",
+"see 4, ch. 75",
+"2,e.g. 5",
+"5(sec59.116) and more",
+"3,5",
+"5(vol32)",
+"see 4, ch. 57"
+],
+"bibliography": [
+"1. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"2. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197."
+]
+}
+}

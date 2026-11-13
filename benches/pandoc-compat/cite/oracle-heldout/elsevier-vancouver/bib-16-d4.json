@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3]",
+"[4]",
+"[1]",
+"[4]",
+"[5]"
+],
+"bibliography": [
+"[1] Hopper G, Lamport L. Go to statement considered harmful. Cambridge University Press; 1943.",
+"[2] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128.",
+"[3] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[4] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[5] Hamilton M, Lovelace A, Turing AM. An axiomatic basis for computer programming. Lab Scheduler; 1956."
+]
+},
+"bib": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3]",
+"[4]",
+"[1]",
+"[4]",
+"[5]"
+],
+"bibliography": [
+"[1] Hopper G, Lamport L. Go to statement considered harmful. London: Cambridge University Press; 1943.",
+"[2] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128.",
+"[3] Turing AM. Time, clocks, and the ordering of events. PhD thesis. University of Zurich, 1940.",
+"[4] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[5] Hamilton M, Lovelace A, Turing AM. An axiomatic basis for computer programming. Lab Scheduler; 1956."
+]
+}
+}

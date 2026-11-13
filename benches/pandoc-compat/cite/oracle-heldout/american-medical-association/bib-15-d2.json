@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"1",
+"2(sec39.113) and more",
+"2(pp9-106)",
+"1,2",
+"2,3",
+"4(vol11)",
+"5"
+],
+"bibliography": [
+"1. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955.",
+"4. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"5. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
+]
+},
+"bib": {
+"citations": [
+"1",
+"2(sec39.113) and more",
+"2(pp9-106)",
+"1,2",
+"2,3",
+"4(vol11)",
+"5"
+],
+"bibliography": [
+"1. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955.",
+"4. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"5. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
+]
+}
+}

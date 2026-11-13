@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1",
+"e.g. 2,3",
+"4(vol55)",
+"2,5,6",
+"5",
+"7(p3)",
+"7",
+"6"
+],
+"bibliography": [
+"1. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
+"6. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"7. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101."
+]
+},
+"bib": {
+"citations": [
+"1",
+"e.g. 2,3",
+"4(vol55)",
+"2,5,6",
+"5",
+"7(p3)",
+"7",
+"6"
+],
+"bibliography": [
+"1. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
+"6. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"7. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101."
+]
+}
+}

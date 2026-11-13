@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"3(p18)",
+"4(sec59.109) and more",
+"5(sec74.108) and more",
+"6",
+"4(fig92)",
+"7(sec26.114) and more",
+"see 8, ch. 73",
+"3(p44),9",
+"10(p45)",
+"8(fig60)",
+"8(vol11)"
+],
+"bibliography": [
+"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"5. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"6. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970.",
+"7. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004.",
+"8. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"9. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"10. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"3(p18)",
+"4(sec59.109) and more",
+"5(sec74.108) and more",
+"6",
+"4(fig92)",
+"7(sec26.114) and more",
+"see 8, ch. 73",
+"3(p44),9",
+"10(p45)",
+"8(fig60)",
+"8(vol11)"
+],
+"bibliography": [
+"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"5. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"6. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970.",
+"7. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004.",
+"8. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"9. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"10. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188."
+]
+}
+}

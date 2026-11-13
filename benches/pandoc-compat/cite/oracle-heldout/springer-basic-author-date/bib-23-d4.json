@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Turing 1968, p. 49)",
+"(Cruz 1951, sec. 77.111 and more)",
+"(1944)",
+"(Backus et al. 1958, p. 82; Rossum and Backus 1979)",
+"(Rossum and Backus 1979)",
+"(Backus et al. 1958, pp. 66–116)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Liskov B (1958) Notes on the analytical engine. Lab Estimate",
+"Cruz M de la (1951) Notes on the analytical engine. MIT Press",
+"Dijkstra EW (1993) The apollo guidance computer. Journal of the ACM 33:39–369",
+"Liskov B (1944) The art of computer programming. Lab Optimizer",
+"Rossum G van, Backus J (1979) The education of a computer. PhD thesis, University of Cambridge",
+"Turing AM (1968) Time, clocks, and the ordering of events"
+]
+},
+"bib": {
+"citations": [
+"(Turing 1968, p. 49)",
+"(Cruz 1951, sec. 77.111 and more)",
+"(1944)",
+"(Backus et al. 1958, p. 82; Rossum and Backus 1979)",
+"(Rossum and Backus 1979)",
+"(Backus et al. 1958, pp. 66–116)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Liskov B (1958) Notes on the analytical engine. Lab Estimate",
+"Cruz M de la (1951) Notes on the analytical engine. MIT Press, Boston",
+"Dijkstra EW (1993) The apollo guidance computer. Journal of the ACM 33:39–369",
+"Liskov B (1944) The art of computer programming. Lab Optimizer",
+"Rossum G van, Backus J (1979) The education of a computer. PhD thesis, University of Cambridge",
+"Turing AM (1968) Time, clocks, and the ordering of events"
+]
+}
+}

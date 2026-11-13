@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"1–3",
+"4(p18)",
+"2(p42)",
+"5(pp14-139)",
+"1",
+"1(p72)",
+"4(fig27)",
+"1–3",
+"1",
+"2,5,6"
+],
+"bibliography": [
+"1. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"2. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"3. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"4. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"5. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"6. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy"
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"1–3",
+"4(p18)",
+"2(p42)",
+"5(pp14-139)",
+"1",
+"1(p72)",
+"4(fig27)",
+"1–3",
+"1",
+"2,5,6"
+],
+"bibliography": [
+"1. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"2. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"3. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"4. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"5. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"6. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy"
+]
+}
+}

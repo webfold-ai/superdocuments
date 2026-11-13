@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1(fig7)",
+"2(p70)",
+"1(fig36)",
+"2,3",
+"1,2",
+"3",
+"4(p82)",
+"1",
+"1,5(p63)",
+"see 2, ch. 93",
+"2(sec19.112) and more",
+"see 5, ch. 55"
+],
+"bibliography": [
+"1. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"2. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
+"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"5. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004."
+]
+},
+"bib": {
+"citations": [
+"1(fig7)",
+"2(p70)",
+"1(fig36)",
+"2,3",
+"1,2",
+"3",
+"4(p82)",
+"1",
+"1,5(p63)",
+"see 2, ch. 93",
+"2(sec19.112) and more",
+"see 5, ch. 55"
+],
+"bibliography": [
+"1. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"2. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
+"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"5. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004."
+]
+}
+}

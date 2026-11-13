@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(García and Knuth 1995; e.g. Lamport and Dijkstra 1953)",
+"(1995)",
+"Liskov, Hamilton, and Lovelace (1949:60–116)",
+"García and Knuth (1995:35–116)",
+"(García and Knuth 1995; O’Brien 1948:89)",
+"(Turing 2018:85)",
+"(see Lamport and García 1999)",
+"(Lamport and Dijkstra 1953:58)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50(11):159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Pp. 62–190 in Proceedings of the array symposium."
+]
+},
+"bib": {
+"citations": [
+"(García and Knuth 1995; e.g. Lamport and Dijkstra 1953)",
+"(1995)",
+"Liskov, Hamilton, and Lovelace (1949:60–116)",
+"García and Knuth (1995:35–116)",
+"(García and Knuth 1995; O’Brien 1948:89)",
+"(Turing 2018:85)",
+"(see Lamport and García 1999)",
+"(Lamport and Dijkstra 1953:58)"
+],
+"bibliography": [
+"García, Luis, and Donald E. Knuth. 1995. On Computable Numbers. TR-47. Lab Compiler.",
+"Lamport, Leslie, and Edsger W. Dijkstra. 1953. Data Abstraction and Hierarchy. Second. London: Springer.",
+"Lamport, Leslie, and Luis García. 1999. Notes on the Analytical Engine. 3rd ed. New York: Cambridge University Press.",
+"Liskov, Barbara, Margaret Hamilton, and Ada Lovelace. 1949. “The Apollo Guidance Computer.” Communications of the ACM 50(11):159–344.",
+"O’Brien, Flann. 1948. Time, Clocks, and the Ordering of Events. TR-87. Lab Array.",
+"Turing, Alan M. 2018. “Go to Statement Considered Harmful.” Pp. 62–190 in Proceedings of the array symposium."
+]
+}
+}

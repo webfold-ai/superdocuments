@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Lovelace and Hoare 1970; García and Rossum 2010)",
+"(Turing 1994; García and Rossum 2010; Smith and Hopper 2022)",
+"(García and Rossum 2010, fig. 82)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970; Smith and Hopper 2022)",
+"(Turing 1994, pp. 93–123)",
+"Liskov and Smith (1936)",
+"(Turing 1994, p. 37)",
+"(e.g. Liskov and Smith 1936; Smith and Hopper 2022)",
+"(see Lovelace and Hoare 1970, ch. 26)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Hoare CAR, Smith JJr, García L (1941) An axiomatic basis for computer programming, Second. Springer, New York",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace A, Hoare CAR (1970) Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42:59–345. https://doi.org/10.4721/scheduler.33",
+"Smith JJr, Hopper G (2022) The education of a computer. In: Proceedings of the convergence symposium. pp 61–101",
+"Turing AM (1994) The art of computer programming. Springer, Boston"
+]
+},
+"bib": {
+"citations": [
+"(Lovelace and Hoare 1970; García and Rossum 2010)",
+"(Turing 1994; García and Rossum 2010; Smith and Hopper 2022)",
+"(García and Rossum 2010, fig. 82)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970; Smith and Hopper 2022)",
+"(Turing 1994, pp. 93–123)",
+"Liskov and Smith (1936)",
+"(Turing 1994, p. 37)",
+"(e.g. Liskov and Smith 1936; Smith and Hopper 2022)",
+"(see Lovelace and Hoare 1970, ch. 26)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Hoare CAR, Smith JJr, García L (1941) An axiomatic basis for computer programming, Second. Springer, New York",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace A, Hoare CAR (1970) Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42:59–345. https://doi.org/10.4721/scheduler.33",
+"Smith JJr, Hopper G (2022) The education of a computer. In: Proceedings of the convergence symposium. pp 61–101",
+"Turing AM (1994) The art of computer programming. Springer, Boston"
+]
+}
+}

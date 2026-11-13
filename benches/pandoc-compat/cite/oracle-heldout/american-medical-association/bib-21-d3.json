@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3(p20)",
+"4(p30)",
+"5(p94)",
+"6",
+"see 5",
+"see 4",
+"7(vol20)",
+"1",
+"2(pp64-116)",
+"6(pp19-119)",
+"see 8, ch. 75"
+],
+"bibliography": [
+"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"5. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"6. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"7. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"8. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3(p20)",
+"4(p30)",
+"5(p94)",
+"6",
+"see 5",
+"see 4",
+"7(vol20)",
+"1",
+"2(pp64-116)",
+"6(pp19-119)",
+"see 8, ch. 75"
+],
+"bibliography": [
+"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"5. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"6. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"7. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"8. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004."
+]
+}
+}

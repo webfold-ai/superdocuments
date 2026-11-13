@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Müller and Dijkstra 2004, pp. 15–110)",
+"Knuth et al. (1962, p. 44)",
+"(Smith and García 1993, vol. 4)",
+"(Hopper and Hamilton 1988; Smith and García 1993)",
+"(Müller 1947, p. 93)",
+"(Knuth et al. 1962, sec. 49.103 and more)",
+"(Hopper and Hamilton 1988, pp. 73–115)",
+"(Müller 1947; Knuth et al. 1962; Liskov et al. 1988)",
+"(Hopper and Hamilton 1988, pp. 84–125)",
+"(1962; Liskov et al. 1988)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+},
+"bib": {
+"citations": [
+"(Müller and Dijkstra 2004, pp. 15–110)",
+"Knuth et al. (1962, p. 44)",
+"(Smith and García 1993, vol. 4)",
+"(Hopper and Hamilton 1988; Smith and García 1993)",
+"(Müller 1947, p. 93)",
+"(Knuth et al. 1962, sec. 49.103 and more)",
+"(Hopper and Hamilton 1988, pp. 73–115)",
+"(Müller 1947; Knuth et al. 1962; Liskov et al. 1988)",
+"(Hopper and Hamilton 1988, pp. 84–125)",
+"(1962; Liskov et al. 1988)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press, London",
+"Müller H, Dijkstra EW (2004) On computable numbers. Lab Query",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+}
+}

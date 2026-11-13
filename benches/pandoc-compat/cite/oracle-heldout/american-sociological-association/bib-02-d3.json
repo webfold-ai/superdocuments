@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Liskov, Smith, and Cruz 1963:88–121)",
+"(1990)",
+"(see Rossum and Turing 1990, ch. 65)",
+"(Dijkstra 1973; Lovelace, Smith, and Backus 1969; Smith, Cruz, and Lovelace 1937)",
+"Liskov et al. (1963:53–120)",
+"(Liskov et al. 1963; Müller and O’Brien 2010)",
+"Liskov et al. (1963)",
+"(Smith et al. 1937:25)",
+"(Dijkstra 1973; Müller and O’Brien 2010:52)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. “The Art of Computer Programming.”",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”",
+"Smith, John Jr., Maria de la Cruz, and Ada Lovelace. 1937. Go to Statement Considered Harmful. TR-94. Lab Model."
+]
+},
+"bib": {
+"citations": [
+"(Liskov, Smith, and Cruz 1963:88–121)",
+"(1990)",
+"(see Rossum and Turing 1990, ch. 65)",
+"(Dijkstra 1973; Lovelace, Smith, and Backus 1969; Smith, Cruz, and Lovelace 1937)",
+"Liskov et al. (1963:53–120)",
+"(Liskov et al. 1963; Müller and O’Brien 2010)",
+"Liskov et al. (1963)",
+"(Smith et al. 1937:25)",
+"(Dijkstra 1973; Müller and O’Brien 2010:52)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1973. “The Art of Computer Programming.”",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”",
+"Smith, John Jr., Maria de la Cruz, and Ada Lovelace. 1937. Go to Statement Considered Harmful. TR-94. Lab Model."
+]
+}
+}

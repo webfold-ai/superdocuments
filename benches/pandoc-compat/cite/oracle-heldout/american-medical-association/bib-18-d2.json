@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"see 3",
+"4",
+"see 1",
+"1(sec97.118) and more",
+"see 2, ch. 35",
+"4,e.g. 5",
+"1(pp41-126)",
+"1(p65),4",
+"2",
+"2"
+],
+"bibliography": [
+"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"3. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"4. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"5. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"see 3",
+"4",
+"see 1",
+"1(sec97.118) and more",
+"see 2, ch. 35",
+"4,e.g. 5",
+"1(pp41-126)",
+"1(p65),4",
+"2",
+"2"
+],
+"bibliography": [
+"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"3. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"4. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"5. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+]
+}
+}

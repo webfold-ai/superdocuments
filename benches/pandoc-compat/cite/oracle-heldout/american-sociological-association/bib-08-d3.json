@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Turing, Smith, and Rossum 1969:99)",
+"(Hopper and Lamport 1942:82)",
+"(Turing et al. 1969:63.134 and more)",
+"(Smith and Backus 1981:75.108 and more)",
+"(Turing et al. 1969:61–137)",
+"(Hopper and Lamport 1942:32)",
+"(Hopper and Lamport 1942:61)",
+"(Hoare and Liskov 2005:70–131)",
+"(Hoare and Liskov 2005:38)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. 2005. “On Computable Numbers.” Pp. 71–122 in Proceedings of the transform symposium.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Pp. 37–181 in Proceedings of the filter symposium.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36(12):64–305. doi:10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(Turing, Smith, and Rossum 1969:99)",
+"(Hopper and Lamport 1942:82)",
+"(Turing et al. 1969:63.134 and more)",
+"(Smith and Backus 1981:75.108 and more)",
+"(Turing et al. 1969:61–137)",
+"(Hopper and Lamport 1942:32)",
+"(Hopper and Lamport 1942:61)",
+"(Hoare and Liskov 2005:70–131)",
+"(Hoare and Liskov 2005:38)"
+],
+"bibliography": [
+"Hoare, C. A. R., and Barbara Liskov. 2005. “On Computable Numbers.” Pp. 71–122 in Proceedings of the transform symposium.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Pp. 37–181 in Proceedings of the filter symposium.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36(12):64–305. doi:10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+}
+}

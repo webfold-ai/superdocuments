@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(see Rossum and Turing 1990, ch. 87)",
+"Knuth, Lovelace, and Cruz (1962:65)",
+"(Liskov, Smith, and Cruz 1963:63)",
+"(Backus, Knuth, and Müller 2007:17)",
+"(Liskov, Müller, and Dijkstra 2012; 1990)",
+"(Knuth et al. 1962:26)",
+"(Backus et al. 2007; Lovelace, Smith, and Backus 1969; Müller and O’Brien 2010)",
+"(Knuth et al. 1962)",
+"(1962; Liskov et al. 2012)",
+"(Liskov et al. 2012:75)",
+"(Müller and O’Brien 2010)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. “Notes on the Analytical Engine.”",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Pp. 35–166 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"(see Rossum and Turing 1990, ch. 87)",
+"Knuth, Lovelace, and Cruz (1962:65)",
+"(Liskov, Smith, and Cruz 1963:63)",
+"(Backus, Knuth, and Müller 2007:17)",
+"(Liskov, Müller, and Dijkstra 2012; 1990)",
+"(Knuth et al. 1962:26)",
+"(Backus et al. 2007; Lovelace, Smith, and Backus 1969; Müller and O’Brien 2010)",
+"(Knuth et al. 1962)",
+"(1962; Liskov et al. 2012)",
+"(Liskov et al. 2012:75)",
+"(Müller and O’Brien 2010)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Knuth, Donald E., Ada Lovelace, and Maria de la Cruz. 1962. “Notes on the Analytical Engine.”",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Pp. 35–166 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Lovelace, Ada, John Jr. Smith, and John Backus. 1969. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”"
+]
+}
+}

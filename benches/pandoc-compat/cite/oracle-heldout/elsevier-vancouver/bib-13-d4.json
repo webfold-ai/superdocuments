@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[3 and more]",
+"[1,4]",
+"[4]",
+"[4]",
+"[1]",
+"[4,5]",
+"[2,4]"
+],
+"bibliography": [
+"[1] Smith JJr, Liskov B. Notes on the analytical engine 2024.",
+"[2] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007.",
+"[3] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[4] Smith JJr. The education of a computer 1987.",
+"[5] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[3 and more]",
+"[1,4]",
+"[4]",
+"[4]",
+"[1]",
+"[4,5]",
+"[2,4]"
+],
+"bibliography": [
+"[1] Smith JJr, Liskov B. Notes on the analytical engine 2024.",
+"[2] Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events 2007.",
+"[3] Müller H, Hoare CAR. The art of computer programming 2024.",
+"[4] Smith JJr. The education of a computer 1987.",
+"[5] Smith JJr, Backus J. The apollo guidance computer. PhD thesis. University of Zurich, 1988."
+]
+}
+}

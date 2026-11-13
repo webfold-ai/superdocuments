@@ -32,14 +32,21 @@ import concurrent.futures as cf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BIBS = os.path.join(HERE, "..", "corpus", "bib")
-DOCS = os.path.join(HERE, "docs")
-STYLES = os.path.join(HERE, "styles")
-ORACLE = os.path.join(HERE, "oracle")
-OUT = os.path.join(HERE, "outputs")
+# CITE_SET=heldout selects the held-out set: other documents (another seed) and four styles that were never
+# looked at while the processor was developed (styles-heldout/). The default set is the development set.
+SET = os.environ.get("CITE_SET", "dev")
+SUFFIX = "" if SET == "dev" else "-" + SET
+DOCS = os.path.join(HERE, "docs" + SUFFIX)
+STYLES = os.path.join(HERE, "styles" + SUFFIX)
+ORACLE = os.path.join(HERE, "oracle" + SUFFIX)
+OUT = os.path.join(HERE, "outputs" + SUFFIX)
 RESULTS = os.path.join(HERE, "results")
 CSLJSON = os.path.join(HERE, "csljson")
-STYLE_NAMES = ["apa", "chicago-author-date", "ieee", "harvard-cite-them-right", "nature", "modern-language-association"]
+STYLE_NAMES = (["apa", "chicago-author-date", "ieee", "harvard-cite-them-right", "nature", "modern-language-association"]
+               if SET == "dev" else ["elsevier-vancouver", "american-medical-association", "springer-basic-author-date",
+                                     "american-sociological-association"])
 DOCS_PER_BIB = 5
+SEED_PREFIX = "" if SET == "dev" else SET + "-"
 
 
 def keys_of(path):
@@ -65,7 +72,7 @@ def gen_docs():
             continue
         base = os.path.basename(bib)[:-4]
         for d in range(DOCS_PER_BIB):
-            rnd = random.Random("%s-%d" % (base, d))
+            rnd = random.Random("%s%s-%d" % (SEED_PREFIX, base, d))
             lines = ["# Notes %s.%d" % (base, d), ""]
             used = []
             for p in range(rnd.randint(3, 5)):
@@ -244,7 +251,8 @@ def cmd_run(track, binary):
         doc, st = args
         base = os.path.basename(doc)[:-3]
         bib = csl_json_for(bib_of(doc)) if track == "csl" else bib_of(doc)
-        r = subprocess.run([binary, "--bib", bib, "--csl", style_path(st), doc], capture_output=True, timeout=120)
+        extra = ["--pandoc-names"] if os.environ.get("CITE_PANDOC_NAMES") else []
+        r = subprocess.run([binary] + extra + ["--bib", bib, "--csl", style_path(st), doc], capture_output=True, timeout=120)
         dest = os.path.join(OUT, track, st, base + ".json")
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         if r.returncode == 0:
@@ -289,7 +297,7 @@ def cmd_report(track, detail=False):
             st, nd, cm, ca, 100.0 * cm / max(ca, 1), bm, ba, 100.0 * bm / max(ba, 1), failed))
         rows.append({"style": st, "summary": {"documents": nd, "citations": ca, "citations_exact": cm, "entries": ba,
                                               "entries_exact": bm, "failed": failed}})
-    json.dump(rows, open(os.path.join(RESULTS, "cite-%s.json" % track), "w"), indent=0, ensure_ascii=False)
+    json.dump(rows, open(os.path.join(RESULTS, "cite-%s%s.json" % (track, SUFFIX)), "w"), indent=0, ensure_ascii=False)
     tot = [r["summary"] for r in rows if "summary" in r]
     c, cm, e, em = (sum(t[k] for t in tot) for k in ("citations", "citations_exact", "entries", "entries_exact"))
     print("ALL: citations %d/%d (%.1f%%), bibliography entries %d/%d (%.1f%%)" % (cm, c, 100.0 * cm / max(c, 1), em, e, 100.0 * em / max(e, 1)))

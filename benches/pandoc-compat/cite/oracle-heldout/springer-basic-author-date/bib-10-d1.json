@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Müller 1968, ch. 22)",
+"Hoare (2011, p. 47)",
+"(Smith et al. 1999, pp. 15–122)",
+"(see Müller 1968, ch. 90)",
+"(Cruz and Hamilton 1975; Hoare 2011)",
+"(Müller 1968; Smith et al. 1999, p. 45)",
+"(Cruz and Hamilton 1975; Hoare 2011, p. 30)",
+"(Cruz and Hamilton 1975, sec. 24.136 and more)"
+],
+"bibliography": [
+"Cruz M de la, Hamilton M (1975) Notes on the analytical engine. Lab Throughput",
+"Hoare CAR (2011) On computable numbers. PhD thesis, University of Oxford",
+"Müller H (1968) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Smith JJr, Hoare CAR, Knuth DE (1999) Go to statement considered harmful. Lab Function"
+]
+},
+"bib": {
+"citations": [
+"(see Müller 1968, ch. 22)",
+"Hoare (2011, p. 47)",
+"(Smith et al. 1999, pp. 15–122)",
+"(see Müller 1968, ch. 90)",
+"(Cruz and Hamilton 1975; Hoare 2011)",
+"(Müller 1968; Smith et al. 1999, p. 45)",
+"(Cruz and Hamilton 1975; Hoare 2011, p. 30)",
+"(Cruz and Hamilton 1975, sec. 24.136 and more)"
+],
+"bibliography": [
+"Cruz M de la, Hamilton M (1975) Notes on the analytical engine. Lab Throughput",
+"Hoare CAR (2011) On computable numbers. PhD thesis, University of Oxford",
+"Müller H (1968) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Smith JJr, Hoare CAR, Knuth DE (1999) Go to statement considered harmful. Lab Function"
+]
+}
+}

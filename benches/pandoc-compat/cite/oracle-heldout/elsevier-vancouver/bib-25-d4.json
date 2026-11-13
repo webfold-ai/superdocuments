@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[see 2, ch. 37]",
+"[3]",
+"[4]",
+"[e.g. 5,6]",
+"[see 2, ch. 24]",
+"[2,7]",
+"[4]",
+"[see 5, ch. 60]",
+"[4,8]"
+],
+"bibliography": [
+"[1] Lamport L. Can programming be liberated from the von neumann style. Springer; 1992.",
+"[2] Hoare CAR, Smith JJr, Müller H. On computable numbers. IEEE Transactions on Software Engineering 1994;59:57–370. https://doi.org/10.2998/function.87.",
+"[3] Hoare CAR, Hamilton M. The art of computer programming. 2nd ed. MIT Press; 1975.",
+"[4] Müller H. Can programming be liberated from the von neumann style. Proceedings of the distribution symposium, 1992, p. 94–142.",
+"[5] Knuth DE, Smith JJr. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1991.",
+"[6] Knuth DE. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1955.",
+"[7] Lovelace A. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1984.",
+"[8] Hamilton M, Backus J, Rossum G van. On computable numbers. Proceedings of the token symposium, 1936, p. 76–170."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[see 2, ch. 37]",
+"[3]",
+"[4]",
+"[e.g. 5,6]",
+"[see 2, ch. 24]",
+"[2,7]",
+"[4]",
+"[see 5, ch. 60]",
+"[4,8]"
+],
+"bibliography": [
+"[1] Lamport L. Can programming be liberated from the von neumann style. New York: Springer; 1992.",
+"[2] Hoare CAR, Smith JJr, Müller H. On computable numbers. IEEE Transactions on Software Engineering 1994;59:57–370. https://doi.org/10.2998/function.87.",
+"[3] Hoare CAR, Hamilton M. The art of computer programming. 2nd ed. New York: MIT Press; 1975.",
+"[4] Müller H. Can programming be liberated from the von neumann style. Proceedings of the distribution symposium, 1992, p. 94–142.",
+"[5] Knuth DE, Smith JJr. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1991.",
+"[6] Knuth DE. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1955.",
+"[7] Lovelace A. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1984.",
+"[8] Hamilton M, Backus J, Rossum G van. On computable numbers. Proceedings of the token symposium, 1936, p. 76–170."
+]
+}
+}

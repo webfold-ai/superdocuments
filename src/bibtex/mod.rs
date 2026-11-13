@@ -33,7 +33,7 @@ pub use names::{
 };
 pub use parse::parse_with;
 pub use render::{reference_markdown, render_markdown};
-pub use write::{csl_json, write};
+pub use write::{csl_json, csl_json_pandoc, looks_like_biblatex, write};
 
 use crate::tex_text::{self, Ligatures};
 

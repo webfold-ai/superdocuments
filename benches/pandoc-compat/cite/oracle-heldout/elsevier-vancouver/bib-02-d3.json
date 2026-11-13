@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[see 2, ch. 65]",
+"[3–5]",
+"[1]",
+"[1,6]",
+"[1]",
+"[5]",
+"[4,6]"
+],
+"bibliography": [
+"[1] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963.",
+"[2] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[3] Lovelace A, Smith JJr, Backus J. Time, clocks, and the ordering of events. PhD thesis. University of Oxford, 1969.",
+"[4] Dijkstra EW. The art of computer programming 1973.",
+"[5] Smith JJr, Cruz M de la, Lovelace A. Go to statement considered harmful. Lab Model; 1937.",
+"[6] Müller H, O’Brien F. On computable numbers. PhD thesis. University of Cambridge, 2010."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[see 2, ch. 65]",
+"[3–5]",
+"[1]",
+"[1,6]",
+"[1]",
+"[5]",
+"[4,6]"
+],
+"bibliography": [
+"[1] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963.",
+"[2] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[3] Lovelace A, Smith JJr, Backus J. Time, clocks, and the ordering of events. PhD thesis. University of Oxford, 1969.",
+"[4] Dijkstra EW. The art of computer programming 1973.",
+"[5] Smith JJr, Cruz M de la, Lovelace A. Go to statement considered harmful. Lab Model; 1937.",
+"[6] Müller H, O’Brien F. On computable numbers. PhD thesis. University of Cambridge, 2010."
+]
+}
+}

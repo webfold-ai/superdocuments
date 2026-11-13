@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(see Backus et al. 1958)",
+"Cruz (1951, pp. 81–126)",
+"(see Liskov 1944)",
+"Cruz (1951)",
+"Cruz (1951, pp. 30–127)",
+"(Cruz 1951; Rossum and Backus 1979)",
+"(see Dijkstra 1993, ch. 39)",
+"(Cruz 1951; Backus et al. 1958)",
+"(Backus et al. 1958; Lamport et al. 2017)",
+"Lamport et al. (2017)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)",
+"(Lamport et al. 2017, pp. 36–122)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Liskov B (1958) Notes on the analytical engine. Lab Estimate",
+"Cruz M de la (1951) Notes on the analytical engine. MIT Press",
+"Dijkstra EW (1993) The apollo guidance computer. Journal of the ACM 33:39–369",
+"Lamport L, Müller H, Dijkstra EW (2017) The education of a computer. Addison-Wesley",
+"Liskov B (1944) The art of computer programming. Lab Optimizer",
+"Rossum G van, Backus J (1979) The education of a computer. PhD thesis, University of Cambridge"
+]
+},
+"bib": {
+"citations": [
+"(see Backus et al. 1958)",
+"Cruz (1951, pp. 81–126)",
+"(see Liskov 1944)",
+"Cruz (1951)",
+"Cruz (1951, pp. 30–127)",
+"(Cruz 1951; Rossum and Backus 1979)",
+"(see Dijkstra 1993, ch. 39)",
+"(Cruz 1951; Backus et al. 1958)",
+"(Backus et al. 1958; Lamport et al. 2017)",
+"Lamport et al. (2017)",
+"(Backus et al. 1958; e.g. Dijkstra 1993)",
+"(Lamport et al. 2017, pp. 36–122)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Liskov B (1958) Notes on the analytical engine. Lab Estimate",
+"Cruz M de la (1951) Notes on the analytical engine. MIT Press, Boston",
+"Dijkstra EW (1993) The apollo guidance computer. Journal of the ACM 33:39–369",
+"Lamport L, Müller H, Dijkstra EW (2017) The education of a computer. Addison-Wesley, New York",
+"Liskov B (1944) The art of computer programming. Lab Optimizer",
+"Rossum G van, Backus J (1979) The education of a computer. PhD thesis, University of Cambridge"
+]
+}
+}

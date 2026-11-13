@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"1",
+"2(pp16-113)",
+"e.g. 1,3",
+"4(fig29)",
+"1",
+"2",
+"5(pp72-128)",
+"2,e.g. 6",
+"see 2, ch. 36",
+"3(p92)",
+"7",
+"2(p30)",
+"1(p13)"
+],
+"bibliography": [
+"1. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"2. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
+"3. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"4. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
+"5. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"6. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"7. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2(pp16-113)",
+"e.g. 1,3",
+"4(fig29)",
+"1",
+"2",
+"5(pp72-128)",
+"2,e.g. 6",
+"see 2, ch. 36",
+"3(p92)",
+"7",
+"2(p30)",
+"1(p13)"
+],
+"bibliography": [
+"1. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"2. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
+"3. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"4. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
+"5. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"6. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"7. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991."
+]
+}
+}

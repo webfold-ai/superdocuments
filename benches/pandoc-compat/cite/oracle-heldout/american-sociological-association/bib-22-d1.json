@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Müller 1947)",
+"(Hopper and Hamilton 1988:13)",
+"(Hopper and Hamilton 1988; Liskov, Hoare, and Müller 1988; Müller and Dijkstra 2004)",
+"(Knuth, Smith, and Dijkstra 1962:85)",
+"(see Hopper and Hamilton 1988)",
+"(Smith and García 1993:51)",
+"Hopper and Hamilton (1988:50)",
+"(Knuth et al. 1962:84)",
+"(Knuth et al. 1962:21.140 and more)",
+"Müller and Dijkstra (2004:17)",
+"(Hopper, Lamport, and Smith 2019:82)",
+"(Knuth et al. 1962; e.g. Liskov et al. 1988)",
+"(Knuth et al. 1962:66)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. Springer.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Pp. 26–101 in Proceedings of the latency symposium.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(Müller 1947)",
+"(Hopper and Hamilton 1988:13)",
+"(Hopper and Hamilton 1988; Liskov, Hoare, and Müller 1988; Müller and Dijkstra 2004)",
+"(Knuth, Smith, and Dijkstra 1962:85)",
+"(see Hopper and Hamilton 1988)",
+"(Smith and García 1993:51)",
+"Hopper and Hamilton (1988:50)",
+"(Knuth et al. 1962:84)",
+"(Knuth et al. 1962:21.140 and more)",
+"Müller and Dijkstra (2004:17)",
+"(Hopper, Lamport, and Smith 2019:82)",
+"(Knuth et al. 1962; e.g. Liskov et al. 1988)",
+"(Knuth et al. 1962:66)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Leslie Lamport, and John Jr. Smith. 2019. On Computable Numbers. New York: Springer.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Pp. 26–101 in Proceedings of the latency symposium.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. London: MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+}
+}

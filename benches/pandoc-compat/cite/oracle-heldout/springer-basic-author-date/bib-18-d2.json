@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Rossum et al. 1993; e.g. Hoare et al. 2016)",
+"(see Cruz et al. 1971)",
+"(Turing and Rossum 1968)",
+"(see Hoare et al. 2016)",
+"(Hoare et al. 2016, sec. 97.118 and more)",
+"(see Rossum et al. 1993, ch. 35)",
+"(e.g. Rossum and Hoare 1967; Turing and Rossum 1968)",
+"Hoare et al. (2016, pp. 41–126)",
+"(Turing and Rossum 1968; Hoare et al. 2016, p. 65)",
+"(1993)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful",
+"Turing AM, Rossum G van (1968) The art of computer programming. PhD thesis, University of Cambridge"
+]
+},
+"bib": {
+"citations": [
+"(Rossum et al. 1993; e.g. Hoare et al. 2016)",
+"(see Cruz et al. 1971)",
+"(Turing and Rossum 1968)",
+"(see Hoare et al. 2016)",
+"(Hoare et al. 2016, sec. 97.118 and more)",
+"(see Rossum et al. 1993, ch. 35)",
+"(e.g. Rossum and Hoare 1967; Turing and Rossum 1968)",
+"Hoare et al. (2016, pp. 41–126)",
+"(Turing and Rossum 1968; Hoare et al. 2016, p. 65)",
+"(1993)",
+"(Rossum et al. 1993)"
+],
+"bibliography": [
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Hoare CAR, Lovelace A, Turing AM (2016) Notes on the analytical engine. Lab Feature",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful",
+"Turing AM, Rossum G van (1968) The art of computer programming. PhD thesis, University of Cambridge"
+]
+}
+}

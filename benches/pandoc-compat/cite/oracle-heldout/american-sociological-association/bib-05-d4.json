@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(Liskov and Smith 1936:94.108 and more)",
+"(Liskov and Smith 1936:25)",
+"(García and Rossum 2010; 1936)",
+"(García and Rossum 2010:36–102)",
+"Müller (1948:15)",
+"(Hoare, Smith, and García 1941:20)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. 2010. On Computable Numbers. 2nd ed. London: Addison-Wesley.",
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Liskov, Barbara, and John Jr. Smith. 1936. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 11(7):127–305. doi:10.8852/decoder.67.",
+"Müller, Hans. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Oxford."
+]
+},
+"bib": {
+"citations": [
+"(Liskov and Smith 1936:94.108 and more)",
+"(Liskov and Smith 1936:25)",
+"(García and Rossum 2010; 1936)",
+"(García and Rossum 2010:36–102)",
+"Müller (1948:15)",
+"(Hoare, Smith, and García 1941:20)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. 2010. On Computable Numbers. 2nd ed. London: Addison-Wesley.",
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Liskov, Barbara, and John Jr. Smith. 1936. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 11(7):127–305. doi:10.8852/decoder.67.",
+"Müller, Hans. 1948. “Data Abstraction and Hierarchy.” PhD thesis, University of Oxford."
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Lamport et al. 1994, pp. 99–124)",
+"García (1945)",
+"(Lovelace 1970, vol. 54)",
+"(Lamport et al. 1994, pp. 26–109)",
+"(Lovelace 1970; Lamport et al. 1994)",
+"(Liskov et al. 1962, fig. 39)",
+"Backus et al. (2015, pp. 6–124)",
+"(Backus et al. 2015, pp. 12–104)",
+"(Lovelace 1970; 2015)"
+],
+"bibliography": [
+"Backus J, Hopper G, Rossum G van (2015) The art of computer programming. In: Proceedings of the baseline symposium. pp 96–179",
+"García L (1945) Can programming be liberated from the von neumann style. In: Proceedings of the stream symposium. pp 40–129",
+"Lamport L, Cruz M de la, Hopper G (1994) The apollo guidance computer. In: Proceedings of the compiler symposium. pp 31–177",
+"Liskov B, O’Brien F, Hoare CAR (1962) The apollo guidance computer. Lab Encoder",
+"Lovelace A (1970) Data abstraction and hierarchy"
+]
+},
+"bib": {
+"citations": [
+"(Lamport et al. 1994, pp. 99–124)",
+"García (1945)",
+"(Lovelace 1970, vol. 54)",
+"(Lamport et al. 1994, pp. 26–109)",
+"(Lovelace 1970; Lamport et al. 1994)",
+"(Liskov et al. 1962, fig. 39)",
+"Backus et al. (2015, pp. 6–124)",
+"(Backus et al. 2015, pp. 12–104)",
+"(Lovelace 1970; 2015)"
+],
+"bibliography": [
+"Backus J, Hopper G, Rossum G van (2015) The art of computer programming. In: Proceedings of the baseline symposium. pp 96–179",
+"García L (1945) Can programming be liberated from the von neumann style. In: Proceedings of the stream symposium. pp 40–129",
+"Lamport L, Cruz M de la, Hopper G (1994) The apollo guidance computer. In: Proceedings of the compiler symposium. pp 31–177",
+"Liskov B, O’Brien F, Hoare CAR (1962) The apollo guidance computer. Lab Encoder",
+"Lovelace A (1970) Data abstraction and hierarchy"
+]
+}
+}

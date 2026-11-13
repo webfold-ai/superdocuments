@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(e.g. Müller and Dijkstra 1972; Rossum et al. 1979)",
+"(see Müller and Dijkstra 1972, ch. 46)",
+"(Rossum et al. 1979, pp. 26–139)",
+"(see Lovelace 1968, ch. 99)",
+"(see Lamport 1997, ch. 75)",
+"(e.g. Dijkstra 1946; Rossum et al. 1979)",
+"(Dijkstra 1946, sec. 59.116 and more)",
+"(Dijkstra 1946; Lovelace 1968)",
+"(Dijkstra 1946, vol. 32)",
+"(see Lamport 1997, ch. 57)"
+],
+"bibliography": [
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Müller and Dijkstra 1972; Rossum et al. 1979)",
+"(see Müller and Dijkstra 1972, ch. 46)",
+"(Rossum et al. 1979, pp. 26–139)",
+"(see Lovelace 1968, ch. 99)",
+"(see Lamport 1997, ch. 75)",
+"(e.g. Dijkstra 1946; Rossum et al. 1979)",
+"(Dijkstra 1946, sec. 59.116 and more)",
+"(Dijkstra 1946; Lovelace 1968)",
+"(Dijkstra 1946, vol. 32)",
+"(see Lamport 1997, ch. 57)"
+],
+"bibliography": [
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66"
+]
+}
+}

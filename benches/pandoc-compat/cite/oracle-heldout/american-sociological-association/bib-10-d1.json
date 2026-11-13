@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Müller 1968, ch. 22)",
+"Hoare (2011:47)",
+"(Smith, Hoare, and Knuth 1999:15–122)",
+"(see Müller 1968, ch. 90)",
+"(Cruz and Hamilton 1975; Hoare 2011)",
+"(Müller 1968; Smith et al. 1999:45)",
+"(Cruz and Hamilton 1975; Hoare 2011:30)",
+"(Cruz and Hamilton 1975:24.136 and more)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. 1975. Notes on the Analytical Engine. TR-4. Lab Throughput.",
+"Hoare, C. A. R. 2011. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Müller, Hans. 1968. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Smith, John Jr., C. A. R. Hoare, and Donald E. Knuth. 1999. Go to Statement Considered Harmful. TR-29. Lab Function."
+]
+},
+"bib": {
+"citations": [
+"(see Müller 1968, ch. 22)",
+"Hoare (2011:47)",
+"(Smith, Hoare, and Knuth 1999:15–122)",
+"(see Müller 1968, ch. 90)",
+"(Cruz and Hamilton 1975; Hoare 2011)",
+"(Müller 1968; Smith et al. 1999:45)",
+"(Cruz and Hamilton 1975; Hoare 2011:30)",
+"(Cruz and Hamilton 1975:24.136 and more)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Margaret Hamilton. 1975. Notes on the Analytical Engine. TR-4. Lab Throughput.",
+"Hoare, C. A. R. 2011. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Müller, Hans. 1968. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Smith, John Jr., C. A. R. Hoare, and Donald E. Knuth. 1999. Go to Statement Considered Harmful. TR-29. Lab Function."
+]
+}
+}

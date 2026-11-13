@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(see Turing and Liskov 2018, ch. 62)",
+"(Dijkstra 1946)",
+"(see Lovelace 1968)",
+"(O’Brien 1966, p. 48)",
+"(Rossum et al. 1979, sec. 31.118 and more)",
+"(Cruz and García 1984, p. 77)",
+"(see Lamport 1997)",
+"(Rossum et al. 1979; 1992)",
+"(Dijkstra 1946; Cruz and García 1984; Hopper 1986)",
+"(Rossum et al. 1979, p. 94)",
+"(Rossum et al. 1979, p. 51)",
+"(Rossum et al. 1979, pp. 98–137)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Hopper G (1986) On computable numbers. ACM Computing Surveys 39:151–379. https://doi.org/10.5661/experiment.46",
+"Lamport L (1997) The education of a computer",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press"
+]
+},
+"bib": {
+"citations": [
+"(see Turing and Liskov 2018, ch. 62)",
+"(Dijkstra 1946)",
+"(see Lovelace 1968)",
+"(O’Brien 1966, p. 48)",
+"(Rossum et al. 1979, sec. 31.118 and more)",
+"(Cruz and García 1984, p. 77)",
+"(see Lamport 1997)",
+"(Rossum et al. 1979; 1992)",
+"(Dijkstra 1946; Cruz and García 1984; Hopper 1986)",
+"(Rossum et al. 1979, p. 94)",
+"(Rossum et al. 1979, p. 51)",
+"(Rossum et al. 1979, pp. 98–137)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Hopper G (1986) On computable numbers. ACM Computing Surveys 39:151–379. https://doi.org/10.5661/experiment.46",
+"Lamport L (1997) The education of a computer",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press, London",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press, New York"
+]
+}
+}

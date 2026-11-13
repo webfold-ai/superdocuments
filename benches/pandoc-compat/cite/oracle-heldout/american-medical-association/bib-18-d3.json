@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"2(pp55-120)",
+"3(pp8-134)",
+"3",
+"see 2, ch. 16",
+"1,e.g. 4",
+"5(p74)"
+],
+"bibliography": [
+"1. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
+"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache",
+"5. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"2(pp55-120)",
+"3(pp8-134)",
+"3",
+"see 2, ch. 16",
+"1,e.g. 4",
+"5(p74)"
+],
+"bibliography": [
+"1. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
+"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache",
+"5. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
+]
+}
+}
