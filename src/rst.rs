@@ -332,7 +332,7 @@ impl Reader {
             }
             // Bullet list.
             if let Some(off) = bullet_offset(text) {
-                let (items, end) = self.list_items(lines, i, |l| bullet_offset(l));
+                let (items, end) = self.list_items(lines, i, bullet_offset);
                 let _ = off;
                 out.push(Block::BulletList(items));
                 i = end;
@@ -455,7 +455,8 @@ impl Reader {
                     if j >= n
                         || indent_of(&lines[j]) != 0
                         || j + 1 >= n
-                        || !(indent_of(&lines[j + 1]) > 0 && !is_blank(&lines[j + 1]))
+                        || indent_of(&lines[j + 1]) == 0
+                        || is_blank(&lines[j + 1])
                     {
                         break;
                     }
@@ -1042,15 +1043,9 @@ impl Reader {
                 if (borders.len() >= 2 && j + 1 >= lines.len())
                     || (j + 1 < lines.len() && is_blank(&lines[j + 1]) && borders.len() >= 2)
                 {
-                    if borders.len() >= 3
-                        || !(j + 2 < lines.len() && !is_blank(&lines[j + 2]) && false)
-                    {
-                        break;
-                    }
+                    break;
                 }
             } else if is_blank(&lines[j]) && borders.len() == 1 {
-                return None;
-            } else if indent_of(&lines[j]) > 0 && false {
                 return None;
             }
             j += 1;
@@ -1371,10 +1366,7 @@ impl Reader {
         if body.ends_with('>') {
             if let Some(lt) = body.rfind('<') {
                 let text = body[..lt].trim();
-                let url = body[lt + 1..body.len() - 1]
-                    .trim()
-                    .replace('\n', "")
-                    .replace(' ', "");
+                let url = body[lt + 1..body.len() - 1].trim().replace(['\n', ' '], "");
                 if let Some(name) = url.strip_suffix('_') {
                     let name = name.trim_matches('`');
                     let target = self
@@ -1548,7 +1540,6 @@ fn is_adornment(line: &str, min: usize) -> bool {
 fn is_simple_border(line: &str) -> bool {
     let t = line.trim_end();
     t.starts_with('=') && t.chars().all(|c| c == '=' || c == ' ') && t.contains(' ')
-        || (t.starts_with('=') && t.chars().all(|c| c == '=') && false)
 }
 
 fn is_quoted_literal(line: &str) -> bool {
@@ -1794,9 +1785,6 @@ fn parse_directive(name: &str, arg: String, body: &[String]) -> Directive {
     body.drain(..k);
     while body.first().is_some_and(|l| is_blank(l)) {
         body.remove(0);
-    }
-    if matches!(name, "versionadded" | "versionchanged" | "deprecated") && arg.is_empty() && false {
-        arg = String::new();
     }
     Directive {
         name: name.to_string(),

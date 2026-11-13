@@ -30,12 +30,14 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Changed
 
+- Code: Clippy with warnings denied passes on Rust 1.89 (38 findings: dead `&& false` conditions removed, identical branches merged, three unused functions removed, a few char patterns and collapsible `if`s). No other behaviour changes.
 - Minimum supported Rust version is 1.89 (`rust-version`, CI, release and supply-chain workflows). The git dependencies `apeiron` and `wirefold` require 1.89, `calamine`, `zip` and `encoding_rs` require 1.88, so the previous 1.85 pin could not build.
 
 - The root crate depends on `calamine` (path). The lockfile gains that one edge; no new crates.
 
 ### Fixed
 
+- Citations in Pandoc Markdown (`citeproc::markdown::parse_citations`): an indented code block (four spaces or a tab after a blank line, outside lists, definitions, footnotes and quotes) holds no citations, and `[@a][ref]` is a reference link whose text is the in-text citation `@a`, as `pandoc --citeproc` 3.1.3 reads them. Both were written in the parser behind a condition that was always false and so never took effect.
 - XLSX: a stored double is shown to 15 significant digits like Excel (`4.0999999999999996` is `4.1`, `0.30000000000000004` is `0.3`), and dates with a custom format show as formatted (`Sep-2026`, not `2026-09-01`). This changes the Markdown for such cells; the stored text is in `CellValue::Number::raw`.
 - DOCX: an embedded picture object (`Word.Picture.8`, `Paint.Picture`, `PBrush`) no longer leaves an `Embedded object: Word.Picture.8` line; other embedded objects keep it.
 - PDF: a scanned page carrying only a stamp is OCRed instead of returning the stamp (see Added).
