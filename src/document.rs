@@ -193,7 +193,7 @@ fn decode_csv(data: &[u8]) -> Result<String, String> {
     if data.starts_with(&[0xff, 0xfe]) || data.starts_with(&[0xfe, 0xff]) {
         let little = data[0] == 0xff;
         let payload = &data[2..];
-        if payload.len() % 2 != 0 {
+        if payload.len() % 2 == 1 {
             return Err("odd UTF-16 CSV byte length".into());
         }
         let units: Vec<u16> = payload
@@ -307,7 +307,8 @@ fn xls_unchecked(data: &[u8]) -> Result<String, String> {
         if cells > XLS_MAX_CELLS {
             return Err("worksheet too large".into());
         }
-        sheets.push((name, xls_rows(&range, date1904)));
+        let rows = xls_rows(&book, &name, &range, date1904);
+        sheets.push((name, rows));
     }
     Ok(workbook_markdown(sheets))
 }
@@ -317,16 +318,22 @@ const XLS_MAX_CELLS: usize = 20_000_000;
 
 /// Rows as the XLSX reader builds them: a cell sits at its absolute column, rows with no
 /// content are dropped, and trailing empty cells are trimmed.
-fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<String>> {
-    // Row numbers are not needed: rows without content are dropped, as in the XLSX reader.
-    let Some((_, left)) = range.start() else {
+fn xls_rows(
+    book: &calamine::Xls<Cursor<&[u8]>>,
+    sheet: &str,
+    range: &calamine::Range<calamine::Data>,
+    date1904: bool,
+) -> Vec<Vec<String>> {
+    let Some((top, left)) = range.start() else {
         return Vec::new();
     };
-    let left = left as usize;
     let mut rows = Vec::new();
-    for cells in range.rows() {
-        let mut row: Vec<String> = vec![String::new(); left];
-        row.extend(cells.iter().map(|cell| xls_cell(cell, date1904)));
+    for (y, cells) in range.rows().enumerate() {
+        let mut row: Vec<String> = vec![String::new(); left as usize];
+        row.extend(cells.iter().enumerate().map(|(x, cell)| {
+            let at = (top.saturating_add(y as u32), left.saturating_add(x as u32));
+            xls_cell(cell, book.cell_number_format(sheet, at), date1904)
+        }));
         while row.last().is_some_and(String::is_empty) {
             row.pop();
         }
@@ -350,17 +357,32 @@ fn general_number(value: f64) -> String {
         .to_string()
 }
 
-/// One cell as the XLSX reader prints it.
-fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
+/// What a number shows under its cell's number format, read from the XF and FORMAT records exactly
+/// as the XLSX reader reads `cellXfs` and `numFmts`. `None` without a format, or one `numfmt` does
+/// not implement and the number is not a date.
+fn xls_number(value: f64, format: Option<(u16, Option<&str>)>, date1904: bool) -> Option<String> {
+    let (id, code) = format?;
+    crate::ooxml::xlsx::display_number(u32::from(id), code, value, date1904)
+}
+
+/// One cell as the XLSX reader prints it. `format` is the number format of a numeric cell.
+fn xls_cell(cell: &calamine::Data, format: Option<(u16, Option<&str>)>, date1904: bool) -> String {
     use calamine::Data;
     match cell {
         Data::Empty => String::new(),
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
         Data::Bool(value) => if *value { "TRUE" } else { "FALSE" }.to_owned(),
-        Data::Int(value) => value.to_string(),
-        Data::Float(value) => general_number(*value),
+        Data::Int(value) => {
+            xls_number(*value as f64, format, date1904).unwrap_or_else(|| value.to_string())
+        }
+        Data::Float(value) => {
+            xls_number(*value, format, date1904).unwrap_or_else(|| general_number(*value))
+        }
         Data::DateTime(value) => {
             let serial = value.as_f64();
+            if let Some(shown) = xls_number(serial, format, date1904) {
+                return shown;
+            }
             // Calamine reports only that a cell is a date or time format. A duration is a time of
             // day; a date-time with a fraction shows both, and a whole serial shows the date.
             let (date_part, time_part) = if value.is_duration() {

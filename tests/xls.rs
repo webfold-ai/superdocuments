@@ -47,14 +47,37 @@ fn xls_sheets_are_in_tab_order_with_values_formulas_and_errors() {
 fn xls_1904_epoch_is_applied_once() {
     let xls = convert_bytes("xls", &fixture("date_1904.xls")).unwrap();
     let xlsx = convert_bytes("xlsx", &fixture("date_1904.xlsx")).unwrap();
-    // The third row is an elapsed-time cell (`[h]:mm:ss`). The XLSX reader applies the format code and
-    // shows the hours (255:10:10); calamine tells the XLS reader only that it is a date-time, so it
-    // prints the date. The rows that are dates agree, which is what this test is about.
-    let rows = |md: &str| md.lines().take(5).map(str::to_owned).collect::<Vec<_>>();
-    assert_eq!(rows(&xls), rows(&xlsx));
+    assert_eq!(xls, xlsx);
     assert!(xls.contains("| 2021-01-01 | 15 |"), "{xls}");
     assert!(xls.contains("| 2021-01-02 | 16 |"), "{xls}");
+    // the third row is an elapsed-time cell (`[h]:mm:ss`): both readers show the hours
+    assert!(xls.contains("| 255:10:10 | 17 |"), "{xls}");
     assert!(xlsx.contains("| 255:10:10 | 17 |"), "{xlsx}");
+}
+
+#[test]
+fn xls_shows_numbers_the_way_their_format_shows_them() {
+    // the XLS reader reads the XF and FORMAT records and applies the same number formats as the
+    // XLSX reader applies to `cellXfs` and `numFmts`
+    let xls = convert_bytes("xls", &fixture("number-formats.xls")).unwrap();
+    let xlsx = convert_bytes("xlsx", &fixture("number-formats.xlsx")).unwrap();
+    assert_eq!(xls, xlsx);
+    for row in [
+        "| one decimal of -0.04 | -0.0 |",
+        "| two decimals of 2.675 | 2.68 |",
+        "| thousands | 1,234,567.89 |",
+        "| percent | 26% |",
+        "| one decimal percent | 12.5% |",
+        "| negative section | (1,235) |",
+        "| currency | $1,234.50 |",
+        "| general | 3.14159 |",
+        "| integer of -0.4 | -0 |",
+        "| elapsed | 36:00 |",
+        "| date | Sep-2026 |",
+        "| leading zero | 007 |",
+    ] {
+        assert!(xls.contains(row), "{row}: {xls}");
+    }
 }
 
 #[test]

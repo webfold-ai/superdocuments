@@ -1024,3 +1024,67 @@ fn contents_entries_and_numbered_sections_are_not_wrapped_lines() {
     assert!(md.contains("........ 4\n\n8B Another"), "{md:?}");
     assert!(md.contains("hhhh\n\n9B Publication"), "{md:?}");
 }
+
+/// A one-page PDF whose page holds rows of text runs as (baseline y, [(x, text)]), Helvetica at `size`:
+/// every run is its own text object, as Word writes the cells of a borderless table.
+fn rows_pdf(size: i32, rows: &[(i32, &[(i32, &str)])]) -> Vec<u8> {
+    let content: String = rows
+        .iter()
+        .flat_map(|(y, runs)| {
+            runs.iter().map(move |(x, t)| {
+                let t = t.replace('(', "\\(").replace(')', "\\)");
+                format!("BT /F1 {size} Tf {x} {y} Td ({t}) Tj ET\n")
+            })
+        })
+        .collect();
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    classic_pdf(&objs, 1, &[])
+}
+
+#[test]
+fn rows_of_a_two_column_key_are_not_joined_into_one_paragraph() {
+    // The abbreviation key of a Federal Register of Legislation compilation (F2017L01006, page 7): the
+    // left cell starts at x = 91.6, the right one at x = 320.1, rows 16 pt apart, 11 pt type (two rows:
+    // three would be read as a table). Each row was joined to the next into one run-on line (the Word version has a paragraph per cell), which is why
+    // the stray-line-break measure counted 2.5 merged lines per page on that set instead of 0.5.
+    let md = text_of(&rows_pdf(
+        11,
+        &[
+            (
+                700,
+                &[(92, "ad = added or inserted"), (320, "o = order(s)")],
+            ),
+            (684, &[(92, "am = amended"), (320, "Ord = Ordinance")]),
+        ],
+    ))
+    .expect("PDF");
+    for row in ["ad = added", "am = amended"] {
+        let at = md
+            .find(row)
+            .unwrap_or_else(|| panic!("{row} missing in {md:?}"));
+        let line_start = md[..at].rfind('\n').map_or(0, |n| n + 1);
+        assert!(
+            md[..at].is_empty() || md[line_start..at].trim().is_empty(),
+            "{row} continues the row above in {md:?}"
+        );
+    }
+}
+
+#[test]
+fn justified_lines_with_ordinary_gaps_are_still_one_paragraph() {
+    // the same runs set 20 pt apart are word gaps, not columns
+    let md = text_of(&rows_pdf(
+        11,
+        &[
+            (700, &[(72, "aaaa bbbb cccc"), (130, "dddd eeee ffff")]),
+            (686, &[(72, "gggg hhhh iiii"), (130, "jjjj kkkk llll")]),
+        ],
+    ))
+    .expect("PDF");
+    assert!(md.contains("ffff gggg"), "{md:?}");
+}

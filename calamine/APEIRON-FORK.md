@@ -6,6 +6,10 @@ path caches and workbook relationship indexes use `apeiron::freq::Table` with bo
 `&str` lookups. XLS and ODS readers are unchanged controls. This is an initial
 storage migration, not a rewrite of spreadsheet parsing or a claimed speedup.
 
+One addition to the XLS reader: `Xls::cell_number_format(sheet, (row, col))` returns the number format id
+and custom format code (XF and FORMAT records) of a numeric cell, so a caller can apply the same number
+format as for XLSX. Nothing else in the parser changed.
+
 The `apeiron` dependency resolves from `webfold-ai/apeiron` (`apeiron::freq::Table`). This code lives in the superdocuments workspace as `calamine/`
 rather than as a redistributable standalone package. The upstream Calamine source is MIT; Apeiron has its own
 license in that checkout, which must be reviewed before external distribution.
