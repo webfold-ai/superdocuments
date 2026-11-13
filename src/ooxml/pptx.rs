@@ -95,7 +95,11 @@ fn chart_markdown(xml: &[u8]) -> String {
                     "tx" if !series.is_empty() => part = Part::Name,
                     "cat" | "xVal" if !series.is_empty() => part = Part::Categories,
                     "val" | "yVal" if !series.is_empty() => part = Part::Values,
-                    "pt" => point = attr_local(tag, "idx").and_then(|i| i.parse().ok()).unwrap_or(0),
+                    "pt" => {
+                        point = attr_local(tag, "idx")
+                            .and_then(|i| i.parse().ok())
+                            .unwrap_or(0)
+                    }
                     "v" => in_v = true,
                     "t" if in_title => in_t = true,
                     _ => {}
@@ -132,10 +136,19 @@ fn chart_markdown(xml: &[u8]) -> String {
         }
         buf.clear();
     }
-    let mut out = format!("Chart: {}", title.trim()).trim_end().trim_end_matches(':').to_owned();
-    let rows = series.iter().flat_map(|s| s.1.iter().chain(s.2.iter()).map(|p| p.0 + 1)).max().unwrap_or(0);
+    let mut out = format!("Chart: {}", title.trim())
+        .trim_end()
+        .trim_end_matches(':')
+        .to_owned();
+    let rows = series
+        .iter()
+        .flat_map(|s| s.1.iter().chain(s.2.iter()).map(|p| p.0 + 1))
+        .max()
+        .unwrap_or(0);
     if !series.is_empty() && rows > 0 {
-        let mut table = vec![std::iter::once(String::new()).chain(series.iter().map(|s| s.0.clone())).collect::<Vec<_>>()];
+        let mut table = vec![std::iter::once(String::new())
+            .chain(series.iter().map(|s| s.0.clone()))
+            .collect::<Vec<_>>()];
         for i in 0..rows {
             let label = series
                 .iter()
@@ -143,7 +156,12 @@ fn chart_markdown(xml: &[u8]) -> String {
                 .unwrap_or_default();
             let mut row = vec![label];
             for s in &series {
-                row.push(s.2.iter().find(|p| p.0 == i).map(|p| p.1.clone()).unwrap_or_default());
+                row.push(
+                    s.2.iter()
+                        .find(|p| p.0 == i)
+                        .map(|p| p.1.clone())
+                        .unwrap_or_default(),
+                );
             }
             table.push(row);
         }
@@ -166,7 +184,12 @@ fn level_of(name: &str) -> Option<u32> {
 fn placeholder_key(tag: &BytesStart<'_>) -> String {
     attr_local(tag, "idx")
         .map(|i| format!("idx:{i}"))
-        .unwrap_or_else(|| format!("type:{}", attr_local(tag, "type").unwrap_or_else(|| "body".to_owned())))
+        .unwrap_or_else(|| {
+            format!(
+                "type:{}",
+                attr_local(tag, "type").unwrap_or_else(|| "body".to_owned())
+            )
+        })
 }
 
 /// Reads the list-level bullets out of a layout (`lstStyle` of each placeholder) or a master
@@ -376,7 +399,10 @@ impl<'a> Slide<'a> {
                 }
             }
             "chart" if !self.notes => {
-                if let Some(markdown) = attrs_local(tag, "id").iter().find_map(|id| self.charts.get(id)) {
+                if let Some(markdown) = attrs_local(tag, "id")
+                    .iter()
+                    .find_map(|id| self.charts.get(id))
+                {
                     self.content.body.push((false, markdown.clone()));
                 }
             }
@@ -651,13 +677,11 @@ fn inherited_bullets(
     if let Ok(xml) = entry(zip, &layout) {
         read_bullets(&xml, false, &mut inherited);
     }
-    let master = read_rels(zip, &rels_path_of(&layout))
-        .ok()
-        .and_then(|r| {
-            r.into_iter()
-                .find(|r| r.kind == "slideMaster" && !r.external)
-                .and_then(|r| resolve(&layout, &r.target))
-        });
+    let master = read_rels(zip, &rels_path_of(&layout)).ok().and_then(|r| {
+        r.into_iter()
+            .find(|r| r.kind == "slideMaster" && !r.external)
+            .and_then(|r| resolve(&layout, &r.target))
+    });
     if let Some(master) = master {
         if let Ok(xml) = entry(zip, &master) {
             read_bullets(&xml, true, &mut inherited);
@@ -690,7 +714,14 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
                 Some((r.id.clone(), chart_markdown(&xml)))
             })
             .collect();
-        let slide = read_part(&entry(&mut zip, part)?, &links, &images, &inherited, &charts, false)?;
+        let slide = read_part(
+            &entry(&mut zip, part)?,
+            &links,
+            &images,
+            &inherited,
+            &charts,
+            false,
+        )?;
         let mut notes = Content::default();
         if let Some(notes_part) = rels
             .iter()

@@ -165,7 +165,9 @@ fn format_number(value: f64, format: &NumberFormat) -> Option<String> {
     let value = if format.percent { value * 100.0 } else { value };
     let mut text = format!("{:.*}", format.max_decimals, value.abs());
     if format.max_decimals > format.min_decimals {
-        while text.ends_with('0') && text.len() - text.find('.').unwrap_or(text.len()) - 1 > format.min_decimals {
+        while text.ends_with('0')
+            && text.len() - text.find('.').unwrap_or(text.len()) - 1 > format.min_decimals
+        {
             text.pop();
         }
         if text.ends_with('.') {
@@ -176,7 +178,10 @@ fn format_number(value: f64, format: &NumberFormat) -> Option<String> {
         Some((i, d)) => (i.to_owned(), Some(d.to_owned())),
         None => (text, None),
     };
-    let integer = format!("{integer:0>width$}", width = format.min_integer_digits.max(1));
+    let integer = format!(
+        "{integer:0>width$}",
+        width = format.min_integer_digits.max(1)
+    );
     let integer = if format.thousands {
         let mut grouped = String::new();
         for (i, c) in integer.chars().enumerate() {
@@ -189,7 +194,10 @@ fn format_number(value: f64, format: &NumberFormat) -> Option<String> {
     } else {
         integer
     };
-    let negative = value < 0.0 && format!("{:.*}", format.max_decimals, value.abs()).chars().any(|c| c.is_ascii_digit() && c != '0');
+    let negative = value < 0.0
+        && format!("{:.*}", format.max_decimals, value.abs())
+            .chars()
+            .any(|c| c.is_ascii_digit() && c != '0');
     Some(format!(
         "{}{}{}{}{}{}",
         if negative { "-" } else { "" },
@@ -254,7 +262,9 @@ impl Formats {
     }
 
     fn number(&self, style: Option<usize>) -> Option<&NumberFormat> {
-        style.and_then(|s| self.numbers.get(s)).and_then(Option::as_ref)
+        style
+            .and_then(|s| self.numbers.get(s))
+            .and_then(Option::as_ref)
     }
 
     fn of(&self, style: Option<usize>) -> (bool, bool, bool) {
@@ -836,7 +846,15 @@ mod number_format_tests {
 
     #[test]
     fn other_formats_leave_the_number_alone() {
-        for code in ["General", "0.00E+00", "# ?/?", "@", "yyyy-mm-dd", "#,##0,", "0.0,"] {
+        for code in [
+            "General",
+            "0.00E+00",
+            "# ?/?",
+            "@",
+            "yyyy-mm-dd",
+            "#,##0,",
+            "0.0,",
+        ] {
             assert_eq!(parse_number_format(code), None, "{code}");
         }
     }
@@ -847,6 +865,9 @@ mod number_format_tests {
         let formats = Formats::parse(styles).unwrap();
         let sheet = br#"<worksheet><sheetData><row r="1"><c r="A1" s="1"><v>0.125</v></c><c r="B1" s="2"><v>1234.5</v></c><c r="C1" s="3"><v>45000</v></c><c r="D1"><v>0.30000000000000004</v></c></row></sheetData></worksheet>"#;
         let rows = worksheet(sheet, &[], &formats).unwrap();
-        assert_eq!(rows[0], ["12.5%", "1,234.50", "2023-03-15", "0.30000000000000004"]);
+        assert_eq!(
+            rows[0],
+            ["12.5%", "1,234.50", "2023-03-15", "0.30000000000000004"]
+        );
     }
 }

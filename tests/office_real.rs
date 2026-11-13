@@ -171,9 +171,15 @@ fn pptx_bullets_inherited_from_the_master_keep_their_nesting() {
         md.contains("- Goals for the year\n    - Reduce churn\n    - Raise onboarding rate\n- Risks\n    - Supplier delay"),
         "{md}"
     );
-    assert!(md.contains("## Slide 2: Timeline\n\n- Q1 planning\n- Q2 build\n- Q3 launch"), "{md}");
+    assert!(
+        md.contains("## Slide 2: Timeline\n\n- Q1 planning\n- Q2 build\n- Q3 launch"),
+        "{md}"
+    );
     let two = convert("two-column.pptx");
-    assert!(two.contains("- Option A is cheaper\n- Option A ships in May\n- Option B is faster"), "{two}");
+    assert!(
+        two.contains("- Option A is cheaper\n- Option A ships in May\n- Option B is faster"),
+        "{two}"
+    );
 }
 
 /// A chart is a graphic frame whose text lives in its own part: its title and data were dropped.
@@ -181,5 +187,8 @@ fn pptx_bullets_inherited_from_the_master_keep_their_nesting() {
 fn pptx_chart_title_and_data_are_read() {
     let md = convert("chart.pptx");
     assert!(md.contains("Chart: Quarterly revenue"), "{md}");
-    assert!(md.contains("|  | Revenue |\n| --- | --- |\n| Q1 | 120 |\n| Q2 | 135 |\n| Q3 | 160 |"), "{md}");
+    assert!(
+        md.contains("|  | Revenue |\n| --- | --- |\n| Q1 | 120 |\n| Q2 | 135 |\n| Q3 | 160 |"),
+        "{md}"
+    );
 }

@@ -741,9 +741,21 @@ fn hyperlink_target(instr: &str) -> Option<String> {
     let rest = instr.trim().strip_prefix("HYPERLINK")?.trim();
     // `HYPERLINK \l "bookmark"` (or `HYPERLINK "url" \l "fragment"`): a place in this document
     if let Some((before, after)) = rest.split_once("\\l") {
-        let name = after.trim().trim_start_matches('"').split('"').next().unwrap_or("").trim();
+        let name = after
+            .trim()
+            .trim_start_matches('"')
+            .split('"')
+            .next()
+            .unwrap_or("")
+            .trim();
         if !name.is_empty() {
-            let url = before.trim().trim_start_matches('"').split('"').next().unwrap_or("").trim();
+            let url = before
+                .trim()
+                .trim_start_matches('"')
+                .split('"')
+                .next()
+                .unwrap_or("")
+                .trim();
             return Some(format!("{url}#{name}"));
         }
     }

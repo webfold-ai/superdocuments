@@ -922,10 +922,16 @@ fn nested_tables_are_written_as_html_and_fallback_text_is_dropped() {
         md.contains("<td>Deep A</td><td>Deep B</td>"),
         "inner cells are separate elements: {md:?}"
     );
-    assert!(md.contains("Level two before") && md.contains("Outer after"), "{md:?}");
+    assert!(
+        md.contains("Level two before") && md.contains("Outer after"),
+        "{md:?}"
+    );
     assert!(!md.contains("FALLBACK"), "{md:?}");
     assert!(md.contains("Outside table"), "{md:?}");
-    assert!(!md.contains("\n\n<"), "no blank line inside the HTML block: {md:?}");
+    assert!(
+        !md.contains("\n\n<"),
+        "no blank line inside the HTML block: {md:?}"
+    );
 }
 
 /// A flat table is still a pipe table.
