@@ -573,7 +573,7 @@ checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 [[package]]
 name = "framefold"
 version = "0.1.0"
-source = "git+https://github.com/Ptyktos/framefold?rev=34388793bb8f51be328eadc1da22d36c1e4e4006#34388793bb8f51be328eadc1da22d36c1e4e4006"
+source = "git+https://github.com/Ptyktos/framefold?rev=263c8e15baf1f301b0b21defb23ce1343d9f11ab#263c8e15baf1f301b0b21defb23ce1343d9f11ab"
 dependencies = [
  "brotli",
  "rquickjs",
