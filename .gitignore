@@ -1,3 +1,6 @@
 /target/
 benches/pandoc-compat/outputs/
 __pycache__/
+benches/pandoc-compat/cite/outputs/
+benches/pandoc-compat/cite/outputs-*/
+benches/pandoc-compat/cite/suite/ours/
