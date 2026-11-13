@@ -194,3 +194,57 @@ fn pptx_chart_title_and_data_are_read() {
         "{md}"
     );
 }
+
+// ----- ODP: found by webfold-bench/tests/formats-fidelity-v1 (the reader wrote every paragraph as flat text) -----
+
+/// A library-written presentation (odfpy): slides, nested bullets and speaker notes. The old reader
+/// returned one run of paragraphs with no slide boundaries, no bullets and the notes mixed in.
+#[test]
+fn odp_slides_bullets_and_notes_are_kept_apart() {
+    let md = convert("odp-bullets-notes.odp");
+    assert!(
+        md.starts_with("## Slide 1\n\nKickoff\n\n- Scope agreed\n- Budget approved\n\n**Notes:** Remind the team about the freeze date."),
+        "{md}"
+    );
+    assert!(
+        md.contains("---\n\n## Slide 2\n\nWrap-up\n\n- Actions assigned\n\n**Notes:** Close within ten minutes."),
+        "{md}"
+    );
+}
+
+/// LibreOffice marks the title frame (`presentation:class="title"`) and the outline frame; the
+/// title is the slide heading and the outline's bullets keep their nesting.
+#[test]
+fn odp_written_by_libreoffice_has_titles_and_nested_bullets() {
+    let md = convert("lo-slides.odp");
+    assert!(md.starts_with("## Slide 1: Project Overview\n\n"), "{md}");
+    assert!(
+        md.contains("- Goals for the year\n    - Reduce churn\n    - Raise onboarding rate\n- Risks\n    - Supplier delay"),
+        "{md}"
+    );
+    assert!(md.contains("## Slide 2: Timeline"), "{md}");
+}
+
+/// A span that holds only a space (`<text:span> </text:span>`) separates the words around it, and a
+/// span that ends in a space keeps it. The reader trimmed every span, which wrote `**Lorem Ipsum**is`
+/// (Docling's text_document_02.odt).
+#[test]
+fn odt_spans_keep_the_whitespace_between_words() {
+    let md = convert("odt-span-space.odt");
+    assert!(md.contains("**Lorem Ipsum** is simply dummy text"), "{md}");
+    assert!(
+        md.contains("[the page](https://example.org/x) afterwards."),
+        "{md}"
+    );
+    assert!(md.contains("One two"), "{md}");
+}
+
+/// A SmartArt diagram keeps its text in a data part the slide points to (`dgm:relIds r:dm`); a slide
+/// that holds only a diagram came out empty (LibreOffice sd/qa Horizontal_Organization_Chart.pptx, MPL-2.0).
+#[test]
+fn pptx_smartart_text_is_read() {
+    let md = convert("smartart-org-chart.pptx");
+    for node in ["One", "Two", "Assistent", "Eleven", "Sekretärin", "Twelve"] {
+        assert!(md.contains(&format!("- {node}")), "{node}: {md}");
+    }
+}

@@ -949,3 +949,20 @@ fn surrogate_pair_split_by_a_uc_word_is_one_character() {
     let md = markdown_of(br"{\rtf1\ansi\pard emoji: \uc0 \u55357\uc1 \u56424\'3f.\par}");
     assert!(md.contains("emoji: \u{1F468}."), "{md:?}");
 }
+
+/// Text inside a drawing shape or text frame (`\shp` ... `\*\shpinst` ... `\shptxt`) is body text;
+/// the whole `\*\shpinst` group used to be skipped as an unknown destination, so a document whose
+/// text lives in a frame came out empty (LibreOffice rtfexport fdo83464.rtf, textframe-table.rtf).
+#[test]
+fn text_in_a_shape_is_read_and_its_fallback_is_not() {
+    let md = markdown_of(
+        br"{\rtf1\ansi\pard Before\par{\shp{\*\shpinst\shpleft0\shptop0{\sp{\sn shapeType}{\sv 202}}{\shptxt\pard Inside the box\par}}{\shprslt fallback picture}}\pard After\par}",
+    );
+    assert!(md.contains("Before"), "{md:?}");
+    assert!(md.contains("Inside the box"), "{md:?}");
+    assert!(md.contains("After"), "{md:?}");
+    assert!(
+        !md.contains("fallback") && !md.contains("shapeType"),
+        "{md:?}"
+    );
+}

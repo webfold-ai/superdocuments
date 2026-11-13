@@ -513,6 +513,17 @@ impl Reader {
     }
 
     fn inlines(&mut self, nodes: &[XNode], style: Option<&str>) -> Vec<Inline> {
+        self.inlines_with(nodes, style, true)
+    }
+
+    /// The inlines of an element nested inside a paragraph (a span, a link): its edge whitespace
+    /// is kept, because it separates the element from its neighbours (`<span>bold</span>
+    /// <span> </span>text`); the paragraph trims its own ends.
+    fn nested(&mut self, nodes: &[XNode]) -> Vec<Inline> {
+        self.inlines_with(nodes, None, false)
+    }
+
+    fn inlines_with(&mut self, nodes: &[XNode], style: Option<&str>, trim: bool) -> Vec<Inline> {
         let mut out: Vec<Inline> = Vec::new();
         for n in nodes {
             match n {
@@ -525,14 +536,14 @@ impl Reader {
                 XNode::Elem(e) => self.inline_elem(e, style, &mut out),
             }
         }
-        normalise(&mut out);
+        normalise(&mut out, trim);
         out
     }
 
     fn inline_elem(&mut self, e: &XElem, _style: Option<&str>, out: &mut Vec<Inline>) {
         match e.name.as_str() {
             "text:span" => {
-                let inner = self.inlines(&e.children, None);
+                let inner = self.nested(&e.children);
                 if inner.is_empty() {
                     return;
                 }
@@ -544,7 +555,7 @@ impl Reader {
                 out.extend(wrapped);
             }
             "text:a" => {
-                let inner = self.inlines(&e.children, None);
+                let inner = self.nested(&e.children);
                 let href = e.attr("xlink:href").unwrap_or("");
                 if href.is_empty() || inner.is_empty() {
                     out.extend(inner);
@@ -624,7 +635,7 @@ impl Reader {
             "office:annotation" | "office:annotation-end" => {}
             "text:note-citation" => {}
             _ => {
-                let inner = self.inlines(&e.children, None);
+                let inner = self.nested(&e.children);
                 out.extend(inner);
             }
         }
@@ -732,7 +743,7 @@ fn collapse(s: &str) -> String {
 }
 
 /// Merges adjacent text, collapses doubled spaces across run boundaries and trims the ends.
-fn normalise(v: &mut Vec<Inline>) {
+fn normalise(v: &mut Vec<Inline>, trim: bool) {
     let mut out: Vec<Inline> = Vec::with_capacity(v.len());
     for i in v.drain(..) {
         match (out.last_mut(), i) {
@@ -746,11 +757,13 @@ fn normalise(v: &mut Vec<Inline>) {
             (_, i) => out.push(i),
         }
     }
-    if let Some(Inline::Text(t)) = out.first_mut() {
-        *t = t.trim_start().to_string();
-    }
-    if let Some(Inline::Text(t)) = out.last_mut() {
-        *t = t.trim_end().to_string();
+    if trim {
+        if let Some(Inline::Text(t)) = out.first_mut() {
+            *t = t.trim_start().to_string();
+        }
+        if let Some(Inline::Text(t)) = out.last_mut() {
+            *t = t.trim_end().to_string();
+        }
     }
     out.retain(|i| !matches!(i, Inline::Text(t) if t.is_empty()));
     while matches!(out.last(), Some(Inline::LineBreak)) {
