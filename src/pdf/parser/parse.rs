@@ -773,6 +773,61 @@ fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64
 /// (coordinate buckets, projection depth); the only sorts are on the tiny rule/column lists (the page,
 /// the null cell) — never the document.
 fn table_candidates(lines: &[Line], h: &[(f64, f64, f64)], v: &[(f64, f64, f64)]) -> Vec<Cand> {
+    let mut out = ruled_candidates(lines, h, v);
+    // Tables with no drawn rules (or on a page whose rules bound only one of several tables): runs of
+    // consecutive lines that each break into two or more cells. A block that a ruled grid already covers
+    // is left to it.
+    let covered: Vec<(f64, f64)> = out.iter().map(|c| (c.ybot, c.ytop)).collect();
+    for c in block_candidates(lines) {
+        if !covered.iter().any(|&(lo, hi)| c.ytop >= lo && c.ybot <= hi) {
+            out.push(c);
+        }
+    }
+    out
+}
+
+/// How many cells a line breaks into: its positioned runs, split where the gap to the previous run is
+/// wider than a column gap (a word space is about a quarter em).
+fn line_cells(l: &Line) -> usize {
+    if l.text.starts_with('\u{0}') {
+        return 0;
+    }
+    let col_gap = 0.9 * l.size.max(1.0);
+    let mut cells = usize::from(!l.segs.is_empty());
+    for w in l.segs.windows(2) {
+        if w[1].3 || w[1].0 - w[0].1 > col_gap {
+            cells += 1;
+        }
+    }
+    cells
+}
+
+/// Candidate regions from runs of at least three consecutive multi-cell lines (borderless tables).
+fn block_candidates(lines: &[Line]) -> Vec<Cand> {
+    let mut out = Vec::new();
+    let mut i = 0;
+    while i < lines.len() {
+        if line_cells(&lines[i]) < 2 {
+            i += 1;
+            continue;
+        }
+        let start = i;
+        while i < lines.len() && line_cells(&lines[i]) >= 2 {
+            i += 1;
+        }
+        if i - start < 3 {
+            continue;
+        }
+        let region: Vec<&Line> = lines[start..i].iter().collect();
+        let (Some(colxs), rowys) = (columns_from_gutters(&region), row_boundaries(&region)) else {
+            continue;
+        };
+        add_cand(&mut out, lines, rowys, colxs, false);
+    }
+    out
+}
+
+fn ruled_candidates(lines: &[Line], h: &[(f64, f64, f64)], v: &[(f64, f64, f64)]) -> Vec<Cand> {
     let mut out = Vec::new();
     let hys = cluster_coords(h.iter().map(|r| r.0).collect(), 3.0);
     if hys.len() < 2 {
@@ -1289,8 +1344,9 @@ impl Document {
             Some(Object::Name(t)) if t == "Page" => out.push(num),
             _ => {
                 if let Some(kids) = d.get(&"Kids".to_string()) {
-                    let kids = match kids {
-                        Object::Array(a) => a.clone(),
+                    // /Kids may itself be an indirect object (7.3.10): follow one reference to the array.
+                    let kids = match self.resolve(kids) {
+                        Some(Object::Array(a)) => a.clone(),
                         _ => return,
                     };
                     for k in &kids {
@@ -1423,6 +1479,9 @@ struct Pen {
     /// The one-em scales of the previous run, horizontal and vertical (see `show`).
     last_sh: f64,
     last_sv: f64,
+    /// A text object just opened on the line in progress: the previous run's end-x is not known to be
+    /// exact across the break, so a font without widths gets a word space here.
+    bt_break: bool,
 }
 impl Pen {
     fn new() -> Pen {
@@ -1450,6 +1509,7 @@ impl Pen {
             leading: 0.0,
             last_sh: 0.0,
             last_sv: 0.0,
+            bt_break: false,
         }
     }
     /// Flush the line, carrying its font size (heading signal), bold flag, baseline y, and segments.
@@ -1511,7 +1571,9 @@ impl Pen {
                         self.flush(); // new line
                     } else if self.started && !self.cur.is_empty() && !self.cur.ends_with(' ') {
                         let gap = self.x - self.end_x;
-                        if first && has_w && gap > 0.45 * sh.abs() {
+                        if first && self.bt_break && !has_w {
+                            self.cur.push(' ');
+                        } else if first && has_w && gap > 0.45 * sh.abs() {
                             self.cur.push(' ');
                             big = true;
                         }
@@ -1527,6 +1589,7 @@ impl Pen {
                     }
                     pending = false;
                     first = false;
+                    self.bt_break = false;
                     match font {
                         Some(c) => self.cur.push_str(&c.decode(s)),
                         None => self.cur.push_str(&decode_str(s)),
@@ -1657,6 +1720,16 @@ fn extract_text(
                     }
                 }
                 "BT" => {
+                    // Writers that wrap every span in its own BT..ET (tagged PDF, Word, Acrobat) put one
+                    // line in many text objects. A text object that opens under the same CTM as the last
+                    // one continues the line: the pen keeps it, and the baseline test in `show` decides
+                    // whether this run starts a new one. A different CTM is a different frame, so the
+                    // line ends here.
+                    if ctm != text_ctm {
+                        p.flush();
+                        p.started = false;
+                    }
+                    p.bt_break = p.started;
                     text_ctm = ctm;
                     p.x = 0.0;
                     p.y = 0.0;
@@ -1664,12 +1737,8 @@ fn extract_text(
                     p.ly = 0.0;
                     p.a = 1.0;
                     p.d = 1.0;
-                    p.started = false;
                 }
-                "ET" => {
-                    p.flush();
-                    p.started = false;
-                }
+                "ET" => {}
                 "Tf" => {
                     if let Some(Tok::Name(n)) = ops.iter().find(|t| matches!(t, Tok::Name(_))) {
                         font = fonts.get(n);

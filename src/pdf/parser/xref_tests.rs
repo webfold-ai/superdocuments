@@ -869,3 +869,85 @@ fn filter_free_streams_answer_to_the_decode_ceiling() {
         "raw stream over the cap is refused"
     );
 }
+
+#[test]
+fn kids_may_be_an_indirect_array() {
+    // /Kids (7.7.3.2) may be an indirect object holding the array: `/Kids 7 0 R` with `7 0 obj [3 0 R]`.
+    let mut objs = page_objects("KIDS BY REFERENCE");
+    objs[1].1 = b"<< /Type /Pages /Kids 7 0 R /Count 1 >>".to_vec();
+    objs.push((7, b"[3 0 R]".to_vec()));
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF with an indirect /Kids array");
+    assert!(
+        md.contains("KIDS BY REFERENCE"),
+        "indirect /Kids array not read: {md:?}"
+    );
+}
+
+#[test]
+fn spans_in_separate_text_objects_form_one_line() {
+    // Tagged-PDF writers wrap every span in BT..ET. Three spans on one baseline are one line, and the
+    // word space between them is read from the gap, so "Hello brave new world" is not four lines.
+    let content = "BT /F1 12 Tf 72 700 Td (Hello) Tj ET\nBT /F1 12 Tf 110 700 Td (brave) Tj ET\n\
+                   BT /F1 12 Tf 150 700 Td (new) Tj ET\nBT /F1 12 Tf 72 680 Td (second line) Tj ET";
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF");
+    assert!(
+        md.contains("Hello brave new"),
+        "spans of one baseline not joined: {md:?}"
+    );
+    assert!(md.contains("second line"), "{md:?}");
+    assert_eq!(
+        md.lines().filter(|l| l.contains("Hello")).count(),
+        1,
+        "{md:?}"
+    );
+}
+
+#[test]
+fn borderless_rows_of_cells_become_a_table_without_ruling_lines() {
+    // Four rows of three cells, aligned by position only: no rules are drawn, so only the
+    // run-of-multi-cell-lines read can find the grid. Prose above it stays prose.
+    let mut content = String::from(
+        "BT /F1 12 Tf 72 740 Td (This sentence introduces the figures below.) Tj ET\n",
+    );
+    let rows = [
+        ("Item", "Qty", "Price"),
+        ("Pens", "10", "4.50"),
+        ("Paper", "200", "12.00"),
+        ("Ink", "3", "31.25"),
+    ];
+    for (i, (a, b, c)) in rows.iter().enumerate() {
+        let y = 700 - 20 * i as i32;
+        content.push_str(&format!(
+            "BT /F1 12 Tf 72 {y} Td ({a}) Tj ET\nBT /F1 12 Tf 232 {y} Td ({b}) Tj ET\nBT /F1 12 Tf 392 {y} Td ({c}) Tj ET\n"
+        ));
+    }
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF");
+    assert!(
+        md.contains("<table>"),
+        "borderless rows not read as a table: {md:?}"
+    );
+    assert!(
+        md.contains("<td>Paper</td><td>200</td><td>12.00</td>"),
+        "{md:?}"
+    );
+    assert!(
+        md.contains("This sentence introduces the figures below."),
+        "{md:?}"
+    );
+    assert!(
+        !md.contains("<td>This"),
+        "prose pulled into the table: {md:?}"
+    );
+}
