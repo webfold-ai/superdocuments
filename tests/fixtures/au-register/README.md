@@ -14,3 +14,13 @@ Commonwealth Coat of Arms and third-party material; this page carries neither).
 Attribution: Based on content from the Federal Register of Legislation at 12 November 2026. For the latest
 information on Australian Government law please go to https://www.legislation.gov.au.
 Changes indicated: only the first of the file's three pages is kept.
+
+## census-regulations-1909-05-26.doc
+
+The Register's "Word" download of the *Census and Statistics Regulations (Provisional)* (C1909L00060, compilation
+start 1909-05-26), unchanged: 15107 bytes, SHA-256 8a78eb4b922daada0eed0ceed2dd44353ed43c13924ec96966534dbc8eced203,
+source URL `https://api.prod.legislation.gov.au/v1/documents(titleid='C1909L00060',start=1909-05-26T00:00:00,retrospectivestart=1909-05-26T00:00:00,rectificationversionnumber=0,type='Primary',uniqueTypeNumber=0,volumeNumber=0,format='Word')`,
+downloaded 2026-11-13. Despite the `.doc` name it is an OOXML package (starts `PK`); 14 of the demo's 21 `.doc`
+downloads are. Licence CC BY 4.0 (Federal Register of Legislation terms of use, except the Commonwealth Coat of
+Arms and third-party material). Attribution: Based on content from the Federal Register of Legislation at 12 November
+2026. For the latest information on Australian Government law please go to https://www.legislation.gov.au.

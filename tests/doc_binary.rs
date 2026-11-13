@@ -295,10 +295,18 @@ fn truncated_and_corrupted_files_error_without_panicking() {
 
 // ── the Register's own file ─────────────────────────────────────────────────────────────────────
 
+/// 14 of the Register's 21 ".doc" downloads in the demo are OOXML (a zip) under a `.doc` name; only 7 are
+/// OLE compound files (and those carry the Coat of Arms, which the licence excludes, so none is kept here).
+/// The 1909 regulations are one of the 14: read by content, not by extension.
 #[test]
-fn register_doc_fixture_reads() {
+fn register_docx_saved_as_doc_is_read_by_content() {
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("tests/fixtures/au-register/census-regulations-1909-05-26.doc");
+    let data = std::fs::read(&path).unwrap();
+    assert!(
+        data.starts_with(b"PK\x03\x04"),
+        "the fixture is expected to be an OOXML zip"
+    );
     let md = superdocuments::document::convert_path(&path).expect("the Register's .doc converts");
     assert!(md.contains("Census"), "{md:.300}");
     assert!(md.len() > 500, "only {} characters", md.len());
