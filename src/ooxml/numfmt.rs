@@ -454,9 +454,6 @@ fn format_number(toks: &[Tok], value: f64) -> Option<String> {
             }
         })
         .collect();
-    if int_digits.contains(&'?') || frac_digits.contains(&'?') {
-        return None;
-    }
     let grouping = {
         let body = &int_part[..int_part.len()
             - int_part
@@ -470,17 +467,33 @@ fn format_number(toks: &[Tok], value: f64) -> Option<String> {
     for _ in 0..trailing {
         v /= 1000.0;
     }
-    let (mut int_s, mut frac_s) = fixed(v, frac_digits.len());
-    let zeros_required = int_digits.iter().filter(|c| **c == '0').count();
-    while int_s.len() < zeros_required {
-        int_s.insert(0, '0');
+    let (mut int_s, frac_s) = fixed(v, frac_digits.len());
+    let has_blank = int_digits.contains(&'?') || frac_digits.contains(&'?');
+    if grouping && has_blank {
+        return None; // a space-padded digit inside a grouped number: not reproduced
     }
-    // '#' placeholders after the last '0' in the fraction drop trailing zeros
+    // Each integer placeholder left of the value's own digits shows a 0 (`0`), a space (`?`) or
+    // nothing (`#`): `0#` shows 1 as `01`, `#0#` too, `?0` shows 1 as ` 1`.
+    let width = int_digits.len();
+    for k in int_s.len()..width {
+        match int_digits[width - 1 - k] {
+            '0' => int_s.insert(0, '0'),
+            '?' => int_s.insert(0, ' '),
+            _ => {}
+        }
+    }
+    // Trailing zeros of the fraction: dropped under `#`, shown as a space under `?`, kept under `0`
+    let mut frac_s: Vec<char> = frac_s.chars().collect();
     let mut keep = frac_s.len();
-    while keep > 0 && frac_digits[keep - 1] == '#' && frac_s.as_bytes()[keep - 1] == b'0' {
+    while keep > 0 && frac_s[keep - 1] == '0' && frac_digits[keep - 1] != '0' {
+        if frac_digits[keep - 1] == '?' {
+            frac_s[keep - 1] = ' ';
+        } else {
+            frac_s.truncate(keep - 1);
+        }
         keep -= 1;
     }
-    frac_s.truncate(keep);
+    let frac_s: String = frac_s.into_iter().collect();
     if grouping {
         let mut grouped = String::new();
         for (k, ch) in int_s.chars().enumerate() {
@@ -654,6 +667,33 @@ mod tests {
         assert_eq!(f(0.05, "0.0").as_deref(), Some("0.1"));
         assert_eq!(f(5.0, "0.0#").as_deref(), Some("5.0"));
         assert_eq!(f(5.25, "0.0#").as_deref(), Some("5.25"));
+    }
+
+    #[test]
+    fn a_negative_number_that_rounds_to_zero_keeps_its_sign() {
+        // Excel: -0.04 under `0.0` is `-0.0`, under `0` is `-0`; a second section replaces the sign
+        assert_eq!(f(-0.04, "0.0").as_deref(), Some("-0.0"));
+        assert_eq!(f(-0.4, "0").as_deref(), Some("-0"));
+        assert_eq!(f(-0.0001, "#,##0.00").as_deref(), Some("-0.00"));
+        assert_eq!(f(-0.0004, "0.0%").as_deref(), Some("-0.0%"));
+        assert_eq!(f(-0.04, "0.0;(0.0)").as_deref(), Some("(0.0)"));
+        assert_eq!(f(-0.04, "0.0;-0.0").as_deref(), Some("-0.0"));
+        assert_eq!(f(0.0, "0.0;(0.0)").as_deref(), Some("0.0"));
+        assert_eq!(f(-0.04, "\"$\"0.0").as_deref(), Some("-$0.0"));
+    }
+
+    #[test]
+    fn digit_placeholders_pad_with_zeros_spaces_or_nothing() {
+        assert_eq!(f(1.0, "0#").as_deref(), Some("01"));
+        assert_eq!(f(1.0, "#0#").as_deref(), Some("01"));
+        assert_eq!(f(1.0, "#,##0").as_deref(), Some("1"));
+        assert_eq!(f(0.4, "#,##0").as_deref(), Some("0"));
+        assert_eq!(f(0.0, "#.##").as_deref(), Some("."));
+        assert_eq!(f(1.0, "?0").as_deref(), Some(" 1"));
+        assert_eq!(f(5.0, "0.0?").as_deref(), Some("5.0 "));
+        assert_eq!(f(5.25, "0.0?").as_deref(), Some("5.25"));
+        assert_eq!(f(5.0, "0.0#").as_deref(), Some("5.0"));
+        assert_eq!(f(1234.0, "?,??0"), None);
     }
 
     #[test]
