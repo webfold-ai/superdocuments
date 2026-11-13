@@ -1147,6 +1147,18 @@ fn continues_paragraph(cur: &Para, lines: &[Line], i: usize, geo: &[Geo], headin
     if !(dy > 0.0 && dy <= 1.7 * size) || (pl.size - l.size).abs() > 0.15 * size {
         return false;
     }
+    // Two lines that each hold cells set far apart (a key and its meaning in two columns, the rows of a
+    // list that is not ruled) are two rows, not a wrapped line. Justified text has gaps too, but nothing
+    // near two ems wide.
+    let widest_gap = |ln: &Line| {
+        ln.segs
+            .windows(2)
+            .map(|w| w[1].0 - w[0].1)
+            .fold(0.0, f64::max)
+    };
+    if widest_gap(pl) > 2.0 * size && widest_gap(l) > 2.0 * size {
+        return false;
+    }
     if heading {
         // a wrapped title continues; a numbered section heading, or a heading line that ended a
         // sentence, starts a new heading
