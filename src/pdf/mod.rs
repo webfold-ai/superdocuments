@@ -122,8 +122,9 @@ pub struct OcrOptions {
     pub max_image_dimension: u32,
     /// Shared wall-clock budget for rendering and OCR (1..=3600 s).
     pub timeout: Duration,
-    /// Tesseract processes run at once (1..=16). With more than one, each is held to a single
-    /// OpenMP thread, since Tesseract's own threads spin and oversubscribing the cores makes every page slower.
+    /// Tesseract processes run at once (1..=16). Each is held to a single OpenMP thread (unless
+    /// `OMP_THREAD_LIMIT` is already set and `workers` is 1), since Tesseract's own threads spin and
+    /// oversubscribing the cores makes every page slower.
     pub workers: u32,
     /// Optional observability sink — counters/gauges/histograms plus an append-only JSONL
     /// log. Both default to no-op so callers without metrics infrastructure are unaffected.
@@ -1163,7 +1164,11 @@ fn tesseract_ocr_pages(
                                     .arg("-l")
                                     .arg(languages)
                                     .args(["--psm", "3"]);
-                                if workers > 1 {
+                                // One OpenMP thread per Tesseract unless the caller chose otherwise: its
+                                // threads spin, and on a busy or CPU-limited host (a container that sees
+                                // every core of the machine) a single page can take minutes instead of
+                                // seconds. Parallelism across pages is `workers`.
+                                if workers > 1 || std::env::var_os("OMP_THREAD_LIMIT").is_none() {
                                     ocr.env("OMP_THREAD_LIMIT", "1");
                                 }
                                 let started = Instant::now();

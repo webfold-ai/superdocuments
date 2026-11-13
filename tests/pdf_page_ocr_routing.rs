@@ -59,7 +59,7 @@ impl Toolchain {
             "tesseract",
             format!(
                 "#!/bin/sh\nimg=$1; base=$2\nn=${{img##*-}}; n=${{n%.png}}; n=$((n+0))\n\
-                 echo \"ocr $n\" >> '{log}'\nprintf 'OCR TEXT page %s' \"$n\" > \"$base.txt\"\n",
+                 echo \"ocr $n omp=$OMP_THREAD_LIMIT\" >> '{log}'\nprintf 'OCR TEXT page %s' \"$n\" > \"$base.txt\"\n",
                 log = log.display()
             ),
         );
@@ -80,7 +80,7 @@ impl Toolchain {
         let mut pages: Vec<u32> = log
             .lines()
             .filter_map(|l| l.strip_prefix("ocr "))
-            .filter_map(|n| n.parse().ok())
+            .filter_map(|n| n.split(' ').next()?.parse().ok())
             .collect();
         pages.sort_unstable();
         pages
@@ -127,6 +127,30 @@ fn stamp_only_scan_pages_are_read_by_ocr() {
     // the stamp is kept (it is the only identifier on the page), after the page's own text
     assert!(md.contains(STAMP), "{md:?}");
     assert!(md.find("OCR TEXT page 1").unwrap() < md.find(STAMP).unwrap());
+    let _ = std::fs::remove_file(path);
+}
+
+#[test]
+fn tesseract_runs_with_one_openmp_thread_unless_the_caller_chose() {
+    // Tesseract's OpenMP threads spin: on a busy host one page took minutes (the stamp fixture: 1.7 s with
+    // one thread, over twelve minutes of CPU without). The caller's own OMP_THREAD_LIMIT is respected.
+    let _lock = PATH_LOCK.lock().unwrap_or_else(|e| e.into_inner());
+    let pdf = build(&[page(FULL_PAGE, None)]);
+    let path = write_pdf("omp", &pdf);
+    let saved = std::env::var_os("OMP_THREAD_LIMIT");
+    std::env::remove_var("OMP_THREAD_LIMIT");
+    let tools = Toolchain::install("omp", 1);
+    pdf::extract_file_with_ocr_options(&path, &OcrOptions::default()).unwrap();
+    let log = std::fs::read_to_string(&tools.log).unwrap();
+    assert!(log.contains("ocr 1 omp=1"), "unset: {log}");
+    std::env::set_var("OMP_THREAD_LIMIT", "3");
+    pdf::extract_file_with_ocr_options(&path, &OcrOptions::default()).unwrap();
+    let log = std::fs::read_to_string(&tools.log).unwrap();
+    assert!(log.contains("ocr 1 omp=3"), "caller's value kept: {log}");
+    match saved {
+        Some(v) => std::env::set_var("OMP_THREAD_LIMIT", v),
+        None => std::env::remove_var("OMP_THREAD_LIMIT"),
+    }
     let _ = std::fs::remove_file(path);
 }
 
