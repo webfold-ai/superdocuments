@@ -155,6 +155,8 @@ pub struct XlsOptions {
 struct SheetData {
     range: Range<Data>,
     formula: Range<String>,
+    /// The XF record index of every number, RK and formula-result cell.
+    cell_xfs: Range<Option<u16>>,
     merge_cells: Vec<Dimensions>,
 }
 
@@ -166,6 +168,10 @@ pub struct Xls<RS> {
     reader: RS,
     options: XlsOptions,
     formats: Vec<CellFormat>,
+    /// The number format id (`ifmt`) of every XF record, in record order.
+    xf_formats: Vec<u16>,
+    /// The format code of every custom number format (FORMAT record), by `ifmt`.
+    format_codes: BTreeMap<u16, String>,
     is_1904: bool,
     #[cfg(feature = "picture")]
     pictures: Option<Vec<(String, Vec<u8>)>>,
@@ -207,6 +213,8 @@ impl<RS: Read + Seek> Xls<RS> {
             options,
             is_1904: false,
             formats: Vec::new(),
+            xf_formats: Vec::new(),
+            format_codes: BTreeMap::new(),
             #[cfg(feature = "picture")]
             pictures: None,
         };
@@ -392,6 +400,18 @@ impl<RS: Read + Seek> Xls<RS> {
     pub fn has_1904_epoch(&self) -> bool {
         self.is_1904
     }
+
+    /// The number format of a numeric cell: the format id (`ifmt`, MS-XLS 2.4.126) of its XF
+    /// record and, for a custom format, its format code. The id is one of Excel's built-in
+    /// formats (0 is `General`, 14 a date, ...) unless a code is returned.
+    ///
+    /// `pos` is the absolute `(row, column)`. `None` for a cell that is not a number, an RK value
+    /// or a formula result, and for an unknown sheet.
+    pub fn cell_number_format(&self, sheet: &str, pos: (u32, u32)) -> Option<(u16, Option<&str>)> {
+        let xf = (*self.sheets.get(sheet)?.cell_xfs.get_value(pos)?)?;
+        let ifmt = *self.xf_formats.get(xf as usize)?;
+        Some((ifmt, self.format_codes.get(&ifmt).map(String::as_str)))
+    }
 }
 
 impl<RS: Read + Seek> Reader<RS> for Xls<RS> {
@@ -488,6 +508,7 @@ impl<RS: Read + Seek> Xls<RS> {
         let mut defined_names = Vec::new();
         let mut xtis = Vec::new();
         let mut formats = BTreeMap::new();
+        let mut format_codes = BTreeMap::new();
         let mut xfs = Vec::new();
         let mut biff = Biff::Biff8; // Binary Interchange File Format (BIFF) version
         let codepage = self.options.force_codepage.unwrap_or(1200);
@@ -520,8 +541,9 @@ impl<RS: Read + Seek> Xls<RS> {
                     }
                     // Format (MS-XLS 2.4.126)
                     0x041E => match parse_format(&mut r, &encoding, biff) {
-                        Ok((idx, format)) => {
+                        Ok((idx, format, code)) => {
                             formats.insert(idx, format);
+                            format_codes.insert(idx, code);
                         }
                         Err(e) => log::warn!("{e}"),
                     },
@@ -571,6 +593,8 @@ impl<RS: Read + Seek> Xls<RS> {
                 })
                 .collect();
         }
+        self.xf_formats = xfs.clone();
+        self.format_codes = format_codes;
         self.formats = xfs
             .into_iter()
             .map(|fmt| match formats.get(&fmt) {
@@ -606,6 +630,7 @@ impl<RS: Read + Seek> Xls<RS> {
             let sh = &stream[pos..];
             let records = RecordIter { stream: sh };
             let mut cells = Vec::new();
+            let mut cell_xfs: Vec<Cell<Option<u16>>> = Vec::new();
             let mut formulas = Vec::new();
             let mut fmla_pos = (0, 0);
             let mut merge_cells = Vec::new();
@@ -642,7 +667,12 @@ impl<RS: Read + Seek> Xls<RS> {
                         cells.reserve(rows.saturating_mul(cols).min(1 << 16));
                     }
                     //0x0201 => cells.push(parse_blank(r.data)?), // 513: Blank
-                    0x0203 => cells.push(parse_number(r.data, &self.formats, self.is_1904)?), // 515: Number
+                    0x0203 => {
+                        // 515: Number
+                        let cell = parse_number(r.data, &self.formats, self.is_1904)?;
+                        cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(&r.data[4..]))));
+                        cells.push(cell);
+                    }
                     0x0204 => cells.push(parse_label(r.data, &encoding, biff)?), // 516: Label [MS-XLS 2.4.148]
                     0x00D6 => cells.push(parse_label(r.data, &encoding, biff)?), // RString
                     0x0205 => cells.push(parse_bool_err(r.data)?),               // 517: BoolErr
@@ -651,9 +681,22 @@ impl<RS: Read + Seek> Xls<RS> {
                         let val = Data::String(parse_string(r.data, &encoding, biff)?);
                         cells.push(Cell::new(fmla_pos, val));
                     }
-                    0x027E => cells.push(parse_rk(r.data, &self.formats, self.is_1904)?), // 638: Rk
+                    0x027E => {
+                        // 638: Rk
+                        let cell = parse_rk(r.data, &self.formats, self.is_1904)?;
+                        cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(&r.data[4..]))));
+                        cells.push(cell);
+                    }
                     0x00FD => cells.extend(parse_label_sst(r.data, &strings)?), // LabelSst
-                    0x00BD => parse_mul_rk(r.data, &mut cells, &self.formats, self.is_1904)?, // 189: MulRk
+                    0x00BD => {
+                        // 189: MulRk
+                        let first = cells.len();
+                        parse_mul_rk(r.data, &mut cells, &self.formats, self.is_1904)?;
+                        // each 6-byte RK entry starts with its own XF index
+                        for (cell, rk) in cells[first..].iter().zip(r.data[4..].chunks(6)) {
+                            cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(rk))));
+                        }
+                    }
                     0x00E5 => parse_merge_cells(r.data, &mut merge_cells)?, // 229: Merge Cells
                     0x000A => break,                                        // 10: EOF,
                     0x0006 => {
@@ -674,6 +717,7 @@ impl<RS: Read + Seek> Xls<RS> {
                         {
                             // If the value is a string
                             // it will appear in 0x0207 record coming next
+                            cell_xfs.push(Cell::new(fmla_pos, Some(read_u16(&r.data[4..]))));
                             cells.push(Cell::new(fmla_pos, val));
                         }
                         let fmla = parse_formula(
@@ -698,11 +742,13 @@ impl<RS: Read + Seek> Xls<RS> {
             }
             let range = Range::from_sparse(cells);
             let formula = Range::from_sparse(formulas);
+            let cell_xfs = Range::from_sparse(cell_xfs);
             sheets.insert(
                 name,
                 SheetData {
                     range,
                     formula,
+                    cell_xfs,
                     merge_cells,
                 },
             );
@@ -1171,7 +1217,7 @@ fn parse_format(
     r: &mut Record<'_>,
     encoding: &XlsEncoding,
     biff: Biff,
-) -> Result<(u16, CellFormat), XlsError> {
+) -> Result<(u16, CellFormat, String), XlsError> {
     if r.data.len() < 2 {
         return Err(XlsError::Len {
             typ: "format",
@@ -1186,7 +1232,7 @@ fn parse_format(
     }
 
     let s = parse_string(&r.data[2..], encoding, biff)?;
-    Ok((ifmt, detect_custom_number_format(&s)))
+    Ok((ifmt, detect_custom_number_format(&s), s))
 }
 
 /// Decode `XLUnicodeRichExtendedString` [MS-XLS 2.5.293].

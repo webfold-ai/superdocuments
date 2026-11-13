@@ -117,6 +117,26 @@ impl Formats {
     }
 }
 
+/// What a stored number shows under number format `id` (`custom` is the format code the file
+/// defines for it, if any): the format applied, or the ISO form of a date the format code could not
+/// be applied to. The XLS reader calls this with the ids and codes of its XF and FORMAT records.
+pub(crate) fn display_number(
+    id: u32,
+    custom: Option<&str>,
+    value: f64,
+    date1904: bool,
+) -> Option<String> {
+    let (is_date, date_part, time_part) = classify(id, custom);
+    custom
+        .or_else(|| super::numfmt::builtin(id))
+        .and_then(|code| super::numfmt::format_value(value, code, date1904))
+        .or_else(|| {
+            is_date
+                .then(|| serial_to_text(value, date1904, date_part, time_part))
+                .flatten()
+        })
+}
+
 /// `(is_date, has_date_part, has_time_part)` for a number format.
 fn classify(id: u32, code: Option<&str>) -> (bool, bool, bool) {
     match (id, code) {
