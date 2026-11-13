@@ -158,9 +158,7 @@ fn parse_number_format(code: &str) -> Option<NumberFormat> {
         .iter()
         .position(|c| *c == '0')
         .map_or(0, |first| placeholders.len() - first);
-    let min_decimals = dec_part
-        .rfind(|c| matches!(c, '0' | '?'))
-        .map_or(0, |last| last + 1);
+    let min_decimals = dec_part.rfind(['0', '?']).map_or(0, |last| last + 1);
     Some(NumberFormat {
         min_decimals,
         max_decimals: dec_part.len(),

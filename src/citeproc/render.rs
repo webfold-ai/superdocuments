@@ -78,7 +78,7 @@ pub fn normalize(toks: Toks) -> Toks {
         if let Tok::Text(s) = t {
             let mut n = String::new();
             for c in s.chars() {
-                let sp = c == ' ' || c == '\u{a0}' && false;
+                let sp = c == ' ';
                 if sp && prev_space {
                     continue;
                 }

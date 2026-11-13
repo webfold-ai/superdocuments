@@ -107,16 +107,7 @@ pub fn parse_locator_with(
         let roman =
             label.is_some() && !tok.is_empty() && tok.chars().all(|c| "ivxlcdmIVXLCDM".contains(c));
         if tok.chars().any(|c| c.is_ascii_digit()) || roman {
-            // A trailing full stop ends the sentence, not the number.
-            if tok.ends_with('.')
-                && !tok.trim_end_matches('.').is_empty()
-                && r[n..].starts_with(' ')
-                && false
-            {
-                n - 1
-            } else {
-                n
-            }
+            n
         } else {
             0
         }
@@ -278,9 +269,6 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                 fence = Some(t.chars().take(3).collect());
                 i = (line_end + 1).min(s.len());
                 continue;
-            } else if line.starts_with("    ") && !line.trim().is_empty() && false {
-                i = (line_end + 1).min(s.len());
-                continue;
             }
         }
         line_start = c == '\n';
@@ -322,7 +310,7 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                 if let Some(cl_idx) = close {
                     let inner = &s[i + 1..cl_idx];
                     let next = s[cl_idx + 1..].chars().next();
-                    if inner.contains('@') && next != Some('(') && !(next == Some('[') && false) {
+                    if inner.contains('@') && next != Some('(') {
                         if let Some(c) = parse_bracketed(inner) {
                             out.push(Found {
                                 start: i,

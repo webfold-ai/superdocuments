@@ -1755,13 +1755,11 @@ impl Parser<'_> {
                 if name == "minted" {
                     let _ = self.top().optional_raw();
                     language = self.top().group_raw().map(|s| s.trim().to_string());
-                } else {
-                    if let Some(opts) = self.top().optional_raw() {
-                        language = parse_options(&opts)
-                            .into_iter()
-                            .find(|(k, _)| k == "language")
-                            .map(|(_, v)| v);
-                    }
+                } else if let Some(opts) = self.top().optional_raw() {
+                    language = parse_options(&opts)
+                        .into_iter()
+                        .find(|(k, _)| k == "language")
+                        .map(|(_, v)| v);
                 }
                 let end = format!("\\end{{{name}}}");
                 let (text, found) = self.top().until_raw(&end, false);

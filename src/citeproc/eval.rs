@@ -4,7 +4,7 @@
 use std::collections::HashSet;
 
 use super::reference::{DateValue, Field, Name, Reference};
-use super::style::{text_of, Style};
+use super::style::Style;
 use crate::xmltree::{XElem, XNode};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -273,14 +273,6 @@ fn decorate(e: &XElem, r: &mut R, ctx: &Ctx) {
     r.toks = toks;
 }
 
-fn plural_attr(e: &XElem, count: usize) -> bool {
-    match e.attr("plural") {
-        Some("always") => true,
-        Some("never") => false,
-        _ => count > 1,
-    }
-}
-
 fn eval_text(e: &XElem, ctx: &mut Ctx) -> R {
     let mut r = R::default();
     if let Some(name) = e.attr("macro") {
@@ -492,7 +484,7 @@ fn is_numeric_value(s: &str) -> bool {
     }
     // A number, or a run of numbers joined by ", ", "-", "–" or "&"; a leading or trailing letter
     // is allowed on each (`S12`, `4a`).
-    t.split(|c: char| c == ',' || c == '&' || c == '-' || c == '\u{2013}')
+    t.split([',', '&', '-', '\u{2013}'])
         .map(str::trim)
         .all(|part| {
             !part.is_empty()
@@ -610,11 +602,9 @@ fn page_dash(s: &str) -> String {
         if *c == '-'
             && i > 0
             && i + 1 < chars.len()
-            && chars[i - 1].is_ascii_alphanumeric()
-            && chars[i + 1].is_ascii_alphanumeric()
+            && ((chars[i - 1].is_ascii_alphanumeric() && chars[i + 1].is_ascii_alphanumeric())
+                || chars[i - 1] == ' ')
         {
-            out.push('\u{2013}');
-        } else if *c == '-' && i > 0 && i + 1 < chars.len() && chars[i - 1] == ' ' {
             out.push('\u{2013}');
         } else {
             out.push(*c);
@@ -636,7 +626,7 @@ pub(crate) fn format_page_ranges(s: &str, format: &str) -> String {
         let t = p.trim();
         let lead = &p[..p.len() - p.trim_start().len()];
         out.push_str(lead);
-        let dash = t.find(|c| c == '-' || c == '\u{2013}');
+        let dash = t.find(['-', '\u{2013}']);
         match dash {
             Some(i) if i > 0 => {
                 let width = t[i..].chars().next().map_or(1, char::len_utf8);
@@ -763,8 +753,7 @@ fn label_is_plural(var: &str, value: &str) -> bool {
         }
         _ => {
             let numberish = value.chars().any(|c| c.is_alphanumeric());
-            numberish
-                && value.contains(|c: char| c == '-' || c == '\u{2013}' || c == ',' || c == '&')
+            numberish && value.contains(['-', '\u{2013}', ',', '&'])
         }
     }
 }
@@ -1583,9 +1572,7 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
     }
     // author-only: the author names are captured; suppress-author: they are dropped (citations).
     if is_author_names {
-        if ctx.names_seen < usize::MAX {
-            ctx.names_seen += 1;
-        }
+        ctx.names_seen = ctx.names_seen.saturating_add(1);
         if ctx.item.author_only && ctx.captured.is_none() && !out.toks.is_empty() {
             ctx.captured = Some(out.toks.clone());
         }
@@ -1738,13 +1725,13 @@ fn name_toks(
     };
     let mut family_tok = {
         let mut r = R {
-            toks: text(if n.non_dropping_particle.is_empty() {
-                n.family.clone()
-            } else if o.demote && invert {
-                n.family.clone()
-            } else {
-                format!("{} {}", n.non_dropping_particle, n.family)
-            }),
+            toks: text(
+                if n.non_dropping_particle.is_empty() || (o.demote && invert) {
+                    n.family.clone()
+                } else {
+                    format!("{} {}", n.non_dropping_particle, n.family)
+                },
+            ),
             called: 0,
             found: 0,
             hidden: false,
@@ -1835,8 +1822,4 @@ pub fn plain(toks: &[Tok]) -> String {
             _ => None,
         })
         .collect()
-}
-
-pub(crate) fn child_text(e: &XElem) -> String {
-    text_of(e)
 }
