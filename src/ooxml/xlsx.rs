@@ -6,10 +6,13 @@
 //! booleans as `TRUE`/`FALSE`, inline and rich-text strings as text with phonetic guides left
 //! out, errors as written, and a formula that was never calculated as `=formula`.
 //!
-//! Numbers are shown the way the cell's number format shows them (`0.0`, `#,##0.00`, `0%`,
-//! `mmm-yyyy`, ...; see `numfmt`), after Excel's rounding of a stored double to 15 digits. A
-//! format that is not implemented (conditions, fractions, scientific) keeps the number as
-//! stored, a date in ISO form. `read_typed` returns each cell's typed value next to its display.
+//! A number is shown the way its format shows it. Plain formats (a fixed number of decimals, a
+//! thousands separator, a percentage, a currency symbol or other text around the number: `0.00`,
+//! `#,##0.0`, `0.0%`, `$#,##0.00`, `"EUR "0`) go through `format_number` below. Everything else
+//! `numfmt` can read (General, sections, date and time codes such as `mmm-yyyy`) is applied
+//! after Excel's rounding of a stored double to 15 digits. A format neither implements
+//! (scientific, fractions, conditions) leaves the number as stored and a date in ISO form.
+//! `read_typed` returns each cell's typed value next to its display.
 
 use std::collections::HashMap;
 
@@ -45,7 +48,180 @@ pub(crate) struct Formats {
     xfs: Vec<(bool, bool, bool)>,
     /// Per `cellXfs` index: the format code, when it is custom or a locale-independent built-in.
     codes: Vec<Option<String>>,
+    /// Per `cellXfs` index: the plain number format, when it has one.
+    numbers: Vec<Option<NumberFormat>>,
     pub date1904: bool,
+}
+
+/// A plain number format: what `format_number` can reproduce exactly.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub(crate) struct NumberFormat {
+    min_decimals: usize,
+    max_decimals: usize,
+    min_integer_digits: usize,
+    thousands: bool,
+    percent: bool,
+    prefix: String,
+    suffix: String,
+}
+
+/// The built-in number formats that are plain (ids 1-4, 9, 10).
+fn builtin_number_format(id: u32) -> Option<&'static str> {
+    Some(match id {
+        1 => "0",
+        2 => "0.00",
+        3 => "#,##0",
+        4 => "#,##0.00",
+        9 => "0%",
+        10 => "0.00%",
+        _ => return None,
+    })
+}
+
+/// Parses the first section of a format code. `None` when the code is not a plain number format.
+fn parse_number_format(code: &str) -> Option<NumberFormat> {
+    let mut spec = String::new();
+    let (mut prefix, mut suffix) = (String::new(), String::new());
+    let mut seen_spec = false;
+    let mut chars = code.chars().peekable();
+    while let Some(c) = chars.next() {
+        let literal = match c {
+            ';' => break,
+            '"' => {
+                let mut text = String::new();
+                for q in chars.by_ref() {
+                    if q == '"' {
+                        break;
+                    }
+                    text.push(q);
+                }
+                text
+            }
+            '\\' => chars.next().map(String::from).unwrap_or_default(),
+            '_' => {
+                chars.next();
+                " ".to_owned()
+            }
+            '*' => {
+                chars.next();
+                String::new()
+            }
+            '[' => {
+                let mut inner = String::new();
+                for q in chars.by_ref() {
+                    if q == ']' {
+                        break;
+                    }
+                    inner.push(q);
+                }
+                match inner.strip_prefix('$') {
+                    Some(currency) => currency.split('-').next().unwrap_or("").to_owned(),
+                    None if inner.chars().all(|q| q.is_ascii_alphabetic()) => String::new(), // [Red]
+                    None => return None,
+                }
+            }
+            '0' | '#' | '?' | ',' | '.' | '%' => {
+                spec.push(c);
+                seen_spec = true;
+                continue;
+            }
+            // scientific, fractions, General, text and date codes are not plain number formats
+            c if c.is_ascii_alphabetic() || c == '/' || c == '@' => return None,
+            other => other.to_string(),
+        };
+        if seen_spec {
+            suffix.push_str(&literal);
+        } else {
+            prefix.push_str(&literal);
+        }
+    }
+    if !spec.chars().any(|c| matches!(c, '0' | '#' | '?')) {
+        return None;
+    }
+    let percent = spec.contains('%');
+    let spec = spec.replace('%', "");
+    let (int_part, dec_part) = match spec.split_once('.') {
+        Some((i, d)) => (i.to_owned(), d.to_owned()),
+        None => (spec.clone(), String::new()),
+    };
+    // a comma after the last digit placeholder scales by 1000
+    if int_part.ends_with(',') && dec_part.is_empty() || dec_part.contains(',') {
+        return None;
+    }
+    if dec_part.chars().any(|c| c == ',' || c == '.') || int_part.contains('.') {
+        return None;
+    }
+    // Mandatory digits: in the integer part everything from the leftmost `0` to the end (`0#` shows
+    // 1 as `01`), in the decimals everything up to the last `0` or `?`.
+    let placeholders: Vec<char> = int_part.chars().filter(|c| *c != ',').collect();
+    let min_integer_digits = placeholders
+        .iter()
+        .position(|c| *c == '0')
+        .map_or(0, |first| placeholders.len() - first);
+    let min_decimals = dec_part
+        .rfind(|c| matches!(c, '0' | '?'))
+        .map_or(0, |last| last + 1);
+    Some(NumberFormat {
+        min_decimals,
+        max_decimals: dec_part.len(),
+        min_integer_digits,
+        thousands: int_part.contains(','),
+        percent,
+        prefix,
+        suffix,
+    })
+}
+
+/// A number as its plain format shows it. `None` when the value is not finite.
+fn format_number(value: f64, format: &NumberFormat) -> Option<String> {
+    if !value.is_finite() {
+        return None;
+    }
+    let value = if format.percent { value * 100.0 } else { value };
+    let mut text = format!("{:.*}", format.max_decimals, value.abs());
+    if format.max_decimals > format.min_decimals {
+        while text.ends_with('0')
+            && text.len() - text.find('.').unwrap_or(text.len()) - 1 > format.min_decimals
+        {
+            text.pop();
+        }
+        if text.ends_with('.') {
+            text.pop();
+        }
+    }
+    let (integer, decimals) = match text.split_once('.') {
+        Some((i, d)) => (i.to_owned(), Some(d.to_owned())),
+        None => (text, None),
+    };
+    let integer = format!(
+        "{integer:0>width$}",
+        width = format.min_integer_digits.max(1)
+    );
+    let integer = if format.thousands {
+        let mut grouped = String::new();
+        for (i, c) in integer.chars().enumerate() {
+            if i > 0 && (integer.len() - i) % 3 == 0 {
+                grouped.push(',');
+            }
+            grouped.push(c);
+        }
+        grouped
+    } else {
+        integer
+    };
+    let negative = value < 0.0
+        && format!("{:.*}", format.max_decimals, value.abs())
+            .chars()
+            .any(|c| c.is_ascii_digit() && c != '0');
+    Some(format!(
+        "{}{}{}{}{}{}",
+        if negative { "-" } else { "" },
+        format.prefix,
+        integer,
+        decimals.map(|d| format!(".{d}")).unwrap_or_default(),
+        if format.percent { "%" } else { "" },
+        format.suffix
+    ))
 }
 
 impl Formats {
@@ -55,6 +231,7 @@ impl Formats {
         let mut custom: HashMap<u32, String> = HashMap::new();
         let mut xfs = Vec::new();
         let mut codes = Vec::new();
+        let mut numbers = Vec::new();
         let mut in_cell_xfs = false;
         loop {
             match reader
@@ -75,7 +252,15 @@ impl Formats {
                         let id: u32 = attr_local(&tag, "numFmtId")
                             .and_then(|v| v.parse().ok())
                             .unwrap_or(0);
-                        xfs.push(classify(id, custom.get(&id).map(String::as_str)));
+                        let code = custom.get(&id).map(String::as_str);
+                        let classified = classify(id, code);
+                        numbers.push(if classified.0 {
+                            None
+                        } else {
+                            code.or_else(|| builtin_number_format(id))
+                                .and_then(parse_number_format)
+                        });
+                        xfs.push(classified);
                         codes.push(
                             custom
                                 .get(&id)
@@ -94,18 +279,31 @@ impl Formats {
         Ok(Self {
             xfs,
             codes,
+            numbers,
             date1904: false,
         })
     }
 
     /// What the cell style shows for a number; `None` when the style has no usable format code.
     fn display(&self, style: Option<usize>, value: f64) -> Option<String> {
+        // A plain number format first; the other formats `numfmt` reads second.
+        if let Some(format) = self.number(style) {
+            if let Some(shown) = format_number(value, format) {
+                return Some(shown);
+            }
+        }
         // No style (or style 0 with no code) is the General format.
         let code = match style {
             Some(s) => self.codes.get(s)?.as_deref()?,
             None => "General",
         };
         super::numfmt::format_value(value, code, self.date1904)
+    }
+
+    fn number(&self, style: Option<usize>) -> Option<&NumberFormat> {
+        style
+            .and_then(|s| self.numbers.get(s))
+            .and_then(Option::as_ref)
     }
 
     fn of(&self, style: Option<usize>) -> (bool, bool, bool) {
@@ -726,5 +924,63 @@ mod tests {
         )
         .unwrap();
         assert_eq!(rows, vec![vec!["45000", "2023-03-15", "2023-03-15"]]);
+    }
+}
+
+#[cfg(test)]
+mod number_format_tests {
+    use super::*;
+
+    fn shown(code: &str, value: f64) -> Option<String> {
+        format_number(value, &parse_number_format(code)?)
+    }
+
+    #[test]
+    fn plain_number_formats_are_applied() {
+        assert_eq!(shown("0.0%", 0.125).as_deref(), Some("12.5%"));
+        assert_eq!(shown("0%", 0.5).as_deref(), Some("50%"));
+        assert_eq!(shown("#,##0.00", 1234.5).as_deref(), Some("1,234.50"));
+        assert_eq!(shown("#,##0", 1234567.0).as_deref(), Some("1,234,567"));
+        assert_eq!(shown("0.00", 99.0).as_deref(), Some("99.00"));
+        assert_eq!(shown("0.0#", 2.5).as_deref(), Some("2.5"));
+        assert_eq!(shown("000", 7.0).as_deref(), Some("007"));
+        // `0#` shows 1 as 01; a literal around the digits is kept (docling xlsx_07_gap_tolerance, LibreOffice shows 1.01)
+        assert_eq!(shown("0#", 1.0).as_deref(), Some("01"));
+        assert_eq!(shown("\\1\\.0#", 1.0).as_deref(), Some("1.01"));
+        assert_eq!(shown("#,##0", 0.4).as_deref(), Some("0"));
+        assert_eq!(shown("$#,##0.00", 1234.5).as_deref(), Some("$1,234.50"));
+        assert_eq!(shown("\"EUR \"0.00", 3.0).as_deref(), Some("EUR 3.00"));
+        assert_eq!(shown("[$€-407]#,##0.00", 10.0).as_deref(), Some("€10.00"));
+        assert_eq!(shown("#,##0.00", -1234.5).as_deref(), Some("-1,234.50"));
+        assert_eq!(shown("0.00;[Red]-0.00", 2.0).as_deref(), Some("2.00"));
+    }
+
+    #[test]
+    fn other_formats_leave_the_number_alone() {
+        for code in [
+            "General",
+            "0.00E+00",
+            "# ?/?",
+            "@",
+            "yyyy-mm-dd",
+            "#,##0,",
+            "0.0,",
+        ] {
+            assert_eq!(parse_number_format(code), None, "{code}");
+        }
+    }
+
+    #[test]
+    fn cells_use_their_style_number_format() {
+        let styles = br#"<styleSheet><numFmts><numFmt numFmtId="164" formatCode="0.0%"/><numFmt numFmtId="165" formatCode="yyyy-mm-dd"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="164"/><xf numFmtId="4"/><xf numFmtId="165"/></cellXfs></styleSheet>"#;
+        let formats = Formats::parse(styles).unwrap();
+        let sheet = br#"<worksheet><sheetData><row r="1"><c r="A1" s="1"><v>0.125</v></c><c r="B1" s="2"><v>1234.5</v></c><c r="C1" s="3"><v>45000</v></c><c r="D1"><v>0.30000000000000004</v></c></row></sheetData></worksheet>"#;
+        let rows = worksheet(sheet, &[], &formats).unwrap();
+        assert_eq!(
+            rows[0],
+            // a General cell shows 15 significant digits, as Excel does (the stored text stays in
+            // `CellValue::Number::raw`)
+            ["12.5%", "1,234.50", "2023-03-15", "0.3"]
+        );
     }
 }

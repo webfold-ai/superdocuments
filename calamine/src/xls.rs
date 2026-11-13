@@ -1092,7 +1092,8 @@ fn parse_dimensions(r: &[u8]) -> Result<Dimensions, XlsError> {
             read_u16(&r[4..6]) as u32,
             read_u16(&r[6..8]) as u32,
         ),
-        14 => (
+        // 14 bytes is the BIFF8 record; some writers append two bytes (16), which carry nothing
+        14.. => (
             read_u32(&r[0..4]),
             read_u32(&r[4..8]),
             read_u16(&r[8..10]) as u32,
@@ -2006,6 +2007,19 @@ fn parse_pictures(stream: &[u8]) -> Result<Vec<(String, Vec<u8>)>, XlsError> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A DIMENSIONS record of 16 bytes (two more than BIFF8 defines) is read like the 14-byte one;
+    /// it used to fail the whole workbook (upstream tests/dimensions_16_bytes.xls).
+    #[test]
+    fn dimensions_record_with_trailing_bytes_is_read() {
+        let mut record = vec![0u8; 16];
+        record[4..8].copy_from_slice(&5u32.to_le_bytes()); // last row + 1
+        record[10..12].copy_from_slice(&3u16.to_le_bytes()); // last column + 1
+        let d = parse_dimensions(&record).unwrap();
+        assert_eq!((d.start, d.end), ((0, 0), (4, 2)));
+        parse_dimensions(&record[..14]).unwrap();
+        parse_dimensions(&record[..12]).unwrap_err();
+    }
 
     #[test]
     fn test_parse_string() {

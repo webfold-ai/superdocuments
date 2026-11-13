@@ -1,0 +1,50 @@
+name: Tag a release
+
+# Creates the `vX.Y.Z` tag for a commit on main, from CI. Tags created here with GITHUB_TOKEN do not start the
+# tag-triggered Release workflow (GitHub does not run workflows for events caused by GITHUB_TOKEN); run that
+# separately if release assets are wanted.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to create, e.g. v0.9.0 (must equal the crate version at the commit)"
+        required: true
+      sha:
+        description: "Full commit SHA to tag (must be reachable from main)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    name: Create the tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Check the commit and the tag
+        env:
+          TAG: ${{ inputs.tag }}
+          SHA: ${{ inputs.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "tag must look like v1.2.3"; exit 1; }
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "sha must be a full 40-character commit id"; exit 1; }
+          git merge-base --is-ancestor "$SHA" origin/main || { echo "$SHA is not on main"; exit 1; }
+          version=$(git show "$SHA:Cargo.toml" | sed -n 's/^version = "\([^"]*\)"$/\1/p' | head -n 1)
+          [ "v$version" = "$TAG" ] || { echo "crate version at $SHA is $version, not ${TAG#v}"; exit 1; }
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "$TAG already exists"; exit 1
+          fi
+      - name: Create and push the tag
+        env:
+          TAG: ${{ inputs.tag }}
+          SHA: ${{ inputs.sha }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "$TAG"
+          git push origin "refs/tags/$TAG"
