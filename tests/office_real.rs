@@ -228,3 +228,17 @@ fn odp_written_by_libreoffice_has_titles_and_nested_bullets() {
     );
     assert!(md.contains("## Slide 2: Timeline"), "{md}");
 }
+
+/// A span that holds only a space (`<text:span> </text:span>`) separates the words around it, and a
+/// span that ends in a space keeps it. The reader trimmed every span, which wrote `**Lorem Ipsum**is`
+/// (Docling's text_document_02.odt).
+#[test]
+fn odt_spans_keep_the_whitespace_between_words() {
+    let md = convert("odt-span-space.odt");
+    assert!(md.contains("**Lorem Ipsum** is simply dummy text"), "{md}");
+    assert!(
+        md.contains("[the page](https://example.org/x) afterwards."),
+        "{md}"
+    );
+    assert!(md.contains("One two"), "{md}");
+}
