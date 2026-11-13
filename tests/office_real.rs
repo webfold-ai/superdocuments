@@ -241,4 +241,13 @@ fn odt_spans_keep_the_whitespace_between_words() {
         "{md}"
     );
     assert!(md.contains("One two"), "{md}");
+
+/// A SmartArt diagram keeps its text in a data part the slide points to (`dgm:relIds r:dm`); a slide
+/// that holds only a diagram came out empty (LibreOffice sd/qa Horizontal_Organization_Chart.pptx, MPL-2.0).
+#[test]
+fn pptx_smartart_text_is_read() {
+    let md = convert("smartart-org-chart.pptx");
+    for node in ["One", "Two", "Assistent", "Eleven", "Sekretärin", "Twelve"] {
+        assert!(md.contains(&format!("- {node}")), "{node}: {md}");
+    }
 }
