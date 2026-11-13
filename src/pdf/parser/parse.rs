@@ -1162,8 +1162,11 @@ fn continues_paragraph(cur: &Para, lines: &[Line], i: usize, geo: &[Geo], headin
     let t = l.text.trim_start();
     let bullet = t.starts_with(['\u{2022}', '\u{25cf}', '\u{25aa}', '-', '\u{2013}', '*'])
         && t.chars().nth(1).is_some_and(char::is_whitespace);
-    if bullet || starts_numbering(t) {
+    if bullet || starts_numbering(t) || starts_section_number(t) {
         return false;
+    }
+    if cur.text.contains(".....") {
+        return false; // contents lines with dot leaders: one entry per line
     }
     let prev = cur.text.trim_end();
     let ends_sentence =
@@ -1175,6 +1178,19 @@ fn continues_paragraph(cur: &Para, lines: &[Line], i: usize, geo: &[Geo], headin
     }
     // a first-line indent after a finished sentence starts a new paragraph
     !(ends_sentence && gl.x0 > cur.left + 0.9 * size)
+}
+
+/// A section number then a capitalised word (`8A Transfer of`, `12 Publication`): the next entry of a
+/// contents list or the next section of an Act, not a wrapped line.
+fn starts_section_number(t: &str) -> bool {
+    let digits = t.chars().take_while(char::is_ascii_digit).count();
+    if digits == 0 || digits > 4 {
+        return false;
+    }
+    let rest = &t[digits..];
+    let letters = rest.chars().take_while(char::is_ascii_uppercase).count();
+    let rest = &rest[letters..];
+    letters <= 2 && rest.starts_with(' ') && rest.trim_start().starts_with(char::is_uppercase)
 }
 
 /// `(a)`, `(12)`, `1.`, `12)`, `iv.` at the start of a line: a numbered or lettered item.

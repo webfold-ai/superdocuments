@@ -1009,3 +1009,18 @@ fn a_new_baseline_far_below_starts_a_new_paragraph() {
         "lines a hundred points apart were joined: {md:?}"
     );
 }
+
+#[test]
+fn contents_entries_and_numbered_sections_are_not_wrapped_lines() {
+    // Contents entries are full-width lines ending in a page number, and a line that opens with a section
+    // number and a capitalised word starts a new paragraph; neither is a wrapped line of the one before.
+    let md = text_of(&lines_pdf(&[
+        (700, "8A Transfer of Census information ........ 4"),
+        (686, "8B Another entry of the contents list ..... 5"),
+        (640, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (626, "9B Publication of statistics follows here"),
+    ]))
+    .expect("PDF");
+    assert!(md.contains("........ 4\n\n8B Another"), "{md:?}");
+    assert!(md.contains("hhhh\n\n9B Publication"), "{md:?}");
+}
