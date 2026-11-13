@@ -1030,14 +1030,13 @@ impl Reader {
             (from..n)
                 .find(|&f| is_simple_border(&lines[f]) && (f + 1 >= n || is_blank(&lines[f + 1])))
         };
-        let headed = (start + 2 < n)
-            .then(|| border_columns(&lines[start + 2], &['=', '-']))
-            .flatten()
-            .and_then(|cols| {
-                closes_at(start + 3)
-                    .filter(|f| *f > start + 3)
-                    .map(|f| (cols, f))
-            });
+        let headed = if start + 2 < n {
+            let sep = border_columns(&lines[start + 2], &['=', '-']);
+            let close = closes_at(start + 3).filter(|f| *f > start + 3);
+            sep.zip(close)
+        } else {
+            None
+        };
         let (cols, header, first_row, close) = match headed {
             Some((cols, close)) => (cols, Some(start + 1), start + 3, close),
             None => {
@@ -1431,12 +1430,14 @@ impl Reader {
             self.notes.get(label.trim_start_matches('#')).cloned()
         } else {
             // A citation reference: a link to the definition.
+            if !self.notes.contains_key(label) {
+                return None;
+            }
             return Some(Inline::Link {
                 url: format!("#{label}"),
                 title: None,
                 inlines: vec![Inline::Verbatim(format!("\\[{label}\\]"))],
-            })
-            .filter(|_| self.notes.contains_key(label));
+            });
         };
         let content = content?;
         let blocks = self.blocks(&content, 0);

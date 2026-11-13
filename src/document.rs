@@ -193,7 +193,7 @@ fn decode_csv(data: &[u8]) -> Result<String, String> {
     if data.starts_with(&[0xff, 0xfe]) || data.starts_with(&[0xfe, 0xff]) {
         let little = data[0] == 0xff;
         let payload = &data[2..];
-        if payload.len() % 2 != 0 {
+        if payload.len() % 2 == 1 {
             return Err("odd UTF-16 CSV byte length".into());
         }
         let units: Vec<u16> = payload
