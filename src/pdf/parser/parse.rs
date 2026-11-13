@@ -344,6 +344,10 @@ fn num(t: &Tok) -> Option<f64> {
 /// Is this line a heading? Three signals, any of which suffices: a font **larger** than the body, a
 /// **bold** short title line, or a **numbered section** (`11 …`, `1.2 …`, `3.1.4 …`). Each is gated to
 /// short, lettered lines that don't read as a full sentence — so body text and captions don't trip it.
+fn exp(name: &str) -> bool {
+    std::env::var("SD_EXP").is_ok_and(|v| v.split(',').any(|x| x == name))
+}
+
 fn is_heading(l: &str, size: f64, bold: bool, body: f64) -> bool {
     let n = l.chars().count();
     if n == 0 || n >= 150 || !l.chars().any(|c| c.is_alphabetic()) {
@@ -352,6 +356,9 @@ fn is_heading(l: &str, size: f64, bold: bool, body: f64) -> bool {
     if body > 0.0 && size > body * 1.15 {
         return true;
     } // larger than body
+    if exp("h_nobold") {
+        return n < 90 && is_section_heading(l);
+    }
     if bold && n < 90 && !l.ends_with('.') {
         return true;
     } // bold short title
@@ -742,7 +749,9 @@ fn add_cand(out: &mut Vec<Cand>, lines: &[Line], rowys: Vec<f64>, colxs: Vec<f64
     // read: text actually inside it (`fill ≥ 15`) and rows that span columns (`multi_col ≥ 50`). The
     // strict prose gate (`avg_cell ≤ 24`) wrongly killed real tables with long cells, so it's dropped
     // here. A BORDERLESS region (gutters only) keeps the strict gate — that's where false positives live.
-    let geo_ok = if ruled {
+    let geo_ok = if exp("t_ruled_only") && !ruled {
+        false
+    } else if ruled {
         st.fill_pct >= 15 && st.multi_col_pct >= 50
     } else {
         st.fill_pct >= 50 && st.multi_col_pct >= 50 && st.avg_cell <= 24
@@ -999,6 +1008,154 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
         i += 1;
     }
 }
+
+/// One line's footprint on the page, for [`reading_order`].
+#[derive(Clone, Copy)]
+struct Foot {
+    i: usize,
+    y: f64,
+    size: f64,
+    x0: f64,
+    x1: f64,
+}
+
+/// Put a page's lines in reading order. Content streams list text in the order the writer drew it, which
+/// is the reading order for most TeX and single-column output and is not for text boxes, tagged-PDF
+/// exports and slide decks. This is the recursive XY cut: within a region, split at the empty vertical
+/// gutters (columns, left to right) if there are any, else at the empty horizontal bands (top to bottom),
+/// and recurse; a region that no longer splits is read top to bottom, left to right within a baseline.
+/// Image markers keep their place in the stream and divide the page into independent runs. Table
+/// regions are unaffected: a ruled or aligned row is one line whose extent crosses its own gutters.
+fn reading_order(lines: Vec<Line>) -> Vec<Line> {
+    if exp("no_ro") || lines.len() < 3 || lines.len() > 20_000 {
+        return lines;
+    }
+    let mut order: Vec<usize> = Vec::with_capacity(lines.len());
+    let mut run: Vec<Foot> = Vec::new();
+    let flush = |run: &mut Vec<Foot>, order: &mut Vec<usize>| {
+        if run.is_empty() {
+            return;
+        }
+        let mut sizes: Vec<f64> = run.iter().map(|f| f.size).filter(|s| *s > 0.0).collect();
+        sizes.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+        let m = sizes.get(sizes.len() / 2).copied().unwrap_or(10.0).max(1.0);
+        xy_cut(std::mem::take(run), m, 0, order);
+    };
+    for (i, l) in lines.iter().enumerate() {
+        if l.text.starts_with('\u{0}') {
+            flush(&mut run, &mut order);
+            order.push(i);
+            continue;
+        }
+        let (mut x0, mut x1) = (f64::MAX, f64::MIN);
+        for s in &l.segs {
+            x0 = x0.min(s.0.min(s.1));
+            x1 = x1.max(s.0.max(s.1));
+        }
+        if !(x0.is_finite() && x1.is_finite() && x1 >= x0 && l.y.is_finite()) {
+            // an unplaceable line (no segments, or a degenerate matrix): keep the stream order for the page
+            return lines;
+        }
+        run.push(Foot { i, y: l.y, size: l.size.abs(), x0, x1 });
+    }
+    flush(&mut run, &mut order);
+    let mut slots: Vec<Option<Line>> = lines.into_iter().map(Some).collect();
+    order.into_iter().filter_map(|i| slots[i].take()).collect()
+}
+
+fn xy_cut(items: Vec<Foot>, m: f64, depth: u32, out: &mut Vec<usize>) {
+    if items.len() < 2 || depth > 24 {
+        leaf_order(items, m, out);
+        return;
+    }
+    // Columns: gutters in the x projection of the lines' extents, each at least `gutter` wide, with at
+    // least `min_side` lines on both sides (a margin number or a page number is not a column).
+    let gutter = exp_f("ro_gutter", 0.9) * m;
+    let mut by_x = items.clone();
+    by_x.sort_by(|a, b| a.x0.partial_cmp(&b.x0).unwrap_or(std::cmp::Ordering::Equal));
+    let mut groups: Vec<Vec<Foot>> = vec![vec![by_x[0]]];
+    let mut reach = by_x[0].x1;
+    for f in &by_x[1..] {
+        if f.x0 > reach + gutter {
+            groups.push(Vec::new());
+        }
+        groups.last_mut().unwrap().push(*f);
+        reach = reach.max(f.x1);
+    }
+    let min_side = exp_f("ro_min_side", 2.0) as usize;
+    // merge groups that are too small into the previous (or next) group, then cut if two or more remain
+    let mut merged: Vec<Vec<Foot>> = Vec::new();
+    for g in groups {
+        match merged.last_mut() {
+            Some(prev) if prev.len() < min_side || g.len() < min_side => prev.extend(g),
+            _ => merged.push(g),
+        }
+    }
+    // Only prose columns are read column by column. A group of short lines is a table's column (or a
+    // sidebar of labels), and a table is read across its rows, so such a split is refused.
+    let minw = exp_f("ro_minw", 15.0) * m;
+    let prose = |g: &Vec<Foot>| {
+        let mut w: Vec<f64> = g.iter().map(|f| f.x1 - f.x0).collect();
+        w.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
+        w[w.len() / 2] >= minw
+    };
+    if merged.len() >= 2 && merged.iter().all(prose) {
+        for g in merged {
+            xy_cut(g, m, depth + 1, out);
+        }
+        return;
+    }
+    // Bands: horizontal gaps wider than `band` with nothing crossing them.
+    let band = exp_f("ro_band", 0.6) * m;
+    let mut by_top = items.clone();
+    by_top.sort_by(|a, b| {
+        (b.y + 0.8 * b.size.max(m * 0.5)).partial_cmp(&(a.y + 0.8 * a.size.max(m * 0.5))).unwrap_or(std::cmp::Ordering::Equal)
+    });
+    let mut bands: Vec<Vec<Foot>> = vec![vec![by_top[0]]];
+    let mut low = by_top[0].y - 0.25 * by_top[0].size.max(m * 0.5);
+    for f in &by_top[1..] {
+        let top = f.y + 0.8 * f.size.max(m * 0.5);
+        if top < low - band {
+            bands.push(Vec::new());
+            low = f64::MAX;
+        }
+        bands.last_mut().unwrap().push(*f);
+        low = low.min(f.y - 0.25 * f.size.max(m * 0.5));
+    }
+    if bands.len() >= 2 {
+        for g in bands {
+            xy_cut(g, m, depth + 1, out);
+        }
+        return;
+    }
+    leaf_order(items, m, out);
+}
+
+/// A region that does not split: top to bottom, and left to right among lines on one baseline.
+fn leaf_order(mut items: Vec<Foot>, m: f64, out: &mut Vec<usize>) {
+    items.sort_by(|a, b| b.y.partial_cmp(&a.y).unwrap_or(std::cmp::Ordering::Equal));
+    let mut k = 0;
+    while k < items.len() {
+        let y0 = items[k].y;
+        let tol = 0.3 * items[k].size.max(m * 0.5);
+        let mut j = k + 1;
+        while j < items.len() && (y0 - items[j].y).abs() <= tol {
+            j += 1;
+        }
+        let band = &mut items[k..j];
+        band.sort_by(|a, b| a.x0.partial_cmp(&b.x0).unwrap_or(std::cmp::Ordering::Equal).then(a.i.cmp(&b.i)));
+        out.extend(band.iter().map(|f| f.i));
+        k = j;
+    }
+}
+
+fn exp_f(name: &str, default: f64) -> f64 {
+    std::env::var("SD_EXPV")
+        .ok()
+        .and_then(|v| v.split(',').find_map(|kv| kv.strip_prefix(&format!("{name}="))?.parse().ok()))
+        .unwrap_or(default)
+}
+
 /// PDF string bytes → text. Latin-1 for now (each byte a char); the CMap glyph→unicode is wave 3.
 fn decode_str(s: &[u8]) -> String {
     s.iter().map(|&b| b as char).collect()
@@ -1084,6 +1241,7 @@ impl Document {
                     .into_iter()
                     .filter(|l| !l.text.trim().is_empty())
                     .collect();
+                let lines = reading_order(lines);
                 pdata.push((lines, extract_rules(&content)));
             }
         }
@@ -1659,6 +1817,15 @@ fn extract_text(
                     }
                 }
                 "BT" => {
+                    // Writers that wrap every span in its own BT..ET (tagged PDF, Word, Acrobat) put one
+                    // line in many text objects. A text object that opens under the same CTM as the last
+                    // one is a continuation: the pen keeps its line, and the baseline test in `show`
+                    // decides whether this run starts a new one. A different CTM means a different frame,
+                    // so the line ends here.
+                    if exp("et_flush") || ctm != text_ctm {
+                        p.flush();
+                        p.started = false;
+                    }
                     text_ctm = ctm;
                     p.x = 0.0;
                     p.y = 0.0;
@@ -1666,11 +1833,12 @@ fn extract_text(
                     p.ly = 0.0;
                     p.a = 1.0;
                     p.d = 1.0;
-                    p.started = false;
                 }
                 "ET" => {
-                    p.flush();
-                    p.started = false;
+                    if exp("et_flush") {
+                        p.flush();
+                        p.started = false;
+                    }
                 }
                 "Tf" => {
                     if let Some(Tok::Name(n)) = ops.iter().find(|t| matches!(t, Tok::Name(_))) {
