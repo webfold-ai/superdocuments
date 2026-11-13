@@ -97,6 +97,9 @@ impl<'a> Ctx<'a> {
 /// The result of evaluating one element.
 #[derive(Debug, Default, Clone)]
 pub struct R {
+    /// Set when the element found its content but it is not shown (a suppressed author):
+    /// a `substitute` stops there instead of trying its next child.
+    pub hidden: bool,
     pub toks: Toks,
     /// Variables the element (or a macro it called) looked at, and how many had a value.
     pub called: usize,
@@ -237,6 +240,10 @@ fn decorate(e: &XElem, r: &mut R, ctx: &Ctx) {
         _ => {}
     }
     let _ = ctx;
+    // `display` blocks (`left-margin`, `right-inline`) are separate boxes: a space apart in text.
+    if matches!(e.attr("display"), Some("left-margin") | Some("block") | Some("indent")) {
+        toks.push(Tok::Text(" ".into()));
+    }
     if let Some(p) = e.attr("prefix") {
         toks.insert(0, Tok::Text(p.to_string()));
     }
@@ -617,20 +624,42 @@ fn label_is_plural(var: &str, value: &str) -> bool {
     match var {
         "number-of-pages" | "number-of-volumes" => value.trim().parse::<u64>().map(|n| n != 1).unwrap_or(false),
         _ => {
-            let digits = value.chars().filter(|c| c.is_ascii_digit()).count();
-            digits > 0 && value.contains(|c: char| c == '-' || c == '\u{2013}' || c == ',' || c == '&')
+            let numberish = value.chars().any(|c| c.is_alphanumeric());
+            numberish && value.contains(|c: char| c == '-' || c == '\u{2013}' || c == ',' || c == '&')
         }
     }
 }
 
 // ---- groups and conditions --------------------------------------------------------------------
 
+/// The outputs of an element as the items of the group it stands in: the selected branch of a
+/// `choose` counts as several items of that group, so the group's delimiter goes between them.
+fn eval_items(e: &XElem, ctx: &mut Ctx) -> Vec<R> {
+    if e.name != "choose" {
+        return vec![eval(e, ctx)];
+    }
+    for c in e.elems() {
+        let selected = match c.name.as_str() {
+            "if" | "else-if" => test_element(c, ctx).unwrap_or(false),
+            "else" => true,
+            _ => false,
+        };
+        if selected {
+            let mut items = Vec::new();
+            for k in c.elems() {
+                items.extend(eval_items(k, ctx));
+            }
+            return items;
+        }
+    }
+    Vec::new()
+}
+
 fn eval_group(e: &XElem, ctx: &mut Ctx) -> R {
     let delim = e.attr("delimiter").unwrap_or("");
     let mut out = R::default();
     let mut first = true;
-    for c in e.elems() {
-        let r = eval(c, ctx);
+    for r in e.elems().flat_map(|c| eval_items(c, ctx)) {
         out.absorb_counts(&r);
         if r.empty() {
             continue;
@@ -944,7 +973,7 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                 _ => {}
             }
             let Some(mut toks) = piece else { continue };
-            let mut tmp = R { toks: std::mem::take(&mut toks), called: 0, found: 0 };
+            let mut tmp = R { toks: std::mem::take(&mut toks), called: 0, found: 0, hidden: false };
             decorate(t, &mut tmp, ctx);
             if !first && !delim.is_empty() {
                 out.push(Tok::Text(delim.to_string()));
@@ -1030,7 +1059,8 @@ fn name_opts(names_el: &XElem, name_el: Option<&XElem>, ctx: &Ctx) -> NameOpts {
         ),
         _ => (min, use_first),
     };
-    let and = name_el.and_then(|n| n.attr("and")).or_else(|| ctx.style.inherited("and", &chain)).map(str::to_string);
+    // A sort key is the names in order, with no connecting words.
+    let and = if ctx.sorting { None } else { name_el.and_then(|n| n.attr("and")).or_else(|| ctx.style.inherited("and", &chain)).map(str::to_string) };
     NameOpts {
         and,
         delimiter: name_el.and_then(|n| n.attr("delimiter")).map(str::to_string).or_else(|| get("name-delimiter")).unwrap_or_else(|| ", ".into()),
@@ -1052,45 +1082,33 @@ fn initials(given: &str, with: &str, init: bool) -> String {
     if !init {
         return given.to_string();
     }
-    // Each given-name part becomes its first letter followed by `with`; hyphenated parts keep
+    // Each given-name word becomes its first letter followed by `with`; a word that already
+    // ends in a full stop ("C.", "Jr.") is an abbreviation and stays; hyphenated parts keep
     // the hyphen ("Jean-Paul" -> "J.-P.").
-    let mut out = String::new();
     let trimmed_with = with.trim_end();
+    let between = if with.ends_with(' ') { " " } else { "" };
+    let mut out = String::new();
     let words: Vec<&str> = given.split_whitespace().collect();
     for (wi, w) in words.iter().enumerate() {
-        let mut parts = w.split('-').peekable();
-        let mut piece = String::new();
-        while let Some(p) = parts.next() {
-            let is_initial = p.chars().filter(|c| c.is_alphabetic()).count() <= 1 && p.trim_end_matches('.').chars().count() <= 1;
-            let first = p.chars().next();
-            let lower_particle = p.chars().next().is_some_and(char::is_lowercase) && p.chars().count() > 1;
-            if lower_particle {
-                // "de", "van": kept as a word.
-                piece.push_str(p);
-                if parts.peek().is_some() {
-                    piece.push('-');
-                }
-                continue;
+        let parts: Vec<&str> = w.split('-').collect();
+        for (pi, p) in parts.iter().enumerate() {
+            let letters = p.chars().filter(|c| c.is_alphabetic()).count();
+            if p.chars().next().is_some_and(char::is_lowercase) && p.chars().count() > 1 {
+                // A particle ("de", "van") stays a word.
+                out.push_str(p);
+            } else if p.ends_with('.') && letters > 1 {
+                out.push_str(p);
+            } else if let Some(f) = p.chars().next() {
+                out.push(f);
+                out.push_str(trimmed_with);
             }
-            if let Some(f) = first {
-                piece.push(f);
-                if !(is_initial && p.ends_with('.') && trimmed_with.is_empty()) {
-                    piece.push_str(trimmed_with);
-                }
-            }
-            if parts.peek().is_some() {
-                piece.push('-');
+            if pi + 1 < parts.len() {
+                out.push('-');
             }
         }
-        out.push_str(&piece);
         if wi + 1 < words.len() {
-            // Between initials the separator is `with` as given (".", ". ", "" or " ").
-            let sep = if with.ends_with(' ') { " " } else { "" };
-            out.push_str(sep);
+            out.push_str(between);
         }
-    }
-    if with.ends_with(' ') && !with.trim().is_empty() {
-        // A trailing space is only a separator between initials; it is not printed at the end.
     }
     out
 }
@@ -1174,7 +1192,7 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
                 _ => count > 1,
             };
             if let Some(t) = ctx.style.term(v, form, plural) {
-                let mut lr = R { toks: text(t), called: 0, found: 0 };
+                let mut lr = R { toks: text(t), called: 0, found: 0, hidden: false };
                 decorate(l, &mut lr, ctx);
                 // Labels follow the names unless the `label` element comes first.
                 let label_first = e.elems().position(|c| c.name == "label") < e.elems().position(|c| c.name == "name");
@@ -1229,6 +1247,11 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
             } else {
                 eval(c, ctx)
             };
+            if r.hidden {
+                out.found = 1;
+                out.hidden = true;
+                break;
+            }
             if !r.empty() {
                 out.found = 1;
                 out.toks = r.toks;
@@ -1258,9 +1281,9 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
             ctx.captured = Some(out.toks.clone());
         }
         if ctx.item.suppress_author {
+            let had = !out.toks.is_empty();
             out.toks.clear();
-            out.found = 0;
-            out.called = 0;
+            out.hidden = had;
         }
     }
     out
@@ -1335,7 +1358,7 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
             _ => n >= 2,
         };
         out.push(Tok::Text(if precede { o.delimiter.clone() } else { " ".into() }));
-        let mut r = R { toks: text(t), called: 0, found: 0 };
+        let mut r = R { toks: text(t), called: 0, found: 0, hidden: false };
         if let Some(el) = et_al_el {
             decorate(el, &mut r, ctx);
         }
@@ -1353,7 +1376,7 @@ fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: 
     // Plain composition first.
     let given = if init_with.is_empty() && !initialize { n.given.clone() } else { initials(&n.given, init_with, initialize) };
     let mut family_tok = {
-        let mut r = R { toks: text(if n.non_dropping_particle.is_empty() { n.family.clone() } else if o.demote && invert { n.family.clone() } else { format!("{} {}", n.non_dropping_particle, n.family) }), called: 0, found: 0 };
+        let mut r = R { toks: text(if n.non_dropping_particle.is_empty() { n.family.clone() } else if o.demote && invert { n.family.clone() } else { format!("{} {}", n.non_dropping_particle, n.family) }), called: 0, found: 0, hidden: false };
         if let Some(el) = part_el("family") {
             decorate(el, &mut r, ctx);
         }
@@ -1363,7 +1386,7 @@ fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: 
         return family_tok;
     }
     let given_tok = {
-        let mut r = R { toks: text(given.clone()), called: 0, found: 0 };
+        let mut r = R { toks: text(given.clone()), called: 0, found: 0, hidden: false };
         if let Some(el) = part_el("given") {
             decorate(el, &mut r, ctx);
         }

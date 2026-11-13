@@ -48,6 +48,9 @@ pub struct CitationItem {
     pub suppress_author: bool,
     /// `@key`: the author in the text, the rest in the usual place.
     pub author_in_text: bool,
+    /// The suffix still holds the locator as written (`, p. 4`): the processor reads it with the
+    /// labels of its style. Items built by hand leave this false and set `label` and `locator`.
+    pub unparsed: bool,
 }
 
 /// A citation: one or more items cited together.
@@ -94,6 +97,8 @@ impl Processor {
     /// Formats the citations and the bibliography of the works they cite (plus `nocite`, the
     /// ids that are listed but not cited, in the given order).
     pub fn process(&self, citations: &[Citation], nocite: &[String]) -> Processed {
+        let resolved: Vec<Citation> = citations.iter().map(|c| self.resolve_locators(c)).collect();
+        let citations = &resolved[..];
         // Order of first citation.
         let mut order: Vec<String> = Vec::new();
         for c in citations {
@@ -141,7 +146,25 @@ impl Processor {
                     let mut ctx = Ctx::new(&self.style, r, Mode::Bibliography);
                     ctx.citation_number = numbers.get(id).copied();
                     ctx.year_suffix = suffixes.get(id).cloned();
-                    let mut toks = eval(layout, &mut ctx).toks;
+                    let mut toks = if bib.attr("second-field-align").is_some() {
+                        // The first field is the left margin: the rest is a box of its own.
+                        let mut r = eval::R::default();
+                        let mut done_first = false;
+                        for c in layout.elems() {
+                            let part = eval(c, &mut ctx);
+                            let nonempty = part.toks.iter().any(|t| matches!(t, Tok::Text(x) if !x.is_empty()));
+                            r.toks.extend(part.toks);
+                            if nonempty && !done_first {
+                                done_first = true;
+                                r.toks.push(Tok::Text(" ".into()));
+                            }
+                        }
+                        let mut wrapped = r;
+                        decorate_layout(layout, &mut wrapped);
+                        wrapped.toks
+                    } else {
+                        eval(layout, &mut ctx).toks
+                    };
                     if let Some(sub) = sub {
                         let mut actx = Ctx::new(&self.style, r, Mode::Bibliography);
                         actx.item.author_only = true;
@@ -163,6 +186,36 @@ impl Processor {
         result
     }
 
+    /// Reads the locator out of each unparsed suffix. A word is a label when it is a locator
+    /// term of the style's locale (any form, singular or plural), as in Pandoc.
+    fn resolve_locators(&self, c: &Citation) -> Citation {
+        const NAMES: &[&str] = &["number", "book", "chapter", "column", "figure", "folio", "issue", "line", "note", "opus", "page", "paragraph", "part", "section", "sub-verbo", "verse", "volume"];
+        let lookup = |w: &str| -> Option<String> {
+            let w = w.to_lowercase();
+            for name in NAMES {
+                for form in ["", "short", "symbol"] {
+                    if let Some((s, p)) = self.style.terms.get(&(name.to_string(), form.to_string())) {
+                        if s.to_lowercase() == w || p.to_lowercase() == w {
+                            return Some((*name).to_string());
+                        }
+                    }
+                }
+            }
+            None
+        };
+        let mut out = c.clone();
+        for it in &mut out.items {
+            if it.unparsed {
+                let (label, locator, rest) = markdown::parse_locator_with(&it.suffix, &lookup);
+                it.label = label;
+                it.locator = locator;
+                it.suffix = rest;
+                it.unparsed = false;
+            }
+        }
+        out
+    }
+
     fn item_ctx<'a>(&'a self, r: &'a Reference, it: &CitationItem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Ctx<'a> {
         let mut ctx = Ctx::new(&self.style, r, Mode::Citation);
         ctx.citation_number = numbers.get(&it.id).copied();
@@ -177,11 +230,12 @@ impl Processor {
         ctx
     }
 
-    fn render_item(&self, it: &CitationItem, layout: &XElem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Toks {
+    /// The author part (for `@key`) and the cite proper of one item.
+    fn render_item_parts(&self, it: &CitationItem, layout: &XElem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> (Option<Toks>, Toks) {
         let Some(r) = self.refs.get(&it.id) else {
-            return vec![Tok::Text("???".into())];
+            return (None, vec![Tok::Text("???".into())]);
         };
-        let body = if it.author_in_text {
+        let (author, body) = if it.author_in_text {
             // The author (rendered alone), then the rest of the cite without the author.
             let mut actx = self.item_ctx(r, it, numbers, suffixes, position);
             actx.item.suppress_author = false;
@@ -190,16 +244,10 @@ impl Processor {
             let author = actx.captured.take().or_else(|| self.author_from_bibliography(r));
             let mut rctx = self.item_ctx(r, it, numbers, suffixes, position);
             rctx.item.suppress_author = true;
-            let rest = eval_layout_items(layout, &mut rctx);
-            let mut t = author.unwrap_or_default();
-            if !t.is_empty() && !rest.is_empty() {
-                t.push(Tok::Text(" ".into()));
-            }
-            t.extend(rest);
-            t
+            (author, eval_layout_items(layout, &mut rctx))
         } else {
             let mut ctx = self.item_ctx(r, it, numbers, suffixes, position);
-            eval_layout_items(layout, &mut ctx)
+            (None, eval_layout_items(layout, &mut ctx))
         };
         let mut out = Toks::new();
         if !it.prefix.is_empty() {
@@ -212,7 +260,17 @@ impl Processor {
             let attach = s.starts_with([',', ';', ':', '.', ')', ']']);
             out.push(Tok::Text(if attach { s.to_string() } else { format!(" {s}") }));
         }
-        out
+        (author, out)
+    }
+
+    fn render_item(&self, it: &CitationItem, layout: &XElem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Toks {
+        let (author, body) = self.render_item_parts(it, layout, numbers, suffixes, position);
+        let mut t = author.unwrap_or_default();
+        if !t.is_empty() && !body.is_empty() {
+            t.push(Tok::Text(" ".into()));
+        }
+        t.extend(body);
+        t
     }
 
     /// For styles whose citations print no author (numeric styles): the names of the
@@ -241,6 +299,21 @@ impl Processor {
             items = keyed.into_iter().map(|(_, it)| it).collect();
         }
         let delim = layout.attr("delimiter").unwrap_or("");
+        // `@key`: the author in the text and the layout (its brackets too) around the rest only.
+        if let [it] = items[..] {
+            if it.author_in_text {
+                let position = if seen.contains(&it.id) { Position::Subsequent } else { Position::First };
+                let (author, body) = self.render_item_parts(it, layout, numbers, suffixes, position);
+                let mut r = eval::R { toks: body, called: 0, found: 0, hidden: false };
+                decorate_layout(layout, &mut r);
+                let mut out = author.unwrap_or_default();
+                if !out.is_empty() && !r.toks.is_empty() {
+                    out.push(Tok::Text(" ".into()));
+                }
+                out.extend(r.toks);
+                return normalize(out);
+            }
+        }
         let mut pieces: Vec<(Toks, &CitationItem)> = Vec::new();
         for it in &items {
             let position = if !seen.contains(&it.id) {
@@ -274,7 +347,7 @@ impl Processor {
             return out;
         }
         // The layout's own affixes and formatting wrap the whole citation.
-        let mut r = eval::R { toks: out, called: 0, found: 0 };
+        let mut r = eval::R { toks: out, called: 0, found: 0, hidden: false };
         decorate_layout(layout, &mut r);
         normalize(r.toks)
     }
@@ -356,6 +429,9 @@ impl Processor {
                         ctx.sorting = true;
                         let toks = eval::eval_children(mac, &mut ctx).toks;
                         let s = sort_string(&plain(&toks));
+                        if std::env::var("CITEPROC_DEBUG").is_ok() {
+                            eprintln!("sort {id} {m}: {:?}", plain(&toks));
+                        }
                         return if s.is_empty() { SortKey::Empty } else { SortKey::Str(s) };
                     }
                 }
