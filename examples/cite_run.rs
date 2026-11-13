@@ -21,7 +21,9 @@ fn main() {
     let p = Processor::new(style, refs).with_pandoc_names(args.iter().any(|a| a == "--pandoc-names"));
     let found = markdown::parse_citations(&md);
     let cites: Vec<_> = found.iter().map(|f| f.citation.clone()).collect();
-    let done = p.process(&cites, &[]);
+    let nocite_all = md.starts_with("---") && md.split("\n---\n").next().is_some_and(|h| h.contains("nocite") && h.contains("@*"));
+    let nocite = if nocite_all { p.refs_in_order() } else { Vec::new() };
+    let done = p.process(&cites, &nocite);
     let (c, b) = done.comparison(p.style());
     println!("{}", serde_json::json!({ "citations": c, "bibliography": b }));
 }

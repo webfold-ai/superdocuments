@@ -1,0 +1,25 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation
+      delimiter-precedes-last="always">
+    <layout>
+      <names variable="author">
+        <name delimiter=", " and="text" />
+      </names>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <names variable="author">
+        <name delimiter=", " and="text" />
+      </names>
+    </layout>
+  </bibliography>
+</style>

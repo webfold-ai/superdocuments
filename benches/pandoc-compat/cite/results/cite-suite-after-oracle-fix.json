@@ -1,0 +1,8903 @@
+[
+{
+"test": "affix_CommaAfterQuote",
+"cit_ref": [
+"‘Quote,’ Hello Thing"
+],
+"cit_ours": [
+"'quote', Hello Thing"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_InterveningEmpty",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_MovingPunctuation",
+"cit_ref": [
+"“The Title.” And “so it goes”"
+],
+"cit_ours": [
+"“The Title.” And \"so it goes\""
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_PrefixFullCitationTextOnly",
+"cit_ref": [
+"(As written in Smith 2000)"
+],
+"cit_ours": [
+"(As written in Smith 2000)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_PrefixWithDecorations",
+"cit_ref": [
+"(See Smith 2000)"
+],
+"cit_ours": [
+"(See Smith 2000)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_SpaceWithQuotes",
+"cit_ref": [
+"The Title And “so it goes”"
+],
+"cit_ours": [
+"The Title And \"so it goes\""
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_TextNodeWithMacro",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "affix_WithCommas",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Jones, David. Book D, 2000.",
+"Smith, John. Book C, 2000."
+],
+"bib_ours": [
+"Jones, David. Book D, 2000.",
+"Smith, John. Book C, 2000."
+]
+},
+{
+"test": "affix_WordProcessorAffixNoSpace",
+"cit_ref": [
+"My Prefix My Title My Suffix",
+"My Prefix. My Title, My Suffix",
+"My Prefix My Title My Suffix"
+],
+"cit_ours": [
+"My Prefix My Title My Suffix",
+"My Prefix. My Title, My Suffix",
+"My Prefix My Title My Suffix"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_Abnt",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_AccidentalAllCaps",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John, His Anonymous Life, 1965."
+],
+"bib_ours": [
+"Doe John, His Anonymous Life, , 1965."
+]
+},
+{
+"test": "bugreports_AllCapsLeakage",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John, « His Anonymous Life », in Jane Roe, (éd.). His Anonymous Life, 1 juin 1965."
+],
+"bib_ours": [
+"Doe John, “His Anonymous Life,” in Jane Roe, (ed.). His Anonymous Life, 1 june 1965."
+]
+},
+{
+"test": "bugreports_ApostropheOnParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_ArabicLocale",
+"cit_ref": [
+"Jonathan Chang وآخرون."
+],
+"cit_ours": [
+"Jonathan Chang et al."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_AsaSpacing",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"“His Anonymous Chapter.” Some text string"
+],
+"bib_ours": [
+"“His Anonymous Chapter.” Some text string"
+]
+},
+{
+"test": "bugreports_AsmJournals",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1. Doe Co. 1965. His Collectively Anonymous Life."
+],
+"bib_ours": [
+"1. Doe Co. 1965. His Collectively Anonymous Life."
+]
+},
+{
+"test": "bugreports_AuthorPosition",
+"cit_ref": [
+"(A00 et al., 2010)"
+],
+"cit_ours": [
+"(A00 et al., 2010)"
+],
+"bib_ref": [
+"A00, A., A01, B., A02, C., A03, D., A04, E., A05, F., … A50, K. (2010). Modelling the Species Distribution of Flat-Headed Cats (Prionailurus planiceps), an Endangered South-East Asian Small Felid. PLoS ONE, 5(3), e9612. doi:10.1371/journal.pone.0009612"
+],
+"bib_ours": [
+"A00, A., A01, B., A02, C., A03, D., A04, E., A05, F., … A50, K. (2010). Modelling the Species Distribution of Flat-Headed Cats (Prionailurus planiceps), an Endangered South-East Asian Small Felid. PLoS ONE, 5(3), e9612. doi:10.1371/journal.pone.0009612"
+]
+},
+{
+"test": "bugreports_AuthorYear",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Family01, G. (2003). This is some title (Vol. 2003)."
+],
+"bib_ours": [
+"Family01, G. (2003). This is some title (Vol. 2003)."
+]
+},
+{
+"test": "bugreports_AutomaticallyDeleteItemsFails",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] J. Doe, Book A, 2000.",
+"[2] J. Doe, Book B, 2000.",
+"[3] R. Snoakes, Book C, 2000."
+],
+"bib_ours": [
+"[1] J. Doe, Book A, 2000.",
+"[2] J. Doe, Book B, 2000.",
+"[3] R. Snoakes, Book C, 2000."
+]
+},
+{
+"test": "bugreports_BadCitationUpdate",
+"cit_ref": [
+"C. Grignon, C. Sentenac 2000a",
+"C. Grignon, C. Sentenac 2000b"
+],
+"cit_ours": [
+"C. Grignon, C. Sentenac 2000a",
+"C. Grignon, C. Sentenac 2000b"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_BadDelimiterBeforeCollapse",
+"cit_ref": [
+"(Jones 2000; Smith 2000a,b)"
+],
+"cit_ours": [
+"(Jones 2000; Smith 2000a,b)"
+],
+"bib_ref": [
+"Jones, R. 2000. Book Three.",
+"Smith, J. 2000a. Book One.",
+"Smith, J. 2000b. Book Two."
+],
+"bib_ours": [
+"Jones, R. 2000. Book Three. Edition.",
+"Smith, J. 2000a. Book One. Edition.",
+"Smith, J. 2000b. Book Two. Edition."
+]
+},
+{
+"test": "bugreports_ByBy",
+"cit_ref": [
+"(Review of My Title, by Beaver Burtle, n.d.)"
+],
+"cit_ours": [
+"(Review of My Title, by Beaver Burtle, n.d.)"
+],
+"bib_ref": [
+"Review of My Title, by Beaver Burtle. n.d."
+],
+"bib_ours": [
+"Review of My Title, by Beaver Burtle. n.d. Review of My Title, by Beaver Burtle."
+]
+},
+{
+"test": "bugreports_CapsAfterOneWordPrefix",
+"cit_ref": [
+"Nocapsafter. ibid.",
+"Caps after. Ibid."
+],
+"cit_ours": [
+"Nocapsafter. ibid.",
+"Caps after. ibid."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_ChicagoAuthorDateLooping",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Anon. Google. http://www.google.com/.",
+"---Anon. JA-SIG Conference Presentation. http://www.ja-sig.org/jasigconf/popSpeaker.jsp?id=39e50005&conf_id=jasig12&name=Lennard+Fuller.",
+"Manstein, Erich Von. 1982. Lost Victories. Presidio Pr, September."
+],
+"bib_ours": [
+"Anon. Google. http://www.google.com/.",
+"Anon. JA-SIG Conference Presentation. http://www.ja-sig.org/jasigconf/popSpeaker.jsp?id=39e50005&conf_id=jasig12&name=Lennard+Fuller.",
+"Manstein, Erich Von. 1982. Lost Victories. Presidio Pr, September."
+]
+},
+{
+"test": "bugreports_ChineseCharactersFamilyOnlyPluralLabel",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_CitationSortsWithEtAl",
+"cit_ref": [
+"[Aalto et al., 1999, 2000, 2001]"
+],
+"cit_ours": [
+"[Aalto et al., 1999, 2000, 2001]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_CollapseFailure",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, J., Blub, S., Lanbright, B. (1970).",
+"Doe, J., Roe, J., Noakes, R. (1965a).",
+"Doe, J., Spindlethrift, M., Korkblougher, W. (1965b)."
+],
+"bib_ours": [
+"Doe, J., Blub, S., Lanbright, B. (1970).",
+"Doe, J., Roe, J., Noakes, R. (1965a).",
+"Doe, J., Spindlethrift, M., Korkblougher, W. (1965b)."
+]
+},
+{
+"test": "bugreports_ContainerTitleShort",
+"cit_ref": [
+"BOGUSBOGUS"
+],
+"cit_ours": [
+"BOGUSBOGUS"
+],
+"bib_ref": [
+"Anon J/Anon J/Anonymous Journal",
+"Journal-1/Journal-1/Anonymous Journal One"
+],
+"bib_ours": [
+"Anonymous Journal/Anonymous Journal",
+"Journal-1/Journal-1/Anonymous Journal One"
+]
+},
+{
+"test": "bugreports_ContentPunctuationDuplicate1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_ContextualPluralWithMainItemFields",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_CreepingAddNames",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Butler, Sharon, and Sarah Turner. 2010.",
+"Morley, John, Richard King, Tom Gadget, and Peter Widget. 2011.",
+"Rowan, Steven, Artemus Peel, and Bruce Vendeville. 2004."
+],
+"bib_ours": [
+"Butler, Sharon, and Sarah Turner. 2010.",
+"Morley, John, Richard King, Tom Gadget, and Peter Widget. 2011.",
+"Rowan, Steven, Artemus Peel, and Bruce Vendeville. 2004."
+]
+},
+{
+"test": "bugreports_DelimiterOnLayout",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_DelimitersOnLocator",
+"cit_ref": [
+"[1, 32; 2, 32; 3, 32]"
+],
+"cit_ours": [
+"[1, 32; 2, 32; 3, 32]"
+],
+"bib_ref": [
+"[1] J. Doe, His Anonymous Life.",
+"[2] J. Doe, His Anonymous Life.",
+"[3] J. Doe, His Anonymous Life."
+],
+"bib_ours": [
+"[1] J. Doe, His Anonymous Life. .",
+"[2] J. Doe, His Anonymous Life. .",
+"[3] J. Doe, His Anonymous Life. ."
+]
+},
+{
+"test": "bugreports_DemoPageFullCiteCruftOnSubsequent",
+"cit_ref": [
+"Nolan J. Malone, U.S. Bureau of the Census, Evaluating Components of International Migration: Consistency of 2000 Nativity Data (New York: Routledge, 2001)."
+],
+"cit_ours": [
+"Nolan J. Malone, U.S. Bureau of the Census, Evaluating Components of International Migration: Consistency of 2000 Nativity Data (New York: Routledge, 2001)."
+],
+"bib_ref": [
+"Malone, Nolan J., and U.S. Bureau of the Census. Evaluating Components of International Migration: Consistency of 2000 Nativity Data. New York: Routledge, 2001."
+],
+"bib_ours": [
+"Malone, Nolan J., and U.S. Bureau of the Census. Evaluating Components of International Migration: Consistency of 2000 Nativity Data. New York: Routledge, 2001."
+]
+},
+{
+"test": "bugreports_DisambiguationAddNames",
+"cit_ref": [
+"(Roe et al., 1995a, 1995b)"
+],
+"cit_ours": [
+"(Roe et al., 1995a, 1995b)"
+],
+"bib_ref": [
+"Roe, J., Doe, J. and Smith, J.:, 1995a.",
+"Roe, J., Noakes, R. and Brown, B.:, 1995b."
+],
+"bib_ours": [
+"Roe, J., Doe, J. and Smith, J.:, 1995a.",
+"Roe, J., Noakes, R. and Brown, B.:, 1995b."
+]
+},
+{
+"test": "bugreports_DisambiguationAddNamesBibliography",
+"cit_ref": [
+"(Roe et al., 1995a, 1995b)"
+],
+"cit_ours": [
+"(Roe et al., 1995a, 1995b)"
+],
+"bib_ref": [
+"Roe, J., Doe, J. and Smith, J.:, 1995a.",
+"Roe, J., Noakes, R. and Brown, B.:, 1995b."
+],
+"bib_ours": [
+"Roe, J., Doe, J. and Smith, J.:, 1995a.",
+"Roe, J., Noakes, R. and Brown, B.:, 1995b."
+]
+},
+{
+"test": "bugreports_DoubleEncodedAngleBraces",
+"cit_ref": [
+"Center for History and New Media, « Zotero Quick Start Guide », s.d., [En ligne]. <http://zotero.org/support/quick_start_guide>."
+],
+"cit_ours": [
+"Center for History and New Media, “Zotero Quick Start Guide,” [En ligne]. <http://zotero.org/support/quick_start_guide>. ."
+],
+"bib_ref": [
+"Center for History and New Media, « Zotero Quick Start Guide », s.d., [En ligne]. <http://zotero.org/support/quick_start_guide>."
+],
+"bib_ours": [
+"Center for History and New Media, “Zotero Quick Start Guide,” [En ligne]. <http://zotero.org/support/quick_start_guide>. ."
+]
+},
+{
+"test": "bugreports_DroppingGroupDelimiterSpace",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_DuplicateSpaces",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] B. D’Arcus, Boundaries of Dissent: Protest and State Power in the Media Age, New York: Routledge, 2006."
+],
+"bib_ours": [
+"[1] B. D'Arcus, Boundaries of Dissent: Protest and State Power in the Media Age, New York: Routledge, 2006."
+]
+},
+{
+"test": "bugreports_DuplicateSpaces2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Smith, John, “Some Title.” Container Title."
+],
+"bib_ours": [
+"Smith, John, “Some Title.” Container Title."
+]
+},
+{
+"test": "bugreports_DuplicateSpaces3",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1. Family Name N. The Title. In: Container Title."
+],
+"bib_ours": [
+"1. Family Name N. The Title. In: Container Title."
+]
+},
+{
+"test": "bugreports_DuplicateTerminalPunctuationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"D’Arcus, Bruce. 2006. Boundaries of Dissent: Protest and State Power in the Media Age. New York: Routledge http://www.test01.com."
+],
+"bib_ours": [
+"D'Arcus, Bruce. 2006. Boundaries of Dissent: Protest and State Power in the Media Age. New York: Routledge http://www.test01.com."
+]
+},
+{
+"test": "bugreports_EmptyIfMatchNoneFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_EnvAndUrb",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_EtAlSubsequent",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_FourAndFour",
+"cit_ref": [
+"Anne Tyler, George Smith, John Brown, and Cat Garfield, Ladder of his’ Years, vol. 2003 (New York: Ivy Books, 1997).",
+"Anne Tyler, George Smith, John Brown, and Cat Felix, Ladder of his’ Years, vol. 2003 (New York: Ivy Books, 1997)."
+],
+"cit_ours": [
+"Anne Tyler, George Smith, John Brown, and Cat Garfield, Ladder of his' Years, vol. 2003 (New York: Ivy Books, 1997).",
+"Anne Tyler, George Smith, John Brown, and Cat Felix, Ladder of his' Years, vol. 2003 (New York: Ivy Books, 1997)."
+],
+"bib_ref": [
+"Tyler, Anne, George Smith, John Brown, and Cat Felix. Ladder of his’ Years. Vol. 2003. New York: Ivy Books, 1997.",
+"Tyler, Anne, George Smith, John Brown, and Cat Garfield. Ladder of his’ Years. Vol. 2003. New York: Ivy Books, 1997."
+],
+"bib_ours": [
+"Tyler, Anne, George Smith, John Brown, and Cat Felix. Ladder of his' Years. Vol. 2003. New York: Ivy Books, 1997.",
+"Tyler, Anne, George Smith, John Brown, and Cat Garfield. Ladder of his' Years. Vol. 2003. New York: Ivy Books, 1997."
+]
+},
+{
+"test": "bugreports_FrenchApostrophe",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_GreekStyleProblems",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Άγρας Τέλλος, «Ο Καρυωτάκης και οι Σάτιρες», στο: Κώστας Καρυωτάκης, Ποιήματα και πεζά, μτφ. Andreas Dimitriadis, επιμ. Γ. Π. Σαββίδης, 1998."
+],
+"bib_ours": [
+"Άγρας Τέλλος, «Ο Καρυωτάκης και οι Σάτιρες», in: by Κώστας Καρυωτάκης, Ποιήματα και πεζά, trans by. Andreas Dimitriadis, ed by. Γ. Π. Σαββίδης, 1998."
+]
+},
+{
+"test": "bugreports_GreekStyleTwoEditors",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Άγρας Τέλλος, «Ο Καρυωτάκης και οι Σάτιρες», στο: Γ. Π. Σαββίδης και Κώστας Καρυωτάκης (επιμ.), Ποιήματα και πεζά, μτφ. Andreas Dimitriadis, 1998."
+],
+"bib_ours": [
+"Άγρας Τέλλος, «Ο Καρυωτάκης και οι Σάτιρες», in: Γ. Π. Σαββίδης and Κώστας Καρυωτάκης (eds.), Ποιήματα και πεζά, trans by. Andreas Dimitriadis, 1998."
+]
+},
+{
+"test": "bugreports_IeeePunctuation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] P.G. Zimbardo, “Does Psychology make a significant difference in our lives?” American Psychologist, vol. 59, Jan. 2004, pp. 339–351."
+],
+"bib_ours": [
+"[1] P.G. Zimbardo, “Does Psychology make a significant difference in our lives?,” American Psychologist, vol. 59, Jan. 2004, pp. 339–351."
+]
+},
+{
+"test": "bugreports_LabelsOutOfPlace",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Jones, Colin. Bourgeois Revolution Revivified: 1789 and Social Change. Edited by Colin Lucas. Oxford: Clarendon Press, 1991."
+],
+"bib_ours": [
+"Jones, Colin. Bourgeois Revolution Revivified: 1789 and Social Change. Edited by Colin Lucas. Oxford: Clarendon Press, 1991."
+]
+},
+{
+"test": "bugreports_LegislationCrash",
+"cit_ref": [
+"BOGUS"
+],
+"cit_ours": [
+"BOGUS"
+],
+"bib_ref": [
+"Arrêté du 23 mars 1992 relatif au programme des études conduisant au diplôme d’État d’infirmier, 1992. 23 mars 1992"
+],
+"bib_ours": [
+"Arrêté du 23 mars 1992 relatif au programme des études conduisant au diplôme d'État d'infirmier, 1992. March 23, 1992"
+]
+},
+{
+"test": "bugreports_MatchedAuthorAndDate",
+"cit_ref": [
+"(Brown, 2006a, 2006b)"
+],
+"cit_ours": [
+"(Brown, 2006a, 2006b)"
+],
+"bib_ref": [
+"Brown, J. 2006a, August. Tijdschrift voor praktijkondersteuning. http://dx.doi.org/10.1007/bf03074904.",
+"Brown, J. 2006b, August. Huisarts en Wetenschap. http://dx.doi.org/10.1007/bf03084836."
+],
+"bib_ours": [
+"Brown, J. 2006a, August. Tijdschrift voor praktijkondersteuning. http://dx.doi.org/10.1007/bf03074904.",
+"Brown, J. 2006b, August. Huisarts en Wetenschap. http://dx.doi.org/10.1007/bf03084836."
+]
+},
+{
+"test": "bugreports_MissingItemInJoin",
+"cit_ref": [
+"Aalto, Book One, p. 100 This.Álvarez, Book Two, p. 200Álvarez, Film One, p. 300"
+],
+"cit_ours": [
+"Aalto, Book One, S. 100 This.Álvarez, Book Two, S. 200Álvarez, Film One, 300"
+],
+"bib_ref": [
+"Aalto, Alan: Book One,",
+"Álvarez, Ajax: Book Two,",
+""
+],
+"bib_ours": [
+"Aalto, Alan: Book One,",
+"Álvarez, Ajax: Book Two,",
+""
+]
+},
+{
+"test": "bugreports_MovePunctuationInsideQuotesForLocator",
+"cit_ref": [
+"Jennifer J. Davis, “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830” (Ph.D. diss., Pennsylvania State University, History, 2004), p. “gargoyle.”"
+],
+"cit_ours": [
+"Jennifer J. Davis, “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830” (Ph.D. diss., Pennsylvania State University, History, 2004), p. \"gargoyle\"."
+],
+"bib_ref": [
+"Davis, Jennifer J. “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830.” Ph.D. diss., Pennsylvania State University, History, 2004."
+],
+"bib_ours": [
+"Davis, Jennifer J. “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830.” Ph.D. diss., Pennsylvania State University, History, 2004."
+]
+},
+{
+"test": "bugreports_NoCaseEscape",
+"cit_ref": [
+"(Aalto n.d.a; Aalto n.d.b)"
+],
+"cit_ours": [
+"(Aalto n.d.; Aalto n.d.)"
+],
+"bib_ref": [
+"Aalto, Alan N.d.a“‘PIAAC-Longitudinal (PIAAC-L) 2015’.”",
+"N.d.b “PIAAC-Longitudinal (PIAAC-Lx) 2015”."
+],
+"bib_ours": [
+"Aalto, Alan '\"PIAAC-Longitudinal (PIAAC-L) 2015\"'.",
+"\"PIAAC-Longitudinal (PIAAC-Lx) 2015\"."
+]
+},
+{
+"test": "bugreports_NoEventInNestedMacroWithOldProcessor",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"My Anonymous Paper. Paper presented at Big Event, Bogus.",
+"My Anonymous Speech. Speech delivered at Other Big Event, Bogus."
+],
+"bib_ours": [
+"My Anonymous Paper. Paper presented at Big Event, Bogus.",
+"My Anonymous Speech. Speech delivered at Other Big Event, Bogus."
+]
+},
+{
+"test": "bugreports_NoTitle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"ecs. (n.d.).",
+"Family01, G. (n.d.). XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX."
+],
+"bib_ours": [
+"ecs. (n.d.). ecs.",
+"Family01, G. (n.d.). XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX."
+]
+},
+{
+"test": "bugreports_NumberAffixEscape",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_NumberInMacroWithVerticalAlign",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_OldMhraDisambiguationFailure",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John, Book A, 2000.",
+"---, Book B, 2000."
+],
+"bib_ours": [
+"Doe, John, Book A, 2000.",
+"---, Book B, 2000."
+]
+},
+{
+"test": "bugreports_OverwriteCitationItems",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Title One",
+"Title Two",
+"Title Three",
+"Title Four",
+"Title Five"
+],
+"bib_ours": [
+"Title One",
+"Title Two",
+"Title Three",
+"Title Four",
+"Title Five"
+]
+},
+{
+"test": "bugreports_ProcessorHang1",
+"cit_ref": [
+"(Philpott, Arendt, et al. 2008)",
+"(Philpott, Perfecto, et al. 2008a)",
+"(Philpott, Perfecto, et al. 2008b)"
+],
+"cit_ours": [
+"(Philpott, Arendt, et al. 2008)",
+"(Philpott, Perfecto, and Vandermeer 2008a)",
+"(Philpott, Perfecto, and Vandermeer 2008b)"
+],
+"bib_ref": [
+"Philpott, S.M., W.J. Arendt, I. Armbrecht, P. Bichier, T.V. Dietsch, C. Gordon, R. Greenberg, I. Perfecto, R. Reynoso-Santos, L. Soto-Pinto, C. Tejeda-Cruz, G. Williams-Linera, J. Valenzuela, and J.M. Zolotoff. 2008. Biodiversity loss in Latin American coffee landscapes: review of the evidence on ants, birds, and trees. Conservation Biology 22:1093–1105. Available online at http://dx.doi.org/10.1111/j.1523-1739.2008.01029.x. Accessed September 25, 2008.",
+"Philpott, S.M., I. Perfecto, and J. Vandermeer. 2008a. Behavioral diversity of predatory arboreal ants in coffee agroecosystems. Environmental Entomology 37:181–191. Available online at http://www.bioone.org/doi/abs/10.1603/0046-225X(2008)37%5B181:BDOPAA%5D2.0.CO%3B2.",
+"Philpott, S.M., I. Perfecto, and J. Vandermeer. 2008b. Effects of predatory ants on lower trophic levels across a gradient of coffee management complexity. Journal of Animal Ecology 77:505–511. Available online at http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2656.2008.01358.x/abstract. Accessed June 10, 2013."
+],
+"bib_ours": [
+"Philpott, S.M., W.J. Arendt, I. Armbrecht, P. Bichier, T.V. Dietsch, C. Gordon, R. Greenberg, I. Perfecto, R. Reynoso-Santos, L. Soto-Pinto, C. Tejeda-Cruz, G. Williams-Linera, J. Valenzuela, and J.M. Zolotoff. 2008. Biodiversity loss in Latin American coffee landscapes: review of the evidence on ants, birds, and trees. Conservation Biology 22:1093–1105. Available online at http://dx.doi.org/10.1111/j.1523-1739.2008.01029.x. Accessed September 25, 2008.",
+"Philpott, S.M., I. Perfecto, and J. Vandermeer. 2008a. Behavioral diversity of predatory arboreal ants in coffee agroecosystems. Environmental Entomology 37:181–191. Available online at http://www.bioone.org/doi/abs/10.1603/0046-225X(2008)37%5B181:BDOPAA%5D2.0.CO%3B2.",
+"Philpott, S.M., I. Perfecto, and J. Vandermeer. 2008b. Effects of predatory ants on lower trophic levels across a gradient of coffee management complexity. Journal of Animal Ecology 77:505–511. Available online at http://onlinelibrary.wiley.com/doi/10.1111/j.1365-2656.2008.01358.x/abstract. Accessed June 10, 2013."
+]
+},
+{
+"test": "bugreports_SectionAndLocator",
+"cit_ref": [
+"Title One, 123",
+"Title Two"
+],
+"cit_ours": [
+"Title One, 123",
+"Title Two"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_SelfLink",
+"cit_ref": [
+"[O A. Book Title]"
+],
+"cit_ours": [
+"[O A. Book Title]"
+],
+"bib_ref": [
+"O A. Book Title."
+],
+"bib_ours": [
+"O A. Book TitleO A. Book Title : Book Title, ed. ."
+]
+},
+{
+"test": "bugreports_SimpleBib",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Bang"
+],
+"bib_ours": [
+"Bang"
+]
+},
+{
+"test": "bugreports_SingleQuote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] “production d ’ eau glacée à condensation à eau avec récupération de chaleur . Modélisation simplifiée dans l ’ optique d ’ un calcul des consommations d ’ énergie d ’ une insta.”"
+],
+"bib_ours": [
+"[1] “production d ' eau glacée à condensation à eau avec récupération de chaleur . Modélisation simplifiée dans l ’ optique d ’ un calcul des consommations d ’ énergie d ’ une insta.”"
+]
+},
+{
+"test": "bugreports_SingleQuoteXml",
+"cit_ref": [
+"[Cite with a composer ; O A. \"hello\" Book Title]"
+],
+"cit_ours": [
+"[O A. \"hello\" Book Title]"
+],
+"bib_ref": [
+"Cite with a composer : Book-2 Title.",
+"O A. \"hello\" Book Title."
+],
+"bib_ours": [
+"Cite with a composer : Book-2 Title, ed. .",
+"O A. \"hello\" Book TitleO A. \"hello\" Book Title : Book Title, ed. ."
+]
+},
+{
+"test": "bugreports_SingletonIfMatchNoneFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_SmallCapsEscape",
+"cit_ref": [
+"(Aalto n.d.)"
+],
+"cit_ours": [
+"(Aalto n.d.)"
+],
+"bib_ref": [
+"Aalto, Alan N.d.Here."
+],
+"bib_ours": [
+"Aalto, Alan Here."
+]
+},
+{
+"test": "bugreports_SortSecondaryKey",
+"cit_ref": [
+"(Roe, 1995, 1996)"
+],
+"cit_ours": [
+"(Roe, 1995, 1996)"
+],
+"bib_ref": [
+"Roe, J.:, 1995.",
+"Roe, J.:, 1996."
+],
+"bib_ours": [
+"Roe, J.:, 1995.",
+"Roe, J.:, 1996."
+]
+},
+{
+"test": "bugreports_SortSecondaryKeyBibliography",
+"cit_ref": [
+"(Roe, 1995, 1996)"
+],
+"cit_ours": [
+"(Roe, 1995, 1996)"
+],
+"bib_ref": [
+"Roe, J.:, 1995.",
+"Roe, J.:, 1996."
+],
+"bib_ours": [
+"Roe, J.:, 1995.",
+"Roe, J.:, 1996."
+]
+},
+{
+"test": "bugreports_SortedIeeeItalicsFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] J. Doe, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, Jun. 1965.",
+"[2] G. Everhardt, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, Jun. 1965.",
+"[3] J. Roe, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, Jun. 1965."
+],
+"bib_ours": [
+"[2] J. Doe, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, June. 1965.",
+"[3] G. Everhardt, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, June. 1965.",
+"[1] J. Roe, “His Anonymous Article,” Journal of Obscurity, vol. 100, p. 15, June. 1965."
+]
+},
+{
+"test": "bugreports_StyleError001",
+"cit_ref": [
+"Anonymous Journal ; Anonymous Journal One."
+],
+"cit_ours": [
+"Anonymous Journal ; Anonymous Journal One."
+],
+"bib_ref": [
+"Anonymous Journal.",
+"Anonymous Journal One."
+],
+"bib_ours": [
+"Anonymous Journal.",
+"Anonymous Journal One."
+]
+},
+{
+"test": "bugreports_ThesisUniversityAppearsTwice",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Davis, Jennifer J. “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830.” Ph.D. diss., Pennsylvania State University, History, 2004."
+],
+"bib_ours": [
+"Davis, Jennifer J. “Men of Taste: Gender and Authority in the French Culinary Trades, 1730-1830.” Ph.D. diss., Pennsylvania State University, History, 2004."
+]
+},
+{
+"test": "bugreports_TitleCase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_UndefinedBeforeVal",
+"cit_ref": [
+"(Aalto)"
+],
+"cit_ours": [
+"(Aalto)"
+],
+"bib_ref": [
+"Aalto, A. Translated by Boy Beamish."
+],
+"bib_ours": [
+"Aalto, A. Translated by Boy Beamish."
+]
+},
+{
+"test": "bugreports_UndefinedInName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"I Test J R."
+],
+"bib_ours": [
+", I Test J R."
+]
+},
+{
+"test": "bugreports_UndefinedInName2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Kim, B-X, and A-Y Kim."
+],
+"bib_ours": [
+"Kim, B-X, and A-Y Kim."
+]
+},
+{
+"test": "bugreports_UndefinedInName3",
+"cit_ref": [
+"B-X Kim and A-Y Kim.",
+"Kim and Kim, 23."
+],
+"cit_ours": [
+"B-X Kim and A-Y Kim.",
+"Kim and Kim, 23."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_UndefinedNotString",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] FOO BAR n.d."
+],
+"bib_ours": [
+"[1] FOO BAR."
+]
+},
+{
+"test": "bugreports_UndefinedStr",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] FamilyName G. n.d."
+],
+"bib_ours": [
+"[1] FamilyName G. ."
+]
+},
+{
+"test": "bugreports_UnisaHarvardInitialization",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, JQ n.d.,"
+],
+"bib_ours": [
+"Doe, JQ n.d.,"
+]
+},
+{
+"test": "bugreports_YearSuffixInHarvard1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Africa News, 2006a. Burkina Faso: Journalist Case Puts Spotlight On Justice System. Africa News.",
+"Africa News, 2010. Niger: Who Really Ousted Tandja, And Why? Africa News.",
+"Africa News, 2007. Uganda: Police Protect Besigye Rally. Africa News.",
+"Africa News, 2006b. Uganda: UK, US Deploy Observers. Africa News."
+],
+"bib_ours": [
+"Africa News, 2006a. Burkina Faso: Journalist Case Puts Spotlight On Justice System. Africa News.",
+"Africa News, 2010. Niger: Who Really Ousted Tandja, And Why? Africa News.",
+"Africa News, 2007. Uganda: Police Protect Besigye Rally. Africa News.",
+"Africa News, 2006b. Uganda: UK, US Deploy Observers. Africa News."
+]
+},
+{
+"test": "bugreports_YearSuffixLingers",
+"cit_ref": [
+"Smith 1990a",
+"Smith 1990b",
+"Jones 1990"
+],
+"cit_ours": [
+"Smith 1990a",
+"Smith 1990b",
+"Jones 1990"
+],
+"bib_ref": [
+"Ignore me",
+"Ignore me",
+"Ignore me"
+],
+"bib_ours": [
+"Ignore me",
+"Ignore me",
+"Ignore me"
+]
+},
+{
+"test": "bugreports_disambigHang",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_disambiguate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"FamilyA, G. D., & FamilyB, G. P. (2003). Title01. Container Title01.",
+"FamilyA, G. D., FamilyC, G. G., & FamilyB, G. P. (2007). Title02. Container Title02."
+],
+"bib_ours": [
+"FamilyA, G. D., & FamilyB, G. P. (2003). Title01. Container Title01.",
+"FamilyA, G. D., FamilyC, G. G., & FamilyB, G. P. (2007). Title02. Container Title02."
+]
+},
+{
+"test": "bugreports_effingBug",
+"cit_ref": [
+"Book One, 123 f.; Book Two, 456 f."
+],
+"cit_ours": [
+"Book One, 123 f.; Book Two, 456 f."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "bugreports_ikeyOne",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Smith, James. Book B. Print.",
+"Smith, John. Book C. Print."
+],
+"bib_ours": [
+"Smith, James. Book B. Print.",
+"Smith, John. Book C. Print."
+]
+},
+{
+"test": "bugreports_parenthesis",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"(2006): 1–7."
+],
+"bib_ours": [
+"(2006): 1–7."
+]
+},
+{
+"test": "bugreports_parseName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"van Happel, Eduard 2008",
+"Hoppel, Gustav von 2008"
+],
+"bib_ours": [
+"\"van Happel\", Eduard 2008",
+"von Hoppel, Gustav 2008"
+]
+},
+{
+"test": "bugreports_undefinedCrash",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1. FamilyName. Title."
+],
+"bib_ours": [
+"1. FamilyName. Title."
+]
+},
+{
+"test": "collapse_AuthorCollapse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_AuthorCollapseDifferentAuthorsOneWithEtAl",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_AuthorCollapseNoDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_AuthorCollapseNoDateSorted",
+"cit_ref": [
+"(Smith 325AD, 2000, )"
+],
+"cit_ours": [
+"(Smith 325, 2000, )"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_ChicagoAfterCollapse",
+"cit_ref": [
+"(Whittaker 1967, 1975; Wiens 1989a, 1989b)",
+"(Wong 1999, 328; 2000, 475; Garcia 1998, 67)",
+"(Whittaker 1967; Wiens 1989b)"
+],
+"cit_ours": [
+"(Whittaker 1967, 1975; Wiens 1989a, 1989b)",
+"(Wong 1999, 328, 2000, 475; Garcia 1998, 67)",
+"(Whittaker 1967; Wiens 1989b)"
+],
+"bib_ref": [
+"Garcia, Randy. 1998.",
+"Whittaker, Phil. 1967.",
+"———. 1975.",
+"Wiens, Walter. 1989a.",
+"———. 1989b.",
+"Wong, Richard. 1999.",
+"———. 2000."
+],
+"bib_ours": [
+"Garcia, Randy. 1998.",
+"Whittaker, Phil. 1967.",
+"———. 1975.",
+"Wiens, Walter. 1989a.",
+"———. 1989b.",
+"Wong, Richard. 1999.",
+"———. 2000."
+]
+},
+{
+"test": "collapse_CitationNumberRangesInsert",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesMixed",
+"cit_ref": [
+"([1]–[7])",
+"([1]–[3], [5]–[7])"
+],
+"cit_ours": [
+"([1], [2], [3], [4], [5], [6], [7])",
+"([1], [2], [3], [5], [6], [7])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesMixed2",
+"cit_ref": [
+"([1]–[11])",
+"([1], [3]–[5], [7], [9]–[11])"
+],
+"cit_ours": [
+"([1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11])",
+"([1], [3], [4], [5], [7], [9], [10], [11])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesMixed3",
+"cit_ref": [
+"([1]–[8])",
+"([1], [4], [6]–[8])"
+],
+"cit_ours": [
+"([1], [2], [3], [4], [5], [6], [7], [8])",
+"([1], [4], [6], [7], [8])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesOneOnly",
+"cit_ref": [
+"BOGUS"
+],
+"cit_ours": [
+"BOGUS"
+],
+"bib_ref": [
+"[1]."
+],
+"bib_ours": [
+"[1]."
+]
+},
+{
+"test": "collapse_CitationNumberRangesWithAffixes",
+"cit_ref": [
+"([1]–[3])"
+],
+"cit_ours": [
+"([1],[2],[3])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesWithAffixesGrouped",
+"cit_ref": [
+"([1]–[3])"
+],
+"cit_ours": [
+"([1],[2],[3])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesWithAffixesGroupedLocator",
+"cit_ref": [
+"([1],[2, p. 23],[3])"
+],
+"cit_ours": [
+"([1],[2, p. 23],[3])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_CitationNumberRangesWithAffixesNoCollapse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_NumericDuplicate",
+"cit_ref": [
+"(1,2,2–4)"
+],
+"cit_ours": [
+"(1,2,2–4)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_NumericDuplicate2",
+"cit_ref": [
+"(1–3,3–5)"
+],
+"cit_ours": [
+"(1–3,3–5)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_TrailingDelimiter",
+"cit_ref": [
+"(Condit et al. 2000, 1995, 1998; Connell 1971, Cortes & Hunziker 1971)"
+],
+"cit_ours": [
+"(Condit et al. 2000, 1995, 1998; Connell 1971; Cortes & Hunziker 1971)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_YearSuffixCollapse",
+"cit_ref": [
+"Smith 2000a–e, 2001",
+"Smith 2000a,c–e, 2001"
+],
+"cit_ours": [
+"Smith 2000a,b,c,d,e, 2001",
+"Smith 2000a,c,d,e, 2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_YearSuffixCollapseNoRange",
+"cit_ref": [
+"Smith 2000a,b,c,d,e, 2001",
+"Smith 2000a,c,d,e, 2001"
+],
+"cit_ours": [
+"Smith 2000a,b,c,d,e, 2001",
+"Smith 2000a,c,d,e, 2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_YearSuffixCollapseNoYearSuffixDelimiter",
+"cit_ref": [
+"Smith 2000a–e;2001",
+"Smith 2000a;c–e;2001"
+],
+"cit_ours": [
+"Smith 2000a, b, c, d, e, 2001",
+"Smith 2000a, c, d, e, 2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "collapse_YearSuffixImplicitCollapseNoYearSuffixDelimiter",
+"cit_ref": [
+"Smith 2000a–e;2001",
+"Smith 2000a;c–e;2001"
+],
+"cit_ours": [
+"Smith 2000a, b, c, d, e, 2001",
+"Smith 2000a, c, d, e, 2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_EmptyDate",
+"cit_ref": [
+"No date here",
+"Have date, will travel"
+],
+"cit_ours": [
+"No date here",
+"Have date, will travel"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_EmptyIsNumericFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_EmptyIsUncertainDateFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_EmptyShortTitleFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_FirstNullAny",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_LocatorIsFalse",
+"cit_ref": [
+"Book One: (1) Locator true (2) Locator true; Book Two: (1) Locator false (2) Locator false"
+],
+"cit_ours": [
+"Book One: (1) Locator true (2) Locator true; Book Two: (1) Locator false (2) Locator false"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_MatchAll",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_NameAndTextVars",
+"cit_ref": [
+"should be this!"
+],
+"cit_ours": [
+"should be this!"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_NumberIsNumeric",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_NumeralIsNumeric",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_NumeralWithTextIsNumeric",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_RefTypeBranching",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Work 1 (John Doe), 2000.",
+"John Doe, 2000. Work 2.",
+"2000. Work 3, John Doe.",
+"Work 4 (2000), John Doe.",
+"Work 5, John Doe, 2000."
+],
+"bib_ours": [
+"Work 1 (John Doe), 2000.",
+"John Doe, 2000. Work 2.",
+"2000. Work 3, John Doe.",
+"Work 4 (2000), John Doe.",
+"Work 5, John Doe, 2000."
+]
+},
+{
+"test": "condition_SingletonIfMatchNone",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_TextIsNotNumeric",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_VariableAll",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_VariableAny",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "condition_VariableNone",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_Accessed",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_AccessedCrash",
+"cit_ref": [
+"(1994)"
+],
+"cit_ours": [
+"(1994)"
+],
+"bib_ref": [
+"(1994)."
+],
+"bib_ours": [
+"(1994)."
+]
+},
+{
+"test": "date_DateAD",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_DateBC",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_DateNoDateNoTest",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_DateNoDateWithTest",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_DayOrdinalDayOneOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_DisappearingBug",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Larry, H. (2017). A Lovely Title."
+],
+"bib_ours": [
+"Larry, H. (2017). A Lovely Title."
+]
+},
+{
+"test": "date_EmptyStrings",
+"cit_ref": [
+"2000"
+],
+"cit_ours": [
+"2000"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_IgnoreNonexistentSort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_InPress",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_January",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_KeyVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Book A",
+"Book B",
+"Book C",
+"Book D"
+],
+"bib_ours": [
+"Book A",
+"Book B",
+"Book C",
+"Book D"
+]
+},
+{
+"test": "date_LiteralFailGracefullyIfNoValue",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-af-ZA",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ar-AR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-bg-BG",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ca-AD",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-cs-CZ",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-da-DK",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-de-AT",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-de-CH",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-de-DE",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-el-GR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-en-US",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-es-ES",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-et-EE",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-fr-FR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-he-IL",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-hu-HU",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-is-IS",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-it-IT",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ja-JP",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-kh-KH",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ko-KR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-mn-MN",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-nb-NO",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-nl-NL",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-pl-PL",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-pt-BR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-pt-PT",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ro-RO",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-ru-RU",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-sk-SK",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-sl-SL",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-sr-RS",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-sv-SE",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-th-TH",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-tr-TR",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-uk-UA",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-vi-VN",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-zh-CN",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedDateFormats-zh-TW",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericDefault",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericDefaultMissingDay",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericDefaultWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericYear",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericYearMonth",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericYearRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedNumericYearWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextDefault",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextDefaultMissingDay",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextDefaultWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextInStyleLocaleWithTextCase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextMonthFormOverride",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextYear",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextYearMonth",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedTextYearWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LocalizedWithInStyleFormatting",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LongMonth",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_LopsidedDataYearSuffixCollapse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_MaskNonexistentWithCondition",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_NegativeDateSort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_NegativeDateSortViaMacro",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_NegativeDateSortViaMacroOnYearMonthOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_NoDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_NonexistentSortReverseBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Item 2",
+"Item 4",
+"Item 1",
+"Item 3"
+],
+"bib_ours": [
+"Item 2",
+"Item 4",
+"Item 1",
+"Item 3"
+]
+},
+{
+"test": "date_NonexistentSortReverseCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_OtherAlone",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_OtherWithDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_RangeDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Year, Month, Day, with repeated month and year: 2_[DRD]_4 January 1999",
+"Year, Month, Day, with differing month: 2 January_[MRD]_4 March 1999",
+"Year, Month, Day, with differing year: 2 January 1999_[YRD]_4 January 2000",
+"Year, Month, with repeated year: January_[MRD]_March 1999",
+"Year, Month, with differing year: January 1999_[YRD]_March 2000",
+"Year, with differing year: 1999_[YRD]_2000"
+],
+"bib_ours": [
+"Year, Month, Day, with repeated month and year: 2January–4January1999",
+"Year, Month, Day, with differing month: 2January–4March1999",
+"Year, Month, Day, with differing year: 2January1999–4January2000",
+"Year, Month, with repeated year: January–March1999",
+"Year, Month, with differing year: January1999–March2000",
+"Year, with differing year: 1999–2000"
+]
+},
+{
+"test": "date_SeasonRange1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_SeasonRange2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_SeasonRange3",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_SeasonSubstituteInGroup",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_SortEmptyDatesBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"BookD 1999.",
+"BookB 2000.",
+"BookA.",
+"BookC.",
+"BookE."
+],
+"bib_ours": [
+"BookD 1999.",
+"BookB 2000.",
+"BookA.",
+"BookC.",
+"BookE."
+]
+},
+{
+"test": "date_SortEmptyDatesCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_String",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormFulldateDayRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormFulldateMonthRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormFulldateYearRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormMonthdateMonthRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormMonthdateYearRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormYeardateYearRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_TextFormYeardateYearRangeOpen",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_Uncertain",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_VariousInvalidDates",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_YearSuffixDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_YearSuffixImplicitWithNoDate",
+"cit_ref": [
+"(John Doe n.d. [Accessed: June 1, 1965]; John Doe n.d. [Accessed: June 1, 2065])"
+],
+"cit_ours": [
+"(John Doe [Accessed: June 1, 1965]; John Doe [Accessed: June 1, 2065])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_YearSuffixImplicitWithNoDateOneOnly",
+"cit_ref": [
+"(John Doe n.d. [Accessed: June 1, 1965])"
+],
+"cit_ours": [
+"(John Doe [Accessed: June 1, 1965])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "date_YearSuffixWithNoDate",
+"cit_ref": [
+"(John Doe n.d. [Accessed: June 1, 1965]; John Doe n.d. [Accessed: June 1, 2065])"
+],
+"cit_ours": [
+"(John Doe [Accessed: June 1, 1965]; John Doe [Accessed: June 1, 2065])"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_AndTermUnaffectedByNameDecorations",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_Baseline",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Little, Stuart, My Short Narrative (1990)"
+],
+"bib_ours": [
+"Little, Stuart, My Short Narrative (1990)"
+]
+},
+{
+"test": "decorations_NestedQuotes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_NestedQuotesInnerReverse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_NoNormalWithoutDecoration",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_SimpleFlipFlop",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "decorations_SimpleQuotes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AddNamesFailure",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AddNamesFailureWithAddGivenname",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AddNamesSuccess",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AllNamesBaseNameCountOnFailureIfYearSuffixAvailable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"bogus",
+"bogus",
+"bogus",
+"bogus"
+],
+"bib_ours": [
+"bogus",
+"bogus",
+"bogus",
+"bogus"
+]
+},
+{
+"test": "disambiguate_AllNamesGenerally",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AllNamesSimpleSequence",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AllNamesWithInitialsBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Asthma, A., Bronchitis, B., and Cold, C. (1980)",
+"Asthma, A., Bronchitis, B., and Cold, O. (1995)"
+],
+"bib_ours": [
+"Asthma, A., Bronchitis, B., and Cold, C. (1980)",
+"Asthma, A., Bronchitis, B., and Cold, O. (1995)"
+]
+},
+{
+"test": "disambiguate_AllNamesWithInitialsGenerally",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg1a",
+"cit_ref": [
+"Smith, Brown, et al. (1980); Smith, Brown, et al. (1980)",
+"Smith, Brown, et al. (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown, et al. (1980); Smith, Brown, et al. (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)",
+"Smith, Brown & Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg1b",
+"cit_ref": [
+"Smith, Brown & J. Jones (1980); Smith, Brown & J. Jones (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Brown & A. Jones (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)",
+"Smith, Brown & Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg1c",
+"cit_ref": [
+"Smith et al. (1980); Smith et al. (1980)",
+"Smith et al. (1980); Smith et al. (1980)",
+"Smith et al. (1980); Smith et al. (1980)"
+],
+"cit_ours": [
+"Smith et al. (1980); Smith et al. (1980)",
+"Smith et al. (1980); Smith et al. (1980)",
+"Smith et al. (1980); Smith et al. (1980)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg2",
+"cit_ref": [
+"Smith, Brown & J. Jones (1980); Smith, Brown & J. Jones (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Brown & A. Jones (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)",
+"Smith, Brown & Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg3",
+"cit_ref": [
+"Smith, Brown & J. Jones (1980a); Smith, Brown & J. Jones (1980b)",
+"Smith, Brown & J. Jones (1980a); Smith, Benson, et al. (1980)",
+"Smith, Brown & J. Jones (1980a); Smith, Brown & A. Jones (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980a); Smith, Brown & Jones (1980b)",
+"Smith, Brown & Jones (1980a); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980a); Smith, Brown & Jones (1980c)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg4",
+"cit_ref": [
+"Smith, Brown & J. Jones (1980); Smith, Brown & J. Jones (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & J. Jones (1980); Smith, Brown & A. Jones (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)",
+"Smith, Brown & Jones (1980); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980); Smith, Brown & Jones (1980)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_AndreaEg5",
+"cit_ref": [
+"Smith, Brown & J. Jones (1980a); Smith, Brown & J. Jones (1980b)",
+"Smith, Brown & J. Jones (1980a); Smith, Benson, et al. (1980)",
+"Smith, Brown & J. Jones (1980a); Smith, Brown & A. Jones (1980)"
+],
+"cit_ours": [
+"Smith, Brown & Jones (1980a); Smith, Brown & Jones (1980b)",
+"Smith, Brown & Jones (1980a); Smith, Benson, et al. (1980)",
+"Smith, Brown & Jones (1980a); Smith, Brown & Jones (1980c)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_BasedOnEtAlSubsequent",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_BasedOnSubsequentFormWithBackref2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteBaseNameCountOnFailureIfYearSuffixAvailable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteDisambiguateCondition",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteGivennameExpandCrossNestedNames",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteGivennameNoShortFormInitializeWith",
+"cit_ref": [
+"J Roe",
+"John Doe; Jack Doe"
+],
+"cit_ours": [
+"J Roe",
+"J Doe; J Doe"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteGivennameShortFormInitializeWith",
+"cit_ref": [
+"Roe",
+"J Doe; A Doe",
+"Thomas Smith; Ted Smith"
+],
+"cit_ours": [
+"Roe",
+"Doe; Doe",
+"Smith; Smith"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteGivennameShortFormNoInitializeWith",
+"cit_ref": [
+"Roe",
+"John Doe; Aloysius Doe"
+],
+"cit_ours": [
+"Roe",
+"Doe; Doe"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteIncremental1",
+"cit_ref": [
+"(Baines, Lightfoot, Benedettini, et al., 2009)",
+"(Baines, Lightfoot and Kay, 2009)",
+"(Grubic et al., 2009)"
+],
+"cit_ours": [
+"(Baines, Lightfoot, Benedettini, et al., 2009)",
+"(Baines, Lightfoot and Kay, 2009)",
+"(Grubic et al., 2009)"
+],
+"bib_ref": [
+"Baines, T.S., Lightfoot, H.W., Benedettini, O. and Kay, J.M. (2009), “The servitization of manufacturing: a review of literature and reflection on future challenges”, Journal of Manufacturing Technology Management, Vol. 20 No. 5, pp. 547–567.",
+"Baines, T.S., Lightfoot, H.W. and Kay, J.M. (2009), “Servitized manufacture: Practical challenges of delivering integrated products and services”, Proceedings of the Institution of Mechanical Engineers, Part B: Journal of Engineering Manufacture, Vol. 223 No. 9, pp. 1207–1215.",
+"Grubic, T., Jennions, I. and Baines, T.S. (2009), “The Interaction of PSS and PHM-a mutual benefit case”. Retrieved from http://72.27.231.73/sites/phmsociety.org/files/phm_submission/2009/phmc_09_49.pdf"
+],
+"bib_ours": [
+"Baines, T.S., Lightfoot, H.W., Benedettini, O. and Kay, J.M. (2009), “The servitization of manufacturing: a review of literature and reflection on future challenges,” Journal of Manufacturing Technology Management, Vol. 20 No. 5, pp. 547–567.",
+"Baines, T.S., Lightfoot, H.W. and Kay, J.M. (2009), “Servitized manufacture: Practical challenges of delivering integrated products and services,” Proceedings of the Institution of Mechanical Engineers, Part B: Journal of Engineering Manufacture, Vol. 223 No. 9, pp. 1207–1215.",
+"Grubic, T., Jennions, I. and Baines, T.S. (2009), “The Interaction of PSS and PHM-a mutual benefit case.” Retrieved from http://72.27.231.73/sites/phmsociety.org/files/phm_submission/2009/phmc_09_49.pdf"
+]
+},
+{
+"test": "disambiguate_ByCiteIncremental2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Baines, T.S., Lightfoot, H.W., Benedettini, O. and Kay, J.M. (2009), “The servitization of manufacturing: a review of literature and reflection on future challenges”, Journal of Manufacturing Technology Management, Vol. 20 No. 5, pp. 547–567.",
+"Baines, T.S., Lightfoot, H.W. and Kay, J.M. (2009), “Servitized manufacture: Practical challenges of delivering integrated products and services”, Proceedings of the Institution of Mechanical Engineers, Part B: Journal of Engineering Manufacture, Vol. 223 No. 9, pp. 1207–1215."
+],
+"bib_ours": [
+"Baines, T.S., Lightfoot, H.W., Benedettini, O. and Kay, J.M. (2009), “The servitization of manufacturing: a review of literature and reflection on future challenges,” Journal of Manufacturing Technology Management, Vol. 20 No. 5, pp. 547–567.",
+"Baines, T.S., Lightfoot, H.W. and Kay, J.M. (2009), “Servitized manufacture: Practical challenges of delivering integrated products and services,” Proceedings of the Institution of Mechanical Engineers, Part B: Journal of Engineering Manufacture, Vol. 223 No. 9, pp. 1207–1215."
+]
+},
+{
+"test": "disambiguate_ByCiteIsDefault",
+"cit_ref": [
+"(Hall and Thelen, 2009)",
+"(Steinmo et al., 1992)"
+],
+"cit_ours": [
+"(Hall and Thelen, 2009)",
+"(Steinmo et al., 1992)"
+],
+"bib_ref": [
+"Hall, P.A., Thelen, K.A., 2009. Institutional change in varieties of capitalism. Socioecon Rev 7, 7–34.",
+"Steinmo, S., Thelen, K.A., Longstreth, F. (Eds.), 1992. Structuring Politics: Historical Institutionalism in Comparative Analysis, Cambridge studies in comparative politics. Cambridge University Press, Cambridge [England]."
+],
+"bib_ours": [
+"Hall, P.A., Thelen, K.A., 2009. Institutional change in varieties of capitalism. Socioecon Rev 7, 7–34.",
+"Steinmo, S., Thelen, K.A., Longstreth, F. (Eds.), 1992. Structuring Politics: Historical Institutionalism in Comparative Analysis, Cambridge studies in comparative politics. Cambridge University Press, Cambridge [England]."
+]
+},
+{
+"test": "disambiguate_ByCiteMinimalGivennameExpandMinimalNames",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Ignore me",
+"Ignore me"
+],
+"bib_ours": [
+"Ignore me",
+"Ignore me"
+]
+},
+{
+"test": "disambiguate_ByCiteRetainNamesOnFailureIfYearSuffixNotAvailable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteTwoAuthorsSameCite",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ByCiteTwoAuthorsSameFamilyName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_CitationLabelDefault",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_CitationLabelInData",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_DifferentSpacingInInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_DisambiguateTrueAndYearSuffixOne",
+"cit_ref": [
+"Pollock, 1979",
+"Pollock, 1980"
+],
+"cit_ours": [
+"Pollock, 1979",
+"Pollock, 1980"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_DisambiguateTrueReflectedInBibliography",
+"cit_ref": [
+"Smith, Book One; Smith, Book Two; Brown"
+],
+"cit_ours": [
+"Smith, Book One; Smith, Book Two; Brown"
+],
+"bib_ref": [
+"Smith, Book One",
+"Smith, Book Two",
+"Brown"
+],
+"bib_ours": [
+"Smith",
+"Smith",
+"Brown"
+]
+},
+{
+"test": "disambiguate_DisambiguateWithThree",
+"cit_ref": [
+"(Aalto, Book A)",
+"(Aalto, Book B)",
+"(Aalto, Book C)"
+],
+"cit_ours": [
+"(Aalto, Book A)",
+"(Aalto, Book B)",
+"(Aalto, Book C)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_DisambiguateWithThree2",
+"cit_ref": [
+"(Spivak, A Critique)",
+"(Spivak, “Cultural Talks”)",
+"(Spivak, Death of a Discipline)"
+],
+"cit_ours": [
+"(Spivak, A Critique)",
+"(Spivak, “Cultural Talks”)",
+"(Spivak, Death of a Discipline)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_DisambiguationHang",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_ExtraTextCitation",
+"cit_ref": [
+"Bumke, Courtly Culture: Literature and Society in the High Middle Ages",
+"Bumke, Höfische"
+],
+"cit_ours": [
+"Bumke, Courtly Culture: Literature and Society in the High Middle Ages",
+"Bumke, Höfische"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_FailWithYearSuffix",
+"cit_ref": [
+"(Caritas Europa et al. 2004a)",
+"(Caritas Europa et al. 2004b)"
+],
+"cit_ours": [
+"(Caritas Europa, CCME, COMECE, ICMC, JRS-Europe, and QCEA 2004a)",
+"(Caritas Europa, CCME, COMECE, ICMC, JRS-Europe, and QCEA 2004b)"
+],
+"bib_ref": [
+"Caritas Europa, CCME, COMECE, ICMC, JRS-Europe, and QCEA. 2004a. Integrating Migrants, Integrating Societies: Essential Elements for EU Migration Policy. December 18. http://www.comece.org/site/en/publications/otherpublications/article/3341.html.",
+"---. 2004b. Integrating Migrants, Integrating Societies: Essential Elements for EU Migration Policy. December 18. http://www.comece.org/site/en/publications/otherpublications/article/3341.html."
+],
+"bib_ours": [
+"Caritas Europa, CCME, COMECE, ICMC, JRS-Europe, and QCEA. 2004a. Integrating Migrants, Integrating Societies: Essential Elements for EU Migration Policy. December 18. http://www.comece.org/site/en/publications/otherpublications/article/3341.html.",
+"---. 2004b. Integrating Migrants, Integrating Societies: Essential Elements for EU Migration Policy. December 18. http://www.comece.org/site/en/publications/otherpublications/article/3341.html."
+]
+},
+{
+"test": "disambiguate_FamilyNameOnly",
+"cit_ref": [
+"Blevins2001",
+"Blevins2001"
+],
+"cit_ours": [
+"Blevins2001",
+"Blevins2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_HonorFullnameInBibliography",
+"cit_ref": [
+"A. Aalto; Blevins; R. Aalto"
+],
+"cit_ours": [
+"Aalto; Blevins; Aalto"
+],
+"bib_ref": [
+"Alan Aalto",
+"Richard Aalto",
+"Old Blevins"
+],
+"bib_ours": [
+"Alan Aalto",
+"Richard Aalto",
+"Old Blevins"
+]
+},
+{
+"test": "disambiguate_ImplicitYearSuffixOnceOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1990a] Doe, Book A 05/30/1990",
+"[1990b] Doe, Book B 05/30/1990"
+],
+"bib_ours": [
+"[1990a] Doe, Book A 5/30/1990a",
+"[1990b] Doe, Book B 5/30/1990b"
+]
+},
+{
+"test": "disambiguate_IncrementalExtraText",
+"cit_ref": [
+"Yost Trisk",
+"John Smith, Book One, ed. 3",
+"John Smith, Book Two, ed. 4",
+"John Smith, Complete Works, ed. 5",
+"John Smith, Complete Works, ed. 6"
+],
+"cit_ours": [
+"Yost Trisk",
+"John Smith, Book One, ed. 3",
+"John Smith, Book Two, ed. 4",
+"John Smith, Complete Works, ed. 5",
+"John Smith, Complete Works, ed. 6"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_InitializeWithButNoDisambiguation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, H. (1965a) His Anonymous Second Life. In:",
+"Doe, J. (1965b) His Anonymous Life."
+],
+"bib_ours": [
+"Doe, H. (1965a) His Anonymous Second Life.",
+"Doe, J. (1965b) His Anonymous Life."
+]
+},
+{
+"test": "disambiguate_LastOnlyFailWithByCite",
+"cit_ref": [
+"Organisation 2010a",
+"Organisation 2010b"
+],
+"cit_ours": [
+"Organisation 2010a",
+"Organisation 2010b"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_NoTextElementUsesYearSuffixVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_PrimaryNameGenerally",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_PrimaryNameWithInitialsLimitedToPrimary",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_PrimaryNameWithNonDroppingParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_PrimaryNameWithParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_SetsOfNames",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Ely, EW, Gautam, S, Margolin, R & Francis, J 2001, ‘The impact of delirium in the intensive care unit on hospital length of stay’, Intensive Care Medicine, vol. 27, no. 12, pp. 1892–1900, viewed <http://www.ncbi.nlm.nih.gov/pubmed/11797025>.",
+"Ely, EW, Inouye, SK, Bernard, GR & Gordon, S 2001, ‘Delirium in Mechanically Ventilated Patients’, JAMA: The Journal of the American Medical Association, vol. 286, no. 21, pp. 2703–2710, viewed <http://jama.ama-assn.org/content/286/21/2703.abstract>.",
+"Ely, EW, Margolin, R, Francis, J & May, L 2001, ‘Evaluation of delirium in critically ill patients: validation of the Confusion Assessment Method for the Intensive Care Unit (CAM-ICU)’, Critical Care Medicine, vol. 29, no. 7, pp. 1370–1379, viewed <http://www.ncbi.nlm.nih.gov/pubmed/11445689>."
+],
+"bib_ours": [
+"Ely, EW, Gautam, S, Margolin, R & Francis, J 2001, “The impact of delirium in the intensive care unit on hospital length of stay,” Intensive Care Medicine, vol. 27, no. 12, pp. 1892–1900, viewed <http://www.ncbi.nlm.nih.gov/pubmed/11797025>.",
+"Ely, EW, Inouye, SK, Bernard, GR & Gordon, S 2001, “Delirium in Mechanically Ventilated Patients,” JAMA: The Journal of the American Medical Association, vol. 286, no. 21, pp. 2703 –2710, viewed <http://jama.ama-assn.org/content/286/21/2703.abstract>.",
+"Ely, EW, Margolin, R, Francis, J & May, L 2001, “Evaluation of delirium in critically ill patients: validation of the Confusion Assessment Method for the Intensive Care Unit (CAM-ICU),” Critical Care Medicine, vol. 29, no. 7, pp. 1370–1379, viewed <http://www.ncbi.nlm.nih.gov/pubmed/11445689>."
+]
+},
+{
+"test": "disambiguate_SkipAccessedYearSuffix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe J. His Anonymous Life. http://example.com (accessed 15 December 2000). 1965a",
+"Doe J. His Anonymous Life. http://example.com (accessed 15 December 2000). 1965b"
+],
+"bib_ours": [
+"Doe J. His Anonymous Life. http://example.com (accessed 15 December 2000). 1965a",
+"Doe J. His Anonymous Life. http://example.com (accessed 15 December 2000). 1965b"
+]
+},
+{
+"test": "disambiguate_ThreeNoAuthorNoTitleEntries",
+"cit_ref": [
+"BleagleA, 2000",
+"BleagleB, 2000",
+"BleagleC, 2000"
+],
+"cit_ours": [
+"BleagleA, 2000",
+"BleagleB, 2000",
+"BleagleC, 2000"
+],
+"bib_ref": [
+"BleagleA, 2000",
+"BleagleB, 2000",
+"BleagleC, 2000"
+],
+"bib_ours": [
+"BleagleA, 2000",
+"BleagleB, 2000",
+"BleagleC, 2000"
+]
+},
+{
+"test": "disambiguate_ToInitialOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_Trigraph",
+"cit_ref": [
+"Aalt02a",
+"Aalt02b",
+"Aalt02c"
+],
+"cit_ours": [
+"Aal02",
+"Aal02",
+"Aal02"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_WithOriginalYear",
+"cit_ref": [
+"(Castel, [1995] 1999)",
+"(Castel, 1999)"
+],
+"cit_ours": [
+"(Castel, [1995] 1999)",
+"(Castel, 1999)"
+],
+"bib_ref": [
+"Castel C., [1995] 1999,.",
+"Castel C., 1999,."
+],
+"bib_ours": [
+"Castel C., [1995] 1999, .",
+"Castel C., 1999, ."
+]
+},
+{
+"test": "disambiguate_YearCollapseWithInstitution",
+"cit_ref": [
+"(Smith Co 2000a, 2000b, 2000c)",
+"(Smith Co 2000b)",
+"(Smith Co 2000c)"
+],
+"cit_ours": [
+"(Smith Co 2000a, 2000b, 2000c)",
+"(Smith Co 2000b)",
+"(Smith Co 2000c)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixAndSort",
+"cit_ref": [
+"1990m!; 1990l!; 1990k!; 1990j!; 1990i!; 1990h!; 1990g!; 1990f!; 1990e!; 1990d!; 1990c!; 1990b!; 1990a!"
+],
+"cit_ours": [
+"1990m!; 1990l!; 1990k!; 1990j!; 1990i!; 1990h!; 1990g!; 1990f!; 1990e!; 1990d!; 1990c!; 1990b!; 1990a!"
+],
+"bib_ref": [
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me"
+],
+"bib_ours": [
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me",
+"Ignore me"
+]
+},
+{
+"test": "disambiguate_YearSuffixAtTwoLevels",
+"cit_ref": [
+"Smith et al. (1986a); Smith et al. (1986b); Smith et al. (1986c); Smith et al. (1986d)"
+],
+"cit_ours": [
+"Smith, Jones & Brown (1986a); Smith, Jones & Brown (1986b); Smith, Jones, Brown & Green (1986a); Smith, Jones, Brown & Green (1986b)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixFiftyTwoEntries",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixFiftyTwoEntriesByCite",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixMacroSameYearExplicit",
+"cit_ref": [
+"A Smith 2001",
+"B Smith 2001"
+],
+"cit_ours": [
+"Smith 2001a",
+"Smith 2001b"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixMacroSameYearImplicit",
+"cit_ref": [
+"A Smith 2001",
+"B Smith 2001"
+],
+"cit_ours": [
+"Smith 2001a",
+"Smith 2001b"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixMidInsert",
+"cit_ref": [
+"(UN DESA 2011b)",
+"(UN DESA 2011c)",
+"(UN DESA 2011a)"
+],
+"cit_ours": [
+"(UN DESA 2011b)",
+"(UN DESA 2011c)",
+"(UN DESA 2011a)"
+],
+"bib_ref": [
+"UN DESA. 2011a. World Economic Situation and Prospects 2011. United Nations, January 13.",
+"---. 2011b. Monthly Briefing: World Economic Situation and Prospects. Monthly Briefing. United Nations, April 11. http://www.un.org/en/development/desa/policy/wesp/wesp_mb/wesp_mb30.pdf.",
+"---. 2011c. World Economic Situation and Prospects 2011: Update as of mid-2011. WESP. United Nations, May 25. http://www.un.org/en/development/desa/policy/wesp/wesp_current/2011wespupdate_pr_en.pdf."
+],
+"bib_ours": [
+"UN DESA. 2011a. World Economic Situation and Prospects 2011. United Nations, January 13.",
+"---. 2011b. Monthly Briefing: World Economic Situation and Prospects. Monthly Briefing. United Nations, April 11. http://www.un.org/en/development/desa/policy/wesp/wesp_mb/wesp_mb30.pdf.",
+"---. 2011c. World Economic Situation and Prospects 2011: Update as of mid-2011. WESP. United Nations, May 25. http://www.un.org/en/development/desa/policy/wesp/wesp_current/2011wespupdate_pr_en.pdf."
+]
+},
+{
+"test": "disambiguate_YearSuffixMixedDates",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"forget me.",
+"forget me.",
+"forget me."
+],
+"bib_ours": [
+"forget me.",
+"forget me.",
+"forget me."
+]
+},
+{
+"test": "disambiguate_YearSuffixTwoPairsBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J. Doe and S. Jones, 1999a",
+"J. Doe and S. Jones, 1999b",
+"J. Doe and S. Smith, 1999a",
+"J. Doe and S. Smith, 1999b"
+],
+"bib_ours": [
+"J. Doe and S. Jones, 1999a",
+"J. Doe and S. Jones, 1999b",
+"J. Doe and S. Smith, 1999a",
+"J. Doe and S. Smith, 1999b"
+]
+},
+{
+"test": "disambiguate_YearSuffixTwoPairsFirstNameBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J. Doe and S. Jones, 1999a",
+"J. Doe and S. Jones, 1999b",
+"J. Doe and S. Smith, 1999a",
+"J. Doe and S. Smith, 1999b"
+],
+"bib_ours": [
+"J. Doe and S. Jones, 1999a",
+"J. Doe and S. Jones, 1999b",
+"J. Doe and S. Smith, 1999a",
+"J. Doe and S. Smith, 1999b"
+]
+},
+{
+"test": "disambiguate_YearSuffixTwoPairsFullNamesBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J. Doe and S. Jones, 1999",
+"J. Doe and S. Jones, 1999",
+"J. Doe and S. Smith, 1999",
+"J. Doe and S. Smith, 1999"
+],
+"bib_ours": [
+"J. Doe and S. Jones, 1999",
+"J. Doe and S. Jones, 1999",
+"J. Doe and S. Smith, 1999",
+"J. Doe and S. Smith, 1999"
+]
+},
+{
+"test": "disambiguate_YearSuffixWithEtAlSubsequent",
+"cit_ref": [
+"(Smith 2000a, 2000b, 2000c)",
+"(Smith 2000b)",
+"(Smith 2000c)"
+],
+"cit_ours": [
+"(Smith 2000a, 2000b, 2000c)",
+"(Smith 2000b)",
+"(Smith 2000c)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "disambiguate_YearSuffixWithMixedCreatorTypes",
+"cit_ref": [
+"(Asthma 1990a)",
+"(Asthma 1990b)"
+],
+"cit_ours": [
+"(Asthma 1990a)",
+"(Asthma 1990b)"
+],
+"bib_ref": [
+"Ignore me",
+"Ignore me"
+],
+"bib_ours": [
+"Ignore me",
+"Ignore me"
+]
+},
+{
+"test": "display_AuthorAsHeading",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Aloysius Doe1999Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa",
+"2000 Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb",
+"Jane Henrietta Roe1999aCcccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc",
+"1999b Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd",
+"2000 Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee"
+],
+"bib_ours": [
+"John Aloysius Doe 1999 Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa Aaaaa",
+"2000 Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb Bbbbb",
+"Jane Henrietta Roe 1999a Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc Ccccc",
+"1999b Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd Ddddd",
+"2000 Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee Eeeee"
+]
+},
+{
+"test": "display_DisplayBlock",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith, Book A (2000)An interesting book by an interesting author.",
+"Robert Jones, Book B (2001)An old contribution to a new field."
+],
+"bib_ours": [
+"John Smith, Book A (2000)An interesting book by an interesting author.",
+"Robert Jones, Book B (2001)An old contribution to a new field."
+]
+},
+{
+"test": "display_LostSuffix",
+"cit_ref": [
+"Aalto, Chapter One,"
+],
+"cit_ours": [
+"Aalto, Chapter One,"
+],
+"bib_ref": [
+"Book One, (zitiert als: Aalto, Chapter One)."
+],
+"bib_ours": [
+"Book One, (zitiert als: Aalto, Chapter One)."
+]
+},
+{
+"test": "display_SecondFieldAlignClone",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] John Aloysius Doe, “John’s Book” (1999)",
+"[2] Jane Henrietta Roe, “Jane’s Book” (2000)"
+],
+"bib_ours": [
+"[1 ] John Aloysius Doe, “John's Book” (1999)",
+"[2 ] Jane Henrietta Roe, “Jane's Book” (2000)"
+]
+},
+{
+"test": "display_SecondFieldAlignMigratePunctuation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] B. D’Arcus, Boundaries of Dissent: Protest and State Power in the Media Age, Routledge, 2005.",
+"[2] F.G. Bennett Jr., “Getting Property Right: ‘Informal’ Mortgages in the Japanese Courts,” Pac. Rim L. & Pol’y J., vol. 18, Aug. 2009, pp. 463–509."
+],
+"bib_ours": [
+"[1] B. D'Arcus, Boundaries of Dissent: Protest and State Power in the Media Age, Routledge, 2005.",
+"[2] F.G. Bennett Jr., “Getting Property Right: \"Informal\" Mortgages in the Japanese Courts,” Pac. Rim L. & Pol'y J., vol. 18, Aug. 2009, pp. 463–509."
+]
+},
+{
+"test": "etal_CitationAndBibliographyDecorationsInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, J. et al. 1965."
+],
+"bib_ours": [
+"Doe, J. et al. 1965."
+]
+},
+{
+"test": "etal_CitationAndBibliographyDecorationsInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, J. et al. 1965."
+],
+"bib_ours": [
+"Doe, J. et al. 1965."
+]
+},
+{
+"test": "etal_ShortFormOfName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "etal_UseZeroFirst",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al. // John Doe et al."
+]
+},
+{
+"test": "flipflop_ApostropheInsideTag",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_Apostrophes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"“Supplément Aux Annales Du Service Des Antiquités de l’Égypte, Cahier.” Cairo: Conseil Suprême des Antiquités de l’Égypte [formerly Imprimerie de l’Institut français d’archéologie orientale], n.d."
+],
+"bib_ours": [
+"“Supplément Aux Annales du Service des Antiquités de l'Égypte, Cahier.” Cairo: Conseil Suprême des Antiquités de l'Égypte [formerly Imprimerie de l'Institut français d'archéologie orientale], n.d."
+]
+},
+{
+"test": "flipflop_BoldfaceNodeLevelMarkup",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_CompleteCiteInPrefix",
+"cit_ref": [
+"Wilhelm Dilthey, “The Types of World Views and Their Unfoldment Within the Metaphysical Systems,” in Dilthey’s Philosophy of Existence: Introduction to Weltanschauungslehre, trans. William Kluback and Martin Weinbaum (New York: Bookman Associates, 1957), 26–27 Other Book Title"
+],
+"cit_ours": [
+"Wilhelm Dilthey, \"The Types of World Views and Their Unfoldment Within the Metaphysical Systems,\" in Dilthey’s Philosophy of Existence: Introduction to Weltanschauungslehre, trans. William Kluback and Martin Weinbaum (New York: Bookman Associates, 1957), 26–27 Other Book Title"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_ItalicsFlipped",
+"cit_ref": [
+"One Two Three Four Five!",
+"One Two Three Four Five!"
+],
+"cit_ours": [
+"One Two Three Four Five!",
+"One Two Three Four Five!"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_ItalicsSimple",
+"cit_ref": [
+"One TwoA Three Four Five!",
+"One TwoB Three Four Five!",
+"One TwoC Three Four Five!",
+"One TwoD Three Four Five!",
+"One TwoE Three Four Five!",
+"One TwoF</i> Three Four Five!"
+],
+"cit_ours": [
+"One TwoA Three Four Five!",
+"One TwoB Three Four Five!",
+"One TwoC Three Four Five!",
+"One TwoD Three Four Five!",
+"One TwoE Three Four Five!",
+"One TwoF Three Four Five!"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_ItalicsWithOk",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Lessard v. Schmidt. 1972. 349 F. Supp. 1078 (E.D. Wisc.)."
+],
+"bib_ours": [
+"Lessard v. Schmidt. 1972. 349 F. Supp. (E.D. Wisc.)."
+]
+},
+{
+"test": "flipflop_ItalicsWithOkAndTextcase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Lessard V. Schmidt. 1972. 349 F. Supp. 1078 (E.D. Wisc.)."
+],
+"bib_ours": [
+"Lessard V. Schmidt. 1972. 349 F. Supp. (E.D. Wisc.)."
+]
+},
+{
+"test": "flipflop_LeadingMarkupWithApostrophe",
+"cit_ref": [
+"Insha’Allah is an Arabic phrase meaning ‘God willing.’ Another Arabic word is bukra. Aalto"
+],
+"cit_ours": [
+"Insha’Allah is an Arabic phrase meaning ‘God willing’. Another Arabic word is bukra. Aalto"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_LeadingSingleQuote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_LongComplexPrefix",
+"cit_ref": [
+"The French translation provided there runs, Toi, qui cultives notre philosophie sous lhabit étranger—et peut-être pas si étranger que cela, puisque la chevelure des naziréens et la consécration de la tête, dont il a toujours tenu le fer à lécart, sont aussi comme une loi des sanctuaires, et que la blancheur et l’éclat des vêtements appartiennent aux anges, quand on les représente sous une forme corporelle: c’est, je pense, le symbole de la pureté propre à leur nature—! Other Book Title"
+],
+"cit_ours": [
+"The French translation provided there runs, Toi, qui cultives notre philosophie sous lhabit étranger—et peut-être pas si étranger que cela, puisque la chevelure des naziréens et la consécration de la tête, dont il a toujours tenu le fer à lécart, sont aussi comme une loi des sanctuaires, et que la blancheur et l’éclat des vêtements appartiennent aux anges, quand on les représente sous une forme corporelle: c’est, je pense, le symbole de la pureté propre à leur nature—! Other Book Title"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_NumericField",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_OrphanQuote",
+"cit_ref": [
+"Nation of “Positive Obligations ” of State Under the European Convention on Human Rights (1)"
+],
+"cit_ours": [
+"Nation of \"Positive Obligations \" of State Under the European Convention on Human Rights (1)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_QuotesInFieldNotOnNode",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_QuotesNodeLevelMarkup",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_SingleBeforeColon",
+"cit_ref": [
+"“Nobody Knows You’re a Dog”: As Iconic Internet Cartoon Turns 20, Creator Peter Steiner Knows the Joke Rings as Relevant as Ever"
+],
+"cit_ours": [
+"'Nobody Knows You're a Dog': as Iconic Internet Cartoon Turns 20, Creator Peter Steiner Knows the Joke Rings as Relevant as Ever"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_SingleQuotesOnItalics",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_SmallCaps",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "flipflop_StartingApostrophe",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "form_TitleShort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "form_TitleShortNoLong",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "form_TitleTestNoLongFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "fullstyles_ABdNT",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"COLE, S. J.; MOORE, R. Hydrological modelling using raingauge- and radar-based estimators of areal rainfall. Journal of Hydrology, v. 358, n. 3-4, p. 159–181, 2008."
+],
+"bib_ours": [
+"COLE, S. J.; MOORE, R. Hydrological modelling using raingauge- and radar-based estimators of areal rainfall. Journal of Hydrology, v. 358, n. 3-4, p. 159–181, 2008."
+]
+},
+{
+"test": "fullstyles_APA",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Oblinger, D. G., & Oblinger, S. M. (2009). Bookie."
+],
+"bib_ours": [
+"Oblinger, D. G., & Oblinger, S. M. (2009). Bookie."
+]
+},
+{
+"test": "fullstyles_ChicagoArticleTitleQuestion",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John. 1994. An article is it? New Thinker 10: 5."
+],
+"bib_ours": [
+"Doe, John. 1994. An article is it? New Thinker 10: 5."
+]
+},
+{
+"test": "fullstyles_ChicagoAuthorDateSimple",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John. 1990. Book A. Brobdingnag: Zardoz Press.",
+"Doe, John, and Jane Roe. 1991. Book B.",
+"Doe, John, Jane Roe, and Alvin Asthma. 1992. Book C.",
+"Doe, John, Jane Roe, Alvin Asthma, Bob Bronchitis, Chris Cold, Don Dropsy, Ernie Enteritis, et al. 1993. Book D.",
+"Doe, John, Jane Roe, Alvin Asthma, Bob Bronchitis, Chris Cold, Don Dropsy, Ernie Enteritis, et al. 1994. Book E."
+],
+"bib_ours": [
+"Doe, John. 1990. Book A. Brobdingnag: Zardoz Press.",
+"Doe, John, and Jane Roe. 1991. Book B.",
+"Doe, John, Jane Roe, and Alvin Asthma. 1992. Book C.",
+"Doe, John, Jane Roe, Alvin Asthma, Bob Bronchitis, Chris Cold, Don Dropsy, Ernie Enteritis, et al. 1993. Book D.",
+"---. 1994. Book E."
+]
+},
+{
+"test": "fullstyles_ChicagoNoteWithBibliographyWithPublisher",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John. Book A. Brobdingnag: Zardoz Press, 1990.",
+"Roe, Jane. Book B, 1991."
+],
+"bib_ours": [
+"Doe, John. Book A. Brobdingnag: Zardoz Press, 1990.",
+"Roe, Jane. Book B, 1991."
+]
+},
+{
+"test": "group_ComplexNesting",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe Inc. (n.d.). Retrieved June 1, 1965, from http://example.com/"
+],
+"bib_ours": [
+"Doe Inc. Retrieved June 1, 1965, from http://example.com/"
+]
+},
+{
+"test": "group_LegalWithAuthorDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "group_ShortOutputOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "group_SuppressTermInMacro",
+"cit_ref": [
+"His Anonymous Life"
+],
+"cit_ours": [
+"His Anonymous Life, in"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "group_SuppressTermWhenNoOutputFromPartialDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "group_SuppressValueWithEmptySubgroup",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "group_SuppressWithEmptyNestedDateNode",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Author1, O., Author7, T. & Author3, T., 2008. Test Article. Test Journal, 12."
+],
+"bib_ours": [
+"Author1, O., Author7, T. & Author3, T., 2008. Test Article. Test Journal, 12."
+]
+},
+{
+"test": "integration_CitationSort",
+"cit_ref": [
+"(Doe; Noakes; Roe; Snoakes)"
+],
+"cit_ours": [
+"(Doe; Noakes; Roe; Snoakes)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_CitationSortTwice",
+"cit_ref": [
+"(Doe; Roe)",
+"(Doe; Noakes; Roe; Snoakes)"
+],
+"cit_ours": [
+"(Doe; Roe)",
+"(Doe; Noakes; Roe; Snoakes)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_DeleteName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_DisambiguateAddGivenname1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_DisambiguateAddGivenname2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_DuplicateItem",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_DuplicateItem2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_FirstReferenceNoteNumberPositionChange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_IbidOnInsert",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_IbidWithDifferentLocators",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_SimpleFirstReferenceNoteNumber",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_SimpleIbid",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_SubsequentWhenInterveningFootnote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "integration_YearSuffixOnOffOn",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_CollapsedPageNumberPluralDetection",
+"cit_ref": [
+"His Anonymous Life, pages 327–330",
+"His Anonymous Life, pages 427–430"
+],
+"cit_ours": [
+"His Anonymous Life, page 327 \\-30",
+"His Anonymous Life, pages 427–430"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_CompactNamesAfterFullNames",
+"cit_ref": [
+"Alan Aalto, editor"
+],
+"cit_ours": [
+"Alan Aalto, editor"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_EditorTranslator1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1. Иванов И.И. . Пример оформления книги с редактором и переводчиком в одном лице : вид издания : in 5 vols. Vol. 2 / И.И. Иванов, П.П. Петров, С.С. Сидоров; ed & trans. Р.Р. Романов Дополнительно. – Тюмень: Дом, 2013. – 10. – 100 p."
+],
+"bib_ours": [
+"1. Иванов И.И. . Пример оформления книги с редактором и переводчиком в одном лице : вид издания : in 5 vols. Vol. 2 / И.И. Иванов, П.П. Петров, С.С. Сидоров; trans. ed. Р.Р. Романов; Р.Р. Романов Дополнительно. – Тюмень: Дом, 2013. – No. 10. – 100 p."
+]
+},
+{
+"test": "label_EditorTranslator2",
+"cit_ref": [
+"Some title, “Hello there.”"
+],
+"cit_ours": [
+"Some title, \"Hello there\"."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_EmptyLabelVanish",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_EmptyLabelVanishPage",
+"cit_ref": [
+"{53}"
+],
+"cit_ours": [
+", p. 53"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_ImplicitForm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_MissingReturnsEmpty",
+"cit_ref": [
+"Aalto"
+],
+"cit_ours": [
+"Aalto"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_NameLabelThroughSubstitute",
+"cit_ref": [
+"(Wolf, 2005)"
+],
+"cit_ours": [
+"(Wolf, 2005)"
+],
+"bib_ref": [
+"Wolf, K. S. (2005). The future for Deaf individuals is not that bleak [Peer commentary, Decrease of Deaf potential in a mainstreamed environment, by W. C. Hall]. Retrieved from http://www.personalityresearch.org/papers/hall.html"
+],
+"bib_ours": [
+"Wolf, K.S. (2005). The future for Deaf individuals is not that bleak. Retrieved from http://www.personalityresearch.org/papers/hall.html"
+]
+},
+{
+"test": "label_NoFirstCharCapWithInTextClass",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_NonexistentNameVariableLabel",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralNumberOfVolumes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralPagesWithAlphaPrefix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithAmpersand",
+"cit_ref": [
+"Page 213 & 235"
+],
+"cit_ours": [
+"pages 213 & 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithAnd",
+"cit_ref": [
+"Page 213 and 235"
+],
+"cit_ours": [
+"page 213 and 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithCommaAnd",
+"cit_ref": [
+"Page 213, and 235"
+],
+"cit_ours": [
+"page 213, and 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithCommaLocalizedAnd",
+"cit_ref": [
+"Page 213, et 235"
+],
+"cit_ours": [
+"page 213, et 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithLocalizedAmpersand",
+"cit_ref": [
+"Page 213 & 235"
+],
+"cit_ours": [
+"pages 213 & 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "label_PluralWithLocalizedAnd",
+"cit_ref": [
+"Page 213 et 235"
+],
+"cit_ours": [
+"page 213 et 235"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyPlusOverrideDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyPlusOverrideStyleOpt",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyPlusOverrideTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyStyleOpt",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_EmptyTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_ForceEmptyAndOthersTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_ForceEmptyEtAlTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_NonExistentLocaleDef",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_OverloadWithEmptyString",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_PageRangeDelimiterTermDefined",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_PageRangeDelimiterTermFrenchUndef",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_PageRangeDelimiterTermUndefined",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_SpecificDate",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_SpecificStyleOpt",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_SpecificTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseEmptyLangEmptyLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseEmptyLangNonEnglishLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseGarbageLangEmptyLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseGarbageLangEnglishLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseGarbageLangNonEnglishLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_TitleCaseNonEnglishLangUpperEmptyLocale",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locale_UnknownTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_SimpleLocators",
+"cit_ref": [
+"Doe, Book A, 2000, p. 100 - 103; Roe, Book B, 2001, chap. 200 - 201."
+],
+"cit_ours": [
+"Doe, Book A, 2000, p. 100 - 103; Roe, Book B, 2001, chap. 200 - 201."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_SingularEmbeddedLabelAfterPlural",
+"cit_ref": [
+"Book One, pages 367–368, fig. 333"
+],
+"cit_ours": [
+"Book One, pages 367–368, fig. 333"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_TermSelection",
+"cit_ref": [
+"Book A, fol. 101"
+],
+"cit_ours": [
+"Book A, fol. 101"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_TrickyEntryForPlurals",
+"cit_ref": [
+"Book Title, p. vol. 1, fol. 186, 8 April 1544"
+],
+"cit_ours": [
+"Book Title, p. vol. 1, fol. 186, 8 April 1544"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_WithLeadingSpace",
+"cit_ref": [
+"Hello Title:666"
+],
+"cit_ours": [
+"Hello Title:666"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "locator_WorkaroundTestForSubVerbo",
+"cit_ref": [
+"Book With Opus, op. 100",
+"Book With Sub Verbo, p. 200"
+],
+"cit_ours": [
+"Book With Opus, op. 100",
+"Book With Sub Verbo, p. 200"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_AllowRepeatDateRenderings",
+"cit_ref": [
+"(2006).",
+"(2007, February 15)."
+],
+"cit_ours": [
+"(2006).",
+"(2007, February 15)."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_CapitalizeFirstOccurringNameParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_CapitalizeFirstOccurringTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_CitationLabelInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[Doe65] Doe, J.: Book A., 1965.",
+"[RoNo78a] Roe, J. and Noakes, R.: Book A., 1978.",
+"[RoNo78b] Roe, J. and Noakes, R.: Book A., 1978."
+],
+"bib_ours": [
+"[Roe78] Roe, J. and Noakes, R.: Book A., 1978a.",
+"[Doe65] Doe, J.: Book A., 1965.",
+"[Roe78] Roe, J. and Noakes, R.: Book A., 1978b."
+]
+},
+{
+"test": "magic_CitationLabelInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[Doe65] Doe, J.: Book A., 1965.",
+"[RoNo78a] Roe, J. and Noakes, R.: Book A., 1978.",
+"[RoNo78b] Roe, J. and Noakes, R.: Book A., 1978."
+],
+"bib_ours": [
+"[Roe78] Roe, J. and Noakes, R.: Book A., 1978a.",
+"[Doe65] Doe, J.: Book A., 1965.",
+"[Roe78] Roe, J. and Noakes, R.: Book A., 1978b."
+]
+},
+{
+"test": "magic_EntrySpacingDouble",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+],
+"bib_ours": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+]
+},
+{
+"test": "magic_HangingIndent",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith, Book A: being a book with a very long and verbose title with lots of words that takes up excessive space on the page and leaves the reader more confused about the content rather than less (2000)",
+"Robert Jones, Book B: a work of great eloquence in which every word makes the reader eager for the next which is a good thing because it has a very long and ostensibly boring title (2001)"
+],
+"bib_ours": [
+"John Smith, Book A: being a book with a very long and verbose title with lots of words that takes up excessive space on the page and leaves the reader more confused about the content rather than less (2000)",
+"Robert Jones, Book B: a work of great eloquence in which every word makes the reader eager for the next which is a good thing because it has a very long and ostensibly boring title (2001)"
+]
+},
+{
+"test": "magic_ImplicitYearSuffixDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_ImplicitYearSuffixExplicitDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"dummy",
+"dummy"
+],
+"bib_ours": [
+"dummy",
+"dummy"
+]
+},
+{
+"test": "magic_LineSpacingDouble",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+],
+"bib_ours": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+]
+},
+{
+"test": "magic_LineSpacingTripleStretch",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+],
+"bib_ours": [
+"John Smith, Book A (2000)",
+"Robert Jones, Book B (2001)"
+]
+},
+{
+"test": "magic_NameParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_NameSuffixNoComma",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_NameSuffixWithComma",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_NumberRangeEnglish",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_NumberRangeFrench",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteDefaultEnglishDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteDefaultEnglishSuffix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteDelimiterTrue",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteFalseSuppressExtra",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteNested",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteSuffixTrue",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_PunctuationInQuoteTrueSuppressExtra",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_QuotesAndBraces1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_QuotesAndBraces2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_SecondFieldAlign",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] John Smith, Book A (2000)",
+"[2] Robert Jones, Book B (2001)"
+],
+"bib_ours": [
+"[1] John Smith, Book A (2000)",
+"[2] Robert Jones, Book B (2001)"
+]
+},
+{
+"test": "magic_StripPeriodsExcludeAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_StripPeriodsFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_StripPeriodsTrue",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_StripPeriodsTrueShortForm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"",
+""
+],
+"bib_ours": [
+"",
+""
+]
+},
+{
+"test": "magic_SubsequentAuthorSubstitute",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Smith and Jane Roe, Book A (2000)",
+"———, Book B (2001)",
+"John Smith, Book C (2002)"
+],
+"bib_ours": [
+"John Smith and Jane Roe, Book A (2000)",
+"———, Book B (2001)",
+"John Smith, Book C (2002)"
+]
+},
+{
+"test": "magic_SubsequentAuthorSubstituteNotFooled",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Silverstein, Theodore, tran. “Sir Gawain and the Green Knight.” Chicago: University of Chicago Press, 1974.",
+"Soltes, Ori A., ed. “Georgia: Art and Civilization through the Ages.” London: Philip Wilson, 1999.",
+"“The Chicago Manual of Style.” Chicago: University of Chicago Press, 1993."
+],
+"bib_ours": [
+"Silverstein, Theodore, trans. “Sir Gawain and the Green Knight.” Chicago: University of Chicago Press, 1974.",
+"Soltes, Ori A., ed. “Georgia: Art and Civilization through the Ages.” London: Philip Wilson, 1999.",
+"“The Chicago Manual of Style.” Chicago: University of Chicago Press, 1993."
+]
+},
+{
+"test": "magic_SubsequentAuthorSubstituteOfTitleField",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Warren Smith (2000)",
+"----- (2001)",
+"Book Y (2002)"
+],
+"bib_ours": [
+"Warren Smith (2000)",
+"----- (2001)",
+"Book Y (2002)"
+]
+},
+{
+"test": "magic_SuperscriptChars",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_SuppressDuplicateVariableRendering",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_SuppressLayoutDelimiterIfPrefixComma",
+"cit_ref": [
+"Book A, cited in Book B"
+],
+"cit_ours": [
+"Book A; , cited in Book B"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_TermCapitalizationWithPrefix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_TextRangeEnglish",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "magic_TextRangeFrench",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AfterInvertedName",
+"cit_ref": [
+"DOEBUCK, Jonathan, et al.; DOE, John, Jane ROE et al.; DOE, John, Janice ROEBUCK et al.",
+"APPLEBY, Aloysius, and Bobby BROWN; APPLEBY, Aloysius, Bobby BROWN and Cecile CREAM; APPLEBY, Aloysius, Bobby BROWN and Enola EVERGREEN"
+],
+"cit_ours": [
+"DOEBUCK, Jonathan, et al.; DOE, John, Jane ROE et al.; DOE, John, Janice ROEBUCK et al.",
+"APPLEBY, Aloysius, and Bobby BROWN; APPLEBY, Aloysius, Bobby BROWN and Cecile CREAM; APPLEBY, Aloysius, Bobby BROWN and Enola EVERGREEN"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AllCapsInitialsUntouched",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AndTextDelimiterPrecedesLastAlways",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ApostropheInGivenName",
+"cit_ref": [
+"Shun’ichi Aalto"
+],
+"cit_ours": [
+"Shun'ichi Aalto"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArabicShortForms",
+"cit_ref": [
+"Al-Aswānī; al-Aswānī"
+],
+"cit_ours": [
+"al-Aswānī; al-Aswānī"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularNameAsSortOrder",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularPlain",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularShortForm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularShortFormCommaSuffix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularWithComma",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ArticularWithCommaNameAsSortOrder",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AsianGlyphs",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AuthorCount",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AuthorCountWithMultipleVariables",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AuthorCountWithSameVarContentAndCombinedTermFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AuthorCountWithSameVarContentAndCombinedTermSucceed",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_AuthorEditorCount",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_BibliographyNameFormNeverShrinks",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Smith, Jimmie",
+"Smith, Reggie"
+],
+"bib_ours": [
+"Smith, Jimmie",
+"Smith, Reggie"
+]
+},
+{
+"test": "name_CelticClanName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_CeltsAndToffsCrowdedInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_CeltsAndToffsNoHyphens",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_CeltsAndToffsSpacedInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_CeltsAndToffsWithHyphens",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_CiteGroupDelimiterWithYearCollapse",
+"cit_ref": [
+"(Aalto 2015a 2015b)"
+],
+"cit_ours": [
+"(Aalto 2015a 2015b)"
+],
+"bib_ref": [
+"Alan Aalto (2015a)",
+"Alan Aalto (2015b)"
+],
+"bib_ours": [
+"Alan Aalto (2015a):director Trans.",
+"Alan Aalto (2015b):director Trans."
+]
+},
+{
+"test": "name_CiteGroupDelimiterWithYearSuffixCollapse",
+"cit_ref": [
+"(Aalto 2015a, b)"
+],
+"cit_ours": [
+"(Aalto 2015a, b)"
+],
+"bib_ref": [
+"bogus",
+"bogus"
+],
+"bib_ours": [
+"bogus",
+"bogus"
+]
+},
+{
+"test": "name_CiteGroupDelimiterWithYearSuffixCollapse2",
+"cit_ref": [
+"(Aalto 2015a–e; Bartleby 2010)"
+],
+"cit_ours": [
+"(Aalto 2015a,b,c,d,e; Bartleby 2010)"
+],
+"bib_ref": [
+"Aalto, Alan. 2015a.",
+"———. 2015b.",
+"———. 2015c.",
+"———. 2015d.",
+"———. 2015e.",
+"Bartleby, Brian. 2010."
+],
+"bib_ours": [
+"Aalto, Alan. 2015a.",
+"———. 2015b.",
+"———. 2015c.",
+"———. 2015d.",
+"———. 2015e.",
+"Bartleby, Brian. 2010."
+]
+},
+{
+"test": "name_CiteGroupDelimiterWithYearSuffixCollapse3",
+"cit_ref": [
+"(Aalto 2015a,b; Bartleby 2010)"
+],
+"cit_ours": [
+"(Aalto 2015a,b; Bartleby 2010)"
+],
+"bib_ref": [
+"Aalto, Alan. 2015a.",
+"———. 2015b.",
+"Bartleby, Brian. 2010."
+],
+"bib_ours": [
+"Aalto, Alan. 2015a.",
+"———. 2015b.",
+"Bartleby, Brian. 2010."
+]
+},
+{
+"test": "name_CollapseRoleLabels",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_Delimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_DelimiterAfterInverted",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Australian Government Productivity Commission, & New Zealand Productivity Commission",
+"Weinstock, R., Leong, G. B., & Silva, J. A."
+],
+"bib_ours": [
+"Australian Government Productivity Commission & New Zealand Productivity Commission",
+"Weinstock, R., Leong, G. B., & Silva, J. A."
+]
+},
+{
+"test": "name_EditorTranslatorBoth",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Noakes, Richard. Hello. Ed. by John Doe. Trans. by Jane Roe."
+],
+"bib_ours": [
+"Noakes, Richard. Hello. Trans. by Ed. by John Doe. Jane Roe."
+]
+},
+{
+"test": "name_EditorTranslatorSameEmptyTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_EditorTranslatorSameWithTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_EditorTranslatorWithTranslatorOnlyBib",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Noakes, Richard. Hello. Trans. by Jane Roe."
+],
+"bib_ours": [
+"Noakes, Richard. Hello. Trans. by Jane Roe."
+]
+},
+{
+"test": "name_EtAlKanji",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_EtAlUseLast",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Anderson, John Brown, John Catharsis, John Doldrums, John Evergreen, John Fugedaboutit, … John Houynym"
+],
+"bib_ours": [
+"John Anderson, John Brown, John Catharsis, John Doldrums, John Evergreen, John Fugedaboutit, … John Houynym"
+]
+},
+{
+"test": "name_EtAlWithCombined",
+"cit_ref": [
+"John Doe。",
+"John Doe著，Ziggy Zither 等點校。",
+"田中太郎, Yossarian Yoda, 等翻譯員。"
+],
+"cit_ours": [
+"John Doe。",
+"John Doe，Ziggy Zither et al.edited by。",
+"太郎 田中, Yossarian Yoda, et al.translators。"
+],
+"bib_ref": [
+"John Doe。",
+"——著，Ziggy Zither 等點校。",
+"田中太郎, Yossarian Yoda, 等翻譯員。"
+],
+"bib_ours": [
+"John Doe。",
+"——，Ziggy Zither et al.edited by。",
+"太郎 田中, Yossarian Yoda, et al.translators。"
+]
+},
+{
+"test": "name_FirstInitialFullForm",
+"cit_ref": [
+"A. Alan Aalto"
+],
+"cit_ours": [
+"A. Alan Aalto"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_FormattingOfParticles",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_GreekSimple",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_HebrewAnd",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_HierarchicalDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_HyphenatedFirstName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_HyphenatedNonDroppingParticle1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Marple, Mary",
+"One, Alan al-",
+"Participle, Paul"
+],
+"bib_ours": [
+"al-One, Alan",
+"Marple, Mary",
+"Participle, Paul"
+]
+},
+{
+"test": "name_HyphenatedNonDroppingParticle2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Mary Marple",
+"Alan al-One",
+"Paul Participle"
+],
+"bib_ours": [
+"Alan al-One",
+"Mary Marple",
+"Paul Participle"
+]
+},
+{
+"test": "name_InTextMarkupInitialize",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"<b>Doe</b>, <b>John</b>. Q.",
+"<b>Doe</b>, <b>John</b>.-Q."
+],
+"bib_ours": [
+"<b>Doe</b>, <. Q.",
+"<b>Doe</b>, <.-Q."
+]
+},
+{
+"test": "name_InTextMarkupNormalizeInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"<b>Doe</b>, <b>J</b>. Q.",
+"<b>Doe</b>, <b>J</b>.-Q."
+],
+"bib_ours": [
+"<b>Doe</b>, <. Q.",
+"<b>Doe</b>, <.-Q."
+]
+},
+{
+"test": "name_InheritAttributesEtAlStyle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeFalse",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M E]",
+"[Crosler, M E.] becomes [Crosler, M E]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M E]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME]",
+"[Grant, Me.] becomes [Grant, Me]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph M E]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph M E]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M.E]",
+"[Crosler, M E.] becomes [Crosler, M E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M.E.]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeFalseEmpty",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, ME]",
+"[Crosler, M E.] becomes [Crosler, ME]",
+"[Dimauro, John M.E.] becomes [Dimauro, John ME]",
+"[Evans, M E] becomes [Evans, ME]",
+"[Faquhar, ME.] becomes [Faquhar, ME]",
+"[Grant, Me.] becomes [Grant, Me]",
+"[Hudson, Ph.M.E.] becomes [Hudson, PhME]",
+"[Immel, Ph. M.E.] becomes [Immel, PhME]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M.E]",
+"[Crosler, M E.] becomes [Crosler, M E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M.E.]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeFalsePeriod",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M.E.]",
+"[Crosler, M E.] becomes [Crosler, M.E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M.E.]",
+"[Evans, M E] becomes [Evans, M.E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph.M.E.]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M.E]",
+"[Crosler, M E.] becomes [Crosler, M E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M.E.]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeFalsePeriodSpace",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M. E.]",
+"[Crosler, M E.] becomes [Crosler, M. E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M. E.]",
+"[Evans, M E] becomes [Evans, M. E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph. M. E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M. E.]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, ME]",
+"[Behn, M.E] becomes [Behn, M.E]",
+"[Crosler, M E.] becomes [Crosler, M E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, John M.E.]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeTrue",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, M]",
+"[Behn, M.E] becomes [Behn, M E]",
+"[Crosler, M E.] becomes [Crosler, M E]",
+"[Dimauro, John M.E.] becomes [Dimauro, J M E]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME]",
+"[Grant, Me.] becomes [Grant, Me]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph M E]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph M E]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, M]",
+"[Behn, M.E] becomes [Behn, M]",
+"[Crosler, M E.] becomes [Crosler, M E]",
+"[Dimauro, John M.E.] becomes [Dimauro, J M.E.]",
+"[Evans, M E] becomes [Evans, M E]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeTrueEmpty",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, M]",
+"[Behn, M.E] becomes [Behn, ME]",
+"[Crosler, M E.] becomes [Crosler, ME]",
+"[Dimauro, John M.E.] becomes [Dimauro, JME]",
+"[Evans, M E] becomes [Evans, ME]",
+"[Faquhar, ME.] becomes [Faquhar, ME]",
+"[Grant, Me.] becomes [Grant, Me]",
+"[Hudson, Ph.M.E.] becomes [Hudson, PhME]",
+"[Immel, Ph. M.E.] becomes [Immel, PhME]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, M]",
+"[Behn, M.E] becomes [Behn, M]",
+"[Crosler, M E.] becomes [Crosler, ME]",
+"[Dimauro, John M.E.] becomes [Dimauro, JM.E]",
+"[Evans, M E] becomes [Evans, ME]",
+"[Faquhar, ME.] becomes [Faquhar, ME]",
+"[Grant, Me.] becomes [Grant, Me]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E]",
+"[Immel, Ph. M.E.] becomes [Immel, PhM.E]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeTruePeriod",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, M.]",
+"[Behn, M.E] becomes [Behn, M.E.]",
+"[Crosler, M E.] becomes [Crosler, M.E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, J.M.E.]",
+"[Evans, M E] becomes [Evans, M.E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph.M.E.]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, M.]",
+"[Behn, M.E] becomes [Behn, M.]",
+"[Crosler, M E.] becomes [Crosler, M.E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, J.M.E.]",
+"[Evans, M E] becomes [Evans, M.E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph.M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InitialsInitializeTruePeriodSpace",
+"cit_ref": [
+"[Axford, ME] becomes [Axford, M.]",
+"[Behn, M.E] becomes [Behn, M. E.]",
+"[Crosler, M E.] becomes [Crosler, M. E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, J. M. E.]",
+"[Evans, M E] becomes [Evans, M. E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph. M. E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M. E.]"
+],
+"cit_ours": [
+"[Axford, ME] becomes [Axford, M.]",
+"[Behn, M.E] becomes [Behn, M.]",
+"[Crosler, M E.] becomes [Crosler, M. E.]",
+"[Dimauro, John M.E.] becomes [Dimauro, J. M.E.]",
+"[Evans, M E] becomes [Evans, M. E.]",
+"[Faquhar, ME.] becomes [Faquhar, ME.]",
+"[Grant, Me.] becomes [Grant, Me.]",
+"[Hudson, Ph.M.E.] becomes [Hudson, Ph.M.E.]",
+"[Immel, Ph. M.E.] becomes [Immel, Ph. M.E.]"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_Institution",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_InstitutionDecoration",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_LabelAfterPlural",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_LabelAfterPluralDecorations",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_LabelFormatBug",
+"cit_ref": [
+"Aalto editor"
+],
+"cit_ours": [
+"Aalto editor"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_LiteralWithComma",
+"cit_ref": [
+"Smith, JohnKlark Kent"
+],
+"cit_ours": [
+"Smith, JohnKlark Kent"
+],
+"bib_ref": [
+"Klark Kent",
+"Smith, John"
+],
+"bib_ours": [
+"Smith, John",
+"Klark Kent"
+]
+},
+{
+"test": "name_LongAbbreviation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_LowercaseSurnameSuffix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_MultipleLiteral",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_NoNameNode",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_NonDroppingParticleDefault",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_OnlyFamilyname",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_OnlyGivenname",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_OverridingHierarchicalDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParseNames",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedCommaDelimitedDroppingParticleSortOrderingWithoutAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedDroppingParticleWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedDroppingParticleWithApostrophe",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedNonDroppingParticleWithAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedNonDroppingParticleWithApostrophe",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParsedUpperCaseNonDroppingParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParticleCaps1",
+"cit_ref": [
+"(Van One, van Two)",
+"(Van Three, Van Four)"
+],
+"cit_ours": [
+"(van One, van Two)",
+"(van Three, Van Four)"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParticleCaps2",
+"cit_ref": [
+"Bogus",
+"Bogus"
+],
+"cit_ours": [
+"Bogus",
+"Bogus"
+],
+"bib_ref": [
+"van One, O., van Two, T.",
+"van Three, T., Van Four, F."
+],
+"bib_ours": [
+"van One, O., van Two, T.",
+"van Three, T., Van Four, F."
+]
+},
+{
+"test": "name_ParticleCaps3",
+"cit_ref": [
+"Bogus",
+"Bogus",
+"Bogus"
+],
+"cit_ours": [
+"Bogus",
+"Bogus",
+"Bogus"
+],
+"bib_ref": [
+"Onename van One, Twoname van Two",
+"Threename van Three, Fourname Van Four",
+"Dick Van Dyke"
+],
+"bib_ours": [
+"Onename van One, Twoname van Two",
+"Threename van Three, Fourname Van Four",
+"Dick \"Van Dyke\""
+]
+},
+{
+"test": "name_ParticleFormatting",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParticleParse1",
+"cit_ref": [
+"Smith",
+"Von und zum Jones"
+],
+"cit_ours": [
+"Smith",
+"von und zum Jones"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_ParticlesDemoteNonDroppingNever",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_PeriodAfterInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_QuashOrdinaryVariableRenderedViaSubstitute",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_RomanianTwo",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SemicolonWithAnd",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SplitInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubsequentAuthorSubstituteMultipleNames",
+"cit_ref": [
+"Bogus",
+"Bogus"
+],
+"cit_ours": [
+"Bogus",
+"Bogus"
+],
+"bib_ref": [
+"Bumke, Courtly Culture: Literature and Society in the High Middle Ages, Dunlap tran.",
+"-----, Höfische"
+],
+"bib_ours": [
+"Bumke, Courtly Culture: Literature and Society in the High Middle Ages, Dunlap trans.",
+"-----, Höfische"
+]
+},
+{
+"test": "name_SubsequentAuthorSubstituteSingleField",
+"cit_ref": [
+"(Yomiuri Shinbun)",
+"(Yomiuri Shinbun)"
+],
+"cit_ours": [
+"(Yomiuri Shinbun)",
+"(Yomiuri Shinbun)"
+],
+"bib_ref": [
+"Yomiuri Shinbun.",
+"———."
+],
+"bib_ours": [
+"Yomiuri Shinbun.",
+"———."
+]
+},
+{
+"test": "name_SubstituteInheritLabel",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteMacroInheritDecorations",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnDateGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnGroupSpanGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnMacroGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnNamesSingletonGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnNamesSpanGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnNamesSpanNamesSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstituteOnNumberGroupSpanFail",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_SubstitutePartialEach",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Title One",
+"---"
+],
+"bib_ours": [
+"Title One",
+"---"
+]
+},
+{
+"test": "name_TwoRolesSameRenderingSeparateRoleLabels",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WesternArticularLowercase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WesternPrimaryFontStyle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WesternPrimaryFontStyleTwoAuthors",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WesternSimple",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WesternTwoAuthors",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_WithNonBreakingSpace",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_namepartAffixes",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_namepartAffixesNameAsSortOrder",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "name_namepartAffixesNameAsSortOrderDemoteNonDroppingParticle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_AndOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_AndOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_AndOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_AndOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_AndOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_AndOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_AndOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_AndOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, et al."
+],
+"bib_ours": [
+"John Doe, et al."
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, et al."
+],
+"bib_ours": [
+"John Doe, et al."
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, et al."
+],
+"bib_ours": [
+"John Doe, et al."
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, et al."
+],
+"bib_ours": [
+"John Doe, et al."
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesEtAlOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, and Jane Roe"
+],
+"bib_ours": [
+"John Doe, and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, and Jane Roe"
+],
+"bib_ours": [
+"John Doe, and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe and Jane Roe"
+],
+"bib_ours": [
+"John Doe and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, and Jane Roe"
+],
+"bib_ours": [
+"John Doe, and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, and Jane Roe"
+],
+"bib_ours": [
+"John Doe, and Jane Roe"
+]
+},
+{
+"test": "nameattr_DelimiterPrecedesLastOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_EtAlMinOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlMinOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlMinOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlMinOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_EtAlMinOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlMinOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_EtAlMinOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe et al."
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlMinOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_EtAlSubsequentMinOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentMinOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentMinOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentMinOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentMinOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentUseFirstOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe, Jane Roe, Richard Snoakes"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentUseFirstOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe, Jane Roe, Richard Snoakes"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentUseFirstOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe, Jane Roe, Richard Snoakes"
+]
+},
+{
+"test": "nameattr_EtAlSubsequentUseFirstOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe, Jane Roe, Richard Snoakes"
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, et al."
+],
+"bib_ours": [
+"John Doe, Jane Roe, et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, et al."
+],
+"bib_ours": [
+"John Doe, Jane Roe, et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, Richard Snoakes"
+],
+"bib_ours": [
+"John Doe et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, et al."
+],
+"bib_ours": [
+"John Doe, Jane Roe, et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_EtAlUseFirstOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe, et al."
+],
+"bib_ours": [
+"John Doe, Jane Roe, et al."
+]
+},
+{
+"test": "nameattr_EtAlUseFirstOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_InitializeWithOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J.-L. Doe"
+],
+"bib_ours": [
+"J.-L. Doe"
+]
+},
+{
+"test": "nameattr_InitializeWithOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J.-L. Doe"
+],
+"bib_ours": [
+"J.-L. Doe"
+]
+},
+{
+"test": "nameattr_InitializeWithOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John-Lee Doe"
+],
+"bib_ours": [
+"John-Lee Doe"
+]
+},
+{
+"test": "nameattr_InitializeWithOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_InitializeWithOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J.-L. Doe"
+],
+"bib_ours": [
+"J.-L. Doe"
+]
+},
+{
+"test": "nameattr_InitializeWithOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_InitializeWithOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J.-L. Doe"
+],
+"bib_ours": [
+"J.-L. Doe"
+]
+},
+{
+"test": "nameattr_InitializeWithOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NameAsSortOrderOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John; Roe, Jane"
+],
+"bib_ours": [
+"Doe, John; Roe, Jane"
+]
+},
+{
+"test": "nameattr_NameAsSortOrderOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John; Roe, Jane"
+],
+"bib_ours": [
+"Doe, John; Roe, Jane"
+]
+},
+{
+"test": "nameattr_NameAsSortOrderOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe; Jane Roe"
+],
+"bib_ours": [
+"John Doe; Jane Roe"
+]
+},
+{
+"test": "nameattr_NameAsSortOrderOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NameAsSortOrderOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John; Roe, Jane"
+],
+"bib_ours": [
+"Doe, John; Roe, Jane"
+]
+},
+{
+"test": "nameattr_NameAsSortOrderOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NameAsSortOrderOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John; Roe, Jane"
+],
+"bib_ours": [
+"Doe, John; Roe, Jane"
+]
+},
+{
+"test": "nameattr_NameAsSortOrderOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NameDelimiterOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe; Jane Roe"
+],
+"bib_ours": [
+"John Doe; Jane Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe; Roe"
+],
+"bib_ours": [
+"Doe; Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Jane Roe"
+],
+"bib_ours": [
+"John Doe, Jane Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, Roe"
+],
+"bib_ours": [
+"Doe, Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe; Jane Roe"
+],
+"bib_ours": [
+"John Doe; Jane Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, Roe"
+],
+"bib_ours": [
+"Doe, Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe; Jane Roe"
+],
+"bib_ours": [
+"John Doe; Jane Roe"
+]
+},
+{
+"test": "nameattr_NameDelimiterOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe; Roe"
+],
+"bib_ours": [
+"Doe; Roe"
+]
+},
+{
+"test": "nameattr_NameFormOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe"
+],
+"bib_ours": [
+"Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe"
+],
+"bib_ours": [
+"Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe"
+],
+"bib_ours": [
+"John Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe"
+],
+"bib_ours": [
+"John Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe"
+],
+"bib_ours": [
+"Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NameFormOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe"
+],
+"bib_ours": [
+"Doe"
+]
+},
+{
+"test": "nameattr_NameFormOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NamesDelimiterOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe AND ALSO THE EDITOR Jane Roe"
+],
+"bib_ours": [
+"John DoeJane Roe"
+]
+},
+{
+"test": "nameattr_NamesDelimiterOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John AND ALSO THE EDITOR Roe, Jane"
+],
+"bib_ours": [
+"Doe, JohnRoe, Jane"
+]
+},
+{
+"test": "nameattr_NamesDelimiterOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John DoeJane Roe"
+],
+"bib_ours": [
+"John DoeJane Roe"
+]
+},
+{
+"test": "nameattr_NamesDelimiterOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NamesDelimiterOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe AND ALSO THE EDITOR Jane Roe"
+],
+"bib_ours": [
+"John Doe AND ALSO THE EDITOR Jane Roe"
+]
+},
+{
+"test": "nameattr_NamesDelimiterOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_NamesDelimiterOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe AND ALSO THE EDITOR Jane Roe"
+],
+"bib_ours": [
+"John DoeJane Roe"
+]
+},
+{
+"test": "nameattr_NamesDelimiterOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_SortSeparatorOnBibliographyInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John"
+],
+"bib_ours": [
+"Doe, John"
+]
+},
+{
+"test": "nameattr_SortSeparatorOnBibliographyInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John"
+],
+"bib_ours": [
+"Doe John"
+]
+},
+{
+"test": "nameattr_SortSeparatorOnCitationInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John"
+],
+"bib_ours": [
+"Doe, John"
+]
+},
+{
+"test": "nameattr_SortSeparatorOnCitationInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_SortSeparatorOnNamesInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John"
+],
+"bib_ours": [
+"Doe, John"
+]
+},
+{
+"test": "nameattr_SortSeparatorOnNamesInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameattr_SortSeparatorOnStyleInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John"
+],
+"bib_ours": [
+"Doe, John"
+]
+},
+{
+"test": "nameattr_SortSeparatorOnStyleInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_Long",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_LongNameAsSortDemoteDisplayAndSort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_LongNameAsSortDemoteNever",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_Short",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_ShortDemoteDisplayAndSort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "nameorder_ShortNameAsSortDemoteNever",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "namespaces_NonNada3",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_FailingDelimiters",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"His Anonymous Life[x]100[x]:555"
+],
+"bib_ours": [
+"His Anonymous Life[x]100[x]:555"
+]
+},
+{
+"test": "number_IsNumericWithAlpha",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_LeadingZeros",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_LimitOrdinalsToDayOne",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1ᵉʳ-14 octobre 2004",
+"14 octobre-1ᵉʳ novembre 2004"
+],
+"bib_ours": [
+"",
+""
+]
+},
+{
+"test": "number_MixedPageRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_MixedText",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_NewOrdinalsEdition",
+"cit_ref": [
+"Title 1, 1ʳᵉ éd., 2000."
+],
+"cit_ours": [
+"Title 1, 1st ed., 2000."
+],
+"bib_ref": [
+"Title 1. 1ʳᵉ éd., 2000."
+],
+"bib_ours": [
+"Title 1. 1st ed., 2000."
+]
+},
+{
+"test": "number_NewOrdinalsWithGenderChange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_OrdinalSpacing",
+"cit_ref": [
+"Blah blah. 7th, p. 3rd–8thDDed"
+],
+"cit_ours": [
+"Blah blah. 7, p. 3–8DDed"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_PageFirst",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_PageRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_PlainHyphenOrEnDashAlwaysPlural",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_PreserveDelimiter",
+"cit_ref": [
+"Pages 187–228 in C. S. Stephen and M. L. Brown, editors. Analysis and interpretation of freshwater fisheries data"
+],
+"cit_ours": [
+". Pages 187–228 in C. S. Stephen and M. L. Brown, editors. Analysis and interpretation of freshwater fisheries data"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SeparateOrdinalNamespaces",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SimpleNumberArabic",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SimpleNumberOrdinalLong",
+"cit_ref": [
+"42nd",
+"Ninth"
+],
+"cit_ours": [
+"42nd",
+"ninth"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SimpleNumberOrdinalShort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SimpleNumberRoman",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_SpacesMakeIsNumericFalse",
+"cit_ref": [
+"Is-numeric is FALSE: version: 2002, amended effective June 1, 2010, and January 1, 2017"
+],
+"cit_ours": [
+"is-numeric is FALSE: version: 2002, amended effective June 1, 2010, and January 1, 2017"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "number_StrangeError",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_Chicago",
+"cit_ref": [
+"Example A, at 101–8",
+"Example B, at 3–10",
+"Example C, at 71–72",
+"Example D, at 96–117",
+"Example E, at 100–104",
+"Example F, at 600–613",
+"Example G, at 1100–1123",
+"Example H, at 107–8",
+"Example I, at 505–17",
+"Example J, at 1002–6",
+"Example K, at 321–25",
+"Example L, at 415–532",
+"Example M, at 1536–38",
+"Example N, at 11564–68",
+"Example O, at 11564–78",
+"Example P, at 13792–803",
+"Example Q, at 1496–1504",
+"Example R, at 2787–2816",
+"Example S, at 11153–2359"
+],
+"cit_ours": [
+"Example A, at 101–8",
+"Example B, at 3–10",
+"Example C, at 71–72",
+"Example D, at 96–117",
+"Example E, at 100–104",
+"Example F, at 600–613",
+"Example G, at 1100–1123",
+"Example H, at 107–8",
+"Example I, at 505–17",
+"Example J, at 1002–6",
+"Example K, at 321–25",
+"Example L, at 415–532",
+"Example M, at 1536–38",
+"Example N, at 11564–68",
+"Example O, at 11564–78",
+"Example P, at 13792–803",
+"Example Q, at 1496–504",
+"Example R, at 2787–816",
+"Example S, at 11153–2359"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_Chicago16",
+"cit_ref": [
+"Example A, at 3–10",
+"Example B, at 71–72",
+"Example C, at 71–72",
+"Example D, at 96–117",
+"Example E, at 100–104",
+"Example F, at 1100–1113",
+"Example G, at 1100–1113",
+"Example H, at 101–8",
+"Example I, at 808–33",
+"Example J, at 1103–4",
+"Example K, at 321–28",
+"Example L, at 321–28",
+"Example M, at 498–532",
+"Example N, at 1087–89",
+"Example O, at 1087–89",
+"Example P, at 1496–500",
+"Example Q, at 11564–615",
+"Example R, at 12991–123001",
+"Example S, at xxv–xxviii",
+"Example T, at cvi–cix"
+],
+"cit_ours": [
+"Example A, at 3–10",
+"Example B, at 71–72",
+"Example C, at 71–72",
+"Example D, at 96–117",
+"Example E, at 100–104",
+"Example F, at 1100–1113",
+"Example G, at 1100–1113",
+"Example H, at 101–8",
+"Example I, at 808–33",
+"Example J, at 1103–4",
+"Example K, at 321–28",
+"Example L, at 321–28",
+"Example M, at 498–532",
+"Example N, at 1087–89",
+"Example O, at 1087–89",
+"Example P, at 1496–500",
+"Example Q, at 11564–615",
+"Example R, at 12991–123001",
+"Example S, at xxv–xxviii",
+"Example T, at cvi–cix"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_ChicagoWeird",
+"cit_ref": [
+"Example S, at 8n11564–68",
+"Example T, at n11564–68",
+"Example U, at n11564–1568"
+],
+"cit_ours": [
+"Example S, at 8n11564–8n1568",
+"Example T, at n11564–n1568",
+"Example U, at n11564–1568"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_Expand",
+"cit_ref": [
+"Example: minimal, at 110–115",
+"Example: prefix on first number only, at N110–5",
+"Example: same prefix on both numbers, at N110–N115",
+"Example: prefix on last number only, at 110–N6",
+"Example: different prefixes on both numbers, at N110–P5",
+"Example: leading number before prefix, at 123N110–N5",
+"Example: multiple ranges, at 123N110–N5, 456K200–99",
+"Example: first less than second, at 123N110–N5, 000c23–22"
+],
+"cit_ours": [
+"Example: minimal, at 110–115",
+"Example: prefix on first number only, at N110–5",
+"Example: same prefix on both numbers, at N110–N5",
+"Example: prefix on last number only, at 110–N6",
+"Example: different prefixes on both numbers, at N110–P5",
+"Example: leading number before prefix, at 123N110–N5",
+"Example: multiple ranges, at 123N110–N5, 456K200–99",
+"Example: first less than second, at 123N110–N5, 000c23–22"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_ExpandWeirdComposite",
+"cit_ref": [
+"Example: weird composite, at 123N110–N5, 456K200–99"
+],
+"cit_ours": [
+"Example: weird composite, at 123N110–N5, 456K200–99"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_Minimal",
+"cit_ref": [
+"Example A, at 101–8",
+"Example B, at 3–10",
+"Example C, at 71–2",
+"Example D, at 96–117",
+"Example E, at 100–4",
+"Example F, at 600–13",
+"Example G, at 1100–23",
+"Example H, at 107–8",
+"Example I, at 505–17",
+"Example J, at 1002–6",
+"Example K, at 321–5",
+"Example L, at 415–532",
+"Example M, at 1536–8",
+"Example N, at 11564–8",
+"Example O, at 11564–78",
+"Example P, at 13792–803",
+"Example Q, at 1496–504",
+"Example R, at 2787–816",
+"Example S, at n11564–8",
+"Example T, at n11564–1568"
+],
+"cit_ours": [
+"Example A, at 101–8",
+"Example B, at 3–10",
+"Example C, at 71–2",
+"Example D, at 96–117",
+"Example E, at 100–4",
+"Example F, at 600–13",
+"Example G, at 1100–23",
+"Example H, at 107–8",
+"Example I, at 505–17",
+"Example J, at 1002–6",
+"Example K, at 321–5",
+"Example L, at 415–532",
+"Example M, at 1536–8",
+"Example N, at 11564–8",
+"Example O, at 11564–78",
+"Example P, at 13792–803",
+"Example Q, at 1496–504",
+"Example R, at 2787–816",
+"Example S, at n11564–n1568",
+"Example T, at n11564–1568"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_NoOption",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_NumberPageFirst",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_PluralDetectWithEndash",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "page_WithLocaleAndWeirdDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_LabelForced",
+"cit_ref": [
+"P. 32–34"
+],
+"cit_ours": [
+"p. 32–34"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelAlways",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelContextualPlural",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelContextualSingular",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelDefaultPlural",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelDefaultSingular",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "plural_NameLabelNever",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_FalseInBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"His Anonymous Life"
+],
+"bib_ours": [
+"I am weak, and I have failed."
+]
+},
+{
+"test": "position_FirstTrueOnlyOnce",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidInText",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidSeparateCiteSameNote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidWithLocator",
+"cit_ref": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"Ibid. p. 23."
+],
+"cit_ours": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"ibid. p. 23."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidWithMultipleSoloCitesInBackref",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidWithPrefixFullStop",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IbidWithSuffix",
+"cit_ref": [
+"BogusBogusBogusBogus"
+],
+"cit_ours": [
+"BogusBogusBogusBogus"
+],
+"bib_ref": [
+"Alan Aberdeen",
+"Al-Khatib Organization",
+"Beatrice Butterfield",
+"Sergei Kaspersky"
+],
+"bib_ours": [
+"Alan Aberdeen",
+"Al-Khatib Organization",
+"Beatrice Butterfield",
+"Sergei Kaspersky"
+]
+},
+{
+"test": "position_IfIbidIsTrueThenSubsequentIsTrue",
+"cit_ref": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"SUBSEQUENT."
+],
+"cit_ours": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"SUBSEQUENT."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_IfIbidWithLocatorIsTrueThenIbidIsTrue",
+"cit_ref": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"Ibid."
+],
+"cit_ours": [
+"Appleton “Tom Swift and His Electric Runabout” (1910).",
+"ibid."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_NearNoteFalse",
+"cit_ref": [
+"Note is not near."
+],
+"cit_ours": [
+"Note is not near."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_NearNoteSameNote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_NearNoteUnsupported",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_NearNoteWithPlugin",
+"cit_ref": [
+"People v. Taylor, 73 N.Y.2d 683 (1989)."
+],
+"cit_ours": [
+"People v. Taylor, 73 N.Y.2d 683 (1989)."
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_ResetNoteNumbers",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "position_TrueInCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"His Anonymous Life"
+],
+"bib_ours": [
+"His Anonymous Life"
+]
+},
+{
+"test": "punctuation_DateStripPeriods",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_DefaultYearSuffixDelimiter",
+"cit_ref": [
+"(Aalto 2000a; b; c)"
+],
+"cit_ours": [
+"(Aalto 2000a, b, c)"
+],
+"bib_ref": [
+"Aalto, A. (2000a)",
+"Aalto, A. (2000b)",
+"Aalto, A. (2000c)"
+],
+"bib_ours": [
+"Aalto, A. (2000a)",
+"Aalto, A. (2000b)",
+"Aalto, A. (2000c)"
+]
+},
+{
+"test": "punctuation_DelimiterWithStripPeriodsAndSubstitute1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J Doe, J Roe and R Noakes eds. Book Title. http://example.com/"
+],
+"bib_ours": [
+"J Doe, J Roe and R Noakes eds. Book Title. http://example.com/"
+]
+},
+{
+"test": "punctuation_DelimiterWithStripPeriodsAndSubstitute2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J Doe, J Roe and R Noakes eds. Book Title"
+],
+"bib_ours": [
+"J Doe, J Roe and R Noakes eds. Book Title"
+]
+},
+{
+"test": "punctuation_DelimiterWithStripPeriodsAndSubstitute3",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"J Doe, J Roe and R Noakes eds. Book Title"
+],
+"bib_ours": [
+"J Doe, J Roe and R Noakes eds. Book Title"
+]
+},
+{
+"test": "punctuation_DoNotSuppressColonAfterPeriod",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FieldDuplicates",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FrenchOrthography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FullMontyField",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FullMontyPlain",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FullMontyQuotesIn",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_FullMontyQuotesOut",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_NoSuppressOfPeriodBeforeSemicolon",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_OnMacro",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "punctuation_SemicolonDelimiter",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Bauthor, O. T.; Cauthor, T.; Dauthor, T.; Eauthor, E.; Fauthor, F.; Gauthor, G."
+],
+"bib_ours": [
+"Bauthor, O. T.; Cauthor, T.; Dauthor, T.; Eauthor, E.; Fauthor, F.; Gauthor, G."
+]
+},
+{
+"test": "punctuation_SuppressPrefixPeriodForDelimiterSemicolon",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John. “His Anonymous Life,” 1965.",
+"Roe, Jane. “Her Anonymous Life,” 1965."
+],
+"bib_ours": [
+"Doe, John. “His Anonymous Life,” 1965.",
+"Roe, Jane. “Her Anonymous Life,” 1965."
+]
+},
+{
+"test": "quotes_Punctuation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"“The Book Title,”"
+],
+"bib_ours": [
+"“The Book Title,”"
+]
+},
+{
+"test": "quotes_PunctuationNasty",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Savage, Thomas. “Report of Labors in Archives and Procuring Material for History of California: And Related Material,” 1879. MSS C-E 191. Bancroft Library, University of California at Berkeley."
+],
+"bib_ours": [
+"Savage, Thomas. “Report of Labors in Archives and Procuring Material for History of California: And Related Material,” 1879. MSS C-E 191. Bancroft Library, University of California at Berkeley."
+]
+},
+{
+"test": "quotes_PunctuationWithInnerQuote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"“This is ‘The One’.”"
+],
+"bib_ours": [
+"“This is 'The One'.”"
+]
+},
+{
+"test": "quotes_QuotesUnderQuotesFalse",
+"cit_ref": [
+"(Title with ‘quotes’ in it, in press)"
+],
+"cit_ours": [
+"(Title with \"quotes\" in it, in press)"
+],
+"bib_ref": [
+"'Title with ‘quotes’ in it',."
+],
+"bib_ours": [
+"'Title with \"quotes\" in it',."
+]
+},
+{
+"test": "simplespace_case1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, J., 1992. In Some title. Vintage, pp. 250–300."
+],
+"bib_ours": [
+"Doe, J., 1992. In Some title. Vintage, pp. 250–300."
+]
+},
+{
+"test": "sort_AguStyle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Smith, A. (1989a)",
+"Smith, A. (1989b)",
+"Smith, A. (1991)",
+"Smith, A. and C. Allen (1992)",
+"Smith, A. and B. Frank (1995)",
+"Smith, A. and B. Frank (1997)",
+"Smith, A., L. Roberts, and T. Jones (1993)",
+"Smith, A., T. Jones, and L. Roberts (1997)"
+],
+"bib_ours": [
+"Smith, A. (1989a)",
+"Smith, A. (1989b)",
+"Smith, A. (1991)",
+"Smith, A. and C. Allen (1992)",
+"Smith, A. and B. Frank (1995)",
+"Smith, A. and B. Frank (1997)",
+"Smith, A., T. Jones, and L. Roberts (1997)",
+"Smith, A., L. Roberts, and T. Jones (1993)"
+]
+},
+{
+"test": "sort_AguStyleReverseGroups",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Smith, A., L. Roberts, and T. Jones (1993)",
+"Smith, A., T. Jones, and L. Roberts (1997)",
+"Smith, A. and C. Allen (2000)",
+"Smith, A. and B. Frank (1995)",
+"Smith, A. and B. Frank (1997)",
+"Smith, A. (1989a)",
+"Smith, A. (1989b)",
+"Smith, A. (1991)"
+],
+"bib_ours": [
+"Smith, A. (1989a)",
+"Smith, A. (1989b)",
+"Smith, A. (1991)",
+"Smith, A. and C. Allen (2000)",
+"Smith, A. and B. Frank (1995)",
+"Smith, A. and B. Frank (1997)",
+"Smith, A., T. Jones, and L. Roberts (1997)",
+"Smith, A., L. Roberts, and T. Jones (1993)"
+]
+},
+{
+"test": "sort_AuthorDateWithYearSuffix",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Day BL, Fitzpatrick RC (2005b) The vestibular system. Curr Biol 15:R583–6.",
+"Day BL, Fitzpatrick RC (2005a) Virtual head rotation reveals a process of route reconstruction from human vestibular signals. J Physiol 567:591–7.",
+"Mian OS, Thom JM, Narici MV, Baltzopoulos V (2005) Stair descent: kinematics in healthy young and older adults In Belgrade, Serbia, p. 129–130."
+],
+"bib_ours": [
+"Day BL, Fitzpatrick RC (2005a) The vestibular system. Curr Biol 15:R583–6.",
+"Day BL, Fitzpatrick RC (2005b) Virtual head rotation reveals a process of route reconstruction from human vestibular signals. J Physiol 567:591–7.",
+"Mian O.S, Thom JM, Narici MV, Baltzopoulos V (2005) Stair descent: kinematics in healthy young and older adults In Belgrade, Serbia, p. 129–130."
+]
+},
+{
+"test": "sort_BibliographyResortOnUpdate",
+"cit_ref": [
+"Effinger; Jamey; Ging"
+],
+"cit_ours": [
+"Effinger; Jamey; Ging"
+],
+"bib_ref": [
+"Effinger",
+"Ging",
+"Jamey"
+],
+"bib_ours": [
+"Effinger",
+"Ging",
+"Jamey"
+]
+},
+{
+"test": "sort_CaseInsensitiveBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Aaa",
+"ABC"
+],
+"bib_ours": [
+"Aaa",
+"ABC"
+]
+},
+{
+"test": "sort_CaseInsensitiveCitation",
+"cit_ref": [
+"Aaa - ABC - Xyz"
+],
+"cit_ours": [
+"Aaa - ABC - Xyz"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_ChangeInNameSort",
+"cit_ref": [
+"De Quincey",
+"Noakes",
+"Carter",
+"Noakes"
+],
+"cit_ours": [
+"De Quincey",
+"Noakes",
+"Carter",
+"Noakes"
+],
+"bib_ref": [
+"Carter",
+"De Quincey",
+"Noakes"
+],
+"bib_ours": [
+"Carter",
+"De Quincey",
+"Noakes"
+]
+},
+{
+"test": "sort_ChicagoYearSuffix1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Beijing Zoo. 1974a. Observations on the breeding of the giant panda and the raising of its young [in Chinese]. Acta Zoologica Sinica 20: 154–61.",
+"Beijing Zoo. 1974b. On the diseases of the giant panda and their preventive and curative measures [in Chinese]. Acta Zoologica Sinica 20: 139–47."
+],
+"bib_ours": [
+"Beijing Zoo. 1974a. Observations on the breeding of the giant panda and the raising of its young [in Chinese]. Acta Zoologica Sinica 20: 154–61.",
+"---. 1974b. On the diseases of the giant panda and their preventive and curative measures [in Chinese]. Acta Zoologica Sinica 20: 139–47."
+]
+},
+{
+"test": "sort_ChicagoYearSuffix2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Beijing Zoo. 1974a. Observations on the breeding of the giant panda and the raising of its young [in Chinese]. Acta Zoologica Sinica 20: 154–61.",
+"Beijing Zoo. 1974b. On the diseases of the giant panda and their preventive and curative measures [in Chinese]. Acta Zoologica Sinica 20: 139–47."
+],
+"bib_ours": [
+"Beijing Zoo. 1974a. Observations on the breeding of the giant panda and the raising of its young [in Chinese]. Acta Zoologica Sinica 20: 154–61.",
+"---. 1974b. On the diseases of the giant panda and their preventive and curative measures [in Chinese]. Acta Zoologica Sinica 20: 139–47."
+]
+},
+{
+"test": "sort_Citation",
+"cit_ref": [
+"Doe; Roe"
+],
+"cit_ours": [
+"Doe; Roe"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_CitationNumberPrimaryAscendingViaMacroBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+],
+"bib_ours": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+]
+},
+{
+"test": "sort_CitationNumberPrimaryAscendingViaMacroCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+],
+"bib_ours": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+]
+},
+{
+"test": "sort_CitationNumberPrimaryAscendingViaVariableBibliography",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+],
+"bib_ours": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+]
+},
+{
+"test": "sort_CitationNumberPrimaryAscendingViaVariableCitation",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+],
+"bib_ours": [
+"[1] Aaaa (first-cited)",
+"[2] Bbbb (second-cited)",
+"[3] Zzzz (third-cited)",
+"[4] Xxxx (fourth-cited)"
+]
+},
+{
+"test": "sort_CitationSecondaryKey",
+"cit_ref": [
+"Doe 1995; Roe 1995"
+],
+"cit_ours": [
+"Doe 1995; Roe 1995"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_CiteGroupDelimiter",
+"cit_ref": [
+"Banda 1999; Aalto 2000, Aalto 2001"
+],
+"cit_ours": [
+"Banda 1999; Aalto 2000; Aalto 2001"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_ConditionalMacroDates",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Title 3",
+"Title 1",
+"Title 2"
+],
+"bib_ours": [
+"Title 3",
+"Title 1",
+"Title 2"
+]
+},
+{
+"test": "sort_DaleDalebout",
+"cit_ref": [
+"Allabout; Dale; Dalebout"
+],
+"cit_ours": [
+"Allabout; Dale; Dalebout"
+],
+"bib_ref": [
+"Allabout",
+"Dale",
+"Dalebout"
+],
+"bib_ours": [
+"Allabout",
+"Dale",
+"Dalebout"
+]
+},
+{
+"test": "sort_DateMacroSortWithSecondFieldAlign",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe His Anonymous Life (1965)."
+],
+"bib_ours": [
+"John Doe His Anonymous Life (1965)."
+]
+},
+{
+"test": "sort_DateVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableMixedElementsAscendingA",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableMixedElementsAscendingB",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableMixedElementsDescendingA",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableMixedElementsDescendingB",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableRange",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DateVariableRangeMixed",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_DropNameLabelInSort",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John ed. Hello.",
+"---. Hello.",
+"Doe, John Eamon. Hello.",
+"Doe, John Egbert. Hello."
+],
+"bib_ours": [
+"Doe, John. Hello.",
+"Doe, John Eamon. Hello.",
+"Doe, John ed. Hello.",
+"Doe, John Egbert. Hello."
+]
+},
+{
+"test": "sort_EtAlUseLast",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Roe, Doe, … Aogh, Book A",
+"Roe, Doe, … Bogh, Book A",
+"Roe, Doe, … Gogh, Book A"
+],
+"bib_ours": [
+"Roe, Doe, … Aogh, Book A",
+"Roe, Doe, … Bogh, Book A",
+"Roe, Doe, … Gogh, Book A"
+]
+},
+{
+"test": "sort_FamilyOnly",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Aardvaark",
+"ANZ Group",
+"Edelweis"
+],
+"bib_ours": [
+"Aardvaark",
+"ANZ Group",
+"Edelweis"
+]
+},
+{
+"test": "sort_GroupedByAuthorstring",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_LatinUnicode",
+"cit_ref": [
+"Aalto; Álvarez"
+],
+"cit_ours": [
+"Aalto; Álvarez"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_LeadingA",
+"cit_ref": [
+"Hussein Ab Delrahman, Det danske alfabet er sært (Kbh: Politiken, 2012); Martin A Hansen, Alfabetiseringsproblemer (København: Gyldendal, 2012); A kasernes fællesvirke, Problemer med alfabetet (Kbh: Dafolo, 2015); B Gjengen, Alfabeta (Kbh, 2009); Uffe Juul Jensen, Carsten Hædersdal, og Mogens Kim Skadborg, “Etablering af klinisk etiske komitéer i Danmark: en praksis-filosofisk tilgang til klinisk etik fra bibliotek.dk”, Bibliotek for læger 206, nr. 1 (2014): 44–61; “A er det første bogstav i alfabetet”, television broadcast (DR, 2011)."
+],
+"cit_ours": [
+"Hussein Ab Delrahman, Det Danske Alfabet Er Sært (Kbh: Politiken, 2012); Martin A Hansen, Alfabetiseringsproblemer (København: Gyldendal, 2012); A kasernes fællesvirke, Problemer Med Alfabetet (Kbh: Dafolo, 2015); B Gjengen, Alfabeta (Kbh, 2009); Uffe Juul Jensen, Carsten Hædersdal, and Mogens Kim Skadborg, “Etablering Af Klinisk Etiske Komitéer I Danmark: En Praksis-Filosofisk Tilgang Til Klinisk Etik Fra Bibliotek.dk,” Bibliotek for Læger 206, no. 1 (2014): 44–61; “A Er Det Første Bogstav I Alfabetet,” television broadcast (DR, 2011)."
+],
+"bib_ref": [
+"“A er det første bogstav i alfabetet”. Television broadcast. DR, 2011.",
+"A Hansen, Martin. Alfabetiseringsproblemer. København: Gyldendal, 2012.",
+"A kasernes fællesvirke. Problemer med alfabetet. Kbh: Dafolo, 2015.",
+"Ab Delrahman, Hussein. Det danske alfabet er sært. Kbh: Politiken, 2012.",
+"B Gjengen. Alfabeta. Kbh, 2009.",
+"Juul Jensen, Uffe, Carsten Hædersdal, og Mogens Kim Skadborg. “Etablering af klinisk etiske komitéer i Danmark: en praksis-filosofisk tilgang til klinisk etik fra bibliotek.dk”. Bibliotek for læger 206, nr. 1 (2014): 44–61."
+],
+"bib_ours": [
+"“A Er Det Første Bogstav I Alfabetet.” Television broadcast. DR, 2011.",
+"A Hansen, Martin. Alfabetiseringsproblemer. København: Gyldendal, 2012.",
+"A kasernes fællesvirke. Problemer Med Alfabetet. Kbh: Dafolo, 2015.",
+"Ab Delrahman, Hussein. Det Danske Alfabet Er Sært. Kbh: Politiken, 2012.",
+"B Gjengen. Alfabeta. Kbh, 2009.",
+"Juul Jensen, Uffe, Carsten Hædersdal, and Mogens Kim Skadborg. “Etablering Af Klinisk Etiske Komitéer I Danmark: En Praksis-Filosofisk Tilgang Til Klinisk Etik Fra Bibliotek.dk.” Bibliotek for Læger 206, no. 1 (2014): 44–61."
+]
+},
+{
+"test": "sort_LeadingApostropheOnNameParticle",
+"cit_ref": [
+"BOGUSBOGUSBOGUSBOGUSBOGUSBOGUSBOGUSBOGUS"
+],
+"cit_ours": [
+"BOGUSBOGUSBOGUSBOGUSBOGUSBOGUSBOGUSBOGUS"
+],
+"bib_ref": [
+"d’Wander, W",
+"de’Frinkle, B",
+"in ’t Horvath, P A B",
+"in ’t Horvath, P A D",
+"Klabdaggit, M",
+"’t Horvath, P A A",
+"’t Horvath, P A C",
+"Vooz, B"
+],
+"bib_ours": [
+"de' Frinkle, B",
+"d'Wander, W",
+"in 't Horvath, P A.B.",
+"in 't Horvath, P A.D.",
+"Klabdaggit, M",
+"'t Horvath, P A.A.",
+"'t Horvath, P A.C.",
+"Vooz, B"
+]
+},
+{
+"test": "sort_LocalizedDateLimitedParts",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_NameImplicitSortOrderAndForm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, Book C",
+"Doe, Book B",
+"Roe, Book A"
+],
+"bib_ours": [
+"Doe, Book C",
+"Doe, Book B",
+"Roe, Book A"
+]
+},
+{
+"test": "sort_NameParticleInNameSortFalse",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John von Doe",
+"John di Noakes",
+"Jane van Roe"
+],
+"bib_ours": [
+"John von Doe",
+"John di Noakes",
+"Jane van Roe"
+]
+},
+{
+"test": "sort_NameParticleInNameSortTrue",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John di Noakes",
+"Jane van Roe",
+"John von Doe"
+],
+"bib_ours": [
+"John von Doe",
+"John di Noakes",
+"Jane van Roe"
+]
+},
+{
+"test": "sort_NameVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe",
+"Jacob [F]linders",
+"Jane Roe"
+],
+"bib_ours": [
+"John Doe",
+"Jacob [F]linders",
+"Jane Roe"
+]
+},
+{
+"test": "sort_NamesUseLast",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"John Doe, Xavier Xerxes, et al. Book One 2000",
+"John Doe, Alvin Anderson, et al. Book Two 1999"
+],
+"bib_ours": [
+"John Doe, Alvin Anderson, et al. Book Two 1999",
+"John Doe, Xavier Xerxes, et al. Book One 2000"
+]
+},
+{
+"test": "sort_NumberOfAuthorsAsKey",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Book One",
+"Book Two",
+"Book Three"
+],
+"bib_ours": [
+"Book One",
+"Book Three",
+"Book Two"
+]
+},
+{
+"test": "sort_OmittedBibRefMixedNumericStyle",
+"cit_ref": [
+"(1; Brown, Letter One; 3)"
+],
+"cit_ours": [
+"(1; Brown, Letter One; 3)"
+],
+"bib_ref": [
+"1. Anderson, Book One",
+"",
+"3. Crane, Book Two"
+],
+"bib_ours": [
+"1. Anderson, Book One",
+"",
+"3. Crane, Book Two"
+]
+},
+{
+"test": "sort_OmittedBibRefNonNumericStyle",
+"cit_ref": [
+"(Anderson, Book One; Brown, Letter One; Crane, Book Two)"
+],
+"cit_ours": [
+"(Anderson, Book One; Brown, Letter One; Crane, Book Two)"
+],
+"bib_ref": [
+"Anderson, Book One",
+"",
+"Crane, Book Two"
+],
+"bib_ours": [
+"Anderson, Book One",
+"",
+"Crane, Book Two"
+]
+},
+{
+"test": "sort_Quotes",
+"cit_ref": [
+"Simple “title” here C; Simple title, here A; “Simple title here B”"
+],
+"cit_ours": [
+"Simple 'title' here C; Simple title, here A; “Simple title here B”"
+],
+"bib_ref": [
+"Simple title, here A",
+"“Simple title here B”",
+"Simple “title” here C"
+],
+"bib_ours": [
+"Simple title, here A",
+"“Simple title here B”",
+"Simple 'title' here C"
+]
+},
+{
+"test": "sort_RangeUnaffected",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"1. Title A.",
+"2. Title B.",
+"3. Title C.",
+"4. Title D."
+],
+"bib_ours": [
+"1. Title a. Title a.",
+"2. Title B. Title B.",
+"3. Title C. Title C.",
+"4. Title D. Title D."
+]
+},
+{
+"test": "sort_SeparateAuthorsAndOthers",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe, John. Hello 4.",
+"--- ed. Hello 1.",
+"Doe, John Barbitol. Hello 2.",
+"Doe, John Egbert. Hello 3."
+],
+"bib_ours": [
+"Doe, John. Hello 4.",
+"Doe, John Barbitol. Hello 2.",
+"Doe, John ed. Hello 1.",
+"Doe, John Egbert. Hello 3."
+]
+},
+{
+"test": "sort_StatusFieldAscending",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Book B",
+"Book A",
+"Book C"
+],
+"bib_ours": [
+"Book B",
+"Book A",
+"Book C"
+]
+},
+{
+"test": "sort_StatusFieldDescending",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Book B",
+"Book A",
+"Book C"
+],
+"bib_ours": [
+"Book B",
+"Book A",
+"Book C"
+]
+},
+{
+"test": "sort_StripMarkup",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_SubstituteTitle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Brooker, C. (2011, July 24). The news coverage of the Norway mass-killings was fact-free conjecture. The Guardian. London. Retrieved from http://www.guardian.co.uk/commentisfree/2011/jul/24/charlie-brooker-norway-mass-killings",
+"Brooker, C. (2011, July 31). Let’s think outside the box here: maybe blue-sky thinking is nonsense. The Guardian. London. Retrieved from http://www.guardian.co.uk/commentisfree/2011/jul/31/blue-sky-thinking"
+],
+"bib_ours": [
+"Brooker, C. (2011, July 24). The news coverage of the Norway mass-killings was fact-free conjecture. The Guardian. London. Retrieved from http://www.guardian.co.uk/commentisfree/2011/jul/24/charlie-brooker-norway-mass-killings",
+"Brooker, C. (2011, July 31). Let's think outside the box here: maybe blue-sky thinking is nonsense. The Guardian. London. Retrieved from http://www.guardian.co.uk/commentisfree/2011/jul/31/blue-sky-thinking"
+]
+},
+{
+"test": "sort_TestInheritance",
+"cit_ref": [
+"Aalto; Bottom"
+],
+"cit_ours": [
+"Aalto; Bottom"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "sort_VariousNameMacros1",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2.",
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2."
+],
+"bib_ours": [
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2.",
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2."
+]
+},
+{
+"test": "sort_VariousNameMacros2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2.",
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2."
+],
+"bib_ours": [
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2.",
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2."
+]
+},
+{
+"test": "sort_VariousNameMacros3",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2."
+],
+"bib_ours": [
+"Doe John A. & Bloggs Joe A. (2011). Title 3. Test 3, 3–4.",
+"Doe Jane B. & Doe John A. (2009). Title 1. Test 1, 1–2.",
+"Doe John A. & Smith John A. (2010). Title 2. Test 2, 1–2."
+]
+},
+{
+"test": "sort_WithAndInOneEntry",
+"cit_ref": [
+"(Beck 1991; Beck and Katz 2001, 2011; Beck, Katz, and Tucker 1998; Beck, King, and Zeng 2000; Colaresi 2006; Colaresi, Rasler, and Thompson 2007; Colaresi and Thompson 2002; Gochman 1993; Gochman and Leng 1983; Gochman and Maoz 1984)"
+],
+"cit_ours": [
+"(Beck 1991; Beck and Katz 2001, 2011; Beck, Katz, and Tucker 1998; Beck, King, and Zeng 2000; Colaresi 2006; Colaresi, Rasler, and Thompson 2007; Colaresi and Thompson 2002; Gochman 1993; Gochman and Leng 1983; Gochman and Maoz 1984)"
+],
+"bib_ref": [
+"Beck, Nathaniel. 1991. “Comparing Dynamic Specifications: The Case of Presidential Approval.” Political Analysis 3(1): 51–87.",
+"Beck, Nathaniel, and Jonathan Katz. 2011. “Dynamics in Time Series Cross Section Data.” Annual Review of Political Science 14(1): 331–352.",
+"———. 2001. “Throwing Out the Baby with the Bath Water: A Comment on Green, Kim, and Yoon.” International Organization 55(2): 487–495.",
+"Beck, Nathaniel, Jonathan Katz, and Richard Tucker. 1998. “Taking Time Seriously: Time-Series-Cross-Section Analysis with a Binary Dependent Variable.” American Journal of Political Science 42(4): 1260–1288.",
+"Beck, Nathaniel, Gary King, and Langche Zeng. 2000. “Improving Quantitative Studies of International Conflict: A Conjecture.” American Political Science Review 94(1): 21–35.",
+"Colaresi, Michael P. 2006. Scare Tactics: The Politics of International Rivalry. Syracuse, NY: Syracuse University Press.",
+"Colaresi, Michael P., Karen Rasler, and William R. Thompson. 2007. Strategic Rivalries in World Politics: Position, Space and Conflict Escalation. 1st ed. Cambridge University Press.",
+"Colaresi, Michael P., and William R. Thompson. 2002. “Hot Spots or Hot Hands? Serial Crisis Behavior, Escalating Risks, and Rivalry.” Journal of Politics 64(4): 1175–1198.",
+"Gochman, Charles S. 1993. “The Evolution of Militarized Disputes.” International Interactions 19(1-2): 49–76.",
+"Gochman, Charles S., and Russell J. Leng. 1983. “Realpolitik and the Road to War: An Analysis of Attributes and Behavior.” International Studies Quarterly 27(1): 97–120.",
+"Gochman, Charles S., and Zeev Maoz. 1984. “Militarized Interstate Disputes, 1816-1976.” Journal of Conflict Resolution 28(4): 585–616."
+],
+"bib_ours": [
+"Beck, Nathaniel. 1991. “Comparing Dynamic Specifications: The Case of Presidential Approval.” Political Analysis 3(1): 51–87.",
+"Beck, Nathaniel, and Jonathan Katz. 2011. “Dynamics in Time Series Cross Section Data.” Annual Review of Political Science 14(1): 331–352.",
+"———. 2001. “Throwing Out the Baby with the Bath Water: A Comment on Green, Kim, and Yoon.” International Organization 55(2): 487–495.",
+"Beck, Nathaniel, Jonathan Katz, and Richard Tucker. 1998. “Taking Time Seriously: Time-Series-Cross-Section Analysis with a Binary Dependent Variable.” American Journal of Political Science 42(4): 1260–1288.",
+"Beck, Nathaniel, Gary King, and Langche Zeng. 2000. “Improving Quantitative Studies of International Conflict: A Conjecture.” American Political Science Review 94(1): 21–35.",
+"Colaresi, Michael P. 2006. Scare Tactics: The Politics of International Rivalry. Syracuse, NY: Syracuse University Press.",
+"Colaresi, Michael P., Karen Rasler, and William R. Thompson. 2007. Strategic Rivalries in World Politics: Position, Space and Conflict Escalation. 1st ed. Cambridge University Press.",
+"Colaresi, Michael P., and William R. Thompson. 2002. “Hot Spots or Hot Hands? Serial Crisis Behavior, Escalating Risks, and Rivalry.” Journal of Politics 64(4): 1175–1198.",
+"Gochman, Charles S. 1993. “The Evolution of Militarized Disputes.” International Interactions 19(1-2): 49–76.",
+"Gochman, Charles S., and Russell J. Leng. 1983. “Realpolitik and the Road to War: An Analysis of Attributes and Behavior.” International Studies Quarterly 27(1): 97–120.",
+"Gochman, Charles S., and Zeev Maoz. 1984. “Militarized Interstate Disputes, 1816-1976.” Journal of Conflict Resolution 28(4): 585–616."
+]
+},
+{
+"test": "sortseparator_SortSeparatorEmpty",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Doe John"
+],
+"bib_ours": [
+"Doe John"
+]
+},
+{
+"test": "substitute_RepeatedNamesOk",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "substitute_SharedMacro",
+"cit_ref": [
+"Alto, Alan: Book One.; Alto, Alan: Book Two.; Alan Alto Inc.: Book Three.; Alan Alto Inc.: Book Four."
+],
+"cit_ours": [
+"Alto, Alan: Book One.; Alto, Alan: Book Two.; Alan Alto Inc.: Book Three.; Alan Alto Inc.: Book Four."
+],
+"bib_ref": [
+"Alan Alto Inc.: Book Three.",
+"---: Book Four.",
+"Alto, Alan: Book One.",
+"---: Book Two."
+],
+"bib_ours": [
+"Alan Alto Inc.: Book Three.",
+"---: Book Four.",
+"Alto, Alan: Book One.",
+"---: Book Two."
+]
+},
+{
+"test": "substitute_SubstituteOnlyOnceString",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "substitute_SubstituteOnlyOnceTerm",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "substitute_SubstituteOnlyOnceTermEmpty",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "substitute_SubstituteOnlyOnceVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "substitute_SuppressOrdinaryVariable",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"“The Title.” The Publisher.",
+"John-boy Doe ed. The Title. The Publisher.",
+"Jane-girl Doe editor. The Title. The Organization."
+],
+"bib_ours": [
+"“The Title.” The Publisher.",
+"John-boy Doe ed.John-boy Doe editor. The Title. The Publisher.",
+"Jane-girl Doe editorJane-girl Doe editor. The Title. The Organization."
+]
+},
+{
+"test": "testers_FirstAutoGeneratedZoteroPluginTest",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Center <sup>for</sup> History <sub>and</sub> New Media. “Zotero … ‘Quick Start’ & Guide 日本語.” http://zotero.org/support/quick_start_guide.",
+"Smith, John. Book A, 2000.",
+"Smith, Steven. Book A, 2000."
+],
+"bib_ours": [
+"Center <sup>for</sup> History <sub>and</sub> New Media. “Zotero … \"Quick Start\" & Guide 日本語.” http://zotero.org/support/quick_start_guide.",
+"Smith, John. Book A, 2000.",
+"Smith, Steven. Book A, 2000."
+]
+},
+{
+"test": "testers_SecondAutoGeneratedZoteroPluginTest",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Center <sup>for</sup> History <sub>and</sub> New Media. “Zotero … ‘Quick Start’ & Guide 日本語.” http://zotero.org/support/quick_start_guide.",
+"Smith, John. Book A, 2000.",
+"Smith, Steven. Book A, 2000."
+],
+"bib_ours": [
+"Center <sup>for</sup> History <sub>and</sub> New Media. “Zotero … \"Quick Start\" & Guide 日本語.” http://zotero.org/support/quick_start_guide.",
+"Smith, John. Book A, 2000.",
+"Smith, Steven. Book A, 2000."
+]
+},
+{
+"test": "textcase_AfterQuote",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_CapitalizeAll",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_CapitalizeFirst",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_CapitalizeFirstWithDecor",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_CapitalsUntouched",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_ImplicitNocase",
+"cit_ref": [
+"My small caps phrase in a Title",
+"My superscript phrase in a Title",
+"My subscript phrase in a Title"
+],
+"cit_ours": [
+"My Small Caps Phrase in a Title",
+"My Superscript Phrase in a Title",
+"My Subscript Phrase in a Title"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_InQuotes",
+"cit_ref": [
+"From “Distance” to “Friction”: Substituting Metaphors and Redirecting Intercultural Research For"
+],
+"cit_ours": [
+"From \"distance\" to \"friction\": Substituting Metaphors and Redirecting Intercultural Research for"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_LastChar",
+"cit_ref": [
+"07-x",
+"07-x Test"
+],
+"cit_ours": [
+"07-X",
+"07-X Test"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_LocaleUnicode",
+"cit_ref": [
+"IA AND IB EN",
+"IA AND IB EN",
+"İC AND ID TR",
+"BAD LANGUAGE CODE THAT PASSES IN NODE.JS BUT FAILS IN SOME BROWSERS"
+],
+"cit_ours": [
+"IA AND IB EN",
+"IA AND IB EN",
+"IC AND ID TR",
+"BAD LANGUAGE CODE THAT PASSES IN NODE.JS BUT FAILS IN SOME BROWSERS"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_Lowercase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_NoSpaceBeforeApostrophe",
+"cit_ref": [
+"Marcus Shafi’i (ed.), Response to Shafi’i Comment",
+"Marcus Shafi`i (ed.), Response to Shafi`i Comment"
+],
+"cit_ours": [
+"Marcus Shafi'i (ed.), Response to Shafi'i Comment",
+"Marcus Shafi`i (ed.), Response to Shafi`i Comment"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_NonEnglishChars",
+"cit_ref": [
+"Saline Solution of β-Carotine",
+"Saline Solution of Beta-Carotine"
+],
+"cit_ours": [
+"Saline Solution of Β-Carotine",
+"Saline Solution of Beta-Carotine"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_RepeatedTitleBug",
+"cit_ref": [
+"(Jenrich & Bentler, 2012)"
+],
+"cit_ours": [
+"(Jenrich & Bentler, 2012)"
+],
+"bib_ref": [
+"Jenrich, R. I., & Bentler, P. M. (2012). Exploratory bi-factor analysis: The oblique case. Psychometrika, 77(3), 442–454. https://doi.org/https://doi.org/10.1007/s11336-012-9269-1"
+],
+"bib_ours": [
+"Jenrich, R.I., & Bentler, P.M. (2012). Exploratory bi-factor analysis: The oblique case. Psychometrika, 77(3), 442–454. https://doi.org/https://doi.org/10.1007/s11336-012-9269-1"
+]
+},
+{
+"test": "textcase_SentenceCapitalization",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_SkipNameParticlesInTitleCase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_StopWordBeforeHyphen",
+"cit_ref": [
+"Employee Pro-Environmental Behavior"
+],
+"cit_ours": [
+"Employee Pro-Environmental Behavior"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCapitalization",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCapitalization2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseNonEnglish",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseNonEnglish2",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithCleverBrandName",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithFinalNocase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithHyphens",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithInitials",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithNonBreakSpace",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleCaseWithVolumeTitle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [
+"Syntax und Stilistik",
+"Syntax und Stilistik",
+"Syntax und Stilistik",
+"Syntax und Stilistik",
+"Syntax und Stilistik"
+],
+"bib_ours": [
+"Syntax Und Stilistik",
+"Syntax Und Stilistik",
+"Syntax Und Stilistik",
+"Syntax Und Stilistik",
+"Syntax Und Stilistik"
+]
+},
+{
+"test": "textcase_TitleWithCircumflex",
+"cit_ref": [
+"“About Arvâsî”"
+],
+"cit_ours": [
+"“About Arvâsî”"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleWithEmDash",
+"cit_ref": [
+"Relationship of Core Self-Evaluation Traits—Self-Esteem, Generalized Self-Efficacy, Locus of Control, and Emotional Stability—with Job Satisfaction and Job Performance: A Meta-Analysis"
+],
+"cit_ours": [
+"Relationship of Core Self-Evaluation Traits—self-Esteem, Generalized Self-Efficacy, Locus of Control, and Emotional Stability—with Job Satisfaction and Job Performance: a Meta-Analysis"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_TitleWithEnDash",
+"cit_ref": [
+"Closing the Scientist–Practitioner Gap: Studies from 2016 with Significant Practical Utility"
+],
+"cit_ours": [
+"Closing the Scientist–Practitioner Gap: Studies from 2016 with Significant Practical Utility"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_Uppercase",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "textcase_UppercaseNumber",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "unicode_NonBreakingSpace",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "variables_ContainerTitleShort",
+"cit_ref": [
+"(1,2)"
+],
+"cit_ours": [
+"(1,2)"
+],
+"bib_ref": [
+"1. Campbell DT, Fiske DW. Main title. In: Container: a title. (Series: a title).",
+"2. Campbell DT, Fiske DW. Main title. Container."
+],
+"bib_ours": [
+"1. Campbell DT, Fiske DW. Main title. In: Container: a title. (Series: a title).",
+"2. Campbell DT, Fiske DW. Main title. Container."
+]
+},
+{
+"test": "variables_ContainerTitleShort2",
+"cit_ref": [
+"(1,2)"
+],
+"cit_ours": [
+"(1,2)"
+],
+"bib_ref": [
+"1. Campbell DT, Fiske DW. CONVERGENT AND DISCRIMINANT VALIDATION BY THE MULTITRAIT-MULTIMETHOD MATRIX. In: Container: a title. p. 25. (Series: a title).",
+"2. Campbell DT, Fiske DW. CONVERGENT AND DISCRIMINANT VALIDATION BY THE MULTITRAIT-MULTIMETHOD MATRIX. Container. :25."
+],
+"bib_ours": [
+"1. Campbell DT, Fiske DW. CONVERGENT AND DISCRIMINANT VALIDATION BY THE MULTITRAIT-MULTIMETHOD MATRIX. p. 25.",
+"2. Campbell DT, Fiske DW. CONVERGENT AND DISCRIMINANT VALIDATION BY THE MULTITRAIT-MULTIMETHOD MATRIX. :25."
+]
+},
+{
+"test": "variables_TitleShortOnShortTitleNoTitle",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "variables_TitleShortOnShortTitleNoTitleCondition",
+"cit_ref": [
+"My Long Title 1 has title-short",
+"My Long Title 2 does not have title-short",
+""
+],
+"cit_ours": [
+"My Long Title 1 has title-short",
+"My Long Title 2 does not have title-short",
+""
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "variables_TitleShortOnShortTitleNoTitleGroup",
+"cit_ref": [
+"Check this out: My Short Title is from title-short",
+"Check this out:",
+"Check this out:"
+],
+"cit_ours": [
+"Check this out: My Short Title is from title-short",
+"Check this out:",
+"Check this out:"
+],
+"bib_ref": [],
+"bib_ours": []
+},
+{
+"test": "virtual_PageFirst",
+"cit_ref": [],
+"cit_ours": [],
+"bib_ref": [],
+"bib_ours": []
+}
+]

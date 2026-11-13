@@ -1,0 +1,1 @@
+[Wilhelm Dilthey, "The Types of World Views and Their Unfoldment Within the Metaphysical Systems," in Dilthey’s Philosophy of Existence: Introduction to Weltanschauungslehre, trans. William Kluback and Martin Weinbaum (New York: Bookman Associates, 1957), 26–27 @ITEM-1]

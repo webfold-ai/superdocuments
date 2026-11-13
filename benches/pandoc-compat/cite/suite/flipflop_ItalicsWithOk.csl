@@ -1,0 +1,28 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+     <layout>
+		<text variable="title" suffix=". " font-style="italic"/>
+      	<text value="BOGUS"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <group suffix=".">
+        <text variable="title" suffix=". " font-style="italic"/>
+        <date variable="issued" date-parts="year" form="text" suffix=". "/>
+        <text variable="volume" suffix=" "/>
+        <text variable="container-title"/>
+        <text variable="page-first" prefix=" "/>
+        <text variable="authority" prefix=" (" suffix=")"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

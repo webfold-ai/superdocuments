@@ -19,10 +19,6 @@
 "strong": [
 1,
 3
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -30,8 +26,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9787234042553191,
-"fidelity": 0.9794667779573761,
+"features": 0.9859154929577465,
+"fidelity": 0.9818641408581853,
 "math": 1.0,
 "structure": 0.9696969696969697,
 "text": 0.9899799599198397
@@ -48,17 +44,13 @@
 0,
 1
 ],
-"emph": [
-3,
-2
-],
 "math_inline": [
 2,
 0
 ],
 "strong": [
 1,
-3
+2
 ]
 },
 "format": "latex",
@@ -66,8 +58,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.8444444444444444,
-"fidelity": 0.9259989452760538,
+"features": 0.8888888888888888,
+"fidelity": 0.9408137600908685,
 "math": 0.0,
 "structure": 0.9696969696969697,
 "text": 0.963855421686747
@@ -80,13 +72,9 @@
 23,
 24
 ],
-"emph": [
-1,
-0
-],
 "strong": [
 0,
-2
+1
 ]
 },
 "format": "latex",
@@ -94,8 +82,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9649122807017544,
-"fidelity": 0.978682766927015,
+"features": 0.9824561403508771,
+"fidelity": 0.9845307201433892,
 "math": 1.0,
 "structure": 0.9885057471264368,
 "text": 0.9826302729528535
@@ -104,13 +92,9 @@
 },
 {
 "detail": {
-"emph": [
-1,
-0
-],
 "strong": [
 0,
-2
+1
 ]
 },
 "format": "latex",
@@ -118,8 +102,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.972972972972973,
-"fidelity": 0.9848277265290357,
+"features": 0.990990990990991,
+"fidelity": 0.9908337325350418,
 "structure": 0.9859154929577465,
 "text": 0.9955947136563876
 },
@@ -162,10 +146,6 @@
 },
 {
 "detail": {
-"math_display": [
-1,
-2
-],
 "strong": [
 0,
 1
@@ -176,10 +156,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.972972972972973,
-"fidelity": 0.9702339702339703,
+"features": 0.9863013698630136,
+"fidelity": 0.9809613343054117,
 "math": 0.0,
-"structure": 0.9615384615384616,
+"structure": 0.9803921568627451,
 "text": 0.9761904761904762
 },
 "status": "ok"
@@ -284,10 +264,6 @@
 1,
 2
 ],
-"math_display": [
-3,
-4
-],
 "math_inline": [
 2,
 0
@@ -302,38 +278,25 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.8888888888888888,
-"fidelity": 0.9446859903381642,
-"math": 0.4444444444444444,
-"structure": 0.9777777777777777,
+"features": 0.9056603773584906,
+"fidelity": 0.9539385755500457,
+"math": 0.5,
+"structure": 0.9887640449438202,
 "text": 0.967391304347826
 },
 "status": "ok"
 },
 {
-"detail": {
-"emph": [
-1,
-0
-],
-"math_display": [
-4,
-5
-],
-"strong": [
-1,
-2
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-015",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9724770642201835,
-"fidelity": 0.9875894421187019,
-"math": 0.8235294117647058,
-"structure": 0.9902912621359223,
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.875,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -355,10 +318,6 @@
 "strong": [
 1,
 3
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -366,8 +325,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.7441860465116279,
-"fidelity": 0.8842276723644741,
+"features": 0.7727272727272727,
+"fidelity": 0.8937414144363557,
 "math": 0.0,
 "structure": 0.9736842105263158,
 "text": 0.9348127600554785
@@ -376,10 +335,6 @@
 },
 {
 "detail": {
-"math_display": [
-2,
-4
-],
 "strong": [
 0,
 2
@@ -390,30 +345,25 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9705882352941176,
-"fidelity": 0.963955853602438,
+"features": 0.9850746268656716,
+"fidelity": 0.9791789160259309,
 "math": 0.0,
-"structure": 0.9354838709677419,
+"structure": 0.9666666666666667,
 "text": 0.9857954545454546
 },
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-3,
-4
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-018",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9859154929577465,
-"fidelity": 0.9909761599902445,
-"math": 0.7368421052631579,
-"structure": 0.987012987012987,
+"features": 1.0,
+"fidelity": 1.0,
+"math": 0.7777777777777778,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -439,13 +389,9 @@
 },
 {
 "detail": {
-"emph": [
-1,
-0
-],
 "strong": [
 0,
-2
+1
 ]
 },
 "format": "latex",
@@ -453,8 +399,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9433962264150944,
-"fidelity": 0.968821469411092,
+"features": 0.9811320754716981,
+"fidelity": 0.9814000857632932,
 "structure": 0.9818181818181818,
 "text": 0.98125
 },
@@ -502,10 +448,6 @@
 0,
 1
 ],
-"math_display": [
-1,
-2
-],
 "math_inline": [
 6,
 4
@@ -513,10 +455,6 @@
 "strong": [
 0,
 1
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -524,10 +462,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.8627450980392157,
-"fidelity": 0.9320620769357769,
-"math": 0.6153846153846154,
-"structure": 0.9705882352941176,
+"features": 0.9019607843137255,
+"fidelity": 0.9499627695511315,
+"math": 0.6666666666666666,
+"structure": 0.9850746268656716,
 "text": 0.962852897473997
 },
 "status": "ok"
@@ -584,10 +522,6 @@
 "cell": [
 22,
 24
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -595,8 +529,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9774436090225563,
-"fidelity": 0.9890447768906804,
+"features": 0.9850746268656716,
+"fidelity": 0.991588449505052,
 "math": 1.0,
 "structure": 0.9896907216494846,
 "text": 1.0
@@ -604,21 +538,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-2,
-3
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-026",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.967741935483871,
-"fidelity": 0.9782847449830373,
+"features": 1.0,
+"fidelity": 0.9950980392156863,
 "math": 0.0,
-"structure": 0.9818181818181818,
+"structure": 1.0,
 "text": 0.9852941176470589
 },
 "status": "ok"
@@ -714,10 +643,6 @@
 1,
 2
 ],
-"math_display": [
-2,
-3
-],
 "math_inline": [
 2,
 0
@@ -732,10 +657,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9361702127659575,
-"fidelity": 0.9620781215592281,
-"math": 0.2857142857142857,
-"structure": 0.9777777777777777,
+"features": 0.946236559139785,
+"fidelity": 0.9690956594058514,
+"math": 0.3333333333333333,
+"structure": 0.9887640449438202,
 "text": 0.9722863741339491
 },
 "status": "ok"
@@ -800,10 +725,6 @@
 1,
 2
 ],
-"math_display": [
-2,
-3
-],
 "math_inline": [
 2,
 0
@@ -818,10 +739,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9156626506024096,
-"fidelity": 0.9440940045264629,
-"math": 0.2857142857142857,
-"structure": 0.9523809523809523,
+"features": 0.926829268292683,
+"fidelity": 0.9516410335251521,
+"math": 0.3333333333333333,
+"structure": 0.963855421686747,
 "text": 0.9642384105960264
 },
 "status": "ok"
@@ -856,21 +777,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-3,
-4
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-038",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9743589743589743,
-"fidelity": 0.9765104627173593,
-"math": 0.2857142857142857,
-"structure": 0.9666666666666667,
+"features": 1.0,
+"fidelity": 0.9905188648613547,
+"math": 0.3333333333333333,
+"structure": 0.9830508474576272,
 "text": 0.9885057471264368
 },
 "status": "ok"
@@ -989,10 +905,6 @@
 0,
 1
 ],
-"math_display": [
-1,
-2
-],
 "math_inline": [
 4,
 2
@@ -1000,10 +912,6 @@
 "strong": [
 0,
 2
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1011,10 +919,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9411764705882353,
-"fidelity": 0.9607874137797411,
-"math": 0.4444444444444444,
-"structure": 0.9739130434782609,
+"features": 0.954248366013072,
+"fidelity": 0.9679924112122255,
+"math": 0.5,
+"structure": 0.9824561403508771,
 "text": 0.9672727272727273
 },
 "status": "ok"
@@ -1028,10 +936,6 @@
 "strong": [
 1,
 2
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1039,8 +943,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9859154929577465,
-"fidelity": 0.9885265410357712,
+"features": 0.9906542056074766,
+"fidelity": 0.9901061119190145,
 "math": 1.0,
 "structure": 0.990990990990991,
 "text": 0.988673139158576
@@ -1048,25 +952,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-4,
-5
-],
-"sup": [
-1,
-0
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-046",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9761904761904762,
-"fidelity": 0.9868844819551597,
-"math": 0.46153846153846156,
-"structure": 0.9887640449438202,
+"features": 1.0,
+"fidelity": 0.9985663082437276,
+"math": 0.5,
+"structure": 1.0,
 "text": 0.9956989247311828
 },
 "status": "ok"
@@ -1092,21 +987,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-1,
-2
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-048",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9795918367346939,
-"fidelity": 0.9832703783267692,
-"math": 0.4,
-"structure": 0.9866666666666667,
+"features": 1.0,
+"fidelity": 0.9945175438596491,
+"math": 0.5,
+"structure": 1.0,
 "text": 0.9835526315789473
 },
 "status": "ok"
@@ -1148,21 +1038,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-2,
-3
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-050",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.967741935483871,
-"fidelity": 0.9822771632916881,
-"math": 0.5714285714285714,
-"structure": 0.9859154929577465,
+"features": 1.0,
+"fidelity": 0.9977246871444824,
+"math": 0.6666666666666666,
+"structure": 1.0,
 "text": 0.9931740614334471
 },
 "status": "ok"
@@ -1181,10 +1066,6 @@
 0,
 1
 ],
-"math_display": [
-1,
-2
-],
 "math_inline": [
 2,
 0
@@ -1199,10 +1080,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9310344827586207,
-"fidelity": 0.9399992560354127,
+"features": 0.9391304347826087,
+"fidelity": 0.948142552808079,
 "math": 0.0,
-"structure": 0.9310344827586207,
+"structure": 0.9473684210526315,
 "text": 0.9579288025889967
 },
 "status": "ok"
@@ -1313,10 +1194,6 @@
 0,
 2
 ],
-"math_display": [
-2,
-3
-],
 "math_inline": [
 10,
 6
@@ -1331,30 +1208,25 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.819672131147541,
-"fidelity": 0.9016406166005794,
-"math": 0.6666666666666666,
-"structure": 0.958904109589041,
+"features": 0.8333333333333334,
+"fidelity": 0.9106337215402371,
+"math": 0.7,
+"structure": 0.9722222222222222,
 "text": 0.9263456090651558
 },
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-1,
-2
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-058",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.989247311827957,
-"fidelity": 0.9897901018546782,
-"math": 0.6666666666666666,
-"structure": 0.9811320754716981,
+"features": 1.0,
+"fidelity": 0.9964890362468566,
+"math": 0.75,
+"structure": 0.9904761904761905,
 "text": 0.9989909182643795
 },
 "status": "ok"
@@ -1364,10 +1236,6 @@
 "strong": [
 0,
 1
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1375,8 +1243,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9791666666666666,
-"fidelity": 0.9874209650004859,
+"features": 0.9896907216494846,
+"fidelity": 0.9909289833280918,
 "math": 1.0,
 "structure": 0.9917355371900827,
 "text": 0.9913606911447084
@@ -1388,14 +1256,6 @@
 "cell": [
 11,
 12
-],
-"math_display": [
-3,
-4
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1403,10 +1263,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9724770642201835,
-"fidelity": 0.9847539916917899,
-"math": 0.2857142857142857,
-"structure": 0.9827586206896551,
+"features": 0.9908256880733946,
+"fidelity": 0.9937187753550041,
+"math": 0.3333333333333333,
+"structure": 0.991304347826087,
 "text": 0.9990262901655307
 },
 "status": "ok"
@@ -1474,10 +1334,6 @@
 "strong": [
 0,
 1
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1485,8 +1341,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9830508474576272,
-"fidelity": 0.9896813439233312,
+"features": 0.9915966386554622,
+"fidelity": 0.9925299409892762,
 "math": 1.0,
 "structure": 0.9885057471264368,
 "text": 0.9974874371859297
@@ -1500,10 +1356,6 @@
 1
 ],
 "code_block": [
-1,
-2
-],
-"math_display": [
 1,
 2
 ],
@@ -1521,10 +1373,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.85,
-"fidelity": 0.9213676760365143,
+"features": 0.8717948717948718,
+"fidelity": 0.9346890041377165,
 "math": 0.0,
-"structure": 0.9629629629629629,
+"structure": 0.9811320754716981,
 "text": 0.9511400651465798
 },
 "status": "ok"
@@ -1534,10 +1386,6 @@
 "cell": [
 17,
 18
-],
-"math_display": [
-1,
-2
 ],
 "strong": [
 1,
@@ -1549,10 +1397,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9724770642201835,
-"fidelity": 0.9773098625815212,
-"math": 0.6666666666666666,
-"structure": 0.9714285714285714,
+"features": 0.9814814814814815,
+"fidelity": 0.9850042266513671,
+"math": 0.75,
+"structure": 0.9855072463768116,
 "text": 0.9880239520958084
 },
 "status": "ok"
@@ -1582,23 +1430,14 @@
 "status": "ok"
 },
 {
-"detail": {
-"emph": [
-2,
-1
-],
-"strong": [
-2,
-3
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-068",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9795918367346939,
-"fidelity": 0.9915552427867699,
+"features": 1.0,
+"fidelity": 0.9983579638752053,
 "math": 1.0,
 "structure": 1.0,
 "text": 0.9950738916256158
@@ -1693,23 +1532,14 @@
 "status": "ok"
 },
 {
-"detail": {
-"emph": [
-2,
-1
-],
-"strong": [
-1,
-2
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-074",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9722222222222222,
-"fidelity": 0.9879552254204066,
+"features": 1.0,
+"fidelity": 0.9972144846796658,
 "math": 1.0,
 "structure": 1.0,
 "text": 0.9916434540389972
@@ -1737,10 +1567,6 @@
 "strong": [
 2,
 3
-],
-"sup": [
-2,
-0
 ]
 },
 "format": "latex",
@@ -1748,8 +1574,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9047619047619048,
-"fidelity": 0.9534427836314628,
+"features": 0.9302325581395349,
+"fidelity": 0.9619330014240063,
 "math": 0.5,
 "structure": 0.987012987012987,
 "text": 0.9685534591194969
@@ -1773,10 +1599,6 @@
 "strong": [
 0,
 2
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -1784,8 +1606,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9066666666666666,
-"fidelity": 0.9475030786300401,
+"features": 0.9210526315789473,
+"fidelity": 0.952298400267467,
 "math": 0.0,
 "structure": 0.9743589743589743,
 "text": 0.9614835948644793
@@ -1793,21 +1615,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-1,
-2
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-077",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9743589743589743,
-"fidelity": 0.9823002394430965,
-"math": 0.6666666666666666,
-"structure": 0.9818181818181818,
+"features": 1.0,
+"fidelity": 0.9969078540507113,
+"math": 0.75,
+"structure": 1.0,
 "text": 0.9907235621521335
 },
 "status": "ok"
@@ -1920,19 +1737,14 @@
 "status": "ok"
 },
 {
-"detail": {
-"sup": [
-1,
-0
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-082",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9882352941176471,
-"fidelity": 0.990403147526909,
+"features": 1.0,
+"fidelity": 0.9943247161543599,
 "math": 1.0,
 "structure": 0.9894736842105263,
 "text": 0.9935004642525533
@@ -1985,17 +1797,13 @@
 1,
 2
 ],
-"emph": [
-1,
-0
-],
 "math_inline": [
 6,
 4
 ],
 "strong": [
 0,
-2
+1
 ]
 },
 "format": "latex",
@@ -2003,8 +1811,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.92,
-"fidelity": 0.9595576209517634,
+"features": 0.94,
+"fidelity": 0.96622428761843,
 "math": 0.8333333333333334,
 "structure": 0.9894736842105263,
 "text": 0.9691991786447639
@@ -2021,10 +1829,6 @@
 0,
 1
 ],
-"math_display": [
-2,
-3
-],
 "math_inline": [
 2,
 0
@@ -2039,10 +1843,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9210526315789473,
-"fidelity": 0.9549197324524922,
-"math": 0.2857142857142857,
-"structure": 0.975609756097561,
+"features": 0.9333333333333333,
+"fidelity": 0.9630281546673185,
+"math": 0.3333333333333333,
+"structure": 0.9876543209876543,
 "text": 0.9680968096809681
 },
 "status": "ok"
@@ -2069,17 +1873,9 @@
 },
 {
 "detail": {
-"math_display": [
-1,
-2
-],
 "strong": [
 0,
 1
-],
-"sup": [
-1,
-0
 ]
 },
 "format": "latex",
@@ -2087,10 +1883,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9734513274336283,
-"fidelity": 0.9764303831526999,
+"features": 0.9911504424778761,
+"fidelity": 0.9879763878246383,
 "math": 0.0,
-"structure": 0.9655172413793104,
+"structure": 0.9824561403508771,
 "text": 0.9903225806451613
 },
 "status": "ok"
@@ -2140,10 +1936,6 @@
 "cell": [
 11,
 12
-],
-"math_display": [
-3,
-4
 ]
 },
 "format": "latex",
@@ -2151,34 +1943,25 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9787234042553191,
-"fidelity": 0.9888417083703928,
-"math": 0.5714285714285714,
-"structure": 0.991304347826087,
+"features": 0.989247311827957,
+"fidelity": 0.9952482282859098,
+"math": 0.6666666666666666,
+"structure": 1.0,
 "text": 0.9964973730297724
 },
 "status": "ok"
 },
 {
-"detail": {
-"math_display": [
-3,
-4
-],
-"sup": [
-1,
-0
-]
-},
+"detail": {},
 "format": "latex",
 "id": "latex-gen-091",
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9615384615384616,
-"fidelity": 0.9777484420341563,
-"math": 0.2857142857142857,
-"structure": 0.987012987012987,
+"features": 1.0,
+"fidelity": 0.9948979591836734,
+"math": 0.3333333333333333,
+"structure": 1.0,
 "text": 0.9846938775510204
 },
 "status": "ok"
@@ -2217,17 +2000,9 @@
 },
 {
 "detail": {
-"math_display": [
-2,
-4
-],
 "strong": [
 0,
 1
-],
-"sup": [
-2,
-0
 ]
 },
 "format": "latex",
@@ -2235,10 +2010,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9664429530201343,
-"fidelity": 0.9784813600839571,
+"features": 0.9932885906040269,
+"fidelity": 0.993838313776329,
 "math": 0.0,
-"structure": 0.970873786407767,
+"structure": 0.9900990099009901,
 "text": 0.99812734082397
 },
 "status": "ok"
@@ -2268,17 +2043,13 @@
 0,
 2
 ],
-"emph": [
-3,
-2
-],
 "math_inline": [
 7,
 3
 ],
 "strong": [
 0,
-3
+2
 ]
 },
 "format": "latex",
@@ -2286,8 +2057,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.8536585365853658,
-"fidelity": 0.920530286383945,
+"features": 0.8780487804878049,
+"fidelity": 0.928660367684758,
 "math": 0.5,
 "structure": 0.972972972972973,
 "text": 0.9349593495934959
@@ -2301,10 +2072,6 @@
 1
 ],
 "code_block": [
-1,
-2
-],
-"math_display": [
 1,
 2
 ],
@@ -2322,10 +2089,10 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.9380530973451328,
-"fidelity": 0.9621510124824958,
+"features": 0.9464285714285714,
+"fidelity": 0.9679993233933981,
 "math": 0.0,
-"structure": 0.9719626168224299,
+"structure": 0.9811320754716981,
 "text": 0.9764373232799246
 },
 "status": "ok"
@@ -2379,10 +2146,6 @@
 "strong": [
 1,
 2
-],
-"sup": [
-3,
-0
 ]
 },
 "format": "latex",
@@ -2390,8 +2153,8 @@
 "kind": "generated",
 "producer": "python generator (seeded)",
 "scores": {
-"features": 0.8666666666666667,
-"fidelity": 0.9433887749677222,
+"features": 0.9206349206349206,
+"fidelity": 0.9613781929571402,
 "math": 0.5,
 "structure": 0.9894736842105263,
 "text": 0.974025974025974
@@ -2568,10 +2331,6 @@
 },
 {
 "detail": {
-"math_display": [
-1,
-2
-],
 "sup": [
 3,
 0
@@ -2582,10 +2341,10 @@
 "kind": "hand-written",
 "producer": "hand-written",
 "scores": {
-"features": 0.9166666666666666,
-"fidelity": 0.8614008402143996,
-"math": 0.7272727272727273,
-"structure": 0.7692307692307693,
+"features": 0.9361702127659575,
+"fidelity": 0.8892695436150179,
+"math": 0.8,
+"structure": 0.8333333333333334,
 "text": 0.8983050847457628
 },
 "status": "ok"
@@ -2789,15 +2548,11 @@
 "detail": {
 "emph": [
 1,
-2
+3
 ],
 "strong": [
 0,
-2
-],
-"sup": [
-1,
-0
+1
 ]
 },
 "format": "latex",
@@ -2805,8 +2560,8 @@
 "kind": "generated",
 "producer": "python generator (seeded), \\input/\\include project",
 "scores": {
-"features": 0.9230769230769231,
-"fidelity": 0.9644656553292349,
+"features": 0.9433962264150944,
+"fidelity": 0.9712387564419586,
 "math": 0.0,
 "structure": 0.9787234042553191,
 "text": 0.9915966386554622
@@ -2830,9 +2585,13 @@
 },
 {
 "detail": {
+"emph": [
+0,
+1
+],
 "strong": [
 0,
-2
+1
 ]
 },
 "format": "latex",
@@ -3961,21 +3720,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-2,
-3
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-01",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.975609756097561,
-"fidelity": 0.970364542355101,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9354838709677419,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4090,21 +3844,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-02",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9922480620155039,
-"fidelity": 0.9874657719156157,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9701492537313433,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4210,21 +3959,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-03",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.994413407821229,
-"fidelity": 0.985559186254875,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9622641509433962,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4351,21 +4095,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-04",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9934640522875817,
-"fidelity": 0.9857001386413152,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9636363636363636,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4480,20 +4219,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-2,
-3
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-05",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9859154929577465,
-"fidelity": 0.9723166585721223,
-"structure": 0.9310344827586207,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4603,21 +4337,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-06",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9904761904761905,
-"fidelity": 0.9878163878163878,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.972972972972973,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4728,20 +4457,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-07",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9777777777777777,
-"fidelity": 0.9750487329434697,
-"structure": 0.9473684210526315,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4858,21 +4582,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-08",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9925925925925926,
-"fidelity": 0.983641975308642,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9583333333333334,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -4999,21 +4718,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-09",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9894736842105263,
-"fidelity": 0.9789473684210526,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9473684210526315,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5128,21 +4842,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-10",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9859154929577465,
-"fidelity": 0.9836092578865002,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9649122807017544,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5269,21 +4978,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-11",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9957081545064378,
-"fidelity": 0.988312974579069,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9692307692307692,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5398,21 +5102,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-12",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.987012987012987,
-"fidelity": 0.9805194805194805,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9545454545454546,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5516,20 +5215,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-2,
-3
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-13",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.98989898989899,
-"fidelity": 0.9830275544561259,
-"structure": 0.9591836734693877,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5624,20 +5318,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-14",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9908256880733946,
-"fidelity": 0.985037134119703,
-"structure": 0.9642857142857143,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5732,20 +5421,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-15",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9885057471264368,
-"fidelity": 0.9765607392382241,
-"structure": 0.9411764705882353,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5835,20 +5519,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-2,
-3
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-16",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9900990099009901,
-"fidelity": 0.9737111642198703,
-"structure": 0.9310344827586207,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5899,21 +5578,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-17",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9887640449438202,
-"fidelity": 0.9836760652957389,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9622641509433962,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -5961,20 +5635,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-2,
-3
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-18",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9855072463768116,
-"fidelity": 0.9776252224764811,
-"structure": 0.9473684210526315,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -6034,21 +5703,16 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-4,
-5
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-19",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.9921259842519685,
-"fidelity": 0.9854705661792277,
+"features": 1.0,
+"fidelity": 1.0,
 "math": 0.0,
-"structure": 0.9642857142857143,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -6105,20 +5769,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-3,
-4
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-pandoc-20",
 "kind": "generated",
 "producer": "pandoc 3.1.3 writer from a seed",
 "scores": {
-"features": 0.993006993006993,
-"fidelity": 0.985323318656652,
-"structure": 0.9629629629629629,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"
@@ -6998,20 +6657,15 @@
 "status": "ok"
 },
 {
-"detail": {
-"h1": [
-1,
-2
-]
-},
+"detail": {},
 "format": "docx",
 "id": "docx-raw-structure",
 "kind": "hand-written",
 "producer": "python zipfile, OOXML written for this corpus",
 "scores": {
-"features": 0.9655172413793104,
-"fidelity": 0.9676724137931035,
-"structure": 0.9375,
+"features": 1.0,
+"fidelity": 1.0,
+"structure": 1.0,
 "text": 1.0
 },
 "status": "ok"

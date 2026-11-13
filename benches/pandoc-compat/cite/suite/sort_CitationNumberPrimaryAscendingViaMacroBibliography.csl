@@ -1,0 +1,33 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="citation-number-macro">
+    <number variable="citation-number"/>
+  </macro>
+  <citation>
+    <sort>
+      <key macro="citation-number-macro"/>
+    </sort>
+    <layout>
+      <group delimiter=" ">
+        <number variable="citation-number" prefix="[" suffix="]"/>
+        <text variable="title"/>
+      </group>
+    </layout>
+  </citation>
+  <bibliography>
+    <sort>
+      <key macro="citation-number-macro" sort="ascending"/>
+    </sort>
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="] "/>
+      <text variable="title" />
+    </layout>
+  </bibliography>
+</style>

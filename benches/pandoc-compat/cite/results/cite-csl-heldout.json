@@ -5567,13 +5567,13 @@
 "7. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397."
 ],
 "bib_ours": [
-"1. Guido van Rossum, Alan M. Turing, Grace Hopper. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
-"2. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
-"3. C. A. R. Hoare, Ada Lovelace, John Jr. Smith. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
-"4. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
-"5. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
-"6. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
-"7. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397."
+"1. Rossum G van, Turing AM, Hopper G. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
+"2. Hoare CAR, Rossum G van. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"3. Hoare CAR, Lovelace A, Smith JJr. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
+"4. Backus J, Lamport L. An axiomatic basis for computer programming. Published online 1956.",
+"5. Hopper G. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
+"6. Turing AM. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"7. Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397."
 ]
 },
 {
@@ -5622,14 +5622,14 @@
 "8. Guido van Rossum, Alan M. Turing, Grace Hopper. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941."
 ],
 "bib_ours": [
-"1. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
-"2. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
-"3. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
-"4. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
-"5. C. A. R. Hoare, Ada Lovelace, John Jr. Smith. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
-"6. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
-"7. Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
-"8. Guido van Rossum, Alan M. Turing, Grace Hopper. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941."
+"1. Turing AM. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"2. Hoare CAR, Rossum G van. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"3. Backus J, Lamport L. An axiomatic basis for computer programming. Published online 1956.",
+"4. Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"5. Hoare CAR, Lovelace A, Smith JJr. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
+"6. Hopper G. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
+"7. Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
+"8. Rossum G van, Turing AM, Hopper G. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941."
 ]
 },
 {
@@ -5667,11 +5667,11 @@
 "5. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55"
 ],
 "bib_ours": [
-"1. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
-"2. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
-"3. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
-"4. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
-"5. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55"
+"1. Turing AM. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"2. Hoare CAR, Rossum G van. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"3. Backus J, Lamport L. An axiomatic basis for computer programming. Published online 1956.",
+"4. Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"5. Hopper G. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55"
 ]
 },
 {
@@ -5711,13 +5711,13 @@
 "7. C. A. R. Hoare, Ada Lovelace, John Jr. Smith. On Computable Numbers. 3rd ed. Addison-Wesley; 2010."
 ],
 "bib_ours": [
-"1. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
-"2. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
-"3. Guido van Rossum, Alan M. Turing, Grace Hopper. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
-"4. Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
-"5. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
-"6. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
-"7. C. A. R. Hoare, Ada Lovelace, John Jr. Smith. On Computable Numbers. 3rd ed. Addison-Wesley; 2010."
+"1. Hopper G. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55",
+"2. Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"3. Rossum G van, Turing AM, Hopper G. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
+"4. Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
+"5. Backus J, Lamport L. An axiomatic basis for computer programming. Published online 1956.",
+"6. Hoare CAR, Rossum G van. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"7. Hoare CAR, Lovelace A, Smith JJr. On Computable Numbers. 3rd ed. Addison-Wesley; 2010."
 ]
 },
 {
@@ -5763,13 +5763,13 @@
 "7. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Ada Lovelace, John Jr. Smith. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
-"2. Guido van Rossum, Alan M. Turing, Grace Hopper. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
-"3. Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
-"4. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
-"5. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
-"6. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
-"7. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956."
+"1. Hoare CAR, Lovelace A, Smith JJr. On Computable Numbers. 3rd ed. Addison-Wesley; 2010.",
+"2. Rossum G van, Turing AM, Hopper G. Go to Statement Considered Harmful. PhD thesis. University of Oxford; 1941.",
+"3. Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Bound Symposium. 2007:48-186.",
+"4. Turing AM. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"5. Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"6. Hoare CAR, Rossum G van. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"7. Backus J, Lamport L. An axiomatic basis for computer programming. Published online 1956."
 ]
 },
 {
@@ -5811,13 +5811,13 @@
 "7. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969."
 ],
 "bib_ours": [
-"1. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
-"2. Donald E. Knuth, Ada Lovelace, Maria de la Cruz. Notes on the analytical engine. Published online 1962.",
-"3. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
-"4. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
-"5. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
-"6. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
-"7. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969."
+"1. Rossum G van, Turing AM. Notes on the analytical engine. Published online 1990.",
+"2. Knuth DE, Lovelace A, Cruz M de la. Notes on the analytical engine. Published online 1962.",
+"3. Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"4. Backus J, Knuth DE, Müller H. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"5. Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"6. Müller H, O’Brien F. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
+"7. Lovelace A, Smith JJr, Backus J. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969."
 ]
 },
 {
@@ -5855,13 +5855,13 @@
 "7. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density"
 ],
 "bib_ours": [
-"1. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
-"2. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
-"3. Donald E. Knuth, Ada Lovelace, Maria de la Cruz. Notes on the analytical engine. Published online 1962.",
-"4. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
-"5. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
-"6. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
-"7. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density"
+"1. Rossum G van, Turing AM. Notes on the analytical engine. Published online 1990.",
+"2. Smith JJr, Cruz M de la, Lovelace A. Go to Statement Considered Harmful. Lab Model; 1937.",
+"3. Knuth DE, Lovelace A, Cruz M de la. Notes on the analytical engine. Published online 1962.",
+"4. Backus J, Knuth DE, Müller H. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"5. Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"6. Dijkstra EW. The art of computer programming. Published online 1973.",
+"7. Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density"
 ]
 },
 {
@@ -5908,14 +5908,14 @@
 "8. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937."
 ],
 "bib_ours": [
-"1. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
-"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
-"3. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
-"4. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
-"5. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
-"6. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
-"7. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
-"8. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937."
+"1. Backus J, Knuth DE, Müller H. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark",
+"2. Rossum G van, Turing AM. Notes on the analytical engine. Published online 1990.",
+"3. Müller H, O’Brien F. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
+"4. Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"5. Lovelace A, Smith JJr, Backus J. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"6. Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"7. Dijkstra EW. The art of computer programming. Published online 1973.",
+"8. Smith JJr, Cruz M de la, Lovelace A. Go to Statement Considered Harmful. Lab Model; 1937."
 ]
 },
 {
@@ -5952,12 +5952,12 @@
 "6. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010."
 ],
 "bib_ours": [
-"1. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
-"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
-"3. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
-"4. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
-"5. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
-"6. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010."
+"1. Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"2. Rossum G van, Turing AM. Notes on the analytical engine. Published online 1990.",
+"3. Lovelace A, Smith JJr, Backus J. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"4. Dijkstra EW. The art of computer programming. Published online 1973.",
+"5. Smith JJr, Cruz M de la, Lovelace A. Go to Statement Considered Harmful. Lab Model; 1937.",
+"6. Müller H, O’Brien F. On Computable Numbers. PhD thesis. University of Cambridge; 2010."
 ]
 },
 {
@@ -5989,11 +5989,11 @@
 "5. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark"
 ],
 "bib_ours": [
-"1. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
-"2. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
-"3. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
-"4. Barbara Liskov, Hans Müller, Edsger W. Dijkstra. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
-"5. John Backus, Donald E. Knuth, Hans Müller. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark"
+"1. Rossum G van, Turing AM. Notes on the analytical engine. Published online 1990.",
+"2. Müller H, O’Brien F. On Computable Numbers. PhD thesis. University of Cambridge; 2010.",
+"3. Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"4. Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. In: Proceedings of the Compiler Symposium. 2012:35-166.",
+"5. Backus J, Knuth DE, Müller H. On Computable Numbers. Lab Heuristic; 2007. https://example.org/benchmark"
 ]
 },
 {
@@ -6024,10 +6024,10 @@
 "4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
 ],
 "bib_ours": [
-"1. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
-"2. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
-"3. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
-"4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
+"1. Lovelace A, Hamilton M. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"2. Smith JJr, Backus J, Hoare CAR. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"3. Hoare CAR, Dijkstra EW, Müller H. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
+"4. Lovelace A, Hopper G. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
 ]
 },
 {
@@ -6058,10 +6058,10 @@
 "4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
-"2. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
-"3. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
-"4. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
+"1. Hoare CAR, Dijkstra EW, Müller H. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
+"2. Lovelace A, Hamilton M. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"3. Smith JJr, Backus J, Hoare CAR. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"4. Lovelace A, Hopper G. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120."
 ]
 },
 {
@@ -6098,10 +6098,10 @@
 "4. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
 ],
 "bib_ours": [
-"1. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
-"2. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
-"3. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
-"4. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
+"1. Smith JJr, Backus J, Hoare CAR. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"2. Lovelace A, Hamilton M. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"3. Lovelace A, Hopper G. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
+"4. Hoare CAR, Dijkstra EW, Müller H. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
 ]
 },
 {
@@ -6130,10 +6130,10 @@
 "4. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree"
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
-"2. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
-"3. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
-"4. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree"
+"1. Hoare CAR, Dijkstra EW, Müller H. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory",
+"2. Lovelace A, Hopper G. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
+"3. Smith JJr, Backus J, Hoare CAR. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"4. Lovelace A, Hamilton M. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree"
 ]
 },
 {
@@ -6178,10 +6178,10 @@
 "4. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
 ],
 "bib_ours": [
-"1. Ada Lovelace, Grace Hopper. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
-"2. Ada Lovelace, Margaret Hamilton. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
-"3. John Jr. Smith, John Backus, C. A. R. Hoare. On Computable Numbers. Second. Cambridge University Press; 1939.",
-"4. C. A. R. Hoare, Edsger W. Dijkstra, Hans Müller. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
+"1. Lovelace A, Hopper G. An axiomatic basis for computer programming. In: Proceedings of the Array Symposium. 1969:14-120.",
+"2. Lovelace A, Hamilton M. Notes on the Analytical Engine. MIT Press; 2017. https://example.org/tree",
+"3. Smith JJr, Backus J, Hoare CAR. On Computable Numbers. Second. Cambridge University Press; 1939.",
+"4. Hoare CAR, Dijkstra EW, Müller H. The Art of Computer Programming. Lab Metric; 1948. https://example.org/memory"
 ]
 },
 {
@@ -6216,12 +6216,12 @@
 "6. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
 ],
 "bib_ours": [
-"1. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
-"2. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
-"3. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
-"4. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
-"5. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
-"6. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
+"1. Cruz M de la. The Apollo Guidance Computer. Lab Window; 2014.",
+"2. Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"3. Müller H, Backus J, Lamport L. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"4. Smith JJr, Backus J. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"5. Knuth DE, Turing AM. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
+"6. Rossum G van, Hopper G. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
 ]
 },
 {
@@ -6261,13 +6261,13 @@
 "7. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
 ],
 "bib_ours": [
-"1. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
-"2. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
-"3. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
-"4. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
-"5. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
-"6. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
-"7. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
+"1. Smith JJr, Backus J. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"2. Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"3. Müller H, Backus J, Lamport L. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"4. Knuth DE, Turing AM. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
+"5. Hoare CAR, Müller H. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"6. García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"7. Rossum G van, Hopper G. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
 ]
 },
 {
@@ -6305,13 +6305,13 @@
 "7. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
 ],
 "bib_ours": [
-"1. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186.",
-"2. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
-"3. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
-"4. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
-"5. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
-"6. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
-"7. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
+"1. Rossum G van, Hopper G. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186.",
+"2. Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"3. Smith JJr, Backus J. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"4. García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"5. Cruz M de la. The Apollo Guidance Computer. Lab Window; 2014.",
+"6. Knuth DE, Turing AM. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
+"7. Müller H, Backus J, Lamport L. Data Abstraction and Hierarchy. Lab Matrix; 1937."
 ]
 },
 {
@@ -6346,12 +6346,12 @@
 "6. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
 ],
 "bib_ours": [
-"1. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
-"2. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
-"3. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
-"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
-"5. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
-"6. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
+"1. García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"2. Hoare CAR, Müller H. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"3. Smith JJr, Backus J. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"4. Cruz M de la. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"6. Müller H, Backus J, Lamport L. Data Abstraction and Hierarchy. Lab Matrix; 1937."
 ]
 },
 {
@@ -6388,12 +6388,12 @@
 "6. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975."
 ],
 "bib_ours": [
-"1. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
-"2. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
-"3. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
-"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
-"5. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
-"6. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975."
+"1. Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"2. Müller H, Backus J, Lamport L. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"3. García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"4. Cruz M de la. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. Smith JJr, Backus J. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"6. Knuth DE, Turing AM. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975."
 ]
 },
 {
@@ -6423,9 +6423,9 @@
 "3. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
 ],
 "bib_ours": [
-"1. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
-"2. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
-"3. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
+"1. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
+"2. Hoare CAR, Smith JJr, García L. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"3. Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
 ]
 },
 {
@@ -6455,11 +6455,11 @@
 "5. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
 ],
 "bib_ours": [
-"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
-"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
-"3. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
-"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
-"5. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
+"1. García L, Rossum G van. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. Smith JJr, Hopper G. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"4. Turing AM. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
 ]
 },
 {
@@ -6498,12 +6498,12 @@
 "6. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67"
 ],
 "bib_ours": [
-"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
-"2. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
-"3. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
-"4. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
-"5. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
-"6. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67"
+"1. García L, Rossum G van. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"3. Turing AM. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"4. Smith JJr, Hopper G. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"5. Hoare CAR, Smith JJr, García L. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"6. Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67"
 ]
 },
 {
@@ -6539,13 +6539,13 @@
 "7. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101."
 ],
 "bib_ours": [
-"1. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
-"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
-"3. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
-"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
-"5. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
-"6. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
-"7. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101."
+"1. Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33",
+"2. Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. García L, Rossum G van. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"4. Turing AM. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
+"6. Hoare CAR, Smith JJr, García L. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment",
+"7. Smith JJr, Hopper G. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101."
 ]
 },
 {
@@ -6574,10 +6574,10 @@
 "4. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment"
 ],
 "bib_ours": [
-"1. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
-"2. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
-"3. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
-"4. C. A. R. Hoare, John Jr. Smith, Luis García. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment"
+"1. Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"2. García L, Rossum G van. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"3. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Oxford; 1948.",
+"4. Hoare CAR, Smith JJr, García L. An Axiomatic Basis for Computer Programming. Second. Springer; 1941. https://example.org/experiment"
 ]
 },
 {
@@ -6618,12 +6618,12 @@
 "6. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975."
 ],
 "bib_ours": [
-"1. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
-"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
-"3. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
-"4. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
-"5. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"6. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975."
+"1. Turing AM, O’Brien F, Liskov B. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"2. Rossum G van. The education of a computer. Published online 2019. https://example.org/latency",
+"3. García L, Rossum G van, Lovelace A. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
+"4. Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"5. Hamilton M, García L, Liskov B. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"6. Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style. Published online 1975."
 ]
 },
 {
@@ -6659,13 +6659,13 @@
 "7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
 ],
 "bib_ours": [
-"1. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
-"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
-"3. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
-"4. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
-"5. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
-"6. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
+"1. Turing AM, O’Brien F, Liskov B. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"2. Rossum G van. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Smith JJr. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
+"4. Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style. Published online 1975.",
+"5. Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"6. Hamilton M, García L, Liskov B. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"7. García L, Rossum G van, Lovelace A. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
 ]
 },
 {
@@ -6706,14 +6706,14 @@
 "8. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric"
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
-"2. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
-"3. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
-"4. Edsger W. Dijkstra, John Jr. Smith. Time, clocks, and the ordering of events. In: Proceedings of the Window Symposium. 1988:81-126.",
-"5. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
-"6. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"7. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
-"8. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric"
+"1. Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style. Published online 1975.",
+"2. García L, Rossum G van, Lovelace A. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
+"3. Smith JJr. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
+"4. Dijkstra EW, Smith JJr. Time, clocks, and the ordering of events. In: Proceedings of the Window Symposium. 1988:81-126.",
+"5. Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"6. Hamilton M, García L, Liskov B. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"7. Rossum G van. The education of a computer. Published online 2019. https://example.org/latency",
+"8. Turing AM, O’Brien F, Liskov B. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric"
 ]
 },
 {
@@ -6759,13 +6759,13 @@
 "7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
-"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
-"3. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"4. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
-"5. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
-"6. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
-"7. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
+"1. Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"2. Rossum G van. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Hamilton M, García L, Liskov B. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"4. Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style. Published online 1975.",
+"5. Smith JJr. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023.",
+"6. Turing AM, O’Brien F, Liskov B. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"7. García L, Rossum G van, Lovelace A. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945."
 ]
 },
 {
@@ -6807,13 +6807,13 @@
 "7. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023."
 ],
 "bib_ours": [
-"1. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"2. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975.",
-"3. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
-"4. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
-"5. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
-"6. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
-"7. John Jr. Smith. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023."
+"1. Hamilton M, García L, Liskov B. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"2. Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style. Published online 1975.",
+"3. García L, Rossum G van, Lovelace A. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
+"4. Turing AM, O’Brien F, Liskov B. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"5. Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"6. Rossum G van. The education of a computer. Published online 2019. https://example.org/latency",
+"7. Smith JJr. The Apollo Guidance Computer. PhD thesis. University of Cambridge; 2023."
 ]
 },
 {
@@ -6851,11 +6851,11 @@
 "5. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
-"2. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994.",
-"3. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
-"4. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
-"5. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
+"1. Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"2. Hoare CAR. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994.",
+"3. Cruz M de la, O’Brien F. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"4. Dijkstra EW. On Computable Numbers. Lab Estimate; 2000.",
+"5. Knuth DE. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ]
 },
 {
@@ -6889,11 +6889,11 @@
 "5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
 ],
 "bib_ours": [
-"1. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
-"2. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
-"3. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
-"4. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
-"5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
+"1. Knuth DE. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
+"2. Dijkstra EW. On Computable Numbers. Lab Estimate; 2000.",
+"3. Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"4. Cruz M de la, O’Brien F. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"5. Hoare CAR. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
 ]
 },
 {
@@ -6937,11 +6937,11 @@
 "5. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
-"2. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
-"3. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994.",
-"4. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
-"5. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
+"1. Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"2. Cruz M de la, O’Brien F. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"3. Hoare CAR. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994.",
+"4. Dijkstra EW. On Computable Numbers. Lab Estimate; 2000.",
+"5. Knuth DE. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ]
 },
 {
@@ -6976,10 +6976,10 @@
 "4. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
-"2. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
-"3. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
-"4. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
+"1. Cruz M de la, O’Brien F. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"2. Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"3. Dijkstra EW. On Computable Numbers. Lab Estimate; 2000.",
+"4. Knuth DE. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
 ]
 },
 {
@@ -7017,11 +7017,11 @@
 "5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
 ],
 "bib_ours": [
-"1. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
-"2. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
-"3. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
-"4. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
-"5. C. A. R. Hoare. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
+"1. Knuth DE. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156.",
+"2. Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"3. Dijkstra EW. On Computable Numbers. Lab Estimate; 2000.",
+"4. Cruz M de la, O’Brien F. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"5. Hoare CAR. Can Programming Be Liberated from the von Neumann Style. Lab Parser; 1994."
 ]
 },
 {
@@ -7054,10 +7054,10 @@
 "4. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181."
 ],
 "bib_ours": [
-"1. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
-"2. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
-"3. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
-"4. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181."
+"1. Smith JJr, Backus J. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
+"2. Turing AM, Smith JJr, Rossum G van. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"3. Hopper G. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
+"4. Hopper G, Lamport L. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181."
 ]
 },
 {
@@ -7096,10 +7096,10 @@
 "4. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
 ],
 "bib_ours": [
-"1. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
-"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
-"3. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
-"4. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
+"1. Hopper G. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
+"2. Hopper G, Lamport L. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. Turing AM, Smith JJr, Rossum G van. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"4. Smith JJr, Backus J. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
 ]
 },
 {
@@ -7133,11 +7133,11 @@
 "5. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122.",
-"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
-"3. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
-"4. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
-"5. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
+"1. Hoare CAR, Liskov B. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122.",
+"2. Hopper G, Lamport L. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. Turing AM, Smith JJr, Rossum G van. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"4. Hopper G. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
+"5. Smith JJr, Backus J. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
 ]
 },
 {
@@ -7172,10 +7172,10 @@
 "4. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122."
 ],
 "bib_ours": [
-"1. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
-"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
-"3. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
-"4. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122."
+"1. Turing AM, Smith JJr, Rossum G van. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"2. Hopper G, Lamport L. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. Smith JJr, Backus J. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
+"4. Hoare CAR, Liskov B. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122."
 ]
 },
 {
@@ -7219,11 +7219,11 @@
 "5. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986."
 ],
 "bib_ours": [
-"1. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
-"2. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
-"3. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
-"4. C. A. R. Hoare, Barbara Liskov. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122.",
-"5. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986."
+"1. Turing AM, Smith JJr, Rossum G van. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"2. Smith JJr, Backus J. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12",
+"3. Hopper G, Lamport L. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"4. Hoare CAR, Liskov B. On computable numbers. In: Proceedings of the Transform Symposium. 2005:71-122.",
+"5. Hopper G. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986."
 ]
 },
 {
@@ -7266,12 +7266,12 @@
 "6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
 ],
 "bib_ours": [
-"1. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
-"2. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
-"3. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"4. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
-"5. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
-"6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
+"1. Smith JJr. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"2. Lamport L, Turing AM. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"3. Hoare CAR. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"4. O’Brien F, Cruz M de la, Hopper G. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"5. Turing AM, Lamport L, Lovelace A. The art of computer programming. Published online 1979.",
+"6. Hamilton M, Backus J, Turing AM. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
 ]
 },
 {
@@ -7305,11 +7305,11 @@
 "5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
-"2. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
-"3. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
-"4. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
-"5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017."
+"1. Lamport L, Turing AM. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"2. Turing AM, Lamport L, Lovelace A. The art of computer programming. Published online 1979.",
+"3. Hamilton M, Backus J, Turing AM. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
+"4. O’Brien F, Cruz M de la, Hopper G. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"5. Smith JJr. The Education of a Computer. PhD thesis. University of Oxford; 2017."
 ]
 },
 {
@@ -7352,12 +7352,12 @@
 "6. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter"
 ],
 "bib_ours": [
-"1. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
-"2. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
-"3. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
-"4. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
-"6. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter"
+"1. Lamport L, Turing AM. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"2. Turing AM, Lamport L, Lovelace A. The art of computer programming. Published online 1979.",
+"3. Hamilton M, Backus J, Turing AM. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
+"4. Hoare CAR. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"5. Smith JJr. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"6. O’Brien F, Cruz M de la, Hopper G. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter"
 ]
 },
 {
@@ -7402,12 +7402,12 @@
 "6. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141."
 ],
 "bib_ours": [
-"1. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
-"2. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
-"3. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
-"4. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
-"5. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"6. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141."
+"1. O’Brien F, Cruz M de la, Hopper G. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"2. Smith JJr. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"3. Turing AM, Lamport L, Lovelace A. The art of computer programming. Published online 1979.",
+"4. Hamilton M, Backus J, Turing AM. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008.",
+"5. Hoare CAR. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"6. Lamport L, Turing AM. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141."
 ]
 },
 {
@@ -7450,12 +7450,12 @@
 "6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
-"2. Flann O’Brien, Maria de la Cruz, Grace Hopper. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
-"3. Alan M. Turing, Leslie Lamport, Ada Lovelace. The art of computer programming. Published online 1979.",
-"4. Leslie Lamport, Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
-"5. John Jr. Smith. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
-"6. Margaret Hamilton, John Backus, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
+"1. Hoare CAR. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"2. O’Brien F, Cruz M de la, Hopper G. An Axiomatic Basis for Computer Programming. Springer; 1956. https://example.org/filter",
+"3. Turing AM, Lamport L, Lovelace A. The art of computer programming. Published online 1979.",
+"4. Lamport L, Turing AM. Go to statement considered harmful. In: Proceedings of the Distribution Symposium. 1938:67-141.",
+"5. Smith JJr. The Education of a Computer. PhD thesis. University of Oxford; 2017.",
+"6. Hamilton M, Backus J, Turing AM. Can Programming Be Liberated from the von Neumann Style. 3rd ed. Springer; 2008."
 ]
 },
 {
@@ -7490,10 +7490,10 @@
 "4. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975.",
-"2. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
-"3. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
-"4. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
+"1. Cruz M de la, Hamilton M. Notes on the Analytical Engine. Lab Throughput; 1975.",
+"2. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"3. Hoare CAR. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"4. Smith JJr, Hoare CAR, Knuth DE. Go to Statement Considered Harmful. Lab Function; 1999."
 ]
 },
 {
@@ -7526,10 +7526,10 @@
 "4. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975."
 ],
 "bib_ours": [
-"1. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
-"2. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
-"3. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999.",
-"4. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975."
+"1. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"2. Hoare CAR. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"3. Smith JJr, Hoare CAR, Knuth DE. Go to Statement Considered Harmful. Lab Function; 1999.",
+"4. Cruz M de la, Hamilton M. Notes on the Analytical Engine. Lab Throughput; 1975."
 ]
 },
 {
@@ -7567,11 +7567,11 @@
 "5. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
-"2. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999.",
-"3. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
-"4. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
-"5. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975."
+"1. Hoare CAR. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Smith JJr, Hoare CAR, Knuth DE. Go to Statement Considered Harmful. Lab Function; 1999.",
+"3. Liskov B. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"4. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"5. Cruz M de la, Hamilton M. Notes on the Analytical Engine. Lab Throughput; 1975."
 ]
 },
 {
@@ -7609,11 +7609,11 @@
 "5. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
-"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
-"3. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
-"4. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975.",
-"5. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
+"1. Hoare CAR. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Liskov B. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"4. Cruz M de la, Hamilton M. Notes on the Analytical Engine. Lab Throughput; 1975.",
+"5. Smith JJr, Hoare CAR, Knuth DE. Go to Statement Considered Harmful. Lab Function; 1999."
 ]
 },
 {
@@ -7652,10 +7652,10 @@
 "4. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
-"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
-"3. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999.",
-"4. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968."
+"1. Hoare CAR. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Liskov B. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. Smith JJr, Hoare CAR, Knuth DE. Go to Statement Considered Harmful. Lab Function; 1999.",
+"4. Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968."
 ]
 },
 {
@@ -7688,10 +7688,10 @@
 "4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998."
 ],
 "bib_ours": [
-"1. John Backus. On computable numbers. Published online 1943.",
-"2. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
-"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
-"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998."
+"1. Backus J. On computable numbers. Published online 1943.",
+"2. Smith JJr. The Apollo Guidance Computer. Lab Layer; 2006.",
+"3. Hopper G, Backus J, Müller H. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. García L, Lamport L, Liskov B. The art of computer programming. Published online 1998."
 ]
 },
 {
@@ -7734,14 +7734,14 @@
 "8. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939."
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
-"2. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
-"3. John Backus. On computable numbers. Published online 1943.",
-"4. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
-"5. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
-"6. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
-"7. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
-"8. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939."
+"1. Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"2. García L, Lamport L, Liskov B. The art of computer programming. Published online 1998.",
+"3. Backus J. On computable numbers. Published online 1943.",
+"4. García L, Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"5. Smith JJr. The Apollo Guidance Computer. Lab Layer; 2006.",
+"6. O’Brien F, Rossum G van, Smith JJr. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"7. Hopper G, Müller H, Lovelace A. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"8. Hopper G, Backus J, Müller H. The Art of Computer Programming. Addison-Wesley; 1939."
 ]
 },
 {
@@ -7777,13 +7777,13 @@
 "7. John Backus. On computable numbers. Published online 1943."
 ],
 "bib_ours": [
-"1. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
-"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
-"3. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
-"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
-"5. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
-"6. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
-"7. John Backus. On computable numbers. Published online 1943."
+"1. Hopper G, Backus J, Müller H. The Art of Computer Programming. Addison-Wesley; 1939.",
+"2. García L, Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. Hopper G, Müller H, Lovelace A. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"4. García L, Lamport L, Liskov B. The art of computer programming. Published online 1998.",
+"5. Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"6. O’Brien F, Rossum G van, Smith JJr. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"7. Backus J. On computable numbers. Published online 1943."
 ]
 },
 {
@@ -7827,13 +7827,13 @@
 "7. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17"
 ],
 "bib_ours": [
-"1. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
-"2. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
-"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
-"4. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
-"5. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
-"6. John Backus. On computable numbers. Published online 1943.",
-"7. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17"
+"1. García L, Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"2. O’Brien F, Rossum G van, Smith JJr. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"3. Hopper G, Backus J, Müller H. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. Smith JJr. The Apollo Guidance Computer. Lab Layer; 2006.",
+"5. Hopper G, Müller H, Lovelace A. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"6. Backus J. On computable numbers. Published online 1943.",
+"7. Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17"
 ]
 },
 {
@@ -7875,13 +7875,13 @@
 "7. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987."
 ],
 "bib_ours": [
-"1. John Backus. On computable numbers. Published online 1943.",
-"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
-"3. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
-"4. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
-"5. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
-"6. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
-"7. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987."
+"1. Backus J. On computable numbers. Published online 1943.",
+"2. García L, Knuth DE. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. García L, Lamport L, Liskov B. The art of computer programming. Published online 1998.",
+"4. O’Brien F, Rossum G van, Smith JJr. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"5. Hopper G, Backus J, Müller H. The Art of Computer Programming. Addison-Wesley; 1939.",
+"6. Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"7. Hopper G, Müller H, Lovelace A. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987."
 ]
 },
 {
@@ -7926,10 +7926,10 @@
 "4. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954."
 ],
 "bib_ours": [
-"1. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
-"2. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
-"3. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
-"4. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954."
+"1. O’Brien F. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
+"2. Lovelace A, Hamilton M. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"3. O’Brien F. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
+"4. Rossum G van, Cruz M de la. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954."
 ]
 },
 {
@@ -7970,10 +7970,10 @@
 "4. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
 ],
 "bib_ours": [
-"1. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
-"2. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
-"3. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
-"4. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
+"1. Lovelace A, Hamilton M. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"2. O’Brien F. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
+"3. Rossum G van, Cruz M de la. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"4. O’Brien F. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
 ]
 },
 {
@@ -8018,10 +8018,10 @@
 "4. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015."
 ],
 "bib_ours": [
-"1. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
-"2. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
-"3. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
-"4. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015."
+"1. O’Brien F. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147.",
+"2. Rossum G van, Cruz M de la. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"3. O’Brien F. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
+"4. Lovelace A, Hamilton M. Go to Statement Considered Harmful. Second. MIT Press; 2015."
 ]
 },
 {
@@ -8055,9 +8055,9 @@
 "3. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
 ],
 "bib_ours": [
-"1. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
-"2. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
-"3. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
+"1. Lovelace A, Hamilton M. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"2. Rossum G van, Cruz M de la. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"3. O’Brien F. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84"
 ]
 },
 {
@@ -8096,10 +8096,10 @@
 "4. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147."
 ],
 "bib_ours": [
-"1. Flann O’Brien. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
-"2. Guido van Rossum, Maria de la Cruz. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
-"3. Ada Lovelace, Margaret Hamilton. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
-"4. Flann O’Brien. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147."
+"1. O’Brien F. The art of computer programming. Journal of the ACM. 1989;25(4):182-319. doi:10.9095/compiler.84",
+"2. Rossum G van, Cruz M de la. Can Programming Be Liberated from the von Neumann Style. Cambridge University Press; 1954.",
+"3. Lovelace A, Hamilton M. Go to Statement Considered Harmful. Second. MIT Press; 2015.",
+"4. O’Brien F. Can programming be liberated from the von neumann style. In: Proceedings of the Layer Symposium. 2011:72-147."
 ]
 },
 {
@@ -8141,13 +8141,13 @@
 "7. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
-"2. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
-"3. Barbara Liskov. Data abstraction and hierarchy. Published online 1946.",
-"4. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
-"5. John Jr. Smith. The education of a computer. Published online 1987.",
-"6. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
-"7. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
+"1. Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events. Published online 2007.",
+"2. Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"3. Liskov B. Data abstraction and hierarchy. Published online 1946.",
+"4. Smith JJr, Liskov B. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"5. Smith JJr. The education of a computer. Published online 1987.",
+"6. Müller H, Hoare CAR. The art of computer programming. Published online 2024.",
+"7. Smith JJr, Backus J. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
 ]
 },
 {
@@ -8180,12 +8180,12 @@
 "6. John Jr. Smith. The education of a computer. Published online 1987."
 ],
 "bib_ours": [
-"1. Barbara Liskov. Data abstraction and hierarchy. Published online 1946.",
-"2. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
-"3. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
-"4. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
-"5. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
-"6. John Jr. Smith. The education of a computer. Published online 1987."
+"1. Liskov B. Data abstraction and hierarchy. Published online 1946.",
+"2. Smith JJr, Liskov B. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"3. Müller H, Hoare CAR. The art of computer programming. Published online 2024.",
+"4. Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events. Published online 2007.",
+"5. Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"6. Smith JJr. The education of a computer. Published online 1987."
 ]
 },
 {
@@ -8223,11 +8223,11 @@
 "5. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007."
 ],
 "bib_ours": [
-"1. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
-"2. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
-"3. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
-"4. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
-"5. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007."
+"1. Müller H, Hoare CAR. The art of computer programming. Published online 2024.",
+"2. Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"3. Smith JJr, Liskov B. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"4. Smith JJr, Backus J. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
+"5. Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events. Published online 2007."
 ]
 },
 {
@@ -8269,13 +8269,13 @@
 "7. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse"
 ],
 "bib_ours": [
-"1. Barbara Liskov. Data abstraction and hierarchy. Published online 1946.",
-"2. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
-"3. John Jr. Smith. The education of a computer. Published online 1987.",
-"4. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
-"5. John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
-"6. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
-"7. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse"
+"1. Liskov B. Data abstraction and hierarchy. Published online 1946.",
+"2. Smith JJr, Backus J. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988.",
+"3. Smith JJr. The education of a computer. Published online 1987.",
+"4. Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events. Published online 2007.",
+"5. Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Solver Symposium. 1952:66-128. https://example.org/entropy",
+"6. Müller H, Hoare CAR. The art of computer programming. Published online 2024.",
+"7. Smith JJr, Liskov B. Notes on the analytical engine. Published online 2024. https://example.org/sparse"
 ]
 },
 {
@@ -8309,11 +8309,11 @@
 "5. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
 ],
 "bib_ours": [
-"1. John Jr. Smith, Barbara Liskov. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
-"2. Leslie Lamport, Grace Hopper, Donald E. Knuth. Time, clocks, and the ordering of events. Published online 2007.",
-"3. Hans Müller, C. A. R. Hoare. The art of computer programming. Published online 2024.",
-"4. John Jr. Smith. The education of a computer. Published online 1987.",
-"5. John Jr. Smith, John Backus. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
+"1. Smith JJr, Liskov B. Notes on the analytical engine. Published online 2024. https://example.org/sparse",
+"2. Lamport L, Hopper G, Knuth DE. Time, clocks, and the ordering of events. Published online 2007.",
+"3. Müller H, Hoare CAR. The art of computer programming. Published online 2024.",
+"4. Smith JJr. The education of a computer. Published online 1987.",
+"5. Smith JJr, Backus J. The Apollo Guidance Computer. PhD thesis. University of Zurich; 1988."
 ]
 },
 {
@@ -8358,12 +8358,12 @@
 "6. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
 ],
 "bib_ours": [
-"1. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
-"2. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
-"3. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190.",
-"4. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
-"5. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
-"6. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
+"1. O’Brien F. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"2. Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"3. Turing AM. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190.",
+"4. Lamport L, Dijkstra EW. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"5. García L, Knuth DE. On Computable Numbers. Lab Compiler; 1995.",
+"6. Lamport L, García L. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
 ]
 },
 {
@@ -8398,12 +8398,12 @@
 "6. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
-"2. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
-"3. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
-"4. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
-"5. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190.",
-"6. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
+"1. Lamport L, Dijkstra EW. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"2. García L, Knuth DE. On Computable Numbers. Lab Compiler; 1995.",
+"3. Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"4. O’Brien F. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"5. Turing AM. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190.",
+"6. Lamport L, García L. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999."
 ]
 },
 {
@@ -8437,11 +8437,11 @@
 "5. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344."
 ],
 "bib_ours": [
-"1. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
-"2. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
-"3. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
-"4. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
-"5. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344."
+"1. O’Brien F. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"2. García L, Knuth DE. On Computable Numbers. Lab Compiler; 1995.",
+"3. Lamport L, García L. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
+"4. Lamport L, Dijkstra EW. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"5. Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344."
 ]
 },
 {
@@ -8482,12 +8482,12 @@
 "6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
 ],
 "bib_ours": [
-"1. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
-"2. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
-"3. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
-"4. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
-"5. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
-"6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
+"1. Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"2. Lamport L, Dijkstra EW. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"3. Lamport L, García L. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
+"4. García L, Knuth DE. On Computable Numbers. Lab Compiler; 1995.",
+"5. O’Brien F. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"6. Turing AM. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
 ]
 },
 {
@@ -8520,12 +8520,12 @@
 "6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
 ],
 "bib_ours": [
-"1. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
-"2. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
-"3. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
-"4. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
-"5. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
-"6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
+"1. García L, Knuth DE. On Computable Numbers. Lab Compiler; 1995.",
+"2. Liskov B, Hamilton M, Lovelace A. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"3. Lamport L, Dijkstra EW. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"4. Lamport L, García L. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
+"5. O’Brien F. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"6. Turing AM. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
 ]
 },
 {
@@ -8574,14 +8574,14 @@
 "8. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
 ],
 "bib_ours": [
-"1. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
-"2. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955.",
-"3. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
-"4. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
-"5. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
-"6. Donald E. Knuth, Maria de la Cruz, John Jr. Smith. On computable numbers. Published online 2020.",
-"7. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
-"8. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
+"1. Rossum G van, Cruz M de la. Notes on the Analytical Engine. Lab Transform; 2012.",
+"2. O’Brien F, Hopper G. On computable numbers. Published online 1955.",
+"3. Dijkstra EW. The apollo guidance computer. Published online 1947.",
+"4. Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"5. Smith JJr. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
+"6. Knuth DE, Cruz M de la, Smith JJr. On computable numbers. Published online 2020.",
+"7. Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"8. Liskov B, Backus J, Turing AM. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
 ]
 },
 {
@@ -8626,14 +8626,14 @@
 "8. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955."
 ],
 "bib_ours": [
-"1. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
-"2. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
-"3. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
-"4. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
-"5. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
-"6. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
-"7. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
-"8. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955."
+"1. Dijkstra EW. The apollo guidance computer. Published online 1947.",
+"2. Cruz M de la, Turing AM. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"3. Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"4. Rossum G van, Cruz M de la. Notes on the Analytical Engine. Lab Transform; 2012.",
+"5. Smith JJr. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
+"6. Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"7. Liskov B, Backus J, Turing AM. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"8. O’Brien F, Hopper G. On computable numbers. Published online 1955."
 ]
 },
 {
@@ -8665,11 +8665,11 @@
 "5. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
-"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
-"3. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955.",
-"4. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
-"5. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
+"1. Cruz M de la, Turing AM. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"2. Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. O’Brien F, Hopper G. On computable numbers. Published online 1955.",
+"4. Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"5. Liskov B, Backus J, Turing AM. The Education of a Computer. MIT Press; 2004. https://example.org/matrix"
 ]
 },
 {
@@ -8707,13 +8707,13 @@
 "7. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938."
 ],
 "bib_ours": [
-"1. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
-"2. Flann O’Brien, Grace Hopper. On computable numbers. Published online 1955.",
-"3. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
-"4. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
-"5. Donald E. Knuth, Maria de la Cruz, John Jr. Smith. On computable numbers. Published online 2020.",
-"6. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
-"7. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938."
+"1. Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"2. O’Brien F, Hopper G. On computable numbers. Published online 1955.",
+"3. Rossum G van, Cruz M de la. Notes on the Analytical Engine. Lab Transform; 2012.",
+"4. Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"5. Knuth DE, Cruz M de la, Smith JJr. On computable numbers. Published online 2020.",
+"6. Smith JJr. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior",
+"7. Cruz M de la, Turing AM. Go to Statement Considered Harmful. 2nd ed. Springer; 1938."
 ]
 },
 {
@@ -8754,14 +8754,14 @@
 "8. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior"
 ],
 "bib_ours": [
-"1. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
-"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
-"3. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
-"4. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
-"5. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
-"6. Donald E. Knuth, Maria de la Cruz, John Jr. Smith. On computable numbers. Published online 2020.",
-"7. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
-"8. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior"
+"1. Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"2. Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. Dijkstra EW. The apollo guidance computer. Published online 1947.",
+"4. Liskov B, Backus J, Turing AM. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"5. Cruz M de la, Turing AM. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"6. Knuth DE, Cruz M de la, Smith JJr. On computable numbers. Published online 2020.",
+"7. Rossum G van, Cruz M de la. Notes on the Analytical Engine. Lab Transform; 2012.",
+"8. Smith JJr. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior"
 ]
 },
 {
@@ -8794,12 +8794,12 @@
 "6. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver"
 ],
 "bib_ours": [
-"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
-"2. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
-"3. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
-"4. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
-"5. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
-"6. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver"
+"1. Hopper G, Lamport L. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"3. Knuth DE, O’Brien F. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"4. García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming. Published online 2007.",
+"5. Hopper G, Dijkstra EW, Backus J. On Computable Numbers. Lab Algorithm; 1990.",
+"6. Liskov B, Knuth DE. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver"
 ]
 },
 {
@@ -8844,12 +8844,12 @@
 "6. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
 ],
 "bib_ours": [
-"1. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
-"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
-"3. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
-"4. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
-"5. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
-"6. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+"1. Liskov B, Knuth DE. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"2. Hopper G, Lamport L. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Hopper G, Backus J. Notes on the analytical engine. Published online 2008.",
+"4. Turing AM. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"5. García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming. Published online 2007.",
+"6. Hopper G, Dijkstra EW, Backus J. On Computable Numbers. Lab Algorithm; 1990."
 ]
 },
 {
@@ -8893,13 +8893,13 @@
 "7. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945."
 ],
 "bib_ours": [
-"1. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
-"2. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
-"3. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
-"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
-"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
-"6. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
-"7. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945."
+"1. Hopper G, Backus J. Notes on the analytical engine. Published online 2008.",
+"2. Turing AM. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"3. García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming. Published online 2007.",
+"4. Hopper G, Dijkstra EW, Backus J. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Hamilton M, Lovelace A, Turing AM. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"6. Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"7. Knuth DE, O’Brien F. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945."
 ]
 },
 {
@@ -8948,14 +8948,14 @@
 "8. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
-"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
-"3. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
-"4. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
-"5. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
-"6. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
-"7. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
-"8. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+"1. Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"2. Hopper G, Lamport L. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Liskov B, Knuth DE. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"4. Hopper G, Backus J. Notes on the analytical engine. Published online 2008.",
+"5. Knuth DE, O’Brien F. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"6. García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming. Published online 2007.",
+"7. Hamilton M, Lovelace A, Turing AM. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"8. Hopper G, Dijkstra EW, Backus J. On Computable Numbers. Lab Algorithm; 1990."
 ]
 },
 {
@@ -8987,11 +8987,11 @@
 "5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956."
 ],
 "bib_ours": [
-"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
-"2. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
-"3. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
-"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
-"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956."
+"1. Hopper G, Lamport L. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Liskov B, Knuth DE. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"3. Turing AM. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"4. Hopper G, Dijkstra EW, Backus J. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Hamilton M, Lovelace A, Turing AM. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956."
 ]
 },
 {
@@ -9033,11 +9033,11 @@
 "5. Ada Lovelace. Data abstraction and hierarchy. Published online 1970."
 ],
 "bib_ours": [
-"1. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
-"2. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
-"3. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
-"4. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
-"5. Ada Lovelace. Data abstraction and hierarchy. Published online 1970."
+"1. Backus J, Hopper G, Rossum G van. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
+"2. García L. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"3. Liskov B, O’Brien F, Hoare CAR. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"4. Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"5. Lovelace A. Data abstraction and hierarchy. Published online 1970."
 ]
 },
 {
@@ -9081,11 +9081,11 @@
 "5. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
 ],
 "bib_ours": [
-"1. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
-"2. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
-"3. Ada Lovelace. Data abstraction and hierarchy. Published online 1970.",
-"4. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
-"5. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
+"1. García L. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"2. Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"3. Lovelace A. Data abstraction and hierarchy. Published online 1970.",
+"4. Liskov B, O’Brien F, Hoare CAR. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"5. Backus J, Hopper G, Rossum G van. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
 ]
 },
 {
@@ -9121,11 +9121,11 @@
 "5. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
 ],
 "bib_ours": [
-"1. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
-"2. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
-"3. Ada Lovelace. Data abstraction and hierarchy. Published online 1970.",
-"4. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
-"5. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
+"1. Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"2. García L. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"3. Lovelace A. Data abstraction and hierarchy. Published online 1970.",
+"4. Liskov B, O’Brien F, Hoare CAR. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"5. Backus J, Hopper G, Rossum G van. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking"
 ]
 },
 {
@@ -9161,11 +9161,11 @@
 "5. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
-"2. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
-"3. Ada Lovelace. Data abstraction and hierarchy. Published online 1970.",
-"4. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
-"5. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962."
+"1. Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"2. Backus J, Hopper G, Rossum G van. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
+"3. Lovelace A. Data abstraction and hierarchy. Published online 1970.",
+"4. García L. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129.",
+"5. Liskov B, O’Brien F, Hoare CAR. The Apollo Guidance Computer. Lab Encoder; 1962."
 ]
 },
 {
@@ -9207,11 +9207,11 @@
 "5. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129."
 ],
 "bib_ours": [
-"1. Barbara Liskov, Flann O’Brien, C. A. R. Hoare. The Apollo Guidance Computer. Lab Encoder; 1962.",
-"2. John Backus, Grace Hopper, Guido van Rossum. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
-"3. Leslie Lamport, Maria de la Cruz, Grace Hopper. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
-"4. Ada Lovelace. Data abstraction and hierarchy. Published online 1970.",
-"5. Luis García. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129."
+"1. Liskov B, O’Brien F, Hoare CAR. The Apollo Guidance Computer. Lab Encoder; 1962.",
+"2. Backus J, Hopper G, Rossum G van. The art of computer programming. In: Proceedings of the Baseline Symposium. 2015:96-179. https://example.org/ranking",
+"3. Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. In: Proceedings of the Compiler Symposium. 1994:31-177.",
+"4. Lovelace A. Data abstraction and hierarchy. Published online 1970.",
+"5. García L. Can programming be liberated from the von neumann style. In: Proceedings of the Stream Symposium. 1945:40-129."
 ]
 },
 {
@@ -9246,12 +9246,12 @@
 "6. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
-"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
-"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
-"4. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
-"5. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
-"6. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+"1. Hoare CAR, Lovelace A, Turing AM. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Cruz M de la, O’Brien F, Hopper G. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Rossum G van, Backus J, Liskov B. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Cruz M de la. Time, clocks, and the ordering of events. Published online 1941.",
+"5. Turing AM, Rossum G van. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"6. Rossum G van, Hoare CAR. Go to statement considered harmful. Published online 1967. https://example.org/cache"
 ]
 },
 {
@@ -9292,12 +9292,12 @@
 "6. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968."
 ],
 "bib_ours": [
-"1. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
-"2. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
-"3. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
-"4. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache",
-"5. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark",
-"6. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968."
+"1. Rossum G van, Backus J, Liskov B. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"2. Cruz M de la. Time, clocks, and the ordering of events. Published online 1941.",
+"3. Cruz M de la, O’Brien F, Hopper G. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"4. Rossum G van, Hoare CAR. Go to statement considered harmful. Published online 1967. https://example.org/cache",
+"5. Backus J, Hopper G, Lamport L. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark",
+"6. Turing AM, Rossum G van. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968."
 ]
 },
 {
@@ -9337,11 +9337,11 @@
 "5. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
 ],
 "bib_ours": [
-"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
-"2. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
-"3. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
-"4. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
-"5. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+"1. Hoare CAR, Lovelace A, Turing AM. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Rossum G van, Backus J, Liskov B. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"3. Cruz M de la, O’Brien F, Hopper G. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"4. Turing AM, Rossum G van. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"5. Rossum G van, Hoare CAR. Go to statement considered harmful. Published online 1967. https://example.org/cache"
 ]
 },
 {
@@ -9373,11 +9373,11 @@
 "5. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
 ],
 "bib_ours": [
-"1. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
-"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
-"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
-"4. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache",
-"5. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
+"1. Cruz M de la. Time, clocks, and the ordering of events. Published online 1941.",
+"2. Cruz M de la, O’Brien F, Hopper G. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Rossum G van, Backus J, Liskov B. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Rossum G van, Hoare CAR. Go to statement considered harmful. Published online 1967. https://example.org/cache",
+"5. Backus J, Hopper G, Lamport L. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
 ]
 },
 {
@@ -9415,13 +9415,13 @@
 "7. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
 ],
 "bib_ours": [
-"1. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
-"2. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache",
-"3. Hans Müller. Notes on the Analytical Engine. Lab Bound; 2013. https://example.org/entropy",
-"4. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
-"5. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
-"6. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
-"7. John Backus, Grace Hopper, Leslie Lamport. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
+"1. Cruz M de la, O’Brien F, Hopper G. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"2. Rossum G van, Hoare CAR. Go to statement considered harmful. Published online 1967. https://example.org/cache",
+"3. Müller H. Notes on the Analytical Engine. Lab Bound; 2013. https://example.org/entropy",
+"4. Cruz M de la. Time, clocks, and the ordering of events. Published online 1941.",
+"5. Hoare CAR, Lovelace A, Turing AM. Notes on the Analytical Engine. Lab Feature; 2016.",
+"6. Rossum G van, Backus J, Liskov B. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"7. Backus J, Hopper G, Lamport L. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1966. https://example.org/benchmark"
 ]
 },
 {
@@ -9459,11 +9459,11 @@
 "5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197."
 ],
 "bib_ours": [
-"1. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
-"2. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
-"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
-"4. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
-"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197."
+"1. Müller H, Dijkstra EW. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"2. Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"3. Lovelace A. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. Lamport L. The education of a computer. Published online 1997. https://example.org/benchmark",
+"5. Dijkstra EW. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197."
 ]
 },
 {
@@ -9506,14 +9506,14 @@
 "8. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018."
 ],
 "bib_ours": [
-"1. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
-"2. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
-"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
-"4. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
-"5. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
-"6. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
-"7. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
-"8. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018."
+"1. Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"2. Lamport L. The education of a computer. Published online 1997. https://example.org/benchmark",
+"3. Cruz M de la, García L. The apollo guidance computer. Published online 1984.",
+"4. Müller H, Dijkstra EW. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"5. O’Brien F. Go to Statement Considered Harmful. MIT Press; 1966.",
+"6. Dijkstra EW. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"7. Lovelace A. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"8. Turing AM, Liskov B. On Computable Numbers. MIT Press; 2018."
 ]
 },
 {
@@ -9559,15 +9559,15 @@
 "9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
 ],
 "bib_ours": [
-"1. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
-"2. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
-"3. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
-"4. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
-"5. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
-"6. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
-"7. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
-"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
-"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+"1. Turing AM, Liskov B. On Computable Numbers. MIT Press; 2018.",
+"2. Dijkstra EW. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"3. Lovelace A. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"4. O’Brien F. Go to Statement Considered Harmful. MIT Press; 1966.",
+"5. Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"6. Cruz M de la, García L. The apollo guidance computer. Published online 1984.",
+"7. Lamport L. The education of a computer. Published online 1997. https://example.org/benchmark",
+"8. Liskov B. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Hopper G. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
 ]
 },
 {
@@ -9617,15 +9617,15 @@
 "9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
 ],
 "bib_ours": [
-"1. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
-"2. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
-"3. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
-"4. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
-"5. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
-"6. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
-"7. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
-"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
-"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+"1. Dijkstra EW. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"2. Müller H, Dijkstra EW. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"3. Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"4. Cruz M de la, García L. The apollo guidance computer. Published online 1984.",
+"5. Lovelace A. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"6. O’Brien F. Go to Statement Considered Harmful. MIT Press; 1966.",
+"7. Turing AM, Liskov B. On Computable Numbers. MIT Press; 2018.",
+"8. Liskov B. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Hopper G. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
 ]
 },
 {
@@ -9663,13 +9663,13 @@
 "7. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356."
 ],
 "bib_ours": [
-"1. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
-"2. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
-"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
-"4. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
-"5. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
-"6. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
-"7. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356."
+"1. Lamport L. The education of a computer. Published online 1997. https://example.org/benchmark",
+"2. O’Brien F. Go to Statement Considered Harmful. MIT Press; 1966.",
+"3. Cruz M de la, García L. The apollo guidance computer. Published online 1984.",
+"4. Turing AM, Liskov B. On Computable Numbers. MIT Press; 2018.",
+"5. Dijkstra EW. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"6. Lovelace A. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"7. Liskov B. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356."
 ]
 },
 {
@@ -9702,12 +9702,12 @@
 "6. John Jr. Smith, John Backus. The art of computer programming. Published online 1973."
 ],
 "bib_ours": [
-"1. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
-"2. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
-"3. Luis García. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
-"4. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965.",
-"5. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
-"6. John Jr. Smith, John Backus. The art of computer programming. Published online 1973."
+"1. Müller H, Liskov B. The Apollo Guidance Computer. Second. Springer; 2014.",
+"2. Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"3. García L. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
+"4. O’Brien F. An axiomatic basis for computer programming. Published online 1965.",
+"5. O’Brien F. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
+"6. Smith JJr, Backus J. The art of computer programming. Published online 1973."
 ]
 },
 {
@@ -9751,13 +9751,13 @@
 "7. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure"
 ],
 "bib_ours": [
-"1. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
-"2. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
-"3. Hans Müller, C. A. R. Hoare. The apollo guidance computer. Published online 1989.",
-"4. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965.",
-"5. Luis García. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
-"6. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
-"7. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure"
+"1. Müller H, Liskov B. The Apollo Guidance Computer. Second. Springer; 2014.",
+"2. Smith JJr, Backus J. The art of computer programming. Published online 1973.",
+"3. Müller H, Hoare CAR. The apollo guidance computer. Published online 1989.",
+"4. O’Brien F. An axiomatic basis for computer programming. Published online 1965.",
+"5. García L. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
+"6. Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"7. O’Brien F. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure"
 ]
 },
 {
@@ -9796,12 +9796,12 @@
 "6. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
 ],
 "bib_ours": [
-"1. Grace Hopper, Flann O’Brien. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
-"2. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
-"3. Hans Müller, C. A. R. Hoare. The apollo guidance computer. Published online 1989.",
-"4. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
-"5. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
-"6. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
+"1. Hopper G, O’Brien F. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
+"2. Smith JJr, Backus J. The art of computer programming. Published online 1973.",
+"3. Müller H, Hoare CAR. The apollo guidance computer. Published online 1989.",
+"4. Müller H, Liskov B. The Apollo Guidance Computer. Second. Springer; 2014.",
+"5. Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"6. O’Brien F. An axiomatic basis for computer programming. Published online 1965."
 ]
 },
 {
@@ -9848,14 +9848,14 @@
 "8. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
 ],
 "bib_ours": [
-"1. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
-"2. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
-"3. Hans Müller, C. A. R. Hoare. The apollo guidance computer. Published online 1989.",
-"4. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
-"5. Luis García. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
-"6. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
-"7. Grace Hopper, Flann O’Brien. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
-"8. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965."
+"1. Müller H, Liskov B. The Apollo Guidance Computer. Second. Springer; 2014.",
+"2. O’Brien F. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
+"3. Müller H, Hoare CAR. The apollo guidance computer. Published online 1989.",
+"4. Smith JJr, Backus J. The art of computer programming. Published online 1973.",
+"5. García L. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
+"6. Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"7. Hopper G, O’Brien F. The education of a computer. IEEE Transactions on Software Engineering. 1963;45(2):135-397. https://example.org/throughput",
+"8. O’Brien F. An axiomatic basis for computer programming. Published online 1965."
 ]
 },
 {
@@ -9884,10 +9884,10 @@
 "4. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014."
 ],
 "bib_ours": [
-"1. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965.",
-"2. John Jr. Smith, John Backus. The art of computer programming. Published online 1973.",
-"3. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
-"4. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014."
+"1. O’Brien F. An axiomatic basis for computer programming. Published online 1965.",
+"2. Smith JJr, Backus J. The art of computer programming. Published online 1973.",
+"3. Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"4. Müller H, Liskov B. The Apollo Guidance Computer. Second. Springer; 2014."
 ]
 },
 {
@@ -9924,12 +9924,12 @@
 "6. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache"
 ],
 "bib_ours": [
-"1. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
-"2. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
-"3. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
-"4. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
-"5. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
-"6. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache"
+"1. Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"2. Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"3. Hamilton M, Liskov B, Rossum G van. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"4. Liskov B, García L, Müller H. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"5. Turing AM. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"6. Cruz M de la. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache"
 ]
 },
 {
@@ -9976,16 +9976,16 @@
 "10. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188."
 ],
 "bib_ours": [
-"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
-"2. Margaret Hamilton, Barbara Liskov, Guido van Rossum. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
-"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
-"4. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
-"5. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
-"6. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970.",
-"7. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004.",
-"8. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
-"9. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
-"10. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188."
+"1. Liskov B. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Hamilton M, Liskov B, Rossum G van. An axiomatic basis for computer programming. Published online 1992. https://example.org/heuristic",
+"3. Turing AM. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"5. Liskov B, García L, Müller H. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"6. Dijkstra EW, Rossum G van, Lamport L. Time, Clocks, and the Ordering of Events. Springer; 1970.",
+"7. Dijkstra EW, García L. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004.",
+"8. Cruz M de la. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"9. O’Brien F, Backus J. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"10. Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188."
 ]
 },
 {
@@ -10020,12 +10020,12 @@
 "6. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77"
 ],
 "bib_ours": [
-"1. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
-"2. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
-"3. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970.",
-"4. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
-"5. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
-"6. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77"
+"1. Liskov B, García L, Müller H. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"2. Liskov B. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"3. Dijkstra EW, Rossum G van, Lamport L. Time, Clocks, and the Ordering of Events. Springer; 1970.",
+"4. Cruz M de la. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"5. Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"6. Turing AM. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77"
 ]
 },
 {
@@ -10070,14 +10070,14 @@
 "8. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004."
 ],
 "bib_ours": [
-"1. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
-"2. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
-"3. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
-"4. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
-"5. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
-"6. Barbara Liskov, Luis García, Hans Müller. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
-"7. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
-"8. Edsger W. Dijkstra, Luis García. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004."
+"1. Liskov B. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"2. Cruz M de la. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"3. Turing AM. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"4. O’Brien F, Backus J. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"5. Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"6. Liskov B, García L, Müller H. An Axiomatic Basis for Computer Programming. PhD thesis. University of Cambridge; 1992.",
+"7. Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"8. Dijkstra EW, García L. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 2004."
 ]
 },
 {
@@ -10123,13 +10123,13 @@
 "7. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970."
 ],
 "bib_ours": [
-"1. Maria de la Cruz. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
-"2. Ada Lovelace. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
-"3. Grace Hopper, Margaret Hamilton, John Jr. Smith. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
-"4. Flann O’Brien, John Backus. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
-"5. Alan M. Turing. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
-"6. Barbara Liskov. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
-"7. Edsger W. Dijkstra, Guido van Rossum, Leslie Lamport. Time, Clocks, and the Ordering of Events. Springer; 1970."
+"1. Cruz M de la. Go to statement considered harmful. In: Proceedings of the Network Symposium. 2007:81-115. https://example.org/cache",
+"2. Lovelace A. Can programming be liberated from the von neumann style. ACM Computing Surveys. 1940;33(8):183-370. doi:10.9422/heuristic.52",
+"3. Hopper G, Hamilton M, Smith JJr. The apollo guidance computer. In: Proceedings of the Vector Symposium. 1939:95-188.",
+"4. O’Brien F, Backus J. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley; 2024.",
+"5. Turing AM. The apollo guidance computer. Journal of the ACM. 1949;4(9):240-315. doi:10.8223/index.77",
+"6. Liskov B. On Computable Numbers. Lab Estimate; 1956. https://example.org/analysis",
+"7. Dijkstra EW, Rossum G van, Lamport L. Time, Clocks, and the Ordering of Events. Springer; 1970."
 ]
 },
 {
@@ -10171,11 +10171,11 @@
 "5. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004."
 ],
 "bib_ours": [
-"1. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
-"2. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
-"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
-"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
-"5. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004."
+"1. Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"2. Hopper G, O’Brien F, Cruz M de la. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
+"3. Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Hopper G, Hamilton M. On Computable Numbers. Lab Agent; 1988.",
+"5. Müller H, Dijkstra EW. On Computable Numbers. Lab Query; 2004."
 ]
 },
 {
@@ -10221,13 +10221,13 @@
 "7. Grace Hopper, Leslie Lamport, John Jr. Smith. On Computable Numbers. Springer; 2019."
 ],
 "bib_ours": [
-"1. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
-"2. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
-"3. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
-"4. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
-"5. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
-"6. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
-"7. Grace Hopper, Leslie Lamport, John Jr. Smith. On Computable Numbers. Springer; 2019."
+"1. Müller H. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"2. Hopper G, Hamilton M. On Computable Numbers. Lab Agent; 1988.",
+"3. Müller H, Dijkstra EW. On Computable Numbers. Lab Query; 2004.",
+"4. Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"5. Knuth DE, Smith JJr, Dijkstra EW. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"6. Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"7. Hopper G, Lamport L, Smith JJr. On Computable Numbers. Springer; 2019."
 ]
 },
 {
@@ -10266,12 +10266,12 @@
 "6. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197."
 ],
 "bib_ours": [
-"1. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
-"2. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
-"3. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
-"4. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
-"5. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
-"6. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197."
+"1. Müller H, Dijkstra EW. On Computable Numbers. Lab Query; 2004.",
+"2. Knuth DE, Smith JJr, Dijkstra EW. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"3. Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"4. Hopper G, Hamilton M. On Computable Numbers. Lab Agent; 1988.",
+"5. Müller H. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"6. Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197."
 ]
 },
 {
@@ -10310,12 +10310,12 @@
 "6. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988."
 ],
 "bib_ours": [
-"1. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
-"2. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
-"3. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
-"4. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
-"5. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
-"6. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988."
+"1. Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"2. Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"3. Müller H. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"4. Hopper G, O’Brien F, Cruz M de la. On Computable Numbers. PhD thesis. University of Oxford; 1941.",
+"5. Müller H, Dijkstra EW. On Computable Numbers. Lab Query; 2004.",
+"6. Hopper G, Hamilton M. On Computable Numbers. Lab Agent; 1988."
 ]
 },
 {
@@ -10359,13 +10359,13 @@
 "7. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941."
 ],
 "bib_ours": [
-"1. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
-"2. Grace Hopper, Leslie Lamport, John Jr. Smith. On Computable Numbers. Springer; 2019.",
-"3. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
-"4. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
-"5. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
-"6. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
-"7. Grace Hopper, Flann O’Brien, Maria de la Cruz. On Computable Numbers. PhD thesis. University of Oxford; 1941."
+"1. Hopper G, Hamilton M. On Computable Numbers. Lab Agent; 1988.",
+"2. Hopper G, Lamport L, Smith JJr. On Computable Numbers. Springer; 2019.",
+"3. Knuth DE, Smith JJr, Dijkstra EW. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"4. Müller H. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"5. Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"6. Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"7. Hopper G, O’Brien F, Cruz M de la. On Computable Numbers. PhD thesis. University of Oxford; 1941."
 ]
 },
 {
@@ -10401,11 +10401,11 @@
 "5. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017.",
-"2. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
-"3. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
-"4. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
-"5. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
+"1. Lamport L, Müller H, Dijkstra EW. The Education of a Computer. Addison-Wesley; 2017.",
+"2. Backus J, Knuth DE, Liskov B. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"3. Liskov B. The Art of Computer Programming. Lab Optimizer; 1944.",
+"4. Turing AM. Time, clocks, and the ordering of events. Published online 1968.",
+"5. Dijkstra EW. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
 ]
 },
 {
@@ -10441,13 +10441,13 @@
 "7. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
 ],
 "bib_ours": [
-"1. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
-"2. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
-"3. Guido van Rossum, John Backus. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
-"4. Maria de la Cruz. Notes on the Analytical Engine. MIT Press; 1951.",
-"5. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
-"6. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
-"7. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
+"1. Backus J, Knuth DE, Liskov B. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"2. Liskov B. The Art of Computer Programming. Lab Optimizer; 1944.",
+"3. Rossum G van, Backus J. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
+"4. Cruz M de la. Notes on the Analytical Engine. MIT Press; 1951.",
+"5. Turing AM. Time, clocks, and the ordering of events. Published online 1968.",
+"6. Dijkstra EW. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
+"7. Lamport L, Müller H, Dijkstra EW. The Education of a Computer. Addison-Wesley; 2017."
 ]
 },
 {
@@ -10483,11 +10483,11 @@
 "5. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968."
 ],
 "bib_ours": [
-"1. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
-"2. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
-"3. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017.",
-"4. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
-"5. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968."
+"1. Backus J, Knuth DE, Liskov B. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"2. Liskov B. The Art of Computer Programming. Lab Optimizer; 1944.",
+"3. Lamport L, Müller H, Dijkstra EW. The Education of a Computer. Addison-Wesley; 2017.",
+"4. Dijkstra EW. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
+"5. Turing AM. Time, clocks, and the ordering of events. Published online 1968."
 ]
 },
 {
@@ -10530,12 +10530,12 @@
 "6. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
 ],
 "bib_ours": [
-"1. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
-"2. Maria de la Cruz. Notes on the Analytical Engine. MIT Press; 1951.",
-"3. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
-"4. Guido van Rossum, John Backus. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
-"5. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
-"6. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017."
+"1. Backus J, Knuth DE, Liskov B. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"2. Cruz M de la. Notes on the Analytical Engine. MIT Press; 1951.",
+"3. Liskov B. The Art of Computer Programming. Lab Optimizer; 1944.",
+"4. Rossum G van, Backus J. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
+"5. Dijkstra EW. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369.",
+"6. Lamport L, Müller H, Dijkstra EW. The Education of a Computer. Addison-Wesley; 2017."
 ]
 },
 {
@@ -10568,12 +10568,12 @@
 "6. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
 ],
 "bib_ours": [
-"1. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
-"2. Maria de la Cruz. Notes on the Analytical Engine. MIT Press; 1951.",
-"3. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
-"4. Guido van Rossum, John Backus. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
-"5. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
-"6. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
+"1. Turing AM. Time, clocks, and the ordering of events. Published online 1968.",
+"2. Cruz M de la. Notes on the Analytical Engine. MIT Press; 1951.",
+"3. Liskov B. The Art of Computer Programming. Lab Optimizer; 1944.",
+"4. Rossum G van, Backus J. The Education of a Computer. PhD thesis. University of Cambridge; 1979.",
+"5. Backus J, Knuth DE, Liskov B. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"6. Dijkstra EW. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
 ]
 },
 {
@@ -10603,11 +10603,11 @@
 "5. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
-"2. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
-"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
-"4. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
-"5. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
+"1. Lamport L, Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"2. Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
+"3. Lamport L, Dijkstra EW, Hamilton M. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Lamport L, Müller H. The Apollo Guidance Computer. Lab Function; 1969.",
+"5. O’Brien F, Hoare CAR, Hopper G. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
 ]
 },
 {
@@ -10648,12 +10648,12 @@
 "6. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy"
 ],
 "bib_ours": [
-"1. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
-"2. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
-"3. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
-"4. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
-"5. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
-"6. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy"
+"1. Lamport L, Dijkstra EW, Hamilton M. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"2. Lamport L, Müller H. The Apollo Guidance Computer. Lab Function; 1969.",
+"3. Lamport L, Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"4. O’Brien F, Hoare CAR, Hopper G. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"5. Dijkstra EW, Liskov B. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"6. Müller H, García L, Cruz M de la. The art of computer programming. Published online 2019. https://example.org/policy"
 ]
 },
 {
@@ -10687,11 +10687,11 @@
 "5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
-"2. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
-"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
-"4. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
-"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184."
+"1. Lamport L, Müller H. The Apollo Guidance Computer. Lab Function; 1969.",
+"2. O’Brien F, Hoare CAR, Hopper G. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"3. Lamport L, Dijkstra EW, Hamilton M. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Lamport L, Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"5. Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184."
 ]
 },
 {
@@ -10733,13 +10733,13 @@
 "7. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
-"2. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy",
-"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
-"4. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
-"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
-"6. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
-"7. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
+"1. Lamport L, Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"2. Müller H, García L, Cruz M de la. The art of computer programming. Published online 2019. https://example.org/policy",
+"3. Lamport L, Dijkstra EW, Hamilton M. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Lamport L, Müller H. The Apollo Guidance Computer. Lab Function; 1969.",
+"5. Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
+"6. Dijkstra EW, Liskov B. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"7. O’Brien F, Hoare CAR, Hopper G. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
 ]
 },
 {
@@ -10782,12 +10782,12 @@
 "6. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012."
 ],
 "bib_ours": [
-"1. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
-"2. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
-"3. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
-"4. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy",
-"5. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
-"6. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012."
+"1. Lamport L, Dijkstra EW, Hamilton M. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"2. Rossum G van, Smith JJr, Backus J. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
+"3. O’Brien F, Hoare CAR, Hopper G. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"4. Müller H, García L, Cruz M de la. The art of computer programming. Published online 2019. https://example.org/policy",
+"5. Lamport L, Müller H. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"6. Dijkstra EW, Liskov B. The Art of Computer Programming. PhD thesis. University of Oxford; 2012."
 ]
 },
 {
@@ -10834,12 +10834,12 @@
 "6. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
 ],
 "bib_ours": [
-"1. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
-"2. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
-"3. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
-"4. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
-"5. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
-"6. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
+"1. Lamport L. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"2. Müller H. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"3. Lovelace A. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"4. Knuth DE. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"5. Knuth DE, Smith JJr. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"6. Hoare CAR, Hamilton M. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
 ]
 },
 {
@@ -10884,14 +10884,14 @@
 "8. C. A. R. Hoare, John Jr. Smith, Hans Müller. On computable numbers. IEEE Transactions on Software Engineering. 1994;59(1):57-370. doi:10.2998/function.87"
 ],
 "bib_ours": [
-"1. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
-"2. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
-"3. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
-"4. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
-"5. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
-"6. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
-"7. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
-"8. C. A. R. Hoare, John Jr. Smith, Hans Müller. On computable numbers. IEEE Transactions on Software Engineering. 1994;59(1):57-370. doi:10.2998/function.87"
+"1. Lamport L. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"2. Müller H. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"3. Hamilton M, Backus J, Rossum G van. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
+"4. Hoare CAR, Hamilton M. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
+"5. Knuth DE, Smith JJr. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"6. Lovelace A. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"7. Knuth DE. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"8. Hoare CAR, Smith JJr, Müller H. On computable numbers. IEEE Transactions on Software Engineering. 1994;59(1):57-370. doi:10.2998/function.87"
 ]
 },
 {
@@ -10937,13 +10937,13 @@
 "7. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991."
 ],
 "bib_ours": [
-"1. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
-"2. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
-"3. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
-"4. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
-"5. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
-"6. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
-"7. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991."
+"1. Knuth DE. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"2. Hoare CAR, Hamilton M. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
+"3. Lamport L. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"4. Hamilton M, Backus J, Rossum G van. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
+"5. Lovelace A. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"6. Müller H. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"7. Knuth DE, Smith JJr. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991."
 ]
 },
 {
@@ -10987,11 +10987,11 @@
 "5. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
 ],
 "bib_ours": [
-"1. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
-"2. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
-"3. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
-"4. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
-"5. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
+"1. Knuth DE, Smith JJr. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"2. Hamilton M, Backus J, Rossum G van. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170.",
+"3. Lamport L. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"4. Knuth DE. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"5. Hoare CAR, Hamilton M. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
 ]
 },
 {
@@ -11032,14 +11032,14 @@
 "8. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170."
 ],
 "bib_ours": [
-"1. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
-"2. C. A. R. Hoare, John Jr. Smith, Hans Müller. On computable numbers. IEEE Transactions on Software Engineering. 1994;59(1):57-370. doi:10.2998/function.87",
-"3. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
-"4. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
-"5. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
-"6. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
-"7. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
-"8. Margaret Hamilton, John Backus, Guido van Rossum. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170."
+"1. Lamport L. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"2. Hoare CAR, Smith JJr, Müller H. On computable numbers. IEEE Transactions on Software Engineering. 1994;59(1):57-370. doi:10.2998/function.87",
+"3. Hoare CAR, Hamilton M. The Art of Computer Programming. 2nd ed. MIT Press; 1975.",
+"4. Müller H. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"5. Knuth DE, Smith JJr. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"6. Knuth DE. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"7. Lovelace A. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"8. Hamilton M, Backus J, Rossum G van. On computable numbers. In: Proceedings of the Token Symposium. 1936:76-170."
 ]
 },
 {
@@ -11049,7 +11049,7 @@
 "citations": 1270,
 "citations_exact": 1270,
 "entries": 738,
-"entries_exact": 738,
+"entries_exact": 0,
 "failed": 0
 }
 },

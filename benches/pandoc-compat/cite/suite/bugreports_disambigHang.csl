@@ -1,0 +1,23 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="in-text"
+      demote-non-dropping-particle="never" default-locale="en-US"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation et-al-min="3" et-al-use-first="1"
+    disambiguate-add-givenname="true" disambiguate-add-year-suffix="true"
+    collapse="year" cite-group-delimiter=", ">
+    <layout delimiter="; " prefix="(" suffix=")">
+      <group delimiter=" ">
+        <names variable="author">
+          <name form="short" and="text" delimiter=", " initialize-with=". "/>
+        </names>
+        <date variable="issued" form="text" date-parts="year"/>
+      </group>
+    </layout>
+  </citation>
+</style>

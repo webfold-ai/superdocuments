@@ -1,0 +1,25 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0"
+      demote-non-dropping-particle="sort-only">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+    <layout>
+      <text value="Bogus"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <group>
+        <names variable="author" delimiter="; ">
+          <name name-as-sort-order="all" delimiter=", " initialize-with="."/>
+        </names>
+      </group>
+    </layout>
+  </bibliography>
+</style>

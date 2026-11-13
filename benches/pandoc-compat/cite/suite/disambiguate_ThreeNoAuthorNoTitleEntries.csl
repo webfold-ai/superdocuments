@@ -1,0 +1,41 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true">
+    <layout>
+      <group delimiter=", ">
+        <choose>
+          <if position="subsequent">
+            <names variable="author">
+              <name/>
+            </names>
+          </if>
+          <else-if position="first">
+            <names variable="author">
+              <name/>
+            </names>
+            <text variable="container-title"/>
+            <date variable="issued" form="text" date-parts="year"/>
+          </else-if>
+        </choose>
+      </group>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <group delimiter=", ">
+        <names variable="author">
+          <name/>
+        </names>
+        <text variable="container-title"/>
+        <date variable="issued" form="text" date-parts="year"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

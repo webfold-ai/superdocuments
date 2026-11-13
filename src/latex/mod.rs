@@ -308,6 +308,12 @@ pub enum Inline {
     /// `\texttt` and `\tt`.
     Mono(Vec<Inline>),
     SmallCaps(Vec<Inline>),
+    /// `\textsuperscript`.
+    Sup(Vec<Inline>),
+    /// `\textsubscript`.
+    Sub(Vec<Inline>),
+    /// `\sout` (ulem).
+    Strike(Vec<Inline>),
     /// `\verb` content.
     Code(String),
     /// Inline math (`$...$`, `\(...\)`, `math`), or display math inside a paragraph.
@@ -480,6 +486,9 @@ fn for_each_inline(blocks: &[Block], f: &mut dyn FnMut(&Inline)) {
                 | Inline::Strong(v)
                 | Inline::Mono(v)
                 | Inline::SmallCaps(v)
+                | Inline::Sup(v)
+                | Inline::Sub(v)
+                | Inline::Strike(v)
                 | Inline::Footnote(v) => walk_inlines(v, f),
                 Inline::Link { text, .. } => walk_inlines(text, f),
                 _ => {}

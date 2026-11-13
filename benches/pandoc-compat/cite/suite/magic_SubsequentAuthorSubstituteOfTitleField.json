@@ -1,0 +1,1 @@
+[{"author": [{"family": "Smith", "given": "Warren"}], "id": "item-1", "issued": {"date-parts": [["2000"]]}, "title": "Book X", "type": "book"}, {"author": [{"family": "Smith", "given": "Warren"}], "id": "item-2", "issued": {"date-parts": [["2001"]]}, "title": "Book X", "type": "book"}, {"id": "item-3", "issued": {"date-parts": [["2002"]]}, "title": "Book Y", "type": "book"}]

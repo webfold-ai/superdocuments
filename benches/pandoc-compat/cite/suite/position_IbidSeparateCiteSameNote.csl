@@ -1,0 +1,55 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="in-text"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+    <layout suffix="." delimiter="; ">
+      <choose>
+        <if position="ibid-with-locator">
+          <group delimiter=" ">
+            <text term="ibid" />
+            <group delimiter=" ">
+              <label variable="locator"/>
+              <text variable="locator"/>
+            </group>
+          </group>
+        </if>
+        <else-if position="ibid">
+          <text term="ibid" />
+        </else-if>
+        <else-if position="subsequent">
+          <group delimiter=" ">
+            <names variable="author">
+              <name form="short" />
+            </names>
+            <text value="supra"/>
+            <group delimiter=" ">
+              <text value="note"/>
+              <text variable="first-reference-note-number"/>
+            </group>
+            <group delimiter=" ">
+              <label variable="locator"/>
+              <text variable="locator"/>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=" ">
+            <names variable="author">
+              <name form="short" />
+            </names>
+            <text quotes="true" variable="title" />
+            <date prefix="(" suffix=")" variable="issued">
+              <date-part name="year" />
+            </date>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+</style>

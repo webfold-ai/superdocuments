@@ -1,0 +1,40 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+    <layout delimiter="; " suffix=".">
+      <choose>
+        <if position="first">
+          <names variable="author">
+            <name />
+          </names>
+          <text prefix=", " variable="title" />
+          <date variable="issued">
+            <date-part name="year" prefix=" (" suffix=")" />
+          </date>
+        </if>
+        <else-if position="subsequent">
+          <names variable="author">
+            <name form="short" />
+          </names>
+          <choose>
+            <if disambiguate="true">
+              <text prefix=", " variable="title" />
+            </if>
+          </choose>
+          <text prefix=", " suffix=" " value="supra note" />
+          <text variable="first-reference-note-number" />
+        </else-if>
+        <else>
+          <text value="FAILED TO MATCH"/>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+</style>

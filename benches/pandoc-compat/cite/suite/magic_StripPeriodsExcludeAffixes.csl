@@ -1,0 +1,26 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="container-title">
+    <text strip-periods="true" variable="container-title" form="short"/>
+  </macro>
+  <macro name="author">
+    <names variable="author" >
+      <name and="symbol" delimiter-precedes-last="never" />
+    </names>
+  </macro>
+  <citation>
+    <layout delimiter="." suffix=".">
+      <group delimiter=".">
+        <text macro="author"/>
+        <text macro="container-title"/>
+      </group>
+    </layout>
+  </citation>
+</style>

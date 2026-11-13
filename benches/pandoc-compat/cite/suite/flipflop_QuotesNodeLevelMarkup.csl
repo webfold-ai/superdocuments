@@ -1,0 +1,22 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="passphrase">
+    <group  prefix="Speak, " suffix=", and enter.">
+      <text  value="&#34;friend&#34;"/>
+      <text value=" of mine on this day, "/>
+      <date variable="issued" form="text"/>
+    </group>
+  </macro>
+  <citation>
+    <layout>
+      <text macro="passphrase" quotes="true"/>
+    </layout>
+  </citation>
+</style>

@@ -1,0 +1,31 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <citation>
+    <sort>
+      <key variable="author"/>
+    </sort>
+    <layout delimiter="; " prefix="(" suffix=")">
+      <choose>
+        <if position="ibid-with-locator">
+          <text term="ibid"/>
+        </if>
+        <else>
+          <names variable="author">
+            <name form="short"/>
+          </names>
+          <group prefix=" ">
+            <label variable="locator" form="short" suffix=" "/>
+            <text variable="locator"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+</style>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" page-range-format="minimal-two" default-locale="fr-FR">
+  <info>
+    <title>Date ranges with ordinal French option format</title>
+    <title-short>dates_ranges_ordinal_french</title-short>
+    <id>http://www.zotero.org/styles/dates_ranges_ordinal_french</id>
+    <link rel="self" href="http://www.zotero.org/styles/dates_ranges_ordinal_french"/>
+    <author>
+      <name/>
+    </author>
+    <category citation-format="note"/>
+    <category field="humanities"/>
+    <updated>2020-06-27T10:27:51+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="fr">
+    <style-options limit-day-ordinals-to-day-1="true"/>
+  </locale>
+  <citation>
+    <layout delimiter=" ; ">
+      <date delimiter=" " variable="event-date">
+        <date-part name="day" form="ordinal" range-delimiter="-"/>
+        <date-part name="month" form="long" range-delimiter="-"/>
+        <date-part name="year" range-delimiter="-"/>
+      </date>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <date delimiter=" " variable="event-date">
+        <date-part name="day" form="ordinal" range-delimiter="-"/>
+        <date-part name="month" form="long" range-delimiter="-"/>
+        <date-part name="year" range-delimiter="-"/>
+      </date>
+    </layout>
+  </bibliography>
+</style>

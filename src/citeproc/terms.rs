@@ -64,6 +64,8 @@ speech||presentation|
 thesis||thesis|
 thesis|short|thes.|
 webpage||webpage|
+ad||AD|
+bc||BC|
 open-quote||\u{201c}|
 close-quote||\u{201d}|
 open-inner-quote||\u{2018}|

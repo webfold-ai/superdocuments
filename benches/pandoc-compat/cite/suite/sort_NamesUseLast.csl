@@ -1,0 +1,43 @@
+<style 
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2009-08-10T04:49:00+09:00</updated>
+  </info>
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="first" sort-separator=" "/>
+      <substitute>
+        <names variable="editor" />
+      </substitute>
+    </names>
+  </macro>
+  <macro name="theyear">
+    <date variable="issued">
+      <date-part name="year" />
+    </date>
+  </macro>
+  <citation>
+    <layout>
+      <text value="Ignore me" />
+    </layout>
+  </citation>
+  <bibliography et-al-min="3" et-al-use-first="2" et-al-use-last="false">
+    <sort>
+      <key macro="author" names-min="3" names-use-first="1" names-use-last="true"/>
+      <key macro="theyear" />
+    </sort>
+    <layout>
+      <group delimiter=" ">
+        <names variable="author">
+          <name/>
+        </names>
+        <text variable="title" />
+        <date variable="issued" date-parts="year" form="text"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>

@@ -129,7 +129,10 @@ def inl(xs, out):
         elif t == "Code":
             out.append(c[1])
         elif t == "Note":
-            pass
+            # A note style: citeproc puts the citation text in a footnote.
+            for b in c:
+                if b["t"] in ("Para", "Plain"):
+                    inl(b["c"], out)
 
 
 def normalize(s):

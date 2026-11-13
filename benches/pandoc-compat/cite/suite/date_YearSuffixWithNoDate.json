@@ -1,0 +1,1 @@
+[{"accessed": {"date-parts": [["1965", "6", "1"]]}, "author": [{"family": "Doe", "given": "John"}], "id": "ITEM-1", "type": "book"}, {"accessed": {"date-parts": [["2065", "6", "1"]]}, "author": [{"family": "Doe", "given": "John"}], "id": "ITEM-2", "type": "book"}]

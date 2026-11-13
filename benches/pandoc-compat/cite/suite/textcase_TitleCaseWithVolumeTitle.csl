@@ -1,0 +1,24 @@
+<style
+      xmlns="http://purl.org/net/xbiblio/csl"
+      class="note"
+      version="1.0">
+  <info>
+    <id />
+    <title />
+    <updated>2025-03-12T12:22:26+00:00</updated>
+  </info>
+  <citation>
+    <layout delimiter="; ">
+      <text value="DUMMY"/>
+    </layout>
+  </citation>
+  <bibliography>
+    <layout>
+      <text text-case="title" variable="event-title"/>
+      <text text-case="title" variable="original-title"/>
+      <text text-case="title" variable="part-title"/>
+      <text text-case="title" variable="reviewed-title"/>
+      <text text-case="title" variable="volume-title"/>
+    </layout>
+  </bibliography>
+</style>

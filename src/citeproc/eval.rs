@@ -561,7 +561,8 @@ pub(crate) fn format_page_ranges(s: &str, format: &str) -> String {
         let dash = t.find(|c| c == '-' || c == '\u{2013}');
         match dash {
             Some(i) if i > 0 => {
-                let (a, b) = (t[..i].trim(), t[i + 1..].trim());
+                let width = t[i..].chars().next().map_or(1, char::len_utf8);
+                let (a, b) = (t[..i].trim(), t[i + width..].trim());
                 out.push_str(&format_range(a, b, format));
             }
             _ => out.push_str(t),
@@ -835,15 +836,25 @@ fn eval_choose(e: &XElem, ctx: &mut Ctx) -> R {
 
 const STOP_WORDS: &[&str] = &[
     "a", "an", "and", "as", "at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on", "onto", "or",
-    "over", "so", "the", "till", "to", "up", "via", "with", "yet", "von", "van", "de", "der", "den", "du", "des", "di", "da", "del", "della", "la", "le",
+    "over", "so", "the", "till", "to", "up", "via", "with", "yet", "von", "van", "de",
 ];
 
 fn capitalize_word(w: &str) -> String {
-    let mut c = w.chars();
-    match c.next() {
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
-        None => String::new(),
+    // The first letter, after any opening quote or bracket.
+    let mut out = String::new();
+    let mut done = false;
+    for c in w.chars() {
+        if !done && c.is_alphabetic() {
+            out.extend(c.to_uppercase());
+            done = true;
+        } else {
+            out.push(c);
+            if !done && c.is_alphanumeric() {
+                done = true;
+            }
+        }
     }
+    out
 }
 
 pub(crate) fn apply_case(toks: &mut Toks, case: &str) {
@@ -891,7 +902,7 @@ pub(crate) fn apply_case(toks: &mut Toks, case: &str) {
         };
         if !s.is_empty() {
             at_start = false;
-            after_colon = s.trim_end().ends_with(':');
+            after_colon = s.trim_end().ends_with([':', '.', '?', '!']);
         }
     }
 }
@@ -980,6 +991,8 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                     }
                     if p[0] < 0 {
                         y.push_str(ctx.style.term("bc", "long", false).unwrap_or_default().as_str());
+                    } else if p[0] < 1000 && t.attr("form") != Some("short") {
+                        y.push_str(ctx.style.term("ad", "long", false).unwrap_or_default().as_str());
                     }
                     let mut v = text(y);
                     if let Some(suf) = ctx.year_suffix.as_ref().filter(|_| e.attr("variable") == Some("issued") && !ctx.style.calls_year_suffix()) {
