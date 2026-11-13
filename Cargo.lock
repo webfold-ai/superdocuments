@@ -91,7 +91,7 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://github.com/webfold-ai/apeiron?rev=d0eda3226193542949306f767d7280404921546f#d0eda3226193542949306f767d7280404921546f"
+source = "git+https://github.com/webfold-ai/apeiron?rev=1c3d4a1da565cde409f6f3cb343086aa6853eb9c#1c3d4a1da565cde409f6f3cb343086aa6853eb9c"
 dependencies = [
  "libc",
 ]
@@ -1190,7 +1190,7 @@ checksum = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
 
 [[package]]
 name = "superdocuments"
-version = "0.9.0"
+version = "0.9.1"
 dependencies = [
  "apeiron",
  "calamine",
@@ -1433,7 +1433,7 @@ dependencies = [
 [[package]]
 name = "wirefold"
 version = "0.1.0"
-source = "git+https://github.com/webfold-ai/wirefold?rev=ba9a71284844cd1a7f14ae3b7105ad972aaa9e07#ba9a71284844cd1a7f14ae3b7105ad972aaa9e07"
+source = "git+https://github.com/webfold-ai/wirefold?rev=98df8bfb8051fb24ca43ce3ddc446641684ef8f9#98df8bfb8051fb24ca43ce3ddc446641684ef8f9"
 dependencies = [
  "apeiron",
 ]
