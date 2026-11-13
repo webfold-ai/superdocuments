@@ -14,13 +14,13 @@
 
 `superdocuments` reads DOCX, DOCM, PPTX, XLSX, XLSM, XLS, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML, LaTeX, BibTeX and arXiv e-prints, and turns them into Markdown or structured Rust types — in process, with no GPU, no model downloads and no Python. PDF text extraction is native (with an optional OCR fallback through `pdftoppm` and `tesseract`); legacy binary `.xls` is read through the in-repo `calamine/` fork. It is the conversion engine behind [`webfold`](https://github.com/webfold-ai/webfold), which re-exports it.
 
-> **Status: research build (0.9.0).** Not production-ready. Interfaces, formats and results may change without notice while the crate is hardened toward a production release. Known gaps are listed [below](#known-gaps).
+> **Status: research build (0.9.1).** Not production-ready. Interfaces, formats and results may change without notice while the crate is hardened toward a production release. Known gaps are listed [below](#known-gaps).
 
 ## Quick start
 
 ```toml
 [dependencies]
-superdocuments = { git = "https://github.com/webfold-ai/superdocuments", tag = "v0.9.0" }
+superdocuments = { git = "https://github.com/webfold-ai/superdocuments", tag = "v0.9.1" }
 ```
 
 ```rust
@@ -188,7 +188,7 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `serde`, `serde_json` | crates.io | `1` | Required | Geometry types and JSON output in `pdf` and `graph` |
 | `wirefold` | git, `webfold-ai/wirefold` | rev `98df8bfb8051fb24ca43ce3ddc446641684ef8f9` | Required (`syntax` feature) | Syntax codec (YAML surface) for Markdown front matter |
 | `apeiron` | git, `webfold-ai/apeiron` | rev `1c3d4a1da565cde409f6f3cb343086aa6853eb9c` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`); `apeiron::map::hashtrinity::Table` is the hash map used by the cache, HTML extractor and PDF parser |
-| `framefold` | git, `Ptyktos/framefold` | rev `9bbb4cf8d4d10f52d1acc3128f4eb2aefdfc09a6` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
+| `framefold` | git, `Ptyktos/framefold` | rev `34388793bb8f51be328eadc1da22d36c1e4e4006` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
 | `transcode` | git, `Ptyktos/transcode` | rev `8e65c5afeb8adb9663511760b80e19156970207e` | Features `media-codecs`, `images` | Codec re-export as `media_codecs`; embedded PDF image decode and PNG encode |
 | `calamine` (local) | `calamine/` in this repository | version 0.36.1 | Required | Path dependency with default features off, for the legacy `.xls` reader (`document::xls`); see below |
 

@@ -399,9 +399,9 @@ impl Writer {
                     let text = self.inlines(inlines).replace('\n', " ");
                     let text = text.trim();
                     let plain = crate::ast::inlines_text(inlines);
-                    if text.is_empty() {
-                        let _ = write!(out, "<{url}>");
-                    } else if plain.trim() == url && !url.contains(' ') && url.contains(':') {
+                    if text.is_empty()
+                        || (plain.trim() == url && !url.contains(' ') && url.contains(':'))
+                    {
                         let _ = write!(out, "<{url}>");
                     } else {
                         // `[^1^](..)` reads as a footnote reference; a space keeps it a link.
@@ -608,7 +608,7 @@ fn yaml_scalar(s: &str) -> String {
         && s.chars().all(|c| {
             c.is_alphanumeric() || matches!(c, ' ' | '.' | ',' | '-' | '\'' | '(' | ')' | '/')
         })
-        && !s.starts_with(|c: char| c == '-' || c == ' ' || c == '\'')
+        && !s.starts_with(['-', ' ', '\''])
         && !s.ends_with(' ')
         && !matches!(
             s.to_ascii_lowercase().as_str(),
