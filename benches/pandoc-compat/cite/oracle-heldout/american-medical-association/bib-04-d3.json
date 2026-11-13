@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"see 1",
+"2(pp53-135)",
+"3,4",
+"5(p5)",
+"2(pp43-106)",
+"5(pp4-111)",
+"5",
+"6(pp78-133)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"2. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"3. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"6. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
+]
+},
+"bib": {
+"citations": [
+"see 1",
+"2(pp53-135)",
+"3,4",
+"5(p5)",
+"2(pp43-106)",
+"5(pp4-111)",
+"5",
+"6(pp78-133)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"2. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"3. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"4. Maria de la Cruz. The Apollo Guidance Computer. Lab Window; 2014.",
+"5. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"6. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937."
+]
+}
+}

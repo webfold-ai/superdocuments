@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Lamport 1997:22)",
+"O’Brien (1966:40–131)",
+"(Cruz and García 1984)",
+"(Turing and Liskov 2018:75–138)",
+"(Turing and Liskov 2018:26)",
+"Dijkstra (1946:56–133)",
+"(Dijkstra 1946; Liskov 1992; Lovelace 1968)",
+"(see Liskov 1992, ch. 95)",
+"(see Turing and Liskov 2018)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. MIT Press.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(Lamport 1997:22)",
+"O’Brien (1966:40–131)",
+"(Cruz and García 1984)",
+"(Turing and Liskov 2018:75–138)",
+"(Turing and Liskov 2018:26)",
+"Dijkstra (1946:56–133)",
+"(Dijkstra 1946; Liskov 1992; Lovelace 1968)",
+"(see Liskov 1992, ch. 95)",
+"(see Turing and Liskov 2018)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. London: MIT Press.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. New York: MIT Press."
+]
+}
+}

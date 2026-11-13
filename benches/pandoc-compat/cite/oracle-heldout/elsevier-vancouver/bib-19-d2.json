@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"[see 1, ch. 62]",
+"[2]",
+"[see 3]",
+"[4]",
+"[5 and more]",
+"[6]",
+"[see 7]",
+"[5,8]",
+"[2,6,9]",
+"[5]",
+"[5]",
+"[5]"
+],
+"bibliography": [
+"[1] Turing AM, Liskov B. On computable numbers. MIT Press; 2018.",
+"[2] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[3] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[4] O’Brien F. Go to statement considered harmful. MIT Press; 1966.",
+"[5] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[6] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[7] Lamport L. The education of a computer 1997.",
+"[8] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356.",
+"[9] Hopper G. On computable numbers. ACM Computing Surveys 1986;39:151–379. https://doi.org/10.5661/experiment.46."
+]
+},
+"bib": {
+"citations": [
+"[see 1, ch. 62]",
+"[2]",
+"[see 3]",
+"[4]",
+"[5 and more]",
+"[6]",
+"[see 7]",
+"[5,8]",
+"[2,6,9]",
+"[5]",
+"[5]",
+"[5]"
+],
+"bibliography": [
+"[1] Turing AM, Liskov B. On computable numbers. New York: MIT Press; 2018.",
+"[2] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[3] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[4] O’Brien F. Go to statement considered harmful. London: MIT Press; 1966.",
+"[5] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[6] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[7] Lamport L. The education of a computer 1997.",
+"[8] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356.",
+"[9] Hopper G. On computable numbers. ACM Computing Surveys 1986;39:151–379. https://doi.org/10.5661/experiment.46."
+]
+}
+}

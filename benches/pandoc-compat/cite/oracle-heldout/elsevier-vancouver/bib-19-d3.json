@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"[1 and more]",
+"[2,3]",
+"[4]",
+"[see 5, ch. 26]",
+"[5,6]",
+"[3,4]",
+"[7]",
+"[3 and more]",
+"[8]",
+"[2]",
+"[3,4,8]",
+"[5,9]",
+"[8]",
+"[see 8]"
+],
+"bibliography": [
+"[1] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[2] Müller H, Dijkstra EW. Go to statement considered harmful. Proceedings of the approach symposium, 1972, p. 53–147.",
+"[3] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[4] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[5] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[6] O’Brien F. Go to statement considered harmful. MIT Press; 1966.",
+"[7] Turing AM, Liskov B. On computable numbers. MIT Press; 2018.",
+"[8] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356.",
+"[9] Hopper G. On computable numbers. ACM Computing Surveys 1986;39:151–379. https://doi.org/10.5661/experiment.46."
+]
+},
+"bib": {
+"citations": [
+"[1 and more]",
+"[2,3]",
+"[4]",
+"[see 5, ch. 26]",
+"[5,6]",
+"[3,4]",
+"[7]",
+"[3 and more]",
+"[8]",
+"[2]",
+"[3,4,8]",
+"[5,9]",
+"[8]",
+"[see 8]"
+],
+"bibliography": [
+"[1] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[2] Müller H, Dijkstra EW. Go to statement considered harmful. Proceedings of the approach symposium, 1972, p. 53–147.",
+"[3] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[4] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[5] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[6] O’Brien F. Go to statement considered harmful. London: MIT Press; 1966.",
+"[7] Turing AM, Liskov B. On computable numbers. New York: MIT Press; 2018.",
+"[8] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356.",
+"[9] Hopper G. On computable numbers. ACM Computing Surveys 1986;39:151–379. https://doi.org/10.5661/experiment.46."
+]
+}
+}

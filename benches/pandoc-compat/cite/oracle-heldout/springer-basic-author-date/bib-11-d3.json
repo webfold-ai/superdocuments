@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"García and Knuth (1936)",
+"O’Brien et al. (1975, pp. 55–114)",
+"(Hopper et al. 1939; O’Brien et al. 1975, p. 15)",
+"(see García and Knuth 1936, ch. 30)",
+"(Smith 2006)",
+"(O’Brien et al. 1975, sec. 59.134 and more)",
+"(Backus 1943, p. 81; Hopper et al. 1987)",
+"(see O’Brien et al. 1975, ch. 64)",
+"(1939, 1987)",
+"(García and Knuth 1936, sec. 96.137 and more)",
+"(2005)",
+"(Hopper et al. 1987, p. 17)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Knuth DE (1936) An axiomatic basis for computer programming. In: Proceedings of the transform symposium. pp 2–133",
+"Hoare CAR, Müller H (2005) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7:191–397. https://doi.org/10.4589/gradient.17",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Hopper G, Müller H, Lovelace A (1987) The apollo guidance computer, 3rd edn. Cambridge University Press, London",
+"O’Brien F, Rossum G van, Smith JJr (1975) Time, clocks, and the ordering of events. Addison-Wesley, New York",
+"Smith JJr (2006) The apollo guidance computer. Lab Layer"
+]
+},
+"bib": {
+"citations": [
+"García and Knuth (1936)",
+"O’Brien et al. (1975, pp. 55–114)",
+"(Hopper et al. 1939; O’Brien et al. 1975, p. 15)",
+"(see García and Knuth 1936, ch. 30)",
+"(Smith 2006)",
+"(O’Brien et al. 1975, sec. 59.134 and more)",
+"(Backus 1943, p. 81; Hopper et al. 1987)",
+"(see O’Brien et al. 1975, ch. 64)",
+"(1939, 1987)",
+"(García and Knuth 1936, sec. 96.137 and more)",
+"(2005)",
+"(Hopper et al. 1987, p. 17)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Knuth DE (1936) An axiomatic basis for computer programming. In: Proceedings of the transform symposium. pp 2–133",
+"Hoare CAR, Müller H (2005) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7:191–397. https://doi.org/10.4589/gradient.17",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Hopper G, Müller H, Lovelace A (1987) The apollo guidance computer, 3rd edn. Cambridge University Press, London",
+"O’Brien F, Rossum G van, Smith JJr (1975) Time, clocks, and the ordering of events. Addison-Wesley, New York",
+"Smith JJr (2006) The apollo guidance computer. Lab Layer"
+]
+}
+}

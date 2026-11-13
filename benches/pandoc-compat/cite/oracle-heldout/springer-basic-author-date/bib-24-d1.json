@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Lamport and Müller 1969; Lamport et al. 2002)",
+"(Lamport and Müller 1965, 1969; Lamport et al. 2002)",
+"O’Brien et al. (1953, p. 18)",
+"Lamport and Müller (1969, p. 42)",
+"Dijkstra and Liskov (2012, pp. 14–139)",
+"(Lamport et al. 2002)",
+"Lamport et al. (2002, p. 72)",
+"(O’Brien et al. 1953, fig. 27)",
+"(Lamport and Müller 1965, 1969; Lamport et al. 2002)",
+"(2002)",
+"(Lamport and Müller 1969; Dijkstra and Liskov 2012; Müller et al. 2019)"
+],
+"bibliography": [
+"Dijkstra EW, Liskov B (2012) The art of computer programming. PhD thesis, University of Oxford",
+"Lamport L, Dijkstra EW, Hamilton M (2002) The education of a computer. PhD thesis, University of Zurich",
+"Lamport L, Müller H (1969) The apollo guidance computer. Lab Function",
+"Lamport L, Müller H (1965) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Müller H, García L, Cruz M de la (2019) The art of computer programming",
+"O’Brien F, Hoare CAR, Hopper G (1953) On computable numbers. In: Proceedings of the optimizer symposium. pp 43–145"
+]
+},
+"bib": {
+"citations": [
+"(Lamport and Müller 1969; Lamport et al. 2002)",
+"(Lamport and Müller 1965, 1969; Lamport et al. 2002)",
+"O’Brien et al. (1953, p. 18)",
+"Lamport and Müller (1969, p. 42)",
+"Dijkstra and Liskov (2012, pp. 14–139)",
+"(Lamport et al. 2002)",
+"Lamport et al. (2002, p. 72)",
+"(O’Brien et al. 1953, fig. 27)",
+"(Lamport and Müller 1965, 1969; Lamport et al. 2002)",
+"(2002)",
+"(Lamport and Müller 1969; Dijkstra and Liskov 2012; Müller et al. 2019)"
+],
+"bibliography": [
+"Dijkstra EW, Liskov B (2012) The art of computer programming. PhD thesis, University of Oxford",
+"Lamport L, Dijkstra EW, Hamilton M (2002) The education of a computer. PhD thesis, University of Zurich",
+"Lamport L, Müller H (1969) The apollo guidance computer. Lab Function",
+"Lamport L, Müller H (1965) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Müller H, García L, Cruz M de la (2019) The art of computer programming",
+"O’Brien F, Hoare CAR, Hopper G (1953) On computable numbers. In: Proceedings of the optimizer symposium. pp 43–145"
+]
+}
+}

@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Rossum et al. 1941; 1953)",
+"(Hoare et al. 2010, vol. 74)",
+"Backus and Lamport (1956)",
+"(Hoare et al. 2010; Hopper 2016)",
+"Turing (1948, p. 48)",
+"(Backus and Lamport 1956, fig. 11)",
+"(Hoare and Rossum 1953; Hoare et al. 2010; Hopper 2016)",
+"(Rossum et al. 1941, p. 70)",
+"(Hoare and Rossum 1953)",
+"Turing (1948, pp. 45–113)",
+"(Rossum 1937; 1948)",
+"(see Hoare and Rossum 1953, ch. 35)"
+],
+"bibliography": [
+"Backus J, Lamport L (1956) An axiomatic basis for computer programming",
+"Hoare CAR, Lovelace A, Smith JJr (2010) On computable numbers, 3rd edn. Addison-Wesley, New York",
+"Hoare CAR, Rossum G van (1953) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Hopper G (2016) The art of computer programming. IEEE Transactions on Software Engineering 4:238–320. https://doi.org/10.8087/bound.55",
+"Rossum G van (1937) Can programming be liberated from the von neumann style. Journal of the ACM 27:248–397",
+"Rossum G van, Turing AM, Hopper G (1941) Go to statement considered harmful. PhD thesis, University of Oxford",
+"Turing AM (1948) Data abstraction and hierarchy. PhD thesis, University of Cambridge"
+]
+},
+"bib": {
+"citations": [
+"(Rossum et al. 1941; 1953)",
+"(Hoare et al. 2010, vol. 74)",
+"Backus and Lamport (1956)",
+"(Hoare et al. 2010; Hopper 2016)",
+"Turing (1948, p. 48)",
+"(Backus and Lamport 1956, fig. 11)",
+"(Hoare and Rossum 1953; Hoare et al. 2010; Hopper 2016)",
+"(Rossum et al. 1941, p. 70)",
+"(Hoare and Rossum 1953)",
+"Turing (1948, pp. 45–113)",
+"(Rossum 1937; 1948)",
+"(see Hoare and Rossum 1953, ch. 35)"
+],
+"bibliography": [
+"Backus J, Lamport L (1956) An axiomatic basis for computer programming",
+"Hoare CAR, Lovelace A, Smith JJr (2010) On computable numbers, 3rd edn. Addison-Wesley, New York",
+"Hoare CAR, Rossum G van (1953) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Hopper G (2016) The art of computer programming. IEEE Transactions on Software Engineering 4:238–320. https://doi.org/10.8087/bound.55",
+"Rossum G van (1937) Can programming be liberated from the von neumann style. Journal of the ACM 27:248–397",
+"Rossum G van, Turing AM, Hopper G (1941) Go to statement considered harmful. PhD thesis, University of Oxford",
+"Turing AM (1948) Data abstraction and hierarchy. PhD thesis, University of Cambridge"
+]
+}
+}

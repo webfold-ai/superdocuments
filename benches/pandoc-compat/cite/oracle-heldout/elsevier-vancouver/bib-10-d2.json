@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[1,2]",
+"[see 2]",
+"[3,4]",
+"[e.g. 3,5]",
+"[5 and more]",
+"[1,3]",
+"[3]",
+"[4,5]"
+],
+"bibliography": [
+"[1] Hoare CAR. On computable numbers. PhD thesis. University of Oxford, 2011.",
+"[2] Smith JJr, Hoare CAR, Knuth DE. Go to statement considered harmful. Lab Function; 1999.",
+"[3] Liskov B. Can programming be liberated from the von neumann style. London: Springer; 1946.",
+"[4] Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1968.",
+"[5] Cruz M de la, Hamilton M. Notes on the analytical engine. Lab Throughput; 1975."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[1,2]",
+"[see 2]",
+"[3,4]",
+"[e.g. 3,5]",
+"[5 and more]",
+"[1,3]",
+"[3]",
+"[4,5]"
+],
+"bibliography": [
+"[1] Hoare CAR. On computable numbers. PhD thesis. University of Oxford, 2011.",
+"[2] Smith JJr, Hoare CAR, Knuth DE. Go to statement considered harmful. Lab Function; 1999.",
+"[3] Liskov B. Can programming be liberated from the von neumann style. London: Springer; 1946.",
+"[4] Müller H. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1968.",
+"[5] Cruz M de la, Hamilton M. Notes on the analytical engine. Lab Throughput; 1975."
+]
+}
+}

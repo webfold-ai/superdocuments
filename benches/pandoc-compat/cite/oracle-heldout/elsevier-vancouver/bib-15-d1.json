@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[3]",
+"[1,4]",
+"[3,5]",
+"[1]",
+"[1]",
+"[2,6]",
+"[3]",
+"[2]",
+"[7 and more]",
+"[1,e.g. 8]",
+"[5]"
+],
+"bibliography": [
+"[1] Dijkstra EW. The apollo guidance computer 1947.",
+"[2] Cruz M de la, Turing AM. Go to statement considered harmful. 2nd ed. Springer; 1938.",
+"[3] Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. Proceedings of the stream symposium, 2018, p. 1–192.",
+"[4] Rossum G van, Cruz M de la. Notes on the analytical engine. Lab Transform; 2012.",
+"[5] Smith JJr. Notes on the analytical engine. PhD thesis. University of Cambridge, 1972.",
+"[6] Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering 2020;2:86–362. https://doi.org/10.7751/compiler.14.",
+"[7] Liskov B, Backus J, Turing AM. The education of a computer. MIT Press; 2004.",
+"[8] O’Brien F, Hopper G. On computable numbers 1955."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[3]",
+"[1,4]",
+"[3,5]",
+"[1]",
+"[1]",
+"[2,6]",
+"[3]",
+"[2]",
+"[7 and more]",
+"[1,e.g. 8]",
+"[5]"
+],
+"bibliography": [
+"[1] Dijkstra EW. The apollo guidance computer 1947.",
+"[2] Cruz M de la, Turing AM. Go to statement considered harmful. 2nd ed. New York: Springer; 1938.",
+"[3] Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. Proceedings of the stream symposium, 2018, p. 1–192.",
+"[4] Rossum G van, Cruz M de la. Notes on the analytical engine. Lab Transform; 2012.",
+"[5] Smith JJr. Notes on the analytical engine. PhD thesis. University of Cambridge, 1972.",
+"[6] Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering 2020;2:86–362. https://doi.org/10.7751/compiler.14.",
+"[7] Liskov B, Backus J, Turing AM. The education of a computer. New York: MIT Press; 2004.",
+"[8] O’Brien F, Hopper G. On computable numbers 1955."
+]
+}
+}

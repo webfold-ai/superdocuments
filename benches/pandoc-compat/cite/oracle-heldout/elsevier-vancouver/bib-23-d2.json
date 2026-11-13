@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[e.g. 3,4]",
+"[1]",
+"[4 and more]",
+"[5]",
+"[1,4]",
+"[4 and more]",
+"[1,e.g. 4]",
+"[5]"
+],
+"bibliography": [
+"[1] Backus J, Knuth DE, Liskov B. Notes on the analytical engine. Lab Estimate; 1958.",
+"[2] Liskov B. The art of computer programming. Lab Optimizer; 1944.",
+"[3] Lamport L, Müller H, Dijkstra EW. The education of a computer. Addison-Wesley; 2017.",
+"[4] Dijkstra EW. The apollo guidance computer. Journal of the ACM 1993;33:39–369.",
+"[5] Turing AM. Time, clocks, and the ordering of events 1968."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[e.g. 3,4]",
+"[1]",
+"[4 and more]",
+"[5]",
+"[1,4]",
+"[4 and more]",
+"[1,e.g. 4]",
+"[5]"
+],
+"bibliography": [
+"[1] Backus J, Knuth DE, Liskov B. Notes on the analytical engine. Lab Estimate; 1958.",
+"[2] Liskov B. The art of computer programming. Lab Optimizer; 1944.",
+"[3] Lamport L, Müller H, Dijkstra EW. The education of a computer. New York: Addison-Wesley; 2017.",
+"[4] Dijkstra EW. The apollo guidance computer. Journal of the ACM 1993;33:39–369.",
+"[5] Turing AM. Time, clocks, and the ordering of events 1968."
+]
+}
+}

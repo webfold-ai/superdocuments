@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(pp88-121)",
+"2",
+"see 2, ch. 65",
+"3–5",
+"1(pp53-120)",
+"1,6",
+"1",
+"5(p25)",
+"4,6(p52)"
+],
+"bibliography": [
+"1. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"3. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"4. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"5. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
+"6. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010."
+]
+},
+"bib": {
+"citations": [
+"1(pp88-121)",
+"2",
+"see 2, ch. 65",
+"3–5",
+"1(pp53-120)",
+"1,6",
+"1",
+"5(p25)",
+"4,6(p52)"
+],
+"bibliography": [
+"1. Barbara Liskov, John Jr. Smith, Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1963. https://example.org/density",
+"2. Guido van Rossum, Alan M. Turing. Notes on the analytical engine. Published online 1990.",
+"3. Ada Lovelace, John Jr. Smith, John Backus. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1969.",
+"4. Edsger W. Dijkstra. The art of computer programming. Published online 1973.",
+"5. John Jr. Smith, Maria de la Cruz, Ada Lovelace. Go to Statement Considered Harmful. Lab Model; 1937.",
+"6. Hans Müller, Flann O’Brien. On Computable Numbers. PhD thesis. University of Cambridge; 2010."
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(see Liskov et al. 1992, ch. 81)",
+"Liskov (1956)",
+"(1992)",
+"(see Dijkstra et al. 1970, ch. 89)",
+"(Cruz 2007)",
+"Lovelace (1940)",
+"(Turing 1949)",
+"(1992; Cruz 2007)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, Rossum G van, Lamport L (1970) Time, clocks, and the ordering of events. Springer",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Liskov B, García L, Müller H (1992) An axiomatic basis for computer programming. PhD thesis, University of Cambridge",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+},
+"bib": {
+"citations": [
+"(see Liskov et al. 1992, ch. 81)",
+"Liskov (1956)",
+"(1992)",
+"(see Dijkstra et al. 1970, ch. 89)",
+"(Cruz 2007)",
+"Lovelace (1940)",
+"(Turing 1949)",
+"(1992; Cruz 2007)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, Rossum G van, Lamport L (1970) Time, clocks, and the ordering of events. Springer, London",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Liskov B, García L, Müller H (1992) An axiomatic basis for computer programming. PhD thesis, University of Cambridge",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"1(p29)",
+"2(sec82.129) and more",
+"3",
+"4(vol44)",
+"5",
+"3,4(p29)",
+"3(p67)",
+"3(vol13)",
+"3"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017.",
+"2. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"3. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
+"4. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
+"5. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
+]
+},
+"bib": {
+"citations": [
+"1(p29)",
+"2(sec82.129) and more",
+"3",
+"4(vol44)",
+"5",
+"3,4(p29)",
+"3(p67)",
+"3(vol13)",
+"3"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller, Edsger W. Dijkstra. The Education of a Computer. Addison-Wesley; 2017.",
+"2. John Backus, Donald E. Knuth, Barbara Liskov. Notes on the Analytical Engine. Lab Estimate; 1958. https://example.org/convergence",
+"3. Barbara Liskov. The Art of Computer Programming. Lab Optimizer; 1944.",
+"4. Alan M. Turing. Time, clocks, and the ordering of events. Published online 1968.",
+"5. Edsger W. Dijkstra. The apollo guidance computer. Journal of the ACM. 1993;33(2):39-369."
+]
+}
+}

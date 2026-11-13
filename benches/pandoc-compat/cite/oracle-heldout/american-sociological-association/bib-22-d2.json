@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Müller and Dijkstra 2004:15–110)",
+"Knuth, Smith, and Dijkstra (1962:44)",
+"(Smith and García 1993:4)",
+"(Hopper and Hamilton 1988; Smith and García 1993)",
+"(Müller 1947:93)",
+"(Knuth et al. 1962:49.103 and more)",
+"(Hopper and Hamilton 1988:73–115)",
+"(Knuth et al. 1962; Liskov, Hoare, and Müller 1988; Müller 1947)",
+"(Hopper and Hamilton 1988:84–125)",
+"(1962; Liskov et al. 1988)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Pp. 26–101 in Proceedings of the latency symposium.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(Müller and Dijkstra 2004:15–110)",
+"Knuth, Smith, and Dijkstra (1962:44)",
+"(Smith and García 1993:4)",
+"(Hopper and Hamilton 1988; Smith and García 1993)",
+"(Müller 1947:93)",
+"(Knuth et al. 1962:49.103 and more)",
+"(Hopper and Hamilton 1988:73–115)",
+"(Knuth et al. 1962; Liskov, Hoare, and Müller 1988; Müller 1947)",
+"(Hopper and Hamilton 1988:84–125)",
+"(1962; Liskov et al. 1988)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Knuth, Donald E., John Jr. Smith, and Edsger W. Dijkstra. 1962. “An Axiomatic Basis for Computer Programming.” Pp. 26–101 in Proceedings of the latency symposium.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans. 1947. Data Abstraction and Hierarchy. London: MIT Press.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1(p78)",
+"2(p59)",
+"3(p20)",
+"3(p92)",
+"4(p73)",
+"1(pp23-136)",
+"5",
+"1(p67)",
+"6",
+"7(p10)",
+"7(p99)"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"2. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy",
+"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
+"6. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"7. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
+]
+},
+"bib": {
+"citations": [
+"1(p78)",
+"2(p59)",
+"3(p20)",
+"3(p92)",
+"4(p73)",
+"1(pp23-136)",
+"5",
+"1(p67)",
+"6",
+"7(p10)",
+"7(p99)"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"2. Hans Müller, Luis García, Maria de la Cruz. The art of computer programming. Published online 2019. https://example.org/policy",
+"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184.",
+"6. Edsger W. Dijkstra, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Oxford; 2012.",
+"7. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145."
+]
+}
+}

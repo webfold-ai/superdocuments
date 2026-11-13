@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"2(p8)",
+"3,4(p32)",
+"5(vol47)",
+"4(vol56)",
+"1(pp44-117)"
+],
+"bibliography": [
+"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"2(p8)",
+"3,4(p32)",
+"5(vol47)",
+"4(vol56)",
+"1(pp44-117)"
+],
+"bibliography": [
+"1. Luis García, Guido van Rossum. On Computable Numbers. 2nd ed. Addison-Wesley; 2010.",
+"2. Barbara Liskov, John Jr. Smith. Can programming be liberated from the von neumann style. Journal of the ACM. 1936;11(7):127-305. doi:10.8852/decoder.67",
+"3. John Jr. Smith, Grace Hopper. The education of a computer. In: Proceedings of the Convergence Symposium. 2022:61-101.",
+"4. Alan M. Turing. The Art of Computer Programming. Springer; 1994. https://example.org/workload",
+"5. Ada Lovelace, C. A. R. Hoare. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society. 1970;42(8):59-345. doi:10.4721/scheduler.33"
+]
+}
+}

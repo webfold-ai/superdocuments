@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[1,e.g. 3]",
+"[4]",
+"[4]",
+"[5]",
+"[2]",
+"[2]",
+"[2]",
+"[5]"
+],
+"bibliography": [
+"[1] Turing AM. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1948.",
+"[2] Hoare CAR, Rossum G van. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1953.",
+"[3] Backus J, Lamport L. An axiomatic basis for computer programming 1956.",
+"[4] Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM 1937;27:248–397.",
+"[5] Hopper G. The art of computer programming. IEEE Transactions on Software Engineering 2016;4:238–320. https://doi.org/10.8087/bound.55."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[1,e.g. 3]",
+"[4]",
+"[4]",
+"[5]",
+"[2]",
+"[2]",
+"[2]",
+"[5]"
+],
+"bibliography": [
+"[1] Turing AM. Data abstraction and hierarchy. PhD thesis. University of Cambridge, 1948.",
+"[2] Hoare CAR, Rossum G van. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1953.",
+"[3] Backus J, Lamport L. An axiomatic basis for computer programming 1956.",
+"[4] Rossum G van. Can programming be liberated from the von neumann style. Journal of the ACM 1937;27:248–397.",
+"[5] Hopper G. The art of computer programming. IEEE Transactions on Software Engineering 2016;4:238–320. https://doi.org/10.8087/bound.55."
+]
+}
+}

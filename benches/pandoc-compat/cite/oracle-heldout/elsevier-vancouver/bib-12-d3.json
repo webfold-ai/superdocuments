@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1–3]",
+"[e.g. 1,2]",
+"[3]",
+"[3]",
+"[1]",
+"[see 2, ch. 15]",
+"[3 and more]",
+"[3]",
+"[1]"
+],
+"bibliography": [
+"[1] Lovelace A, Hamilton M. Go to statement considered harmful. Second. New York: MIT Press; 2015.",
+"[2] Rossum G van, Cruz M de la. Can programming be liberated from the von neumann style. New York: Cambridge University Press; 1954.",
+"[3] O’Brien F. The art of computer programming. Journal of the ACM 1989;25:182–319. https://doi.org/10.9095/compiler.84."
+]
+},
+"bib": {
+"citations": [
+"[1–3]",
+"[e.g. 1,2]",
+"[3]",
+"[3]",
+"[1]",
+"[see 2, ch. 15]",
+"[3 and more]",
+"[3]",
+"[1]"
+],
+"bibliography": [
+"[1] Lovelace A, Hamilton M. Go to statement considered harmful. Second. New York: MIT Press; 2015.",
+"[2] Rossum G van, Cruz M de la. Can programming be liberated from the von neumann style. New York: Cambridge University Press; 1954.",
+"[3] O’Brien F. The art of computer programming. Journal of the ACM 1989;25:182–319. https://doi.org/10.9095/compiler.84."
+]
+}
+}

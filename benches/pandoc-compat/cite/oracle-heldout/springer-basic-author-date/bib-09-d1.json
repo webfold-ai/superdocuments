@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(e.g. Lamport and Turing 1938; Turing et al. 1979)",
+"(Lamport and Turing 1938, pp. 97–116)",
+"(see Hamilton et al. 2008)",
+"(O’Brien et al. 1956, p. 50)",
+"Smith (2017, pp. 69–124)",
+"(Turing et al. 1979, vol. 34)",
+"Turing et al. (1979, pp. 89–109)",
+"(see Smith 2017)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Lamport and Turing 1938; Turing et al. 1979)",
+"(Lamport and Turing 1938, pp. 97–116)",
+"(see Hamilton et al. 2008)",
+"(O’Brien et al. 1956, p. 50)",
+"Smith (2017, pp. 69–124)",
+"(Turing et al. 1979, vol. 34)",
+"Turing et al. (1979, pp. 89–109)",
+"(see Smith 2017)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+}
+}

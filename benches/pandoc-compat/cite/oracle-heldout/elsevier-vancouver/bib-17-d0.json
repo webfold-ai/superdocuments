@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[1,2]",
+"[3]",
+"[4]",
+"[3,5]",
+"[1]",
+"[5 and more]",
+"[2,3,5]",
+"[3]",
+"[2]"
+],
+"bibliography": [
+"[1] Backus J, Hopper G, Rossum G van. The art of computer programming. Proceedings of the baseline symposium, 2015, p. 96–179.",
+"[2] García L. Can programming be liberated from the von neumann style. Proceedings of the stream symposium, 1945, p. 40–129.",
+"[3] Liskov B, O’Brien F, Hoare CAR. The apollo guidance computer. Lab Encoder; 1962.",
+"[4] Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. Proceedings of the compiler symposium, 1994, p. 31–177.",
+"[5] Lovelace A. Data abstraction and hierarchy 1970."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[1,2]",
+"[3]",
+"[4]",
+"[3,5]",
+"[1]",
+"[5 and more]",
+"[2,3,5]",
+"[3]",
+"[2]"
+],
+"bibliography": [
+"[1] Backus J, Hopper G, Rossum G van. The art of computer programming. Proceedings of the baseline symposium, 2015, p. 96–179.",
+"[2] García L. Can programming be liberated from the von neumann style. Proceedings of the stream symposium, 1945, p. 40–129.",
+"[3] Liskov B, O’Brien F, Hoare CAR. The apollo guidance computer. Lab Encoder; 1962.",
+"[4] Lamport L, Cruz M de la, Hopper G. The apollo guidance computer. Proceedings of the compiler symposium, 1994, p. 31–177.",
+"[5] Lovelace A. Data abstraction and hierarchy 1970."
+]
+}
+}

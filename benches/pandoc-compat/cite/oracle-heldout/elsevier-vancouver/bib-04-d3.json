@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3,4]",
+"[5]",
+"[2]",
+"[5]",
+"[5]",
+"[6]"
+],
+"bibliography": [
+"[1] García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM 1969;44:209–329.",
+"[2] Hoare CAR, Müller H. An axiomatic basis for computer programming. Journal of the ACM 1994;53:203–390. https://doi.org/10.4068/layer.20.",
+"[3] Smith JJr, Backus J. On computable numbers. Proceedings of the schema symposium, 2024, p. 24–188.",
+"[4] Cruz M de la. The apollo guidance computer. Lab Window; 2014.",
+"[5] Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 1945;39:257–308. https://doi.org/10.6600/trace.17.",
+"[6] Müller H, Backus J, Lamport L. Data abstraction and hierarchy. Lab Matrix; 1937."
+]
+},
+"bib": {
+"citations": [
+"[see 1]",
+"[2]",
+"[3,4]",
+"[5]",
+"[2]",
+"[5]",
+"[5]",
+"[6]"
+],
+"bibliography": [
+"[1] García L, Knuth DE, Cruz M de la. On computable numbers. Communications of the ACM 1969;44:209–329.",
+"[2] Hoare CAR, Müller H. An axiomatic basis for computer programming. Journal of the ACM 1994;53:203–390. https://doi.org/10.4068/layer.20.",
+"[3] Smith JJr, Backus J. On computable numbers. Proceedings of the schema symposium, 2024, p. 24–188.",
+"[4] Cruz M de la. The apollo guidance computer. Lab Window; 2014.",
+"[5] Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 1945;39:257–308. https://doi.org/10.6600/trace.17.",
+"[6] Müller H, Backus J, Lamport L. Data abstraction and hierarchy. Lab Matrix; 1937."
+]
+}
+}

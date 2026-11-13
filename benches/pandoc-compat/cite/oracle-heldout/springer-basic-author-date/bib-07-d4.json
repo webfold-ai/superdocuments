@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"Knuth (1971, p. 94)",
+"(Cruz and Knuth 1959, sec. 80.112 and more)",
+"Dijkstra (2000, pp. 31–134)",
+"(Cruz and O’Brien 1996, p. 5)",
+"(see Cruz and Knuth 1959, ch. 60)",
+"(Cruz and O’Brien 1996, p. 38)",
+"(see Knuth 1971, ch. 73)",
+"(Knuth 1971, p. 91)",
+"(see Dijkstra 2000, ch. 36)",
+"(Knuth 1971; Hoare 1994; Dijkstra 2000)"
+],
+"bibliography": [
+"Cruz M de la, Knuth DE (1959) The education of a computer. Proceedings of the London Mathematical Society 31:150–375. https://doi.org/10.2214/heuristic.97",
+"Cruz M de la, O’Brien F (1996) Data abstraction and hierarchy",
+"Dijkstra EW (2000) On computable numbers. Lab Estimate",
+"Hoare CAR (1994) Can programming be liberated from the von neumann style. Lab Parser",
+"Knuth DE (1971) Go to statement considered harmful. In: Proceedings of the feature symposium. pp 63–156"
+]
+},
+"bib": {
+"citations": [
+"Knuth (1971, p. 94)",
+"(Cruz and Knuth 1959, sec. 80.112 and more)",
+"Dijkstra (2000, pp. 31–134)",
+"(Cruz and O’Brien 1996, p. 5)",
+"(see Cruz and Knuth 1959, ch. 60)",
+"(Cruz and O’Brien 1996, p. 38)",
+"(see Knuth 1971, ch. 73)",
+"(Knuth 1971, p. 91)",
+"(see Dijkstra 2000, ch. 36)",
+"(Knuth 1971; Hoare 1994; Dijkstra 2000)"
+],
+"bibliography": [
+"Cruz M de la, Knuth DE (1959) The education of a computer. Proceedings of the London Mathematical Society 31:150–375. https://doi.org/10.2214/heuristic.97",
+"Cruz M de la, O’Brien F (1996) Data abstraction and hierarchy",
+"Dijkstra EW (2000) On computable numbers. Lab Estimate",
+"Hoare CAR (1994) Can programming be liberated from the von neumann style. Lab Parser",
+"Knuth DE (1971) Go to statement considered harmful. In: Proceedings of the feature symposium. pp 63–156"
+]
+}
+}

@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(Liskov and Smith 1936; García and Rossum 2010)",
+"Liskov and Smith (1936, p. 8)",
+"(Turing 1994, p. 32; Smith and Hopper 2022)",
+"(Lovelace and Hoare 1970, vol. 47)",
+"(Turing 1994, vol. 56)",
+"García and Rossum (2010, pp. 44–117)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace A, Hoare CAR (1970) Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42:59–345. https://doi.org/10.4721/scheduler.33",
+"Smith JJr, Hopper G (2022) The education of a computer. In: Proceedings of the convergence symposium. pp 61–101",
+"Turing AM (1994) The art of computer programming. Springer, Boston"
+]
+},
+"bib": {
+"citations": [
+"(Liskov and Smith 1936; García and Rossum 2010)",
+"Liskov and Smith (1936, p. 8)",
+"(Turing 1994, p. 32; Smith and Hopper 2022)",
+"(Lovelace and Hoare 1970, vol. 47)",
+"(Turing 1994, vol. 56)",
+"García and Rossum (2010, pp. 44–117)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Lovelace A, Hoare CAR (1970) Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 42:59–345. https://doi.org/10.4721/scheduler.33",
+"Smith JJr, Hopper G (2022) The education of a computer. In: Proceedings of the convergence symposium. pp 61–101",
+"Turing AM (1994) The art of computer programming. Springer, Boston"
+]
+}
+}

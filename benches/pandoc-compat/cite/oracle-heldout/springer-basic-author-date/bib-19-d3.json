@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"(Dijkstra 1946, sec. 52.113 and more)",
+"(Müller and Dijkstra 1972; 1979)",
+"(Cruz and García 1984, pp. 75–134)",
+"(see Lovelace 1968, ch. 26)",
+"(O’Brien 1966, p. 56; Lovelace 1968)",
+"(Rossum et al. 1979, p. 43; Cruz and García 1984)",
+"(2018)",
+"(Rossum et al. 1979, sec. 83.111 and more)",
+"(Liskov 1992, p. 36)",
+"(Müller and Dijkstra 1972, vol. 90)",
+"(Rossum et al. 1979; Cruz and García 1984; Liskov 1992)",
+"(Lovelace 1968; Hopper 1986)",
+"Liskov (1992, p. 52)",
+"(see Liskov 1992)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Hopper G (1986) On computable numbers. ACM Computing Surveys 39:151–379. https://doi.org/10.5661/experiment.46",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press"
+]
+},
+"bib": {
+"citations": [
+"(Dijkstra 1946, sec. 52.113 and more)",
+"(Müller and Dijkstra 1972; 1979)",
+"(Cruz and García 1984, pp. 75–134)",
+"(see Lovelace 1968, ch. 26)",
+"(O’Brien 1966, p. 56; Lovelace 1968)",
+"(Rossum et al. 1979, p. 43; Cruz and García 1984)",
+"(2018)",
+"(Rossum et al. 1979, sec. 83.111 and more)",
+"(Liskov 1992, p. 36)",
+"(Müller and Dijkstra 1972, vol. 90)",
+"(Rossum et al. 1979; Cruz and García 1984; Liskov 1992)",
+"(Lovelace 1968; Hopper 1986)",
+"Liskov (1992, p. 52)",
+"(see Liskov 1992)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Hopper G (1986) On computable numbers. ACM Computing Surveys 39:151–379. https://doi.org/10.5661/experiment.46",
+"Liskov B (1992) The art of computer programming. Proceedings of the London Mathematical Society 44:132–356",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press, London",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press, New York"
+]
+}
+}

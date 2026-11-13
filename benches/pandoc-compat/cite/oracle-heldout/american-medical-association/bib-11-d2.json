@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1",
+"see 2, ch. 60",
+"3(p83)",
+"1,4",
+"2,4",
+"e.g. 5,6",
+"7",
+"5(vol35)"
+],
+"bibliography": [
+"1. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
+"5. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"6. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"7. John Backus. On computable numbers. Published online 1943."
+]
+},
+"bib": {
+"citations": [
+"1",
+"see 2, ch. 60",
+"3(p83)",
+"1,4",
+"2,4",
+"e.g. 5,6",
+"7",
+"5(vol35)"
+],
+"bibliography": [
+"1. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
+"5. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"6. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"7. John Backus. On computable numbers. Published online 1943."
+]
+}
+}

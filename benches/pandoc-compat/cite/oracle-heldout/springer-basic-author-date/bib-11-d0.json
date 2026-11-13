@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Hopper et al. 1939; Backus 1943; Smith 2006)",
+"(see Hopper et al. 1939, ch. 72)",
+"(Hopper et al. 1939; Smith 2006)",
+"(Backus 1943, p. 26)",
+"(Smith 2006, vol. 11)",
+"(Backus 1943)",
+"(1943; García et al. 1998)",
+"(Backus 1943; García et al. 1998)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Lamport L, Liskov B (1998) The art of computer programming",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Smith JJr (2006) The apollo guidance computer. Lab Layer"
+]
+},
+"bib": {
+"citations": [
+"(Hopper et al. 1939; Backus 1943; Smith 2006)",
+"(see Hopper et al. 1939, ch. 72)",
+"(Hopper et al. 1939; Smith 2006)",
+"(Backus 1943, p. 26)",
+"(Smith 2006, vol. 11)",
+"(Backus 1943)",
+"(1943; García et al. 1998)",
+"(Backus 1943; García et al. 1998)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Lamport L, Liskov B (1998) The art of computer programming",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Smith JJr (2006) The apollo guidance computer. Lab Layer"
+]
+}
+}

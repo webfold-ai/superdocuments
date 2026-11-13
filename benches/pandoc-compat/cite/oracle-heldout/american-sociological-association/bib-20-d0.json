@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Müller and Liskov 2014:7)",
+"(Hoare 2005; 2014)",
+"(García 1986)",
+"(García 1986:74–139)",
+"(O’Brien 1965:49–103)",
+"(O’Brien 1965:99.107 and more)",
+"(O’Brien 1965, 2013; Smith and Backus 1973)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Pp. 30–177 in Proceedings of the node symposium.",
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. Cambridge University Press.",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+},
+"bib": {
+"citations": [
+"(Müller and Liskov 2014:7)",
+"(Hoare 2005; 2014)",
+"(García 1986)",
+"(García 1986:74–139)",
+"(O’Brien 1965:49–103)",
+"(O’Brien 1965:99.107 and more)",
+"(O’Brien 1965, 2013; Smith and Backus 1973)"
+],
+"bibliography": [
+"García, Luis. 1986. “The Apollo Guidance Computer.” Pp. 30–177 in Proceedings of the node symposium.",
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. London: Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"O’Brien, Flann. 2013. The Art of Computer Programming. 3rd ed. New York: Cambridge University Press.",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(see Liskov, García, and Müller 1992, ch. 81)",
+"Liskov (1956)",
+"(1992)",
+"(see Dijkstra, Rossum, and Lamport 1970, ch. 89)",
+"(Cruz 2007)",
+"Lovelace (1940)",
+"(Turing 1949)",
+"(Cruz 2007; 1992)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Pp. 81–115 in Proceedings of the network symposium.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Liskov, Barbara, Luis García, and Hans Müller. 1992. “An Axiomatic Basis for Computer Programming.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33(8):183–370. doi:10.9422/heuristic.52.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4(9):240–315. doi:10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(see Liskov, García, and Müller 1992, ch. 81)",
+"Liskov (1956)",
+"(1992)",
+"(see Dijkstra, Rossum, and Lamport 1970, ch. 89)",
+"(Cruz 2007)",
+"Lovelace (1940)",
+"(Turing 1949)",
+"(Cruz 2007; 1992)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Pp. 81–115 in Proceedings of the network symposium.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. London: Springer.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Liskov, Barbara, Luis García, and Hans Müller. 1992. “An Axiomatic Basis for Computer Programming.” PhD thesis, University of Cambridge.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33(8):183–370. doi:10.9422/heuristic.52.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4(9):240–315. doi:10.8223/index.77."
+]
+}
+}

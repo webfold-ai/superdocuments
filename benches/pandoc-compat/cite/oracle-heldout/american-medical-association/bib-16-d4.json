@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"see 1",
+"2(pp37-114)",
+"3(fig74)",
+"4",
+"1",
+"4(vol16)",
+"5(p66)"
+],
+"bibliography": [
+"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"3. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956."
+]
+},
+"bib": {
+"citations": [
+"see 1",
+"2(pp37-114)",
+"3(fig74)",
+"4",
+"1",
+"4(vol16)",
+"5(p66)"
+],
+"bibliography": [
+"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"3. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956."
+]
+}
+}

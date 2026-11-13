@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Rossum and Turing (1990:29–116)",
+"(2010; Rossum and Turing 1990)",
+"(see Liskov, Smith, and Cruz 1963)",
+"(Liskov, Müller, and Dijkstra 2012:30; Rossum and Turing 1990)",
+"(Liskov et al. 2012:65)",
+"(Rossum and Turing 1990:4)",
+"(e.g. Backus, Knuth, and Müller 2007; Liskov et al. 2012)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Pp. 35–166 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"Rossum and Turing (1990:29–116)",
+"(2010; Rossum and Turing 1990)",
+"(see Liskov, Smith, and Cruz 1963)",
+"(Liskov, Müller, and Dijkstra 2012:30; Rossum and Turing 1990)",
+"(Liskov et al. 2012:65)",
+"(Rossum and Turing 1990:4)",
+"(e.g. Backus, Knuth, and Müller 2007; Liskov et al. 2012)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Hans Müller. 2007. On Computable Numbers. TR-4. Lab Heuristic. https://example.org/benchmark.",
+"Liskov, Barbara, Hans Müller, and Edsger W. Dijkstra. 2012. “Notes on the Analytical Engine.” Pp. 35–166 in Proceedings of the compiler symposium.",
+"Liskov, Barbara, John Jr. Smith, and Maria de la Cruz. 1963. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and Flann O’Brien. 2010. “On Computable Numbers.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van, and Alan M. Turing. 1990. “Notes on the Analytical Engine.”"
+]
+}
+}

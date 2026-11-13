@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"1",
+"2,3",
+"4(sec82.139) and more",
+"see 2",
+"5(p3)",
+"6(pp46-130)",
+"4",
+"3"
+],
+"bibliography": [
+"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
+"5. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"6. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+]
+},
+"bib": {
+"citations": [
+"1",
+"2,3",
+"4(sec82.139) and more",
+"see 2",
+"5(p3)",
+"6(pp46-130)",
+"4",
+"3"
+],
+"bibliography": [
+"1. C. A. R. Hoare, Ada Lovelace, Alan M. Turing. Notes on the Analytical Engine. Lab Feature; 2016.",
+"2. Maria de la Cruz, Flann O’Brien, Grace Hopper. The Art of Computer Programming. Lab Throughput; 1971. https://example.org/complexity",
+"3. Guido van Rossum, John Backus, Barbara Liskov. Go to statement considered harmful. Published online 1993. https://example.org/pipeline",
+"4. Maria de la Cruz. Time, clocks, and the ordering of events. Published online 1941.",
+"5. Alan M. Turing, Guido van Rossum. The Art of Computer Programming. PhD thesis. University of Cambridge; 1968.",
+"6. Guido van Rossum, C. A. R. Hoare. Go to statement considered harmful. Published online 1967. https://example.org/cache"
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"Lamport, Dijkstra, and Hamilton (2002)",
+"(Lamport et al. 2002; O’Brien, Hoare, and Hopper 1953; Rossum, Smith, and Backus 1989)",
+"(Lamport et al. 2002; O’Brien et al. 1953:21)",
+"(Müller, García, and Cruz 2019:45)",
+"(e.g. Lamport and Müller 1965; Müller et al. 2019)",
+"(O’Brien et al. 1953:88)",
+"(O’Brien et al. 1953)",
+"(Dijkstra and Liskov 2012:40)",
+"(Lamport et al. 2002:68)",
+"(Müller et al. 2019:35.132 and more)",
+"(Dijkstra and Liskov 2012:59)",
+"(Müller et al. 2019)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. 2012. “The Art of Computer Programming.” PhD thesis, University of Oxford.",
+"Lamport, Leslie, Edsger W. Dijkstra, and Margaret Hamilton. 2002. “The Education of a Computer.” PhD thesis, University of Zurich.",
+"Lamport, Leslie, and Hans Müller. 1965. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Müller, Hans, Luis García, and Maria de la Cruz. 2019. “The Art of Computer Programming.”",
+"O’Brien, Flann, C. A. R. Hoare, and Grace Hopper. 1953. “On Computable Numbers.” Pp. 43–145 in Proceedings of the optimizer symposium.",
+"Rossum, Guido van, John Jr. Smith, and John Backus. 1989. “Can Programming Be Liberated from the von Neumann Style.” Pp. 43–184 in Proceedings of the compiler symposium."
+]
+},
+"bib": {
+"citations": [
+"Lamport, Dijkstra, and Hamilton (2002)",
+"(Lamport et al. 2002; O’Brien, Hoare, and Hopper 1953; Rossum, Smith, and Backus 1989)",
+"(Lamport et al. 2002; O’Brien et al. 1953:21)",
+"(Müller, García, and Cruz 2019:45)",
+"(e.g. Lamport and Müller 1965; Müller et al. 2019)",
+"(O’Brien et al. 1953:88)",
+"(O’Brien et al. 1953)",
+"(Dijkstra and Liskov 2012:40)",
+"(Lamport et al. 2002:68)",
+"(Müller et al. 2019:35.132 and more)",
+"(Dijkstra and Liskov 2012:59)",
+"(Müller et al. 2019)"
+],
+"bibliography": [
+"Dijkstra, Edsger W., and Barbara Liskov. 2012. “The Art of Computer Programming.” PhD thesis, University of Oxford.",
+"Lamport, Leslie, Edsger W. Dijkstra, and Margaret Hamilton. 2002. “The Education of a Computer.” PhD thesis, University of Zurich.",
+"Lamport, Leslie, and Hans Müller. 1965. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Müller, Hans, Luis García, and Maria de la Cruz. 2019. “The Art of Computer Programming.”",
+"O’Brien, Flann, C. A. R. Hoare, and Grace Hopper. 1953. “On Computable Numbers.” Pp. 43–145 in Proceedings of the optimizer symposium.",
+"Rossum, Guido van, John Jr. Smith, and John Backus. 1989. “Can Programming Be Liberated from the von Neumann Style.” Pp. 43–184 in Proceedings of the compiler symposium."
+]
+}
+}

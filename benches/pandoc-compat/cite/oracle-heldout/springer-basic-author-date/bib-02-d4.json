@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"Rossum and Turing (1990, pp. 29–116)",
+"(Rossum and Turing 1990; 2010)",
+"(see Liskov et al. 1963)",
+"(Rossum and Turing 1990; Liskov et al. 2012, p. 30)",
+"(Liskov et al. 2012, fig. 65)",
+"(Rossum and Turing 1990, p. 4)",
+"(e.g. Backus et al. 2007; Liskov et al. 2012)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine"
+]
+},
+"bib": {
+"citations": [
+"Rossum and Turing (1990, pp. 29–116)",
+"(Rossum and Turing 1990; 2010)",
+"(see Liskov et al. 1963)",
+"(Rossum and Turing 1990; Liskov et al. 2012, p. 30)",
+"(Liskov et al. 2012, fig. 65)",
+"(Rossum and Turing 1990, p. 4)",
+"(e.g. Backus et al. 2007; Liskov et al. 2012)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine"
+]
+}
+}

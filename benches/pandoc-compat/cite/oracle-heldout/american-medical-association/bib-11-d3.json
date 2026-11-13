@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"1",
+"2(pp55-114)",
+"2(p15),3",
+"see 1, ch. 30",
+"4",
+"2(sec59.134) and more",
+"5,6(p81)",
+"see 2, ch. 64",
+"3,5",
+"1(sec96.137) and more",
+"7",
+"5(p17)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"2. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
+"5. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"6. John Backus. On computable numbers. Published online 1943.",
+"7. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17"
+]
+},
+"bib": {
+"citations": [
+"1",
+"2(pp55-114)",
+"2(p15),3",
+"see 1, ch. 30",
+"4",
+"2(sec59.134) and more",
+"5,6(p81)",
+"see 2, ch. 64",
+"3,5",
+"1(sec96.137) and more",
+"7",
+"5(p17)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"2. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
+"5. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987.",
+"6. John Backus. On computable numbers. Published online 1943.",
+"7. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17"
+]
+}
+}

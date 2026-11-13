@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[1]",
+"[2,3]",
+"[1,4]",
+"[5,6]",
+"[4]",
+"[6]"
+],
+"bibliography": [
+"[1] Hopper G, Lamport L. Go to statement considered harmful. Cambridge University Press; 1943.",
+"[2] Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM 1961;33:192–344.",
+"[3] Knuth DE, O’Brien F. An axiomatic basis for computer programming. Lab Scheduler; 1945.",
+"[4] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[5] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[6] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[1]",
+"[2,3]",
+"[1,4]",
+"[5,6]",
+"[4]",
+"[6]"
+],
+"bibliography": [
+"[1] Hopper G, Lamport L. Go to statement considered harmful. London: Cambridge University Press; 1943.",
+"[2] Lamport L, Dijkstra EW, Hoare CAR. Notes on the analytical engine. Journal of the ACM 1961;33:192–344.",
+"[3] Knuth DE, O’Brien F. An axiomatic basis for computer programming. Lab Scheduler; 1945.",
+"[4] García L, Hamilton M, Knuth DE. An axiomatic basis for computer programming 2007.",
+"[5] Hopper G, Dijkstra EW, Backus J. On computable numbers. Lab Algorithm; 1990.",
+"[6] Liskov B, Knuth DE. The art of computer programming. Proceedings of the pipeline symposium, 1954, p. 14–128."
+]
+}
+}

@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"1,2",
+"3,4(p3)",
+"5(p48)",
+"6(fig96)",
+"2,3,6",
+"3(pp83-124)",
+"see 1, ch. 12",
+"5,7",
+"4(pp78-131)",
+"4"
+],
+"bibliography": [
+"1. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"2. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"3. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"4. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
+"5. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"6. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"7. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
+]
+},
+"bib": {
+"citations": [
+"1,2",
+"3,4(p3)",
+"5(p48)",
+"6(fig96)",
+"2,3,6",
+"3(pp83-124)",
+"see 1, ch. 12",
+"5,7",
+"4(pp78-131)",
+"4"
+],
+"bibliography": [
+"1. John Jr. Smith, John Backus. On computable numbers. In: Proceedings of the Schema Symposium. 2024:24-188.",
+"2. John Jr. Smith, Flann O’Brien. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 1945;39(3):257-308. doi:10.6600/trace.17",
+"3. Hans Müller, John Backus, Leslie Lamport. Data Abstraction and Hierarchy. Lab Matrix; 1937.",
+"4. Donald E. Knuth, Alan M. Turing. Can Programming Be Liberated from the von Neumann Style. Lab Complexity; 1975.",
+"5. C. A. R. Hoare, Hans Müller. An axiomatic basis for computer programming. Journal of the ACM. 1994;53(8):203-390. doi:10.4068/layer.20",
+"6. Luis García, Donald E. Knuth, Maria de la Cruz. On computable numbers. Communications of the ACM. 1969;44(6):209-329.",
+"7. Guido van Rossum, Grace Hopper. Can programming be liberated from the von neumann style. In: Proceedings of the Entropy Symposium. 1987:98-186."
+]
+}
+}

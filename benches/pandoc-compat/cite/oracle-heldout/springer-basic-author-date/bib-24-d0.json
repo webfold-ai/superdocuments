@@ -1,0 +1,36 @@
+{
+"csl": {
+"citations": [
+"(Lamport and Müller 1965, sec. 4.124 and more)",
+"(Rossum et al. 1989; Lamport et al. 2002)",
+"Lamport and Müller (1969)",
+"O’Brien et al. (1953, pp. 7–130)",
+"(Rossum et al. 1989, p. 8)",
+"Lamport and Müller (1969)"
+],
+"bibliography": [
+"Lamport L, Dijkstra EW, Hamilton M (2002) The education of a computer. PhD thesis, University of Zurich",
+"Lamport L, Müller H (1969) The apollo guidance computer. Lab Function",
+"Lamport L, Müller H (1965) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"O’Brien F, Hoare CAR, Hopper G (1953) On computable numbers. In: Proceedings of the optimizer symposium. pp 43–145",
+"Rossum G van, Smith JJr, Backus J (1989) Can programming be liberated from the von neumann style. In: Proceedings of the compiler symposium. pp 43–184"
+]
+},
+"bib": {
+"citations": [
+"(Lamport and Müller 1965, sec. 4.124 and more)",
+"(Rossum et al. 1989; Lamport et al. 2002)",
+"Lamport and Müller (1969)",
+"O’Brien et al. (1953, pp. 7–130)",
+"(Rossum et al. 1989, p. 8)",
+"Lamport and Müller (1969)"
+],
+"bibliography": [
+"Lamport L, Dijkstra EW, Hamilton M (2002) The education of a computer. PhD thesis, University of Zurich",
+"Lamport L, Müller H (1969) The apollo guidance computer. Lab Function",
+"Lamport L, Müller H (1965) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"O’Brien F, Hoare CAR, Hopper G (1953) On computable numbers. In: Proceedings of the optimizer symposium. pp 43–145",
+"Rossum G van, Smith JJr, Backus J (1989) Can programming be liberated from the von neumann style. In: Proceedings of the compiler symposium. pp 43–184"
+]
+}
+}

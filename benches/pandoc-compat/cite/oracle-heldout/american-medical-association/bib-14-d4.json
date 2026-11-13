@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1(fig98)",
+"2,3",
+"1,4,5",
+"5(p58)",
+"5,6",
+"1,2,6",
+"3(vol5)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
+"2. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"3. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"4. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
+"5. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
+]
+},
+"bib": {
+"citations": [
+"1(fig98)",
+"2,3",
+"1,4,5",
+"5(p58)",
+"5,6",
+"1,2,6",
+"3(vol5)"
+],
+"bibliography": [
+"1. Luis García, Donald E. Knuth. On Computable Numbers. Lab Compiler; 1995.",
+"2. Barbara Liskov, Margaret Hamilton, Ada Lovelace. The apollo guidance computer. Communications of the ACM. 1949;50(11):159-344.",
+"3. Leslie Lamport, Edsger W. Dijkstra. Data Abstraction and Hierarchy. Second. Springer; 1953.",
+"4. Leslie Lamport, Luis García. Notes on the Analytical Engine. 3rd ed. Cambridge University Press; 1999.",
+"5. Flann O’Brien. Time, Clocks, and the Ordering of Events. Lab Array; 1948.",
+"6. Alan M. Turing. Go to statement considered harmful. In: Proceedings of the Array Symposium. 2018:62-190."
+]
+}
+}

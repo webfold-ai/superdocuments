@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(p63)",
+"2(pp47-138)",
+"1,e.g. 3",
+"4",
+"4(p74)",
+"5",
+"2(p48)",
+"2",
+"2(p4)",
+"5"
+],
+"bibliography": [
+"1. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"2. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"3. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
+"4. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"5. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55"
+]
+},
+"bib": {
+"citations": [
+"1(p63)",
+"2(pp47-138)",
+"1,e.g. 3",
+"4",
+"4(p74)",
+"5",
+"2(p48)",
+"2",
+"2(p4)",
+"5"
+],
+"bibliography": [
+"1. Alan M. Turing. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1948.",
+"2. C. A. R. Hoare, Guido van Rossum. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1953. https://example.org/experiment",
+"3. John Backus, Leslie Lamport. An axiomatic basis for computer programming. Published online 1956.",
+"4. Guido van Rossum. Can programming be liberated from the von neumann style. Journal of the ACM. 1937;27(4):248-397.",
+"5. Grace Hopper. The art of computer programming. IEEE Transactions on Software Engineering. 2016;4(5):238-320. doi:10.8087/bound.55"
+]
+}
+}

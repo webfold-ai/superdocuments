@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[e.g. 2,3]",
+"[4]",
+"[2,5,6]",
+"[5]",
+"[7]",
+"[7]",
+"[6]"
+],
+"bibliography": [
+"[1] Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 1970;42:59–345. https://doi.org/10.4721/scheduler.33.",
+"[2] Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM 1936;11:127–305. https://doi.org/10.8852/decoder.67.",
+"[3] García L, Rossum G van. On computable numbers. 2nd ed. London: Addison-Wesley; 2010.",
+"[4] Turing AM. The art of computer programming. Boston: Springer; 1994.",
+"[5] Müller H. Data abstraction and hierarchy. PhD thesis. University of Oxford, 1948.",
+"[6] Hoare CAR, Smith JJr, García L. An axiomatic basis for computer programming. Second. New York: Springer; 1941.",
+"[7] Smith JJr, Hopper G. The education of a computer. Proceedings of the convergence symposium, 2022, p. 61–101."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[e.g. 2,3]",
+"[4]",
+"[2,5,6]",
+"[5]",
+"[7]",
+"[7]",
+"[6]"
+],
+"bibliography": [
+"[1] Lovelace A, Hoare CAR. Time, clocks, and the ordering of events. Proceedings of the London Mathematical Society 1970;42:59–345. https://doi.org/10.4721/scheduler.33.",
+"[2] Liskov B, Smith JJr. Can programming be liberated from the von neumann style. Journal of the ACM 1936;11:127–305. https://doi.org/10.8852/decoder.67.",
+"[3] García L, Rossum G van. On computable numbers. 2nd ed. London: Addison-Wesley; 2010.",
+"[4] Turing AM. The art of computer programming. Boston: Springer; 1994.",
+"[5] Müller H. Data abstraction and hierarchy. PhD thesis. University of Oxford, 1948.",
+"[6] Hoare CAR, Smith JJr, García L. An axiomatic basis for computer programming. Second. New York: Springer; 1941.",
+"[7] Smith JJr, Hopper G. The education of a computer. Proceedings of the convergence symposium, 2022, p. 61–101."
+]
+}
+}

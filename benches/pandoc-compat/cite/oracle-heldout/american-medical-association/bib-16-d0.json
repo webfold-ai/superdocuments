@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1,2(p13)",
+"1(pp90-103)",
+"2(p93),3",
+"1,4",
+"5,6",
+"4(pp98-101)",
+"6(p77)"
+],
+"bibliography": [
+"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"3. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"4. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"5. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"6. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver"
+]
+},
+"bib": {
+"citations": [
+"1,2(p13)",
+"1(pp90-103)",
+"2(p93),3",
+"1,4",
+"5,6",
+"4(pp98-101)",
+"6(p77)"
+],
+"bibliography": [
+"1. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"2. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"3. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"4. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"5. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"6. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver"
+]
+}
+}

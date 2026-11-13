@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2 and more]",
+"[2]",
+"[1,2]",
+"[2,3]",
+"[4]",
+"[5]"
+],
+"bibliography": [
+"[1] Cruz M de la, Turing AM. Go to statement considered harmful. 2nd ed. Springer; 1938.",
+"[2] Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. Proceedings of the stream symposium, 2018, p. 1–192.",
+"[3] O’Brien F, Hopper G. On computable numbers 1955.",
+"[4] Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering 2020;2:86–362. https://doi.org/10.7751/compiler.14.",
+"[5] Liskov B, Backus J, Turing AM. The education of a computer. MIT Press; 2004."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2 and more]",
+"[2]",
+"[1,2]",
+"[2,3]",
+"[4]",
+"[5]"
+],
+"bibliography": [
+"[1] Cruz M de la, Turing AM. Go to statement considered harmful. 2nd ed. New York: Springer; 1938.",
+"[2] Dijkstra EW, Hoare CAR, Rossum G van. Time, clocks, and the ordering of events. Proceedings of the stream symposium, 2018, p. 1–192.",
+"[3] O’Brien F, Hopper G. On computable numbers 1955.",
+"[4] Müller H, Rossum G van. The education of a computer. IEEE Transactions on Software Engineering 2020;2:86–362. https://doi.org/10.7751/compiler.14.",
+"[5] Liskov B, Backus J, Turing AM. The education of a computer. New York: MIT Press; 2004."
+]
+}
+}

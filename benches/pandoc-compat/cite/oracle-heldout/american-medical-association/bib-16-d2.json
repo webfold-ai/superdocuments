@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"1",
+"2(sec15.140) and more",
+"see 3, ch. 84",
+"2,4",
+"4,5(p82)",
+"5(sec88.115) and more",
+"6(p61)",
+"3(fig28)",
+"7",
+"1,5",
+"see 6",
+"3(sec47.105) and more"
+],
+"bibliography": [
+"1. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"2. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"3. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"6. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"7. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2(sec15.140) and more",
+"see 3, ch. 84",
+"2,4",
+"4,5(p82)",
+"5(sec88.115) and more",
+"6(p61)",
+"3(fig28)",
+"7",
+"1,5",
+"see 6",
+"3(sec47.105) and more"
+],
+"bibliography": [
+"1. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"2. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"3. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"4. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990.",
+"5. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"6. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"7. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945."
+]
+}
+}

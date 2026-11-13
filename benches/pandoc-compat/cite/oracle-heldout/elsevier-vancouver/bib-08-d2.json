@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[5]",
+"[3,5]",
+"[3]",
+"[2]",
+"[1]"
+],
+"bibliography": [
+"[1] Hoare CAR, Liskov B. On computable numbers. Proceedings of the transform symposium, 2005, p. 71–122.",
+"[2] Hopper G, Lamport L. The education of a computer. Proceedings of the filter symposium, 1942, p. 37–181.",
+"[3] Turing AM, Smith JJr, Rossum G van. Time, clocks, and the ordering of events. Lab Graph; 1969.",
+"[4] Hopper G. Time, clocks, and the ordering of events. PhD thesis. University of Oxford, 1986.",
+"[5] Smith JJr, Backus J. The education of a computer. ACM Computing Surveys 1981;36:64–305. https://doi.org/10.9730/kernel.12."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[4]",
+"[5]",
+"[3,5]",
+"[3]",
+"[2]",
+"[1]"
+],
+"bibliography": [
+"[1] Hoare CAR, Liskov B. On computable numbers. Proceedings of the transform symposium, 2005, p. 71–122.",
+"[2] Hopper G, Lamport L. The education of a computer. Proceedings of the filter symposium, 1942, p. 37–181.",
+"[3] Turing AM, Smith JJr, Rossum G van. Time, clocks, and the ordering of events. Lab Graph; 1969.",
+"[4] Hopper G. Time, clocks, and the ordering of events. PhD thesis. University of Oxford, 1986.",
+"[5] Smith JJr, Backus J. The education of a computer. ACM Computing Surveys 1981;36:64–305. https://doi.org/10.9730/kernel.12."
+]
+}
+}

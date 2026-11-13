@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(fig75)",
+"2(sec62.132) and more",
+"3,4",
+"3(p45)",
+"2",
+"1(p39)",
+"4",
+"3,4(p70)",
+"4",
+"1(sec81.131) and more",
+"3,e.g. 4"
+],
+"bibliography": [
+"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999.",
+"4. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968."
+]
+},
+"bib": {
+"citations": [
+"1(fig75)",
+"2(sec62.132) and more",
+"3,4",
+"3(p45)",
+"2",
+"1(p39)",
+"4",
+"3,4(p70)",
+"4",
+"1(sec81.131) and more",
+"3,e.g. 4"
+],
+"bibliography": [
+"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999.",
+"4. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1,2(p98)",
+"3(p6)",
+"3(fig68)",
+"1,4(p35)",
+"1(fig5)",
+"see 5, ch. 47",
+"e.g. 5,6",
+"3(pp99-122)",
+"e.g. 2,6",
+"2,3,7",
+"1(vol46)"
+],
+"bibliography": [
+"1. John Backus. On computable numbers. Published online 1943.",
+"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
+"4. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"5. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"6. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"7. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987."
+]
+},
+"bib": {
+"citations": [
+"1,2(p98)",
+"3(p6)",
+"3(fig68)",
+"1,4(p35)",
+"1(fig5)",
+"see 5, ch. 47",
+"e.g. 5,6",
+"3(pp99-122)",
+"e.g. 2,6",
+"2,3,7",
+"1(vol46)"
+],
+"bibliography": [
+"1. John Backus. On computable numbers. Published online 1943.",
+"2. Luis García, Donald E. Knuth. An axiomatic basis for computer programming. In: Proceedings of the Transform Symposium. 1936:2-133.",
+"3. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998.",
+"4. Flann O’Brien, Guido van Rossum, John Jr. Smith. Time, Clocks, and the Ordering of Events. Addison-Wesley; 1975.",
+"5. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"6. C. A. R. Hoare, Hans Müller. Data abstraction and hierarchy. Proceedings of the London Mathematical Society. 2005;7(9):191-397. doi:10.4589/gradient.17",
+"7. Grace Hopper, Hans Müller, Ada Lovelace. The Apollo Guidance Computer. 3rd ed. Cambridge University Press; 1987."
+]
+}
+}

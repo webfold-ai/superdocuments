@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"(see Turing and Liskov 2018, ch. 62)",
+"(Dijkstra 1946)",
+"(see Lovelace 1968)",
+"(O’Brien 1966:48)",
+"(Rossum, García, and Lovelace 1979:31.118 and more)",
+"(Cruz and García 1984:77)",
+"(see Lamport 1997)",
+"(1992; Rossum et al. 1979)",
+"(Cruz and García 1984; Dijkstra 1946; Hopper 1986)",
+"(Rossum et al. 1979:94)",
+"(Rossum et al. 1979:51)",
+"(Rossum et al. 1979:98–137)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Hopper, Grace. 1986. “On Computable Numbers.” ACM Computing Surveys 39(7):151–379. doi:10.5661/experiment.46.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(see Turing and Liskov 2018, ch. 62)",
+"(Dijkstra 1946)",
+"(see Lovelace 1968)",
+"(O’Brien 1966:48)",
+"(Rossum, García, and Lovelace 1979:31.118 and more)",
+"(Cruz and García 1984:77)",
+"(see Lamport 1997)",
+"(1992; Rossum et al. 1979)",
+"(Cruz and García 1984; Dijkstra 1946; Hopper 1986)",
+"(Rossum et al. 1979:94)",
+"(Rossum et al. 1979:51)",
+"(Rossum et al. 1979:98–137)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Hopper, Grace. 1986. “On Computable Numbers.” ACM Computing Surveys 39(7):151–379. doi:10.5661/experiment.46.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. London: MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. New York: MIT Press."
+]
+}
+}

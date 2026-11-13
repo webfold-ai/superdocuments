@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"1(p97)",
+"2",
+"2(vol85)",
+"3,4",
+"1,3",
+"3,5,6",
+"see 7, ch. 26",
+"3(p57)",
+"7(p66)",
+"e.g. 1,8"
+],
+"bibliography": [
+"1. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
+"4. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"5. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"6. Donald E. Knuth, Maria de la Cruz, John Jr. Smith. On computable numbers. Published online 2020.",
+"7. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
+"8. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior"
+]
+},
+"bib": {
+"citations": [
+"1(p97)",
+"2",
+"2(vol85)",
+"3,4",
+"1,3",
+"3,5,6",
+"see 7, ch. 26",
+"3(p57)",
+"7(p66)",
+"e.g. 1,8"
+],
+"bibliography": [
+"1. Hans Müller, Guido van Rossum. The education of a computer. IEEE Transactions on Software Engineering. 2020;2(11):86-362. doi:10.7751/compiler.14",
+"2. Edsger W. Dijkstra, C. A. R. Hoare, Guido van Rossum. Time, clocks, and the ordering of events. In: Proceedings of the Stream Symposium. 2018:1-192.",
+"3. Edsger W. Dijkstra. The apollo guidance computer. Published online 1947.",
+"4. Barbara Liskov, John Backus, Alan M. Turing. The Education of a Computer. MIT Press; 2004. https://example.org/matrix",
+"5. Maria de la Cruz, Alan M. Turing. Go to Statement Considered Harmful. 2nd ed. Springer; 1938.",
+"6. Donald E. Knuth, Maria de la Cruz, John Jr. Smith. On computable numbers. Published online 2020.",
+"7. Guido van Rossum, Maria de la Cruz. Notes on the Analytical Engine. Lab Transform; 2012.",
+"8. John Jr. Smith. Notes on the Analytical Engine. PhD thesis. University of Cambridge; 1972. https://example.org/prior"
+]
+}
+}

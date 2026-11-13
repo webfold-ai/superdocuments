@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1(vol48)",
+"see 2, ch. 81",
+"2(p72)",
+"1",
+"1",
+"3(vol3)",
+"2",
+"4(vol6)",
+"see 2, ch. 52",
+"4",
+"see 4"
+],
+"bibliography": [
+"1. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
+"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"4. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
+]
+},
+"bib": {
+"citations": [
+"1(vol48)",
+"see 2, ch. 81",
+"2(p72)",
+"1",
+"1",
+"3(vol3)",
+"2",
+"4(vol6)",
+"see 2, ch. 52",
+"4",
+"see 4"
+],
+"bibliography": [
+"1. Grace Hopper. Time, Clocks, and the Ordering of Events. PhD thesis. University of Oxford; 1986.",
+"2. Grace Hopper, Leslie Lamport. The education of a computer. In: Proceedings of the Filter Symposium. 1942:37-181.",
+"3. Alan M. Turing, John Jr. Smith, Guido van Rossum. Time, Clocks, and the Ordering of Events. Lab Graph; 1969. https://example.org/workload",
+"4. John Jr. Smith, John Backus. The education of a computer. ACM Computing Surveys. 1981;36(12):64-305. doi:10.9730/kernel.12"
+]
+}
+}

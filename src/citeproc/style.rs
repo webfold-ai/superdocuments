@@ -44,7 +44,7 @@ impl Style {
         // Locale blocks without an `xml:lang`, or in English, apply; others are ignored.
         for loc in root.elems().filter(|e| e.name == "locale") {
             let lang = loc.attr("xml:lang").unwrap_or("");
-            if !(lang.is_empty() || lang == "en" || lang.starts_with("en-")) {
+            if !(lang.is_empty() || lang == "en" || lang == "en-US") {
                 continue;
             }
             for sec in loc.elems() {

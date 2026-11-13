@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Cruz, O’Brien, and Rossum 1975:52)",
+"(García, Rossum, and Lovelace 1945:51)",
+"(1988; Smith 2023)",
+"(Cruz, Hopper, and Rossum 1958; Cruz et al. 1975; Hamilton, García, and Liskov 1947)",
+"(see Rossum 2019)",
+"(Cruz et al. 1958; Rossum 2019:80)",
+"(Cruz et al. 1958; 1947)",
+"(Smith 2023; 2011)",
+"Cruz et al. (1975)",
+"(Cruz et al. 1958:94.139 and more)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58(12):24–338. doi:10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. “Can Programming Be Liberated from the von Neumann Style.”",
+"Dijkstra, Edsger W., and John Jr. Smith. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 81–126 in Proceedings of the window symposium.",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van. 2019. “The Education of a Computer.”",
+"Smith, John Jr. 2023. “The Apollo Guidance Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich."
+]
+},
+"bib": {
+"citations": [
+"(Cruz, O’Brien, and Rossum 1975:52)",
+"(García, Rossum, and Lovelace 1945:51)",
+"(1988; Smith 2023)",
+"(Cruz, Hopper, and Rossum 1958; Cruz et al. 1975; Hamilton, García, and Liskov 1947)",
+"(see Rossum 2019)",
+"(Cruz et al. 1958; Rossum 2019:80)",
+"(Cruz et al. 1958; 1947)",
+"(Smith 2023; 2011)",
+"Cruz et al. (1975)",
+"(Cruz et al. 1958:94.139 and more)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58(12):24–338. doi:10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. “Can Programming Be Liberated from the von Neumann Style.”",
+"Dijkstra, Edsger W., and John Jr. Smith. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 81–126 in Proceedings of the window symposium.",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van. 2019. “The Education of a Computer.”",
+"Smith, John Jr. 2023. “The Apollo Guidance Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich."
+]
+}
+}

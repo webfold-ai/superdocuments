@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"1(fig89)",
+"3",
+"3(fig35)",
+"1",
+"4(vol13)",
+"1",
+"5(p65)",
+"6(p68)",
+"2",
+"1(p53)"
+],
+"bibliography": [
+"1. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
+"4. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"5. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"6. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"1(fig89)",
+"3",
+"3(fig35)",
+"1",
+"4(vol13)",
+"1",
+"5(p65)",
+"6(p68)",
+"2",
+"1(p53)"
+],
+"bibliography": [
+"1. Alan M. Turing, Flann O’Brien, Barbara Liskov. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 2011. https://example.org/metric",
+"2. Guido van Rossum. The education of a computer. Published online 2019. https://example.org/latency",
+"3. Luis García, Guido van Rossum, Ada Lovelace. An Axiomatic Basis for Computer Programming. Lab Lattice; 1945.",
+"4. Maria de la Cruz, Grace Hopper, Guido van Rossum. The apollo guidance computer. Journal of the ACM. 1958;58(12):24-338. doi:10.6528/vector.60",
+"5. Margaret Hamilton, Luis García, Barbara Liskov. The Art of Computer Programming. PhD thesis. University of Cambridge; 1947.",
+"6. Maria de la Cruz, Flann O’Brien, Guido van Rossum. Can programming be liberated from the von neumann style. Published online 1975."
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"1–3",
+"see 3, ch. 72",
+"2,3",
+"1(p26)",
+"2(vol11)",
+"1",
+"1,4",
+"1,4"
+],
+"bibliography": [
+"1. John Backus. On computable numbers. Published online 1943.",
+"2. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
+"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998."
+]
+},
+"bib": {
+"citations": [
+"1–3",
+"see 3, ch. 72",
+"2,3",
+"1(p26)",
+"2(vol11)",
+"1",
+"1,4",
+"1,4"
+],
+"bibliography": [
+"1. John Backus. On computable numbers. Published online 1943.",
+"2. John Jr. Smith. The Apollo Guidance Computer. Lab Layer; 2006.",
+"3. Grace Hopper, John Backus, Hans Müller. The Art of Computer Programming. Addison-Wesley; 1939.",
+"4. Luis García, Leslie Lamport, Barbara Liskov. The art of computer programming. Published online 1998."
+]
+}
+}

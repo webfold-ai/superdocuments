@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(e.g. Cruz 1941; Cruz et al. 1971)",
+"(Cruz et al. 1971, pp. 55–120)",
+"Rossum et al. (1993, pp. 8–134)",
+"Rossum et al. (1993)",
+"(see Cruz et al. 1971, ch. 16)",
+"(Cruz 1941; e.g. Rossum and Hoare 1967)",
+"(Backus et al. 1966, p. 74)"
+],
+"bibliography": [
+"Backus J, Hopper G, Lamport L (1966) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful"
+]
+},
+"bib": {
+"citations": [
+"(e.g. Cruz 1941; Cruz et al. 1971)",
+"(Cruz et al. 1971, pp. 55–120)",
+"Rossum et al. (1993, pp. 8–134)",
+"Rossum et al. (1993)",
+"(see Cruz et al. 1971, ch. 16)",
+"(Cruz 1941; e.g. Rossum and Hoare 1967)",
+"(Backus et al. 1966, p. 74)"
+],
+"bibliography": [
+"Backus J, Hopper G, Lamport L (1966) Data abstraction and hierarchy. PhD thesis, University of Cambridge",
+"Cruz M de la (1941) Time, clocks, and the ordering of events",
+"Cruz M de la, O’Brien F, Hopper G (1971) The art of computer programming. Lab Throughput",
+"Rossum G van, Backus J, Liskov B (1993) Go to statement considered harmful",
+"Rossum G van, Hoare CAR (1967) Go to statement considered harmful"
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(see García et al. 1969)",
+"(Hoare and Müller 1994, pp. 53–135)",
+"(2014; Smith and Backus 2024)",
+"(Smith and O’Brien 1945, p. 5)",
+"Hoare and Müller (1994, pp. 43–106)",
+"(Smith and O’Brien 1945, pp. 4–111)",
+"(Smith and O’Brien 1945)",
+"Müller et al. (1937, pp. 78–133)"
+],
+"bibliography": [
+"Cruz M de la (2014) The apollo guidance computer. Lab Window",
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Hoare CAR, Müller H (1994) An axiomatic basis for computer programming. Journal of the ACM 53:203–390. https://doi.org/10.4068/layer.20",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+},
+"bib": {
+"citations": [
+"(see García et al. 1969)",
+"(Hoare and Müller 1994, pp. 53–135)",
+"(2014; Smith and Backus 2024)",
+"(Smith and O’Brien 1945, p. 5)",
+"Hoare and Müller (1994, pp. 43–106)",
+"(Smith and O’Brien 1945, pp. 4–111)",
+"(Smith and O’Brien 1945)",
+"Müller et al. (1937, pp. 78–133)"
+],
+"bibliography": [
+"Cruz M de la (2014) The apollo guidance computer. Lab Window",
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Hoare CAR, Müller H (1994) An axiomatic basis for computer programming. Journal of the ACM 53:203–390. https://doi.org/10.4068/layer.20",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+}
+}

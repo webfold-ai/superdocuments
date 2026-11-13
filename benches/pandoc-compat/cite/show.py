@@ -1,6 +1,7 @@
 import json,sys,re
 track,style,kind=sys.argv[1:4]; n=int(sys.argv[4]) if len(sys.argv)>4 else 6
-rows=json.load(open('results/cite-%s.json'%track))
+import os
+rows=json.load(open('results/cite-%s%s.json'%(track,'' if os.environ.get('CITE_SET','dev')=='dev' else '-'+os.environ['CITE_SET'])))
 fm=lambda s: re.sub('[-]', lambda m:{'':'<i>','':'</i>','':'<b>','':'</b>','':'<sc>','':'</sc>','':'<sup>','':'</sup>'}.get(m.group(),'?'), s)
 k=0
 for r in rows:

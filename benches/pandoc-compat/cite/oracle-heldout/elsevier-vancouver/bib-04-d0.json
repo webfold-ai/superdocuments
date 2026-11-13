@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[2]",
+"[e.g. 2,3]",
+"[1]",
+"[4,5]",
+"[3]",
+"[6]"
+],
+"bibliography": [
+"[1] Cruz M de la. The apollo guidance computer. Lab Window; 2014.",
+"[2] Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 1945;39:257–308. https://doi.org/10.6600/trace.17.",
+"[3] Müller H, Backus J, Lamport L. Data abstraction and hierarchy. Lab Matrix; 1937.",
+"[4] Smith JJr, Backus J. On computable numbers. Proceedings of the schema symposium, 2024, p. 24–188.",
+"[5] Knuth DE, Turing AM. Can programming be liberated from the von neumann style. Lab Complexity; 1975.",
+"[6] Rossum G van, Hopper G. Can programming be liberated from the von neumann style. Proceedings of the entropy symposium, 1987, p. 98–186."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[2]",
+"[e.g. 2,3]",
+"[1]",
+"[4,5]",
+"[3]",
+"[6]"
+],
+"bibliography": [
+"[1] Cruz M de la. The apollo guidance computer. Lab Window; 2014.",
+"[2] Smith JJr, O’Brien F. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 1945;39:257–308. https://doi.org/10.6600/trace.17.",
+"[3] Müller H, Backus J, Lamport L. Data abstraction and hierarchy. Lab Matrix; 1937.",
+"[4] Smith JJr, Backus J. On computable numbers. Proceedings of the schema symposium, 2024, p. 24–188.",
+"[5] Knuth DE, Turing AM. Can programming be liberated from the von neumann style. Lab Complexity; 1975.",
+"[6] Rossum G van, Hopper G. Can programming be liberated from the von neumann style. Proceedings of the entropy symposium, 1987, p. 98–186."
+]
+}
+}

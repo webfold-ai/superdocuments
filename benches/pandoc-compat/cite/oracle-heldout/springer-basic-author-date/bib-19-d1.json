@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Rossum et al. 1979, fig. 4)",
+"(1997)",
+"Lamport (1997, p. 8)",
+"(see Cruz and García 1984, ch. 46)",
+"(see Müller and Dijkstra 1972)",
+"O’Brien (1966, p. 15)",
+"(Dijkstra 1946, fig. 44)",
+"(see Dijkstra 1946, ch. 17)",
+"(Lovelace 1968; Turing and Liskov 2018, p. 67)",
+"(Müller and Dijkstra 1972, p. 76)",
+"(Lovelace 1968; Rossum et al. 1979, p. 89)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press"
+]
+},
+"bib": {
+"citations": [
+"(Rossum et al. 1979, fig. 4)",
+"(1997)",
+"Lamport (1997, p. 8)",
+"(see Cruz and García 1984, ch. 46)",
+"(see Müller and Dijkstra 1972)",
+"O’Brien (1966, p. 15)",
+"(Dijkstra 1946, fig. 44)",
+"(see Dijkstra 1946, ch. 17)",
+"(Lovelace 1968; Turing and Liskov 2018, p. 67)",
+"(Müller and Dijkstra 1972, p. 76)",
+"(Lovelace 1968; Rossum et al. 1979, p. 89)"
+],
+"bibliography": [
+"Cruz M de la, García L (1984) The apollo guidance computer",
+"Dijkstra EW (1946) The apollo guidance computer. In: Proceedings of the query symposium. pp 51–197",
+"Lamport L (1997) The education of a computer",
+"Lovelace A (1968) The education of a computer. PhD thesis, University of Cambridge",
+"Müller H, Dijkstra EW (1972) Go to statement considered harmful. In: Proceedings of the approach symposium. pp 53–147",
+"O’Brien F (1966) Go to statement considered harmful. MIT Press, London",
+"Rossum G van, García L, Lovelace A (1979) Go to statement considered harmful. Communications of the ACM 45:289–314. https://doi.org/10.3569/latency.66",
+"Turing AM, Liskov B (2018) On computable numbers. MIT Press, New York"
+]
+}
+}

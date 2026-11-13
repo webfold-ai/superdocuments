@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Cruz 2007, sec. 81.130 and more)",
+"(Lovelace 1940)",
+"(1939; Cruz 2007)",
+"(Cruz 2007, pp. 16–116)",
+"(see O’Brien and Backus 2024, ch. 31)",
+"Cruz (2007, pp. 58–124)",
+"(Lovelace 1940; e.g. Cruz 2007)",
+"(see Cruz 2007)",
+"(Cruz 2007, pp. 37–120)",
+"(e.g. Hopper et al. 1939; Turing 1949)",
+"Liskov (1956, p. 20)",
+"(Dijkstra et al. 1970, vol. 95)",
+"(2024)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, Rossum G van, Lamport L (1970) Time, clocks, and the ordering of events. Springer",
+"Hopper G, Hamilton M, Smith JJr (1939) The apollo guidance computer. In: Proceedings of the vector symposium. pp 95–188",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"O’Brien F, Backus J (2024) Go to statement considered harmful, 2nd edn. Addison-Wesley",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+},
+"bib": {
+"citations": [
+"(Cruz 2007, sec. 81.130 and more)",
+"(Lovelace 1940)",
+"(1939; Cruz 2007)",
+"(Cruz 2007, pp. 16–116)",
+"(see O’Brien and Backus 2024, ch. 31)",
+"Cruz (2007, pp. 58–124)",
+"(Lovelace 1940; e.g. Cruz 2007)",
+"(see Cruz 2007)",
+"(Cruz 2007, pp. 37–120)",
+"(e.g. Hopper et al. 1939; Turing 1949)",
+"Liskov (1956, p. 20)",
+"(Dijkstra et al. 1970, vol. 95)",
+"(2024)"
+],
+"bibliography": [
+"Cruz M de la (2007) Go to statement considered harmful. In: Proceedings of the network symposium. pp 81–115",
+"Dijkstra EW, Rossum G van, Lamport L (1970) Time, clocks, and the ordering of events. Springer, London",
+"Hopper G, Hamilton M, Smith JJr (1939) The apollo guidance computer. In: Proceedings of the vector symposium. pp 95–188",
+"Liskov B (1956) On computable numbers. Lab Estimate",
+"Lovelace A (1940) Can programming be liberated from the von neumann style. ACM Computing Surveys 33:183–370. https://doi.org/10.9422/heuristic.52",
+"O’Brien F, Backus J (2024) Go to statement considered harmful, 2nd edn. Addison-Wesley, New York",
+"Turing AM (1949) The apollo guidance computer. Journal of the ACM 4:240–315. https://doi.org/10.8223/index.77"
+]
+}
+}

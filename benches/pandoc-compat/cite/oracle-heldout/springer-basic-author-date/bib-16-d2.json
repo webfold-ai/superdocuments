@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"Hopper and Backus (2008)",
+"(Turing 1940, sec. 15.140 and more)",
+"(see García et al. 2007, ch. 84)",
+"(Turing 1940; Hopper et al. 1990)",
+"(Hamilton et al. 1956, p. 82; Hopper et al. 1990)",
+"(Hamilton et al. 1956, sec. 88.115 and more)",
+"(Lamport et al. 1961, p. 61)",
+"(García et al. 2007, fig. 28)",
+"(1945)",
+"(Hamilton et al. 1956; Hopper and Backus 2008)",
+"(see Lamport et al. 1961)",
+"(García et al. 2007, sec. 47.105 and more)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Backus J (2008) Notes on the analytical engine",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Turing AM (1940) Time, clocks, and the ordering of events. PhD thesis, University of Zurich"
+]
+},
+"bib": {
+"citations": [
+"Hopper and Backus (2008)",
+"(Turing 1940, sec. 15.140 and more)",
+"(see García et al. 2007, ch. 84)",
+"(Turing 1940; Hopper et al. 1990)",
+"(Hamilton et al. 1956, p. 82; Hopper et al. 1990)",
+"(Hamilton et al. 1956, sec. 88.115 and more)",
+"(Lamport et al. 1961, p. 61)",
+"(García et al. 2007, fig. 28)",
+"(1945)",
+"(Hamilton et al. 1956; Hopper and Backus 2008)",
+"(see Lamport et al. 1961)",
+"(García et al. 2007, sec. 47.105 and more)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Backus J (2008) Notes on the analytical engine",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Turing AM (1940) Time, clocks, and the ordering of events. PhD thesis, University of Zurich"
+]
+}
+}

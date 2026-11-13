@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"Rossum and Cruz (2012)",
+"(see O’Brien and Hopper 1955)",
+"(1947)",
+"Müller and Rossum (2020:79–101)",
+"(Smith 1972:86.105 and more)",
+"(O’Brien and Hopper 1955:44)",
+"(Müller and Rossum 2020:7)",
+"(Dijkstra, Hoare, and Rossum 2018; Knuth, Cruz, and Smith 2020; O’Brien and Hopper 1955)",
+"Rossum and Cruz (2012:68–122)",
+"(Liskov, Backus, and Turing 2004:2.112 and more)",
+"(Dijkstra 1947; e.g. Knuth et al. 2020)",
+"(Knuth et al. 2020:28–123)",
+"(Dijkstra 1947:49)",
+"(Knuth et al. 2020; 2004)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1947. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Pp. 1–192 in Proceedings of the stream symposium.",
+"Knuth, Donald E., Maria de la Cruz, and John Jr. Smith. 2020. “On Computable Numbers.”",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. MIT Press.",
+"Müller, Hans, and Guido van Rossum. 2020. “The Education of a Computer.” IEEE Transactions on Software Engineering 2(11):86–362. doi:10.7751/compiler.14.",
+"O’Brien, Flann, and Grace Hopper. 1955. “On Computable Numbers.”",
+"Rossum, Guido van, and Maria de la Cruz. 2012. Notes on the Analytical Engine. TR-39. Lab Transform.",
+"Smith, John Jr. 1972. “Notes on the Analytical Engine.” PhD thesis, University of Cambridge."
+]
+},
+"bib": {
+"citations": [
+"Rossum and Cruz (2012)",
+"(see O’Brien and Hopper 1955)",
+"(1947)",
+"Müller and Rossum (2020:79–101)",
+"(Smith 1972:86.105 and more)",
+"(O’Brien and Hopper 1955:44)",
+"(Müller and Rossum 2020:7)",
+"(Dijkstra, Hoare, and Rossum 2018; Knuth, Cruz, and Smith 2020; O’Brien and Hopper 1955)",
+"Rossum and Cruz (2012:68–122)",
+"(Liskov, Backus, and Turing 2004:2.112 and more)",
+"(Dijkstra 1947; e.g. Knuth et al. 2020)",
+"(Knuth et al. 2020:28–123)",
+"(Dijkstra 1947:49)",
+"(Knuth et al. 2020; 2004)"
+],
+"bibliography": [
+"Dijkstra, Edsger W. 1947. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Pp. 1–192 in Proceedings of the stream symposium.",
+"Knuth, Donald E., Maria de la Cruz, and John Jr. Smith. 2020. “On Computable Numbers.”",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. New York: MIT Press.",
+"Müller, Hans, and Guido van Rossum. 2020. “The Education of a Computer.” IEEE Transactions on Software Engineering 2(11):86–362. doi:10.7751/compiler.14.",
+"O’Brien, Flann, and Grace Hopper. 1955. “On Computable Numbers.”",
+"Rossum, Guido van, and Maria de la Cruz. 2012. Notes on the Analytical Engine. TR-39. Lab Transform.",
+"Smith, John Jr. 1972. “Notes on the Analytical Engine.” PhD thesis, University of Cambridge."
+]
+}
+}

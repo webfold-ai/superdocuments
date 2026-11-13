@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Turing et al. 1969, p. 24)",
+"(Smith and Backus 1981, p. 32)",
+"Hopper and Lamport (1942)",
+"(Hoare and Liskov 2005, vol. 4)",
+"(see Hoare and Liskov 2005)",
+"(1942; Smith and Backus 1981)",
+"(Smith and Backus 1981; e.g. Hoare and Liskov 2005)",
+"(Smith and Backus 1981, sec. 37.131 and more)",
+"(Hoare and Liskov 2005, pp. 35–108)",
+"(Hopper and Lamport 1942; Turing et al. 1969; Hoare and Liskov 2005)",
+"(Hopper and Lamport 1942, fig. 10)",
+"(Hopper 1986; Hoare and Liskov 2005)",
+"(Turing et al. 1969; e.g. Smith and Backus 1981)"
+],
+"bibliography": [
+"Hoare CAR, Liskov B (2005) On computable numbers. In: Proceedings of the transform symposium. pp 71–122",
+"Hopper G (1986) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Hopper G, Lamport L (1942) The education of a computer. In: Proceedings of the filter symposium. pp 37–181",
+"Smith JJr, Backus J (1981) The education of a computer. ACM Computing Surveys 36:64–305. https://doi.org/10.9730/kernel.12",
+"Turing AM, Smith JJr, Rossum G van (1969) Time, clocks, and the ordering of events. Lab Graph"
+]
+},
+"bib": {
+"citations": [
+"(Turing et al. 1969, p. 24)",
+"(Smith and Backus 1981, p. 32)",
+"Hopper and Lamport (1942)",
+"(Hoare and Liskov 2005, vol. 4)",
+"(see Hoare and Liskov 2005)",
+"(1942; Smith and Backus 1981)",
+"(Smith and Backus 1981; e.g. Hoare and Liskov 2005)",
+"(Smith and Backus 1981, sec. 37.131 and more)",
+"(Hoare and Liskov 2005, pp. 35–108)",
+"(Hopper and Lamport 1942; Turing et al. 1969; Hoare and Liskov 2005)",
+"(Hopper and Lamport 1942, fig. 10)",
+"(Hopper 1986; Hoare and Liskov 2005)",
+"(Turing et al. 1969; e.g. Smith and Backus 1981)"
+],
+"bibliography": [
+"Hoare CAR, Liskov B (2005) On computable numbers. In: Proceedings of the transform symposium. pp 71–122",
+"Hopper G (1986) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Hopper G, Lamport L (1942) The education of a computer. In: Proceedings of the filter symposium. pp 37–181",
+"Smith JJr, Backus J (1981) The education of a computer. ACM Computing Surveys 36:64–305. https://doi.org/10.9730/kernel.12",
+"Turing AM, Smith JJr, Rossum G van (1969) Time, clocks, and the ordering of events. Lab Graph"
+]
+}
+}

@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"Hopper and Backus (2008)",
+"(Turing 1940:15.140 and more)",
+"(see García, Hamilton, and Knuth 2007, ch. 84)",
+"(Hopper, Dijkstra, and Backus 1990; Turing 1940)",
+"(Hamilton, Lovelace, and Turing 1956:82; Hopper et al. 1990)",
+"(Hamilton et al. 1956:88.115 and more)",
+"(Lamport, Dijkstra, and Hoare 1961:61)",
+"(García et al. 2007:28)",
+"(1945)",
+"(Hamilton et al. 1956; Hopper and Backus 2008)",
+"(see Lamport et al. 1961)",
+"(García et al. 2007:47.105 and more)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33(10):192–344.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+},
+"bib": {
+"citations": [
+"Hopper and Backus (2008)",
+"(Turing 1940:15.140 and more)",
+"(see García, Hamilton, and Knuth 2007, ch. 84)",
+"(Hopper, Dijkstra, and Backus 1990; Turing 1940)",
+"(Hamilton, Lovelace, and Turing 1956:82; Hopper et al. 1990)",
+"(Hamilton et al. 1956:88.115 and more)",
+"(Lamport, Dijkstra, and Hoare 1961:61)",
+"(García et al. 2007:28)",
+"(1945)",
+"(Hamilton et al. 1956; Hopper and Backus 2008)",
+"(see Lamport et al. 1961)",
+"(García et al. 2007:47.105 and more)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Knuth, Donald E., and Flann O’Brien. 1945. An Axiomatic Basis for Computer Programming. TR-13. Lab Scheduler.",
+"Lamport, Leslie, Edsger W. Dijkstra, and C. A. R. Hoare. 1961. “Notes on the Analytical Engine.” Journal of the ACM 33(10):192–344.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+}
+}

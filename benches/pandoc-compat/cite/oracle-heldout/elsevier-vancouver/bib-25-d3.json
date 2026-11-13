@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2,3]",
+"[2–4]",
+"[5]",
+"[3 and more]",
+"[2]",
+"[3]",
+"[4,e.g. 5]",
+"[4]",
+"[4]",
+"[1,2,4]",
+"[5]",
+"[5]"
+],
+"bibliography": [
+"[1] Knuth DE, Smith JJr. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1991.",
+"[2] Hamilton M, Backus J, Rossum G van. On computable numbers. Proceedings of the token symposium, 1936, p. 76–170.",
+"[3] Lamport L. Can programming be liberated from the von neumann style. Springer; 1992.",
+"[4] Knuth DE. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1955.",
+"[5] Hoare CAR, Hamilton M. The art of computer programming. 2nd ed. MIT Press; 1975."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2,3]",
+"[2–4]",
+"[5]",
+"[3 and more]",
+"[2]",
+"[3]",
+"[4,e.g. 5]",
+"[4]",
+"[4]",
+"[1,2,4]",
+"[5]",
+"[5]"
+],
+"bibliography": [
+"[1] Knuth DE, Smith JJr. Can programming be liberated from the von neumann style. PhD thesis. University of Cambridge, 1991.",
+"[2] Hamilton M, Backus J, Rossum G van. On computable numbers. Proceedings of the token symposium, 1936, p. 76–170.",
+"[3] Lamport L. Can programming be liberated from the von neumann style. New York: Springer; 1992.",
+"[4] Knuth DE. Data abstraction and hierarchy. PhD thesis. University of Zurich, 1955.",
+"[5] Hoare CAR, Hamilton M. The art of computer programming. 2nd ed. New York: MIT Press; 1975."
+]
+}
+}

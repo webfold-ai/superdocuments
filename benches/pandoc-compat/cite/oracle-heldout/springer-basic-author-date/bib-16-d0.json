@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Hopper and Lamport 1943; Lamport et al. 1961, p. 13)",
+"Hopper and Lamport (1943, pp. 90–103)",
+"(Knuth and O’Brien 1945; Lamport et al. 1961, p. 93)",
+"(Hopper and Lamport 1943; 2007)",
+"(Liskov and Knuth 1954; Hopper et al. 1990)",
+"(García et al. 2007, pp. 98–101)",
+"(Liskov and Knuth 1954, p. 77)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128"
+]
+},
+"bib": {
+"citations": [
+"(Hopper and Lamport 1943; Lamport et al. 1961, p. 13)",
+"Hopper and Lamport (1943, pp. 90–103)",
+"(Knuth and O’Brien 1945; Lamport et al. 1961, p. 93)",
+"(Hopper and Lamport 1943; 2007)",
+"(Liskov and Knuth 1954; Hopper et al. 1990)",
+"(García et al. 2007, pp. 98–101)",
+"(Liskov and Knuth 1954, p. 77)"
+],
+"bibliography": [
+"García L, Hamilton M, Knuth DE (2007) An axiomatic basis for computer programming",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press, London",
+"Knuth DE, O’Brien F (1945) An axiomatic basis for computer programming. Lab Scheduler",
+"Lamport L, Dijkstra EW, Hoare CAR (1961) Notes on the analytical engine. Journal of the ACM 33:192–344",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128"
+]
+}
+}

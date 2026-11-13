@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"(Dijkstra 1946:52.113 and more)",
+"(Müller and Dijkstra 1972; 1979)",
+"(Cruz and García 1984:75–134)",
+"(see Lovelace 1968, ch. 26)",
+"(Lovelace 1968; O’Brien 1966:56)",
+"(Cruz and García 1984; Rossum et al. 1979:43)",
+"(2018)",
+"(Rossum et al. 1979:83.111 and more)",
+"(Liskov 1992:36)",
+"(Müller and Dijkstra 1972:90)",
+"(Cruz and García 1984; Liskov 1992; Rossum et al. 1979)",
+"(Hopper 1986; Lovelace 1968)",
+"Liskov (1992:52)",
+"(see Liskov 1992)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Hopper, Grace. 1986. “On Computable Numbers.” ACM Computing Surveys 39(7):151–379. doi:10.5661/experiment.46.",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Müller, Hans, and Edsger W. Dijkstra. 1972. “Go to Statement Considered Harmful.” Pp. 53–147 in Proceedings of the approach symposium.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(Dijkstra 1946:52.113 and more)",
+"(Müller and Dijkstra 1972; 1979)",
+"(Cruz and García 1984:75–134)",
+"(see Lovelace 1968, ch. 26)",
+"(Lovelace 1968; O’Brien 1966:56)",
+"(Cruz and García 1984; Rossum et al. 1979:43)",
+"(2018)",
+"(Rossum et al. 1979:83.111 and more)",
+"(Liskov 1992:36)",
+"(Müller and Dijkstra 1972:90)",
+"(Cruz and García 1984; Liskov 1992; Rossum et al. 1979)",
+"(Hopper 1986; Lovelace 1968)",
+"Liskov (1992:52)",
+"(see Liskov 1992)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Hopper, Grace. 1986. “On Computable Numbers.” ACM Computing Surveys 39(7):151–379. doi:10.5661/experiment.46.",
+"Liskov, Barbara. 1992. “The Art of Computer Programming.” Proceedings of the London Mathematical Society 44(12):132–356.",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Müller, Hans, and Edsger W. Dijkstra. 1972. “Go to Statement Considered Harmful.” Pp. 53–147 in Proceedings of the approach symposium.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. London: MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. New York: MIT Press."
+]
+}
+}

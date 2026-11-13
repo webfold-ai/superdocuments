@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1,2]",
+"[see 3]",
+"[1,4]",
+"[4]",
+"[1]",
+"[4,e.g. 5]"
+],
+"bibliography": [
+"[1] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[2] Müller H, O’Brien F. On computable numbers. PhD thesis. University of Cambridge, 2010.",
+"[3] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963.",
+"[4] Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. Proceedings of the compiler symposium, 2012, p. 35–166.",
+"[5] Backus J, Knuth DE, Müller H. On computable numbers. Lab Heuristic; 2007."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1,2]",
+"[see 3]",
+"[1,4]",
+"[4]",
+"[1]",
+"[4,e.g. 5]"
+],
+"bibliography": [
+"[1] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[2] Müller H, O’Brien F. On computable numbers. PhD thesis. University of Cambridge, 2010.",
+"[3] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963.",
+"[4] Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. Proceedings of the compiler symposium, 2012, p. 35–166.",
+"[5] Backus J, Knuth DE, Müller H. On computable numbers. Lab Heuristic; 2007."
+]
+}
+}

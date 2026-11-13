@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Cruz, O’Brien, and Hopper 1971; Müller 2013; Rossum and Hoare 1967)",
+"(see Cruz 1941)",
+"(Cruz et al. 1971; Hoare, Lovelace, and Turing 2016)",
+"(Rossum and Hoare 1967:85)",
+"Rossum, Backus, and Liskov (1993:55–122)",
+"(Cruz 1941:90.131 and more)",
+"(1993)",
+"(Backus, Hopper, and Lamport 1966:10)",
+"(1993)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Leslie Lamport. 1966. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Cruz, Maria de la. 1941. “Time, Clocks, and the Ordering of Events.”",
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Hoare, C. A. R., Ada Lovelace, and Alan M. Turing. 2016. Notes on the Analytical Engine. TR-43. Lab Feature.",
+"Müller, Hans. 2013. Notes on the Analytical Engine. TR-96. Lab Bound. https://example.org/entropy.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”"
+]
+},
+"bib": {
+"citations": [
+"(Cruz, O’Brien, and Hopper 1971; Müller 2013; Rossum and Hoare 1967)",
+"(see Cruz 1941)",
+"(Cruz et al. 1971; Hoare, Lovelace, and Turing 2016)",
+"(Rossum and Hoare 1967:85)",
+"Rossum, Backus, and Liskov (1993:55–122)",
+"(Cruz 1941:90.131 and more)",
+"(1993)",
+"(Backus, Hopper, and Lamport 1966:10)",
+"(1993)"
+],
+"bibliography": [
+"Backus, John, Grace Hopper, and Leslie Lamport. 1966. “Data Abstraction and Hierarchy.” PhD thesis, University of Cambridge.",
+"Cruz, Maria de la. 1941. “Time, Clocks, and the Ordering of Events.”",
+"Cruz, Maria de la, Flann O’Brien, and Grace Hopper. 1971. The Art of Computer Programming. TR-84. Lab Throughput. https://example.org/complexity.",
+"Hoare, C. A. R., Ada Lovelace, and Alan M. Turing. 2016. Notes on the Analytical Engine. TR-43. Lab Feature.",
+"Müller, Hans. 2013. Notes on the Analytical Engine. TR-96. Lab Bound. https://example.org/entropy.",
+"Rossum, Guido van, John Backus, and Barbara Liskov. 1993. “Go to Statement Considered Harmful.”",
+"Rossum, Guido van, and C. A. R. Hoare. 1967. “Go to Statement Considered Harmful.”"
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Hopper and Lamport 1943)",
+"Liskov and Knuth (1954, pp. 37–114)",
+"(Turing 1940, fig. 74)",
+"Hopper et al. (1990)",
+"Hopper and Lamport (1943)",
+"(Hopper et al. 1990, vol. 16)",
+"Hamilton et al. (1956, p. 66)"
+],
+"bibliography": [
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128",
+"Turing AM (1940) Time, clocks, and the ordering of events. PhD thesis, University of Zurich"
+]
+},
+"bib": {
+"citations": [
+"(see Hopper and Lamport 1943)",
+"Liskov and Knuth (1954, pp. 37–114)",
+"(Turing 1940, fig. 74)",
+"Hopper et al. (1990)",
+"Hopper and Lamport (1943)",
+"(Hopper et al. 1990, vol. 16)",
+"Hamilton et al. (1956, p. 66)"
+],
+"bibliography": [
+"Hamilton M, Lovelace A, Turing AM (1956) An axiomatic basis for computer programming. Lab Scheduler",
+"Hopper G, Dijkstra EW, Backus J (1990) On computable numbers. Lab Algorithm",
+"Hopper G, Lamport L (1943) Go to statement considered harmful. Cambridge University Press, London",
+"Liskov B, Knuth DE (1954) The art of computer programming. In: Proceedings of the pipeline symposium. pp 14–128",
+"Turing AM (1940) Time, clocks, and the ordering of events. PhD thesis, University of Zurich"
+]
+}
+}

@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[2,3]",
+"[see 1, ch. 30]",
+"[4]",
+"[2 and more]",
+"[5,6]",
+"[see 2, ch. 64]",
+"[3,5]",
+"[1 and more]",
+"[7]",
+"[5]"
+],
+"bibliography": [
+"[1] García L, Knuth DE. An axiomatic basis for computer programming. Proceedings of the transform symposium, 1936, p. 2–133.",
+"[2] O’Brien F, Rossum G van, Smith JJr. Time, clocks, and the ordering of events. New York: Addison-Wesley; 1975.",
+"[3] Hopper G, Backus J, Müller H. The art of computer programming. New York: Addison-Wesley; 1939.",
+"[4] Smith JJr. The apollo guidance computer. Lab Layer; 2006.",
+"[5] Hopper G, Müller H, Lovelace A. The apollo guidance computer. 3rd ed. London: Cambridge University Press; 1987.",
+"[6] Backus J. On computable numbers 1943.",
+"[7] Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 2005;7:191–397. https://doi.org/10.4589/gradient.17."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[2,3]",
+"[see 1, ch. 30]",
+"[4]",
+"[2 and more]",
+"[5,6]",
+"[see 2, ch. 64]",
+"[3,5]",
+"[1 and more]",
+"[7]",
+"[5]"
+],
+"bibliography": [
+"[1] García L, Knuth DE. An axiomatic basis for computer programming. Proceedings of the transform symposium, 1936, p. 2–133.",
+"[2] O’Brien F, Rossum G van, Smith JJr. Time, clocks, and the ordering of events. New York: Addison-Wesley; 1975.",
+"[3] Hopper G, Backus J, Müller H. The art of computer programming. New York: Addison-Wesley; 1939.",
+"[4] Smith JJr. The apollo guidance computer. Lab Layer; 2006.",
+"[5] Hopper G, Müller H, Lovelace A. The apollo guidance computer. 3rd ed. London: Cambridge University Press; 1987.",
+"[6] Backus J. On computable numbers 1943.",
+"[7] Hoare CAR, Müller H. Data abstraction and hierarchy. Proceedings of the London Mathematical Society 2005;7:191–397. https://doi.org/10.4589/gradient.17."
+]
+}
+}

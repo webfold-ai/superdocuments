@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Backus 1943; Hopper, Backus, and Müller 1939; Smith 2006)",
+"(see Hopper et al. 1939, ch. 72)",
+"(Hopper et al. 1939; Smith 2006)",
+"(Backus 1943:26)",
+"(Smith 2006:11)",
+"(Backus 1943)",
+"(1943; García, Lamport, and Liskov 1998)",
+"(Backus 1943; García et al. 1998)"
+],
+"bibliography": [
+"Backus, John. 1943. “On Computable Numbers.”",
+"García, Luis, Leslie Lamport, and Barbara Liskov. 1998. “The Art of Computer Programming.”",
+"Hopper, Grace, John Backus, and Hans Müller. 1939. The Art of Computer Programming. New York: Addison-Wesley.",
+"Smith, John Jr. 2006. The Apollo Guidance Computer. TR-83. Lab Layer."
+]
+},
+"bib": {
+"citations": [
+"(Backus 1943; Hopper, Backus, and Müller 1939; Smith 2006)",
+"(see Hopper et al. 1939, ch. 72)",
+"(Hopper et al. 1939; Smith 2006)",
+"(Backus 1943:26)",
+"(Smith 2006:11)",
+"(Backus 1943)",
+"(1943; García, Lamport, and Liskov 1998)",
+"(Backus 1943; García et al. 1998)"
+],
+"bibliography": [
+"Backus, John. 1943. “On Computable Numbers.”",
+"García, Luis, Leslie Lamport, and Barbara Liskov. 1998. “The Art of Computer Programming.”",
+"Hopper, Grace, John Backus, and Hans Müller. 1939. The Art of Computer Programming. New York: Addison-Wesley.",
+"Smith, John Jr. 2006. The Apollo Guidance Computer. TR-83. Lab Layer."
+]
+}
+}

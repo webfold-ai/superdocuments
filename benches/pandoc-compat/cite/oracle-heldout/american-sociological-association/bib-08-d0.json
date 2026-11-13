@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Smith and Backus 1981)",
+"(Turing, Smith, and Rossum 1969)",
+"(Turing et al. 1969:52.131 and more)",
+"(1986)",
+"Hopper (1986:77–132)",
+"(Hopper and Lamport 1942; Smith and Backus 1981:35)",
+"Smith and Backus (1981)",
+"(Hopper 1986:91–128)"
+],
+"bibliography": [
+"Hopper, Grace. 1986. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Pp. 37–181 in Proceedings of the filter symposium.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36(12):64–305. doi:10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+},
+"bib": {
+"citations": [
+"(see Smith and Backus 1981)",
+"(Turing, Smith, and Rossum 1969)",
+"(Turing et al. 1969:52.131 and more)",
+"(1986)",
+"Hopper (1986:77–132)",
+"(Hopper and Lamport 1942; Smith and Backus 1981:35)",
+"Smith and Backus (1981)",
+"(Hopper 1986:91–128)"
+],
+"bibliography": [
+"Hopper, Grace. 1986. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Oxford.",
+"Hopper, Grace, and Leslie Lamport. 1942. “The Education of a Computer.” Pp. 37–181 in Proceedings of the filter symposium.",
+"Smith, John Jr., and John Backus. 1981. “The Education of a Computer.” ACM Computing Surveys 36(12):64–305. doi:10.9730/kernel.12.",
+"Turing, Alan M., John Jr. Smith, and Guido van Rossum. 1969. Time, Clocks, and the Ordering of Events. TR-81. Lab Graph. https://example.org/workload."
+]
+}
+}

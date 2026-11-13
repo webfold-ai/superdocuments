@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1]",
+"[1]",
+"[2]",
+"[3]",
+"[4–6]",
+"[3]",
+"[4]",
+"[2]",
+"[2,3]"
+],
+"bibliography": [
+"[1] Hopper G, O’Brien F. The education of a computer. IEEE Transactions on Software Engineering 1963;45:135–397.",
+"[2] Smith JJr, Backus J. The art of computer programming 1973.",
+"[3] Müller H, Hoare CAR. The apollo guidance computer 1989.",
+"[4] Müller H, Liskov B. The apollo guidance computer. Second. Springer; 2014.",
+"[5] Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society 2005;33:72–308.",
+"[6] O’Brien F. An axiomatic basis for computer programming 1965."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1]",
+"[1]",
+"[2]",
+"[3]",
+"[4–6]",
+"[3]",
+"[4]",
+"[2]",
+"[2,3]"
+],
+"bibliography": [
+"[1] Hopper G, O’Brien F. The education of a computer. IEEE Transactions on Software Engineering 1963;45:135–397.",
+"[2] Smith JJr, Backus J. The art of computer programming 1973.",
+"[3] Müller H, Hoare CAR. The apollo guidance computer 1989.",
+"[4] Müller H, Liskov B. The apollo guidance computer. Second. London: Springer; 2014.",
+"[5] Hoare CAR. The apollo guidance computer. Proceedings of the London Mathematical Society 2005;33:72–308.",
+"[6] O’Brien F. An axiomatic basis for computer programming 1965."
+]
+}
+}

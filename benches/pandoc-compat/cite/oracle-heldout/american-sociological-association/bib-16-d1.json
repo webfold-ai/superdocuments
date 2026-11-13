@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Liskov and Knuth 1954:25)",
+"(Hopper and Lamport 1943:96–104)",
+"(Hopper and Backus 2008:21)",
+"(Turing 1940)",
+"(Hopper and Lamport 1943:73)",
+"(Liskov and Knuth 1954:42)",
+"(Hopper and Lamport 1943:89–134)",
+"(Hopper and Backus 2008:92; Turing 1940)",
+"(Hopper and Backus 2008:44)",
+"(García, Hamilton, and Knuth 2007:66)",
+"(Hopper, Dijkstra, and Backus 1990:56)",
+"(Liskov and Knuth 1954:56)",
+"(Liskov and Knuth 1954:69)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. Cambridge University Press.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+},
+"bib": {
+"citations": [
+"(Liskov and Knuth 1954:25)",
+"(Hopper and Lamport 1943:96–104)",
+"(Hopper and Backus 2008:21)",
+"(Turing 1940)",
+"(Hopper and Lamport 1943:73)",
+"(Liskov and Knuth 1954:42)",
+"(Hopper and Lamport 1943:89–134)",
+"(Hopper and Backus 2008:92; Turing 1940)",
+"(Hopper and Backus 2008:44)",
+"(García, Hamilton, and Knuth 2007:66)",
+"(Hopper, Dijkstra, and Backus 1990:56)",
+"(Liskov and Knuth 1954:56)",
+"(Liskov and Knuth 1954:69)"
+],
+"bibliography": [
+"García, Luis, Margaret Hamilton, and Donald E. Knuth. 2007. “An Axiomatic Basis for Computer Programming.”",
+"Hopper, Grace, and John Backus. 2008. “Notes on the Analytical Engine.”",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. London: Cambridge University Press.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+}
+}

@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"(Müller and Liskov 2014, p. 7)",
+"(Hoare 2005; 2014)",
+"(García 1986)",
+"(García 1986, pp. 74–139)",
+"(O’Brien 1965, pp. 49–103)",
+"(O’Brien 1965, sec. 99.107 and more)",
+"(O’Brien 1965, 2013; Smith and Backus 1973)"
+],
+"bibliography": [
+"García L (1986) The apollo guidance computer. In: Proceedings of the node symposium. pp 30–177",
+"Hoare CAR (2005) The apollo guidance computer. Proceedings of the London Mathematical Society 33:72–308",
+"Müller H, Liskov B (2014) The apollo guidance computer, Second. Springer",
+"O’Brien F (2013) The art of computer programming, 3rd edn. Cambridge University Press",
+"O’Brien F (1965) An axiomatic basis for computer programming",
+"Smith JJr, Backus J (1973) The art of computer programming"
+]
+},
+"bib": {
+"citations": [
+"(Müller and Liskov 2014, p. 7)",
+"(Hoare 2005; 2014)",
+"(García 1986)",
+"(García 1986, pp. 74–139)",
+"(O’Brien 1965, pp. 49–103)",
+"(O’Brien 1965, sec. 99.107 and more)",
+"(O’Brien 1965, 2013; Smith and Backus 1973)"
+],
+"bibliography": [
+"García L (1986) The apollo guidance computer. In: Proceedings of the node symposium. pp 30–177",
+"Hoare CAR (2005) The apollo guidance computer. Proceedings of the London Mathematical Society 33:72–308",
+"Müller H, Liskov B (2014) The apollo guidance computer, Second. Springer, London",
+"O’Brien F (2013) The art of computer programming, 3rd edn. Cambridge University Press, New York",
+"O’Brien F (1965) An axiomatic basis for computer programming",
+"Smith JJr, Backus J (1973) The art of computer programming"
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[4]",
+"[4]",
+"[5]",
+"[5–7]",
+"[see 7, ch. 95]",
+"[see 4]"
+],
+"bibliography": [
+"[1] Lamport L. The education of a computer 1997.",
+"[2] O’Brien F. Go to statement considered harmful. MIT Press; 1966.",
+"[3] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[4] Turing AM, Liskov B. On computable numbers. MIT Press; 2018.",
+"[5] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[6] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[7] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[3]",
+"[4]",
+"[4]",
+"[5]",
+"[5–7]",
+"[see 7, ch. 95]",
+"[see 4]"
+],
+"bibliography": [
+"[1] Lamport L. The education of a computer 1997.",
+"[2] O’Brien F. Go to statement considered harmful. London: MIT Press; 1966.",
+"[3] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[4] Turing AM, Liskov B. On computable numbers. New York: MIT Press; 2018.",
+"[5] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[6] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[7] Liskov B. The art of computer programming. Proceedings of the London Mathematical Society 1992;44:132–356."
+]
+}
+}

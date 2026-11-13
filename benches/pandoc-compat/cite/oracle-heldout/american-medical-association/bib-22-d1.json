@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"1",
+"2(fig13)",
+"2–4",
+"5(fig85)",
+"see 2",
+"6(fig51)",
+"2(p50)",
+"5(p84)",
+"5(sec21.140) and more",
+"3(p17)",
+"7(p82)",
+"e.g. 4,5",
+"5(vol66)"
+],
+"bibliography": [
+"1. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"2. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"3. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
+"4. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"5. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"6. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"7. Grace Hopper, Leslie Lamport, John Jr. Smith. On Computable Numbers. Springer; 2019."
+]
+},
+"bib": {
+"citations": [
+"1",
+"2(fig13)",
+"2–4",
+"5(fig85)",
+"see 2",
+"6(fig51)",
+"2(p50)",
+"5(p84)",
+"5(sec21.140) and more",
+"3(p17)",
+"7(p82)",
+"e.g. 4,5",
+"5(vol66)"
+],
+"bibliography": [
+"1. Hans Müller. Data Abstraction and Hierarchy. MIT Press; 1947.",
+"2. Grace Hopper, Margaret Hamilton. On Computable Numbers. Lab Agent; 1988.",
+"3. Hans Müller, Edsger W. Dijkstra. On Computable Numbers. Lab Query; 2004.",
+"4. Barbara Liskov, C. A. R. Hoare, Hans Müller. Time, clocks, and the ordering of events. In: Proceedings of the Experiment Symposium. 1988:70-197.",
+"5. Donald E. Knuth, John Jr. Smith, Edsger W. Dijkstra. An axiomatic basis for computer programming. In: Proceedings of the Latency Symposium. 1962:26-101. https://example.org/algorithm",
+"6. John Jr. Smith, Luis García. Can programming be liberated from the von neumann style. Communications of the ACM. 1993;46(5):223-398. doi:10.4191/convergence.19",
+"7. Grace Hopper, Leslie Lamport, John Jr. Smith. On Computable Numbers. Springer; 2019."
+]
+}
+}

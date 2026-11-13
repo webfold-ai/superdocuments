@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Liskov, Hoare, and Müller 1988:7)",
+"Hopper, O’Brien, and Cruz (1941:70)",
+"(Liskov et al. 1988:36)",
+"(Hopper et al. 1941; Smith and García 1993)",
+"(1941; Liskov et al. 1988)",
+"Smith and García (1993)",
+"Hopper and Hamilton (1988:82)",
+"Liskov et al. (1988)",
+"(Liskov et al. 1988; Müller and Dijkstra 2004:63)",
+"(see Hopper et al. 1941, ch. 93)",
+"(Hopper et al. 1941:19.112 and more)",
+"(see Müller and Dijkstra 2004, ch. 55)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+},
+"bib": {
+"citations": [
+"(Liskov, Hoare, and Müller 1988:7)",
+"Hopper, O’Brien, and Cruz (1941:70)",
+"(Liskov et al. 1988:36)",
+"(Hopper et al. 1941; Smith and García 1993)",
+"(1941; Liskov et al. 1988)",
+"Smith and García (1993)",
+"Hopper and Hamilton (1988:82)",
+"Liskov et al. (1988)",
+"(Liskov et al. 1988; Müller and Dijkstra 2004:63)",
+"(see Hopper et al. 1941, ch. 93)",
+"(Hopper et al. 1941:19.112 and more)",
+"(see Müller and Dijkstra 2004, ch. 55)"
+],
+"bibliography": [
+"Hopper, Grace, and Margaret Hamilton. 1988. On Computable Numbers. TR-98. Lab Agent.",
+"Hopper, Grace, Flann O’Brien, and Maria de la Cruz. 1941. “On Computable Numbers.” PhD thesis, University of Oxford.",
+"Liskov, Barbara, C. A. R. Hoare, and Hans Müller. 1988. “Time, Clocks, and the Ordering of Events.” Pp. 70–197 in Proceedings of the experiment symposium.",
+"Müller, Hans, and Edsger W. Dijkstra. 2004. On Computable Numbers. TR-33. Lab Query.",
+"Smith, John Jr., and Luis García. 1993. “Can Programming Be Liberated from the von Neumann Style.” Communications of the ACM 46(5):223–398. doi:10.4191/convergence.19."
+]
+}
+}

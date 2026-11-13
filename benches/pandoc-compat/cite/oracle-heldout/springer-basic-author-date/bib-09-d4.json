@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(Hoare 1947, pp. 19–133)",
+"(Hoare 1947; 1956)",
+"(Lamport and Turing 1938, p. 41; Turing et al. 1979)",
+"(2017)",
+"(see Hamilton et al. 2008, ch. 81)",
+"(O’Brien et al. 1956, fig. 21)",
+"(Lamport and Turing 1938; O’Brien et al. 1956; Hamilton et al. 2008)",
+"(Turing et al. 1979, p. 5)",
+"(e.g. Lamport and Turing 1938; Smith 2017)",
+"O’Brien et al. (1956, p. 57)",
+"(O’Brien et al. 1956, vol. 52)",
+"(Lamport and Turing 1938)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Hoare CAR (1947) The art of computer programming. PhD thesis, University of Cambridge",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+},
+"bib": {
+"citations": [
+"(Hoare 1947, pp. 19–133)",
+"(Hoare 1947; 1956)",
+"(Lamport and Turing 1938, p. 41; Turing et al. 1979)",
+"(2017)",
+"(see Hamilton et al. 2008, ch. 81)",
+"(O’Brien et al. 1956, fig. 21)",
+"(Lamport and Turing 1938; O’Brien et al. 1956; Hamilton et al. 2008)",
+"(Turing et al. 1979, p. 5)",
+"(e.g. Lamport and Turing 1938; Smith 2017)",
+"O’Brien et al. (1956, p. 57)",
+"(O’Brien et al. 1956, vol. 52)",
+"(Lamport and Turing 1938)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Hoare CAR (1947) The art of computer programming. PhD thesis, University of Cambridge",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+}
+}

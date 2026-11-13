@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(O’Brien et al. 1956; Smith 2017, p. 25)",
+"O’Brien et al. (1956, pp. 15–127)",
+"(Turing et al. 1979, fig. 16)",
+"Hamilton et al. (2008)",
+"(Hamilton et al. 2008)",
+"Hoare (1947, p. 70)",
+"(2008)",
+"(1979; Smith 2017)",
+"(O’Brien et al. 1956, pp. 78–106)",
+"(2008)",
+"(e.g. O’Brien et al. 1956; Turing et al. 1979)",
+"Smith (2017, p. 68)",
+"(Lamport and Turing 1938; 1979)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Hoare CAR (1947) The art of computer programming. PhD thesis, University of Cambridge",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+},
+"bib": {
+"citations": [
+"(O’Brien et al. 1956; Smith 2017, p. 25)",
+"O’Brien et al. (1956, pp. 15–127)",
+"(Turing et al. 1979, fig. 16)",
+"Hamilton et al. (2008)",
+"(Hamilton et al. 2008)",
+"Hoare (1947, p. 70)",
+"(2008)",
+"(1979; Smith 2017)",
+"(O’Brien et al. 1956, pp. 78–106)",
+"(2008)",
+"(e.g. O’Brien et al. 1956; Turing et al. 1979)",
+"Smith (2017, p. 68)",
+"(Lamport and Turing 1938; 1979)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Turing AM (2008) Can programming be liberated from the von neumann style, 3rd edn. Springer, New York",
+"Hoare CAR (1947) The art of computer programming. PhD thesis, University of Cambridge",
+"Lamport L, Turing AM (1938) Go to statement considered harmful. In: Proceedings of the distribution symposium. pp 67–141",
+"O’Brien F, Cruz M de la, Hopper G (1956) An axiomatic basis for computer programming. Springer, Boston",
+"Smith JJr (2017) The education of a computer. PhD thesis, University of Oxford",
+"Turing AM, Lamport L, Lovelace A (1979) The art of computer programming"
+]
+}
+}

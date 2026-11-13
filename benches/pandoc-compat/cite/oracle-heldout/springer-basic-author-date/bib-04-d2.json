@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(Smith and O’Brien 1945; Rossum and Hopper 1987; Smith and Backus 2024)",
+"(see García et al. 1969)",
+"(Cruz 2014)",
+"(García et al. 1969, pp. 71–126)",
+"(García et al. 1969; Rossum and Hopper 1987; Smith and Backus 2024)",
+"(Knuth and Turing 1975, sec. 41.135 and more)",
+"(García et al. 1969, fig. 92)",
+"Müller et al. (1937)",
+"(Müller et al. 1937; Rossum and Hopper 1987, p. 19)"
+],
+"bibliography": [
+"Cruz M de la (2014) The apollo guidance computer. Lab Window",
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Knuth DE, Turing AM (1975) Can programming be liberated from the von neumann style. Lab Complexity",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Rossum G van, Hopper G (1987) Can programming be liberated from the von neumann style. In: Proceedings of the entropy symposium. pp 98–186",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+},
+"bib": {
+"citations": [
+"(Smith and O’Brien 1945; Rossum and Hopper 1987; Smith and Backus 2024)",
+"(see García et al. 1969)",
+"(Cruz 2014)",
+"(García et al. 1969, pp. 71–126)",
+"(García et al. 1969; Rossum and Hopper 1987; Smith and Backus 2024)",
+"(Knuth and Turing 1975, sec. 41.135 and more)",
+"(García et al. 1969, fig. 92)",
+"Müller et al. (1937)",
+"(Müller et al. 1937; Rossum and Hopper 1987, p. 19)"
+],
+"bibliography": [
+"Cruz M de la (2014) The apollo guidance computer. Lab Window",
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Knuth DE, Turing AM (1975) Can programming be liberated from the von neumann style. Lab Complexity",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Rossum G van, Hopper G (1987) Can programming be liberated from the von neumann style. In: Proceedings of the entropy symposium. pp 98–186",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+}
+}

@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(see Hopper and Lamport 1943)",
+"Liskov and Knuth (1954:37–114)",
+"(Turing 1940:74)",
+"Hopper, Dijkstra, and Backus (1990)",
+"Hopper and Lamport (1943)",
+"(Hopper et al. 1990:16)",
+"Hamilton, Lovelace, and Turing (1956:66)"
+],
+"bibliography": [
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. Cambridge University Press.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+},
+"bib": {
+"citations": [
+"(see Hopper and Lamport 1943)",
+"Liskov and Knuth (1954:37–114)",
+"(Turing 1940:74)",
+"Hopper, Dijkstra, and Backus (1990)",
+"Hopper and Lamport (1943)",
+"(Hopper et al. 1990:16)",
+"Hamilton, Lovelace, and Turing (1956:66)"
+],
+"bibliography": [
+"Hamilton, Margaret, Ada Lovelace, and Alan M. Turing. 1956. An Axiomatic Basis for Computer Programming. TR-41. Lab Scheduler.",
+"Hopper, Grace, Edsger W. Dijkstra, and John Backus. 1990. On Computable Numbers. TR-81. Lab Algorithm.",
+"Hopper, Grace, and Leslie Lamport. 1943. Go to Statement Considered Harmful. London: Cambridge University Press.",
+"Liskov, Barbara, and Donald E. Knuth. 1954. “The Art of Computer Programming.” Pp. 14–128 in Proceedings of the pipeline symposium.",
+"Turing, Alan M. 1940. “Time, Clocks, and the Ordering of Events.” PhD thesis, University of Zurich."
+]
+}
+}

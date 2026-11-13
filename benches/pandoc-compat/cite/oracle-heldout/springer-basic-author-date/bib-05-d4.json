@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(Liskov and Smith 1936, sec. 94.108 and more)",
+"(Liskov and Smith 1936, p. 25)",
+"(1936; García and Rossum 2010)",
+"(García and Rossum 2010, pp. 36–102)",
+"Müller (1948, p. 15)",
+"(Hoare et al. 1941, vol. 20)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Hoare CAR, Smith JJr, García L (1941) An axiomatic basis for computer programming, Second. Springer, New York",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Müller H (1948) Data abstraction and hierarchy. PhD thesis, University of Oxford"
+]
+},
+"bib": {
+"citations": [
+"(Liskov and Smith 1936, sec. 94.108 and more)",
+"(Liskov and Smith 1936, p. 25)",
+"(1936; García and Rossum 2010)",
+"(García and Rossum 2010, pp. 36–102)",
+"Müller (1948, p. 15)",
+"(Hoare et al. 1941, vol. 20)"
+],
+"bibliography": [
+"García L, Rossum G van (2010) On computable numbers, 2nd edn. Addison-Wesley, London",
+"Hoare CAR, Smith JJr, García L (1941) An axiomatic basis for computer programming, Second. Springer, New York",
+"Liskov B, Smith JJr (1936) Can programming be liberated from the von neumann style. Journal of the ACM 11:127–305. https://doi.org/10.8852/decoder.67",
+"Müller H (1948) Data abstraction and hierarchy. PhD thesis, University of Oxford"
+]
+}
+}

@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Smith and O’Brien 1945; Smith and Backus 2024)",
+"(Müller et al. 1937; Knuth and Turing 1975, p. 3)",
+"(Hoare and Müller 1994, p. 48)",
+"(García et al. 1969, fig. 96)",
+"(Müller et al. 1937; Smith and O’Brien 1945; García et al. 1969)",
+"Müller et al. (1937, pp. 83–124)",
+"(see Smith and Backus 2024, ch. 12)",
+"(Rossum and Hopper 1987; 1994)",
+"Knuth and Turing (1975, pp. 78–131)",
+"(Knuth and Turing 1975)"
+],
+"bibliography": [
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Hoare CAR, Müller H (1994) An axiomatic basis for computer programming. Journal of the ACM 53:203–390. https://doi.org/10.4068/layer.20",
+"Knuth DE, Turing AM (1975) Can programming be liberated from the von neumann style. Lab Complexity",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Rossum G van, Hopper G (1987) Can programming be liberated from the von neumann style. In: Proceedings of the entropy symposium. pp 98–186",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+},
+"bib": {
+"citations": [
+"(Smith and O’Brien 1945; Smith and Backus 2024)",
+"(Müller et al. 1937; Knuth and Turing 1975, p. 3)",
+"(Hoare and Müller 1994, p. 48)",
+"(García et al. 1969, fig. 96)",
+"(Müller et al. 1937; Smith and O’Brien 1945; García et al. 1969)",
+"Müller et al. (1937, pp. 83–124)",
+"(see Smith and Backus 2024, ch. 12)",
+"(Rossum and Hopper 1987; 1994)",
+"Knuth and Turing (1975, pp. 78–131)",
+"(Knuth and Turing 1975)"
+],
+"bibliography": [
+"García L, Knuth DE, Cruz M de la (1969) On computable numbers. Communications of the ACM 44:209–329",
+"Hoare CAR, Müller H (1994) An axiomatic basis for computer programming. Journal of the ACM 53:203–390. https://doi.org/10.4068/layer.20",
+"Knuth DE, Turing AM (1975) Can programming be liberated from the von neumann style. Lab Complexity",
+"Müller H, Backus J, Lamport L (1937) Data abstraction and hierarchy. Lab Matrix",
+"Rossum G van, Hopper G (1987) Can programming be liberated from the von neumann style. In: Proceedings of the entropy symposium. pp 98–186",
+"Smith JJr, Backus J (2024) On computable numbers. In: Proceedings of the schema symposium. pp 24–188",
+"Smith JJr, O’Brien F (1945) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 39:257–308. https://doi.org/10.6600/trace.17"
+]
+}
+}

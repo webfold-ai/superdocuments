@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(see Hopper and Hamilton 1988)",
+"(2019)",
+"(Knuth et al. 1962, sec. 75.121 and more)",
+"Müller (1947, p. 65)",
+"(Müller 1947, p. 2)",
+"(see Müller 1947)",
+"Liskov et al. (1988, pp. 52–118)",
+"(1993; Hopper et al. 2019)",
+"Hopper et al. (2019, pp. 60–129)",
+"(Hopper and Hamilton 1988; 1993)",
+"(Hopper et al. 1941, 2019)",
+"Knuth et al. (1962)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, Lamport L, Smith JJr (2019) On computable numbers. Springer",
+"Hopper G, O’Brien F, Cruz M de la (1941) On computable numbers. PhD thesis, University of Oxford",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+},
+"bib": {
+"citations": [
+"(see Hopper and Hamilton 1988)",
+"(2019)",
+"(Knuth et al. 1962, sec. 75.121 and more)",
+"Müller (1947, p. 65)",
+"(Müller 1947, p. 2)",
+"(see Müller 1947)",
+"Liskov et al. (1988, pp. 52–118)",
+"(1993; Hopper et al. 2019)",
+"Hopper et al. (2019, pp. 60–129)",
+"(Hopper and Hamilton 1988; 1993)",
+"(Hopper et al. 1941, 2019)",
+"Knuth et al. (1962)"
+],
+"bibliography": [
+"Hopper G, Hamilton M (1988) On computable numbers. Lab Agent",
+"Hopper G, Lamport L, Smith JJr (2019) On computable numbers. Springer, New York",
+"Hopper G, O’Brien F, Cruz M de la (1941) On computable numbers. PhD thesis, University of Oxford",
+"Knuth DE, Smith JJr, Dijkstra EW (1962) An axiomatic basis for computer programming. In: Proceedings of the latency symposium. pp 26–101",
+"Liskov B, Hoare CAR, Müller H (1988) Time, clocks, and the ordering of events. In: Proceedings of the experiment symposium. pp 70–197",
+"Müller H (1947) Data abstraction and hierarchy. MIT Press, London",
+"Smith JJr, García L (1993) Can programming be liberated from the von neumann style. Communications of the ACM 46:223–398. https://doi.org/10.4191/convergence.19"
+]
+}
+}

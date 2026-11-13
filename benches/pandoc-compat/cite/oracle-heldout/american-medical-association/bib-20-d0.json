@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1(p7)",
+"1,2",
+"3",
+"3(pp74-139)",
+"4(pp49-103)",
+"4(sec99.107) and more",
+"4–6"
+],
+"bibliography": [
+"1. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
+"2. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"3. Luis García. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
+"4. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965.",
+"5. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
+"6. John Jr. Smith, John Backus. The art of computer programming. Published online 1973."
+]
+},
+"bib": {
+"citations": [
+"1(p7)",
+"1,2",
+"3",
+"3(pp74-139)",
+"4(pp49-103)",
+"4(sec99.107) and more",
+"4–6"
+],
+"bibliography": [
+"1. Hans Müller, Barbara Liskov. The Apollo Guidance Computer. Second. Springer; 2014.",
+"2. C. A. R. Hoare. The apollo guidance computer. Proceedings of the London Mathematical Society. 2005;33(2):72-308. https://example.org/trace",
+"3. Luis García. The apollo guidance computer. In: Proceedings of the Node Symposium. 1986:30-177.",
+"4. Flann O’Brien. An axiomatic basis for computer programming. Published online 1965.",
+"5. Flann O’Brien. The Art of Computer Programming. 3rd ed. Cambridge University Press; 2013. https://example.org/structure",
+"6. John Jr. Smith, John Backus. The art of computer programming. Published online 1973."
+]
+}
+}

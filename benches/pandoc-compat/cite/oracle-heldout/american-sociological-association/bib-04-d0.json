@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(Cruz 2014:87)",
+"Smith and O’Brien (1945)",
+"(Smith and O’Brien 1945)",
+"(Müller, Backus, and Lamport 1937; e.g. Smith and O’Brien 1945)",
+"(Cruz 2014:9)",
+"(1975; Smith and Backus 2024)",
+"Müller et al. (1937)",
+"(Rossum and Hopper 1987:50)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"Knuth, Donald E., and Alan M. Turing. 1975. Can Programming Be Liberated from the von Neumann Style. TR-69. Lab Complexity.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Rossum, Guido van, and Grace Hopper. 1987. “Can Programming Be Liberated from the von Neumann Style.” Pp. 98–186 in Proceedings of the entropy symposium.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Pp. 24–188 in Proceedings of the schema symposium.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39(3):257–308. doi:10.6600/trace.17."
+]
+},
+"bib": {
+"citations": [
+"(Cruz 2014:87)",
+"Smith and O’Brien (1945)",
+"(Smith and O’Brien 1945)",
+"(Müller, Backus, and Lamport 1937; e.g. Smith and O’Brien 1945)",
+"(Cruz 2014:9)",
+"(1975; Smith and Backus 2024)",
+"Müller et al. (1937)",
+"(Rossum and Hopper 1987:50)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"Knuth, Donald E., and Alan M. Turing. 1975. Can Programming Be Liberated from the von Neumann Style. TR-69. Lab Complexity.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Rossum, Guido van, and Grace Hopper. 1987. “Can Programming Be Liberated from the von Neumann Style.” Pp. 98–186 in Proceedings of the entropy symposium.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Pp. 24–188 in Proceedings of the schema symposium.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39(3):257–308. doi:10.6600/trace.17."
+]
+}
+}

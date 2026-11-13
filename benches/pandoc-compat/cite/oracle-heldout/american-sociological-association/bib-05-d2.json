@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"(García and Rossum 2010; Lovelace and Hoare 1970)",
+"(García and Rossum 2010; Smith and Hopper 2022; Turing 1994)",
+"(García and Rossum 2010:82)",
+"(Hoare, Smith, and García 1941; Lovelace and Hoare 1970)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970; Smith and Hopper 2022)",
+"(Turing 1994:93–123)",
+"Liskov and Smith (1936)",
+"(Turing 1994:37)",
+"(e.g. Liskov and Smith 1936; Smith and Hopper 2022)",
+"(see Lovelace and Hoare 1970, ch. 26)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. 2010. On Computable Numbers. 2nd ed. London: Addison-Wesley.",
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Liskov, Barbara, and John Jr. Smith. 1936. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 11(7):127–305. doi:10.8852/decoder.67.",
+"Lovelace, Ada, and C. A. R. Hoare. 1970. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society 42(8):59–345. doi:10.4721/scheduler.33.",
+"Smith, John Jr., and Grace Hopper. 2022. “The Education of a Computer.” Pp. 61–101 in Proceedings of the convergence symposium.",
+"Turing, Alan M. 1994. The Art of Computer Programming. Boston: Springer."
+]
+},
+"bib": {
+"citations": [
+"(García and Rossum 2010; Lovelace and Hoare 1970)",
+"(García and Rossum 2010; Smith and Hopper 2022; Turing 1994)",
+"(García and Rossum 2010:82)",
+"(Hoare, Smith, and García 1941; Lovelace and Hoare 1970)",
+"(Hoare et al. 1941; Lovelace and Hoare 1970; Smith and Hopper 2022)",
+"(Turing 1994:93–123)",
+"Liskov and Smith (1936)",
+"(Turing 1994:37)",
+"(e.g. Liskov and Smith 1936; Smith and Hopper 2022)",
+"(see Lovelace and Hoare 1970, ch. 26)"
+],
+"bibliography": [
+"García, Luis, and Guido van Rossum. 2010. On Computable Numbers. 2nd ed. London: Addison-Wesley.",
+"Hoare, C. A. R., John Jr. Smith, and Luis García. 1941. An Axiomatic Basis for Computer Programming. Second. New York: Springer.",
+"Liskov, Barbara, and John Jr. Smith. 1936. “Can Programming Be Liberated from the von Neumann Style.” Journal of the ACM 11(7):127–305. doi:10.8852/decoder.67.",
+"Lovelace, Ada, and C. A. R. Hoare. 1970. “Time, Clocks, and the Ordering of Events.” Proceedings of the London Mathematical Society 42(8):59–345. doi:10.4721/scheduler.33.",
+"Smith, John Jr., and Grace Hopper. 2022. “The Education of a Computer.” Pp. 61–101 in Proceedings of the convergence symposium.",
+"Turing, Alan M. 1994. The Art of Computer Programming. Boston: Springer."
+]
+}
+}

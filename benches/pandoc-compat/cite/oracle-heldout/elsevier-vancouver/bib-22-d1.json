@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[2–4]",
+"[5]",
+"[see 2]",
+"[6]",
+"[2]",
+"[5]",
+"[5 and more]",
+"[3]",
+"[7]",
+"[e.g. 4,5]",
+"[5]"
+],
+"bibliography": [
+"[1] Müller H. Data abstraction and hierarchy. MIT Press; 1947.",
+"[2] Hopper G, Hamilton M. On computable numbers. Lab Agent; 1988.",
+"[3] Müller H, Dijkstra EW. On computable numbers. Lab Query; 2004.",
+"[4] Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. Proceedings of the experiment symposium, 1988, p. 70–197.",
+"[5] Knuth DE, Smith JJr, Dijkstra EW. An axiomatic basis for computer programming. Proceedings of the latency symposium, 1962, p. 26–101.",
+"[6] Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM 1993;46:223–398. https://doi.org/10.4191/convergence.19.",
+"[7] Hopper G, Lamport L, Smith JJr. On computable numbers. Springer; 2019."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[2–4]",
+"[5]",
+"[see 2]",
+"[6]",
+"[2]",
+"[5]",
+"[5 and more]",
+"[3]",
+"[7]",
+"[e.g. 4,5]",
+"[5]"
+],
+"bibliography": [
+"[1] Müller H. Data abstraction and hierarchy. London: MIT Press; 1947.",
+"[2] Hopper G, Hamilton M. On computable numbers. Lab Agent; 1988.",
+"[3] Müller H, Dijkstra EW. On computable numbers. Lab Query; 2004.",
+"[4] Liskov B, Hoare CAR, Müller H. Time, clocks, and the ordering of events. Proceedings of the experiment symposium, 1988, p. 70–197.",
+"[5] Knuth DE, Smith JJr, Dijkstra EW. An axiomatic basis for computer programming. Proceedings of the latency symposium, 1962, p. 26–101.",
+"[6] Smith JJr, García L. Can programming be liberated from the von neumann style. Communications of the ACM 1993;46:223–398. https://doi.org/10.4191/convergence.19.",
+"[7] Hopper G, Lamport L, Smith JJr. On computable numbers. New York: Springer; 2019."
+]
+}
+}

@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"[see 1]",
+"[2]",
+"[see 3]",
+"[2]",
+"[2]",
+"[2,4]",
+"[see 5, ch. 39]",
+"[1,2]",
+"[1,6]",
+"[6]",
+"[1,e.g. 5]",
+"[6]"
+],
+"bibliography": [
+"[1] Backus J, Knuth DE, Liskov B. Notes on the analytical engine. Lab Estimate; 1958.",
+"[2] Cruz M de la. Notes on the analytical engine. MIT Press; 1951.",
+"[3] Liskov B. The art of computer programming. Lab Optimizer; 1944.",
+"[4] Rossum G van, Backus J. The education of a computer. PhD thesis. University of Cambridge, 1979.",
+"[5] Dijkstra EW. The apollo guidance computer. Journal of the ACM 1993;33:39–369.",
+"[6] Lamport L, Müller H, Dijkstra EW. The education of a computer. Addison-Wesley; 2017."
+]
+},
+"bib": {
+"citations": [
+"[see 1]",
+"[2]",
+"[see 3]",
+"[2]",
+"[2]",
+"[2,4]",
+"[see 5, ch. 39]",
+"[1,2]",
+"[1,6]",
+"[6]",
+"[1,e.g. 5]",
+"[6]"
+],
+"bibliography": [
+"[1] Backus J, Knuth DE, Liskov B. Notes on the analytical engine. Lab Estimate; 1958.",
+"[2] Cruz M de la. Notes on the analytical engine. Boston: MIT Press; 1951.",
+"[3] Liskov B. The art of computer programming. Lab Optimizer; 1944.",
+"[4] Rossum G van, Backus J. The education of a computer. PhD thesis. University of Cambridge, 1979.",
+"[5] Dijkstra EW. The apollo guidance computer. Journal of the ACM 1993;33:39–369.",
+"[6] Lamport L, Müller H, Dijkstra EW. The education of a computer. New York: Addison-Wesley; 2017."
+]
+}
+}

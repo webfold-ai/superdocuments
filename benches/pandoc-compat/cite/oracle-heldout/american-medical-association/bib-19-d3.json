@@ -1,0 +1,60 @@
+{
+"csl": {
+"citations": [
+"1(sec52.113) and more",
+"2,3",
+"4(pp75-134)",
+"see 5, ch. 26",
+"5,6(p56)",
+"3(p43),4",
+"7",
+"3(sec83.111) and more",
+"8(p36)",
+"2(vol90)",
+"3,4,8",
+"5,9",
+"8(p52)",
+"see 8"
+],
+"bibliography": [
+"1. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"2. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"3. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"4. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"5. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"6. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"7. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+]
+},
+"bib": {
+"citations": [
+"1(sec52.113) and more",
+"2,3",
+"4(pp75-134)",
+"see 5, ch. 26",
+"5,6(p56)",
+"3(p43),4",
+"7",
+"3(sec83.111) and more",
+"8(p36)",
+"2(vol90)",
+"3,4,8",
+"5,9",
+"8(p52)",
+"see 8"
+],
+"bibliography": [
+"1. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"2. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"3. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"4. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"5. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"6. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"7. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018.",
+"8. Barbara Liskov. The art of computer programming. Proceedings of the London Mathematical Society. 1992;44(12):132-356.",
+"9. Grace Hopper. On computable numbers. ACM Computing Surveys. 1986;39(7):151-379. doi:10.5661/experiment.46"
+]
+}
+}

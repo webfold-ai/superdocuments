@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"(Rossum, García, and Lovelace 1979:4)",
+"(1997)",
+"Lamport (1997:8)",
+"(see Cruz and García 1984, ch. 46)",
+"(see Müller and Dijkstra 1972)",
+"O’Brien (1966:15)",
+"(Dijkstra 1946:44)",
+"(see Dijkstra 1946, ch. 17)",
+"(Lovelace 1968; Turing and Liskov 2018:67)",
+"(Müller and Dijkstra 1972:76)",
+"(Lovelace 1968; Rossum et al. 1979:89)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Müller, Hans, and Edsger W. Dijkstra. 1972. “Go to Statement Considered Harmful.” Pp. 53–147 in Proceedings of the approach symposium.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. MIT Press."
+]
+},
+"bib": {
+"citations": [
+"(Rossum, García, and Lovelace 1979:4)",
+"(1997)",
+"Lamport (1997:8)",
+"(see Cruz and García 1984, ch. 46)",
+"(see Müller and Dijkstra 1972)",
+"O’Brien (1966:15)",
+"(Dijkstra 1946:44)",
+"(see Dijkstra 1946, ch. 17)",
+"(Lovelace 1968; Turing and Liskov 2018:67)",
+"(Müller and Dijkstra 1972:76)",
+"(Lovelace 1968; Rossum et al. 1979:89)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Luis García. 1984. “The Apollo Guidance Computer.”",
+"Dijkstra, Edsger W. 1946. “The Apollo Guidance Computer.” Pp. 51–197 in Proceedings of the query symposium.",
+"Lamport, Leslie. 1997. “The Education of a Computer.”",
+"Lovelace, Ada. 1968. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Müller, Hans, and Edsger W. Dijkstra. 1972. “Go to Statement Considered Harmful.” Pp. 53–147 in Proceedings of the approach symposium.",
+"O’Brien, Flann. 1966. Go to Statement Considered Harmful. London: MIT Press.",
+"Rossum, Guido van, Luis García, and Ada Lovelace. 1979. “Go to Statement Considered Harmful.” Communications of the ACM 45(8):289–314. doi:10.3569/latency.66.",
+"Turing, Alan M., and Barbara Liskov. 2018. On Computable Numbers. New York: MIT Press."
+]
+}
+}

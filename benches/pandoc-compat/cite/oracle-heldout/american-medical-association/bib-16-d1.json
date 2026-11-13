@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"1(vol25)",
+"2(pp96-104)",
+"3(p21)",
+"4",
+"2(fig73)",
+"1(vol42)",
+"2(pp89-134)",
+"3(p92),4",
+"3(vol44)",
+"5(p66)",
+"6(p56)",
+"1(vol56)",
+"1(p69)"
+],
+"bibliography": [
+"1. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"4. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"5. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"6. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+]
+},
+"bib": {
+"citations": [
+"1(vol25)",
+"2(pp96-104)",
+"3(p21)",
+"4",
+"2(fig73)",
+"1(vol42)",
+"2(pp89-134)",
+"3(p92),4",
+"3(vol44)",
+"5(p66)",
+"6(p56)",
+"1(vol56)",
+"1(p69)"
+],
+"bibliography": [
+"1. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"4. Alan M. Turing. Time, Clocks, and the Ordering of Events. PhD thesis. University of Zurich; 1940. https://example.org/model",
+"5. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"6. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+]
+}
+}

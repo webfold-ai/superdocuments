@@ -1,0 +1,56 @@
+{
+"csl": {
+"citations": [
+"Backus et al. (2007, pp. 69–130)",
+"(see Backus et al. 2007)",
+"(Rossum and Turing 1990; 2010)",
+"(Liskov et al. 1963; 1969)",
+"(Backus et al. 2007, fig. 90)",
+"(Müller and O’Brien 2010, vol. 72)",
+"(Liskov et al. 2012, sec. 81.125 and more)",
+"(see Dijkstra 1973, ch. 83)",
+"(1969; Liskov et al. 2012)",
+"(Backus et al. 2007, pp. 60–124)",
+"Smith et al. (1937, p. 2)",
+"Lovelace et al. (1969, p. 24)",
+"(Liskov et al. 2012, pp. 73–134)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Dijkstra EW (1973) The art of computer programming",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+},
+"bib": {
+"citations": [
+"Backus et al. (2007, pp. 69–130)",
+"(see Backus et al. 2007)",
+"(Rossum and Turing 1990; 2010)",
+"(Liskov et al. 1963; 1969)",
+"(Backus et al. 2007, fig. 90)",
+"(Müller and O’Brien 2010, vol. 72)",
+"(Liskov et al. 2012, sec. 81.125 and more)",
+"(see Dijkstra 1973, ch. 83)",
+"(1969; Liskov et al. 2012)",
+"(Backus et al. 2007, pp. 60–124)",
+"Smith et al. (1937, p. 2)",
+"Lovelace et al. (1969, p. 24)",
+"(Liskov et al. 2012, pp. 73–134)"
+],
+"bibliography": [
+"Backus J, Knuth DE, Müller H (2007) On computable numbers. Lab Heuristic",
+"Dijkstra EW (1973) The art of computer programming",
+"Liskov B, Müller H, Dijkstra EW (2012) Notes on the analytical engine. In: Proceedings of the compiler symposium. pp 35–166",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+}
+}

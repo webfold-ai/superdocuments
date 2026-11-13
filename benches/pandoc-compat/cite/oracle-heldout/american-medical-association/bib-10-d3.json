@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"1–3",
+"1–3",
+"2",
+"1,2",
+"4(pp15-133)",
+"3(vol63)",
+"2,3,5",
+"1(p90)",
+"2(pp83-106)",
+"1–3"
+],
+"bibliography": [
+"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"4. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975.",
+"5. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
+]
+},
+"bib": {
+"citations": [
+"1–3",
+"1–3",
+"2",
+"1,2",
+"4(pp15-133)",
+"3(vol63)",
+"2,3,5",
+"1(p90)",
+"2(pp83-106)",
+"1–3"
+],
+"bibliography": [
+"1. C. A. R. Hoare. On Computable Numbers. PhD thesis. University of Oxford; 2011.",
+"2. Barbara Liskov. Can Programming Be Liberated from the von Neumann Style. Springer; 1946. https://example.org/learning",
+"3. Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1968.",
+"4. Maria de la Cruz, Margaret Hamilton. Notes on the Analytical Engine. Lab Throughput; 1975.",
+"5. John Jr. Smith, C. A. R. Hoare, Donald E. Knuth. Go to Statement Considered Harmful. Lab Function; 1999."
+]
+}
+}

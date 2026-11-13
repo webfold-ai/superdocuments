@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"1",
+"1",
+"see 1, ch. 41",
+"2(fig58)",
+"1(p34)",
+"3(pp29-131)",
+"1(vol81)",
+"2,3",
+"4(vol10)"
+],
+"bibliography": [
+"1. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"2. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"3. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
+"4. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
+]
+},
+"bib": {
+"citations": [
+"1",
+"1",
+"see 1, ch. 41",
+"2(fig58)",
+"1(p34)",
+"3(pp29-131)",
+"1(vol81)",
+"2,3",
+"4(vol10)"
+],
+"bibliography": [
+"1. Maria de la Cruz, Flann O’Brien. Data abstraction and hierarchy. Published online 1996. https://example.org/ranking",
+"2. Maria de la Cruz, Donald E. Knuth. The education of a computer. Proceedings of the London Mathematical Society. 1959;31(7):150-375. doi:10.2214/heuristic.97",
+"3. Edsger W. Dijkstra. On Computable Numbers. Lab Estimate; 2000.",
+"4. Donald E. Knuth. Go to statement considered harmful. In: Proceedings of the Feature Symposium. 1971:63-156."
+]
+}
+}

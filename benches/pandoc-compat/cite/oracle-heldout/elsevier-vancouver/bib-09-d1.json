@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[e.g. 1,2]",
+"[1]",
+"[see 3]",
+"[4]",
+"[5]",
+"[2]",
+"[2]",
+"[see 5]"
+],
+"bibliography": [
+"[1] Lamport L, Turing AM. Go to statement considered harmful. Proceedings of the distribution symposium, 1938, p. 67–141.",
+"[2] Turing AM, Lamport L, Lovelace A. The art of computer programming 1979.",
+"[3] Hamilton M, Backus J, Turing AM. Can programming be liberated from the von neumann style. 3rd ed. New York: Springer; 2008.",
+"[4] O’Brien F, Cruz M de la, Hopper G. An axiomatic basis for computer programming. Boston: Springer; 1956.",
+"[5] Smith JJr. The education of a computer. PhD thesis. University of Oxford, 2017."
+]
+},
+"bib": {
+"citations": [
+"[e.g. 1,2]",
+"[1]",
+"[see 3]",
+"[4]",
+"[5]",
+"[2]",
+"[2]",
+"[see 5]"
+],
+"bibliography": [
+"[1] Lamport L, Turing AM. Go to statement considered harmful. Proceedings of the distribution symposium, 1938, p. 67–141.",
+"[2] Turing AM, Lamport L, Lovelace A. The art of computer programming 1979.",
+"[3] Hamilton M, Backus J, Turing AM. Can programming be liberated from the von neumann style. 3rd ed. New York: Springer; 2008.",
+"[4] O’Brien F, Cruz M de la, Hopper G. An axiomatic basis for computer programming. Boston: Springer; 1956.",
+"[5] Smith JJr. The education of a computer. PhD thesis. University of Oxford, 2017."
+]
+}
+}

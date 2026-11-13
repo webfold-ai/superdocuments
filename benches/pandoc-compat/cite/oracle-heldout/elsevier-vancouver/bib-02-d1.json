@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[see 1]",
+"[e.g. 2,3]",
+"[3]",
+"[3]",
+"[4]",
+"[4,5]",
+"[2,6]",
+"[7]"
+],
+"bibliography": [
+"[1] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[2] Smith JJr, Cruz M de la, Lovelace A. Go to statement considered harmful. Lab Model; 1937.",
+"[3] Knuth DE, Lovelace A, Cruz M de la. Notes on the analytical engine 1962.",
+"[4] Backus J, Knuth DE, Müller H. On computable numbers. Lab Heuristic; 2007.",
+"[5] Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. Proceedings of the compiler symposium, 2012, p. 35–166.",
+"[6] Dijkstra EW. The art of computer programming 1973.",
+"[7] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[see 1]",
+"[e.g. 2,3]",
+"[3]",
+"[3]",
+"[4]",
+"[4,5]",
+"[2,6]",
+"[7]"
+],
+"bibliography": [
+"[1] Rossum G van, Turing AM. Notes on the analytical engine 1990.",
+"[2] Smith JJr, Cruz M de la, Lovelace A. Go to statement considered harmful. Lab Model; 1937.",
+"[3] Knuth DE, Lovelace A, Cruz M de la. Notes on the analytical engine 1962.",
+"[4] Backus J, Knuth DE, Müller H. On computable numbers. Lab Heuristic; 2007.",
+"[5] Liskov B, Müller H, Dijkstra EW. Notes on the analytical engine. Proceedings of the compiler symposium, 2012, p. 35–166.",
+"[6] Dijkstra EW. The art of computer programming 1973.",
+"[7] Liskov B, Smith JJr, Cruz M de la. Time, clocks, and the ordering of events 1963."
+]
+}
+}

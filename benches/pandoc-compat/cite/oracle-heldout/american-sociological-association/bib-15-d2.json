@@ -1,0 +1,38 @@
+{
+"csl": {
+"citations": [
+"(Cruz and Turing 1938)",
+"(Dijkstra, Hoare, and Rossum 2018:39.113 and more)",
+"Dijkstra et al. (2018:9–106)",
+"(Cruz and Turing 1938; Dijkstra et al. 2018)",
+"(Dijkstra et al. 2018; O’Brien and Hopper 1955)",
+"(Müller and Rossum 2020:11)",
+"(Liskov, Backus, and Turing 2004)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. 1938. Go to Statement Considered Harmful. 2nd ed. Springer.",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Pp. 1–192 in Proceedings of the stream symposium.",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. MIT Press.",
+"Müller, Hans, and Guido van Rossum. 2020. “The Education of a Computer.” IEEE Transactions on Software Engineering 2(11):86–362. doi:10.7751/compiler.14.",
+"O’Brien, Flann, and Grace Hopper. 1955. “On Computable Numbers.”"
+]
+},
+"bib": {
+"citations": [
+"(Cruz and Turing 1938)",
+"(Dijkstra, Hoare, and Rossum 2018:39.113 and more)",
+"Dijkstra et al. (2018:9–106)",
+"(Cruz and Turing 1938; Dijkstra et al. 2018)",
+"(Dijkstra et al. 2018; O’Brien and Hopper 1955)",
+"(Müller and Rossum 2020:11)",
+"(Liskov, Backus, and Turing 2004)"
+],
+"bibliography": [
+"Cruz, Maria de la, and Alan M. Turing. 1938. Go to Statement Considered Harmful. 2nd ed. New York: Springer.",
+"Dijkstra, Edsger W., C. A. R. Hoare, and Guido van Rossum. 2018. “Time, Clocks, and the Ordering of Events.” Pp. 1–192 in Proceedings of the stream symposium.",
+"Liskov, Barbara, John Backus, and Alan M. Turing. 2004. The Education of a Computer. New York: MIT Press.",
+"Müller, Hans, and Guido van Rossum. 2020. “The Education of a Computer.” IEEE Transactions on Software Engineering 2(11):86–362. doi:10.7751/compiler.14.",
+"O’Brien, Flann, and Grace Hopper. 1955. “On Computable Numbers.”"
+]
+}
+}

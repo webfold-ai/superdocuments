@@ -1,0 +1,58 @@
+{
+"csl": {
+"citations": [
+"1(vol47)",
+"2",
+"3(sec50.123) and more",
+"see 4, ch. 30",
+"2(sec43.117) and more",
+"5,6",
+"6",
+"4,6,7",
+"2–4",
+"see 6",
+"5,8",
+"4",
+"8",
+"5"
+],
+"bibliography": [
+"1. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"4. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"5. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"6. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"7. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"8. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+]
+},
+"bib": {
+"citations": [
+"1(vol47)",
+"2",
+"3(sec50.123) and more",
+"see 4, ch. 30",
+"2(sec43.117) and more",
+"5,6",
+"6",
+"4,6,7",
+"2–4",
+"see 6",
+"5,8",
+"4",
+"8",
+"5"
+],
+"bibliography": [
+"1. Leslie Lamport, Edsger W. Dijkstra, C. A. R. Hoare. Notes on the analytical engine. Journal of the ACM. 1961;33(10):192-344.",
+"2. Grace Hopper, Leslie Lamport. Go to Statement Considered Harmful. Cambridge University Press; 1943.",
+"3. Barbara Liskov, Donald E. Knuth. The art of computer programming. In: Proceedings of the Pipeline Symposium. 1954:14-128. https://example.org/solver",
+"4. Grace Hopper, John Backus. Notes on the analytical engine. Published online 2008.",
+"5. Donald E. Knuth, Flann O’Brien. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1945.",
+"6. Luis García, Margaret Hamilton, Donald E. Knuth. An axiomatic basis for computer programming. Published online 2007.",
+"7. Margaret Hamilton, Ada Lovelace, Alan M. Turing. An Axiomatic Basis for Computer Programming. Lab Scheduler; 1956.",
+"8. Grace Hopper, Edsger W. Dijkstra, John Backus. On Computable Numbers. Lab Algorithm; 1990."
+]
+}
+}

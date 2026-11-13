@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"(1954; O’Brien 2011)",
+"(e.g. O’Brien 1989, 2011)",
+"(O’Brien 2011, p. 83)",
+"(Rossum and Cruz 1954; O’Brien 1989; Lovelace and Hamilton 2015)",
+"(O’Brien 2011)",
+"Rossum and Cruz (1954, pp. 79–107)",
+"(Rossum and Cruz 1954, fig. 9)",
+"(Rossum and Cruz 1954, fig. 84)",
+"(Rossum and Cruz 1954; O’Brien 1989)",
+"(Rossum and Cruz 1954)",
+"(O’Brien 2011, vol. 16)",
+"(O’Brien 1989; 2015)",
+"(O’Brien 2011, p. 84; Lovelace and Hamilton 2015)",
+"(O’Brien 1989, fig. 90)"
+],
+"bibliography": [
+"Lovelace A, Hamilton M (2015) Go to statement considered harmful, Second. MIT Press, New York",
+"O’Brien F (2011) Can programming be liberated from the von neumann style. In: Proceedings of the layer symposium. pp 72–147",
+"O’Brien F (1989) The art of computer programming. Journal of the ACM 25:182–319. https://doi.org/10.9095/compiler.84",
+"Rossum G van, Cruz M de la (1954) Can programming be liberated from the von neumann style. Cambridge University Press, New York"
+]
+},
+"bib": {
+"citations": [
+"(1954; O’Brien 2011)",
+"(e.g. O’Brien 1989, 2011)",
+"(O’Brien 2011, p. 83)",
+"(Rossum and Cruz 1954; O’Brien 1989; Lovelace and Hamilton 2015)",
+"(O’Brien 2011)",
+"Rossum and Cruz (1954, pp. 79–107)",
+"(Rossum and Cruz 1954, fig. 9)",
+"(Rossum and Cruz 1954, fig. 84)",
+"(Rossum and Cruz 1954; O’Brien 1989)",
+"(Rossum and Cruz 1954)",
+"(O’Brien 2011, vol. 16)",
+"(O’Brien 1989; 2015)",
+"(O’Brien 2011, p. 84; Lovelace and Hamilton 2015)",
+"(O’Brien 1989, fig. 90)"
+],
+"bibliography": [
+"Lovelace A, Hamilton M (2015) Go to statement considered harmful, Second. MIT Press, New York",
+"O’Brien F (2011) Can programming be liberated from the von neumann style. In: Proceedings of the layer symposium. pp 72–147",
+"O’Brien F (1989) The art of computer programming. Journal of the ACM 25:182–319. https://doi.org/10.9095/compiler.84",
+"Rossum G van, Cruz M de la (1954) Can programming be liberated from the von neumann style. Cambridge University Press, New York"
+]
+}
+}

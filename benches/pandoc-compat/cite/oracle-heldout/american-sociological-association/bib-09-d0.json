@@ -1,0 +1,50 @@
+{
+"csl": {
+"citations": [
+"Smith (2017:9)",
+"(Lamport and Turing 1938:10)",
+"(Hoare 1947:15)",
+"(O’Brien, Cruz, and Hopper 1956:9.109 and more)",
+"(see Lamport and Turing 1938)",
+"(1956; Turing, Lamport, and Lovelace 1979)",
+"(Smith 2017:75)",
+"(O’Brien et al. 1956:95)",
+"(Turing et al. 1979:65–119)",
+"(Hamilton, Backus, and Turing 2008:30)",
+"(O’Brien et al. 1956:89)",
+"(O’Brien et al. 1956:50)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. New York: Springer.",
+"Hoare, C. A. R. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Pp. 67–141 in Proceedings of the distribution symposium.",
+"O’Brien, Flann, Maria de la Cruz, and Grace Hopper. 1956. An Axiomatic Basis for Computer Programming. Boston: Springer.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. “The Art of Computer Programming.”"
+]
+},
+"bib": {
+"citations": [
+"Smith (2017:9)",
+"(Lamport and Turing 1938:10)",
+"(Hoare 1947:15)",
+"(O’Brien, Cruz, and Hopper 1956:9.109 and more)",
+"(see Lamport and Turing 1938)",
+"(1956; Turing, Lamport, and Lovelace 1979)",
+"(Smith 2017:75)",
+"(O’Brien et al. 1956:95)",
+"(Turing et al. 1979:65–119)",
+"(Hamilton, Backus, and Turing 2008:30)",
+"(O’Brien et al. 1956:89)",
+"(O’Brien et al. 1956:50)"
+],
+"bibliography": [
+"Hamilton, Margaret, John Backus, and Alan M. Turing. 2008. Can Programming Be Liberated from the von Neumann Style. 3rd ed. New York: Springer.",
+"Hoare, C. A. R. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Lamport, Leslie, and Alan M. Turing. 1938. “Go to Statement Considered Harmful.” Pp. 67–141 in Proceedings of the distribution symposium.",
+"O’Brien, Flann, Maria de la Cruz, and Grace Hopper. 1956. An Axiomatic Basis for Computer Programming. Boston: Springer.",
+"Smith, John Jr. 2017. “The Education of a Computer.” PhD thesis, University of Oxford.",
+"Turing, Alan M., Leslie Lamport, and Ada Lovelace. 1979. “The Art of Computer Programming.”"
+]
+}
+}

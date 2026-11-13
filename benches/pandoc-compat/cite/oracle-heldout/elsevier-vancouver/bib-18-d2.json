@@ -1,0 +1,46 @@
+{
+"csl": {
+"citations": [
+"[e.g. 1,2]",
+"[see 3]",
+"[4]",
+"[see 1]",
+"[1 and more]",
+"[see 2, ch. 35]",
+"[4,e.g. 5]",
+"[1]",
+"[1,4]",
+"[2]",
+"[2]"
+],
+"bibliography": [
+"[1] Hoare CAR, Lovelace A, Turing AM. Notes on the analytical engine. Lab Feature; 2016.",
+"[2] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[3] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[4] Turing AM, Rossum G van. The art of computer programming. PhD thesis. University of Cambridge, 1968.",
+"[5] Rossum G van, Hoare CAR. Go to statement considered harmful 1967."
+]
+},
+"bib": {
+"citations": [
+"[e.g. 1,2]",
+"[see 3]",
+"[4]",
+"[see 1]",
+"[1 and more]",
+"[see 2, ch. 35]",
+"[4,e.g. 5]",
+"[1]",
+"[1,4]",
+"[2]",
+"[2]"
+],
+"bibliography": [
+"[1] Hoare CAR, Lovelace A, Turing AM. Notes on the analytical engine. Lab Feature; 2016.",
+"[2] Rossum G van, Backus J, Liskov B. Go to statement considered harmful 1993.",
+"[3] Cruz M de la, O’Brien F, Hopper G. The art of computer programming. Lab Throughput; 1971.",
+"[4] Turing AM, Rossum G van. The art of computer programming. PhD thesis. University of Cambridge, 1968.",
+"[5] Rossum G van, Hoare CAR. Go to statement considered harmful 1967."
+]
+}
+}

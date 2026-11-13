@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(O’Brien 1965:16–130)",
+"(Smith and Backus 1973:82)",
+"(Smith and Backus 1973)",
+"(Hoare 2005)",
+"(Müller and Liskov 2014:40–118)",
+"(Müller and Liskov 2014; Smith and Backus 1973)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+},
+"bib": {
+"citations": [
+"(O’Brien 1965:16–130)",
+"(Smith and Backus 1973:82)",
+"(Smith and Backus 1973)",
+"(Hoare 2005)",
+"(Müller and Liskov 2014:40–118)",
+"(Müller and Liskov 2014; Smith and Backus 1973)"
+],
+"bibliography": [
+"Hoare, C. A. R. 2005. “The Apollo Guidance Computer.” Proceedings of the London Mathematical Society 33(2):72–308. https://example.org/trace.",
+"Müller, Hans, and Barbara Liskov. 2014. The Apollo Guidance Computer. Second. London: Springer.",
+"O’Brien, Flann. 1965. “An Axiomatic Basis for Computer Programming.”",
+"Smith, John Jr., and John Backus. 1973. “The Art of Computer Programming.”"
+]
+}
+}

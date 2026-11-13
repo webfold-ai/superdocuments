@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Liskov et al. 1963, pp. 88–121)",
+"(1990)",
+"(see Rossum and Turing 1990, ch. 65)",
+"(Smith et al. 1937; Lovelace et al. 1969; Dijkstra 1973)",
+"Liskov et al. (1963, pp. 53–120)",
+"(Liskov et al. 1963; Müller and O’Brien 2010)",
+"Liskov et al. (1963)",
+"(Smith et al. 1937, p. 25)",
+"(Dijkstra 1973; Müller and O’Brien 2010, p. 52)"
+],
+"bibliography": [
+"Dijkstra EW (1973) The art of computer programming",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+},
+"bib": {
+"citations": [
+"(Liskov et al. 1963, pp. 88–121)",
+"(1990)",
+"(see Rossum and Turing 1990, ch. 65)",
+"(Smith et al. 1937; Lovelace et al. 1969; Dijkstra 1973)",
+"Liskov et al. (1963, pp. 53–120)",
+"(Liskov et al. 1963; Müller and O’Brien 2010)",
+"Liskov et al. (1963)",
+"(Smith et al. 1937, p. 25)",
+"(Dijkstra 1973; Müller and O’Brien 2010, p. 52)"
+],
+"bibliography": [
+"Dijkstra EW (1973) The art of computer programming",
+"Liskov B, Smith JJr, Cruz M de la (1963) Time, clocks, and the ordering of events",
+"Lovelace A, Smith JJr, Backus J (1969) Time, clocks, and the ordering of events. PhD thesis, University of Oxford",
+"Müller H, O’Brien F (2010) On computable numbers. PhD thesis, University of Cambridge",
+"Rossum G van, Turing AM (1990) Notes on the analytical engine",
+"Smith JJr, Cruz M de la, Lovelace A (1937) Go to statement considered harmful. Lab Model"
+]
+}
+}

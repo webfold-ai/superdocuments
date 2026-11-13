@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"[1,2]",
+"[3]",
+"[3,e.g. 4]",
+"[3,5]",
+"[6]",
+"[7]",
+"[3,5]",
+"[7]"
+],
+"bibliography": [
+"[1] Turing AM, O’Brien F, Liskov B. Data abstraction and hierarchy. PhD thesis. University of Zurich, 2011.",
+"[2] Rossum G van. The education of a computer 2019.",
+"[3] Smith JJr. The apollo guidance computer. PhD thesis. University of Cambridge, 2023.",
+"[4] Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style 1975.",
+"[5] Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM 1958;58:24–338. https://doi.org/10.6528/vector.60.",
+"[6] Hamilton M, García L, Liskov B. The art of computer programming. PhD thesis. University of Cambridge, 1947.",
+"[7] García L, Rossum G van, Lovelace A. An axiomatic basis for computer programming. Lab Lattice; 1945."
+]
+},
+"bib": {
+"citations": [
+"[1,2]",
+"[3]",
+"[3,e.g. 4]",
+"[3,5]",
+"[6]",
+"[7]",
+"[3,5]",
+"[7]"
+],
+"bibliography": [
+"[1] Turing AM, O’Brien F, Liskov B. Data abstraction and hierarchy. PhD thesis. University of Zurich, 2011.",
+"[2] Rossum G van. The education of a computer 2019.",
+"[3] Smith JJr. The apollo guidance computer. PhD thesis. University of Cambridge, 2023.",
+"[4] Cruz M de la, O’Brien F, Rossum G van. Can programming be liberated from the von neumann style 1975.",
+"[5] Cruz M de la, Hopper G, Rossum G van. The apollo guidance computer. Journal of the ACM 1958;58:24–338. https://doi.org/10.6528/vector.60.",
+"[6] Hamilton M, García L, Liskov B. The art of computer programming. PhD thesis. University of Cambridge, 1947.",
+"[7] García L, Rossum G van, Lovelace A. An axiomatic basis for computer programming. Lab Lattice; 1945."
+]
+}
+}

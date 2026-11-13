@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[1]",
+"[see 1, ch. 41]",
+"[2]",
+"[1]",
+"[3]",
+"[1]",
+"[2,3]",
+"[4]"
+],
+"bibliography": [
+"[1] Cruz M de la, O’Brien F. Data abstraction and hierarchy 1996.",
+"[2] Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society 1959;31:150–375. https://doi.org/10.2214/heuristic.97.",
+"[3] Dijkstra EW. On computable numbers. Lab Estimate; 2000.",
+"[4] Knuth DE. Go to statement considered harmful. Proceedings of the feature symposium, 1971, p. 63–156."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[1]",
+"[see 1, ch. 41]",
+"[2]",
+"[1]",
+"[3]",
+"[1]",
+"[2,3]",
+"[4]"
+],
+"bibliography": [
+"[1] Cruz M de la, O’Brien F. Data abstraction and hierarchy 1996.",
+"[2] Cruz M de la, Knuth DE. The education of a computer. Proceedings of the London Mathematical Society 1959;31:150–375. https://doi.org/10.2214/heuristic.97.",
+"[3] Dijkstra EW. On computable numbers. Lab Estimate; 2000.",
+"[4] Knuth DE. Go to statement considered harmful. Proceedings of the feature symposium, 1971, p. 63–156."
+]
+}
+}

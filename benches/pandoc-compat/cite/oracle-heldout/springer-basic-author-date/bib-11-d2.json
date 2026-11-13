@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Hopper et al. 1939)",
+"(see García and Knuth 1936, ch. 60)",
+"(Hopper et al. 1987, p. 83)",
+"(1939; García et al. 1998)",
+"(García and Knuth 1936; García et al. 1998)",
+"(O’Brien et al. 1975; e.g. Hoare and Müller 2005)",
+"(1943)",
+"(Hoare and Müller 2005, vol. 35)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Knuth DE (1936) An axiomatic basis for computer programming. In: Proceedings of the transform symposium. pp 2–133",
+"García L, Lamport L, Liskov B (1998) The art of computer programming",
+"Hoare CAR, Müller H (2005) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7:191–397. https://doi.org/10.4589/gradient.17",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Hopper G, Müller H, Lovelace A (1987) The apollo guidance computer, 3rd edn. Cambridge University Press, London",
+"O’Brien F, Rossum G van, Smith JJr (1975) Time, clocks, and the ordering of events. Addison-Wesley, New York"
+]
+},
+"bib": {
+"citations": [
+"(Hopper et al. 1939)",
+"(see García and Knuth 1936, ch. 60)",
+"(Hopper et al. 1987, p. 83)",
+"(1939; García et al. 1998)",
+"(García and Knuth 1936; García et al. 1998)",
+"(O’Brien et al. 1975; e.g. Hoare and Müller 2005)",
+"(1943)",
+"(Hoare and Müller 2005, vol. 35)"
+],
+"bibliography": [
+"Backus J (1943) On computable numbers",
+"García L, Knuth DE (1936) An axiomatic basis for computer programming. In: Proceedings of the transform symposium. pp 2–133",
+"García L, Lamport L, Liskov B (1998) The art of computer programming",
+"Hoare CAR, Müller H (2005) Data abstraction and hierarchy. Proceedings of the London Mathematical Society 7:191–397. https://doi.org/10.4589/gradient.17",
+"Hopper G, Backus J, Müller H (1939) The art of computer programming. Addison-Wesley, New York",
+"Hopper G, Müller H, Lovelace A (1987) The apollo guidance computer, 3rd edn. Cambridge University Press, London",
+"O’Brien F, Rossum G van, Smith JJr (1975) Time, clocks, and the ordering of events. Addison-Wesley, New York"
+]
+}
+}

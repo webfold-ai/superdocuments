@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"3(pp67-135)",
+"4(pp31-133)",
+"5",
+"2(p44)",
+"2(p32)",
+"2",
+"e.g. 1,2",
+"2(p60)",
+"1,e.g. 3",
+"6(p73)",
+"5(p40)",
+"5(sec45.110) and more",
+"2(p37),5"
+],
+"bibliography": [
+"1. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"2. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"3. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"4. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"5. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"6. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"3(pp67-135)",
+"4(pp31-133)",
+"5",
+"2(p44)",
+"2(p32)",
+"2",
+"e.g. 1,2",
+"2(p60)",
+"1,e.g. 3",
+"6(p73)",
+"5(p40)",
+"5(sec45.110) and more",
+"2(p37),5"
+],
+"bibliography": [
+"1. Leslie Lamport. Can Programming Be Liberated from the von Neumann Style. Springer; 1992. https://example.org/query",
+"2. Hans Müller. Can programming be liberated from the von neumann style. In: Proceedings of the Distribution Symposium. 1992:94-142.",
+"3. Ada Lovelace. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1984. https://example.org/pipeline",
+"4. Donald E. Knuth. Data Abstraction and Hierarchy. PhD thesis. University of Zurich; 1955.",
+"5. Donald E. Knuth, John Jr. Smith. Can Programming Be Liberated from the von Neumann Style. PhD thesis. University of Cambridge; 1991.",
+"6. C. A. R. Hoare, Margaret Hamilton. The Art of Computer Programming. 2nd ed. MIT Press; 1975."
+]
+}
+}

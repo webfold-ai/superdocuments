@@ -1,0 +1,48 @@
+{
+"csl": {
+"citations": [
+"(Rossum 2019; e.g. Turing, O’Brien, and Liskov 2011)",
+"(Turing et al. 2011:89)",
+"(1945)",
+"(García et al. 1945:35)",
+"(2011)",
+"(Cruz, Hopper, and Rossum 1958:13)",
+"Turing et al. (2011)",
+"(Hamilton, García, and Liskov 1947:65)",
+"(Cruz, O’Brien, and Rossum 1975:68)",
+"(2019)",
+"(Turing et al. 2011:53)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58(12):24–338. doi:10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. “Can Programming Be Liberated from the von Neumann Style.”",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van. 2019. “The Education of a Computer.”",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich."
+]
+},
+"bib": {
+"citations": [
+"(Rossum 2019; e.g. Turing, O’Brien, and Liskov 2011)",
+"(Turing et al. 2011:89)",
+"(1945)",
+"(García et al. 1945:35)",
+"(2011)",
+"(Cruz, Hopper, and Rossum 1958:13)",
+"Turing et al. (2011)",
+"(Hamilton, García, and Liskov 1947:65)",
+"(Cruz, O’Brien, and Rossum 1975:68)",
+"(2019)",
+"(Turing et al. 2011:53)"
+],
+"bibliography": [
+"Cruz, Maria de la, Grace Hopper, and Guido van Rossum. 1958. “The Apollo Guidance Computer.” Journal of the ACM 58(12):24–338. doi:10.6528/vector.60.",
+"Cruz, Maria de la, Flann O’Brien, and Guido van Rossum. 1975. “Can Programming Be Liberated from the von Neumann Style.”",
+"García, Luis, Guido van Rossum, and Ada Lovelace. 1945. An Axiomatic Basis for Computer Programming. TR-55. Lab Lattice.",
+"Hamilton, Margaret, Luis García, and Barbara Liskov. 1947. “The Art of Computer Programming.” PhD thesis, University of Cambridge.",
+"Rossum, Guido van. 2019. “The Education of a Computer.”",
+"Turing, Alan M., Flann O’Brien, and Barbara Liskov. 2011. “Data Abstraction and Hierarchy.” PhD thesis, University of Zurich."
+]
+}
+}

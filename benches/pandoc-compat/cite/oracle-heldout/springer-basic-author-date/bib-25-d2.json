@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(1955)",
+"(Hoare and Hamilton 1975, pp. 16–113)",
+"(e.g. Knuth 1955; Lamport 1992)",
+"(Hamilton et al. 1936, fig. 29)",
+"(1955)",
+"(1975)",
+"(Lovelace 1984, pp. 72–128)",
+"(Hoare and Hamilton 1975; e.g. Müller 1992)",
+"(see Hoare and Hamilton 1975, ch. 36)",
+"Lamport (1992, p. 92)",
+"(Knuth and Smith 1991)",
+"(Hoare and Hamilton 1975, p. 30)",
+"(Knuth 1955, p. 13)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Rossum G van (1936) On computable numbers. In: Proceedings of the token symposium. pp 76–170",
+"Hoare CAR, Hamilton M (1975) The art of computer programming, 2nd edn. MIT Press",
+"Knuth DE (1955) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Knuth DE, Smith JJr (1991) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Lamport L (1992) Can programming be liberated from the von neumann style. Springer",
+"Lovelace A (1984) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Müller H (1992) Can programming be liberated from the von neumann style. In: Proceedings of the distribution symposium. pp 94–142"
+]
+},
+"bib": {
+"citations": [
+"(1955)",
+"(Hoare and Hamilton 1975, pp. 16–113)",
+"(e.g. Knuth 1955; Lamport 1992)",
+"(Hamilton et al. 1936, fig. 29)",
+"(1955)",
+"(1975)",
+"(Lovelace 1984, pp. 72–128)",
+"(Hoare and Hamilton 1975; e.g. Müller 1992)",
+"(see Hoare and Hamilton 1975, ch. 36)",
+"Lamport (1992, p. 92)",
+"(Knuth and Smith 1991)",
+"(Hoare and Hamilton 1975, p. 30)",
+"(Knuth 1955, p. 13)"
+],
+"bibliography": [
+"Hamilton M, Backus J, Rossum G van (1936) On computable numbers. In: Proceedings of the token symposium. pp 76–170",
+"Hoare CAR, Hamilton M (1975) The art of computer programming, 2nd edn. MIT Press, New York",
+"Knuth DE (1955) Data abstraction and hierarchy. PhD thesis, University of Zurich",
+"Knuth DE, Smith JJr (1991) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Lamport L (1992) Can programming be liberated from the von neumann style. Springer, New York",
+"Lovelace A (1984) Can programming be liberated from the von neumann style. PhD thesis, University of Cambridge",
+"Müller H (1992) Can programming be liberated from the von neumann style. In: Proceedings of the distribution symposium. pp 94–142"
+]
+}
+}

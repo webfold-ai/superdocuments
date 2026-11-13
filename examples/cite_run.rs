@@ -14,11 +14,11 @@ fn main() {
         citeproc::references_from_json(&bib_text).expect("csl-json")
     } else {
         let parsed = superdocuments::bibtex::parse(&bib_text);
-        citeproc::references_from_json(&superdocuments::bibtex::csl_json(&parsed).to_string()).expect("csl-json")
+        citeproc::references_from_json(&superdocuments::bibtex::csl_json_pandoc(&parsed, true).to_string()).expect("csl-json")
     };
     let style = Style::parse(&std::fs::read_to_string(&csl).expect("read csl")).expect("parse csl");
     let md = std::fs::read_to_string(&doc).expect("read doc");
-    let p = Processor::new(style, refs);
+    let p = Processor::new(style, refs).with_pandoc_names(args.iter().any(|a| a == "--pandoc-names"));
     let found = markdown::parse_citations(&md);
     let cites: Vec<_> = found.iter().map(|f| f.citation.clone()).collect();
     let done = p.process(&cites, &[]);

@@ -1,0 +1,54 @@
+{
+"csl": {
+"citations": [
+"(Cruz 2007:81.130 and more)",
+"(Lovelace 1940)",
+"(Cruz 2007; 1939)",
+"(Cruz 2007:16–116)",
+"(see O’Brien and Backus 2024, ch. 31)",
+"Cruz (2007:58–124)",
+"(e.g. Cruz 2007; Lovelace 1940)",
+"(see Cruz 2007)",
+"(Cruz 2007:37–120)",
+"(e.g. Hopper et al. 1939; Turing 1949)",
+"Liskov (1956:20)",
+"(Dijkstra, Rossum, and Lamport 1970:95)",
+"(2024)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Pp. 81–115 in Proceedings of the network symposium.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. Springer.",
+"Hopper, Grace, Margaret Hamilton, and John Jr. Smith. 1939. “The Apollo Guidance Computer.” Pp. 95–188 in Proceedings of the vector symposium.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33(8):183–370. doi:10.9422/heuristic.52.",
+"O’Brien, Flann, and John Backus. 2024. Go to Statement Considered Harmful. 2nd ed. Addison-Wesley.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4(9):240–315. doi:10.8223/index.77."
+]
+},
+"bib": {
+"citations": [
+"(Cruz 2007:81.130 and more)",
+"(Lovelace 1940)",
+"(Cruz 2007; 1939)",
+"(Cruz 2007:16–116)",
+"(see O’Brien and Backus 2024, ch. 31)",
+"Cruz (2007:58–124)",
+"(e.g. Cruz 2007; Lovelace 1940)",
+"(see Cruz 2007)",
+"(Cruz 2007:37–120)",
+"(e.g. Hopper et al. 1939; Turing 1949)",
+"Liskov (1956:20)",
+"(Dijkstra, Rossum, and Lamport 1970:95)",
+"(2024)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2007. “Go to Statement Considered Harmful.” Pp. 81–115 in Proceedings of the network symposium.",
+"Dijkstra, Edsger W., Guido van Rossum, and Leslie Lamport. 1970. Time, Clocks, and the Ordering of Events. London: Springer.",
+"Hopper, Grace, Margaret Hamilton, and John Jr. Smith. 1939. “The Apollo Guidance Computer.” Pp. 95–188 in Proceedings of the vector symposium.",
+"Liskov, Barbara. 1956. On Computable Numbers. TR-18. Lab Estimate. https://example.org/analysis.",
+"Lovelace, Ada. 1940. “Can Programming Be Liberated from the von Neumann Style.” ACM Computing Surveys 33(8):183–370. doi:10.9422/heuristic.52.",
+"O’Brien, Flann, and John Backus. 2024. Go to Statement Considered Harmful. 2nd ed. New York: Addison-Wesley.",
+"Turing, Alan M. 1949. “The Apollo Guidance Computer.” Journal of the ACM 4(9):240–315. doi:10.8223/index.77."
+]
+}
+}

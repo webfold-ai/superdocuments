@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"1(fig4)",
+"2",
+"2(p8)",
+"see 3, ch. 46",
+"see 4",
+"5(p15)",
+"6(fig44)",
+"see 6, ch. 17",
+"7,8(p67)",
+"4(p76)",
+"1(p89),7"
+],
+"bibliography": [
+"1. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"2. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"4. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"5. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"6. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"7. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"8. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018."
+]
+},
+"bib": {
+"citations": [
+"1(fig4)",
+"2",
+"2(p8)",
+"see 3, ch. 46",
+"see 4",
+"5(p15)",
+"6(fig44)",
+"see 6, ch. 17",
+"7,8(p67)",
+"4(p76)",
+"1(p89),7"
+],
+"bibliography": [
+"1. Guido van Rossum, Luis García, Ada Lovelace. Go to statement considered harmful. Communications of the ACM. 1979;45(8):289-314. doi:10.3569/latency.66",
+"2. Leslie Lamport. The education of a computer. Published online 1997. https://example.org/benchmark",
+"3. Maria de la Cruz, Luis García. The apollo guidance computer. Published online 1984.",
+"4. Hans Müller, Edsger W. Dijkstra. Go to statement considered harmful. In: Proceedings of the Approach Symposium. 1972:53-147.",
+"5. Flann O’Brien. Go to Statement Considered Harmful. MIT Press; 1966.",
+"6. Edsger W. Dijkstra. The apollo guidance computer. In: Proceedings of the Query Symposium. 1946:51-197.",
+"7. Ada Lovelace. The Education of a Computer. PhD thesis. University of Cambridge; 1968.",
+"8. Alan M. Turing, Barbara Liskov. On Computable Numbers. MIT Press; 2018."
+]
+}
+}

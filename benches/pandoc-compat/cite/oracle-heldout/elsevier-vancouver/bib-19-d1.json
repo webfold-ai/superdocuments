@@ -1,0 +1,52 @@
+{
+"csl": {
+"citations": [
+"[1]",
+"[2]",
+"[2]",
+"[see 3, ch. 46]",
+"[see 4]",
+"[5]",
+"[6]",
+"[see 6, ch. 17]",
+"[7,8]",
+"[4]",
+"[1,7]"
+],
+"bibliography": [
+"[1] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[2] Lamport L. The education of a computer 1997.",
+"[3] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[4] Müller H, Dijkstra EW. Go to statement considered harmful. Proceedings of the approach symposium, 1972, p. 53–147.",
+"[5] O’Brien F. Go to statement considered harmful. MIT Press; 1966.",
+"[6] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[7] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[8] Turing AM, Liskov B. On computable numbers. MIT Press; 2018."
+]
+},
+"bib": {
+"citations": [
+"[1]",
+"[2]",
+"[2]",
+"[see 3, ch. 46]",
+"[see 4]",
+"[5]",
+"[6]",
+"[see 6, ch. 17]",
+"[7,8]",
+"[4]",
+"[1,7]"
+],
+"bibliography": [
+"[1] Rossum G van, García L, Lovelace A. Go to statement considered harmful. Communications of the ACM 1979;45:289–314. https://doi.org/10.3569/latency.66.",
+"[2] Lamport L. The education of a computer 1997.",
+"[3] Cruz M de la, García L. The apollo guidance computer 1984.",
+"[4] Müller H, Dijkstra EW. Go to statement considered harmful. Proceedings of the approach symposium, 1972, p. 53–147.",
+"[5] O’Brien F. Go to statement considered harmful. London: MIT Press; 1966.",
+"[6] Dijkstra EW. The apollo guidance computer. Proceedings of the query symposium, 1946, p. 51–197.",
+"[7] Lovelace A. The education of a computer. PhD thesis. University of Cambridge, 1968.",
+"[8] Turing AM, Liskov B. On computable numbers. New York: MIT Press; 2018."
+]
+}
+}

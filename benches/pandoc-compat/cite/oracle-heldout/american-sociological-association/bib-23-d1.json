@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Backus, Knuth, and Liskov 1958; Liskov 1944)",
+"(Backus et al. 1958:70)",
+"Rossum and Backus (1979:88–138)",
+"(Liskov 1944:74)",
+"(see Cruz 1951)",
+"Turing (1968:7–133)",
+"Dijkstra (1993)",
+"(Lamport, Müller, and Dijkstra 2017:90)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33(2):39–369.",
+"Lamport, Leslie, Hans Müller, and Edsger W. Dijkstra. 2017. The Education of a Computer. Addison-Wesley.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M. 1968. “Time, Clocks, and the Ordering of Events.”"
+]
+},
+"bib": {
+"citations": [
+"(Backus, Knuth, and Liskov 1958; Liskov 1944)",
+"(Backus et al. 1958:70)",
+"Rossum and Backus (1979:88–138)",
+"(Liskov 1944:74)",
+"(see Cruz 1951)",
+"Turing (1968:7–133)",
+"Dijkstra (1993)",
+"(Lamport, Müller, and Dijkstra 2017:90)"
+],
+"bibliography": [
+"Backus, John, Donald E. Knuth, and Barbara Liskov. 1958. Notes on the Analytical Engine. TR-47. Lab Estimate. https://example.org/convergence.",
+"Cruz, Maria de la. 1951. Notes on the Analytical Engine. Boston: MIT Press.",
+"Dijkstra, Edsger W. 1993. “The Apollo Guidance Computer.” Journal of the ACM 33(2):39–369.",
+"Lamport, Leslie, Hans Müller, and Edsger W. Dijkstra. 2017. The Education of a Computer. New York: Addison-Wesley.",
+"Liskov, Barbara. 1944. The Art of Computer Programming. TR-62. Lab Optimizer.",
+"Rossum, Guido van, and John Backus. 1979. “The Education of a Computer.” PhD thesis, University of Cambridge.",
+"Turing, Alan M. 1968. “Time, Clocks, and the Ordering of Events.”"
+]
+}
+}

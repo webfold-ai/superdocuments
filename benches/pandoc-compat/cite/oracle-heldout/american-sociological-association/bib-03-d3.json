@@ -1,0 +1,34 @@
+{
+"csl": {
+"citations": [
+"(Hoare, Dijkstra, and Müller 1948:60)",
+"(see Lovelace and Hopper 1969)",
+"(1939)",
+"(see Smith et al. 1939, ch. 56)",
+"(Hoare et al. 1948:57–139)",
+"(Hoare et al. 1948; Lovelace and Hamilton 2017; Smith et al. 1939)"
+],
+"bibliography": [
+"Hoare, C. A. R., Edsger W. Dijkstra, and Hans Müller. 1948. The Art of Computer Programming. TR-38. Lab Metric. https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. 2017. Notes on the Analytical Engine. New York: MIT Press.",
+"Lovelace, Ada, and Grace Hopper. 1969. “An Axiomatic Basis for Computer Programming.” Pp. 14–120 in Proceedings of the array symposium.",
+"Smith, John Jr., John Backus, and C. A. R. Hoare. 1939. On Computable Numbers. Second. London: Cambridge University Press."
+]
+},
+"bib": {
+"citations": [
+"(Hoare, Dijkstra, and Müller 1948:60)",
+"(see Lovelace and Hopper 1969)",
+"(1939)",
+"(see Smith et al. 1939, ch. 56)",
+"(Hoare et al. 1948:57–139)",
+"(Hoare et al. 1948; Lovelace and Hamilton 2017; Smith et al. 1939)"
+],
+"bibliography": [
+"Hoare, C. A. R., Edsger W. Dijkstra, and Hans Müller. 1948. The Art of Computer Programming. TR-38. Lab Metric. https://example.org/memory.",
+"Lovelace, Ada, and Margaret Hamilton. 2017. Notes on the Analytical Engine. New York: MIT Press.",
+"Lovelace, Ada, and Grace Hopper. 1969. “An Axiomatic Basis for Computer Programming.” Pp. 14–120 in Proceedings of the array symposium.",
+"Smith, John Jr., John Backus, and C. A. R. Hoare. 1939. On Computable Numbers. Second. London: Cambridge University Press."
+]
+}
+}

@@ -1,0 +1,42 @@
+{
+"csl": {
+"citations": [
+"(see García, Knuth, and Cruz 1969)",
+"(Hoare and Müller 1994:53–135)",
+"(2014; Smith and Backus 2024)",
+"(Smith and O’Brien 1945:5)",
+"Hoare and Müller (1994:43–106)",
+"(Smith and O’Brien 1945:4–111)",
+"(Smith and O’Brien 1945)",
+"Müller, Backus, and Lamport (1937:78–133)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"García, Luis, Donald E. Knuth, and Maria de la Cruz. 1969. “On Computable Numbers.” Communications of the ACM 44(6):209–329.",
+"Hoare, C. A. R., and Hans Müller. 1994. “An Axiomatic Basis for Computer Programming.” Journal of the ACM 53(8):203–390. doi:10.4068/layer.20.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Pp. 24–188 in Proceedings of the schema symposium.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39(3):257–308. doi:10.6600/trace.17."
+]
+},
+"bib": {
+"citations": [
+"(see García, Knuth, and Cruz 1969)",
+"(Hoare and Müller 1994:53–135)",
+"(2014; Smith and Backus 2024)",
+"(Smith and O’Brien 1945:5)",
+"Hoare and Müller (1994:43–106)",
+"(Smith and O’Brien 1945:4–111)",
+"(Smith and O’Brien 1945)",
+"Müller, Backus, and Lamport (1937:78–133)"
+],
+"bibliography": [
+"Cruz, Maria de la. 2014. The Apollo Guidance Computer. TR-20. Lab Window.",
+"García, Luis, Donald E. Knuth, and Maria de la Cruz. 1969. “On Computable Numbers.” Communications of the ACM 44(6):209–329.",
+"Hoare, C. A. R., and Hans Müller. 1994. “An Axiomatic Basis for Computer Programming.” Journal of the ACM 53(8):203–390. doi:10.4068/layer.20.",
+"Müller, Hans, John Backus, and Leslie Lamport. 1937. Data Abstraction and Hierarchy. TR-83. Lab Matrix.",
+"Smith, John Jr., and John Backus. 2024. “On Computable Numbers.” Pp. 24–188 in Proceedings of the schema symposium.",
+"Smith, John Jr., and Flann O’Brien. 1945. “Data Abstraction and Hierarchy.” Proceedings of the London Mathematical Society 39(3):257–308. doi:10.6600/trace.17."
+]
+}
+}

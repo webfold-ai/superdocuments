@@ -1,0 +1,44 @@
+{
+"csl": {
+"citations": [
+"(Müller and Hoare 2024:69)",
+"(1952; Müller and Hoare 2024)",
+"(Smith and Backus 1988; Smith and Liskov 2024)",
+"(Backus 1952)",
+"(see Backus 1952, ch. 30)",
+"(see Backus 1952, ch. 16)",
+"(Lamport, Hopper, and Knuth 2007:12; Müller and Hoare 2024)",
+"(Lamport et al. 2007:93)",
+"(Lamport et al. 2007; Smith and Backus 1988:86)",
+"(Lamport et al. 2007; 1988)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+},
+"bib": {
+"citations": [
+"(Müller and Hoare 2024:69)",
+"(1952; Müller and Hoare 2024)",
+"(Smith and Backus 1988; Smith and Liskov 2024)",
+"(Backus 1952)",
+"(see Backus 1952, ch. 30)",
+"(see Backus 1952, ch. 16)",
+"(Lamport, Hopper, and Knuth 2007:12; Müller and Hoare 2024)",
+"(Lamport et al. 2007:93)",
+"(Lamport et al. 2007; Smith and Backus 1988:86)",
+"(Lamport et al. 2007; 1988)"
+],
+"bibliography": [
+"Backus, John. 1952. “Can Programming Be Liberated from the von Neumann Style.” Pp. 66–128 in Proceedings of the solver symposium.",
+"Lamport, Leslie, Grace Hopper, and Donald E. Knuth. 2007. “Time, Clocks, and the Ordering of Events.”",
+"Müller, Hans, and C. A. R. Hoare. 2024. “The Art of Computer Programming.”",
+"Smith, John Jr., and John Backus. 1988. “The Apollo Guidance Computer.” PhD thesis, University of Zurich.",
+"Smith, John Jr., and Barbara Liskov. 2024. “Notes on the Analytical Engine.”"
+]
+}
+}

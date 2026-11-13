@@ -1,0 +1,40 @@
+{
+"csl": {
+"citations": [
+"e.g. 1,2",
+"2",
+"2(p48)",
+"1,3(p65)",
+"4",
+"3(fig53)",
+"4(pp29-126)",
+"2,5"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"2. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184."
+]
+},
+"bib": {
+"citations": [
+"e.g. 1,2",
+"2",
+"2(p48)",
+"1,3(p65)",
+"4",
+"3(fig53)",
+"4(pp29-126)",
+"2,5"
+],
+"bibliography": [
+"1. Leslie Lamport, Hans Müller. The Apollo Guidance Computer. Lab Function; 1969.",
+"2. Flann O’Brien, C. A. R. Hoare, Grace Hopper. On computable numbers. In: Proceedings of the Optimizer Symposium. 1953:43-145.",
+"3. Leslie Lamport, Edsger W. Dijkstra, Margaret Hamilton. The Education of a Computer. PhD thesis. University of Zurich; 2002.",
+"4. Leslie Lamport, Hans Müller. Data Abstraction and Hierarchy. PhD thesis. University of Cambridge; 1965.",
+"5. Guido van Rossum, John Jr. Smith, John Backus. Can programming be liberated from the von neumann style. In: Proceedings of the Compiler Symposium. 1989:43-184."
+]
+}
+}
