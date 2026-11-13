@@ -236,6 +236,11 @@ fn markdown_table(ctx: &Ctx<'_>, table: &Table) -> Option<String> {
     if ctx.options.table_style == TableStyle::Tabs {
         return plain_table(ctx, table);
     }
+    // A pipe table cannot hold a table: when one cell contains another table the whole table is
+    // written as HTML, which Markdown allows and which keeps every cell in its own element.
+    if has_nested_table(table) {
+        return Some(html_table(ctx, table));
+    }
     let rows: Vec<Vec<String>> = table
         .rows
         .iter()
@@ -252,6 +257,87 @@ fn markdown_table(ctx: &Ctx<'_>, table: &Table) -> Option<String> {
         }
     }
     Some(lines.join("\n"))
+}
+
+fn has_nested_table(table: &Table) -> bool {
+    table
+        .rows
+        .iter()
+        .flat_map(|r| r.cells.iter())
+        .flat_map(|c| c.blocks.iter())
+        .any(|b| matches!(b, Block::Table(_)))
+}
+
+/// An HTML table, nested tables included. No blank lines, so a Markdown reader keeps it as one
+/// HTML block.
+fn html_table(ctx: &Ctx<'_>, table: &Table) -> String {
+    let mut out = String::from("<table>\n");
+    for row in &table.rows {
+        out.push_str("<tr>");
+        let tag = if row.header { "th" } else { "td" };
+        for cell in &row.cells {
+            out.push_str(&format!("<{tag}>"));
+            let mut previous_text = false;
+            for block in &cell.blocks {
+                let (html, is_text) = match block {
+                    Block::Paragraph(p) => (html_runs(ctx, &p.runs), true),
+                    Block::ListItem(item) => (
+                        format!("<ul><li>{}</li></ul>", html_runs(ctx, &item.runs)),
+                        false,
+                    ),
+                    Block::Table(inner) => (html_table(ctx, inner).trim_end().to_string(), false),
+                };
+                if html.is_empty() {
+                    continue;
+                }
+                if previous_text && is_text {
+                    out.push_str("<br>");
+                }
+                out.push_str(&html);
+                previous_text = is_text;
+            }
+            out.push_str(&format!("</{tag}>"));
+        }
+        out.push_str("</tr>\n");
+    }
+    out.push_str("</table>");
+    out
+}
+
+fn html_runs(ctx: &Ctx<'_>, runs: &[Run]) -> String {
+    let mut out = String::new();
+    for run in runs {
+        if let Some(number) = run.style.footnote {
+            out.push_str(&format!("[^{number}]"));
+            continue;
+        }
+        let mut text = escape_html(run.text.trim_matches(|c| c == '\n')).replace('\n', "<br>");
+        if text.trim().is_empty() {
+            out.push_str(&text);
+            continue;
+        }
+        if run.style.strike {
+            text = format!("<del>{text}</del>");
+        }
+        if run.style.italic {
+            text = format!("<em>{text}</em>");
+        }
+        if run.style.bold {
+            text = format!("<strong>{text}</strong>");
+        }
+        if let Some(target) = run.style.link.and_then(|i| ctx.links.get(i)) {
+            text = format!("<a href=\"{}\">{text}</a>", escape_html(&target.target));
+        }
+        out.push_str(&text);
+    }
+    out.trim().to_string()
+}
+
+fn escape_html(text: &str) -> String {
+    text.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
 }
 
 fn markdown_cell(ctx: &Ctx<'_>, cell: &Cell) -> String {

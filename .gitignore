@@ -10,3 +10,4 @@ benches/pandoc-compat/cite/styles/
 benches/pandoc-compat/cite/styles-heldout/
 benches/pandoc-compat/cite/suite/
 benches/pandoc-compat/cite/suite-src/
+benches/readme-charts/target/

@@ -83,7 +83,8 @@ fn pptx_follows_presentation_order_and_reads_notes_and_tables() {
     );
     assert!(md.starts_with("## Slide 1: Second slide"), "{md}");
     assert!(md.contains("## Slide 2: Intro & Goals"), "{md}");
-    assert!(md.contains("Point <A>\n\nPoint B"), "{md}");
+    // the master's body style gives these paragraphs a bullet
+    assert!(md.contains("- Point <A>\n- Point B"), "{md}");
     assert!(md.contains("**Notes:** Speaker note here"), "{md}");
     assert!(md.contains("| H1 | H2 |"), "{md}");
     assert!(md.contains("| a | b |"), "{md}");
@@ -159,4 +160,37 @@ fn rtf_merged_cell_written_through_cellx_edges_keeps_its_columns() {
     let md = convert("rich.rtf");
     assert!(md.contains("| Merged head |  | Third |"), "{md}");
     assert!(md.contains("| a | b | c |"), "{md}");
+}
+
+// ----- regressions found by webfold-bench/tests/formats-fidelity-v1 (fixtures written by python-pptx) -----
+
+/// Body text of a python-pptx slide has no bullet markup of its own: the bullet and its nesting come
+/// from the master's body style. The old reader printed every bullet as a plain paragraph.
+#[test]
+fn pptx_bullets_inherited_from_the_master_keep_their_nesting() {
+    let md = convert("inherited-bullets.pptx");
+    assert!(
+        md.contains("- Goals for the year\n    - Reduce churn\n    - Raise onboarding rate\n- Risks\n    - Supplier delay"),
+        "{md}"
+    );
+    assert!(
+        md.contains("## Slide 2: Timeline\n\n- Q1 planning\n- Q2 build\n- Q3 launch"),
+        "{md}"
+    );
+    let two = convert("two-column.pptx");
+    assert!(
+        two.contains("- Option A is cheaper\n- Option A ships in May\n- Option B is faster"),
+        "{two}"
+    );
+}
+
+/// A chart is a graphic frame whose text lives in its own part: its title and data were dropped.
+#[test]
+fn pptx_chart_title_and_data_are_read() {
+    let md = convert("chart.pptx");
+    assert!(md.contains("Chart: Quarterly revenue"), "{md}");
+    assert!(
+        md.contains("|  | Revenue |\n| --- | --- |\n| Q1 | 120 |\n| Q2 | 135 |\n| Q3 | 160 |"),
+        "{md}"
+    );
 }

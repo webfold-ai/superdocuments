@@ -112,6 +112,25 @@ pub(crate) fn xml_text(data: &[u8], wanted: &[u8]) -> Result<String, String> {
     Ok(out)
 }
 
+/// Appends a table cell: `|` is escaped and a line break inside the cell (a quoted CSV field, an
+/// Excel cell with Alt+Enter) becomes `<br>`, because a raw newline would end the table row.
+fn push_table_cell(line: &mut String, v: &str) {
+    let mut chars = v.chars().peekable();
+    while let Some(ch) = chars.next() {
+        match ch {
+            '|' => line.push_str("\\|"),
+            '\r' => {
+                if chars.peek() == Some(&'\n') {
+                    chars.next();
+                }
+                line.push_str("<br>");
+            }
+            '\n' => line.push_str("<br>"),
+            other => line.push(other),
+        }
+    }
+}
+
 pub(crate) fn markdown_table(rows: &[Vec<String>]) -> String {
     if rows.is_empty() {
         return String::new();
@@ -125,7 +144,7 @@ pub(crate) fn markdown_table(rows: &[Vec<String>]) -> String {
         out.push('|');
         for col in 0..width {
             out.push(' ');
-            out.push_str(&row.get(col).map_or("", String::as_str).replace('|', "\\|"));
+            push_table_cell(&mut out, row.get(col).map_or("", String::as_str));
             out.push_str(" |");
         }
         out.push('\n');
@@ -318,6 +337,19 @@ fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<
     rows
 }
 
+/// A binary double the way Excel's General format shows it: 15 significant digits. An XLS file stores
+/// doubles, so `33730816.02` is held as `33730816.019999996` and printing the shortest round-trip
+/// form shows the noise.
+fn general_number(value: f64) -> String {
+    if !value.is_finite() {
+        return value.to_string();
+    }
+    format!("{value:.14e}")
+        .parse::<f64>()
+        .unwrap_or(value)
+        .to_string()
+}
+
 /// One cell as the XLSX reader prints it.
 fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
     use calamine::Data;
@@ -326,7 +358,7 @@ fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
         Data::Bool(value) => if *value { "TRUE" } else { "FALSE" }.to_owned(),
         Data::Int(value) => value.to_string(),
-        Data::Float(value) => value.to_string(),
+        Data::Float(value) => general_number(*value),
         Data::DateTime(value) => {
             let serial = value.as_f64();
             // Calamine reports only that a cell is a date or time format. A duration is a time of
@@ -983,17 +1015,7 @@ fn write_csv_rows<W: Write>(rows: &[Vec<String>], out: &mut W) -> Result<(), Str
     line.push('|');
     for c in 0..cols {
         line.push(' ');
-        let v = rows[0].get(c).map(String::as_str).unwrap_or("");
-        if v.contains('|') {
-            for ch in v.chars() {
-                if ch == '|' {
-                    line.push('\\');
-                }
-                line.push(ch);
-            }
-        } else {
-            line.push_str(v);
-        }
+        push_table_cell(&mut line, rows[0].get(c).map(String::as_str).unwrap_or(""));
         line.push_str(" |");
     }
     line.push('\n');
@@ -1012,17 +1034,7 @@ fn write_csv_rows<W: Write>(rows: &[Vec<String>], out: &mut W) -> Result<(), Str
         line.push('|');
         for c in 0..cols {
             line.push(' ');
-            let v = row.get(c).map(String::as_str).unwrap_or("");
-            if v.contains('|') {
-                for ch in v.chars() {
-                    if ch == '|' {
-                        line.push('\\');
-                    }
-                    line.push(ch);
-                }
-            } else {
-                line.push_str(v);
-            }
+            push_table_cell(&mut line, row.get(c).map(String::as_str).unwrap_or(""));
             line.push_str(" |");
         }
         line.push('\n');
@@ -1364,16 +1376,7 @@ fn render_csv<W: Write>(doc: &LiftedDoc, out: &mut W) -> Result<(), String> {
         }
         let cell = doc.cells.get(coord).map(String::as_str).unwrap_or("");
         line.push(' ');
-        if cell.contains('|') {
-            for ch in cell.chars() {
-                if ch == '|' {
-                    line.push('\\');
-                }
-                line.push(ch);
-            }
-        } else {
-            line.push_str(cell);
-        }
+        push_table_cell(&mut line, cell);
         line.push_str(" |");
     }
     // Flush the last row.
@@ -1693,5 +1696,48 @@ mod tests {
         assert_ne!(fingerprint_bytes(csv), fingerprint_bytes(docx));
         // Same input gives the same fingerprint (stable across calls).
         assert_eq!(fingerprint_bytes(csv), fingerprint_bytes(csv));
+    }
+}
+
+#[cfg(test)]
+mod table_cell_tests {
+    use super::*;
+
+    /// XLS stores binary doubles; Excel shows 15 significant digits (euses grades_processed xls:
+    /// `33730816.019999996` for a cell that reads 33730816.02).
+    #[test]
+    fn xls_floats_show_fifteen_significant_digits() {
+        assert_eq!(general_number(33730816.019999996), "33730816.02");
+        assert_eq!(general_number(0.1 + 0.2), "0.3");
+        assert_eq!(general_number(1234.5), "1234.5");
+        assert_eq!(general_number(5.0), "5");
+        assert_eq!(general_number(-0.000125), "-0.000125");
+        assert_eq!(general_number(f64::INFINITY), "inf");
+    }
+
+    /// A quoted CSV field with a line break (RFC 4180) must stay inside its table row: the raw
+    /// newline used to end the row and split the table (csv-spectrum `newlines.csv`).
+    #[test]
+    fn line_breaks_inside_csv_cells_become_br() {
+        let md = convert_bytes("csv", b"a,b,c\r\n1,\"x\r\ny\",3\r\n4,5,6\r\n").unwrap();
+        assert_eq!(
+            md,
+            "| a | b | c |\n| --- | --- | --- |\n| 1 | x<br>y | 3 |\n| 4 | 5 | 6 |\n"
+        );
+    }
+
+    #[test]
+    fn pipes_and_line_breaks_are_escaped_in_every_table_writer() {
+        let rows = vec![
+            vec!["h".to_string(), "k".to_string()],
+            vec!["a|b".to_string(), "c\nd".to_string()],
+        ];
+        assert_eq!(
+            markdown_table(&rows),
+            "| h | k |\n| --- | --- |\n| a\\|b | c<br>d |\n"
+        );
+        let mut streamed = Vec::new();
+        write_csv_rows(&rows, &mut streamed).unwrap();
+        assert_eq!(String::from_utf8(streamed).unwrap(), markdown_table(&rows));
     }
 }

@@ -1,0 +1,13 @@
+[package]
+name = "readme-charts"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "Renders the benchmark SVGs embedded in README.md from published webfold-bench results. Not part of the superdocuments workspace."
+
+# Standalone: the root workspace must not pick this crate up, and charton stays
+# out of the superdocuments dependency tree (it is README tooling only).
+[workspace]
+
+[dependencies]
+charton = { version = "0.9", features = ["png"] }

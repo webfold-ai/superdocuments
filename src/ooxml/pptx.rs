@@ -3,11 +3,12 @@
 //! Slides come out in *presentation* order (`sldIdLst` in `presentation.xml`, resolved through
 //! its relationships) and are numbered by position, not by the number in the file name, which
 //! stops matching as soon as a slide is moved. Each slide gives its title, its text one
-//! paragraph at a time (explicit bullets only: bullets a layout supplies are not visible from
-//! the slide), tables as Markdown tables, hyperlinks, and the speaker notes. Footers, dates and
+//! paragraph at a time (a body paragraph without its own bullet setting takes the bullet of its
+//! slide layout's placeholder, then of the master's body style, level by level), tables as Markdown tables, hyperlinks, and the speaker notes. Footers, dates and
 //! slide-number placeholders are dropped.
 //!
-//! Not read: charts, SmartArt, comments, and text that only the layout or master carries.
+//! Chart titles are read. Not read: chart data, SmartArt, comments, and text that only the layout
+//! or master carries.
 
 use std::collections::HashMap;
 
@@ -39,7 +40,229 @@ struct Para {
     segs: Vec<Seg>,
     /// `Some(ordered)` for an explicit bullet.
     bullet: Option<bool>,
+    /// The paragraph says something about its bullet (`buChar`, `buAutoNum` or `buNone`).
+    bullet_set: bool,
     level: u32,
+}
+
+/// The bullet of a list level: `Some(false)` a character, `Some(true)` a number, `None` no bullet.
+type Bullet = Option<bool>;
+
+/// Bullets a slide inherits: per layout placeholder and level, and per level from the master's
+/// body style.
+#[derive(Default)]
+struct Inherited {
+    layout: HashMap<(String, u32), Bullet>,
+    master: HashMap<u32, Bullet>,
+}
+
+impl Inherited {
+    fn resolve(&self, key: &str, level: u32) -> Bullet {
+        self.layout
+            .get(&(key.to_owned(), level))
+            .or_else(|| self.master.get(&level))
+            .copied()
+            .flatten()
+    }
+}
+
+/// A chart part as Markdown: `Chart: <title>` and a table with one column per series. Titles of
+/// axes are not the chart's title and are left out.
+fn chart_markdown(xml: &[u8]) -> String {
+    #[derive(Clone, Copy, PartialEq)]
+    enum Part {
+        None,
+        Name,
+        Categories,
+        Values,
+    }
+    let mut reader = Reader::from_reader(xml);
+    let mut buf = Vec::new();
+    let (mut title, mut in_title, mut in_plot) = (String::new(), false, false);
+    let mut series: Vec<(String, Vec<(usize, String)>, Vec<(usize, String)>)> = Vec::new();
+    let (mut part, mut point, mut in_v, mut in_t) = (Part::None, 0usize, false, false);
+    loop {
+        let Ok(event) = reader.read_event_into(&mut buf) else {
+            break;
+        };
+        match event {
+            Event::Start(ref tag) | Event::Empty(ref tag) => {
+                let name = tag.local_name().as_ref().to_owned();
+                match name.as_str() {
+                    "plotArea" => in_plot = true,
+                    "title" if !in_plot => in_title = true,
+                    "ser" => series.push((String::new(), Vec::new(), Vec::new())),
+                    "tx" if !series.is_empty() => part = Part::Name,
+                    "cat" | "xVal" if !series.is_empty() => part = Part::Categories,
+                    "val" | "yVal" if !series.is_empty() => part = Part::Values,
+                    "pt" => {
+                        point = attr_local(tag, "idx")
+                            .and_then(|i| i.parse().ok())
+                            .unwrap_or(0)
+                    }
+                    "v" => in_v = true,
+                    "t" if in_title => in_t = true,
+                    _ => {}
+                }
+            }
+            Event::End(tag) => {
+                let name = tag.local_name().as_ref().to_owned();
+                match name.as_str() {
+                    "plotArea" => in_plot = false,
+                    "title" => in_title = false,
+                    "tx" | "cat" | "xVal" | "val" | "yVal" => part = Part::None,
+                    "v" => in_v = false,
+                    "t" => in_t = false,
+                    _ => {}
+                }
+            }
+            Event::Text(value) => {
+                let t = text(value.as_ref());
+                if in_t {
+                    title.push_str(&t);
+                } else if in_v {
+                    if let Some(s) = series.last_mut() {
+                        match part {
+                            Part::Name => s.0.push_str(&t),
+                            Part::Categories => s.1.push((point, t)),
+                            Part::Values => s.2.push((point, t)),
+                            Part::None => {}
+                        }
+                    }
+                }
+            }
+            Event::Eof => break,
+            _ => {}
+        }
+        buf.clear();
+    }
+    let mut out = format!("Chart: {}", title.trim())
+        .trim_end()
+        .trim_end_matches(':')
+        .to_owned();
+    let rows = series
+        .iter()
+        .flat_map(|s| s.1.iter().chain(s.2.iter()).map(|p| p.0 + 1))
+        .max()
+        .unwrap_or(0);
+    if !series.is_empty() && rows > 0 {
+        let mut table = vec![std::iter::once(String::new())
+            .chain(series.iter().map(|s| s.0.clone()))
+            .collect::<Vec<_>>()];
+        for i in 0..rows {
+            let label = series
+                .iter()
+                .find_map(|s| s.1.iter().find(|p| p.0 == i).map(|p| p.1.clone()))
+                .unwrap_or_default();
+            let mut row = vec![label];
+            for s in &series {
+                row.push(
+                    s.2.iter()
+                        .find(|p| p.0 == i)
+                        .map(|p| p.1.clone())
+                        .unwrap_or_default(),
+                );
+            }
+            table.push(row);
+        }
+        out.push_str("\n\n");
+        out.push_str(markdown_table(&table).trim_end());
+    }
+    out
+}
+
+/// `lvl3pPr` -> `Some(2)`.
+fn level_of(name: &str) -> Option<u32> {
+    name.strip_prefix("lvl")?
+        .strip_suffix("pPr")?
+        .parse::<u32>()
+        .ok()?
+        .checked_sub(1)
+}
+
+/// The key a placeholder is matched by between a slide and its layout: `idx`, else its type.
+fn placeholder_key(tag: &BytesStart<'_>) -> String {
+    attr_local(tag, "idx")
+        .map(|i| format!("idx:{i}"))
+        .unwrap_or_else(|| {
+            format!(
+                "type:{}",
+                attr_local(tag, "type").unwrap_or_else(|| "body".to_owned())
+            )
+        })
+}
+
+/// Reads the list-level bullets out of a layout (`lstStyle` of each placeholder) or a master
+/// (`bodyStyle`).
+fn read_bullets(xml: &[u8], master: bool, inherited: &mut Inherited) {
+    let mut reader = Reader::from_reader(xml);
+    let mut buf = Vec::new();
+    let (mut key, mut level) = (None::<String>, None::<u32>);
+    let (mut in_list_style, mut in_body_style) = (false, false);
+    loop {
+        let Ok(event) = reader.read_event_into(&mut buf) else {
+            return;
+        };
+        match event {
+            Event::Start(ref tag) | Event::Empty(ref tag) => {
+                let name = tag.local_name().as_ref().to_owned();
+                match name.as_str() {
+                    "sp" => key = None,
+                    "ph" => key = Some(placeholder_key(tag)),
+                    "lstStyle" => in_list_style = true,
+                    "bodyStyle" => in_body_style = true,
+                    "buChar" | "buAutoNum" | "buNone" => {
+                        if let Some(l) = level {
+                            let bullet = match name.as_str() {
+                                "buChar" => Some(false),
+                                "buAutoNum" => Some(true),
+                                _ => None,
+                            };
+                            if master && in_body_style {
+                                inherited.master.entry(l).or_insert(bullet);
+                            } else if !master && in_list_style {
+                                if let Some(k) = key.clone() {
+                                    inherited.layout.entry((k, l)).or_insert(bullet);
+                                }
+                            }
+                        }
+                    }
+                    other => {
+                        if let Some(l) = level_of(other) {
+                            level = Some(l);
+                        }
+                    }
+                }
+                if matches!(event, Event::Empty(_)) {
+                    let n = tag.local_name().as_ref().to_owned();
+                    match n.as_str() {
+                        "lstStyle" => in_list_style = false,
+                        "bodyStyle" => in_body_style = false,
+                        _ => {
+                            if level_of(&n).is_some() {
+                                level = None;
+                            }
+                        }
+                    }
+                }
+            }
+            Event::End(tag) => {
+                let n = tag.local_name().as_ref().to_owned();
+                match n.as_str() {
+                    "lstStyle" => in_list_style = false,
+                    "bodyStyle" => in_body_style = false,
+                    _ => {
+                        if level_of(&n).is_some() {
+                            level = None;
+                        }
+                    }
+                }
+            }
+            Event::Eof => return,
+            _ => {}
+        }
+        buf.clear();
+    }
 }
 
 struct Slide<'a> {
@@ -52,6 +275,10 @@ struct Slide<'a> {
     content: Content,
     para: Option<Para>,
     placeholder: Option<String>,
+    placeholder_key: Option<String>,
+    inherited: &'a Inherited,
+    /// Chart relationship ids to the chart rendered as Markdown.
+    charts: &'a HashMap<String, String>,
     table: Option<Cells>,
     in_tc: bool,
     in_run: bool,
@@ -106,6 +333,7 @@ impl<'a> Slide<'a> {
             "ph" => {
                 self.placeholder =
                     Some(attr_local(tag, "type").unwrap_or_else(|| "body".to_owned()));
+                self.placeholder_key = Some(placeholder_key(tag));
             }
             "p" => self.para = Some(Para::default()),
             "pPr" => {
@@ -118,16 +346,19 @@ impl<'a> Slide<'a> {
             "buChar" => {
                 if let Some(p) = self.para.as_mut() {
                     p.bullet = Some(false);
+                    p.bullet_set = true;
                 }
             }
             "buAutoNum" => {
                 if let Some(p) = self.para.as_mut() {
                     p.bullet = Some(true);
+                    p.bullet_set = true;
                 }
             }
             "buNone" => {
                 if let Some(p) = self.para.as_mut() {
                     p.bullet = None;
+                    p.bullet_set = true;
                 }
             }
             "r" | "fld" => {
@@ -169,6 +400,14 @@ impl<'a> Slide<'a> {
                     p.segs.push(Seg::Br);
                 }
             }
+            "chart" if !self.notes => {
+                if let Some(markdown) = attrs_local(tag, "id")
+                    .iter()
+                    .find_map(|id| self.charts.get(id))
+                {
+                    self.content.body.push((false, markdown.clone()));
+                }
+            }
             "tbl" => self.table = Some(Cells::default()),
             "tr" => {
                 if let Some(t) = self.table.as_mut() {
@@ -200,7 +439,10 @@ impl<'a> Slide<'a> {
                 self.in_run = false;
                 self.in_rpr = false;
             }
-            "sp" => self.placeholder = None,
+            "sp" => {
+                self.placeholder = None;
+                self.placeholder_key = None;
+            }
             "p" => self.finish_paragraph(),
             "tc" => {
                 self.in_tc = false;
@@ -261,7 +503,13 @@ impl<'a> Slide<'a> {
         if line.is_empty() {
             return;
         }
-        match para.bullet {
+        let bullet = match (&self.placeholder_key, para.bullet_set) {
+            (Some(key), false) if placeholder == "body" && !self.notes => {
+                self.inherited.resolve(key, para.level)
+            }
+            _ => para.bullet,
+        };
+        match bullet {
             Some(ordered) => {
                 self.counters.retain(|l, _| *l <= para.level);
                 let marker = if ordered {
@@ -289,11 +537,16 @@ fn read_part(
     xml: &[u8],
     links: &HashMap<String, String>,
     images: &HashMap<String, String>,
+    inherited: &Inherited,
+    charts: &HashMap<String, String>,
     notes: bool,
 ) -> Result<Content, String> {
     let mut slide = Slide {
         links,
         images,
+        inherited,
+        charts,
+        placeholder_key: None,
         alt: None,
         notes,
         content: Content::default(),
@@ -409,6 +662,36 @@ pub(crate) fn slide_order(
     Ok(numbered.into_iter().map(|(_, name)| name).collect())
 }
 
+/// Bullets from the slide's layout and that layout's master. A missing or unreadable part gives none.
+fn inherited_bullets(
+    zip: &mut zip::ZipArchive<std::io::Cursor<&[u8]>>,
+    slide: &str,
+    rels: &[super::Rel],
+) -> Inherited {
+    let mut inherited = Inherited::default();
+    let Some(layout) = rels
+        .iter()
+        .find(|r| r.kind == "slideLayout" && !r.external)
+        .and_then(|r| resolve(slide, &r.target))
+    else {
+        return inherited;
+    };
+    if let Ok(xml) = entry(zip, &layout) {
+        read_bullets(&xml, false, &mut inherited);
+    }
+    let master = read_rels(zip, &rels_path_of(&layout)).ok().and_then(|r| {
+        r.into_iter()
+            .find(|r| r.kind == "slideMaster" && !r.external)
+            .and_then(|r| resolve(&layout, &r.target))
+    });
+    if let Some(master) = master {
+        if let Ok(xml) = entry(zip, &master) {
+            read_bullets(&xml, true, &mut inherited);
+        }
+    }
+    inherited
+}
+
 pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
     let mut zip = archive(data)?;
     let order = slide_order(&mut zip)?;
@@ -424,7 +707,23 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
             .into_iter()
             .map(|(id, path)| (id, super::media_name(&path).to_owned()))
             .collect();
-        let slide = read_part(&entry(&mut zip, part)?, &links, &images, false)?;
+        let inherited = inherited_bullets(&mut zip, part, &rels);
+        let charts: HashMap<String, String> = rels
+            .iter()
+            .filter(|r| r.kind == "chart" && !r.external)
+            .filter_map(|r| {
+                let xml = entry(&mut zip, &resolve(part, &r.target)?).ok()?;
+                Some((r.id.clone(), chart_markdown(&xml)))
+            })
+            .collect();
+        let slide = read_part(
+            &entry(&mut zip, part)?,
+            &links,
+            &images,
+            &inherited,
+            &charts,
+            false,
+        )?;
         let mut notes = Content::default();
         if let Some(notes_part) = rels
             .iter()
@@ -434,6 +733,8 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
             notes = read_part(
                 &entry(&mut zip, &notes_part)?,
                 &HashMap::new(),
+                &HashMap::new(),
+                &Inherited::default(),
                 &HashMap::new(),
                 true,
             )?;
