@@ -463,9 +463,15 @@ impl<'a> Parser<'a> {
                 }
             }
             "hyperlink" => {
+                // `r:id` is an external or relationship target; `w:anchor` names a bookmark of this document
                 self.hyperlink = attrs_local(tag, "id")
                     .iter()
-                    .find_map(|id| self.links.get(id).cloned());
+                    .find_map(|id| self.links.get(id).cloned())
+                    .or_else(|| {
+                        attr_local(tag, "anchor")
+                            .filter(|a| !a.is_empty())
+                            .map(|a| format!("#{a}"))
+                    });
             }
             "docPr" => {
                 self.drawing_alt = attr_local(tag, "descr")
@@ -733,6 +739,26 @@ fn is_off(value: Option<&str>) -> bool {
 /// The URL of a `HYPERLINK "url"` field instruction, if that is what it is.
 fn hyperlink_target(instr: &str) -> Option<String> {
     let rest = instr.trim().strip_prefix("HYPERLINK")?.trim();
+    // `HYPERLINK \l "bookmark"` (or `HYPERLINK "url" \l "fragment"`): a place in this document
+    if let Some((before, after)) = rest.split_once("\\l") {
+        let name = after
+            .trim()
+            .trim_start_matches('"')
+            .split('"')
+            .next()
+            .unwrap_or("")
+            .trim();
+        if !name.is_empty() {
+            let url = before
+                .trim()
+                .trim_start_matches('"')
+                .split('"')
+                .next()
+                .unwrap_or("")
+                .trim();
+            return Some(format!("{url}#{name}"));
+        }
+    }
     if let Some(quoted) = rest.strip_prefix('"') {
         return quoted
             .split('"')
@@ -977,6 +1003,15 @@ mod tests {
             r#"<x:p><x:r><x:fldChar x:fldCharType="begin"/></x:r><x:r><x:instrText> HYPERLINK "https://example.org/p?a=1&amp;b=2" </x:instrText></x:r><x:r><x:fldChar x:fldCharType="separate"/></x:r><x:r><x:t>linked</x:t></x:r><x:r><x:fldChar x:fldCharType="end"/></x:r><x:r><x:t> text</x:t></x:r></x:p>"#,
         );
         assert_eq!(md, "[linked](https://example.org/p?a=1&b=2) text");
+    }
+
+    /// Internal links (`w:anchor`, `HYPERLINK \l`) point at a bookmark: they are `[text](#name)` links.
+    #[test]
+    fn links_to_bookmarks_keep_their_target() {
+        let md = docx_with(
+            r#"<x:p><x:hyperlink x:anchor="intro"><x:r><x:t>see intro</x:t></x:r></x:hyperlink><x:r><x:t> and </x:t></x:r><x:r><x:fldChar x:fldCharType="begin"/></x:r><x:r><x:instrText> HYPERLINK \l "end" </x:instrText></x:r><x:r><x:fldChar x:fldCharType="separate"/></x:r><x:r><x:t>the end</x:t></x:r><x:r><x:fldChar x:fldCharType="end"/></x:r></x:p>"#,
+        );
+        assert_eq!(md, "[see intro](#intro) and [the end](#end)");
     }
 
     #[test]

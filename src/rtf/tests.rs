@@ -873,3 +873,79 @@ fn random_bytes_never_panic() {
         exercise(&data);
     }
 }
+
+// ----- regressions found by webfold-bench/tests/formats-fidelity-v1 -----------------------------
+
+/// `\*` marks an ignorable destination only as the first thing in a group. LibreOffice writes
+/// `{\loch\f2\i0\b0\*\cs7 text}` for ordinary text; the whole group was dropped (Tika's
+/// testRTFIgnoredControlWord.rtf).
+#[test]
+fn star_after_formatting_words_is_not_an_ignorable_destination() {
+    let md = markdown_of(br"{\rtf1\ansi\deff0{\fonttbl{\f0 Times;}}\pard{\loch\f0\i0\b0\*\cs7 The quick brown fox}\par}");
+    assert!(md.contains("The quick brown fox"), "{md:?}");
+    // a real ignorable destination is still skipped
+    let md = markdown_of(br"{\rtf1\ansi{\*\generator Hidden;}Shown\par}");
+    assert!(md.contains("Shown") && !md.contains("Hidden"), "{md:?}");
+}
+
+/// A `\uN` fallback that is a control word (`\u8226 \tab}`) must not skip the first letter of the
+/// text after the group (Pandoc's test/rtf/list_multiparagraph.rtf read "irst item").
+#[test]
+fn unicode_fallback_does_not_cross_the_end_of_a_group() {
+    let md = markdown_of(br"{\rtf1\ansi\pard{\listtext\tab \u8226 \tab}First item\par}");
+    assert!(md.contains("First item"), "{md:?}");
+}
+
+/// A table inside a table cannot be a Markdown pipe table: it is written as HTML, every cell of the
+/// inner tables in its own element, and the `\nonesttables` fallback text (written for readers
+/// that cannot nest) is not read (Pandoc's test/rtf/table_nested.rtf: the old output joined the
+/// inner cells and both fallbacks into one pipe-table cell).
+#[test]
+fn nested_tables_are_written_as_html_and_fallback_text_is_dropped() {
+    let md = markdown_of(
+        br"{\rtf1\ansi
+\trowd\cellx5000
+\pard\intbl\itap2 Level two before\par
+\pard\intbl\itap3 Deep A\nestcell Deep B\nestcell
+{\*\nesttableprops\trowd\cellx2000\cellx4000\nestrow}
+{\nonesttables NESTED FALLBACK ONE\par}
+\pard\intbl\itap2 Level two after\nestcell
+{\*\nesttableprops\trowd\cellx4000\nestrow}
+{\nonesttables PARENT FALLBACK\par}
+\pard\intbl\itap1 Outer after\cell
+\row
+\pard\itap0 Outside table\par
+}",
+    );
+    assert!(md.starts_with("<table>"), "{md:?}");
+    assert!(
+        md.contains("<td>Deep A</td><td>Deep B</td>"),
+        "inner cells are separate elements: {md:?}"
+    );
+    assert!(
+        md.contains("Level two before") && md.contains("Outer after"),
+        "{md:?}"
+    );
+    assert!(!md.contains("FALLBACK"), "{md:?}");
+    assert!(md.contains("Outside table"), "{md:?}");
+    assert!(
+        !md.contains("\n\n<"),
+        "no blank line inside the HTML block: {md:?}"
+    );
+}
+
+/// A flat table is still a pipe table.
+#[test]
+fn flat_tables_stay_pipe_tables() {
+    let md = markdown_of(br"{\rtf1\ansi\trowd\cellx1000\cellx2000\pard\intbl A\cell B\cell\row}");
+    assert!(md.starts_with("| A | B |"), "{md:?}");
+}
+
+/// The two halves of a surrogate pair may be separated by `\uc`, which changes the fallback length
+/// (anydoc's tests/fixtures/rtf/text.rtf writes the family emoji this way); each half used to
+/// come out as U+FFFD.
+#[test]
+fn surrogate_pair_split_by_a_uc_word_is_one_character() {
+    let md = markdown_of(br"{\rtf1\ansi\pard emoji: \uc0 \u55357\uc1 \u56424\'3f.\par}");
+    assert!(md.contains("emoji: \u{1F468}."), "{md:?}");
+}

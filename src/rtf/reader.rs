@@ -254,9 +254,10 @@ impl<'o> Reader<'o> {
                     }
                 }
                 Token::Word { name, param } => {
-                    // `\u` is the one word that must see a pending high surrogate.
+                    // `\u` must see a pending high surrogate, and so must `\uc`: writers change the
+                    // fallback length between the two halves (`\uc0 \u55357\uc1 \u56424\'3f`).
                     self.flush_decoder();
-                    if name != b"u" {
+                    if name != b"u" && name != b"uc" {
                         self.flush_surrogate();
                     }
                     self.word(name, param);
@@ -424,6 +425,9 @@ impl<'o> Reader<'o> {
         let Some(group) = self.groups.pop() else {
             return;
         };
+        // A `\uN` fallback that is a control word (`\u8226 \tab}`) never reaches a character: the
+        // pending skip must not cross the end of the group and eat the next word's first letter.
+        self.skip = 0;
         if group.owns_aux {
             self.finish_aux(group);
         }
@@ -591,7 +595,9 @@ impl<'o> Reader<'o> {
             | b"ud"
             | b"bkmkstart"
             | b"bkmkend"
-            | b"docvar" => Some(Dest::Skip),
+            | b"docvar"
+            // fallback text for readers without nested tables; a reader that nests tables skips it
+            | b"nonesttables" => Some(Dest::Skip),
             b"header" | b"headerl" | b"headerr" | b"headerf" | b"footer" | b"footerl"
             | b"footerr" | b"footerf" => {
                 let kind = match name {
@@ -846,8 +852,12 @@ impl<'o> Reader<'o> {
                     self.paragraph_break();
                 }
             }
+            // `\*` marks an ignorable destination only as the first thing in a group. Elsewhere
+            // (`{\b0\*\cs7 text}`, as LibreOffice writes) the group is ordinary text.
             b'*' => {
-                self.top_mut().star = true;
+                if self.top().fresh {
+                    self.top_mut().star = true;
+                }
             }
             // `\-` optional hyphen, `\:` index subentry and `\|` formula character produce no text.
             _ => {}
