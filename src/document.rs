@@ -337,6 +337,19 @@ fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<
     rows
 }
 
+/// A binary double the way Excel's General format shows it: 15 significant digits. An XLS file stores
+/// doubles, so `33730816.02` is held as `33730816.019999996` and printing the shortest round-trip
+/// form shows the noise.
+fn general_number(value: f64) -> String {
+    if !value.is_finite() {
+        return value.to_string();
+    }
+    format!("{value:.14e}")
+        .parse::<f64>()
+        .unwrap_or(value)
+        .to_string()
+}
+
 /// One cell as the XLSX reader prints it.
 fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
     use calamine::Data;
@@ -345,7 +358,7 @@ fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
         Data::Bool(value) => if *value { "TRUE" } else { "FALSE" }.to_owned(),
         Data::Int(value) => value.to_string(),
-        Data::Float(value) => value.to_string(),
+        Data::Float(value) => general_number(*value),
         Data::DateTime(value) => {
             let serial = value.as_f64();
             // Calamine reports only that a cell is a date or time format. A duration is a time of
@@ -1689,6 +1702,18 @@ mod tests {
 #[cfg(test)]
 mod table_cell_tests {
     use super::*;
+
+    /// XLS stores binary doubles; Excel shows 15 significant digits (euses grades_processed xls:
+    /// `33730816.019999996` for a cell that reads 33730816.02).
+    #[test]
+    fn xls_floats_show_fifteen_significant_digits() {
+        assert_eq!(general_number(33730816.019999996), "33730816.02");
+        assert_eq!(general_number(0.1 + 0.2), "0.3");
+        assert_eq!(general_number(1234.5), "1234.5");
+        assert_eq!(general_number(5.0), "5");
+        assert_eq!(general_number(-0.000125), "-0.000125");
+        assert_eq!(general_number(f64::INFINITY), "inf");
+    }
 
     /// A quoted CSV field with a line break (RFC 4180) must stay inside its table row: the raw
     /// newline used to end the row and split the table (csv-spectrum `newlines.csv`).

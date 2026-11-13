@@ -136,10 +136,20 @@ fn parse_number_format(code: &str) -> Option<NumberFormat> {
     if dec_part.chars().any(|c| c == ',' || c == '.') || int_part.contains('.') {
         return None;
     }
+    // Mandatory digits: in the integer part everything from the leftmost `0` to the end (`0#` shows
+    // 1 as `01`), in the decimals everything up to the last `0` or `?`.
+    let placeholders: Vec<char> = int_part.chars().filter(|c| *c != ',').collect();
+    let min_integer_digits = placeholders
+        .iter()
+        .position(|c| *c == '0')
+        .map_or(0, |first| placeholders.len() - first);
+    let min_decimals = dec_part
+        .rfind(|c| matches!(c, '0' | '?'))
+        .map_or(0, |last| last + 1);
     Some(NumberFormat {
-        min_decimals: dec_part.chars().filter(|c| matches!(c, '0' | '?')).count(),
+        min_decimals,
         max_decimals: dec_part.len(),
-        min_integer_digits: int_part.chars().filter(|c| *c == '0').count(),
+        min_integer_digits,
         thousands: int_part.contains(','),
         percent,
         prefix,
@@ -813,6 +823,10 @@ mod number_format_tests {
         assert_eq!(shown("0.00", 99.0).as_deref(), Some("99.00"));
         assert_eq!(shown("0.0#", 2.5).as_deref(), Some("2.5"));
         assert_eq!(shown("000", 7.0).as_deref(), Some("007"));
+        // `0#` shows 1 as 01; a literal around the digits is kept (docling xlsx_07_gap_tolerance, LibreOffice shows 1.01)
+        assert_eq!(shown("0#", 1.0).as_deref(), Some("01"));
+        assert_eq!(shown("\\1\\.0#", 1.0).as_deref(), Some("1.01"));
+        assert_eq!(shown("#,##0", 0.4).as_deref(), Some("0"));
         assert_eq!(shown("$#,##0.00", 1234.5).as_deref(), Some("$1,234.50"));
         assert_eq!(shown("\"EUR \"0.00", 3.0).as_deref(), Some("EUR 3.00"));
         assert_eq!(shown("[$€-407]#,##0.00", 10.0).as_deref(), Some("€10.00"));
