@@ -3,7 +3,7 @@
 // Copyright 2016-2026, Johann Tuffe.
 
 use std::cmp::min;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::BTreeMap;
 use std::fmt::{self, Write};
 use std::io::{Read, Seek, SeekFrom};
 
@@ -155,9 +155,9 @@ pub struct XlsOptions {
 struct SheetData {
     range: Range<Data>,
     formula: Range<String>,
+    /// The XF record index of every number, RK and formula-result cell.
+    cell_xfs: Range<Option<u16>>,
     merge_cells: Vec<Dimensions>,
-    /// Number format id (`ifmt`) of every number, RK and formula-result cell, by (row, column).
-    cell_ifmt: HashMap<(u32, u32), u16>,
 }
 
 /// A struct representing an old xls format file (CFB)
@@ -168,9 +168,9 @@ pub struct Xls<RS> {
     reader: RS,
     options: XlsOptions,
     formats: Vec<CellFormat>,
-    /// `ifmt` of each XF record, by XF index.
-    xf_ifmt: Vec<u16>,
-    /// Text of the custom number formats (FORMAT records), by `ifmt`.
+    /// The number format id (`ifmt`) of every XF record, in record order.
+    xf_formats: Vec<u16>,
+    /// The format code of every custom number format (FORMAT record), by `ifmt`.
     format_codes: BTreeMap<u16, String>,
     is_1904: bool,
     #[cfg(feature = "picture")]
@@ -182,24 +182,6 @@ fn cfb<RS: Seek + Read>(reader: &mut RS) -> Result<Cfb, XlsError> {
     reader.seek(SeekFrom::Start(0))?;
     let cfb = Cfb::new(reader, offset_end)?;
     Ok(cfb)
-}
-
-impl<RS: Read + Seek> Xls<RS> {
-    /// The number format id (`ifmt`) of the cell at (`row`, `column`) of a worksheet, when it is a
-    /// number, RK or formula-result cell with a format other than General. Ids below 164 are the
-    /// built-in formats; [`Xls::format_code`] gives the text of the custom ones.
-    pub fn cell_number_format(&self, sheet: &str, row: u32, column: u32) -> Option<u16> {
-        self.sheets
-            .get(sheet)?
-            .cell_ifmt
-            .get(&(row, column))
-            .copied()
-    }
-
-    /// The text of a custom number format (a FORMAT record), by `ifmt`.
-    pub fn format_code(&self, ifmt: u16) -> Option<&str> {
-        self.format_codes.get(&ifmt).map(String::as_str)
-    }
 }
 
 impl<RS: Read + Seek> Xls<RS> {
@@ -231,7 +213,7 @@ impl<RS: Read + Seek> Xls<RS> {
             options,
             is_1904: false,
             formats: Vec::new(),
-            xf_ifmt: Vec::new(),
+            xf_formats: Vec::new(),
             format_codes: BTreeMap::new(),
             #[cfg(feature = "picture")]
             pictures: None,
@@ -418,6 +400,18 @@ impl<RS: Read + Seek> Xls<RS> {
     pub fn has_1904_epoch(&self) -> bool {
         self.is_1904
     }
+
+    /// The number format of a numeric cell: the format id (`ifmt`, MS-XLS 2.4.126) of its XF
+    /// record and, for a custom format, its format code. The id is one of Excel's built-in
+    /// formats (0 is `General`, 14 a date, ...) unless a code is returned.
+    ///
+    /// `pos` is the absolute `(row, column)`. `None` for a cell that is not a number, an RK value
+    /// or a formula result, and for an unknown sheet.
+    pub fn cell_number_format(&self, sheet: &str, pos: (u32, u32)) -> Option<(u16, Option<&str>)> {
+        let xf = (*self.sheets.get(sheet)?.cell_xfs.get_value(pos)?)?;
+        let ifmt = *self.xf_formats.get(xf as usize)?;
+        Some((ifmt, self.format_codes.get(&ifmt).map(String::as_str)))
+    }
 }
 
 impl<RS: Read + Seek> Reader<RS> for Xls<RS> {
@@ -514,6 +508,7 @@ impl<RS: Read + Seek> Xls<RS> {
         let mut defined_names = Vec::new();
         let mut xtis = Vec::new();
         let mut formats = BTreeMap::new();
+        let mut format_codes = BTreeMap::new();
         let mut xfs = Vec::new();
         let mut biff = Biff::Biff8; // Binary Interchange File Format (BIFF) version
         let codepage = self.options.force_codepage.unwrap_or(1200);
@@ -548,7 +543,7 @@ impl<RS: Read + Seek> Xls<RS> {
                     0x041E => match parse_format(&mut r, &encoding, biff) {
                         Ok((idx, format, code)) => {
                             formats.insert(idx, format);
-                            self.format_codes.insert(idx, code);
+                            format_codes.insert(idx, code);
                         }
                         Err(e) => log::warn!("{e}"),
                     },
@@ -598,7 +593,8 @@ impl<RS: Read + Seek> Xls<RS> {
                 })
                 .collect();
         }
-        self.xf_ifmt = xfs.clone();
+        self.xf_formats = xfs.clone();
+        self.format_codes = format_codes;
         self.formats = xfs
             .into_iter()
             .map(|fmt| match formats.get(&fmt) {
@@ -634,10 +630,10 @@ impl<RS: Read + Seek> Xls<RS> {
             let sh = &stream[pos..];
             let records = RecordIter { stream: sh };
             let mut cells = Vec::new();
+            let mut cell_xfs: Vec<Cell<Option<u16>>> = Vec::new();
             let mut formulas = Vec::new();
             let mut fmla_pos = (0, 0);
             let mut merge_cells = Vec::new();
-            let mut cell_ifmt: HashMap<(u32, u32), u16> = HashMap::new();
             // Nested substreams (embedded charts) carry cell-like records; skip them.
             // The first BOF belongs to the worksheet itself.
             let mut seen_sheet_bof = false;
@@ -674,12 +670,7 @@ impl<RS: Read + Seek> Xls<RS> {
                     0x0203 => {
                         // 515: Number
                         let cell = parse_number(r.data, &self.formats, self.is_1904)?;
-                        note_ifmt(
-                            &mut cell_ifmt,
-                            &self.xf_ifmt,
-                            cell.get_position(),
-                            &r.data[4..],
-                        );
+                        cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(&r.data[4..]))));
                         cells.push(cell);
                     }
                     0x0204 => cells.push(parse_label(r.data, &encoding, biff)?), // 516: Label [MS-XLS 2.4.148]
@@ -693,12 +684,7 @@ impl<RS: Read + Seek> Xls<RS> {
                     0x027E => {
                         // 638: Rk
                         let cell = parse_rk(r.data, &self.formats, self.is_1904)?;
-                        note_ifmt(
-                            &mut cell_ifmt,
-                            &self.xf_ifmt,
-                            cell.get_position(),
-                            &r.data[4..],
-                        );
+                        cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(&r.data[4..]))));
                         cells.push(cell);
                     }
                     0x00FD => cells.extend(parse_label_sst(r.data, &strings)?), // LabelSst
@@ -706,9 +692,9 @@ impl<RS: Read + Seek> Xls<RS> {
                         // 189: MulRk
                         let first = cells.len();
                         parse_mul_rk(r.data, &mut cells, &self.formats, self.is_1904)?;
-                        // each of its cells starts with its own XF index
+                        // each 6-byte RK entry starts with its own XF index
                         for (cell, rk) in cells[first..].iter().zip(r.data[4..].chunks(6)) {
-                            note_ifmt(&mut cell_ifmt, &self.xf_ifmt, cell.get_position(), rk);
+                            cell_xfs.push(Cell::new(cell.get_position(), Some(read_u16(rk))));
                         }
                     }
                     0x00E5 => parse_merge_cells(r.data, &mut merge_cells)?, // 229: Merge Cells
@@ -726,12 +712,12 @@ impl<RS: Read + Seek> Xls<RS> {
                         let col = read_u16(&r.data[2..]);
                         let format = self.formats.get(read_u16(&r.data[4..]) as usize);
                         fmla_pos = (row as u32, col as u32);
-                        note_ifmt(&mut cell_ifmt, &self.xf_ifmt, fmla_pos, &r.data[4..]);
                         if let Some(val) =
                             parse_formula_value(&r.data[6..14], format, self.is_1904)?
                         {
                             // If the value is a string
                             // it will appear in 0x0207 record coming next
+                            cell_xfs.push(Cell::new(fmla_pos, Some(read_u16(&r.data[4..]))));
                             cells.push(Cell::new(fmla_pos, val));
                         }
                         let fmla = parse_formula(
@@ -756,13 +742,14 @@ impl<RS: Read + Seek> Xls<RS> {
             }
             let range = Range::from_sparse(cells);
             let formula = Range::from_sparse(formulas);
+            let cell_xfs = Range::from_sparse(cell_xfs);
             sheets.insert(
                 name,
                 SheetData {
                     range,
                     formula,
+                    cell_xfs,
                     merge_cells,
-                    cell_ifmt,
                 },
             );
         }
@@ -904,24 +891,6 @@ fn parse_extern_sheet(r: &Record<'_>, biff: Biff) -> Vec<Xti> {
         // BIFF5 and earlier: individual sheet name references; formula
         // tokens embed sheet indices directly, so no XTI table needed.
         Biff::Biff2 | Biff::Biff3 | Biff::Biff4 | Biff::Biff5 => Vec::new(),
-    }
-}
-
-/// Remembers the number format id of a cell whose record starts (after the position) with its XF index.
-fn note_ifmt(
-    cell_ifmt: &mut HashMap<(u32, u32), u16>,
-    xf_ifmt: &[u16],
-    position: (u32, u32),
-    xf: &[u8],
-) {
-    if xf.len() < 2 {
-        return;
-    }
-    if let Some(ifmt) = xf_ifmt.get(read_u16(xf) as usize) {
-        // 0 is General: nothing to apply
-        if *ifmt != 0 {
-            cell_ifmt.insert(position, *ifmt);
-        }
     }
 }
 
@@ -1263,8 +1232,7 @@ fn parse_format(
     }
 
     let s = parse_string(&r.data[2..], encoding, biff)?;
-    let kind = detect_custom_number_format(&s);
-    Ok((ifmt, kind, s))
+    Ok((ifmt, detect_custom_number_format(&s), s))
 }
 
 /// Decode `XLUnicodeRichExtendedString` [MS-XLS 2.5.293].

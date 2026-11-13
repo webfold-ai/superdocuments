@@ -29,7 +29,7 @@ Numbers
 |---|---|
 | RAM | 100 ns |
 
-get(key) -\> value
+get(key) -> value
 
 There are only two hard things in computer science.
 
