@@ -17,6 +17,63 @@ pub fn read_workbook(data: &[u8]) -> Result<Vec<Worksheet>, String> {
         .collect())
 }
 
+/// A cell's typed value, kept next to what the cell shows.
+#[derive(Debug, Clone, PartialEq)]
+pub enum CellValue {
+    Empty,
+    /// Shared, inline or formula-result text.
+    Text(String),
+    /// A number whose style is not a date format: the value and the text exactly as stored
+    /// (`4.0999999999999996`).
+    Number { value: f64, raw: String },
+    Bool(bool),
+    /// A serial date or time (a date number format): the serial and its ISO form (`2026-09-01`,
+    /// `12:30:00` or both).
+    DateTime { serial: f64, iso: String },
+    /// An error value such as `#DIV/0!`.
+    Error(String),
+    /// A formula with no stored result.
+    Formula(String),
+}
+
+/// One cell: `display` is what the sheet shows (number format applied), `value` is the typed value.
+#[derive(Debug, Clone, PartialEq)]
+pub struct TypedCell {
+    pub display: String,
+    pub value: CellValue,
+}
+
+impl TypedCell {
+    pub(crate) fn empty() -> Self {
+        Self {
+            display: String::new(),
+            value: CellValue::Empty,
+        }
+    }
+}
+
+/// A worksheet whose cells keep their typed values. Rows are as in [`Worksheet`]: cells at their
+/// absolute column, rows with no content dropped.
+#[derive(Debug, Clone, PartialEq)]
+pub struct TypedWorksheet {
+    pub index: usize,
+    pub name: String,
+    pub rows: Vec<Vec<TypedCell>>,
+}
+
+/// Like [`read_workbook`], with each cell's typed value as well as its display text.
+pub fn read_workbook_typed(data: &[u8]) -> Result<Vec<TypedWorksheet>, String> {
+    Ok(crate::ooxml::xlsx::read_typed(data)?
+        .into_iter()
+        .enumerate()
+        .map(|(index, sheet)| TypedWorksheet {
+            index,
+            name: sheet.name,
+            rows: sheet.rows,
+        })
+        .collect())
+}
+
 /// Read one worksheet by zero-based workbook-order index.
 pub fn read_sheet(data: &[u8], index: usize) -> Result<Worksheet, String> {
     read_workbook(data)?
