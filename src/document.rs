@@ -924,7 +924,11 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         "pptx" => crate::ooxml::pptx::convert(data),
         "xlsx" | "xlsm" => xlsx(data),
         "odt" => crate::odt::to_markdown(data),
-        "odp" => odt(data),
+        "odp" => match crate::odp::to_markdown(data)? {
+            // a hand-made package without `office:presentation`: the generic text extraction
+            slides if slides.is_empty() => odt(data),
+            slides => Ok(slides),
+        },
         "ods" => ods(data),
         "xls" => xls(data),
         "xlsb" => xlsb(data),
