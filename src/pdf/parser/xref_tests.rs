@@ -869,3 +869,158 @@ fn filter_free_streams_answer_to_the_decode_ceiling() {
         "raw stream over the cap is refused"
     );
 }
+
+#[test]
+fn kids_may_be_an_indirect_array() {
+    // /Kids (7.7.3.2) may be an indirect object holding the array: `/Kids 7 0 R` with `7 0 obj [3 0 R]`.
+    let mut objs = page_objects("KIDS BY REFERENCE");
+    objs[1].1 = b"<< /Type /Pages /Kids 7 0 R /Count 1 >>".to_vec();
+    objs.push((7, b"[3 0 R]".to_vec()));
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF with an indirect /Kids array");
+    assert!(
+        md.contains("KIDS BY REFERENCE"),
+        "indirect /Kids array not read: {md:?}"
+    );
+}
+
+#[test]
+fn spans_in_separate_text_objects_form_one_line() {
+    // Tagged-PDF writers wrap every span in BT..ET. Three spans on one baseline are one line, and the
+    // word space between them is read from the gap, so "Hello brave new world" is not four lines.
+    let content = "BT /F1 12 Tf 72 700 Td (Hello) Tj ET\nBT /F1 12 Tf 110 700 Td (brave) Tj ET\n\
+                   BT /F1 12 Tf 150 700 Td (new) Tj ET\nBT /F1 12 Tf 72 680 Td (second line) Tj ET";
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF");
+    assert!(
+        md.contains("Hello brave new"),
+        "spans of one baseline not joined: {md:?}"
+    );
+    assert!(md.contains("second line"), "{md:?}");
+    assert_eq!(
+        md.lines().filter(|l| l.contains("Hello")).count(),
+        1,
+        "{md:?}"
+    );
+}
+
+#[test]
+fn borderless_rows_of_cells_become_a_table_without_ruling_lines() {
+    // Four rows of three cells, aligned by position only: no rules are drawn, so only the
+    // run-of-multi-cell-lines read can find the grid. Prose above it stays prose.
+    let mut content = String::from(
+        "BT /F1 12 Tf 72 740 Td (This sentence introduces the figures below.) Tj ET\n",
+    );
+    let rows = [
+        ("Item", "Qty", "Price"),
+        ("Pens", "10", "4.50"),
+        ("Paper", "200", "12.00"),
+        ("Ink", "3", "31.25"),
+    ];
+    for (i, (a, b, c)) in rows.iter().enumerate() {
+        let y = 700 - 20 * i as i32;
+        content.push_str(&format!(
+            "BT /F1 12 Tf 72 {y} Td ({a}) Tj ET\nBT /F1 12 Tf 232 {y} Td ({b}) Tj ET\nBT /F1 12 Tf 392 {y} Td ({c}) Tj ET\n"
+        ));
+    }
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    let md = text_of(&classic_pdf(&objs, 1, &[])).expect("PDF");
+    assert!(
+        md.contains("<table>"),
+        "borderless rows not read as a table: {md:?}"
+    );
+    assert!(
+        md.contains("<td>Paper</td><td>200</td><td>12.00</td>"),
+        "{md:?}"
+    );
+    assert!(
+        md.contains("This sentence introduces the figures below."),
+        "{md:?}"
+    );
+    assert!(
+        !md.contains("<td>This"),
+        "prose pulled into the table: {md:?}"
+    );
+}
+
+/// A one-page PDF whose page holds `lines` as (baseline y, text), left edge 72, Helvetica 12.
+fn lines_pdf(lines: &[(i32, &str)]) -> Vec<u8> {
+    let content: String = lines
+        .iter()
+        .map(|(y, t)| format!("BT /F1 12 Tf 72 {y} Td ({t}) Tj ET\n"))
+        .collect();
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    classic_pdf(&objs, 1, &[])
+}
+
+#[test]
+fn wrapped_lines_are_joined_into_paragraphs() {
+    // Two full-width lines and a short last line are one paragraph; the numbered item after it is another;
+    // and a hyphen at a line end joins the word. Spurious newlines inside a sentence are the defect the
+    // opendataloader-bench line-break measure counts (28.7 per page before this, 2.2 after).
+    let md = text_of(&lines_pdf(&[
+        (700, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (686, "iiii jjjj kkkk llll mmmm nnnn oooo pppp"),
+        (672, "qqqq rrrr ssss tttt uuuu."),
+        (658, "(a) first item that is a list entry."),
+        (644, "second pa-"),
+        (630, "ragraph continues here."),
+    ]))
+    .expect("PDF");
+    assert!(
+        md.contains(
+            "aaaa bbbb cccc dddd eeee ffff gggg hhhh iiii jjjj kkkk llll mmmm nnnn oooo pppp qqqq rrrr ssss tttt uuuu.\n\n"
+        ),
+        "wrapped lines not joined: {md:?}"
+    );
+    assert!(
+        md.contains("\n\n(a) first item"),
+        "list item not separate: {md:?}"
+    );
+    assert!(
+        md.contains("paragraph continues here."),
+        "hyphenation not joined: {md:?}"
+    );
+}
+
+#[test]
+fn a_new_baseline_far_below_starts_a_new_paragraph() {
+    let md = text_of(&lines_pdf(&[
+        (700, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (600, "iiii jjjj kkkk llll mmmm nnnn oooo pppp"),
+    ]))
+    .expect("PDF");
+    assert!(
+        !md.contains("hhhh iiii"),
+        "lines a hundred points apart were joined: {md:?}"
+    );
+}
+
+#[test]
+fn contents_entries_and_numbered_sections_are_not_wrapped_lines() {
+    // Contents entries are full-width lines ending in a page number, and a line that opens with a section
+    // number and a capitalised word starts a new paragraph; neither is a wrapped line of the one before.
+    let md = text_of(&lines_pdf(&[
+        (700, "8A Transfer of Census information ........ 4"),
+        (686, "8B Another entry of the contents list ..... 5"),
+        (640, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (626, "9B Publication of statistics follows here"),
+    ]))
+    .expect("PDF");
+    assert!(md.contains("........ 4\n\n8B Another"), "{md:?}");
+    assert!(md.contains("hhhh\n\n9B Publication"), "{md:?}");
+}
