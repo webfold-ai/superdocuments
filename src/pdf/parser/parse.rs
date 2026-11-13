@@ -1004,6 +1004,8 @@ fn featurize(s: &RegionStats) -> u64 {
 /// inside a candidate's y-span is consumed into its `<table>`; everything else is heading / image / body.
 fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
     let mut emitted = vec![false; cands.len()];
+    let geo = line_geometry(lines);
+    let mut cur: Option<Para> = None;
     let mut i = 0;
     while i < lines.len() {
         let l = &lines[i];
@@ -1014,6 +1016,7 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
             .map(|(ci, _)| ci);
         if let Some(ci) = hit {
             let c = &cands[ci];
+            flush_paragraph(out, &mut cur);
             emit_grid_table(out, lines, &c.rowys, &c.colxs);
             emitted[ci] = true;
             while i < lines.len() && lines[i].y <= c.ytop + 2.0 && lines[i].y >= c.ybot - 2.0 {
@@ -1023,36 +1026,174 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
         }
         if let Some(obj) = l.text.strip_prefix('\u{0}') {
             // an image marker (the Do position)
+            flush_paragraph(out, &mut cur);
             out.push_str(&format!("![](img_{}.png)\n", obj));
             i += 1;
             continue;
         }
         let heading = is_heading(&l.text, l.size, l.bold, body);
-        if heading {
-            out.push_str("# ");
-        }
-        // A word broken at a line end (`compari-` / `son`) is one word: the hyphen is dropped and
-        // the next line continues it. The next line must be ordinary text starting in lower case.
-        let continues = lines.get(i + 1).is_some_and(|n| {
-            let in_table = cands
+        let in_table_next = |n: &Line| {
+            cands
                 .iter()
                 .enumerate()
-                .any(|(ci, c)| !emitted[ci] && n.y <= c.ytop + 2.0 && n.y >= c.ybot - 2.0);
-            !in_table
-                && !n.text.starts_with('\u{0}')
-                && n.text.starts_with(|c: char| c.is_lowercase())
-        });
-        match l.text.strip_suffix('-') {
-            Some(stem) if !heading && continues && stem.ends_with(|c: char| c.is_alphabetic()) => {
-                out.push_str(stem);
+                .any(|(ci, c)| !emitted[ci] && n.y <= c.ytop + 2.0 && n.y >= c.ybot - 2.0)
+        };
+        // Lines of one paragraph (or one wrapped heading) are joined into one line of text. A word broken at
+        // a line end (`compari-` / `son`) is one word: the hyphen is dropped and the next line continues it.
+        let joined = match &mut cur {
+            Some(c)
+                if c.heading == heading
+                    && !in_table_next(l)
+                    && continues_paragraph(c, lines, i, &geo, heading) =>
+            {
+                if c.text.ends_with('-')
+                    && c.text[..c.text.len() - 1].ends_with(|ch: char| ch.is_alphabetic())
+                    && l.text.starts_with(|ch: char| ch.is_lowercase())
+                {
+                    c.text.pop();
+                } else {
+                    c.text.push(' ');
+                }
+                c.text.push_str(l.text.trim_start());
+                c.last = i;
+                c.left = c.left.min(geo[i].x0);
+                true
             }
-            _ => {
-                out.push_str(&l.text);
-                out.push('\n');
-            }
+            _ => false,
+        };
+        if !joined {
+            flush_paragraph(out, &mut cur);
+            cur = Some(Para {
+                text: l.text.clone(),
+                heading,
+                last: i,
+                left: geo[i].x0,
+            });
         }
         i += 1;
     }
+    flush_paragraph(out, &mut cur);
+}
+
+/// The paragraph or heading being assembled by [`emit_lines`].
+struct Para {
+    text: String,
+    heading: bool,
+    /// Index of its last line, and the leftmost start among its lines.
+    last: usize,
+    left: f64,
+}
+
+fn flush_paragraph(out: &mut String, cur: &mut Option<Para>) {
+    if let Some(p) = cur.take() {
+        if p.heading {
+            out.push_str("# ");
+            out.push_str(&p.text);
+            out.push('\n');
+        } else {
+            out.push_str(&p.text);
+            out.push_str("\n\n");
+        }
+    }
+}
+
+/// A line's footprint: where it starts and ends, and the right edge of its column (the furthest right any
+/// line that starts near it reaches), against which "this line runs to the margin" is judged.
+struct Geo {
+    x0: f64,
+    x1: f64,
+    col_right: f64,
+}
+
+fn line_geometry(lines: &[Line]) -> Vec<Geo> {
+    let mut g: Vec<Geo> = lines
+        .iter()
+        .map(|l| Geo {
+            x0: l.segs.first().map_or(0.0, |s| s.0),
+            x1: l.segs.iter().map(|s| s.1).fold(f64::MIN, f64::max),
+            col_right: 0.0,
+        })
+        .collect();
+    let page_right = g.iter().map(|x| x.x1).fold(f64::MIN, f64::max);
+    for i in 0..g.len() {
+        if lines.len() > 2500 {
+            g[i].col_right = page_right;
+            continue;
+        }
+        let tol = 2.0 * lines[i].size.max(1.0);
+        let mut right = g[i].x1;
+        for j in 0..g.len() {
+            if (g[j].x0 - g[i].x0).abs() <= tol {
+                right = right.max(g[j].x1);
+            }
+        }
+        g[i].col_right = right;
+    }
+    g
+}
+
+/// Does line `i` continue the paragraph that ends at `cur.last`? Same kind (body or heading), the next
+/// baseline about one leading down, a similar size; and for body text, the previous line either ran to the
+/// column's right edge or did not end a sentence (ragged-right text wraps short), and the new line is not
+/// a list item or a fresh indented paragraph after a finished sentence.
+fn continues_paragraph(cur: &Para, lines: &[Line], i: usize, geo: &[Geo], heading: bool) -> bool {
+    let p = cur.last;
+    let (pl, l) = (&lines[p], &lines[i]);
+    if p + 1 != i || l.text.starts_with('\u{0}') || pl.text.starts_with('\u{0}') {
+        return false;
+    }
+    let size = pl.size.max(l.size).max(1.0);
+    let dy = pl.y - l.y;
+    if !(dy > 0.0 && dy <= 1.7 * size) || (pl.size - l.size).abs() > 0.15 * size {
+        return false;
+    }
+    if heading {
+        // a wrapped title continues; a numbered section heading, or a heading line that ended a
+        // sentence, starts a new heading
+        let t = l.text.trim_start();
+        return !is_section_heading(t)
+            && !starts_numbering(t)
+            && !cur.text.trim_end().ends_with(['.', ':']);
+    }
+    let (gp, gl) = (&geo[p], &geo[i]);
+    if gl.x0 < gp.x0 - 4.0 * size || gl.x0 > gp.x0 + 8.0 * size {
+        return false; // another column or block
+    }
+    let t = l.text.trim_start();
+    let bullet = t.starts_with(['\u{2022}', '\u{25cf}', '\u{25aa}', '-', '\u{2013}', '*'])
+        && t.chars().nth(1).is_some_and(char::is_whitespace);
+    if bullet || starts_numbering(t) {
+        return false;
+    }
+    let prev = cur.text.trim_end();
+    let ends_sentence =
+        prev.ends_with(['.', '!', '?', ':', '\u{201d}', '"', ';']) && !prev.ends_with("al.");
+    let col_w = (gp.col_right - cur.left).max(1.0);
+    let full = gp.col_right - gp.x1 <= (3.0 * size).max(0.12 * col_w);
+    if ends_sentence && !full {
+        return false; // a short last line of a paragraph
+    }
+    // a first-line indent after a finished sentence starts a new paragraph
+    !(ends_sentence && gl.x0 > cur.left + 0.9 * size)
+}
+
+/// `(a)`, `(12)`, `1.`, `12)`, `iv.` at the start of a line: a numbered or lettered item.
+fn starts_numbering(t: &str) -> bool {
+    let (open, rest) = match t.strip_prefix('(') {
+        Some(r) => (true, r),
+        None => (false, t),
+    };
+    let label: String = rest.chars().take_while(|c| c.is_alphanumeric()).collect();
+    let n = label.chars().count();
+    if n == 0 || n > 4 {
+        return false;
+    }
+    let after = &rest[label.len()..];
+    let all_digits = label.chars().all(|c| c.is_ascii_digit());
+    let roman_or_letter = label.chars().all(|c| c.is_ascii_lowercase())
+        && (n == 1 || label.chars().all(|c| "ivxlc".contains(c)));
+    let closes = after.starts_with(')') || (!open && after.starts_with('.'));
+    closes && (all_digits || roman_or_letter) && after[1..].starts_with(char::is_whitespace)
 }
 /// PDF string bytes → text. Latin-1 for now (each byte a char); the CMap glyph→unicode is wave 3.
 fn decode_str(s: &[u8]) -> String {
@@ -1482,6 +1623,13 @@ struct Pen {
     /// A text object just opened on the line in progress: the previous run's end-x is not known to be
     /// exact across the break, so a font without widths gets a word space here.
     bt_break: bool,
+    /// The CTM in force at the last `BT` (translation and scale only): the recorded line positions are
+    /// moved into user space with it, the space the drawn rules are read in, so text drawn under
+    /// different `cm` translations (reportlab, most generators) sits where it does on the page.
+    bx: f64,
+    by: f64,
+    sx: f64,
+    sy: f64,
 }
 impl Pen {
     fn new() -> Pen {
@@ -1510,6 +1658,10 @@ impl Pen {
             last_sh: 0.0,
             last_sv: 0.0,
             bt_break: false,
+            bx: 0.0,
+            by: 0.0,
+            sx: 1.0,
+            sy: 1.0,
         }
     }
     /// Flush the line, carrying its font size (heading signal), bold flag, baseline y, and segments.
@@ -1585,7 +1737,8 @@ impl Pen {
                     // A segment per positioned run (every Tj/TJ), flagged `big` if a column gap preceded
                     // it: the rules-grid path uses all positions, the text-column path only the big ones.
                     if first || self.cur_segs.is_empty() {
-                        self.cur_segs.push((self.x, self.x, self.cur.len(), big));
+                        let ux = self.bx + self.sx * self.x;
+                        self.cur_segs.push((ux, ux, self.cur.len(), big));
                     }
                     pending = false;
                     first = false;
@@ -1604,8 +1757,9 @@ impl Pen {
                     self.x += em * sh
                         + nch as f64 * self.tc * self.a * self.tz
                         + nsp as f64 * self.tw * self.a * self.tz;
+                    let uend = self.bx + self.sx * self.x;
                     if let Some(last) = self.cur_segs.last_mut() {
-                        last.1 = self.x;
+                        last.1 = uend;
                     } // the run's end-x (its extent)
                     self.cur_size = self.cur_size.max((self.fs * self.d).abs()); // the line's font size (heading signal)
                     self.cur_n += nch;
@@ -1614,7 +1768,7 @@ impl Pen {
                     } // bold fraction
                     self.end_x = self.x;
                     self.last_y = self.y;
-                    self.cur_y = self.y;
+                    self.cur_y = self.by + self.sy * self.y;
                     self.started = true;
                 }
                 _ => {}
@@ -1654,16 +1808,6 @@ fn form_matrix(d: &Dict) -> [f64; 6] {
         Ok(m) if m.iter().all(|v| v.is_finite()) => m,
         _ => IDENTITY,
     }
-}
-
-/// The inverse of an affine matrix, or `None` when it is singular.
-fn invert(m: &[f64; 6]) -> Option<[f64; 6]> {
-    let det = m[0] * m[3] - m[1] * m[2];
-    if det.abs() < 1e-12 || !det.is_finite() {
-        return None;
-    }
-    let (a, b, c, d) = (m[3] / det, -m[1] / det, -m[2] / det, m[0] / det);
-    Some([a, b, c, d, -(m[4] * a + m[5] * c), -(m[4] * b + m[5] * d)])
 }
 
 /// Map a form's lines from form space into the frame the page's own text is laid out in.
@@ -1731,6 +1875,10 @@ fn extract_text(
                     }
                     p.bt_break = p.started;
                     text_ctm = ctm;
+                    p.bx = ctm[4];
+                    p.by = ctm[5];
+                    p.sx = if ctm[0].abs() > 1e-9 { ctm[0] } else { 1.0 };
+                    p.sy = if ctm[3].abs() > 1e-9 { ctm[3] } else { 1.0 };
                     p.x = 0.0;
                     p.y = 0.0;
                     p.lx = 0.0;
@@ -1838,8 +1986,7 @@ fn extract_text(
                             let mut inner = extract_text(&form.content, ff, fi, &Table::new());
                             // Form space -> user space at this paint point -> the page-text frame.
                             let user = matmul(&form.matrix, &ctm);
-                            let placed = invert(&text_ctm).map_or(user, |inv| matmul(&user, &inv));
-                            place_form_lines(&mut inner, &placed);
+                            place_form_lines(&mut inner, &user);
                             p.lines.extend(inner);
                             p.started = false;
                         } else if let Some(obj) = imgs.get(n) {
@@ -1848,7 +1995,7 @@ fn extract_text(
                                 text: format!("\u{0}{}", obj),
                                 size: 0.0,
                                 bold: false,
-                                y: p.y,
+                                y: p.by + p.sy * p.y,
                                 segs: Vec::new(),
                             });
                             p.started = false;
@@ -2503,7 +2650,8 @@ mod review_tests {
         emit_lines(&mut out, &lines, &cands, 10.0);
         assert!(out.starts_with("intro-\n"), "markdown: {out:?}");
 
-        // Ordinary text after it still joins the word.
+        // Ordinary text one line below it still joins the word.
+        let lines = vec![line("intro-", 300.0), line("alpha beta", 288.0)];
         let mut out = String::new();
         emit_lines(&mut out, &lines, &[], 10.0);
         assert!(out.starts_with("introalpha"), "markdown: {out:?}");

@@ -951,3 +951,61 @@ fn borderless_rows_of_cells_become_a_table_without_ruling_lines() {
         "prose pulled into the table: {md:?}"
     );
 }
+
+/// A one-page PDF whose page holds `lines` as (baseline y, text), left edge 72, Helvetica 12.
+fn lines_pdf(lines: &[(i32, &str)]) -> Vec<u8> {
+    let content: String = lines
+        .iter()
+        .map(|(y, t)| format!("BT /F1 12 Tf 72 {y} Td ({t}) Tj ET\n"))
+        .collect();
+    let mut objs = page_objects("");
+    objs[3].1 = format!(
+        "<< /Length {} >>\nstream\n{content}\nendstream",
+        content.len()
+    )
+    .into_bytes();
+    classic_pdf(&objs, 1, &[])
+}
+
+#[test]
+fn wrapped_lines_are_joined_into_paragraphs() {
+    // Two full-width lines and a short last line are one paragraph; the numbered item after it is another;
+    // and a hyphen at a line end joins the word. Spurious newlines inside a sentence are the defect the
+    // opendataloader-bench line-break measure counts (28.7 per page before this, 2.2 after).
+    let md = text_of(&lines_pdf(&[
+        (700, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (686, "iiii jjjj kkkk llll mmmm nnnn oooo pppp"),
+        (672, "qqqq rrrr ssss tttt uuuu."),
+        (658, "(a) first item that is a list entry."),
+        (644, "second pa-"),
+        (630, "ragraph continues here."),
+    ]))
+    .expect("PDF");
+    assert!(
+        md.contains(
+            "aaaa bbbb cccc dddd eeee ffff gggg hhhh iiii jjjj kkkk llll mmmm nnnn oooo pppp qqqq rrrr ssss tttt uuuu.\n\n"
+        ),
+        "wrapped lines not joined: {md:?}"
+    );
+    assert!(
+        md.contains("\n\n(a) first item"),
+        "list item not separate: {md:?}"
+    );
+    assert!(
+        md.contains("paragraph continues here."),
+        "hyphenation not joined: {md:?}"
+    );
+}
+
+#[test]
+fn a_new_baseline_far_below_starts_a_new_paragraph() {
+    let md = text_of(&lines_pdf(&[
+        (700, "aaaa bbbb cccc dddd eeee ffff gggg hhhh"),
+        (600, "iiii jjjj kkkk llll mmmm nnnn oooo pppp"),
+    ]))
+    .expect("PDF");
+    assert!(
+        !md.contains("hhhh iiii"),
+        "lines a hundred points apart were joined: {md:?}"
+    );
+}
