@@ -633,6 +633,11 @@ impl<'o> Reader<'o> {
                     Some(Dest::Skip)
                 }
             }
+            // A drawing shape: `\*\shpinst` holds its properties (`\sp`, skipped above) and the text of a
+            // text box in `\shptxt`, which is body text. `\shprslt` is the fallback picture or text
+            // for readers that do not draw shapes.
+            b"shpinst" => None,
+            b"shprslt" => Some(Dest::Skip),
             _ => {
                 if star {
                     Some(Dest::Skip)

@@ -307,7 +307,14 @@ fn xls_unchecked(data: &[u8]) -> Result<String, String> {
         if cells > XLS_MAX_CELLS {
             return Err("worksheet too large".into());
         }
-        sheets.push((name, xls_rows(&range, date1904)));
+        // The number format code of a cell, custom (FORMAT record) or built-in.
+        let code = |row: u32, col: u32| -> Option<String> {
+            let id = book.cell_number_format(&name, row, col)?;
+            book.format_code(id)
+                .map(str::to_owned)
+                .or_else(|| crate::ooxml::numfmt::builtin(u32::from(id)).map(str::to_owned))
+        };
+        sheets.push((name.clone(), xls_rows(&range, date1904, &code)));
     }
     Ok(workbook_markdown(sheets))
 }
@@ -317,16 +324,23 @@ const XLS_MAX_CELLS: usize = 20_000_000;
 
 /// Rows as the XLSX reader builds them: a cell sits at its absolute column, rows with no
 /// content are dropped, and trailing empty cells are trimmed.
-fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<String>> {
-    // Row numbers are not needed: rows without content are dropped, as in the XLSX reader.
-    let Some((_, left)) = range.start() else {
+fn xls_rows(
+    range: &calamine::Range<calamine::Data>,
+    date1904: bool,
+    code: &dyn Fn(u32, u32) -> Option<String>,
+) -> Vec<Vec<String>> {
+    // Rows without content are dropped, as in the XLSX reader.
+    let Some((top, left)) = range.start() else {
         return Vec::new();
     };
     let left = left as usize;
     let mut rows = Vec::new();
-    for cells in range.rows() {
+    for (index, cells) in range.rows().enumerate() {
         let mut row: Vec<String> = vec![String::new(); left];
-        row.extend(cells.iter().map(|cell| xls_cell(cell, date1904)));
+        row.extend(cells.iter().enumerate().map(|(offset, cell)| {
+            let position = (top + index as u32, left as u32 + offset as u32);
+            xls_cell(cell, date1904, code(position.0, position.1).as_deref())
+        }));
         while row.last().is_some_and(String::is_empty) {
             row.pop();
         }
@@ -351,8 +365,22 @@ fn general_number(value: f64) -> String {
 }
 
 /// One cell as the XLSX reader prints it.
-fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
+fn xls_cell(cell: &calamine::Data, date1904: bool, code: Option<&str>) -> String {
     use calamine::Data;
+    // A number or date shown the way its format shows it (the same engine as XLSX), when the format is one the engine reads.
+    if let Some(code) = code {
+        let value = match cell {
+            Data::Int(v) => Some(*v as f64),
+            Data::Float(v) => Some(*v),
+            Data::DateTime(v) => Some(v.as_f64()),
+            _ => None,
+        };
+        if let Some(shown) =
+            value.and_then(|v| crate::ooxml::numfmt::format_value(v, code, date1904))
+        {
+            return shown;
+        }
+    }
     match cell {
         Data::Empty => String::new(),
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
