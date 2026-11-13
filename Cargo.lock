@@ -1433,7 +1433,7 @@ dependencies = [
 [[package]]
 name = "wirefold"
 version = "0.1.0"
-source = "git+https://github.com/webfold-ai/wirefold?rev=ed1ffdf4d34a86ab60e128ea14d2475e57650946#ed1ffdf4d34a86ab60e128ea14d2475e57650946"
+source = "git+https://github.com/webfold-ai/wirefold?rev=98df8bfb8051fb24ca43ce3ddc446641684ef8f9#98df8bfb8051fb24ca43ce3ddc446641684ef8f9"
 dependencies = [
  "apeiron",
 ]
