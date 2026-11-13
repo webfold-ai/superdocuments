@@ -1088,3 +1088,189 @@ fn justified_lines_with_ordinary_gaps_are_still_one_paragraph() {
     .expect("PDF");
     assert!(md.contains("ffff gggg"), "{md:?}");
 }
+
+#[test]
+fn borderless_word_table_rows_with_wrapped_cells_become_a_table() {
+    // The `Item | Matter` table of the Census and Statistics Regulation 2016 (F2016L00706, page 5): the
+    // item number starts at x = 90, the matter at x = 133, rows 15 pt apart in 10 pt type; the fourth
+    // matter wraps onto a line that starts under the second column. No rule is drawn anywhere. The rows
+    // were written as one heading each, and the text of the table was also left outside it.
+    let md = text_of(&rows_pdf(
+        10,
+        &[
+            (578, &[(90, "Item"), (133, "Matter")]),
+            (562, &[(90, "1"), (133, "Name")]),
+            (547, &[(90, "2"), (133, "Sex")]),
+            (531, &[(90, "3"), (133, "Date of birth or age last birthday")]),
+            (
+                516,
+                &[(90, "4"), (133, "Relationship to the other persons, if any, who spend the Census night in the same")],
+            ),
+            (504, &[(133, "accommodation")]),
+            (489, &[(90, "5"), (133, "Present marital status")]),
+        ],
+    ))
+    .expect("PDF");
+    assert!(md.contains("<table>"), "{md:?}");
+    assert!(md.contains("<td>Item</td><td>Matter</td>"), "{md:?}");
+    assert!(md.contains("<td>Sex</td>"), "{md:?}");
+    assert!(
+        md.contains("who spend the Census night in the same accommodation</td>"),
+        "wrapped cell text: {md:?}"
+    );
+    assert_eq!(
+        md.matches("accommodation").count(),
+        1,
+        "text repeated outside the table: {md:?}"
+    );
+    assert!(!md.contains("# "), "a row written as a heading: {md:?}");
+}
+
+#[test]
+fn rows_with_dot_leaders_between_a_label_and_its_text_are_a_table() {
+    // The legislation history of the Census and Statistics Act 1905 (C1905A00015, endnote 4): the
+    // provision at x = 126 runs over dot leaders into the second column, which starts at x = 232.
+    let leaders = "..................................................";
+    let md = text_of(&rows_pdf(
+        8,
+        &[
+            (
+                624,
+                &[(126, &format!("s 2 {leaders}")), (232, "rep No 216, 1973")],
+            ),
+            (609, &[(126, " "), (232, "ad No 195, 1985")]),
+            (594, &[(126, " "), (232, "am No 59, 2015")]),
+            (
+                579,
+                &[(126, &format!("s 3 {leaders}")), (232, "am No 106, 2003")],
+            ),
+            (
+                564,
+                &[(126, &format!("s 4 {leaders}")), (232, "rep No 15, 1977")],
+            ),
+            (
+                549,
+                &[(126, &format!("s 5 {leaders}")), (232, "am No 216, 1973")],
+            ),
+        ],
+    ))
+    .expect("PDF");
+    assert!(md.contains("<table>"), "{md:?}");
+    assert!(md.contains("<td>s 3 ."), "{md:?}");
+    assert!(md.contains("</td><td>am No 106, 2003</td>"), "{md:?}");
+    assert!(md.contains("<td></td><td>ad No 195, 1985</td>"), "{md:?}");
+}
+
+#[test]
+fn contents_entries_with_page_numbers_are_not_a_table() {
+    // The contents of the same regulation: long titles, then the page number at the right margin.
+    let md = text_of(&rows_pdf(
+        11,
+        &[
+            (
+                440,
+                &[
+                    (90, "Part 1 - Preliminary provisions of the Regulation"),
+                    (495, "1"),
+                ],
+            ),
+            (
+                423,
+                &[
+                    (90, "Part 2 - The Census and the information collected"),
+                    (495, "3"),
+                ],
+            ),
+            (
+                406,
+                &[
+                    (90, "Part 3 - Statistics and their publication"),
+                    (495, "6"),
+                ],
+            ),
+            (
+                389,
+                &[
+                    (90, "Schedule 1 - Undertaking of fidelity and secrecy"),
+                    (495, "12"),
+                ],
+            ),
+        ],
+    ))
+    .expect("PDF");
+    assert!(!md.contains("<table>"), "{md:?}");
+    assert!(
+        md.contains("Part 2 - The Census and the information collected"),
+        "{md:?}"
+    );
+}
+
+#[test]
+fn justified_prose_with_gaps_between_words_is_not_a_table() {
+    // Three lines of a justified newspaper column (olmOCR-bench multi_column, TIME): the gaps between
+    // words are 6 to 20 pt and fall anywhere.
+    let md = text_of(&rows_pdf(
+        10,
+        &[
+            (
+                301,
+                &[
+                    (338, "next day"),
+                    (364, "at the"),
+                    (386, "Greenwich"),
+                    (401, "Village"),
+                    (422, "home of"),
+                ],
+            ),
+            (
+                291,
+                &[
+                    (338, "William"),
+                    (384, "Bayard,"),
+                    (427, "how his"),
+                    (453, "burial"),
+                    (473, "in Trinity"),
+                ],
+            ),
+            (
+                281,
+                &[
+                    (338, "churchyard"),
+                    (395, "was a"),
+                    (416, "signal"),
+                    (457, "for an"),
+                    (490, "unprecedented"),
+                ],
+            ),
+            (
+                271,
+                &[
+                    (338, "outpouring"),
+                    (395, "of public"),
+                    (444, "grief."),
+                    (474, "TIME too"),
+                    (510, "would"),
+                ],
+            ),
+        ],
+    ))
+    .expect("PDF");
+    assert!(!md.contains("<table>"), "{md:?}");
+}
+
+#[test]
+fn one_line_of_many_short_cells_is_a_table_row() {
+    // The money columns of a printed form (C1912L00216, the union rates of wages): `s. d.` fifteen times
+    // on one line at 7 pt; the Word source has a cell for each.
+    let xs = [
+        262, 277, 294, 308, 325, 340, 357, 371, 388, 398, 420, 434, 466, 483, 497,
+    ];
+    let cells: Vec<(i32, &str)> = xs
+        .iter()
+        .enumerate()
+        .map(|(i, x)| (*x, if i % 2 == 0 { "s." } else { "d." }))
+        .collect();
+    let md = text_of(&rows_pdf(7, &[(450, &cells)])).expect("PDF");
+    assert!(md.contains("<table>"), "{md:?}");
+    assert!(md.matches("<td>").count() >= 12, "{md:?}");
+}
