@@ -15,6 +15,7 @@ pub mod markdown;
 pub mod mathml;
 pub(crate) mod mdwrite;
 pub(crate) mod media;
+pub mod odp;
 pub mod odt;
 pub(crate) mod ooxml;
 pub mod pdf;

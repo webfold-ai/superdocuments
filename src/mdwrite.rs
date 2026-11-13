@@ -519,7 +519,9 @@ fn escape_url(url: &str) -> String {
 }
 
 /// Escapes characters that Markdown would read as markup. `_` between two letters or digits is
-/// left alone, as Pandoc does.
+/// left alone, as Pandoc does. `<` is escaped only where it could open a tag, an autolink, a comment
+/// or a processing instruction (`<a`, `</`, `<!`, `<?`) and `>` only where it would start a block
+/// quote (the start of a line); `x < y > z` stays as written, as in the DOCX and XLSX output.
 pub(crate) fn escape_text(t: &str, prev: Option<char>, next: Option<char>) -> String {
     let chars: Vec<char> = t.chars().collect();
     let mut out = String::with_capacity(t.len() + 4);
@@ -530,9 +532,24 @@ pub(crate) fn escape_text(t: &str, prev: Option<char>, next: Option<char>) -> St
             .copied()
             .or(if i + 1 == chars.len() { next } else { None });
         match c {
-            '\\' | '*' | '`' | '<' | '>' | '[' | ']' | '$' | '~' | '^' | '|' => {
+            '\\' | '*' | '`' | '[' | ']' | '$' | '~' | '^' | '|' => {
                 out.push('\\');
                 out.push(c);
+            }
+            '<' => {
+                let opens_markup =
+                    after.is_some_and(|a| a.is_ascii_alphabetic() || matches!(a, '/' | '!' | '?'));
+                if opens_markup {
+                    out.push('\\');
+                }
+                out.push('<');
+            }
+            '>' => {
+                let line_start = before.is_none() || before == Some('\n');
+                if line_start {
+                    out.push('\\');
+                }
+                out.push('>');
             }
             '_' => {
                 let inner = before.is_some_and(|b| b.is_alphanumeric())
@@ -739,6 +756,21 @@ mod tests {
         );
         assert_eq!(escape_block_start("1. not a list"), "1\\. not a list");
         assert_eq!(escape_block_start("# not a heading"), "\\# not a heading");
+    }
+
+    #[test]
+    fn angle_brackets_are_escaped_only_where_markdown_reads_them() {
+        // an entity reference in the source (`&lt;`, `&gt;`) comes out as the plain character
+        assert_eq!(escape_text("x < y > z", None, None), "x < y > z");
+        assert_eq!(escape_text("a<b", None, None), "a\\<b");
+        assert_eq!(escape_text("<a href>", None, None), "\\<a href>");
+        assert_eq!(
+            escape_text("</p> <!-- c --> <?x", None, None),
+            "\\</p> \\<!-- c --> \\<?x"
+        );
+        assert_eq!(escape_text("1 <", None, Some('b')), "1 \\<");
+        assert_eq!(escape_text("a\n> b", None, None), "a\n\\> b");
+        assert_eq!(escape_text("> q", None, None), "\\> q");
     }
 
     #[test]

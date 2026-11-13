@@ -515,6 +515,7 @@ impl CellType for Data {}
 impl<'a> CellType for DataRef<'a> {}
 impl CellType for String {}
 impl CellType for usize {} // for tests
+impl CellType for Option<u16> {} // XF indices of the BIFF reader
 
 // -----------------------------------------------------------------------
 // The `Cell` struct.
