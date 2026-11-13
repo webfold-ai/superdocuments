@@ -940,3 +940,12 @@ fn flat_tables_stay_pipe_tables() {
     let md = markdown_of(br"{\rtf1\ansi\trowd\cellx1000\cellx2000\pard\intbl A\cell B\cell\row}");
     assert!(md.starts_with("| A | B |"), "{md:?}");
 }
+
+/// The two halves of a surrogate pair may be separated by `\uc`, which changes the fallback length
+/// (anydoc's tests/fixtures/rtf/text.rtf writes the family emoji this way); each half used to
+/// come out as U+FFFD.
+#[test]
+fn surrogate_pair_split_by_a_uc_word_is_one_character() {
+    let md = markdown_of(br"{\rtf1\ansi\pard emoji: \uc0 \u55357\uc1 \u56424\'3f.\par}");
+    assert!(md.contains("emoji: \u{1F468}."), "{md:?}");
+}

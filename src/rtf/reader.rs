@@ -254,9 +254,10 @@ impl<'o> Reader<'o> {
                     }
                 }
                 Token::Word { name, param } => {
-                    // `\u` is the one word that must see a pending high surrogate.
+                    // `\u` must see a pending high surrogate, and so must `\uc`: writers change the
+                    // fallback length between the two halves (`\uc0 \u55357\uc1 \u56424\'3f`).
                     self.flush_decoder();
-                    if name != b"u" {
+                    if name != b"u" && name != b"uc" {
                         self.flush_surrogate();
                     }
                     self.word(name, param);
