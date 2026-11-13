@@ -375,7 +375,9 @@ impl Writer {
                     } else if plain.trim() == url && !url.contains(' ') && url.contains(':') {
                         let _ = write!(out, "<{url}>");
                     } else {
-                        let _ = write!(out, "[{}]({}{})", text, escape_url(url), title_suffix(title));
+                        // `[^1^](..)` reads as a footnote reference; a space keeps it a link.
+                        let lead = if text.starts_with('^') { " " } else { "" };
+                        let _ = write!(out, "[{lead}{}]({}{})", text, escape_url(url), title_suffix(title));
                     }
                 }
                 Inline::Image { url, alt, title } => {

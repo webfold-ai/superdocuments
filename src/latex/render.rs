@@ -402,6 +402,18 @@ impl<'a> Renderer<'a> {
                 self.code(&s)
             }
             Inline::SmallCaps(v) => self.inlines(v),
+            Inline::Sup(v) | Inline::Sub(v) | Inline::Strike(v) => {
+                let inner = self.inlines(v);
+                if !self.front_matter() || inner.trim().is_empty() {
+                    return inner;
+                }
+                let spaced = inner.replace(' ', "\\ ");
+                match inl {
+                    Inline::Sup(_) => format!("^{spaced}^"),
+                    Inline::Sub(_) => format!("~{spaced}~"),
+                    _ => format!("~~{inner}~~"),
+                }
+            }
             Inline::Code(s) => self.code(s),
             Inline::Math { tex, display } => {
                 if *display {
@@ -668,6 +680,11 @@ impl<'a> Renderer<'a> {
             }
             Block::List(list) => self.list(list),
             Block::Table(t) => self.table(t),
+            Block::Math(m) if self.front_matter() && m.rows.len() > 1 => {
+                // Pandoc reads one environment as one display formula.
+                let body: Vec<&str> = m.rows.iter().map(|r| r.tex.trim()).collect();
+                format!("$$\\begin{{aligned}}\n{}\n\\end{{aligned}}$$\n\n", body.join(" \\\\\n"))
+            }
             Block::Math(m) => {
                 let mut out = String::new();
                 for row in &m.rows {
@@ -686,20 +703,18 @@ impl<'a> Renderer<'a> {
             },
             Block::Figure(f) => self.figure(f),
             Block::Theorem(t) if self.front_matter() => {
-                let mut head = t.name.clone();
+                let mut core = t.name.clone();
                 if let Some(n) = &t.number {
-                    head = format!("{head} {n}");
+                    core = format!("{core} {n}");
                 }
-                if let Some(title) = &t.title {
-                    let tt = self.inlines(title);
-                    head = format!("{head} ({tt})");
-                }
-                let head = self.escape(&head);
+                let core = self.escape(&core);
+                let title = t.title.as_ref().map(|title| format!(" ({})", self.inlines(title))).unwrap_or_default();
                 // amsthm's plain style sets the body in italics; the others do not.
                 let plain = matches!(
                     t.env.as_str(),
                     "theorem" | "lemma" | "proposition" | "corollary" | "conjecture" | "claim"
                 );
+                let remark = matches!(t.env.as_str(), "remark" | "note" | "case" | "conclusion");
                 let mut parts = Vec::new();
                 for b in &t.body {
                     let text = self.blocks(std::slice::from_ref(b));
@@ -712,9 +727,11 @@ impl<'a> Renderer<'a> {
                 }
                 let body = parts.join("\n\n");
                 let lead = if t.env == "proof" {
-                    self.emph(&format!("{head}."))
+                    self.emph(&format!("{core}."))
+                } else if remark {
+                    format!("{}{title}.", self.emph(&core))
                 } else {
-                    format!("{}.", self.strong(&head))
+                    format!("{}{title}.", self.strong(&core))
                 };
                 format!("{lead} {body}\n\n")
             }
@@ -909,6 +926,21 @@ impl<'a> Renderer<'a> {
     }
 
     fn table(&mut self, t: &Table) -> String {
+        if self.front_matter() {
+            if let Some(c) = &t.caption {
+                // Pandoc: the caption belongs to the table (`: caption` after a pipe table).
+                let mut bare = t.clone();
+                bare.caption = None;
+                let body = self.table_inner(&bare);
+                let text = self.inlines(c);
+                let attrs = t.label.as_ref().map(|l| format!(" {{#{l}}}")).unwrap_or_default();
+                return format!("{}\n\n: {text}{attrs}\n\n", body.trim_end());
+            }
+        }
+        self.table_inner(t)
+    }
+
+    fn table_inner(&mut self, t: &Table) -> String {
         let mut out = String::new();
         if let Some(c) = &t.caption {
             let number = t.number.clone().unwrap_or_default();
