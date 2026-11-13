@@ -22,14 +22,14 @@ media-codecs = ["dep:transcode"]
 images = ["dep:transcode"]
 
 [dependencies]
-framefold = { git = "https://github.com/Ptyktos/framefold", rev = "5a097c2e2448640c79d43b37b9246d0f7baea0d4", default-features = false, optional = true }
+framefold = { git = "https://github.com/Ptyktos/framefold", rev = "9bbb4cf8d4d10f52d1acc3128f4eb2aefdfc09a6", default-features = false, optional = true }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
-wirefold = { version = "0.1.0", git = "https://github.com/webfold-ai/wirefold", rev = "ba9a71284844cd1a7f14ae3b7105ad972aaa9e07", default-features = false, features = ["syntax"] }
+wirefold = { version = "0.1.0", git = "https://github.com/webfold-ai/wirefold", rev = "ed1ffdf4d34a86ab60e128ea14d2475e57650946", default-features = false, features = ["syntax"] }
 # The O(1) borrowed-key table (`apeiron::freq::Table`, zero-allocation `get_at(&str)`) used for the EPUB
 # manifest index and the XLSX/XLSB path and relationship caches in `calamine/`.
-apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "d0eda3226193542949306f767d7280404921546f" }
+apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "1c3d4a1da565cde409f6f3cb343086aa6853eb9c" }
 # Legacy BIFF (`.xls`) reader, the workspace member in `calamine/`. Its default features are empty;
 # the `chrono` and `picture` features stay off.
 calamine = { path = "calamine", version = "0.36.1", default-features = false }
