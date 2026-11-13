@@ -31,7 +31,8 @@ fn update() -> bool {
 #[test]
 fn readers_match_the_stored_markdown() {
     let corpus = root().join("corpus");
-    let manifest: Value = serde_json::from_str(&fs::read_to_string(corpus.join("manifest.json")).unwrap()).unwrap();
+    let manifest: Value =
+        serde_json::from_str(&fs::read_to_string(corpus.join("manifest.json")).unwrap()).unwrap();
     let items = manifest["items"].as_array().unwrap();
     assert!(items.len() >= 370, "the corpus has {} items", items.len());
     let mut bad = Vec::new();
@@ -44,16 +45,26 @@ fn readers_match_the_stored_markdown() {
             fs::write(&golden, &got).unwrap();
             continue;
         }
-        let want = fs::read_to_string(&golden).unwrap_or_else(|_| panic!("missing golden file for {id}"));
+        let want =
+            fs::read_to_string(&golden).unwrap_or_else(|_| panic!("missing golden file for {id}"));
         if got != want {
             bad.push(id.to_string());
         }
     }
-    assert!(bad.is_empty(), "{} documents differ from their golden Markdown: {:?}", bad.len(), &bad[..bad.len().min(20)]);
+    assert!(
+        bad.is_empty(),
+        "{} documents differ from their golden Markdown: {:?}",
+        bad.len(),
+        &bad[..bad.len().min(20)]
+    );
 }
 
 fn normalized(v: &Value) -> Vec<String> {
-    v.as_array().unwrap().iter().map(|s| normalize_comparison(s.as_str().unwrap())).collect()
+    v.as_array()
+        .unwrap()
+        .iter()
+        .map(|s| normalize_comparison(s.as_str().unwrap()))
+        .collect()
 }
 
 #[test]
@@ -62,11 +73,18 @@ fn citations_match_the_stored_pandoc_citeproc_output() {
     let mut checked = 0;
     let mut bad = Vec::new();
     for style in ["lite-author-date", "lite-numeric", "lite-note"] {
-        let golden: Value = serde_json::from_str(&fs::read_to_string(cite.join("golden").join(format!("{style}.json"))).unwrap()).unwrap();
-        let csl = Style::parse(&fs::read_to_string(cite.join("golden-styles").join(format!("{style}.csl"))).unwrap()).unwrap();
+        let golden: Value = serde_json::from_str(
+            &fs::read_to_string(cite.join("golden").join(format!("{style}.json"))).unwrap(),
+        )
+        .unwrap();
+        let csl = Style::parse(
+            &fs::read_to_string(cite.join("golden-styles").join(format!("{style}.csl"))).unwrap(),
+        )
+        .unwrap();
         for (doc, reference) in golden.as_object().unwrap() {
             let bib = doc.rsplit_once("-d").unwrap().0;
-            let items = fs::read_to_string(cite.join("csljson").join(format!("{bib}.json"))).unwrap();
+            let items =
+                fs::read_to_string(cite.join("csljson").join(format!("{bib}.json"))).unwrap();
             let p = Processor::new(csl.clone(), citeproc::references_from_json(&items).unwrap());
             let md = fs::read_to_string(cite.join("docs").join(format!("{doc}.md"))).unwrap();
             let (c, b) = markdown::comparison_for_document(&md, &p);
@@ -81,6 +99,14 @@ fn citations_match_the_stored_pandoc_citeproc_output() {
             checked += 1;
         }
     }
-    assert!(checked >= 375, "only {checked} document/style pairs checked");
-    assert!(bad.is_empty(), "{} differences from Pandoc's stored output: {:?}", bad.len(), &bad[..bad.len().min(10)]);
+    assert!(
+        checked >= 375,
+        "only {checked} document/style pairs checked"
+    );
+    assert!(
+        bad.is_empty(),
+        "{} differences from Pandoc's stored output: {:?}",
+        bad.len(),
+        &bad[..bad.len().min(10)]
+    );
 }

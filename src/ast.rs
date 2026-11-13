@@ -162,7 +162,9 @@ pub fn inlines_text(inlines: &[Inline]) -> String {
     let mut s = String::new();
     for i in inlines {
         match i {
-            Inline::Text(t) | Inline::Code(t) | Inline::Cite(t) | Inline::Verbatim(t) => s.push_str(t),
+            Inline::Text(t) | Inline::Code(t) | Inline::Cite(t) | Inline::Verbatim(t) => {
+                s.push_str(t)
+            }
             Inline::Emph(v)
             | Inline::Strong(v)
             | Inline::Strike(v)

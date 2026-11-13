@@ -38,7 +38,12 @@ impl Writer {
         if !self.notes.is_empty() {
             out.push_str("\n\n");
             for (i, n) in self.notes.iter().enumerate() {
-                let _ = write!(out, "[^{}]: {}\n\n", i + 1, indent_rest(n.trim_end(), "    "));
+                let _ = write!(
+                    out,
+                    "[^{}]: {}\n\n",
+                    i + 1,
+                    indent_rest(n.trim_end(), "    ")
+                );
             }
             out = out.trim_end().to_string();
         }
@@ -96,7 +101,9 @@ impl Writer {
             // comment keeps them apart, as Pandoc does. A code block after a list needs the same.
             let is_list = |b: &Block| matches!(b, Block::BulletList(_) | Block::OrderedList { .. });
             if let Some(p) = prev {
-                if (is_list(p) && is_list(b)) || (is_list(p) && matches!(b, Block::Code { lang: None, .. })) {
+                if (is_list(p) && is_list(b))
+                    || (is_list(p) && matches!(b, Block::Code { lang: None, .. }))
+                {
                     out.push_str("<!-- -->\n\n");
                 }
             }
@@ -137,12 +144,24 @@ impl Writer {
                 let body = self.blocks(inner);
                 body.trim_end()
                     .lines()
-                    .map(|l| if l.is_empty() { ">".to_string() } else { format!("> {l}") })
+                    .map(|l| {
+                        if l.is_empty() {
+                            ">".to_string()
+                        } else {
+                            format!("> {l}")
+                        }
+                    })
                     .collect::<Vec<_>>()
                     .join("\n")
             }
-            Block::BulletList(items) => self.list(items.iter().map(|i| ("-   ".to_string(), i)).collect()),
-            Block::OrderedList { start, style, items } => {
+            Block::BulletList(items) => {
+                self.list(items.iter().map(|i| ("-   ".to_string(), i)).collect())
+            }
+            Block::OrderedList {
+                start,
+                style,
+                items,
+            } => {
                 let marks = items
                     .iter()
                     .enumerate()
@@ -184,7 +203,11 @@ impl Writer {
             }
             Block::Table(t) => self.table(t),
             Block::Figure { url, caption } => {
-                format!("![{}]({})", self.inlines(caption).replace('\n', " ").trim(), escape_url(url))
+                format!(
+                    "![{}]({})",
+                    self.inlines(caption).replace('\n', " ").trim(),
+                    escape_url(url)
+                )
             }
             Block::Rule => "---".to_string(),
             Block::Raw { format, text } => match format.as_str() {
@@ -200,7 +223,9 @@ impl Writer {
     }
 
     fn list(&mut self, items: Vec<(String, &Vec<Block>)>) -> String {
-        let tight = items.iter().all(|(_, it)| !it.iter().any(|b| matches!(b, Block::Para(_))));
+        let tight = items
+            .iter()
+            .all(|(_, it)| !it.iter().any(|b| matches!(b, Block::Para(_))));
         let mut out = String::new();
         for (mark, item) in items {
             let body = if tight {
@@ -366,7 +391,11 @@ impl Writer {
                         let _ = write!(out, "${tex}$");
                     }
                 }
-                Inline::Link { url, title, inlines } => {
+                Inline::Link {
+                    url,
+                    title,
+                    inlines,
+                } => {
                     let text = self.inlines(inlines).replace('\n', " ");
                     let text = text.trim();
                     let plain = crate::ast::inlines_text(inlines);
@@ -377,12 +406,24 @@ impl Writer {
                     } else {
                         // `[^1^](..)` reads as a footnote reference; a space keeps it a link.
                         let lead = if text.starts_with('^') { " " } else { "" };
-                        let _ = write!(out, "[{lead}{}]({}{})", text, escape_url(url), title_suffix(title));
+                        let _ = write!(
+                            out,
+                            "[{lead}{}]({}{})",
+                            text,
+                            escape_url(url),
+                            title_suffix(title)
+                        );
                     }
                 }
                 Inline::Image { url, alt, title } => {
                     let a = self.inlines(alt).replace('\n', " ");
-                    let _ = write!(out, "![{}]({}{})", a.trim(), escape_url(url), title_suffix(title));
+                    let _ = write!(
+                        out,
+                        "![{}]({}{})",
+                        a.trim(),
+                        escape_url(url),
+                        title_suffix(title)
+                    );
                 }
                 Inline::Note(blocks) => {
                     let body = self.blocks(blocks);
@@ -484,14 +525,18 @@ pub(crate) fn escape_text(t: &str, prev: Option<char>, next: Option<char>) -> St
     let mut out = String::with_capacity(t.len() + 4);
     for (i, &c) in chars.iter().enumerate() {
         let before = if i == 0 { prev } else { Some(chars[i - 1]) };
-        let after = chars.get(i + 1).copied().or(if i + 1 == chars.len() { next } else { None });
+        let after = chars
+            .get(i + 1)
+            .copied()
+            .or(if i + 1 == chars.len() { next } else { None });
         match c {
             '\\' | '*' | '`' | '<' | '>' | '[' | ']' | '$' | '~' | '^' | '|' => {
                 out.push('\\');
                 out.push(c);
             }
             '_' => {
-                let inner = before.is_some_and(|b| b.is_alphanumeric()) && after.is_some_and(|a| a.is_alphanumeric());
+                let inner = before.is_some_and(|b| b.is_alphanumeric())
+                    && after.is_some_and(|a| a.is_alphanumeric());
                 if !inner {
                     out.push('\\');
                 }
@@ -518,9 +563,23 @@ fn escape_block_start(t: &str) -> String {
     let b = t.as_bytes();
     let first_is = |s: &str| t.starts_with(s);
     let digits = t.chars().take_while(char::is_ascii_digit).count();
-    let list_num = digits > 0 && matches!(b.get(digits), Some(b'.') | Some(b')')) && matches!(b.get(digits + 1), Some(b' ') | None);
-    let marker = t.chars().next().is_some_and(|c| matches!(c, '#' | '+' | '-' | '=' | ':' | '|'))
-        && (first_is("#") || first_is("+ ") || first_is("- ") || first_is("---") || first_is("===") || first_is(":::") || first_is("|") || first_is("-\n") || t == "-" || t == "+");
+    let list_num = digits > 0
+        && matches!(b.get(digits), Some(b'.') | Some(b')'))
+        && matches!(b.get(digits + 1), Some(b' ') | None);
+    let marker = t
+        .chars()
+        .next()
+        .is_some_and(|c| matches!(c, '#' | '+' | '-' | '=' | ':' | '|'))
+        && (first_is("#")
+            || first_is("+ ")
+            || first_is("- ")
+            || first_is("---")
+            || first_is("===")
+            || first_is(":::")
+            || first_is("|")
+            || first_is("-\n")
+            || t == "-"
+            || t == "+");
     if list_num {
         format!("{}\\{}", &t[..digits], &t[digits..])
     } else if marker {
@@ -546,10 +605,15 @@ fn indent_rest(s: &str, pad: &str) -> String {
 
 fn yaml_scalar(s: &str) -> String {
     let simple = !s.is_empty()
-        && s.chars().all(|c| c.is_alphanumeric() || matches!(c, ' ' | '.' | ',' | '-' | '\'' | '(' | ')' | '/'))
+        && s.chars().all(|c| {
+            c.is_alphanumeric() || matches!(c, ' ' | '.' | ',' | '-' | '\'' | '(' | ')' | '/')
+        })
         && !s.starts_with(|c: char| c == '-' || c == ' ' || c == '\'')
         && !s.ends_with(' ')
-        && !matches!(s.to_ascii_lowercase().as_str(), "true" | "false" | "null" | "yes" | "no" | "on" | "off")
+        && !matches!(
+            s.to_ascii_lowercase().as_str(),
+            "true" | "false" | "null" | "yes" | "no" | "on" | "off"
+        )
         && s.parse::<f64>().is_err();
     if simple {
         s.to_string()
@@ -584,8 +648,19 @@ fn alpha(mut n: u32, upper: bool) -> String {
 
 fn roman(mut n: u32, upper: bool) -> String {
     const T: [(u32, &str); 13] = [
-        (1000, "m"), (900, "cm"), (500, "d"), (400, "cd"), (100, "c"), (90, "xc"), (50, "l"),
-        (40, "xl"), (10, "x"), (9, "ix"), (5, "v"), (4, "iv"), (1, "i"),
+        (1000, "m"),
+        (900, "cm"),
+        (500, "d"),
+        (400, "cd"),
+        (100, "c"),
+        (90, "xc"),
+        (50, "l"),
+        (40, "xl"),
+        (10, "x"),
+        (9, "ix"),
+        (5, "v"),
+        (4, "iv"),
+        (1, "i"),
     ];
     let mut s = String::new();
     for (v, r) in T {
@@ -612,14 +687,31 @@ mod tests {
     #[test]
     fn writes_lists_tables_and_notes() {
         let doc = Doc {
-            meta: Meta { title: t("A: title"), ..Default::default() },
+            meta: Meta {
+                title: t("A: title"),
+                ..Default::default()
+            },
             blocks: vec![
-                Block::Heading { level: 1, inlines: t("Head"), id: None },
+                Block::Heading {
+                    level: 1,
+                    inlines: t("Head"),
+                    id: None,
+                },
                 Block::BulletList(vec![
-                    vec![Block::Plain(t("one")), Block::OrderedList { start: 1, style: ListStyle::Decimal, items: vec![vec![Block::Plain(t("a"))]] }],
+                    vec![
+                        Block::Plain(t("one")),
+                        Block::OrderedList {
+                            start: 1,
+                            style: ListStyle::Decimal,
+                            items: vec![vec![Block::Plain(t("a"))]],
+                        },
+                    ],
                     vec![Block::Plain(t("two"))],
                 ]),
-                Block::Para(vec![Inline::Text("x".into()), Inline::Note(vec![Block::Para(t("note"))])]),
+                Block::Para(vec![
+                    Inline::Text("x".into()),
+                    Inline::Note(vec![Block::Para(t("note"))]),
+                ]),
                 Block::Table(Table {
                     caption: t("Cap"),
                     align: vec![Align::Left, Align::Right],
@@ -632,13 +724,19 @@ mod tests {
         assert!(md.starts_with("---\ntitle: \"A: title\"\n---\n"), "{md}");
         assert!(md.contains("-   one\n    1.  a\n-   two\n"), "{md}");
         assert!(md.contains("x[^1]"), "{md}");
-        assert!(md.contains("| A | B |\n|:---|---:|\n| 1 | 2 |\n\n: Cap"), "{md}");
+        assert!(
+            md.contains("| A | B |\n|:---|---:|\n| 1 | 2 |\n\n: Cap"),
+            "{md}"
+        );
         assert!(md.ends_with("[^1]: note\n"), "{md}");
     }
 
     #[test]
     fn escapes_markup_and_keeps_snake_case() {
-        assert_eq!(escape_text("a*b_c snake_case [x]", None, None), "a\\*b_c snake_case \\[x\\]");
+        assert_eq!(
+            escape_text("a*b_c snake_case [x]", None, None),
+            "a\\*b_c snake_case \\[x\\]"
+        );
         assert_eq!(escape_block_start("1. not a list"), "1\\. not a list");
         assert_eq!(escape_block_start("# not a heading"), "\\# not a heading");
     }

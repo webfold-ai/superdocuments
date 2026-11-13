@@ -53,11 +53,19 @@ fn parse_key(s: &str, at: usize) -> Option<(String, usize)> {
 
 /// Splits a suffix into locator label, locator and the rest, with the labels built in.
 pub fn parse_locator(suffix: &str) -> (Option<String>, Option<String>, String) {
-    parse_locator_with(suffix, &|w| LOCATOR_LABELS.iter().find(|(l, _)| l.eq_ignore_ascii_case(w)).map(|(_, n)| (*n).to_string()))
+    parse_locator_with(suffix, &|w| {
+        LOCATOR_LABELS
+            .iter()
+            .find(|(l, _)| l.eq_ignore_ascii_case(w))
+            .map(|(_, n)| (*n).to_string())
+    })
 }
 
 /// The same with a caller-supplied label lookup (the words the style's own locale uses).
-pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>) -> (Option<String>, Option<String>, String) {
+pub fn parse_locator_with(
+    suffix: &str,
+    lookup: &dyn Fn(&str) -> Option<String>,
+) -> (Option<String>, Option<String>, String) {
     let t = suffix.trim_start_matches([',', ' ']);
     // A label word (with its dot) followed by a space.
     let mut label: Option<String> = None;
@@ -65,7 +73,11 @@ pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>)
     let mut first_word_end = t.find(' ').unwrap_or(t.len());
     // "p.3": a label ending in a full stop may run into the number.
     if let Some(dot) = t.find('.') {
-        if dot < first_word_end && dot + 1 < t.len() && t[dot + 1..].starts_with(|c: char| c.is_ascii_digit()) && lookup(&t[..=dot]).is_some() {
+        if dot < first_word_end
+            && dot + 1 < t.len()
+            && t[dot + 1..].starts_with(|c: char| c.is_ascii_digit())
+            && lookup(&t[..=dot]).is_some()
+        {
             first_word_end = dot + 1;
         }
     }
@@ -75,7 +87,10 @@ pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>)
         rest = t[first_word_end..].trim_start();
     } else if first.starts_with('\u{a7}') || first.starts_with('\u{b6}') {
         // "§3" without a space.
-        let sym: String = first.chars().take_while(|c| *c == '\u{a7}' || *c == '\u{b6}').collect();
+        let sym: String = first
+            .chars()
+            .take_while(|c| *c == '\u{a7}' || *c == '\u{b6}')
+            .collect();
         if let Some(name) = lookup(&sym) {
             label = Some(name);
             rest = &t[sym.len()..];
@@ -83,12 +98,21 @@ pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>)
     }
     // The locator: number-like tokens joined by dashes, commas and ampersands.
     let tok_len = |r: &str| -> usize {
-        let n: usize = r.chars().take_while(|c| c.is_alphanumeric() || *c == '.').map(char::len_utf8).sum();
+        let n: usize = r
+            .chars()
+            .take_while(|c| c.is_alphanumeric() || *c == '.')
+            .map(char::len_utf8)
+            .sum();
         let tok = &r[..n];
-        let roman = label.is_some() && !tok.is_empty() && tok.chars().all(|c| "ivxlcdmIVXLCDM".contains(c));
+        let roman =
+            label.is_some() && !tok.is_empty() && tok.chars().all(|c| "ivxlcdmIVXLCDM".contains(c));
         if tok.chars().any(|c| c.is_ascii_digit()) || roman {
             // A trailing full stop ends the sentence, not the number.
-            if tok.ends_with('.') && !tok.trim_end_matches('.').is_empty() && r[n..].starts_with(' ') && false {
+            if tok.ends_with('.')
+                && !tok.trim_end_matches('.').is_empty()
+                && r[n..].starts_with(' ')
+                && false
+            {
                 n - 1
             } else {
                 n
@@ -116,7 +140,11 @@ pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>)
         let sep = if r.starts_with(", & ") {
             4
         } else if r.starts_with(", ") || r.starts_with(" & ") {
-            if r.starts_with(", ") { 2 } else { 3 }
+            if r.starts_with(", ") {
+                2
+            } else {
+                3
+            }
         } else {
             break;
         };
@@ -137,7 +165,13 @@ pub fn parse_locator_with(suffix: &str, lookup: &dyn Fn(&str) -> Option<String>)
     (label, Some(locator), tail.to_string())
 }
 
-fn item_from(prefix: &str, suppress: bool, key: String, suffix: &str, in_text: bool) -> CitationItem {
+fn item_from(
+    prefix: &str,
+    suppress: bool,
+    key: String,
+    suffix: &str,
+    in_text: bool,
+) -> CitationItem {
     // The locator is read later, with the labels of the style that formats the citation.
     let (label, locator, rest) = (None, None, suffix.to_string());
     let prefix = prefix.trim_start();
@@ -164,9 +198,17 @@ fn parse_bracketed(inner: &str) -> Option<Citation> {
         for (i, c) in part.char_indices() {
             if c == '@' {
                 let before = part[..i].chars().last();
-                let ok = before.is_none_or(|b| b.is_whitespace() || b == '-' || b == '(' || b == '[' || b == '\u{2018}' || b == '\u{201c}');
+                let ok = before.is_none_or(|b| {
+                    b.is_whitespace()
+                        || b == '-'
+                        || b == '('
+                        || b == '['
+                        || b == '\u{2018}'
+                        || b == '\u{201c}'
+                });
                 if ok {
-                    let suppress = before == Some('-') && (i == 1 || part[..i - 1].chars().last().is_none_or(char::is_whitespace));
+                    let suppress = before == Some('-')
+                        && (i == 1 || part[..i - 1].chars().last().is_none_or(char::is_whitespace));
                     found = Some((i, suppress));
                     break;
                 }
@@ -282,7 +324,11 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                     let next = s[cl_idx + 1..].chars().next();
                     if inner.contains('@') && next != Some('(') && !(next == Some('[') && false) {
                         if let Some(c) = parse_bracketed(inner) {
-                            out.push(Found { start: i, end: cl_idx + 1, citation: c });
+                            out.push(Found {
+                                start: i,
+                                end: cl_idx + 1,
+                                citation: c,
+                            });
                             i = cl_idx + 1;
                             continue;
                         }
@@ -293,7 +339,8 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
             }
             '@' => {
                 let prev = s[..i].chars().last();
-                let ok = prev.is_none_or(|p| !(p.is_alphanumeric() || p == '@' || p == '\\' || p == '_'));
+                let ok = prev
+                    .is_none_or(|p| !(p.is_alphanumeric() || p == '@' || p == '\\' || p == '_'));
                 if ok {
                     if let Some((key, end)) = parse_key(s, i) {
                         let mut end_all = end;
@@ -312,7 +359,11 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                             }
                         }
                         let item = item_from("", false, key, &suffix, true);
-                        out.push(Found { start: i, end: end_all, citation: Citation { items: vec![item] } });
+                        out.push(Found {
+                            start: i,
+                            end: end_all,
+                            citation: Citation { items: vec![item] },
+                        });
                         i = end_all;
                         continue;
                     }
@@ -334,7 +385,11 @@ pub fn process_markdown(md: &str, p: &Processor) -> String {
     let found = parse_citations(md);
     let nocite_all = skip_front_matter(md) > 0 && md[..skip_front_matter(md)].contains("@*");
     let cites: Vec<Citation> = found.iter().map(|f| f.citation.clone()).collect();
-    let nocite: Vec<String> = if nocite_all { p.refs_in_order() } else { Vec::new() };
+    let nocite: Vec<String> = if nocite_all {
+        p.refs_in_order()
+    } else {
+        Vec::new()
+    };
     let done = p.process(&cites, &nocite);
     let (oq, iq) = quote_marks(p.style());
     let mut out = String::new();
@@ -353,7 +408,11 @@ pub fn process_markdown(md: &str, p: &Processor) -> String {
         out.push_str("\n::: {#refs}\n");
         for e in &done.bibliography {
             let inl = to_inlines(&e.toks, (&oq.0, &oq.1), (&iq.0, &iq.1));
-            out.push_str(&format!("\n::: {{#ref-{} .csl-entry}}\n{}\n:::\n", e.id, ast::inlines_to_markdown(&inl)));
+            out.push_str(&format!(
+                "\n::: {{#ref-{} .csl-entry}}\n{}\n:::\n",
+                e.id,
+                ast::inlines_to_markdown(&inl)
+            ));
         }
         out.push_str(":::\n");
     }
@@ -367,7 +426,11 @@ pub fn comparison_for_document(md: &str, p: &Processor) -> (Vec<String>, Vec<Str
     let found = parse_citations(md);
     let cites: Vec<Citation> = found.iter().map(|f| f.citation.clone()).collect();
     let head = &md[..skip_front_matter(md)];
-    let nocite = if head.contains("nocite") && head.contains("@*") { p.refs_in_order() } else { Vec::new() };
+    let nocite = if head.contains("nocite") && head.contains("@*") {
+        p.refs_in_order()
+    } else {
+        Vec::new()
+    };
     p.process(&cites, &nocite).comparison(p.style())
 }
 
@@ -384,7 +447,10 @@ mod tests {
         assert_eq!((it[0].id.as_str(), it[0].prefix.as_str()), ("a", "see "));
         assert!(it[1].suppress_author);
         let (label, locator, rest) = parse_locator(&it[1].suffix);
-        assert_eq!((label.as_deref(), locator.as_deref(), rest.trim()), (Some("page"), Some("4"), "and more"));
+        assert_eq!(
+            (label.as_deref(), locator.as_deref(), rest.trim()),
+            (Some("page"), Some("4"), "and more")
+        );
     }
 
     #[test]
@@ -392,15 +458,24 @@ mod tests {
         let f = parse_citations("@smith2000 [p. 3] said mail me at a@b.com, `@no` and \\@no.");
         assert_eq!(f.len(), 1);
         assert!(f[0].citation.items[0].author_in_text);
-        assert_eq!(parse_locator(&f[0].citation.items[0].suffix).1.as_deref(), Some("3"));
+        assert_eq!(
+            parse_locator(&f[0].citation.items[0].suffix).1.as_deref(),
+            Some("3")
+        );
     }
 
     #[test]
     fn locator_labels_and_ranges() {
-        assert_eq!(parse_locator(", chap. 2, pp. 3").0.as_deref(), Some("chapter"));
+        assert_eq!(
+            parse_locator(", chap. 2, pp. 3").0.as_deref(),
+            Some("chapter")
+        );
         assert_eq!(parse_locator(", p.3").1.as_deref(), Some("3"));
         let (l, loc, rest) = parse_locator(", pp. 33-35, with notes");
-        assert_eq!((l.as_deref(), loc.as_deref()), (Some("page"), Some("33-35")));
+        assert_eq!(
+            (l.as_deref(), loc.as_deref()),
+            (Some("page"), Some("33-35"))
+        );
         assert_eq!(rest.trim_start_matches([',', ' ']), "with notes");
         assert_eq!(parse_locator("see also").1, None);
     }

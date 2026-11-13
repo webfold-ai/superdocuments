@@ -14,9 +14,9 @@ use zip::ZipArchive;
 use crate::document::{entry, text};
 
 pub(crate) mod docx;
+pub(crate) mod numfmt;
 pub(crate) mod omml;
 pub(crate) mod pptx;
-pub(crate) mod numfmt;
 pub(crate) mod xlsx;
 
 /// An attribute by local name: `val` finds `w:val`, `val` and `ns0:val`.
@@ -248,7 +248,12 @@ pub(crate) fn render(segs: &[Seg], line_break: &str, emphasis: bool) -> String {
                     if h != href {
                         break;
                     }
-                    inner.push_str(&emphasise(text, *bold && emphasis, *italic && emphasis, if emphasis { *marks } else { 0 }));
+                    inner.push_str(&emphasise(
+                        text,
+                        *bold && emphasis,
+                        *italic && emphasis,
+                        if emphasis { *marks } else { 0 },
+                    ));
                     end += 1;
                 }
                 match href {

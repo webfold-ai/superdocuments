@@ -761,10 +761,12 @@ fn latex_markdown(
     bib: Option<&crate::bibtex::Bibliography>,
 ) -> String {
     use crate::latex::CitationSource;
-    let mut out =
-        crate::latex::render_markdown(
+    let mut out = crate::latex::render_markdown(
         doc,
-        &crate::latex::RenderOptions { bibliography: bib, pandoc: true },
+        &crate::latex::RenderOptions {
+            bibliography: bib,
+            pandoc: true,
+        },
     );
     let Some(bib) = bib.filter(|_| doc.bibitems.is_empty()) else {
         return out;
@@ -1476,7 +1478,10 @@ mod tests {
             "content.xml",
             "<office:document><text:h>Title</text:h><text:p>Body</text:p></office:document>",
         )]);
-        assert_eq!(convert_bytes("odt", &odf).unwrap().trim(), "# Title\n\nBody");
+        assert_eq!(
+            convert_bytes("odt", &odf).unwrap().trim(),
+            "# Title\n\nBody"
+        );
         let sheet = package(&[("content.xml", "<office:document><table:table table:name=\"Data\"><table:table-row><table:table-cell office:value=\"42\"/></table:table-row></table:table></office:document>")]);
         assert!(convert_bytes("ods", &sheet).unwrap().contains("| 42 |"));
 

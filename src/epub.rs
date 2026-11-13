@@ -222,7 +222,11 @@ pub fn extract_doc(book: &Book, bytes: &[u8]) -> Result<crate::ast::Doc, String>
     let mut doc = crate::ast::Doc {
         meta: Meta {
             title: book.title.iter().map(|t| Inline::Text(t.clone())).collect(),
-            authors: book.creators.iter().map(|c| vec![Inline::Text(c.clone())]).collect(),
+            authors: book
+                .creators
+                .iter()
+                .map(|c| vec![Inline::Text(c.clone())])
+                .collect(),
             date: book.date.clone(),
             abstract_blocks: Vec::new(),
         },
@@ -233,7 +237,10 @@ pub fn extract_doc(book: &Book, bytes: &[u8]) -> Result<crate::ast::Doc, String>
         let raw = read_bounded_xhtml(&mut zip, &item.href)?;
         total += raw.len();
         if total > MAX_TEXT_BYTES as usize {
-            return Err(format!("spine text exceeds {MAX_TEXT_BYTES} bytes at {:?}", item.href));
+            return Err(format!(
+                "spine text exceeds {MAX_TEXT_BYTES} bytes at {:?}",
+                item.href
+            ));
         }
         let chapter = crate::html::reader::to_doc_epub(&String::from_utf8_lossy(&raw));
         doc.blocks.extend(chapter.blocks);

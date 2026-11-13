@@ -9,13 +9,21 @@ fn main() {
         let path = args.next().expect("usage: sd_convert --csl FILE.bib");
         let text = std::fs::read_to_string(&path).expect("read bib");
         let bib = superdocuments::bibtex::parse(&text);
-        println!("{}", superdocuments::bibtex::csl_json_pandoc(&bib, superdocuments::bibtex::looks_like_biblatex(&bib)));
+        println!(
+            "{}",
+            superdocuments::bibtex::csl_json_pandoc(
+                &bib,
+                superdocuments::bibtex::looks_like_biblatex(&bib)
+            )
+        );
         return;
     }
     let path = first;
     match superdocuments::document::convert_path(std::path::Path::new(&path)) {
         Ok(md) => {
-            std::io::stdout().write_all(md.as_bytes()).expect("write stdout");
+            std::io::stdout()
+                .write_all(md.as_bytes())
+                .expect("write stdout");
         }
         Err(e) => {
             eprintln!("{e}");

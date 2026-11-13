@@ -20,7 +20,10 @@ pub(crate) struct XElem {
 
 impl XElem {
     pub fn attr(&self, name: &str) -> Option<&str> {
-        self.attrs.iter().find(|(k, _)| k == name).map(|(_, v)| v.as_str())
+        self.attrs
+            .iter()
+            .find(|(k, _)| k == name)
+            .map(|(_, v)| v.as_str())
     }
 
     pub fn elems(&self) -> impl Iterator<Item = &XElem> {
@@ -63,7 +66,11 @@ fn write(e: &XElem, out: &mut String) {
         out.push(' ');
         out.push_str(k);
         out.push_str("=\"");
-        out.push_str(&v.replace('&', "&amp;").replace('"', "&quot;").replace('<', "&lt;"));
+        out.push_str(
+            &v.replace('&', "&amp;")
+                .replace('"', "&quot;")
+                .replace('<', "&lt;"),
+        );
         out.push('"');
     }
     out.push('>');
@@ -84,7 +91,10 @@ pub(crate) fn parse(xml: &[u8]) -> Result<XElem, String> {
     let mut buf = Vec::new();
     let mut stack: Vec<XElem> = vec![XElem::default()];
     loop {
-        match reader.read_event_into(&mut buf).map_err(|e| e.to_string())? {
+        match reader
+            .read_event_into(&mut buf)
+            .map_err(|e| e.to_string())?
+        {
             Event::Start(t) => {
                 if stack.len() > 512 {
                     return Err("XML nested too deeply".into());

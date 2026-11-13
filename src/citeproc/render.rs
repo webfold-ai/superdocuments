@@ -30,7 +30,9 @@ pub fn normalize(toks: Toks) -> Toks {
                     continue;
                 }
                 // Moving punctuation inside a quote that just closed.
-                if matches!(out.last(), Some(Tok::Close(Fmt::Quote))) && (s.starts_with(',') || s.starts_with('.')) {
+                if matches!(out.last(), Some(Tok::Close(Fmt::Quote)))
+                    && (s.starts_with(',') || s.starts_with('.'))
+                {
                     let c = s.remove(0);
                     let n = out.len() - 1;
                     let dup = visible_last(&out[..n]) == Some('.') && c == '.';
@@ -48,7 +50,9 @@ pub fn normalize(toks: Toks) -> Toks {
                             s.remove(0);
                         }
                     }
-                } else if let Some(first) = s.chars().next().filter(|c| matches!(c, ':' | ';' | ',')) {
+                } else if let Some(first) =
+                    s.chars().next().filter(|c| matches!(c, ':' | ';' | ','))
+                {
                     // The same punctuation mark twice in a row is one.
                     if visible_last(&out) == Some(first) {
                         s.remove(0);
@@ -98,42 +102,75 @@ pub fn normalize(toks: Toks) -> Toks {
 }
 
 /// Builds the inline tree. Nested italics flip to upright, as CSL asks.
-pub fn to_inlines(toks: &[Tok], open_quote: (&str, &str), inner_quote: (&str, &str)) -> Vec<Inline> {
+pub fn to_inlines(
+    toks: &[Tok],
+    open_quote: (&str, &str),
+    inner_quote: (&str, &str),
+) -> Vec<Inline> {
     struct Frame {
         kind: Option<Fmt>,
         items: Vec<Inline>,
     }
-    let mut stack: Vec<Frame> = vec![Frame { kind: None, items: Vec::new() }];
+    let mut stack: Vec<Frame> = vec![Frame {
+        kind: None,
+        items: Vec::new(),
+    }];
     let mut italic_depth = 0usize;
     let mut bold_depth = 0usize;
     let mut quote_depth = 0usize;
     // Frames that were opened as no-ops (a nested italic) are tracked so closes match.
     for t in toks {
         match t {
-            Tok::Text(s) => stack.last_mut().unwrap().items.push(Inline::Text(s.clone())),
+            Tok::Text(s) => stack
+                .last_mut()
+                .unwrap()
+                .items
+                .push(Inline::Text(s.clone())),
             Tok::Open(f) => match f {
                 Fmt::Italic if italic_depth % 2 == 1 => {
                     italic_depth += 1;
-                    stack.push(Frame { kind: None, items: Vec::new() });
+                    stack.push(Frame {
+                        kind: None,
+                        items: Vec::new(),
+                    });
                 }
                 Fmt::Bold if bold_depth % 2 == 1 => {
                     bold_depth += 1;
-                    stack.push(Frame { kind: None, items: Vec::new() });
+                    stack.push(Frame {
+                        kind: None,
+                        items: Vec::new(),
+                    });
                 }
                 Fmt::Italic => {
                     italic_depth += 1;
-                    stack.push(Frame { kind: Some(Fmt::Italic), items: Vec::new() });
+                    stack.push(Frame {
+                        kind: Some(Fmt::Italic),
+                        items: Vec::new(),
+                    });
                 }
                 Fmt::Bold => {
                     bold_depth += 1;
-                    stack.push(Frame { kind: Some(Fmt::Bold), items: Vec::new() });
+                    stack.push(Frame {
+                        kind: Some(Fmt::Bold),
+                        items: Vec::new(),
+                    });
                 }
                 Fmt::Quote => {
                     quote_depth += 1;
-                    let q = if quote_depth % 2 == 1 { open_quote.0 } else { inner_quote.0 };
-                    stack.push(Frame { kind: Some(Fmt::Quote), items: vec![Inline::Text(q.to_string())] });
+                    let q = if quote_depth % 2 == 1 {
+                        open_quote.0
+                    } else {
+                        inner_quote.0
+                    };
+                    stack.push(Frame {
+                        kind: Some(Fmt::Quote),
+                        items: vec![Inline::Text(q.to_string())],
+                    });
                 }
-                other => stack.push(Frame { kind: Some(*other), items: Vec::new() }),
+                other => stack.push(Frame {
+                    kind: Some(*other),
+                    items: Vec::new(),
+                }),
             },
             Tok::Close(f) => {
                 if stack.len() < 2 {
@@ -158,7 +195,11 @@ pub fn to_inlines(toks: &[Tok], open_quote: (&str, &str), inner_quote: (&str, &s
                     Some(Fmt::Sup) => Inline::Sup(items),
                     Some(Fmt::Sub) => Inline::Sub(items),
                     Some(Fmt::Quote) => {
-                        let q = if quote_depth % 2 == 1 { open_quote.1 } else { inner_quote.1 };
+                        let q = if quote_depth % 2 == 1 {
+                            open_quote.1
+                        } else {
+                            inner_quote.1
+                        };
                         quote_depth = quote_depth.saturating_sub(1);
                         items.push(Inline::Text(q.to_string()));
                         stack.last_mut().unwrap().items.extend(items);
@@ -209,7 +250,9 @@ pub fn comparison_string(inlines: &[Inline]) -> String {
 fn write_cmp(inlines: &[Inline], out: &mut String) {
     for i in inlines {
         match i {
-            Inline::Text(t) | Inline::Verbatim(t) | Inline::Cite(t) | Inline::Code(t) => out.push_str(t),
+            Inline::Text(t) | Inline::Verbatim(t) | Inline::Cite(t) | Inline::Code(t) => {
+                out.push_str(t)
+            }
             Inline::Emph(v) => wrap(out, I_OPEN, I_CLOSE, v),
             Inline::Strong(v) => wrap(out, B_OPEN, B_CLOSE, v),
             Inline::SmallCaps(v) => wrap(out, SC_OPEN, SC_CLOSE, v),
@@ -234,7 +277,13 @@ fn wrap(out: &mut String, o: char, c: char, v: &[Inline]) {
 /// Merges `close open` pairs of the same kind, collapses whitespace and trims.
 pub fn normalize_comparison(s: &str) -> String {
     let mut t = s.replace(['\u{a0}', '\u{2009}', '\u{202f}'], " ");
-    for (o, c) in [(I_OPEN, I_CLOSE), (B_OPEN, B_CLOSE), (SC_OPEN, SC_CLOSE), (SUP_OPEN, SUP_CLOSE), (SUB_OPEN, SUB_CLOSE)] {
+    for (o, c) in [
+        (I_OPEN, I_CLOSE),
+        (B_OPEN, B_CLOSE),
+        (SC_OPEN, SC_CLOSE),
+        (SUP_OPEN, SUP_CLOSE),
+        (SUB_OPEN, SUB_CLOSE),
+    ] {
         let pair = format!("{c}{o}");
         while t.contains(&pair) {
             t = t.replace(&pair, "");

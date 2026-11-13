@@ -30,12 +30,27 @@ fn build(contents_entry: &str, objs_tail: &[(&str, Vec<u8>)]) -> Vec<u8> {
     for o in &offs {
         out.extend_from_slice(format!("{o:010} 00000 n \n").as_bytes());
     }
-    out.extend_from_slice(format!("trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{x}\n%%EOF\n", objs.len() + 1).as_bytes());
+    out.extend_from_slice(
+        format!(
+            "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{x}\n%%EOF\n",
+            objs.len() + 1
+        )
+        .as_bytes(),
+    );
     out
 }
 
 fn stream(text: &str) -> Vec<u8> {
-    let s = format!("BT /F1 12 Tf 72 {} Td ({text}) Tj ET", if text.starts_with("One") { 700 } else if text.starts_with("Two") { 650 } else { 600 });
+    let s = format!(
+        "BT /F1 12 Tf 72 {} Td ({text}) Tj ET",
+        if text.starts_with("One") {
+            700
+        } else if text.starts_with("Two") {
+            650
+        } else {
+            600
+        }
+    );
     format!("<< /Length {} >>\nstream\n{s}\nendstream", s.len()).into_bytes()
 }
 
@@ -45,9 +60,15 @@ fn words(pdf: &[u8]) -> String {
 
 #[test]
 fn contents_as_direct_array_still_works() {
-    let pdf = build("[4 0 R 5 0 R]", &[("s1", stream("One alpha")), ("s2", stream("Two bravo"))]);
+    let pdf = build(
+        "[4 0 R 5 0 R]",
+        &[("s1", stream("One alpha")), ("s2", stream("Two bravo"))],
+    );
     let md = words(&pdf);
-    assert!(md.contains("One alpha") && md.contains("Two bravo"), "{md:?}");
+    assert!(
+        md.contains("One alpha") && md.contains("Two bravo"),
+        "{md:?}"
+    );
 }
 
 #[test]
@@ -59,14 +80,34 @@ fn contents_as_single_stream_still_works() {
 #[test]
 fn contents_as_indirect_array_is_read() {
     // object 6 is the array; 4 and 5 are the streams (the Aspose.Pdf layout)
-    let pdf = build("6 0 R", &[("s1", stream("One alpha")), ("s2", stream("Two bravo")), ("arr", b"[4 0 R 5 0 R]".to_vec())]);
+    let pdf = build(
+        "6 0 R",
+        &[
+            ("s1", stream("One alpha")),
+            ("s2", stream("Two bravo")),
+            ("arr", b"[4 0 R 5 0 R]".to_vec()),
+        ],
+    );
     let md = words(&pdf);
-    assert!(md.contains("One alpha") && md.contains("Two bravo"), "indirect /Contents array gave no text: {md:?}");
+    assert!(
+        md.contains("One alpha") && md.contains("Two bravo"),
+        "indirect /Contents array gave no text: {md:?}"
+    );
 }
 
 #[test]
 fn indirect_array_may_hold_a_reference_to_a_missing_stream() {
-    let pdf = build("6 0 R", &[("s1", stream("One alpha")), ("s2", stream("Two bravo")), ("arr", b"[4 0 R 77 0 R 5 0 R]".to_vec())]);
+    let pdf = build(
+        "6 0 R",
+        &[
+            ("s1", stream("One alpha")),
+            ("s2", stream("Two bravo")),
+            ("arr", b"[4 0 R 77 0 R 5 0 R]".to_vec()),
+        ],
+    );
     let md = words(&pdf);
-    assert!(md.contains("One alpha") && md.contains("Two bravo"), "{md:?}");
+    assert!(
+        md.contains("One alpha") && md.contains("Two bravo"),
+        "{md:?}"
+    );
 }

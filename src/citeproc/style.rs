@@ -37,7 +37,10 @@ impl Style {
             let p: Vec<&str> = line.split('|').collect();
             if p.len() >= 4 {
                 let plural = if p[3].is_empty() { p[2] } else { p[3] };
-                t.insert((p[0].to_string(), p[1].to_string()), (p[2].to_string(), plural.to_string()));
+                t.insert(
+                    (p[0].to_string(), p[1].to_string()),
+                    (p[2].to_string(), plural.to_string()),
+                );
             }
         }
         let mut date_formats = HashMap::new();
@@ -70,10 +73,22 @@ impl Style {
                 }
             }
         }
-        let title = root.find("info").and_then(|i| i.find("title")).map(text_of).unwrap_or_default();
+        let title = root
+            .find("info")
+            .and_then(|i| i.find("title"))
+            .map(text_of)
+            .unwrap_or_default();
         let class_in_text = root.attr("class") != Some("note");
         let calls_year_suffix = mentions_variable(&root, "year-suffix");
-        Ok(Style { root, macros, terms: t, date_formats, title, class_in_text, calls_year_suffix })
+        Ok(Style {
+            root,
+            macros,
+            terms: t,
+            date_formats,
+            title,
+            class_in_text,
+            calls_year_suffix,
+        })
     }
 
     pub(crate) fn citation(&self) -> Option<&XElem> {
@@ -125,7 +140,9 @@ pub(crate) fn text_of(e: &XElem) -> String {
 }
 
 fn mentions_variable(e: &XElem, var: &str) -> bool {
-    if e.attr("variable").is_some_and(|v| v.split_whitespace().any(|x| x == var)) {
+    if e.attr("variable")
+        .is_some_and(|v| v.split_whitespace().any(|x| x == var))
+    {
         return true;
     }
     e.elems().any(|c| mentions_variable(c, var))

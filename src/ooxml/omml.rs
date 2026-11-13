@@ -16,7 +16,9 @@ fn arg(e: &XElem, name: &str) -> String {
 }
 
 fn prop<'a>(e: &'a XElem, group: &str, name: &str) -> Option<&'a str> {
-    child(e, group).and_then(|g| child(g, name)).and_then(|c| c.attr("m:val").or_else(|| c.attr("val")))
+    child(e, group)
+        .and_then(|g| child(g, name))
+        .and_then(|c| c.attr("m:val").or_else(|| c.attr("val")))
 }
 
 fn braced(s: String) -> String {
@@ -39,7 +41,10 @@ fn text_run(e: &XElem) -> String {
         }
     }
     let plain = child(e, "rPr").and_then(|p| child(p, "nor")).is_some()
-        || child(e, "rPr").and_then(|p| child(p, "sty")).and_then(|x| x.attr("m:val").or_else(|| x.attr("val"))) == Some("p");
+        || child(e, "rPr")
+            .and_then(|p| child(p, "sty"))
+            .and_then(|x| x.attr("m:val").or_else(|| x.attr("val")))
+            == Some("p");
     let mut out = String::new();
     for ch in s.chars() {
         match ch {
@@ -100,8 +105,18 @@ fn node(e: &XElem) -> String {
         }
         "sSup" => format!("{{{}}}^{}", arg(e, "e"), braced(arg(e, "sup"))),
         "sSub" => format!("{{{}}}_{}", arg(e, "e"), braced(arg(e, "sub"))),
-        "sSubSup" => format!("{{{}}}_{}^{}", arg(e, "e"), braced(arg(e, "sub")), braced(arg(e, "sup"))),
-        "sPre" => format!("{{}}_{}^{}{{{}}}", braced(arg(e, "sub")), braced(arg(e, "sup")), arg(e, "e")),
+        "sSubSup" => format!(
+            "{{{}}}_{}^{}",
+            arg(e, "e"),
+            braced(arg(e, "sub")),
+            braced(arg(e, "sup"))
+        ),
+        "sPre" => format!(
+            "{{}}_{}^{}{{{}}}",
+            braced(arg(e, "sub")),
+            braced(arg(e, "sup")),
+            arg(e, "e")
+        ),
         "rad" => {
             let deg = arg(e, "deg");
             if deg.trim().is_empty() || prop(e, "radPr", "degHide") == Some("1") {
@@ -135,7 +150,11 @@ fn node(e: &XElem) -> String {
             let beg = prop(e, "dPr", "begChr").unwrap_or("(");
             let end = prop(e, "dPr", "endChr").unwrap_or(")");
             let sep = prop(e, "dPr", "sepChr").unwrap_or("|");
-            let parts: Vec<String> = e.elems().filter(|c| local(&c.name) == "e").map(content).collect();
+            let parts: Vec<String> = e
+                .elems()
+                .filter(|c| local(&c.name) == "e")
+                .map(content)
+                .collect();
             let tex = |c: &str| match c {
                 "" => ".".to_string(),
                 "{" => "\\{".into(),
@@ -148,9 +167,16 @@ fn node(e: &XElem) -> String {
         }
         "func" => {
             let name = arg(e, "fName");
-            let known = ["sin", "cos", "tan", "log", "ln", "exp", "lim", "max", "min", "det", "sec", "csc", "cot"];
+            let known = [
+                "sin", "cos", "tan", "log", "ln", "exp", "lim", "max", "min", "det", "sec", "csc",
+                "cot",
+            ];
             let n = name.trim().to_string();
-            let f = if known.contains(&n.as_str()) { format!("\\{n}") } else { name };
+            let f = if known.contains(&n.as_str()) {
+                format!("\\{n}")
+            } else {
+                name
+            };
             format!("{f} {}", arg(e, "e"))
         }
         "acc" => {
@@ -178,17 +204,31 @@ fn node(e: &XElem) -> String {
             let rows: Vec<String> = e
                 .elems()
                 .filter(|c| local(&c.name) == "mr")
-                .map(|r| r.elems().filter(|c| local(&c.name) == "e").map(content).collect::<Vec<_>>().join(" & "))
+                .map(|r| {
+                    r.elems()
+                        .filter(|c| local(&c.name) == "e")
+                        .map(content)
+                        .collect::<Vec<_>>()
+                        .join(" & ")
+                })
                 .collect();
             format!("\\begin{{matrix}} {} \\end{{matrix}}", rows.join(" \\\\ "))
         }
         "eqArr" => {
-            let rows: Vec<String> = e.elems().filter(|c| local(&c.name) == "e").map(content).collect();
-            format!("\\begin{{aligned}} {} \\end{{aligned}}", rows.join(" \\\\ "))
+            let rows: Vec<String> = e
+                .elems()
+                .filter(|c| local(&c.name) == "e")
+                .map(content)
+                .collect();
+            format!(
+                "\\begin{{aligned}} {} \\end{{aligned}}",
+                rows.join(" \\\\ ")
+            )
         }
         "groupChr" | "box" | "borderBox" | "phant" => arg(e, "e"),
         "oMath" | "e" | "num" | "den" | "sup" | "sub" | "lim" | "fName" | "deg" => content(e),
-        "rPr" | "ctrlPr" | "fPr" | "dPr" | "naryPr" | "accPr" | "barPr" | "radPr" | "sSupPr" | "sSubPr" | "funcPr" | "mPr" | "eqArrPr" | "limLowPr" | "limUppPr" => String::new(),
+        "rPr" | "ctrlPr" | "fPr" | "dPr" | "naryPr" | "accPr" | "barPr" | "radPr" | "sSupPr"
+        | "sSubPr" | "funcPr" | "mPr" | "eqArrPr" | "limLowPr" | "limUppPr" => String::new(),
         _ => content(e),
     }
 }
@@ -196,7 +236,11 @@ fn node(e: &XElem) -> String {
 /// TeX for an `oMath` or `oMathPara` element.
 pub(crate) fn to_tex(e: &XElem) -> String {
     let body = if local(&e.name) == "oMathPara" {
-        e.elems().filter(|c| local(&c.name) == "oMath").map(content).collect::<Vec<_>>().join(" ")
+        e.elems()
+            .filter(|c| local(&c.name) == "oMath")
+            .map(content)
+            .collect::<Vec<_>>()
+            .join(" ")
     } else {
         content(e)
     };

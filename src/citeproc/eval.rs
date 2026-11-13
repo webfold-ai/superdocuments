@@ -122,7 +122,10 @@ pub struct R {
 
 impl R {
     fn empty(&self) -> bool {
-        !self.toks.iter().any(|t| matches!(t, Tok::Text(s) if !s.is_empty()))
+        !self
+            .toks
+            .iter()
+            .any(|t| matches!(t, Tok::Text(s) if !s.is_empty()))
     }
     fn absorb_counts(&mut self, o: &R) {
         self.called += o.called;
@@ -255,7 +258,10 @@ fn decorate(e: &XElem, r: &mut R, ctx: &Ctx) {
     }
     let _ = ctx;
     // `display` blocks (`left-margin`, `right-inline`) are separate boxes: a space apart in text.
-    if matches!(e.attr("display"), Some("left-margin") | Some("block") | Some("indent")) {
+    if matches!(
+        e.attr("display"),
+        Some("left-margin") | Some("block") | Some("indent")
+    ) {
         toks.push(Tok::Text(" ".into()));
     }
     if let Some(p) = e.attr("prefix") {
@@ -278,7 +284,9 @@ fn plural_attr(e: &XElem, count: usize) -> bool {
 fn eval_text(e: &XElem, ctx: &mut Ctx) -> R {
     let mut r = R::default();
     if let Some(name) = e.attr("macro") {
-        let Some(m) = ctx.style.macros.get(name).cloned() else { return r };
+        let Some(m) = ctx.style.macros.get(name).cloned() else {
+            return r;
+        };
         return eval_children(&m, ctx);
     }
     if let Some(v) = e.attr("value") {
@@ -368,12 +376,19 @@ fn variable_text(var: &str, form: &str, ctx: &mut Ctx) -> Option<String> {
     match var {
         "locator" => {
             return if ctx.mode == Mode::Citation {
-                let fmt = ctx.style.citation().and_then(|c| c.attr("page-range-format")).or(ctx.style.inherited("page-range-format", &[]));
+                let fmt = ctx
+                    .style
+                    .citation()
+                    .and_then(|c| c.attr("page-range-format"))
+                    .or(ctx.style.inherited("page-range-format", &[]));
                 ctx.item.locator.clone().filter(|l| !l.is_empty()).map(|l| {
-                    range_delimiter(ctx.style, match fmt {
-                        Some(f) => format_page_ranges(&l, f),
-                        None => page_dash(&l),
-                    })
+                    range_delimiter(
+                        ctx.style,
+                        match fmt {
+                            Some(f) => format_page_ranges(&l, f),
+                            None => page_dash(&l),
+                        },
+                    )
                 })
             } else {
                 None
@@ -399,7 +414,17 @@ fn variable_text(var: &str, form: &str, ctx: &mut Ctx) -> Option<String> {
         Some(Field::Text(t)) if !t.is_empty() => {
             if var == "page" {
                 // Without a `page-range-format` the pages are printed as they were given.
-                let fmt = ctx.style.citation().filter(|_| ctx.mode == Mode::Citation).and_then(|c| c.attr("page-range-format")).or(ctx.style.bibliography().filter(|_| ctx.mode == Mode::Bibliography).and_then(|c| c.attr("page-range-format"))).or(ctx.style.inherited("page-range-format", &[]));
+                let fmt = ctx
+                    .style
+                    .citation()
+                    .filter(|_| ctx.mode == Mode::Citation)
+                    .and_then(|c| c.attr("page-range-format"))
+                    .or(ctx
+                        .style
+                        .bibliography()
+                        .filter(|_| ctx.mode == Mode::Bibliography)
+                        .and_then(|c| c.attr("page-range-format")))
+                    .or(ctx.style.inherited("page-range-format", &[]));
                 let out = match fmt {
                     Some(f) => format_page_ranges(t, f),
                     None => page_dash(t),
@@ -409,7 +434,12 @@ fn variable_text(var: &str, form: &str, ctx: &mut Ctx) -> Option<String> {
             Some(t.clone())
         }
         Some(Field::Date(d)) if !d.is_empty() => Some(date_plain(d)),
-        Some(Field::Names(n)) if !n.is_empty() => Some(n.iter().map(|x| name_display(x, false, "", false)).collect::<Vec<_>>().join(", ")),
+        Some(Field::Names(n)) if !n.is_empty() => Some(
+            n.iter()
+                .map(|x| name_display(x, false, "", false))
+                .collect::<Vec<_>>()
+                .join(", "),
+        ),
         _ => None,
     }
 }
@@ -423,8 +453,16 @@ fn range_delimiter(style: &Style, s: String) -> String {
 }
 
 fn citation_label(r: &Reference) -> String {
-    let fam = r.names("author").first().map(|n| n.family.clone()).unwrap_or_else(|| r.id.clone());
-    let year = r.date("issued").and_then(|d| d.year()).map(|y| format!("{:02}", y % 100)).unwrap_or_default();
+    let fam = r
+        .names("author")
+        .first()
+        .map(|n| n.family.clone())
+        .unwrap_or_else(|| r.id.clone());
+    let year = r
+        .date("issued")
+        .and_then(|d| d.year())
+        .map(|y| format!("{:02}", y % 100))
+        .unwrap_or_default();
     format!("{}{}", fam.chars().take(3).collect::<String>(), year)
 }
 
@@ -432,7 +470,17 @@ fn date_plain(d: &DateValue) -> String {
     if !d.literal.is_empty() {
         return d.literal.clone();
     }
-    d.parts.iter().map(|p| p.iter().filter(|x| **x != 0).map(|x| x.to_string()).collect::<Vec<_>>().join("-")).collect::<Vec<_>>().join("/")
+    d.parts
+        .iter()
+        .map(|p| {
+            p.iter()
+                .filter(|x| **x != 0)
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+                .join("-")
+        })
+        .collect::<Vec<_>>()
+        .join("/")
 }
 
 // ---- numbers, pages ---------------------------------------------------------------------------
@@ -451,8 +499,14 @@ fn is_numeric_value(s: &str) -> bool {
                 && part.chars().any(|c| c.is_ascii_digit())
                 && part.chars().all(|c| c.is_ascii_alphanumeric() || c == '.')
                 && (part.chars().all(|c| c.is_ascii_digit())
-                    || part.trim_start_matches(|c: char| c.is_ascii_alphabetic()).chars().all(|c| c.is_ascii_digit())
-                    || part.trim_end_matches(|c: char| c.is_ascii_alphabetic()).chars().all(|c| c.is_ascii_digit()))
+                    || part
+                        .trim_start_matches(|c: char| c.is_ascii_alphabetic())
+                        .chars()
+                        .all(|c| c.is_ascii_digit())
+                    || part
+                        .trim_end_matches(|c: char| c.is_ascii_alphabetic())
+                        .chars()
+                        .all(|c| c.is_ascii_digit()))
         })
 }
 
@@ -471,7 +525,21 @@ fn ordinal(n: u32, style: &Style) -> String {
 }
 
 fn roman(mut n: u32) -> String {
-    let t = [(1000, "m"), (900, "cm"), (500, "d"), (400, "cd"), (100, "c"), (90, "xc"), (50, "l"), (40, "xl"), (10, "x"), (9, "ix"), (5, "v"), (4, "iv"), (1, "i")];
+    let t = [
+        (1000, "m"),
+        (900, "cm"),
+        (500, "d"),
+        (400, "cd"),
+        (100, "c"),
+        (90, "xc"),
+        (50, "l"),
+        (40, "xl"),
+        (10, "x"),
+        (9, "ix"),
+        (5, "v"),
+        (4, "iv"),
+        (1, "i"),
+    ];
     let mut s = String::new();
     for (v, r) in t {
         while n >= v {
@@ -484,7 +552,9 @@ fn roman(mut n: u32) -> String {
 
 fn eval_number(e: &XElem, ctx: &mut Ctx) -> R {
     let mut r = R::default();
-    let Some(var) = e.attr("variable") else { return r };
+    let Some(var) = e.attr("variable") else {
+        return r;
+    };
     r.called = 1;
     let raw = match var {
         "citation-number" => ctx.citation_number.map(|n| n.to_string()),
@@ -502,7 +572,10 @@ fn eval_number(e: &XElem, ctx: &mut Ctx) -> R {
         match part.trim().parse::<u32>() {
             Ok(n) => match form {
                 "ordinal" => ordinal(n, ctx.style),
-                "long-ordinal" if (1..=10).contains(&n) => ctx.style.term(&format!("long-ordinal-{n:02}"), "long", false).unwrap_or_else(|| ordinal(n, ctx.style)),
+                "long-ordinal" if (1..=10).contains(&n) => ctx
+                    .style
+                    .term(&format!("long-ordinal-{n:02}"), "long", false)
+                    .unwrap_or_else(|| ordinal(n, ctx.style)),
                 "long-ordinal" => ordinal(n, ctx.style),
                 "roman" => roman(n),
                 _ => n.to_string(),
@@ -534,7 +607,12 @@ fn page_dash(s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
     let mut out = String::new();
     for (i, c) in chars.iter().enumerate() {
-        if *c == '-' && i > 0 && i + 1 < chars.len() && chars[i - 1].is_ascii_alphanumeric() && chars[i + 1].is_ascii_alphanumeric() {
+        if *c == '-'
+            && i > 0
+            && i + 1 < chars.len()
+            && chars[i - 1].is_ascii_alphanumeric()
+            && chars[i + 1].is_ascii_alphanumeric()
+        {
             out.push('\u{2013}');
         } else if *c == '-' && i > 0 && i + 1 < chars.len() && chars[i - 1] == ' ' {
             out.push('\u{2013}');
@@ -584,7 +662,10 @@ pub(crate) fn format_page_ranges(s: &str, format: &str) -> String {
 
 fn format_range(a: &str, b: &str, format: &str) -> String {
     let dash = '\u{2013}';
-    let (ad, bd) = (a.chars().all(|c| c.is_ascii_digit()), b.chars().all(|c| c.is_ascii_digit()));
+    let (ad, bd) = (
+        a.chars().all(|c| c.is_ascii_digit()),
+        b.chars().all(|c| c.is_ascii_digit()),
+    );
     if !(ad && bd) || a.is_empty() || b.is_empty() {
         return format!("{a}{dash}{b}");
     }
@@ -631,18 +712,33 @@ fn format_range(a: &str, b: &str, format: &str) -> String {
 
 fn eval_label(e: &XElem, ctx: &mut Ctx) -> R {
     let mut r = R::default();
-    let Some(var) = e.attr("variable") else { return r };
+    let Some(var) = e.attr("variable") else {
+        return r;
+    };
     let form = e.attr("form").unwrap_or("long");
     let (value, term_name) = match var {
         "locator" => {
             if ctx.mode != Mode::Citation {
                 return r;
             }
-            let Some(loc) = ctx.item.locator.clone().filter(|l| !l.is_empty()) else { return r };
+            let Some(loc) = ctx.item.locator.clone().filter(|l| !l.is_empty()) else {
+                return r;
+            };
             (loc, ctx.item.label.clone().unwrap_or_else(|| "page".into()))
         }
-        "citation-number" => (ctx.citation_number.map(|n| n.to_string()).unwrap_or_default(), "citation-number".to_string()),
-        _ => (ctx.reference.text(var).map(str::to_string).unwrap_or_default(), var.to_string()),
+        "citation-number" => (
+            ctx.citation_number
+                .map(|n| n.to_string())
+                .unwrap_or_default(),
+            "citation-number".to_string(),
+        ),
+        _ => (
+            ctx.reference
+                .text(var)
+                .map(str::to_string)
+                .unwrap_or_default(),
+            var.to_string(),
+        ),
     };
     if value.is_empty() {
         return r;
@@ -662,10 +758,13 @@ fn eval_label(e: &XElem, ctx: &mut Ctx) -> R {
 /// like) a number other than one.
 fn label_is_plural(var: &str, value: &str) -> bool {
     match var {
-        "number-of-pages" | "number-of-volumes" => value.trim().parse::<u64>().map(|n| n != 1).unwrap_or(false),
+        "number-of-pages" | "number-of-volumes" => {
+            value.trim().parse::<u64>().map(|n| n != 1).unwrap_or(false)
+        }
         _ => {
             let numberish = value.chars().any(|c| c.is_alphanumeric());
-            numberish && value.contains(|c: char| c == '-' || c == '\u{2013}' || c == ',' || c == '&')
+            numberish
+                && value.contains(|c: char| c == '-' || c == '\u{2013}' || c == ',' || c == '&')
         }
     }
 }
@@ -718,7 +817,8 @@ fn eval_group(e: &XElem, ctx: &mut Ctx) -> R {
 }
 
 fn cond_values(attr: Option<&str>) -> Vec<&str> {
-    attr.map(|a| a.split_whitespace().collect()).unwrap_or_default()
+    attr.map(|a| a.split_whitespace().collect())
+        .unwrap_or_default()
 }
 
 fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
@@ -737,11 +837,15 @@ fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
     let mut has = false;
     if let Some(t) = c.attr("type") {
         has = true;
-        results.push(combine(any_of(cond_values(Some(t)), &|v| ctx.reference.kind == v)));
+        results.push(combine(any_of(cond_values(Some(t)), &|v| {
+            ctx.reference.kind == v
+        })));
     }
     if let Some(t) = c.attr("variable") {
         has = true;
-        results.push(combine(any_of(cond_values(Some(t)), &|v| variable_present(v, ctx))));
+        results.push(combine(any_of(cond_values(Some(t)), &|v| {
+            variable_present(v, ctx)
+        })));
     }
     if let Some(t) = c.attr("is-numeric") {
         has = true;
@@ -751,7 +855,9 @@ fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
     }
     if let Some(t) = c.attr("is-uncertain-date") {
         has = true;
-        results.push(combine(any_of(cond_values(Some(t)), &|v| ctx.reference.date(v).is_some_and(|d| d.circa))));
+        results.push(combine(any_of(cond_values(Some(t)), &|v| {
+            ctx.reference.date(v).is_some_and(|d| d.circa)
+        })));
     }
     if let Some(t) = c.attr("locator") {
         has = true;
@@ -764,7 +870,10 @@ fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
         results.push(combine(any_of(cond_values(Some(t)), &|v| match v {
             "first" => ctx.item.position == Position::First,
             "subsequent" => ctx.item.position != Position::First,
-            "ibid" => matches!(ctx.item.position, Position::Ibid | Position::IbidWithLocator),
+            "ibid" => matches!(
+                ctx.item.position,
+                Position::Ibid | Position::IbidWithLocator
+            ),
             "ibid-with-locator" => ctx.item.position == Position::IbidWithLocator,
             _ => false,
         })));
@@ -772,7 +881,10 @@ fn test_element(c: &XElem, ctx: &Ctx) -> Option<bool> {
     if let Some(t) = c.attr("disambiguate") {
         has = true;
         let want = t == "true";
-        results.push(combine((ctx.disambiguate == want, ctx.disambiguate == want)));
+        results.push(combine((
+            ctx.disambiguate == want,
+            ctx.disambiguate == want,
+        )));
     }
     if c.attr("object-type").is_some() {
         has = true;
@@ -805,7 +917,9 @@ fn variable_present(v: &str, ctx: &Ctx) -> bool {
         return false;
     }
     match v {
-        "locator" => ctx.mode == Mode::Citation && ctx.item.locator.as_deref().is_some_and(|l| !l.is_empty()),
+        "locator" => {
+            ctx.mode == Mode::Citation && ctx.item.locator.as_deref().is_some_and(|l| !l.is_empty())
+        }
         "citation-number" => ctx.citation_number.is_some(),
         "year-suffix" => ctx.year_suffix.is_some(),
         _ => match ctx.reference.fields.get(v) {
@@ -835,8 +949,9 @@ fn eval_choose(e: &XElem, ctx: &mut Ctx) -> R {
 // ---- text case --------------------------------------------------------------------------------
 
 const STOP_WORDS: &[&str] = &[
-    "a", "an", "and", "as", "at", "but", "by", "down", "for", "from", "in", "into", "nor", "of", "on", "onto", "or",
-    "over", "so", "the", "till", "to", "up", "via", "with", "yet", "von", "van", "de",
+    "a", "an", "and", "as", "at", "but", "by", "down", "for", "from", "in", "into", "nor", "of",
+    "on", "onto", "or", "over", "so", "the", "till", "to", "up", "via", "with", "yet", "von",
+    "van", "de",
 ];
 
 fn capitalize_word(w: &str) -> String {
@@ -879,7 +994,9 @@ pub(crate) fn apply_case(toks: &mut Toks, case: &str) {
                     let lw = w.to_lowercase();
                     let stop = STOP_WORDS.contains(&lw.as_str());
                     let leading_first = first && idx == 0;
-                    let r = if w.chars().skip(1).any(|c| c.is_uppercase()) || w.chars().any(|c| c.is_ascii_digit()) {
+                    let r = if w.chars().skip(1).any(|c| c.is_uppercase())
+                        || w.chars().any(|c| c.is_ascii_digit())
+                    {
                         w.to_string()
                     } else if leading_first || !stop {
                         capitalize_word(w)
@@ -933,17 +1050,27 @@ fn split_words(s: &str, mut f: impl FnMut(&str, usize) -> String) -> String {
 // ---- dates ------------------------------------------------------------------------------------
 
 fn month_term(style: &Style, m: i32, form: &str) -> String {
-    style.term(&format!("month-{m:02}"), if form == "short" { "short" } else { "long" }, false).unwrap_or_default()
+    style
+        .term(
+            &format!("month-{m:02}"),
+            if form == "short" { "short" } else { "long" },
+            false,
+        )
+        .unwrap_or_default()
 }
 
 fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
     let mut r = R::default();
-    let Some(var) = e.attr("variable") else { return r };
+    let Some(var) = e.attr("variable") else {
+        return r;
+    };
     r.called = 1;
     if ctx.suppressed.contains(var) {
         return r;
     }
-    let Some(d) = ctx.reference.date(var).cloned() else { return r };
+    let Some(d) = ctx.reference.date(var).cloned() else {
+        return r;
+    };
     r.found = 1;
     if !d.literal.is_empty() && d.parts.is_empty() {
         r.toks = text(d.literal.clone());
@@ -955,7 +1082,11 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
         Some(f) => {
             let base = ctx.style.date_formats.get(f).cloned();
             let mut tpl: Vec<XElem> = match &base {
-                Some(b) => b.elems().filter(|x| x.name == "date-part").cloned().collect(),
+                Some(b) => b
+                    .elems()
+                    .filter(|x| x.name == "date-part")
+                    .cloned()
+                    .collect(),
                 None => builtin_date_parts(f),
             };
             // `<date-part>` children of the calling element override the locale's.
@@ -970,12 +1101,24 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                     }
                 }
             }
-            (e.attr("date-parts").unwrap_or("year-month-day").to_string(), tpl)
+            (
+                e.attr("date-parts").unwrap_or("year-month-day").to_string(),
+                tpl,
+            )
         }
-        None => ("year-month-day".to_string(), e.elems().filter(|x| x.name == "date-part").cloned().collect()),
+        None => (
+            "year-month-day".to_string(),
+            e.elems()
+                .filter(|x| x.name == "date-part")
+                .cloned()
+                .collect(),
+        ),
     };
     let allowed: Vec<&str> = parts_attr.split('-').collect();
-    let templates: Vec<XElem> = templates.into_iter().filter(|t| t.attr("name").is_some_and(|n| allowed.contains(&n))).collect();
+    let templates: Vec<XElem> = templates
+        .into_iter()
+        .filter(|t| t.attr("name").is_some_and(|n| allowed.contains(&n)))
+        .collect();
     let delim = e.attr("delimiter").unwrap_or("");
     let one = |p: &[i32; 3], season: Option<i32>, skip_year: bool, ctx: &Ctx| -> Toks {
         let mut out: Toks = Vec::new();
@@ -990,12 +1133,24 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                         y = format!("{:02}", p[0].abs() % 100);
                     }
                     if p[0] < 0 {
-                        y.push_str(ctx.style.term("bc", "long", false).unwrap_or_default().as_str());
+                        y.push_str(
+                            ctx.style
+                                .term("bc", "long", false)
+                                .unwrap_or_default()
+                                .as_str(),
+                        );
                     } else if p[0] < 1000 && t.attr("form") != Some("short") {
-                        y.push_str(ctx.style.term("ad", "long", false).unwrap_or_default().as_str());
+                        y.push_str(
+                            ctx.style
+                                .term("ad", "long", false)
+                                .unwrap_or_default()
+                                .as_str(),
+                        );
                     }
                     let mut v = text(y);
-                    if let Some(suf) = ctx.year_suffix.as_ref().filter(|_| e.attr("variable") == Some("issued") && !ctx.style.calls_year_suffix()) {
+                    if let Some(suf) = ctx.year_suffix.as_ref().filter(|_| {
+                        e.attr("variable") == Some("issued") && !ctx.style.calls_year_suffix()
+                    }) {
                         v.push(Tok::Text(suf.clone()));
                     }
                     piece = Some(v);
@@ -1007,11 +1162,18 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                         "numeric-leading-zero" => format!("{:02}", p[1]),
                         _ => month_term(ctx.style, p[1], f),
                     };
-                    let s = if t.attr("strip-periods") == Some("true") { s.replace('.', "") } else { s };
+                    let s = if t.attr("strip-periods") == Some("true") {
+                        s.replace('.', "")
+                    } else {
+                        s
+                    };
                     piece = Some(text(s));
                 }
                 "month" if p[1] == 0 && season.is_some() => {
-                    let s = ctx.style.term(&format!("season-{:02}", season.unwrap_or(1)), "long", false).unwrap_or_default();
+                    let s = ctx
+                        .style
+                        .term(&format!("season-{:02}", season.unwrap_or(1)), "long", false)
+                        .unwrap_or_default();
                     piece = Some(text(s));
                 }
                 "day" if p[2] != 0 => {
@@ -1025,7 +1187,12 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
                 _ => {}
             }
             let Some(mut toks) = piece else { continue };
-            let mut tmp = R { toks: std::mem::take(&mut toks), called: 0, found: 0, hidden: false };
+            let mut tmp = R {
+                toks: std::mem::take(&mut toks),
+                called: 0,
+                found: 0,
+                hidden: false,
+            };
             decorate(t, &mut tmp, ctx);
             if !first && !delim.is_empty() {
                 out.push(Tok::Text(delim.to_string()));
@@ -1037,7 +1204,10 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
     };
     if d.parts.len() >= 2 {
         let (a, b) = (&d.parts[0], &d.parts[1]);
-        let skip_first_year = a[0] == b[0] && a[0] != 0 && templates.iter().any(|t| t.attr("name") == Some("year")) && b[1] != 0;
+        let skip_first_year = a[0] == b[0]
+            && a[0] != 0
+            && templates.iter().any(|t| t.attr("name") == Some("year"))
+            && b[1] != 0;
         let mut toks = one(a, d.season, skip_first_year, ctx);
         toks.push(Tok::Text("\u{2013}".into()));
         toks.extend(one(b, None, false, ctx));
@@ -1055,13 +1225,23 @@ fn eval_date(e: &XElem, ctx: &mut Ctx) -> R {
 fn builtin_date_parts(form: &str) -> Vec<XElem> {
     let mk = |name: &str, attrs: &[(&str, &str)]| XElem {
         name: "date-part".into(),
-        attrs: std::iter::once(("name".to_string(), name.to_string())).chain(attrs.iter().map(|(k, v)| (k.to_string(), v.to_string()))).collect(),
+        attrs: std::iter::once(("name".to_string(), name.to_string()))
+            .chain(attrs.iter().map(|(k, v)| (k.to_string(), v.to_string())))
+            .collect(),
         children: vec![],
     };
     if form == "numeric" {
-        vec![mk("month", &[("form", "numeric"), ("suffix", "/")]), mk("day", &[("form", "numeric"), ("suffix", "/")]), mk("year", &[])]
+        vec![
+            mk("month", &[("form", "numeric"), ("suffix", "/")]),
+            mk("day", &[("form", "numeric"), ("suffix", "/")]),
+            mk("year", &[]),
+        ]
     } else {
-        vec![mk("month", &[("suffix", " ")]), mk("day", &[("suffix", ", ")]), mk("year", &[])]
+        vec![
+            mk("month", &[("suffix", " ")]),
+            mk("day", &[("suffix", ", ")]),
+            mk("year", &[]),
+        ]
     }
 }
 
@@ -1091,7 +1271,11 @@ struct NameOpts {
 }
 
 fn name_opts(names_el: &XElem, name_el: Option<&XElem>, ctx: &Ctx) -> NameOpts {
-    let scope = if ctx.mode == Mode::Citation { ctx.style.citation() } else { ctx.style.bibliography() };
+    let scope = if ctx.mode == Mode::Citation {
+        ctx.style.citation()
+    } else {
+        ctx.style.bibliography()
+    };
     let mut chain: Vec<&XElem> = Vec::new();
     if let Some(n) = name_el {
         chain.push(n);
@@ -1107,32 +1291,63 @@ fn name_opts(names_el: &XElem, name_el: Option<&XElem>, ctx: &Ctx) -> NameOpts {
         }
         ctx.style.inherited(a, &chain).map(str::to_string)
     };
-    let min = get("et-al-min").and_then(|v| v.parse().ok()).unwrap_or(usize::MAX);
-    let use_first = get("et-al-use-first").and_then(|v| v.parse().ok()).unwrap_or(1);
+    let min = get("et-al-min")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(usize::MAX);
+    let use_first = get("et-al-use-first")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(1);
     let use_first = ctx.names_use_first_override.unwrap_or(use_first);
     let (min, use_first) = match ctx.item.position != Position::First {
         true => (
-            get("et-al-subsequent-min").and_then(|v| v.parse().ok()).unwrap_or(min),
-            ctx.names_use_first_override.or_else(|| get("et-al-subsequent-use-first").and_then(|v| v.parse().ok())).unwrap_or(use_first),
+            get("et-al-subsequent-min")
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(min),
+            ctx.names_use_first_override
+                .or_else(|| get("et-al-subsequent-use-first").and_then(|v| v.parse().ok()))
+                .unwrap_or(use_first),
         ),
         false => (min, use_first),
     };
     // A sort key is the names in order, with no connecting words.
-    let and = if ctx.sorting || bare { None } else { name_el.and_then(|n| n.attr("and")).or_else(|| ctx.style.inherited("and", &chain)).map(str::to_string) };
+    let and = if ctx.sorting || bare {
+        None
+    } else {
+        name_el
+            .and_then(|n| n.attr("and"))
+            .or_else(|| ctx.style.inherited("and", &chain))
+            .map(str::to_string)
+    };
     NameOpts {
         and,
-        delimiter: name_el.and_then(|n| n.attr("delimiter")).map(str::to_string).or_else(|| get("name-delimiter")).unwrap_or_else(|| ", ".into()),
-        delimiter_precedes_last: get("delimiter-precedes-last").unwrap_or_else(|| "contextual".into()),
-        delimiter_precedes_et_al: get("delimiter-precedes-et-al").unwrap_or_else(|| "contextual".into()),
+        delimiter: name_el
+            .and_then(|n| n.attr("delimiter"))
+            .map(str::to_string)
+            .or_else(|| get("name-delimiter"))
+            .unwrap_or_else(|| ", ".into()),
+        delimiter_precedes_last: get("delimiter-precedes-last")
+            .unwrap_or_else(|| "contextual".into()),
+        delimiter_precedes_et_al: get("delimiter-precedes-et-al")
+            .unwrap_or_else(|| "contextual".into()),
         et_al_min: min,
         et_al_use_first: use_first,
         et_al_use_last: get("et-al-use-last").as_deref() == Some("true"),
-        form: get("name-form").or_else(|| name_el.and_then(|n| n.attr("form")).map(str::to_string)).unwrap_or_else(|| "long".into()),
+        form: get("name-form")
+            .or_else(|| name_el.and_then(|n| n.attr("form")).map(str::to_string))
+            .unwrap_or_else(|| "long".into()),
         initialize: get("initialize").as_deref() != Some("false"),
         initialize_with: get("initialize-with"),
-        inverted: if ctx.sorting { "all".to_string() } else { get("name-as-sort-order").unwrap_or_default() },
+        inverted: if ctx.sorting {
+            "all".to_string()
+        } else {
+            get("name-as-sort-order").unwrap_or_default()
+        },
         sort_separator: get("sort-separator").unwrap_or_else(|| ", ".into()),
-        demote: ctx.style.inherited("demote-non-dropping-particle", &[]).map(|v| v != "never" && v != "sort-only").unwrap_or(true),
+        demote: ctx
+            .style
+            .inherited("demote-non-dropping-particle", &[])
+            .map(|v| v != "never" && v != "sort-only")
+            .unwrap_or(true),
     }
 }
 
@@ -1155,7 +1370,11 @@ fn initials(given: &str, with: &str, init: bool) -> String {
                 // A particle ("de", "van") stays a word.
                 out.push_str(p);
             } else if p.ends_with('.') && letters > 1 {
-                out.push_str(if trimmed_with.is_empty() && between.is_empty() { p.trim_end_matches('.') } else { p });
+                out.push_str(if trimmed_with.is_empty() && between.is_empty() {
+                    p.trim_end_matches('.')
+                } else {
+                    p
+                });
             } else if let Some(f) = p.chars().next() {
                 out.push(f);
                 out.push_str(trimmed_with);
@@ -1175,7 +1394,11 @@ fn name_display(n: &Name, invert: bool, init_with: &str, initialize: bool) -> St
     if !n.literal.is_empty() {
         return n.literal.clone();
     }
-    let given = if init_with.is_empty() && !initialize { n.given.clone() } else { initials(&n.given, init_with, initialize) };
+    let given = if init_with.is_empty() && !initialize {
+        n.given.clone()
+    } else {
+        initials(&n.given, init_with, initialize)
+    };
     let mut family = n.family.clone();
     if !n.non_dropping_particle.is_empty() {
         family = format!("{} {}", n.non_dropping_particle, family);
@@ -1191,7 +1414,11 @@ fn name_display(n: &Name, invert: bool, init_with: &str, initialize: bool) -> St
         let mut s = family;
         let mut tail = given;
         if !n.dropping_particle.is_empty() {
-            tail = if tail.is_empty() { n.dropping_particle.clone() } else { format!("{} {}", tail, n.dropping_particle) };
+            tail = if tail.is_empty() {
+                n.dropping_particle.clone()
+            } else {
+                format!("{} {}", tail, n.dropping_particle)
+            };
         }
         if !tail.is_empty() {
             s.push_str(", ");
@@ -1214,7 +1441,12 @@ fn name_display(n: &Name, invert: bool, init_with: &str, initialize: bool) -> St
 
 fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
     let mut out = R::default();
-    let vars: Vec<String> = e.attr("variable").unwrap_or("").split_whitespace().map(str::to_string).collect();
+    let vars: Vec<String> = e
+        .attr("variable")
+        .unwrap_or("")
+        .split_whitespace()
+        .map(str::to_string)
+        .collect();
     out.called = vars.len().max(1);
     // author-only / suppress-author apply to the first `names` element that prints the author.
     let is_author_names = vars.iter().any(|v| v == "author");
@@ -1230,7 +1462,10 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
         if list.is_empty() {
             continue;
         }
-        rendered.push((v.clone(), render_name_list(&list, &opts, name_el, et_al_el, ctx)));
+        rendered.push((
+            v.clone(),
+            render_name_list(&list, &opts, name_el, et_al_el, ctx),
+        ));
     }
     // `editor` and `translator` with the same people print once, labelled with both roles.
     let mut result_toks: Toks = Toks::new();
@@ -1250,10 +1485,16 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
                 _ => count > 1,
             };
             if let Some(t) = ctx.style.term(v, form, plural) {
-                let mut lr = R { toks: text(t), called: 0, found: 0, hidden: false };
+                let mut lr = R {
+                    toks: text(t),
+                    called: 0,
+                    found: 0,
+                    hidden: false,
+                };
                 decorate(l, &mut lr, ctx);
                 // Labels follow the names unless the `label` element comes first.
-                let label_first = e.elems().position(|c| c.name == "label") < e.elems().position(|c| c.name == "name");
+                let label_first = e.elems().position(|c| c.name == "label")
+                    < e.elems().position(|c| c.name == "name");
                 if label_first {
                     let mut t2 = lr.toks;
                     t2.append(&mut result_toks);
@@ -1323,7 +1564,13 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
                 if c.name == "text" && c.attr("macro").is_some() {
                     // A macro that printed names (title/editor): its variables are marked by
                     // looking at which name variables it could have printed.
-                    for v in ["editor", "translator", "director", "container-author", "composer"] {
+                    for v in [
+                        "editor",
+                        "translator",
+                        "director",
+                        "container-author",
+                        "composer",
+                    ] {
                         if before.contains(v) {
                             continue;
                         }
@@ -1356,7 +1603,13 @@ fn eval_names(e: &XElem, ctx: &mut Ctx) -> R {
     out
 }
 
-fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_el: Option<&XElem>, ctx: &Ctx) -> Toks {
+fn render_name_list(
+    list: &[Name],
+    o: &NameOpts,
+    name_el: Option<&XElem>,
+    et_al_el: Option<&XElem>,
+    ctx: &Ctx,
+) -> Toks {
     let total = list.len();
     let (shown, et_al) = if total >= o.et_al_min && o.et_al_use_first < total {
         (o.et_al_use_first.max(1), true)
@@ -1381,7 +1634,11 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
             "first" => i == 0,
             _ => false,
         } && n.literal.is_empty();
-        let toks = if n.literal.is_empty() { name_toks(n, invert, o, &init_with, initialize, name_el, ctx) } else { text(n.literal.clone()) };
+        let toks = if n.literal.is_empty() {
+            name_toks(n, invert, o, &init_with, initialize, name_el, ctx)
+        } else {
+            text(n.literal.clone())
+        };
         parts.push((toks, invert));
     }
     let mut out = Toks::new();
@@ -1400,8 +1657,14 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
                     _ => n >= 3,
                 };
                 let and = match o.and.as_deref() {
-                    Some("symbol") => ctx.style.term("and", "symbol", false).unwrap_or_else(|| "&".into()),
-                    _ => ctx.style.term("and", "long", false).unwrap_or_else(|| "and".into()),
+                    Some("symbol") => ctx
+                        .style
+                        .term("and", "symbol", false)
+                        .unwrap_or_else(|| "&".into()),
+                    _ => ctx
+                        .style
+                        .term("and", "long", false)
+                        .unwrap_or_else(|| "and".into()),
                 };
                 if precede {
                     out.push(Tok::Text(o.delimiter.clone()));
@@ -1417,15 +1680,27 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
     }
     if et_al && !use_last && !ctx.sorting {
         let term = et_al_el.and_then(|e| e.attr("term")).unwrap_or("et-al");
-        let t = ctx.style.term(term, "long", false).unwrap_or_else(|| "et al.".into());
+        let t = ctx
+            .style
+            .term(term, "long", false)
+            .unwrap_or_else(|| "et al.".into());
         let precede = match o.delimiter_precedes_et_al.as_str() {
             "always" => true,
             "never" => false,
             "after-inverted-name" => parts.last().is_some_and(|p| p.1),
             _ => n >= 2,
         };
-        out.push(Tok::Text(if precede { o.delimiter.clone() } else { " ".into() }));
-        let mut r = R { toks: text(t), called: 0, found: 0, hidden: false };
+        out.push(Tok::Text(if precede {
+            o.delimiter.clone()
+        } else {
+            " ".into()
+        }));
+        let mut r = R {
+            toks: text(t),
+            called: 0,
+            found: 0,
+            hidden: false,
+        };
         if let Some(el) = et_al_el {
             decorate(el, &mut r, ctx);
         }
@@ -1435,15 +1710,45 @@ fn render_name_list(list: &[Name], o: &NameOpts, name_el: Option<&XElem>, et_al_
 }
 
 /// One name, honouring `<name-part>` formatting.
-fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: bool, name_el: Option<&XElem>, ctx: &Ctx) -> Toks {
+fn name_toks(
+    n: &Name,
+    invert: bool,
+    o: &NameOpts,
+    init_with: &str,
+    initialize: bool,
+    name_el: Option<&XElem>,
+    ctx: &Ctx,
+) -> Toks {
     let _ = o.sort_separator.as_str();
     let short = o.form == "short";
-    let parts_el: Vec<&XElem> = name_el.map(|n| n.elems().filter(|e| e.name == "name-part").collect()).unwrap_or_default();
-    let part_el = |name: &str| parts_el.iter().find(|e| e.attr("name") == Some(name)).copied();
+    let parts_el: Vec<&XElem> = name_el
+        .map(|n| n.elems().filter(|e| e.name == "name-part").collect())
+        .unwrap_or_default();
+    let part_el = |name: &str| {
+        parts_el
+            .iter()
+            .find(|e| e.attr("name") == Some(name))
+            .copied()
+    };
     // Plain composition first.
-    let given = if init_with.is_empty() && !initialize { n.given.clone() } else { initials(&n.given, init_with, initialize) };
+    let given = if init_with.is_empty() && !initialize {
+        n.given.clone()
+    } else {
+        initials(&n.given, init_with, initialize)
+    };
     let mut family_tok = {
-        let mut r = R { toks: text(if n.non_dropping_particle.is_empty() { n.family.clone() } else if o.demote && invert { n.family.clone() } else { format!("{} {}", n.non_dropping_particle, n.family) }), called: 0, found: 0, hidden: false };
+        let mut r = R {
+            toks: text(if n.non_dropping_particle.is_empty() {
+                n.family.clone()
+            } else if o.demote && invert {
+                n.family.clone()
+            } else {
+                format!("{} {}", n.non_dropping_particle, n.family)
+            }),
+            called: 0,
+            found: 0,
+            hidden: false,
+        };
         if let Some(el) = part_el("family") {
             decorate(el, &mut r, ctx);
         }
@@ -1453,7 +1758,12 @@ fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: 
         return family_tok;
     }
     let given_tok = {
-        let mut r = R { toks: text(given.clone()), called: 0, found: 0, hidden: false };
+        let mut r = R {
+            toks: text(given.clone()),
+            called: 0,
+            found: 0,
+            hidden: false,
+        };
         if let Some(el) = part_el("given") {
             decorate(el, &mut r, ctx);
         }
@@ -1466,7 +1776,11 @@ fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: 
         particle_after = n.dropping_particle.clone();
     }
     if o.demote && invert && !n.non_dropping_particle.is_empty() {
-        particle_after = if particle_after.is_empty() { n.non_dropping_particle.clone() } else { format!("{} {}", particle_after, n.non_dropping_particle) };
+        particle_after = if particle_after.is_empty() {
+            n.non_dropping_particle.clone()
+        } else {
+            format!("{} {}", particle_after, n.non_dropping_particle)
+        };
     }
     let suffix = if n.suffix.is_empty() {
         String::new()
@@ -1481,7 +1795,11 @@ fn name_toks(n: &Name, invert: bool, o: &NameOpts, init_with: &str, initialize: 
             out.push(Tok::Text(sep));
             out.extend(given_tok.clone());
             if !particle_after.is_empty() {
-                out.push(Tok::Text(format!("{}{}", if given.is_empty() { "" } else { " " }, particle_after)));
+                out.push(Tok::Text(format!(
+                    "{}{}",
+                    if given.is_empty() { "" } else { " " },
+                    particle_after
+                )));
             }
         }
         out.push(Tok::Text(suffix));
