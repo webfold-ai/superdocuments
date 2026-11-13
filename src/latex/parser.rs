@@ -563,7 +563,11 @@ impl Parser<'_> {
                 let label = self.top().group_raw().unwrap_or_default();
                 self.record_label(&label);
                 // `\section{T}\label{x}`: the label belongs to the heading just read.
-                if st.para.iter().all(|i| matches!(i, Inline::Text(t) if t.trim().is_empty())) {
+                if st
+                    .para
+                    .iter()
+                    .all(|i| matches!(i, Inline::Text(t) if t.trim().is_empty()))
+                {
                     if let Some(Block::Section(sec)) = st.blocks.last_mut() {
                         if sec.label.is_none() {
                             sec.label = Some(label.trim().to_string());
@@ -635,8 +639,8 @@ impl Parser<'_> {
                 None
             }
             "underline" | "textrm" | "textsf" | "textup" | "textnormal" | "mbox" | "text"
-            | "hbox" | "mathrm" | "mathbf" | "mathit"
-            | "mathsf" | "mathtt" | "mathcal" | "boldsymbol" | "fbox" => {
+            | "hbox" | "mathrm" | "mathbf" | "mathit" | "mathsf" | "mathtt" | "mathcal"
+            | "boldsymbol" | "fbox" => {
                 let inl = self.arg_inlines();
                 st.para.extend(inl);
                 None

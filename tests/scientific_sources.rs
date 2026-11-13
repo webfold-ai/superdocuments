@@ -64,7 +64,10 @@ Inline $a^2$ and a reference to Section~\ref{sec:one}.
 \end{document}";
     for ext in ["tex", "TEX", "latex", "ltx"] {
         let md = convert_bytes(ext, source).unwrap_or_else(|e| panic!("{ext}: {e}"));
-        assert!(md.starts_with("---\ntitle: \"Routing\"\n---\n"), "{ext}: {md}");
+        assert!(
+            md.starts_with("---\ntitle: \"Routing\"\n---\n"),
+            "{ext}: {md}"
+        );
         assert!(md.contains("# One {#sec:one}"), "{ext}: {md}");
         assert!(md.contains("Inline $a^2$"), "{ext}: {md}");
         assert!(
@@ -272,7 +275,8 @@ fn convert_path_reads_the_project_next_to_the_tex_file() {
     assert!(md.contains("A detail from a nested file"), "{md}");
     // A reference from one input file to a label in another.
     assert!(
-        md.replace('\u{a0}', " ").contains("Section [1](#sec:intro) motivates"),
+        md.replace('\u{a0}', " ")
+            .contains("Section [1](#sec:intro) motivates"),
         "{md}"
     );
     // \bibliography{refs}: citations use refs.bib, and only the cited entries are listed.

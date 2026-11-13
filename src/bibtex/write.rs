@@ -49,13 +49,42 @@ pub fn csl_json(bib: &Bibliography) -> Value {
 /// Whether the file uses BibLaTeX-only fields or entry types (`location`, `journaltitle`, `date`,
 /// `eventtitle`, `@online`, `@report`, ...), so that a reader should take it as BibLaTeX.
 pub fn looks_like_biblatex(bib: &Bibliography) -> bool {
-    const FIELDS: &[&str] = &["location", "journaltitle", "date", "eventtitle", "shortjournal", "origdate", "urldate", "eprint", "pagetotal", "booksubtitle"];
-    const TYPES: &[&str] = &["online", "report", "thesis", "software", "dataset", "suppbook", "collection", "mvbook", "inreference", "reference"];
-    bib.entries.iter().any(|e| TYPES.contains(&e.entry_type.as_str()) || FIELDS.iter().any(|f| e.field(f).is_some()))
+    const FIELDS: &[&str] = &[
+        "location",
+        "journaltitle",
+        "date",
+        "eventtitle",
+        "shortjournal",
+        "origdate",
+        "urldate",
+        "eprint",
+        "pagetotal",
+        "booksubtitle",
+    ];
+    const TYPES: &[&str] = &[
+        "online",
+        "report",
+        "thesis",
+        "software",
+        "dataset",
+        "suppbook",
+        "collection",
+        "mvbook",
+        "inreference",
+        "reference",
+    ];
+    bib.entries.iter().any(|e| {
+        TYPES.contains(&e.entry_type.as_str()) || FIELDS.iter().any(|f| e.field(f).is_some())
+    })
 }
 
 pub fn csl_json_pandoc(bib: &Bibliography, biblatex: bool) -> Value {
-    Value::Array(bib.entries.iter().map(|e| csl_entry_with(bib, e, if biblatex { 2 } else { 1 })).collect())
+    Value::Array(
+        bib.entries
+            .iter()
+            .map(|e| csl_entry_with(bib, e, if biblatex { 2 } else { 1 }))
+            .collect(),
+    )
 }
 
 fn csl_entry(bib: &Bibliography, entry: &Entry) -> Value {
@@ -66,11 +95,17 @@ fn csl_entry(bib: &Bibliography, entry: &Entry) -> Value {
 /// in lower case except all-capital words, words with capitals inside and braced words, and the
 /// word after `:`, `?`, `!` or `.` keeps its case.
 fn sentence_case(title: &str) -> String {
-    const SMALL: &[&str] = &["a", "an", "and", "as", "at", "but", "by", "for", "from", "in", "into", "nor", "of", "on", "or", "the", "to", "with", "via", "von", "van", "de"];
+    const SMALL: &[&str] = &[
+        "a", "an", "and", "as", "at", "but", "by", "for", "from", "in", "into", "nor", "of", "on",
+        "or", "the", "to", "with", "via", "von", "van", "de",
+    ];
     let words: Vec<&str> = title.split(' ').collect();
     let is_title = words.iter().filter(|w| !w.is_empty()).all(|w| {
         let bare = w.trim_matches(|c: char| !c.is_alphanumeric());
-        bare.is_empty() || bare.starts_with(|c: char| c.is_uppercase() || !c.is_alphabetic()) || SMALL.contains(&bare.to_lowercase().as_str()) || w.contains('{')
+        bare.is_empty()
+            || bare.starts_with(|c: char| c.is_uppercase() || !c.is_alphabetic())
+            || SMALL.contains(&bare.to_lowercase().as_str())
+            || w.contains('{')
     });
     if !is_title || words.iter().filter(|w| !w.is_empty()).count() < 2 {
         return title.to_string();
@@ -91,7 +126,11 @@ fn sentence_case(title: &str) -> String {
         let all_caps = letters.len() > 1 && letters.iter().all(|c| c.is_uppercase());
         let inner_caps = letters.iter().skip(1).any(|c| c.is_uppercase());
         let keep = boundary || protected || all_caps || inner_caps;
-        out.push(if keep { w.to_string() } else { w.to_lowercase() });
+        out.push(if keep {
+            w.to_string()
+        } else {
+            w.to_lowercase()
+        });
         boundary = w.ends_with([':', '?', '!', '.']) && !w.is_empty();
     }
     out.join(" ")
@@ -120,7 +159,14 @@ fn csl_entry_with(bib: &Bibliography, entry: &Entry, mode: u8) -> Value {
     let mut out = Map::new();
     out.insert("id".into(), json!(entry.key));
     let (pandoc_type, genre) = csl_type_pandoc(&entry.entry_type);
-    out.insert("type".into(), json!(if pandoc { pandoc_type } else { csl_type(&entry.entry_type) }));
+    out.insert(
+        "type".into(),
+        json!(if pandoc {
+            pandoc_type
+        } else {
+            csl_type(&entry.entry_type)
+        }),
+    );
     let text = |name: &str| bib.resolved_value(entry, name);
     if pandoc {
         if let Some(g) = genre {
@@ -128,7 +174,10 @@ fn csl_entry_with(bib: &Bibliography, entry: &Entry, mode: u8) -> Value {
         }
     }
     if let Some(t) = text("title") {
-        out.insert("title".into(), json!(if pandoc { smart(&sentence_case(&t)) } else { t }));
+        out.insert(
+            "title".into(),
+            json!(if pandoc { smart(&sentence_case(&t)) } else { t }),
+        );
     }
     for (bib_field, csl_field) in [("author", "author"), ("editor", "editor")] {
         let names = resolved_names(bib, entry, bib_field);
@@ -152,25 +201,41 @@ fn csl_entry_with(bib: &Bibliography, entry: &Entry, mode: u8) -> Value {
         }
     }
     let container = match entry.entry_type.as_str() {
-        "inproceedings" | "conference" | "incollection" | "inbook" => {
-            bib.resolved_value(entry, "booktitle").map(|c| if pandoc { sentence_case(&c) } else { c })
-        }
-        _ => bib.resolved_value(entry, "journal").or_else(|| bib.resolved_value(entry, "journaltitle")),
+        "inproceedings" | "conference" | "incollection" | "inbook" => bib
+            .resolved_value(entry, "booktitle")
+            .map(|c| if pandoc { sentence_case(&c) } else { c }),
+        _ => bib
+            .resolved_value(entry, "journal")
+            .or_else(|| bib.resolved_value(entry, "journaltitle")),
     };
     if let Some(c) = container {
         out.insert("container-title".into(), json!(c));
     }
     if pandoc {
         // Where it was issued: the first of these that the entry has.
-        for f in ["publisher", "school", "institution", "organization", "howpublished"] {
+        for f in [
+            "publisher",
+            "school",
+            "institution",
+            "organization",
+            "howpublished",
+        ] {
             if let Some(v) = text(f).filter(|v| !v.trim().is_empty()) {
-                let v = v.trim().strip_prefix("\\url").map(|u| u.trim_start_matches('{').trim_end_matches('}').to_string()).unwrap_or(v);
+                let v = v
+                    .trim()
+                    .strip_prefix("\\url")
+                    .map(|u| u.trim_start_matches('{').trim_end_matches('}').to_string())
+                    .unwrap_or(v);
                 out.insert("publisher".into(), json!(v));
                 break;
             }
         }
         if let Some(n) = text("number").filter(|n| !n.trim().is_empty()) {
-            let key = if entry.entry_type == "article" { "issue" } else { "number" };
+            let key = if entry.entry_type == "article" {
+                "issue"
+            } else {
+                "number"
+            };
             out.insert(key.into(), json!(n));
         }
     }
@@ -191,7 +256,13 @@ fn csl_entry_with(bib: &Bibliography, entry: &Entry, mode: u8) -> Value {
         if pandoc && (csl == "issue" || csl == "publisher") {
             continue;
         }
-        if let Some(v) = text(bibtex).or_else(|| if bibtex == "address" && mode != 1 { text("location") } else { None }) {
+        if let Some(v) = text(bibtex).or_else(|| {
+            if bibtex == "address" && mode != 1 {
+                text("location")
+            } else {
+                None
+            }
+        }) {
             if !v.trim().is_empty() {
                 out.insert(csl.into(), json!(v));
             }
@@ -279,7 +350,11 @@ fn smart(s: &str) -> String {
     let c: Vec<char> = s.chars().collect();
     let mut out = String::new();
     for (i, ch) in c.iter().enumerate() {
-        if *ch == '\'' && i > 0 && c[i - 1].is_alphanumeric() && c.get(i + 1).is_some_and(|n| n.is_alphanumeric()) {
+        if *ch == '\''
+            && i > 0
+            && c[i - 1].is_alphanumeric()
+            && c.get(i + 1).is_some_and(|n| n.is_alphanumeric())
+        {
             out.push('\u{2019}');
         } else {
             out.push(*ch);
@@ -294,13 +369,35 @@ fn name_to_csl(name: &Name, pandoc: bool) -> Value {
     }
     let mut obj = Map::new();
     if !name.family.is_empty() {
-        obj.insert("family".into(), json!(if pandoc { smart(&name.family) } else { name.family.clone() }));
+        obj.insert(
+            "family".into(),
+            json!(if pandoc {
+                smart(&name.family)
+            } else {
+                name.family.clone()
+            }),
+        );
     }
     if !name.given.is_empty() {
-        obj.insert("given".into(), json!(if pandoc { smart(&name.given) } else { name.given.clone() }));
+        obj.insert(
+            "given".into(),
+            json!(if pandoc {
+                smart(&name.given)
+            } else {
+                name.given.clone()
+            }),
+        );
     }
     if !name.prefix.is_empty() {
-        obj.insert(if pandoc { "dropping-particle" } else { "non-dropping-particle" }.into(), json!(name.prefix));
+        obj.insert(
+            if pandoc {
+                "dropping-particle"
+            } else {
+                "non-dropping-particle"
+            }
+            .into(),
+            json!(name.prefix),
+        );
     }
     if !name.suffix.is_empty() {
         obj.insert("suffix".into(), json!(name.suffix));

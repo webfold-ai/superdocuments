@@ -50,12 +50,41 @@ pub struct Reference {
 }
 
 const NAME_VARS: &[&str] = &[
-    "author", "editor", "translator", "container-author", "collection-editor", "composer", "director",
-    "editorial-director", "illustrator", "interviewer", "original-author", "recipient", "reviewed-author",
-    "chair", "compiler", "contributor", "curator", "executive-producer", "guest", "host", "narrator",
-    "organizer", "performer", "producer", "script-writer", "series-creator",
+    "author",
+    "editor",
+    "translator",
+    "container-author",
+    "collection-editor",
+    "composer",
+    "director",
+    "editorial-director",
+    "illustrator",
+    "interviewer",
+    "original-author",
+    "recipient",
+    "reviewed-author",
+    "chair",
+    "compiler",
+    "contributor",
+    "curator",
+    "executive-producer",
+    "guest",
+    "host",
+    "narrator",
+    "organizer",
+    "performer",
+    "producer",
+    "script-writer",
+    "series-creator",
 ];
-const DATE_VARS: &[&str] = &["issued", "accessed", "event-date", "original-date", "submitted", "available-date"];
+const DATE_VARS: &[&str] = &[
+    "issued",
+    "accessed",
+    "event-date",
+    "original-date",
+    "submitted",
+    "available-date",
+];
 
 impl Reference {
     pub fn text(&self, var: &str) -> Option<&str> {
@@ -85,7 +114,15 @@ impl Reference {
             Value::Number(n) => n.to_string(),
             _ => return None,
         };
-        let mut r = Reference { id, kind: obj.get("type").and_then(Value::as_str).unwrap_or("document").to_string(), fields: HashMap::new() };
+        let mut r = Reference {
+            id,
+            kind: obj
+                .get("type")
+                .and_then(Value::as_str)
+                .unwrap_or("document")
+                .to_string(),
+            fields: HashMap::new(),
+        };
         for (k, val) in obj {
             if k == "id" || k == "type" {
                 continue;
@@ -122,7 +159,11 @@ fn smart(s: &str) -> String {
     let c: Vec<char> = s.chars().collect();
     let mut out = String::with_capacity(s.len());
     for (i, ch) in c.iter().enumerate() {
-        if *ch == '\'' && i > 0 && c[i - 1].is_alphanumeric() && c.get(i + 1).is_some_and(|n| n.is_alphanumeric()) {
+        if *ch == '\''
+            && i > 0
+            && c[i - 1].is_alphanumeric()
+            && c.get(i + 1).is_some_and(|n| n.is_alphanumeric())
+        {
             out.push('\u{2019}');
         } else {
             out.push(*ch);
@@ -144,7 +185,10 @@ fn name_from_json(v: &Value) -> Option<Name> {
         non_dropping_particle: s(o, "non-dropping-particle"),
         suffix: s(o, "suffix"),
         literal: s(o, "literal"),
-        comma_suffix: o.get("comma-suffix").and_then(Value::as_bool).unwrap_or(false),
+        comma_suffix: o
+            .get("comma-suffix")
+            .and_then(Value::as_bool)
+            .unwrap_or(false),
     })
 }
 
@@ -176,7 +220,9 @@ fn date_from_json(v: &Value) -> Option<DateValue> {
     if let Some(sn) = o.get("season") {
         d.season = Some(num(sn));
     }
-    d.circa = o.get("circa").is_some_and(|c| c.as_bool().unwrap_or(false) || c.as_str() == Some("true"));
+    d.circa = o
+        .get("circa")
+        .is_some_and(|c| c.as_bool().unwrap_or(false) || c.as_str() == Some("true"));
     Some(d)
 }
 

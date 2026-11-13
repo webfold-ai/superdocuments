@@ -24,7 +24,10 @@ pub fn to_doc(text: &str) -> Doc {
     let mut r = Reader::default();
     r.collect_definitions(&lines);
     let blocks = r.blocks(&lines, 0);
-    Doc { meta: Meta::default(), blocks }
+    Doc {
+        meta: Meta::default(),
+        blocks,
+    }
 }
 
 /// Reads reStructuredText bytes and writes Pandoc-flavoured Markdown.
@@ -58,7 +61,10 @@ fn is_blank(line: &str) -> bool {
 }
 
 fn normalize_name(s: &str) -> String {
-    s.split_whitespace().collect::<Vec<_>>().join(" ").to_lowercase()
+    s.split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .to_lowercase()
 }
 
 /// Pandoc's identifier for a heading: lower case, spaces to hyphens, only letters, digits and
@@ -76,12 +82,27 @@ fn identifier(s: &str) -> String {
         }
     }
     let out = out.trim_end_matches('-').to_string();
-    out.trim_start_matches(|c: char| !c.is_alphabetic()).to_string()
+    out.trim_start_matches(|c: char| !c.is_alphabetic())
+        .to_string()
 }
 
 fn dedent(lines: &[String]) -> Vec<String> {
-    let min = lines.iter().filter(|l| !is_blank(l)).map(|l| indent_of(l)).min().unwrap_or(0);
-    lines.iter().map(|l| if l.len() >= min { l[min..].to_string() } else { String::new() }).collect()
+    let min = lines
+        .iter()
+        .filter(|l| !is_blank(l))
+        .map(|l| indent_of(l))
+        .min()
+        .unwrap_or(0);
+    lines
+        .iter()
+        .map(|l| {
+            if l.len() >= min {
+                l[min..].to_string()
+            } else {
+                String::new()
+            }
+        })
+        .collect()
 }
 
 #[derive(Default)]
@@ -138,7 +159,9 @@ impl Reader {
                         let name = name.trim().trim_matches('`').replace("\\:", ":");
                         if url.is_empty() {
                             // An internal target: resolved to the id of what follows it.
-                            self.targets.entry(normalize_name(&name)).or_insert_with(|| format!("#{}", identifier(&name)));
+                            self.targets
+                                .entry(normalize_name(&name))
+                                .or_insert_with(|| format!("#{}", identifier(&name)));
                         } else {
                             self.targets.insert(normalize_name(&name), target_url(&url));
                         }
@@ -158,14 +181,21 @@ impl Reader {
                         } else if let Some(d) = after.strip_prefix("image::") {
                             let alt = body
                                 .iter()
-                                .find_map(|l| l.trim().strip_prefix(":alt:").map(|v| v.trim().to_string()))
+                                .find_map(|l| {
+                                    l.trim().strip_prefix(":alt:").map(|v| v.trim().to_string())
+                                })
                                 .unwrap_or_default();
                             self.subs.insert(
                                 name,
-                                vec![Inline::Image { url: d.trim().to_string(), alt: vec![Inline::Text(alt)], title: None }],
+                                vec![Inline::Image {
+                                    url: d.trim().to_string(),
+                                    alt: vec![Inline::Text(alt)],
+                                    title: None,
+                                }],
                             );
                         } else if let Some(d) = after.strip_prefix("unicode::") {
-                            self.subs.insert(name, vec![Inline::Text(unicode_directive(d))]);
+                            self.subs
+                                .insert(name, vec![Inline::Text(unicode_directive(d))]);
                         }
                     }
                 } else if first.starts_with('[') {
@@ -176,7 +206,8 @@ impl Reader {
                         match label.as_str() {
                             "#" | "*" => self.auto_notes.push(content),
                             _ => {
-                                self.notes.insert(label.trim_start_matches('#').to_string(), content);
+                                self.notes
+                                    .insert(label.trim_start_matches('#').to_string(), content);
                             }
                         }
                     }
@@ -185,10 +216,16 @@ impl Reader {
                 continue;
             }
             // Section title (underline only): remember its implicit target.
-            if i + 1 < lines.len() && !is_blank(line) && indent_of(line) == 0 && is_adornment(&lines[i + 1], line.trim().chars().count()) {
+            if i + 1 < lines.len()
+                && !is_blank(line)
+                && indent_of(line) == 0
+                && is_adornment(&lines[i + 1], line.trim().chars().count())
+            {
                 let t = line.trim();
                 if !is_adornment(line, 1) {
-                    self.sections.entry(normalize_name(t)).or_insert_with(|| identifier(t));
+                    self.sections
+                        .entry(normalize_name(t))
+                        .or_insert_with(|| identifier(t));
                 }
             }
             i += 1;
@@ -199,7 +236,11 @@ impl Reader {
 
     fn blocks(&mut self, lines: &[String], base: usize) -> Vec<Block> {
         self.depth += 1;
-        let out = if self.depth > 40 { Vec::new() } else { self.blocks_inner(lines, base) };
+        let out = if self.depth > 40 {
+            Vec::new()
+        } else {
+            self.blocks_inner(lines, base)
+        };
         self.depth -= 1;
         out
     }
@@ -230,7 +271,12 @@ impl Reader {
             }
             let text = line.as_str();
             // Section with overline.
-            if i + 2 < n && is_adornment(text, 3) && !is_blank(&lines[i + 1]) && is_adornment(&lines[i + 2], 1) && lines[i + 2].chars().next() == text.chars().next() {
+            if i + 2 < n
+                && is_adornment(text, 3)
+                && !is_blank(&lines[i + 1])
+                && is_adornment(&lines[i + 2], 1)
+                && lines[i + 2].chars().next() == text.chars().next()
+            {
                 let title = lines[i + 1].trim();
                 let ch = text.chars().next().unwrap_or('=');
                 self.push_section(&mut out, ch, true, title);
@@ -238,7 +284,11 @@ impl Reader {
                 continue;
             }
             // Section with underline.
-            if i + 1 < n && !is_adornment(text, 1) && is_adornment(&lines[i + 1], text.trim().chars().count().max(1)) && indent_of(&lines[i + 1]) == 0 {
+            if i + 1 < n
+                && !is_adornment(text, 1)
+                && is_adornment(&lines[i + 1], text.trim().chars().count().max(1))
+                && indent_of(&lines[i + 1]) == 0
+            {
                 let ch = lines[i + 1].chars().next().unwrap_or('=');
                 self.push_section(&mut out, ch, false, text.trim());
                 i += 2;
@@ -293,8 +343,13 @@ impl Reader {
                 let nxt = lines.get(i + 1).map(String::as_str).unwrap_or("");
                 // A lone "A." paragraph is only a list when its sequence continues.
                 if e.sure || is_blank(nxt) || indent_of(nxt) > 0 || enum_marker(nxt).is_some() {
-                    let (items, end) = self.list_items(lines, i, |l| enum_marker(l).map(|m| m.offset));
-                    out.push(Block::OrderedList { start: e.start, style: e.style, items });
+                    let (items, end) =
+                        self.list_items(lines, i, |l| enum_marker(l).map(|m| m.offset));
+                    out.push(Block::OrderedList {
+                        start: e.start,
+                        style: e.style,
+                        items,
+                    });
                     i = end;
                     continue;
                 }
@@ -303,15 +358,25 @@ impl Reader {
             if field_name(text).is_some() {
                 let mut items = Vec::new();
                 let mut j = i;
-                while j < n && !is_blank(&lines[j]) || (j < n && j + 1 < n && field_name(&lines[j + 1]).is_some() && is_blank(&lines[j])) {
+                while j < n && !is_blank(&lines[j])
+                    || (j < n
+                        && j + 1 < n
+                        && field_name(&lines[j + 1]).is_some()
+                        && is_blank(&lines[j]))
+                {
                     if is_blank(&lines[j]) {
                         j += 1;
                         continue;
                     }
-                    let Some((name, rest)) = field_name(&lines[j]) else { break };
+                    let Some((name, rest)) = field_name(&lines[j]) else {
+                        break;
+                    };
                     let mut body = vec![rest.trim().to_string()];
                     let mut k = j + 1;
-                    while k < n && (is_blank(&lines[k]) && k + 1 < n && indent_of(&lines[k + 1]) > 0 || indent_of(&lines[k]) > 0 && !is_blank(&lines[k])) {
+                    while k < n
+                        && (is_blank(&lines[k]) && k + 1 < n && indent_of(&lines[k + 1]) > 0
+                            || indent_of(&lines[k]) > 0 && !is_blank(&lines[k]))
+                    {
                         body.push(lines[k].clone());
                         k += 1;
                     }
@@ -330,7 +395,11 @@ impl Reader {
             if text == "|" || text.starts_with("| ") {
                 let mut j = i;
                 let mut rows: Vec<String> = Vec::new();
-                while j < n && (lines[j] == "|" || lines[j].starts_with("| ") || (indent_of(&lines[j]) > 0 && !is_blank(&lines[j]) && !rows.is_empty())) {
+                while j < n
+                    && (lines[j] == "|"
+                        || lines[j].starts_with("| ")
+                        || (indent_of(&lines[j]) > 0 && !is_blank(&lines[j]) && !rows.is_empty()))
+                {
                     if lines[j] == "|" {
                         rows.push(String::new());
                     } else if let Some(r) = lines[j].strip_prefix("| ") {
@@ -342,23 +411,38 @@ impl Reader {
                     }
                     j += 1;
                 }
-                let rows: Vec<String> = rows.into_iter().map(|r| if r.is_empty() { "|".into() } else { r }).collect();
+                let rows: Vec<String> = rows
+                    .into_iter()
+                    .map(|r| if r.is_empty() { "|".into() } else { r })
+                    .collect();
                 out.push(Block::Para(vec![Inline::Verbatim(rows.join("\n"))]));
                 i = j;
                 continue;
             }
             // Definition list: a line followed by an indented line.
-            if i + 1 < n && indent_of(&lines[i + 1]) > 0 && !is_blank(&lines[i + 1]) && !text.ends_with("::") {
+            if i + 1 < n
+                && indent_of(&lines[i + 1]) > 0
+                && !is_blank(&lines[i + 1])
+                && !text.ends_with("::")
+            {
                 let mut items = Vec::new();
                 let mut j = i;
-                while j + 1 < n && !is_blank(&lines[j]) && indent_of(&lines[j]) == 0 && indent_of(&lines[j + 1]) > 0 && !is_blank(&lines[j + 1]) {
+                while j + 1 < n
+                    && !is_blank(&lines[j])
+                    && indent_of(&lines[j]) == 0
+                    && indent_of(&lines[j + 1]) > 0
+                    && !is_blank(&lines[j + 1])
+                {
                     let term_line = lines[j].trim();
                     let term = match term_line.find(" : ") {
                         Some(p) => &term_line[..p],
                         None => term_line,
                     };
                     let mut k = j + 1;
-                    while k < n && (indent_of(&lines[k]) > 0 || (is_blank(&lines[k]) && k + 1 < n && indent_of(&lines[k + 1]) > 0)) {
+                    while k < n
+                        && (indent_of(&lines[k]) > 0
+                            || (is_blank(&lines[k]) && k + 1 < n && indent_of(&lines[k + 1]) > 0))
+                    {
                         k += 1;
                     }
                     let body = dedent(&lines[j + 1..k]);
@@ -368,7 +452,11 @@ impl Reader {
                     while j < n && is_blank(&lines[j]) {
                         j += 1;
                     }
-                    if j >= n || indent_of(&lines[j]) != 0 || j + 1 >= n || !(indent_of(&lines[j + 1]) > 0 && !is_blank(&lines[j + 1])) {
+                    if j >= n
+                        || indent_of(&lines[j]) != 0
+                        || j + 1 >= n
+                        || !(indent_of(&lines[j + 1]) > 0 && !is_blank(&lines[j + 1]))
+                    {
                         break;
                     }
                 }
@@ -388,7 +476,10 @@ impl Reader {
             if text == "::" {
                 text.clear();
                 literal = true;
-            } else if let Some(t) = text.strip_suffix(" ::").or_else(|| text.strip_suffix("\n::")) {
+            } else if let Some(t) = text
+                .strip_suffix(" ::")
+                .or_else(|| text.strip_suffix("\n::"))
+            {
                 text = t.to_string();
                 literal = true;
             } else if let Some(t) = text.strip_suffix("::") {
@@ -414,14 +505,20 @@ impl Reader {
                     while body.last().is_some_and(|l| l.trim().is_empty()) {
                         body.pop();
                     }
-                    out.push(Block::Code { lang: None, text: body.join("\n") });
+                    out.push(Block::Code {
+                        lang: None,
+                        text: body.join("\n"),
+                    });
                     i = e;
                 } else if k < n && is_quoted_literal(&lines[k]) {
                     let mut e = k;
                     while e < n && !is_blank(&lines[e]) {
                         e += 1;
                     }
-                    out.push(Block::Code { lang: None, text: lines[k..e].join("\n") });
+                    out.push(Block::Code {
+                        lang: None,
+                        text: lines[k..e].join("\n"),
+                    });
                     i = e;
                 }
             }
@@ -440,12 +537,21 @@ impl Reader {
         };
         let id = self.pending_target.take();
         let inlines = self.inlines(title);
-        out.push(Block::Heading { level: u8::try_from(level.min(6)).unwrap_or(6), inlines, id });
+        out.push(Block::Heading {
+            level: u8::try_from(level.min(6)).unwrap_or(6),
+            inlines,
+            id,
+        });
     }
 
     /// Items of a bullet or enumerated list starting at `start`; `marker` gives the content
     /// offset of a list line.
-    fn list_items<F: Fn(&str) -> Option<usize>>(&mut self, lines: &[String], start: usize, marker: F) -> (Vec<Vec<Block>>, usize) {
+    fn list_items<F: Fn(&str) -> Option<usize>>(
+        &mut self,
+        lines: &[String],
+        start: usize,
+        marker: F,
+    ) -> (Vec<Vec<Block>>, usize) {
         let n = lines.len();
         let mut items = Vec::new();
         let mut i = start;
@@ -523,7 +629,9 @@ impl Reader {
         let first = lines[0][2..].trim_start().to_string();
         let body: Vec<String> = lines[1..].to_vec();
         // Targets, substitutions and footnotes were collected in the first pass.
-        if first.starts_with('_') || first.starts_with('|') && first.contains("|") && !first.starts_with("|`") {
+        if first.starts_with('_')
+            || first.starts_with('|') && first.contains("|") && !first.starts_with("|`")
+        {
             if let Some(rest) = first.strip_prefix('_') {
                 if let Some((name, url)) = split_target(rest) {
                     if join_target(url, &body).is_empty() {
@@ -536,8 +644,17 @@ impl Reader {
         if first.starts_with('[') && first.contains(']') {
             if let Some(close) = first.find(']') {
                 let label = &first[1..close];
-                if label.chars().all(|c| c.is_ascii_digit() || c == '#' || c == '*' || c.is_alphanumeric() || c == '-' || c == '_' || c == '.')
-                    && !label.chars().all(|c| c.is_ascii_digit() || c == '#' || c == '*')
+                if label.chars().all(|c| {
+                    c.is_ascii_digit()
+                        || c == '#'
+                        || c == '*'
+                        || c.is_alphanumeric()
+                        || c == '-'
+                        || c == '_'
+                        || c == '.'
+                }) && !label
+                    .chars()
+                    .all(|c| c.is_ascii_digit() || c == '#' || c == '*')
                     && !label.starts_with('#')
                 {
                     // A citation definition: a definition-list entry in a `citations` div.
@@ -546,7 +663,12 @@ impl Reader {
                     let blocks = self.blocks(&content, 0);
                     out.push(Block::Div {
                         classes: vec!["citations".into()],
-                        blocks: vec![Block::DefList(vec![(vec![Inline::Verbatim(format!("[{label}]{{#{label} .citation-label}}"))], vec![blocks])])],
+                        blocks: vec![Block::DefList(vec![(
+                            vec![Inline::Verbatim(format!(
+                                "[{label}]{{#{label} .citation-label}}"
+                            ))],
+                            vec![blocks],
+                        )])],
                     });
                 }
             }
@@ -554,7 +676,11 @@ impl Reader {
         }
         let Some(pos) = first.find("::") else { return };
         let name = first[..pos].trim();
-        if name.is_empty() || !name.chars().all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_' || c == ':') {
+        if name.is_empty()
+            || !name
+                .chars()
+                .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_' || c == ':')
+        {
             return; // a comment
         }
         let arg = first[pos + 2..].trim().to_string();
@@ -563,7 +689,12 @@ impl Reader {
     }
 
     fn directive(&mut self, d: Directive, out: &mut Vec<Block>) {
-        let opt = |k: &str| d.options.iter().find(|(n, _)| n == k).map(|(_, v)| v.clone());
+        let opt = |k: &str| {
+            d.options
+                .iter()
+                .find(|(n, _)| n == k)
+                .map(|(_, v)| v.clone())
+        };
         match d.name.to_lowercase().as_str() {
             "code" | "code-block" | "sourcecode" | "parsed-literal" => {
                 let lang = d.arg.split_whitespace().next().map(str::to_string);
@@ -571,8 +702,15 @@ impl Reader {
                 while text.last().is_some_and(|l| l.trim().is_empty()) {
                     text.pop();
                 }
-                let lang = if d.name == "parsed-literal" { None } else { lang };
-                out.push(Block::Code { lang, text: text.join("\n") });
+                let lang = if d.name == "parsed-literal" {
+                    None
+                } else {
+                    lang
+                };
+                out.push(Block::Code {
+                    lang,
+                    text: text.join("\n"),
+                });
             }
             "math" => {
                 let mut eqs: Vec<String> = Vec::new();
@@ -597,38 +735,65 @@ impl Reader {
                     eqs.push(cur.join("\n"));
                 }
                 for e in eqs {
-                    out.push(Block::Para(vec![Inline::Math { display: true, tex: e }]));
+                    out.push(Block::Para(vec![Inline::Math {
+                        display: true,
+                        tex: e,
+                    }]));
                 }
             }
-            "attention" | "caution" | "danger" | "error" | "hint" | "important" | "note" | "tip" | "warning" | "admonition" => {
+            "attention" | "caution" | "danger" | "error" | "hint" | "important" | "note"
+            | "tip" | "warning" | "admonition" => {
                 let generic = d.name == "admonition";
-                let title = if generic { d.arg.clone() } else { title_case(&d.name) };
+                let title = if generic {
+                    d.arg.clone()
+                } else {
+                    title_case(&d.name)
+                };
                 let mut body = Vec::new();
                 if !generic && !d.arg.is_empty() {
                     body.push(d.arg.clone());
                     body.push(String::new());
                 }
                 body.extend(d.content.clone());
-                let mut blocks = vec![Block::Div { classes: vec!["title".into()], blocks: vec![Block::Para(self.inlines(&title))] }];
+                let mut blocks = vec![Block::Div {
+                    classes: vec!["title".into()],
+                    blocks: vec![Block::Para(self.inlines(&title))],
+                }];
                 blocks.extend(self.blocks(&body, 0));
-                out.push(Block::Div { classes: vec![d.name.to_lowercase()], blocks });
+                out.push(Block::Div {
+                    classes: vec![d.name.to_lowercase()],
+                    blocks,
+                });
             }
-            "versionadded" | "versionchanged" | "deprecated" | "seealso" | "topic" | "sidebar" | "rubric" | "epigraph" | "highlights" | "pull-quote" | "compound" | "container" => {
+            "versionadded" | "versionchanged" | "deprecated" | "seealso" | "topic" | "sidebar"
+            | "rubric" | "epigraph" | "highlights" | "pull-quote" | "compound" | "container" => {
                 let mut body = vec![d.arg.clone()];
                 body.extend(d.content.clone());
-                let body = if d.name.starts_with("version") || d.name == "deprecated" || d.name == "seealso" {
+                let body = if d.name.starts_with("version")
+                    || d.name == "deprecated"
+                    || d.name == "seealso"
+                {
                     // The argument and the indented text read as one paragraph.
-                    let joined: Vec<String> = std::iter::once(d.arg.clone()).chain(d.content.iter().cloned()).collect();
+                    let joined: Vec<String> = std::iter::once(d.arg.clone())
+                        .chain(d.content.iter().cloned())
+                        .collect();
                     joined
                 } else {
                     body
                 };
                 let blocks = self.blocks(&body, 0);
-                out.push(Block::Div { classes: vec![d.name.to_lowercase()], blocks });
+                out.push(Block::Div {
+                    classes: vec![d.name.to_lowercase()],
+                    blocks,
+                });
             }
             "image" => {
                 let alt = opt("alt").unwrap_or_default();
-                out.push(Block::Para(vec![Inline::Image { url: d.arg.clone(), alt: self.inlines(&alt), title: None }]));
+                out.push(Block::Para(vec![Inline::Image {
+                    url: d.arg.clone(),
+                    alt: self.inlines(&alt),
+                    title: None,
+                }]));
             }
             "figure" => {
                 let mut caption = Vec::new();
@@ -636,14 +801,26 @@ impl Reader {
                 if let Some(Block::Para(inl) | Block::Plain(inl)) = blocks.into_iter().next() {
                     caption = inl;
                 }
-                out.push(Block::Figure { url: d.arg.clone(), caption });
+                out.push(Block::Figure {
+                    url: d.arg.clone(),
+                    caption,
+                });
             }
             "raw" => {
-                out.push(Block::Raw { format: d.arg.trim().to_string(), text: d.content.join("\n").trim_end().to_string() });
+                out.push(Block::Raw {
+                    format: d.arg.trim().to_string(),
+                    text: d.content.join("\n").trim_end().to_string(),
+                });
             }
-            "contents" | "toctree" | "sectnum" | "header" | "footer" | "meta" | "title" | "highlight" | "default-role" | "role" | "index" | "only" | "include" | "literalinclude" | "target-notes" | "tabularcolumns" | "module" | "currentmodule" | "autosummary" => {
+            "contents" | "toctree" | "sectnum" | "header" | "footer" | "meta" | "title"
+            | "highlight" | "default-role" | "role" | "index" | "only" | "include"
+            | "literalinclude" | "target-notes" | "tabularcolumns" | "module" | "currentmodule"
+            | "autosummary" => {
                 if matches!(d.name.as_str(), "contents" | "toctree") {
-                    out.push(Block::Div { classes: vec![d.name.clone()], blocks: Vec::new() });
+                    out.push(Block::Div {
+                        classes: vec![d.name.clone()],
+                        blocks: Vec::new(),
+                    });
                 }
             }
             "csv-table" | "list-table" | "table" => {
@@ -659,30 +836,61 @@ impl Reader {
                 }
                 body.extend(d.content.clone());
                 let blocks = self.blocks(&body, 0);
-                out.push(Block::Div { classes: vec![other.to_string()], blocks });
+                out.push(Block::Div {
+                    classes: vec![other.to_string()],
+                    blocks,
+                });
             }
         }
     }
 
     fn directive_table(&mut self, d: &Directive) -> Option<Table> {
-        let header_rows = d.options.iter().find(|(k, _)| k == "header-rows").and_then(|(_, v)| v.parse::<usize>().ok()).unwrap_or(0);
+        let header_rows = d
+            .options
+            .iter()
+            .find(|(k, _)| k == "header-rows")
+            .and_then(|(_, v)| v.parse::<usize>().ok())
+            .unwrap_or(0);
         let mut rows: Vec<Vec<Cell>> = Vec::new();
         match d.name.as_str() {
             "csv-table" => {
-                let delim = d.options.iter().find(|(k, _)| k == "delim").and_then(|(_, v)| v.chars().next()).unwrap_or(',');
+                let delim = d
+                    .options
+                    .iter()
+                    .find(|(k, _)| k == "delim")
+                    .and_then(|(_, v)| v.chars().next())
+                    .unwrap_or(',');
                 let mut head: Vec<Vec<String>> = Vec::new();
                 if let Some((_, h)) = d.options.iter().find(|(k, _)| k == "header") {
                     head.push(csv_row(h, delim));
                 }
-                let mut body: Vec<Vec<String>> = d.content.iter().filter(|l| !l.trim().is_empty()).map(|l| csv_row(l, delim)).collect();
+                let mut body: Vec<Vec<String>> = d
+                    .content
+                    .iter()
+                    .filter(|l| !l.trim().is_empty())
+                    .map(|l| csv_row(l, delim))
+                    .collect();
                 let mut all = head;
                 all.append(&mut body);
-                let nhead = if d.options.iter().any(|(k, _)| k == "header") { 1 } else { header_rows };
+                let nhead = if d.options.iter().any(|(k, _)| k == "header") {
+                    1
+                } else {
+                    header_rows
+                };
                 for r in all {
-                    rows.push(r.iter().map(|c| Cell::text(self.inlines(c.trim()))).collect());
+                    rows.push(
+                        r.iter()
+                            .map(|c| Cell::text(self.inlines(c.trim())))
+                            .collect(),
+                    );
                 }
                 let head: Vec<Vec<Cell>> = rows.drain(..nhead.min(rows.len())).collect();
-                return Some(Table { caption: self.inlines(&d.arg), align: vec![Align::Default; rows.first().or(head.first()).map_or(0, Vec::len)], head, rows });
+                return Some(Table {
+                    caption: self.inlines(&d.arg),
+                    align: vec![Align::Default; rows.first().or(head.first()).map_or(0, Vec::len)],
+                    head,
+                    rows,
+                });
             }
             "list-table" => {
                 // A bullet list of bullet lists.
@@ -694,19 +902,32 @@ impl Reader {
                             rows.push(
                                 cells
                                     .into_iter()
-                                    .map(|c| Cell { blocks: c, colspan: 1, rowspan: 1 })
+                                    .map(|c| Cell {
+                                        blocks: c,
+                                        colspan: 1,
+                                        rowspan: 1,
+                                    })
                                     .collect(),
                             );
                         }
                     }
                 }
                 let head: Vec<Vec<Cell>> = rows.drain(..header_rows.min(rows.len())).collect();
-                return Some(Table { caption: self.inlines(&d.arg), align: vec![Align::Default; rows.first().or(head.first()).map_or(0, Vec::len)], head, rows });
+                return Some(Table {
+                    caption: self.inlines(&d.arg),
+                    align: vec![Align::Default; rows.first().or(head.first()).map_or(0, Vec::len)],
+                    head,
+                    rows,
+                });
             }
             _ => {
                 // `table` wraps a normal table; its argument is the caption.
                 let body = dedent(&d.content);
-                if let Some(Block::Table(mut t)) = self.blocks(&body, 0).into_iter().find(|b| matches!(b, Block::Table(_))) {
+                if let Some(Block::Table(mut t)) = self
+                    .blocks(&body, 0)
+                    .into_iter()
+                    .find(|b| matches!(b, Block::Table(_)))
+                {
                     t.caption = self.inlines(&d.arg);
                     return Some(t);
                 }
@@ -719,11 +940,19 @@ impl Reader {
 
     fn grid_table(&mut self, lines: &[String]) -> Option<Table> {
         let first = lines.first()?;
-        let cols: Vec<usize> = first.char_indices().filter(|(_, c)| *c == '+').map(|(i, _)| i).collect();
+        let cols: Vec<usize> = first
+            .char_indices()
+            .filter(|(_, c)| *c == '+')
+            .map(|(i, _)| i)
+            .collect();
         if cols.len() < 2 || lines.len() < 3 {
             return None;
         }
-        let is_sep = |l: &str| l.starts_with('+') && l.chars().all(|c| c == '+' || c == '-' || c == '=' || c == ' ' || c == ':');
+        let is_sep = |l: &str| {
+            l.starts_with('+')
+                && l.chars()
+                    .all(|c| c == '+' || c == '-' || c == '=' || c == ' ' || c == ':')
+        };
         let mut rows: Vec<Vec<String>> = Vec::new();
         let mut head_rows = 0;
         let mut cur: Vec<String> = vec![String::new(); cols.len() - 1];
@@ -732,7 +961,10 @@ impl Reader {
         for (li, l) in lines.iter().enumerate().skip(1) {
             if is_sep(l) {
                 if have {
-                    rows.push(std::mem::replace(&mut cur, vec![String::new(); cols.len() - 1]));
+                    rows.push(std::mem::replace(
+                        &mut cur,
+                        vec![String::new(); cols.len() - 1],
+                    ));
                     have = false;
                 }
                 if l.contains('=') && head_rows == 0 {
@@ -764,13 +996,22 @@ impl Reader {
                             *b = Block::Plain(std::mem::take(inl));
                         }
                     }
-                    Cell { blocks, colspan: 1, rowspan: 1 }
+                    Cell {
+                        blocks,
+                        colspan: 1,
+                        rowspan: 1,
+                    }
                 })
                 .collect()
         };
         let all: Vec<Vec<Cell>> = rows.iter().map(&mut to_cells).collect();
         let (head, body) = all.split_at(head_rows.min(all.len()));
-        Some(Table { caption: Vec::new(), align: vec![Align::Default; cols.len() - 1], head: head.to_vec(), rows: body.to_vec() })
+        Some(Table {
+            caption: Vec::new(),
+            align: vec![Align::Default; cols.len() - 1],
+            head: head.to_vec(),
+            rows: body.to_vec(),
+        })
     }
 
     fn simple_table(&mut self, lines: &[String], start: usize) -> Option<(Table, usize)> {
@@ -798,8 +1039,12 @@ impl Reader {
             if is_simple_border(&lines[j]) {
                 borders.push(j);
                 // The closing border is followed by a blank line or the end.
-                if (borders.len() >= 2 && j + 1 >= lines.len()) || (j + 1 < lines.len() && is_blank(&lines[j + 1]) && borders.len() >= 2) {
-                    if borders.len() >= 3 || !(j + 2 < lines.len() && !is_blank(&lines[j + 2]) && false) {
+                if (borders.len() >= 2 && j + 1 >= lines.len())
+                    || (j + 1 < lines.len() && is_blank(&lines[j + 1]) && borders.len() >= 2)
+                {
+                    if borders.len() >= 3
+                        || !(j + 2 < lines.len() && !is_blank(&lines[j + 2]) && false)
+                    {
                         break;
                     }
                 }
@@ -819,12 +1064,25 @@ impl Reader {
             cols.iter()
                 .enumerate()
                 .map(|(ci, (a, b))| {
-                    let b = if ci + 1 == cols.len() && last { ch.len().max(*b) } else { *b };
-                    ch.iter().skip(*a).take(b.saturating_sub(*a)).collect::<String>().trim().to_string()
+                    let b = if ci + 1 == cols.len() && last {
+                        ch.len().max(*b)
+                    } else {
+                        *b
+                    };
+                    ch.iter()
+                        .skip(*a)
+                        .take(b.saturating_sub(*a))
+                        .collect::<String>()
+                        .trim()
+                        .to_string()
                 })
                 .collect()
         };
-        let sep_at = if borders.len() >= 3 { Some(borders[1]) } else { None };
+        let sep_at = if borders.len() >= 3 {
+            Some(borders[1])
+        } else {
+            None
+        };
         let mut head: Vec<Vec<Cell>> = Vec::new();
         let mut rows: Vec<Vec<Cell>> = Vec::new();
         let mut cur: Option<Vec<String>> = None;
@@ -870,7 +1128,15 @@ impl Reader {
         } else {
             flush(self, &mut cur, &mut rows);
         }
-        Some((Table { caption: Vec::new(), align: vec![Align::Default; cols.len()], head, rows }, end + 1))
+        Some((
+            Table {
+                caption: Vec::new(),
+                align: vec![Align::Default; cols.len()],
+                head,
+                rows,
+            },
+            end + 1,
+        ))
     }
 
     // ---- inline markup --------------------------------------------------------------------------
@@ -974,7 +1240,11 @@ impl Reader {
                         let body: String = c[s..close].iter().collect();
                         flush(&mut buf, out);
                         let inner = self.nested(&body, depth);
-                        out.push(if strong { Inline::Strong(inner) } else { Inline::Emph(inner) });
+                        out.push(if strong {
+                            Inline::Strong(inner)
+                        } else {
+                            Inline::Emph(inner)
+                        });
                         i = close + if strong { 2 } else { 1 };
                         continue;
                     }
@@ -1008,7 +1278,11 @@ impl Reader {
             // Standalone hyperlink and simple reference names.
             if start_ok && (ch == 'h' || ch == 'f' || ch == 'm') {
                 let rest: String = c[i..].iter().take(8).collect();
-                if rest.starts_with("http://") || rest.starts_with("https://") || rest.starts_with("ftp://") || rest.starts_with("mailto:") {
+                if rest.starts_with("http://")
+                    || rest.starts_with("https://")
+                    || rest.starts_with("ftp://")
+                    || rest.starts_with("mailto:")
+                {
                     let mut e = i;
                     while e < n && !c[e].is_whitespace() && c[e] != '<' && c[e] != '>' {
                         e += 1;
@@ -1018,7 +1292,11 @@ impl Reader {
                     }
                     let url: String = c[i..e].iter().collect();
                     flush(&mut buf, out);
-                    out.push(Inline::Link { url: url.clone(), title: None, inlines: vec![Inline::Text(url)] });
+                    out.push(Inline::Link {
+                        url: url.clone(),
+                        title: None,
+                        inlines: vec![Inline::Text(url)],
+                    });
                     i = e;
                     continue;
                 }
@@ -1026,7 +1304,16 @@ impl Reader {
             if start_ok && (ch.is_alphanumeric()) {
                 // word_ or word__
                 let mut e = i;
-                while e < n && (c[e].is_alphanumeric() || ((c[e] == '-' || c[e] == '_' || c[e] == '.' || c[e] == ':' || c[e] == '+') && e + 1 < n && c[e + 1].is_alphanumeric())) {
+                while e < n
+                    && (c[e].is_alphanumeric()
+                        || ((c[e] == '-'
+                            || c[e] == '_'
+                            || c[e] == '.'
+                            || c[e] == ':'
+                            || c[e] == '+')
+                            && e + 1 < n
+                            && c[e + 1].is_alphanumeric()))
+                {
                     e += 1;
                 }
                 if e < n && c[e] == '_' && (e + 1 >= n || !c[e + 1].is_alphanumeric()) {
@@ -1084,16 +1371,37 @@ impl Reader {
         if body.ends_with('>') {
             if let Some(lt) = body.rfind('<') {
                 let text = body[..lt].trim();
-                let url = body[lt + 1..body.len() - 1].trim().replace('\n', "").replace(' ', "");
+                let url = body[lt + 1..body.len() - 1]
+                    .trim()
+                    .replace('\n', "")
+                    .replace(' ', "");
                 if let Some(name) = url.strip_suffix('_') {
                     let name = name.trim_matches('`');
-                    let target = self.resolve(name).unwrap_or_else(|| format!("#{}", identifier(name)));
+                    let target = self
+                        .resolve(name)
+                        .unwrap_or_else(|| format!("#{}", identifier(name)));
                     let t = if text.is_empty() { name } else { text };
-                    out.push(Inline::Link { url: target, title: None, inlines: self.nested(t, 8) });
+                    out.push(Inline::Link {
+                        url: target,
+                        title: None,
+                        inlines: self.nested(t, 8),
+                    });
                 } else {
-                    let label = if text.is_empty() { url.clone() } else { text.to_string() };
-                    let inl = if text.is_empty() { vec![Inline::Text(label)] } else { self.nested(&label, 8) };
-                    out.push(Inline::Link { url: target_url(&url), title: None, inlines: inl });
+                    let label = if text.is_empty() {
+                        url.clone()
+                    } else {
+                        text.to_string()
+                    };
+                    let inl = if text.is_empty() {
+                        vec![Inline::Text(label)]
+                    } else {
+                        self.nested(&label, 8)
+                    };
+                    out.push(Inline::Link {
+                        url: target_url(&url),
+                        title: None,
+                        inlines: inl,
+                    });
                 }
                 return;
             }
@@ -1108,18 +1416,33 @@ impl Reader {
         match url {
             Some(u) => {
                 let inl = self.nested(body, 8);
-                out.push(Inline::Link { url: u, title: None, inlines: inl });
+                out.push(Inline::Link {
+                    url: u,
+                    title: None,
+                    inlines: inl,
+                });
             }
             None => {
                 let inl = self.nested(body, 8);
-                out.push(Inline::Link { url: format!("#{}", identifier(body)), title: None, inlines: inl });
+                out.push(Inline::Link {
+                    url: format!("#{}", identifier(body)),
+                    title: None,
+                    inlines: inl,
+                });
             }
         }
     }
 
     fn note_ref(&mut self, label: &str) -> Option<Inline> {
         let content = if label == "#" || label == "*" {
-            let c = self.auto_notes.get(if label == "#" { self.auto_used } else { self.auto_used + self.symbol_used }).cloned();
+            let c = self
+                .auto_notes
+                .get(if label == "#" {
+                    self.auto_used
+                } else {
+                    self.auto_used + self.symbol_used
+                })
+                .cloned();
             if c.is_some() {
                 self.auto_used += 1;
             }
@@ -1142,16 +1465,26 @@ impl Reader {
 
     fn role(&mut self, role: &str, body: &str, out: &mut Vec<Inline>) {
         match role {
-            "emphasis" | "title-reference" | "title" | "t" => out.push(Inline::Emph(self.nested(body, 8))),
-            "strong" => out.push(Inline::Strong(self.nested(body, 8))),
-            "literal" | "code" | "samp" | "kbd" | "file" | "command" | "program" | "option" | "envvar" | "makevar" | "regexp" => {
-                out.push(Inline::Code(body.to_string()))
+            "emphasis" | "title-reference" | "title" | "t" => {
+                out.push(Inline::Emph(self.nested(body, 8)))
             }
-            "math" => out.push(Inline::Math { display: false, tex: body.to_string() }),
+            "strong" => out.push(Inline::Strong(self.nested(body, 8))),
+            "literal" | "code" | "samp" | "kbd" | "file" | "command" | "program" | "option"
+            | "envvar" | "makevar" | "regexp" => out.push(Inline::Code(body.to_string())),
+            "math" => out.push(Inline::Math {
+                display: false,
+                tex: body.to_string(),
+            }),
             "sub" | "subscript" => out.push(Inline::Sub(self.nested(body, 8))),
             "sup" | "superscript" => out.push(Inline::Sup(self.nested(body, 8))),
-            "pep-reference" | "rfc-reference" | "pep" | "rfc" => out.push(Inline::Text(body.to_string())),
-            other => out.push(Inline::Verbatim(format!("`{}`{{.interpreted-text role=\"{}\"}}", body.replace('`', "\\`"), other))),
+            "pep-reference" | "rfc-reference" | "pep" | "rfc" => {
+                out.push(Inline::Text(body.to_string()))
+            }
+            other => out.push(Inline::Verbatim(format!(
+                "`{}`{{.interpreted-text role=\"{}\"}}",
+                body.replace('`', "\\`"),
+                other
+            ))),
         }
     }
 }
@@ -1174,7 +1507,11 @@ fn unicode_directive(s: &str) -> String {
     s.split_whitespace()
         .filter(|w| !w.starts_with(".."))
         .filter_map(|w| {
-            let w = w.trim_start_matches("U+").trim_start_matches("0x").trim_start_matches("&#x").trim_end_matches(';');
+            let w = w
+                .trim_start_matches("U+")
+                .trim_start_matches("0x")
+                .trim_start_matches("&#x")
+                .trim_end_matches(';');
             u32::from_str_radix(w, 16).ok().and_then(char::from_u32)
         })
         .collect()
@@ -1201,7 +1538,11 @@ fn is_adornment(line: &str, min: usize) -> bool {
     let t = line.trim_end();
     let mut ch = t.chars();
     let Some(f) = ch.next() else { return false };
-    !f.is_alphanumeric() && !f.is_whitespace() && "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".contains(f) && t.chars().all(|c| c == f) && t.chars().count() >= min.max(1)
+    !f.is_alphanumeric()
+        && !f.is_whitespace()
+        && "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".contains(f)
+        && t.chars().all(|c| c == f)
+        && t.chars().count() >= min.max(1)
 }
 
 fn is_simple_border(line: &str) -> bool {
@@ -1211,7 +1552,9 @@ fn is_simple_border(line: &str) -> bool {
 }
 
 fn is_quoted_literal(line: &str) -> bool {
-    line.chars().next().is_some_and(|c| "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".contains(c))
+    line.chars()
+        .next()
+        .is_some_and(|c| "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~".contains(c))
 }
 
 fn bullet_offset(line: &str) -> Option<usize> {
@@ -1258,9 +1601,17 @@ fn enum_marker(line: &str) -> Option<EnumMarker> {
     } else if token.chars().all(|c| c.is_ascii_digit()) {
         (token.parse().ok()?, ListStyle::Decimal, true)
     } else if token.len() == 1 && token.chars().all(|c| c.is_ascii_lowercase()) {
-        (u32::from(token.as_bytes()[0] - b'a') + 1, ListStyle::LowerAlpha, false)
+        (
+            u32::from(token.as_bytes()[0] - b'a') + 1,
+            ListStyle::LowerAlpha,
+            false,
+        )
     } else if token.len() == 1 && token.chars().all(|c| c.is_ascii_uppercase()) {
-        (u32::from(token.as_bytes()[0] - b'A') + 1, ListStyle::UpperAlpha, false)
+        (
+            u32::from(token.as_bytes()[0] - b'A') + 1,
+            ListStyle::UpperAlpha,
+            false,
+        )
     } else if token.chars().all(|c| "ivxlcdm".contains(c)) {
         (roman(token)?, ListStyle::LowerRoman, false)
     } else if token.chars().all(|c| "IVXLCDM".contains(c)) {
@@ -1270,7 +1621,12 @@ fn enum_marker(line: &str) -> Option<EnumMarker> {
     };
     let sp = after.len() - after.trim_start_matches(' ').len();
     let offset = usize::from(paren) + token.len() + 1 + sp.max(1).min(after.len().max(1));
-    Some(EnumMarker { offset: offset.min(line.len()), start, style, sure })
+    Some(EnumMarker {
+        offset: offset.min(line.len()),
+        start,
+        style,
+        sure,
+    })
 }
 
 fn roman(s: &str) -> Option<u32> {
@@ -1385,14 +1741,35 @@ fn parse_directive(name: &str, arg: String, body: &[String]) -> Directive {
     // The argument may continue on the following lines up to the first option or blank line.
     let mut arg = arg;
     let mut idx = 0;
-    while idx < body.len() && !is_blank(&body[idx]) && field_name(&body[idx]).is_none() && !matches!(name, "code" | "code-block" | "sourcecode" | "math" | "raw" | "parsed-literal" | "versionadded" | "versionchanged" | "deprecated" | "seealso") {
+    while idx < body.len()
+        && !is_blank(&body[idx])
+        && field_name(&body[idx]).is_none()
+        && !matches!(
+            name,
+            "code"
+                | "code-block"
+                | "sourcecode"
+                | "math"
+                | "raw"
+                | "parsed-literal"
+                | "versionadded"
+                | "versionchanged"
+                | "deprecated"
+                | "seealso"
+        )
+    {
         if !arg.is_empty() {
             arg.push(' ');
         }
         arg.push_str(body[idx].trim());
         idx += 1;
     }
-    if idx > 0 && (matches!(name, "versionadded" | "versionchanged" | "deprecated" | "seealso")) {
+    if idx > 0
+        && (matches!(
+            name,
+            "versionadded" | "versionchanged" | "deprecated" | "seealso"
+        ))
+    {
         // Keep them as content for these admonition-like directives.
         arg = String::new();
         idx = 0;
@@ -1421,7 +1798,12 @@ fn parse_directive(name: &str, arg: String, body: &[String]) -> Directive {
     if matches!(name, "versionadded" | "versionchanged" | "deprecated") && arg.is_empty() && false {
         arg = String::new();
     }
-    Directive { name: name.to_string(), arg, options, content: body }
+    Directive {
+        name: name.to_string(),
+        arg,
+        options,
+        content: body,
+    }
 }
 
 fn role_at(c: &[char], i: usize) -> Option<(String, usize)> {
@@ -1430,7 +1812,9 @@ fn role_at(c: &[char], i: usize) -> Option<(String, usize)> {
         return None;
     }
     let mut j = i + 1;
-    while j < c.len() && (c[j].is_alphanumeric() || c[j] == '-' || c[j] == '_' || c[j] == '.' || c[j] == '+') {
+    while j < c.len()
+        && (c[j].is_alphanumeric() || c[j] == '-' || c[j] == '_' || c[j] == '.' || c[j] == '+')
+    {
         j += 1;
     }
     if j > i + 1 && j < c.len() && c[j] == ':' {
@@ -1515,7 +1899,15 @@ mod tests {
     #[test]
     fn sections_follow_the_order_of_adornments() {
         let l = levels("T\n=\n\ntext\n\nS\n-\n\nSS\n~~\n\nB\n=\n");
-        assert_eq!(l, vec![(1, "T".into()), (2, "S".into()), (3, "SS".into()), (1, "B".into())]);
+        assert_eq!(
+            l,
+            vec![
+                (1, "T".into()),
+                (2, "S".into()),
+                (3, "SS".into()),
+                (1, "B".into())
+            ]
+        );
         // An overline is a different style from the same character without one.
         let l = levels("===\nT\n===\n\nS\n===\n");
         assert_eq!(l, vec![(1, "T".into()), (2, "S".into())]);
@@ -1523,23 +1915,44 @@ mod tests {
 
     #[test]
     fn inline_markup_roles_and_links() {
-        let out = md("*a* **b** ``c`` :sub:`2` `x <https://e.org>`__ and |s|\n\n.. |s| replace:: Subst\n");
-        assert!(out.contains("*a* **b** `c` ~2~ [x](https://e.org) and Subst"), "{out}");
+        let out = md(
+            "*a* **b** ``c`` :sub:`2` `x <https://e.org>`__ and |s|\n\n.. |s| replace:: Subst\n",
+        );
+        assert!(
+            out.contains("*a* **b** `c` ~2~ [x](https://e.org) and Subst"),
+            "{out}"
+        );
     }
 
     #[test]
     fn lists_literal_blocks_and_directives() {
         let d = to_doc("- a\n- b\n\nRun::\n\n    x = 1\n\n.. code:: rust\n\n   fn f() {}\n\n.. math:: E = mc^2\n");
-        assert!(matches!(&d.blocks[0], Block::BulletList(items) if items.len() == 2), "{d:?}");
-        assert!(d.blocks.iter().any(|b| matches!(b, Block::Code { lang: None, text } if text == "x = 1")), "{d:?}");
-        assert!(d.blocks.iter().any(|b| matches!(b, Block::Code { lang: Some(l), .. } if l == "rust")), "{d:?}");
+        assert!(
+            matches!(&d.blocks[0], Block::BulletList(items) if items.len() == 2),
+            "{d:?}"
+        );
+        assert!(
+            d.blocks
+                .iter()
+                .any(|b| matches!(b, Block::Code { lang: None, text } if text == "x = 1")),
+            "{d:?}"
+        );
+        assert!(
+            d.blocks
+                .iter()
+                .any(|b| matches!(b, Block::Code { lang: Some(l), .. } if l == "rust")),
+            "{d:?}"
+        );
         assert!(d.blocks.iter().any(|b| matches!(b, Block::Para(p) if matches!(p.first(), Some(Inline::Math { display: true, .. })))), "{d:?}");
     }
 
     #[test]
     fn tables_footnotes_and_fields() {
         let out = md("=== ===\nA   B\n=== ===\n1   2\n=== ===\n\nText [1]_.\n\n.. [1] The note.\n\n:Author: Me\n");
-        assert!(out.contains("| A | B |") || out.contains("A   B") || out.contains("---"), "{out}");
+        assert!(
+            out.contains("| A | B |") || out.contains("A   B") || out.contains("---"),
+            "{out}"
+        );
         assert!(out.contains("[^1]"), "{out}");
         assert!(out.contains("Author"), "{out}");
     }
@@ -1548,6 +1961,9 @@ mod tests {
     fn anonymous_targets_and_admonitions() {
         let out = md("See `x`__.\n\n__ https://e.org\n\n.. note:: Careful\n");
         assert!(out.contains("[x](https://e.org)"), "{out}");
-        assert!(out.contains("::: {.note}") || out.contains("::: note"), "{out}");
+        assert!(
+            out.contains("::: {.note}") || out.contains("::: note"),
+            "{out}"
+        );
     }
 }

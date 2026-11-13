@@ -89,7 +89,14 @@ impl Processor {
     pub fn new(style: Style, references: Vec<Reference>) -> Self {
         let input_order = references.iter().map(|r| r.id.clone()).collect();
         let refs = references.into_iter().map(|r| (r.id.clone(), r)).collect();
-        Processor { style, refs, input_order, pandoc_names: false, names_override: Default::default(), ambiguous: Default::default() }
+        Processor {
+            style,
+            refs,
+            input_order,
+            pandoc_names: false,
+            names_override: Default::default(),
+            ambiguous: Default::default(),
+        }
     }
 
     /// Read `<names>` without a `<name>` child the way Pandoc does: with the CSL defaults, ignoring
@@ -129,12 +136,21 @@ impl Processor {
                 order.push(id.clone());
             }
         }
-        let numbers: HashMap<String, usize> = order.iter().enumerate().map(|(i, id)| (id.clone(), i + 1)).collect();
+        let numbers: HashMap<String, usize> = order
+            .iter()
+            .enumerate()
+            .map(|(i, id)| (id.clone(), i + 1))
+            .collect();
         // Bibliography order.
         let mut bib_order = order.clone();
         if let Some(sort) = self.style.bibliography().and_then(|b| b.find("sort")) {
             // Ties keep the order the references were given in.
-            bib_order.sort_by_key(|id| self.input_order.iter().position(|x| x == id).unwrap_or(usize::MAX));
+            bib_order.sort_by_key(|id| {
+                self.input_order
+                    .iter()
+                    .position(|x| x == id)
+                    .unwrap_or(usize::MAX)
+            });
             self.sort_ids(&mut bib_order, sort, Mode::Bibliography, &numbers);
         }
         // Ambiguous cites: show more names, then year suffixes.
@@ -174,7 +190,10 @@ impl Processor {
                         let mut done_first = false;
                         for c in layout.elems() {
                             let part = eval(c, &mut ctx);
-                            let nonempty = part.toks.iter().any(|t| matches!(t, Tok::Text(x) if !x.is_empty()));
+                            let nonempty = part
+                                .toks
+                                .iter()
+                                .any(|t| matches!(t, Tok::Text(x) if !x.is_empty()));
                             r.toks.extend(part.toks);
                             if nonempty && !done_first {
                                 done_first = true;
@@ -203,7 +222,10 @@ impl Processor {
                         }
                         prev_author = author;
                     }
-                    result.bibliography.push(BibEntry { id: id.clone(), toks: normalize(toks) });
+                    result.bibliography.push(BibEntry {
+                        id: id.clone(),
+                        toks: normalize(toks),
+                    });
                 }
             }
         }
@@ -213,12 +235,32 @@ impl Processor {
     /// Reads the locator out of each unparsed suffix. A word is a label when it is a locator
     /// term of the style's locale (any form, singular or plural), as in Pandoc.
     fn resolve_locators(&self, c: &Citation) -> Citation {
-        const NAMES: &[&str] = &["number", "book", "chapter", "column", "figure", "folio", "issue", "line", "note", "opus", "page", "paragraph", "part", "section", "sub-verbo", "verse", "volume"];
+        const NAMES: &[&str] = &[
+            "number",
+            "book",
+            "chapter",
+            "column",
+            "figure",
+            "folio",
+            "issue",
+            "line",
+            "note",
+            "opus",
+            "page",
+            "paragraph",
+            "part",
+            "section",
+            "sub-verbo",
+            "verse",
+            "volume",
+        ];
         let lookup = |w: &str| -> Option<String> {
             let w = w.to_lowercase();
             for name in NAMES {
                 for form in ["", "short", "symbol"] {
-                    if let Some((s, p)) = self.style.terms.get(&(name.to_string(), form.to_string())) {
+                    if let Some((s, p)) =
+                        self.style.terms.get(&(name.to_string(), form.to_string()))
+                    {
                         if s.to_lowercase() == w || p.to_lowercase() == w {
                             return Some((*name).to_string());
                         }
@@ -240,7 +282,14 @@ impl Processor {
         out
     }
 
-    fn item_ctx<'a>(&'a self, r: &'a Reference, it: &CitationItem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Ctx<'a> {
+    fn item_ctx<'a>(
+        &'a self,
+        r: &'a Reference,
+        it: &CitationItem,
+        numbers: &HashMap<String, usize>,
+        suffixes: &HashMap<String, String>,
+        position: Position,
+    ) -> Ctx<'a> {
         let mut ctx = Ctx::new(&self.style, r, Mode::Citation);
         ctx.names_without_inheritance = self.pandoc_names;
         ctx.names_use_first_override = self.names_override.borrow().get(&it.id).copied();
@@ -258,7 +307,14 @@ impl Processor {
     }
 
     /// The author part (for `@key`) and the cite proper of one item.
-    fn render_item_parts(&self, it: &CitationItem, layout: &XElem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> (Option<Toks>, Toks) {
+    fn render_item_parts(
+        &self,
+        it: &CitationItem,
+        layout: &XElem,
+        numbers: &HashMap<String, usize>,
+        suffixes: &HashMap<String, String>,
+        position: Position,
+    ) -> (Option<Toks>, Toks) {
         let Some(r) = self.refs.get(&it.id) else {
             return (None, vec![Tok::Text("???".into())]);
         };
@@ -286,12 +342,23 @@ impl Processor {
         if !it.suffix.is_empty() {
             let s = it.suffix.trim_start();
             let attach = s.starts_with([',', ';', ':', '.', ')', ']']);
-            out.push(Tok::Text(if attach { s.to_string() } else { format!(" {s}") }));
+            out.push(Tok::Text(if attach {
+                s.to_string()
+            } else {
+                format!(" {s}")
+            }));
         }
         (author, out)
     }
 
-    fn render_item(&self, it: &CitationItem, layout: &XElem, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, position: Position) -> Toks {
+    fn render_item(
+        &self,
+        it: &CitationItem,
+        layout: &XElem,
+        numbers: &HashMap<String, usize>,
+        suffixes: &HashMap<String, String>,
+        position: Position,
+    ) -> Toks {
         let (author, body) = self.render_item_parts(it, layout, numbers, suffixes, position);
         let mut t = author.unwrap_or_default();
         if !t.is_empty() && !body.is_empty() {
@@ -314,9 +381,20 @@ impl Processor {
         cap
     }
 
-    fn render_citation(&self, c: &Citation, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>, seen: &[String], prev: &[String]) -> Toks {
-        let Some(cit) = self.style.citation() else { return Vec::new() };
-        let Some(layout) = cit.find("layout") else { return Vec::new() };
+    fn render_citation(
+        &self,
+        c: &Citation,
+        numbers: &HashMap<String, usize>,
+        suffixes: &HashMap<String, String>,
+        seen: &[String],
+        prev: &[String],
+    ) -> Toks {
+        let Some(cit) = self.style.citation() else {
+            return Vec::new();
+        };
+        let Some(layout) = cit.find("layout") else {
+            return Vec::new();
+        };
         let mut items: Vec<&CitationItem> = c.items.iter().collect();
         if let Some(sort) = cit.find("sort") {
             let mut keyed: Vec<(Vec<SortKey>, &CitationItem)> = items
@@ -330,16 +408,29 @@ impl Processor {
         // `@key`: the author in the text and the layout (its brackets too) around the rest only.
         if let [it] = items[..] {
             if it.author_in_text {
-                let position = if seen.contains(&it.id) { Position::Subsequent } else { Position::First };
-                let (author, body) = self.render_item_parts(it, layout, numbers, suffixes, position);
-                let mut r = eval::R { toks: body, called: 0, found: 0, hidden: false };
+                let position = if seen.contains(&it.id) {
+                    Position::Subsequent
+                } else {
+                    Position::First
+                };
+                let (author, body) =
+                    self.render_item_parts(it, layout, numbers, suffixes, position);
+                let mut r = eval::R {
+                    toks: body,
+                    called: 0,
+                    found: 0,
+                    hidden: false,
+                };
                 decorate_layout(layout, &mut r);
                 let mut out = author.unwrap_or_default();
                 if !self.style.class_in_text {
                     // In a note style the rest goes to the note; what is left of it follows the
                     // author without its leading punctuation.
                     let mut rest = r.toks;
-                    if let Some(Tok::Text(t)) = rest.iter_mut().find(|t| matches!(t, Tok::Text(x) if !x.is_empty())) {
+                    if let Some(Tok::Text(t)) = rest
+                        .iter_mut()
+                        .find(|t| matches!(t, Tok::Text(x) if !x.is_empty()))
+                    {
                         *t = t.trim_start_matches([',', ';', ':', ' ']).to_string();
                     }
                     out.extend(rest);
@@ -357,7 +448,11 @@ impl Processor {
             let position = if !seen.contains(&it.id) {
                 Position::First
             } else if prev.len() == 1 && prev[0] == it.id && c.items.len() == 1 {
-                if it.locator.is_some() { Position::IbidWithLocator } else { Position::Ibid }
+                if it.locator.is_some() {
+                    Position::IbidWithLocator
+                } else {
+                    Position::Ibid
+                }
             } else {
                 Position::Subsequent
             };
@@ -388,13 +483,25 @@ impl Processor {
             return out;
         }
         // The layout's own affixes and formatting wrap the whole citation.
-        let mut r = eval::R { toks: out, called: 0, found: 0, hidden: false };
+        let mut r = eval::R {
+            toks: out,
+            called: 0,
+            found: 0,
+            hidden: false,
+        };
         decorate_layout(layout, &mut r);
         let mut toks = normalize(r.toks);
         if !self.style.class_in_text {
             // A note starts a sentence: its first letter is a capital.
-            if let Some(Tok::Text(t)) = toks.iter_mut().find(|t| matches!(t, Tok::Text(x) if !x.is_empty())) {
-                if let Some(i) = t.char_indices().find(|(_, c)| c.is_alphabetic()).map(|(i, _)| i) {
+            if let Some(Tok::Text(t)) = toks
+                .iter_mut()
+                .find(|t| matches!(t, Tok::Text(x) if !x.is_empty()))
+            {
+                if let Some(i) = t
+                    .char_indices()
+                    .find(|(_, c)| c.is_alphabetic())
+                    .map(|(i, _)| i)
+                {
                     if t[..i].chars().all(|c| !c.is_alphanumeric()) {
                         let c = t[i..].chars().next().unwrap_or(' ');
                         t.replace_range(i..i + c.len_utf8(), &c.to_uppercase().collect::<String>());
@@ -406,12 +513,23 @@ impl Processor {
     }
 
     #[allow(clippy::too_many_arguments)]
-    fn collapse_years(&self, pieces: &[(Toks, &CitationItem)], layout: &XElem, cit: &XElem, delim: &str, mode: &str, numbers: &HashMap<String, usize>, suffixes: &HashMap<String, String>) -> Toks {
+    fn collapse_years(
+        &self,
+        pieces: &[(Toks, &CitationItem)],
+        layout: &XElem,
+        cit: &XElem,
+        delim: &str,
+        mode: &str,
+        numbers: &HashMap<String, usize>,
+        suffixes: &HashMap<String, String>,
+    ) -> Toks {
         // Cites whose author names print the same are moved next to each other (in the place of
         // the first). The names compared are those the layout prints directly, not through a
         // `substitute`.
         let author_key = |it: &CitationItem| -> String {
-            let Some(r) = self.refs.get(&it.id) else { return String::new() };
+            let Some(r) = self.refs.get(&it.id) else {
+                return String::new();
+            };
             let mut ctx = self.item_ctx(r, it, numbers, suffixes, Position::First);
             ctx.item.suppress_author = false;
             let _ = eval_layout_items(layout, &mut ctx);
@@ -435,13 +553,20 @@ impl Processor {
                 continue;
             }
             for j in i + 1..pieces.len() {
-                if !order.contains(&j) && keys[j] == keys[i] && !pieces[j].1.author_in_text && !affixed(pieces[j].1) {
+                if !order.contains(&j)
+                    && keys[j] == keys[i]
+                    && !pieces[j].1.author_in_text
+                    && !affixed(pieces[j].1)
+                {
                     order.push(j);
                 }
             }
         }
         let authors: Vec<String> = order.iter().map(|i| keys[*i].clone()).collect();
-        let pieces: Vec<(Toks, &CitationItem)> = order.iter().map(|i| (pieces[*i].0.clone(), pieces[*i].1)).collect();
+        let pieces: Vec<(Toks, &CitationItem)> = order
+            .iter()
+            .map(|i| (pieces[*i].0.clone(), pieces[*i].1))
+            .collect();
         let pieces = &pieces[..];
         let group_delim = cit.attr("after-collapse-delimiter").unwrap_or(delim);
         let year_delim_attr = cit.attr("cite-group-delimiter");
@@ -452,7 +577,12 @@ impl Processor {
         while i < pieces.len() {
             let mut j = i + 1;
             let affixed = |it: &CitationItem| !it.prefix.is_empty() || !it.suffix.is_empty();
-            while j < pieces.len() && !authors[i].is_empty() && authors[j] == authors[i] && !pieces[j].1.author_in_text && !affixed(pieces[j].1) {
+            while j < pieces.len()
+                && !authors[i].is_empty()
+                && authors[j] == authors[i]
+                && !pieces[j].1.author_in_text
+                && !affixed(pieces[j].1)
+            {
                 j += 1;
             }
             if !first_group {
@@ -467,17 +597,27 @@ impl Processor {
                 ctx.item.suppress_author = true;
                 let rest = eval_layout_items(layout, &mut ctx);
                 let located = pieces[k].1.locator.is_some() || pieces[k - 1].1.locator.is_some();
-                out.push(Tok::Text(if located && year_delim_attr.is_none() { delim.to_string() } else { year_delim.to_string() }));
+                out.push(Tok::Text(if located && year_delim_attr.is_none() {
+                    delim.to_string()
+                } else {
+                    year_delim.to_string()
+                }));
                 let same = mode != "year" && same_year(self.refs.get(&pieces[k - 1].1.id), Some(r));
                 if same {
                     // After a year with a suffix, only the suffix letters follow.
-                    if let (Some(d), Some(Tok::Text(last))) = (cit.attr("year-suffix-delimiter"), out.last_mut()) {
+                    if let (Some(d), Some(Tok::Text(last))) =
+                        (cit.attr("year-suffix-delimiter"), out.last_mut())
+                    {
                         *last = d.to_string();
                     }
                 }
                 let rest = if same {
                     // Same year: only the suffix letter follows.
-                    suffixes.get(&it.id).cloned().map(|s| text_toks(&s)).unwrap_or(rest)
+                    suffixes
+                        .get(&it.id)
+                        .cloned()
+                        .map(|s| text_toks(&s))
+                        .unwrap_or(rest)
                 } else {
                     rest
                 };
@@ -490,22 +630,43 @@ impl Processor {
 
     // ---- sorting ----------------------------------------------------------------------------
 
-    fn keys_for(&self, id: &str, sort: &XElem, mode: Mode, numbers: &HashMap<String, usize>) -> Vec<SortKey> {
-        let Some(r) = self.refs.get(id) else { return Vec::new() };
+    fn keys_for(
+        &self,
+        id: &str,
+        sort: &XElem,
+        mode: Mode,
+        numbers: &HashMap<String, usize>,
+    ) -> Vec<SortKey> {
+        let Some(r) = self.refs.get(id) else {
+            return Vec::new();
+        };
         sort.elems()
             .filter(|k| k.name == "key")
             .map(|k| {
                 if let Some(var) = k.attr("variable") {
                     return match var {
-                        "citation-number" => SortKey::Num(numbers.get(id).copied().unwrap_or(0) as i64),
+                        "citation-number" => {
+                            SortKey::Num(numbers.get(id).copied().unwrap_or(0) as i64)
+                        }
                         v => match r.fields.get(v) {
                             Some(Field::Date(d)) => {
                                 let p = d.parts.first().copied().unwrap_or([0, 0, 0]);
-                                SortKey::Num(i64::from(p[0]) * 10000 + i64::from(p[1]) * 100 + i64::from(p[2]))
+                                SortKey::Num(
+                                    i64::from(p[0]) * 10000
+                                        + i64::from(p[1]) * 100
+                                        + i64::from(p[2]),
+                                )
                             }
-                            Some(Field::Text(t)) if is_plain_number(t) => SortKey::Num(t.trim().parse().unwrap_or(0)),
+                            Some(Field::Text(t)) if is_plain_number(t) => {
+                                SortKey::Num(t.trim().parse().unwrap_or(0))
+                            }
                             Some(Field::Text(t)) => SortKey::Str(sort_string(t)),
-                            Some(Field::Names(n)) => SortKey::Str(sort_string(&n.iter().map(|x| format!("{} {}", x.family, x.given)).collect::<Vec<_>>().join(" "))),
+                            Some(Field::Names(n)) => SortKey::Str(sort_string(
+                                &n.iter()
+                                    .map(|x| format!("{} {}", x.family, x.given))
+                                    .collect::<Vec<_>>()
+                                    .join(" "),
+                            )),
                             None => SortKey::Empty,
                         },
                     };
@@ -520,7 +681,11 @@ impl Processor {
                         if std::env::var("CITEPROC_DEBUG").is_ok() {
                             eprintln!("sort {id} {m}: {:?}", plain(&toks));
                         }
-                        return if s.is_empty() { SortKey::Empty } else { SortKey::Str(s) };
+                        return if s.is_empty() {
+                            SortKey::Empty
+                        } else {
+                            SortKey::Str(s)
+                        };
                     }
                 }
                 SortKey::Empty
@@ -528,8 +693,17 @@ impl Processor {
             .collect()
     }
 
-    fn sort_ids(&self, ids: &mut Vec<String>, sort: &XElem, mode: Mode, numbers: &HashMap<String, usize>) {
-        let mut keyed: Vec<(Vec<SortKey>, String)> = ids.iter().map(|id| (self.keys_for(id, sort, mode, numbers), id.clone())).collect();
+    fn sort_ids(
+        &self,
+        ids: &mut Vec<String>,
+        sort: &XElem,
+        mode: Mode,
+        numbers: &HashMap<String, usize>,
+    ) {
+        let mut keyed: Vec<(Vec<SortKey>, String)> = ids
+            .iter()
+            .map(|id| (self.keys_for(id, sort, mode, numbers), id.clone()))
+            .collect();
         sort_keyed(&mut keyed, sort);
         *ids = keyed.into_iter().map(|(_, id)| id).collect();
     }
@@ -539,8 +713,12 @@ impl Processor {
     /// `disambiguate-add-names`: when two different references print the same cite, show more of
     /// the names of the colliding ones, one at a time, until the cites differ or the names run out.
     fn disambiguate_names(&self, bib_order: &[String], numbers: &HashMap<String, usize>) {
-        let Some(cit) = self.style.citation() else { return };
-        let Some(layout) = cit.find("layout") else { return };
+        let Some(cit) = self.style.citation() else {
+            return;
+        };
+        let Some(layout) = cit.find("layout") else {
+            return;
+        };
         if cit.attr("disambiguate-add-names") != Some("true") {
             self.mark_ambiguous(layout, bib_order, numbers);
             return;
@@ -549,7 +727,10 @@ impl Processor {
             let mut groups: Vec<(String, Vec<String>)> = Vec::new();
             for id in bib_order {
                 let Some(r) = self.refs.get(id) else { continue };
-                let it = CitationItem { id: id.clone(), ..Default::default() };
+                let it = CitationItem {
+                    id: id.clone(),
+                    ..Default::default()
+                };
                 let mut ctx = self.item_ctx(r, &it, numbers, &HashMap::new(), Position::First);
                 let key = plain(&eval_layout_items(layout, &mut ctx));
                 match groups.iter_mut().find(|(k, _)| *k == key) {
@@ -566,7 +747,9 @@ impl Processor {
                     let shown = current.unwrap_or_else(|| self.default_use_first(cit));
                     // Every member of an ambiguous group that still hides names shows one more.
                     if shown < total {
-                        self.names_override.borrow_mut().insert(id.clone(), shown + 1);
+                        self.names_override
+                            .borrow_mut()
+                            .insert(id.clone(), shown + 1);
                         changed = true;
                     }
                 }
@@ -579,11 +762,19 @@ impl Processor {
     }
 
     /// Fills `ambiguous` with the references that still print the same cite as another one.
-    fn mark_ambiguous(&self, layout: &XElem, bib_order: &[String], numbers: &HashMap<String, usize>) {
+    fn mark_ambiguous(
+        &self,
+        layout: &XElem,
+        bib_order: &[String],
+        numbers: &HashMap<String, usize>,
+    ) {
         let mut groups: Vec<(String, Vec<String>)> = Vec::new();
         for id in bib_order {
             let Some(r) = self.refs.get(id) else { continue };
-            let it = CitationItem { id: id.clone(), ..Default::default() };
+            let it = CitationItem {
+                id: id.clone(),
+                ..Default::default()
+            };
             let mut ctx = self.item_ctx(r, &it, numbers, &HashMap::new(), Position::First);
             let key = plain(&eval_layout_items(layout, &mut ctx));
             match groups.iter_mut().find(|(k, _)| *k == key) {
@@ -597,20 +788,35 @@ impl Processor {
     }
 
     fn default_use_first(&self, cit: &XElem) -> usize {
-        cit.attr("et-al-use-first").or_else(|| self.style.root.attr("et-al-use-first")).and_then(|v| v.parse().ok()).unwrap_or(1)
+        cit.attr("et-al-use-first")
+            .or_else(|| self.style.root.attr("et-al-use-first"))
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(1)
     }
 
-    fn year_suffixes(&self, bib_order: &[String], numbers: &HashMap<String, usize>, _n: usize) -> HashMap<String, String> {
+    fn year_suffixes(
+        &self,
+        bib_order: &[String],
+        numbers: &HashMap<String, usize>,
+        _n: usize,
+    ) -> HashMap<String, String> {
         let mut out = HashMap::new();
-        let Some(cit) = self.style.citation() else { return out };
+        let Some(cit) = self.style.citation() else {
+            return out;
+        };
         if cit.attr("disambiguate-add-year-suffix") != Some("true") {
             return out;
         }
-        let Some(layout) = cit.find("layout") else { return out };
+        let Some(layout) = cit.find("layout") else {
+            return out;
+        };
         let mut groups: Vec<(String, Vec<String>)> = Vec::new();
         for id in bib_order {
             let Some(r) = self.refs.get(id) else { continue };
-            let it = CitationItem { id: id.clone(), ..Default::default() };
+            let it = CitationItem {
+                id: id.clone(),
+                ..Default::default()
+            };
             let mut ctx = self.item_ctx(r, &it, numbers, &HashMap::new(), Position::First);
             let key = plain(&eval_layout_items(layout, &mut ctx));
             match groups.iter_mut().find(|(k, _)| *k == key) {
@@ -631,7 +837,10 @@ impl Processor {
 }
 
 fn same_year(a: Option<&Reference>, b: Option<&Reference>) -> bool {
-    match (a.and_then(|r| r.date("issued")), b.and_then(|r| r.date("issued"))) {
+    match (
+        a.and_then(|r| r.date("issued")),
+        b.and_then(|r| r.date("issued")),
+    ) {
         (Some(x), Some(y)) => x.year() == y.year(),
         _ => false,
     }
@@ -680,14 +889,20 @@ fn replace_subsequence(toks: Toks, needle: &Toks, with: &str) -> Toks {
 }
 
 fn collapse_numbers(pieces: &[(Toks, &CitationItem)], delim: &str) -> Toks {
-    let nums: Vec<Option<u64>> = pieces.iter().map(|(t, _)| plain(t).trim().parse::<u64>().ok()).collect();
+    let nums: Vec<Option<u64>> = pieces
+        .iter()
+        .map(|(t, _)| plain(t).trim().parse::<u64>().ok())
+        .collect();
     let mut out = Toks::new();
     let mut i = 0;
     let mut first = true;
     while i < pieces.len() {
         let mut j = i;
         if let Some(n) = nums[i] {
-            while j + 1 < pieces.len() && nums[j + 1] == Some(nums[j].unwrap_or(0) + 1) && nums[j].is_some() {
+            while j + 1 < pieces.len()
+                && nums[j + 1] == Some(nums[j].unwrap_or(0) + 1)
+                && nums[j].is_some()
+            {
                 j += 1;
             }
             let _ = n;
@@ -749,17 +964,36 @@ fn fold(c: char) -> char {
 }
 
 fn sort_keyed<T>(items: &mut [(Vec<SortKey>, T)], sort: &XElem) {
-    let dirs: Vec<bool> = sort.elems().filter(|k| k.name == "key").map(|k| k.attr("sort") == Some("descending")).collect();
+    let dirs: Vec<bool> = sort
+        .elems()
+        .filter(|k| k.name == "key")
+        .map(|k| k.attr("sort") == Some("descending"))
+        .collect();
     items.sort_by(|a, b| {
         for (i, desc) in dirs.iter().enumerate() {
-            let (x, y) = (a.0.get(i).cloned().unwrap_or(SortKey::Empty), b.0.get(i).cloned().unwrap_or(SortKey::Empty));
+            let (x, y) = (
+                a.0.get(i).cloned().unwrap_or(SortKey::Empty),
+                b.0.get(i).cloned().unwrap_or(SortKey::Empty),
+            );
             use std::cmp::Ordering::*;
             let o = match (&x, &y) {
                 (SortKey::Empty, SortKey::Empty) => Equal,
                 (SortKey::Empty, _) => Greater,
                 (_, SortKey::Empty) => Less,
-                (SortKey::Num(p), SortKey::Num(q)) => if *desc { q.cmp(p) } else { p.cmp(q) },
-                (SortKey::Str(p), SortKey::Str(q)) => if *desc { q.cmp(p) } else { p.cmp(q) },
+                (SortKey::Num(p), SortKey::Num(q)) => {
+                    if *desc {
+                        q.cmp(p)
+                    } else {
+                        p.cmp(q)
+                    }
+                }
+                (SortKey::Str(p), SortKey::Str(q)) => {
+                    if *desc {
+                        q.cmp(p)
+                    } else {
+                        p.cmp(q)
+                    }
+                }
                 (SortKey::Num(_), SortKey::Str(_)) => Less,
                 (SortKey::Str(_), SortKey::Num(_)) => Greater,
             };
@@ -773,10 +1007,17 @@ fn sort_keyed<T>(items: &mut [(Vec<SortKey>, T)], sort: &XElem) {
 
 /// Quote marks of the style (English).
 pub fn quote_marks(style: &Style) -> ((String, String), (String, String)) {
-    let t = |n: &str, d: &str| style.term(n, "long", false).unwrap_or_else(|| d.to_string());
+    let t = |n: &str, d: &str| {
+        style
+            .term(n, "long", false)
+            .unwrap_or_else(|| d.to_string())
+    };
     (
         (t("open-quote", "\u{201c}"), t("close-quote", "\u{201d}")),
-        (t("open-inner-quote", "\u{2018}"), t("close-inner-quote", "\u{2019}")),
+        (
+            t("open-inner-quote", "\u{2018}"),
+            t("close-inner-quote", "\u{2019}"),
+        ),
     )
 }
 
@@ -785,6 +1026,9 @@ impl Processed {
     pub fn comparison(&self, style: &Style) -> (Vec<String>, Vec<String>) {
         let (o, i) = quote_marks(style);
         let conv = |t: &Toks| comparison_string(&to_inlines(t, (&o.0, &o.1), (&i.0, &i.1)));
-        (self.citations.iter().map(conv).collect(), self.bibliography.iter().map(|e| conv(&e.toks)).collect())
+        (
+            self.citations.iter().map(conv).collect(),
+            self.bibliography.iter().map(|e| conv(&e.toks)).collect(),
+        )
     }
 }

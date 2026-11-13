@@ -1887,7 +1887,13 @@ fn damaged_fixtures_never_panic_or_hang_with_math_expansion_and_conversion() {
 
 fn pandoc_md(src: &str) -> String {
     let doc = parse(src);
-    render_markdown(&doc, &RenderOptions { pandoc: true, ..Default::default() })
+    render_markdown(
+        &doc,
+        &RenderOptions {
+            pandoc: true,
+            ..Default::default()
+        },
+    )
 }
 
 #[test]
@@ -1895,11 +1901,17 @@ fn pandoc_layout_puts_front_matter_in_yaml_and_levels_follow_the_top_division() 
     let out = pandoc_md(
         "\\title{T}\\author{A \\and B}\\begin{document}\\maketitle\\section{S}\\label{s}\\paragraph{p}x\\end{document}",
     );
-    assert!(out.starts_with("---\ntitle: \"T\"\nauthor:\n- \"A\"\n- \"B\"\n---\n\n# S {#s}\n"), "{out}");
+    assert!(
+        out.starts_with("---\ntitle: \"T\"\nauthor:\n- \"A\"\n- \"B\"\n---\n\n# S {#s}\n"),
+        "{out}"
+    );
     assert!(out.contains("\n#### p\n"), "{out}");
     // Pandoc: \chapter is level 1, \section 2, \paragraph 5; \part above them shifts all by one.
     let book = pandoc_md("\\begin{document}\\chapter{C}\\section{S}\\paragraph{p}\\end{document}");
-    assert!(book.contains("# C\n") && book.contains("## S\n") && book.contains("##### p\n"), "{book}");
+    assert!(
+        book.contains("# C\n") && book.contains("## S\n") && book.contains("##### p\n"),
+        "{book}"
+    );
     let part = pandoc_md("\\begin{document}\\part{P}\\section{S}\\end{document}");
     assert!(part.contains("# P\n") && part.contains("### S\n"), "{part}");
 }
@@ -1910,11 +1922,16 @@ fn pandoc_layout_writes_pandoc_citations() {
         "\\begin{document}A \\cite{a} B \\cite{a,b} C \\citep[see][p.~4]{a,b} D \\citet{a} E \\citet{a,b} F \\citeyear{a} G \\nocite{z}\\end{document}",
     );
     let out = out.replace('\u{a0}', " ");
-    assert!(out.contains("A [@a] B [@a; @b] C [see @a; @b p. 4] D @a E @a [@b] F [-@a] G"), "{out}");
+    assert!(
+        out.contains("A [@a] B [@a; @b] C [see @a; @b p. 4] D @a E @a [@b] F [-@a] G"),
+        "{out}"
+    );
 }
 
 #[test]
 fn pandoc_layout_keeps_description_lists_as_definition_lists() {
-    let out = pandoc_md("\\begin{document}\\begin{description}\\item[t] d\\end{description}\\end{document}");
+    let out = pandoc_md(
+        "\\begin{document}\\begin{description}\\item[t] d\\end{description}\\end{document}",
+    );
     assert!(out.contains("t\n:   d\n"), "{out}");
 }

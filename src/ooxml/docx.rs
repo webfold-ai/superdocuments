@@ -181,10 +181,16 @@ impl Numbering {
                         }
                     }
                     "start" => {
-                        if let (Some(a), Some(l), Some(v)) =
-                            (abstract_id.as_ref(), level, attr_local(&tag, "val").and_then(|v| v.parse().ok()))
-                        {
-                            out.starts.entry(a.clone()).or_default().entry(l).or_insert(v);
+                        if let (Some(a), Some(l), Some(v)) = (
+                            abstract_id.as_ref(),
+                            level,
+                            attr_local(&tag, "val").and_then(|v| v.parse().ok()),
+                        ) {
+                            out.starts
+                                .entry(a.clone())
+                                .or_default()
+                                .entry(l)
+                                .or_insert(v);
                         }
                     }
                     "num" => num_id = attr_local(&tag, "numId"),
@@ -215,8 +221,16 @@ impl Numbering {
     /// The number format and first number of a numbered level (`decimal`, `lowerLetter`, ...).
     fn format_and_start(&self, num_id: &str, level: u32) -> (String, u32) {
         let abs = self.nums.get(num_id);
-        let fmt = abs.and_then(|a| self.formats.get(a)).and_then(|l| l.get(&level)).cloned().unwrap_or_else(|| "decimal".into());
-        let start = abs.and_then(|a| self.starts.get(a)).and_then(|l| l.get(&level)).copied().unwrap_or(1);
+        let fmt = abs
+            .and_then(|a| self.formats.get(a))
+            .and_then(|l| l.get(&level))
+            .cloned()
+            .unwrap_or_else(|| "decimal".into());
+        let start = abs
+            .and_then(|a| self.starts.get(a))
+            .and_then(|l| l.get(&level))
+            .copied()
+            .unwrap_or(1);
         (fmt, start)
     }
 
@@ -423,7 +437,13 @@ impl<'a> Parser<'a> {
                 }
             }
             "ind" if self.in_ppr => {
-                let num = |names: &[&str]| names.iter().find_map(|n| attr_local(tag, n)).and_then(|v| v.parse::<i32>().ok()).unwrap_or(0);
+                let num = |names: &[&str]| {
+                    names
+                        .iter()
+                        .find_map(|n| attr_local(tag, n))
+                        .and_then(|v| v.parse::<i32>().ok())
+                        .unwrap_or(0)
+                };
                 let (left, hanging) = (num(&["left", "start"]), num(&["hanging"]));
                 if let Some(p) = self.paras.last_mut() {
                     p.indent = left - hanging;
@@ -719,16 +739,23 @@ impl<'a> Parser<'a> {
             return;
         }
         let style_name = self.styles.name(&style);
-        let is_code = matches!(
-            style_name.as_str(),
-            "source code" | "sourcecode"
-        ) || matches!(style.as_str(), "SourceCode");
+        let is_code = matches!(style_name.as_str(), "source code" | "sourcecode")
+            || matches!(style.as_str(), "SourceCode");
         let is_quote = matches!(
             style_name.as_str(),
-            "block text" | "block quote" | "block quotation" | "quote" | "intense quote" | "quotations"
+            "block text"
+                | "block quote"
+                | "block quotation"
+                | "quote"
+                | "intense quote"
+                | "quotations"
         ) || matches!(style.as_str(), "BlockText" | "Quote" | "IntenseQuote");
         // Pandoc reads a paragraph that is indented (and not in a list) as a block quote.
-        let is_quote = is_quote || (para.indent > 0 && para.num.is_none() && self.styles.list(&style).is_none() && !is_code);
+        let is_quote = is_quote
+            || (para.indent > 0
+                && para.num.is_none()
+                && self.styles.list(&style).is_none()
+                && !is_code);
         if is_code && self.tables.is_empty() {
             let mut code = String::new();
             for seg in &para.segs {
@@ -765,7 +792,10 @@ impl<'a> Parser<'a> {
             } else {
                 self.counters.retain(|(n, l), _| !(*n == id && *l > level));
                 let (fmt, start) = self.numbering.format_and_start(&id, level);
-                let count = self.counters.entry((id.clone(), level)).or_insert(start.saturating_sub(1));
+                let count = self
+                    .counters
+                    .entry((id.clone(), level))
+                    .or_insert(start.saturating_sub(1));
                 *count += 1;
                 let n = *count;
                 match fmt.as_str() {
@@ -811,7 +841,10 @@ impl<'a> Parser<'a> {
                 .read_event_into(&mut buf)
                 .map_err(|e| e.to_string())?
             {
-                Event::Start(tag) if self.skip == 0 && matches!(tag.local_name().as_ref(), "oMath" | "oMathPara") => {
+                Event::Start(tag)
+                    if self.skip == 0
+                        && matches!(tag.local_name().as_ref(), "oMath" | "oMathPara") =>
+                {
                     let display = tag.local_name().as_ref() == "oMathPara";
                     let name = tag.name().as_ref().to_owned();
                     let from = reader.buffer_position() as usize;
@@ -819,14 +852,24 @@ impl<'a> Parser<'a> {
                     reader
                         .read_to_end_into(quick_xml::name::QName(name.as_str()), &mut scratch)
                         .map_err(|e| e.to_string())?;
-                    let to = (reader.buffer_position() as usize).saturating_sub(name.len() + 3).max(from);
+                    let to = (reader.buffer_position() as usize)
+                        .saturating_sub(name.len() + 3)
+                        .max(from);
                     let inner = String::from_utf8_lossy(&xml[from..to]).into_owned();
-                    let wrapped = format!("<x:wrap xmlns:m=\"m\" xmlns:x=\"x\"><m:{} >{inner}</m:{}></x:wrap>", if display { "oMathPara" } else { "oMath" }, if display { "oMathPara" } else { "oMath" });
+                    let wrapped = format!(
+                        "<x:wrap xmlns:m=\"m\" xmlns:x=\"x\"><m:{} >{inner}</m:{}></x:wrap>",
+                        if display { "oMathPara" } else { "oMath" },
+                        if display { "oMathPara" } else { "oMath" }
+                    );
                     if let Ok(root) = crate::xmltree::parse(wrapped.as_bytes()) {
                         if let Some(m) = root.elems().next() {
                             let tex = super::omml::to_tex(m);
                             if !tex.is_empty() {
-                                self.push_seg(Seg::Raw(if display { format!("$${tex}$$") } else { format!("${tex}$") }));
+                                self.push_seg(Seg::Raw(if display {
+                                    format!("$${tex}$$")
+                                } else {
+                                    format!("${tex}$")
+                                }));
                             }
                         }
                     }
@@ -962,7 +1005,21 @@ fn letter(n: u32, upper: bool) -> String {
 }
 
 fn roman(mut n: u32) -> String {
-    let table = [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")];
+    let table = [
+        (1000, "M"),
+        (900, "CM"),
+        (500, "D"),
+        (400, "CD"),
+        (100, "C"),
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
+        (10, "X"),
+        (9, "IX"),
+        (5, "V"),
+        (4, "IV"),
+        (1, "I"),
+    ];
     let mut out = String::new();
     for (v, r) in table {
         while n >= v {
@@ -988,7 +1045,17 @@ fn join_blocks(blocks: &[Block]) -> String {
                 (owned.as_str(), None)
             }
             Block::Quote(t) => {
-                owned = t.lines().map(|l| if l.is_empty() { ">".to_owned() } else { format!("> {l}") }).collect::<Vec<_>>().join("\n");
+                owned = t
+                    .lines()
+                    .map(|l| {
+                        if l.is_empty() {
+                            ">".to_owned()
+                        } else {
+                            format!("> {l}")
+                        }
+                    })
+                    .collect::<Vec<_>>()
+                    .join("\n");
                 (owned.as_str(), None)
             }
         };
@@ -1054,7 +1121,12 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
                 y.push_str(&format!("{key}: {}\n", quote(v)));
             }
         }
-        let authors: Vec<&String> = main.meta.iter().filter(|(k, _)| *k == "author").map(|(_, v)| v).collect();
+        let authors: Vec<&String> = main
+            .meta
+            .iter()
+            .filter(|(k, _)| *k == "author")
+            .map(|(_, v)| v)
+            .collect();
         if !authors.is_empty() {
             y.push_str("author:\n");
             for a in authors {
@@ -1064,7 +1136,12 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
         if let Some((_, v)) = main.meta.iter().find(|(k, _)| *k == "date") {
             y.push_str(&format!("date: {}\n", quote(v)));
         }
-        let abs: Vec<&String> = main.meta.iter().filter(|(k, _)| *k == "abstract").map(|(_, v)| v).collect();
+        let abs: Vec<&String> = main
+            .meta
+            .iter()
+            .filter(|(k, _)| *k == "abstract")
+            .map(|(_, v)| v)
+            .collect();
         if !abs.is_empty() {
             y.push_str("abstract: |\n");
             for a in abs {

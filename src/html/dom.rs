@@ -82,18 +82,60 @@ fn write_elem(e: &Elem, out: &mut String) {
 pub(crate) fn is_void(tag: &str) -> bool {
     matches!(
         tag,
-        "area" | "base" | "br" | "col" | "embed" | "hr" | "img" | "input" | "link" | "meta"
-            | "param" | "source" | "track" | "wbr" | "command" | "keygen"
+        "area"
+            | "base"
+            | "br"
+            | "col"
+            | "embed"
+            | "hr"
+            | "img"
+            | "input"
+            | "link"
+            | "meta"
+            | "param"
+            | "source"
+            | "track"
+            | "wbr"
+            | "command"
+            | "keygen"
     )
 }
 
 fn is_blocklike(tag: &str) -> bool {
     matches!(
         tag,
-        "address" | "article" | "aside" | "blockquote" | "details" | "div" | "dl" | "fieldset"
-            | "figcaption" | "figure" | "footer" | "form" | "h1" | "h2" | "h3" | "h4" | "h5"
-            | "h6" | "header" | "hr" | "main" | "nav" | "ol" | "p" | "pre" | "section" | "table"
-            | "ul" | "li" | "dd" | "dt" | "center"
+        "address"
+            | "article"
+            | "aside"
+            | "blockquote"
+            | "details"
+            | "div"
+            | "dl"
+            | "fieldset"
+            | "figcaption"
+            | "figure"
+            | "footer"
+            | "form"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "header"
+            | "hr"
+            | "main"
+            | "nav"
+            | "ol"
+            | "p"
+            | "pre"
+            | "section"
+            | "table"
+            | "ul"
+            | "li"
+            | "dd"
+            | "dt"
+            | "center"
     )
 }
 
@@ -101,9 +143,28 @@ fn is_blocklike(tag: &str) -> bool {
 fn is_scope_boundary(tag: &str) -> bool {
     matches!(
         tag,
-        "table" | "td" | "th" | "caption" | "div" | "blockquote" | "section" | "article" | "body"
-            | "html" | "ul" | "ol" | "dl" | "figure" | "aside" | "nav" | "header" | "footer"
-            | "main" | "li" | "dd" | "dt"
+        "table"
+            | "td"
+            | "th"
+            | "caption"
+            | "div"
+            | "blockquote"
+            | "section"
+            | "article"
+            | "body"
+            | "html"
+            | "ul"
+            | "ol"
+            | "dl"
+            | "figure"
+            | "aside"
+            | "nav"
+            | "header"
+            | "footer"
+            | "main"
+            | "li"
+            | "dd"
+            | "dt"
     )
 }
 
@@ -250,7 +311,11 @@ impl Parser<'_> {
         let bytes = self.src.as_bytes();
         let mut i = self.pos + 1;
         let name_start = i;
-        while i < bytes.len() && !bytes[i].is_ascii_whitespace() && bytes[i] != b'>' && bytes[i] != b'/' {
+        while i < bytes.len()
+            && !bytes[i].is_ascii_whitespace()
+            && bytes[i] != b'>'
+            && bytes[i] != b'/'
+        {
             i += 1;
         }
         let tag = self.src[name_start..i].to_ascii_lowercase();
@@ -276,7 +341,10 @@ impl Parser<'_> {
                 _ => {}
             }
             let ns = i;
-            while i < bytes.len() && !bytes[i].is_ascii_whitespace() && !matches!(bytes[i], b'=' | b'>' | b'/') {
+            while i < bytes.len()
+                && !bytes[i].is_ascii_whitespace()
+                && !matches!(bytes[i], b'=' | b'>' | b'/')
+            {
                 i += 1;
             }
             let name = self.src[ns..i].to_ascii_lowercase();
@@ -337,7 +405,9 @@ impl Parser<'_> {
             if let Some(top) = self.stack.last_mut() {
                 top.children.push(Node::Elem(elem));
             }
-            self.pos = self.src[end..].find('>').map_or(self.src.len(), |e| end + e + 1);
+            self.pos = self.src[end..]
+                .find('>')
+                .map_or(self.src.len(), |e| end + e + 1);
             return;
         }
         self.stack.push(elem);
@@ -361,7 +431,11 @@ impl Parser<'_> {
             "dt" | "dd" => find(&self.stack, &["dt", "dd"], &|t| t == "dl"),
             "tr" => find(&self.stack, &["tr"], &|t| t == "table"),
             "td" | "th" => find(&self.stack, &["td", "th"], &|t| matches!(t, "tr" | "table")),
-            "thead" | "tbody" | "tfoot" => find(&self.stack, &["thead", "tbody", "tfoot", "tr", "td", "th"], &|t| t == "table"),
+            "thead" | "tbody" | "tfoot" => find(
+                &self.stack,
+                &["thead", "tbody", "tfoot", "tr", "td", "th"],
+                &|t| t == "table",
+            ),
             "option" => find(&self.stack, &["option"], &|t| t == "select"),
             t if is_blocklike(t) => find(&self.stack, &["p"], &|t| is_scope_boundary(t)),
             _ => None,
@@ -398,7 +472,8 @@ mod tests {
 
     #[test]
     fn decodes_entities_and_skips_comments() {
-        let nodes = parse("<p>a &amp; b &eacute; &#8364;<!-- no --></p><script>if (a<b) {}</script>");
+        let nodes =
+            parse("<p>a &amp; b &eacute; &#8364;<!-- no --></p><script>if (a<b) {}</script>");
         let Node::Elem(p) = &nodes[0] else { panic!() };
         assert_eq!(p.text(), "a & b é €");
         let Node::Elem(s) = &nodes[1] else { panic!() };
