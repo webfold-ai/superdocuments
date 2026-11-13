@@ -24,9 +24,14 @@ pub fn build(pages: &[Page]) -> Vec<u8> {
     // 1 catalog, 2 pages, 3 font, 4 image; page i is object 10 + 2i, its content 11 + 2i.
     let mut objs: Vec<(u32, Vec<u8>)> = vec![
         (1, b"<< /Type /Catalog /Pages 2 0 R >>".to_vec()),
-        (3, b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".to_vec()),
+        (
+            3,
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".to_vec(),
+        ),
     ];
-    let kids: Vec<String> = (0..pages.len()).map(|i| format!("{} 0 R", 10 + 2 * i)).collect();
+    let kids: Vec<String> = (0..pages.len())
+        .map(|i| format!("{} 0 R", 10 + 2 * i))
+        .collect();
     objs.push((
         2,
         format!(
@@ -63,7 +68,11 @@ pub fn build(pages: &[Page]) -> Vec<u8> {
         ));
         objs.push((
             11 + 2 * i as u32,
-            format!("<< /Length {} >>\nstream\n{content}\nendstream", content.len()).into_bytes(),
+            format!(
+                "<< /Length {} >>\nstream\n{content}\nendstream",
+                content.len()
+            )
+            .into_bytes(),
         ));
     }
     objs.sort_by_key(|(n, _)| *n);
@@ -78,16 +87,19 @@ pub fn build(pages: &[Page]) -> Vec<u8> {
     }
     let xref = out.len();
     out.extend_from_slice(format!("xref\n0 {}\n0000000000 65535 f \n", max + 1).as_bytes());
-    for n in 1..=max as usize {
-        if offsets[n] == 0 {
+    for offset in &offsets[1..] {
+        if *offset == 0 {
             out.extend_from_slice(b"0000000000 65535 f \n");
         } else {
-            out.extend_from_slice(format!("{:010} 00000 n \n", offsets[n]).as_bytes());
+            out.extend_from_slice(format!("{offset:010} 00000 n \n").as_bytes());
         }
     }
     out.extend_from_slice(
-        format!("trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n", max + 1)
-            .as_bytes(),
+        format!(
+            "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n",
+            max + 1
+        )
+        .as_bytes(),
     );
     out
 }
@@ -99,4 +111,3 @@ pub fn dense_text() -> String {
     "The quick brown fox jumps over the lazy dog while the Administrator considers the schedule. "
         .repeat(5)
 }
-

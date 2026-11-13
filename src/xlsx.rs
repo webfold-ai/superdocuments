@@ -25,11 +25,17 @@ pub enum CellValue {
     Text(String),
     /// A number whose style is not a date format: the value and the text exactly as stored
     /// (`4.0999999999999996`).
-    Number { value: f64, raw: String },
+    Number {
+        value: f64,
+        raw: String,
+    },
     Bool(bool),
     /// A serial date or time (a date number format): the serial and its ISO form (`2026-09-01`,
     /// `12:30:00` or both).
-    DateTime { serial: f64, iso: String },
+    DateTime {
+        serial: f64,
+        iso: String,
+    },
     /// An error value such as `#DIV/0!`.
     Error(String),
     /// A formula with no stored result.

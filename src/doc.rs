@@ -159,7 +159,8 @@ fn piece_table(clx: &[u8]) -> Result<Vec<Piece>, String> {
         return Err("empty piece table".into());
     }
     let n = (plc.len() - 4) / 12;
-    let cp = |k: usize| u32::from_le_bytes([plc[4 * k], plc[4 * k + 1], plc[4 * k + 2], plc[4 * k + 3]]);
+    let cp =
+        |k: usize| u32::from_le_bytes([plc[4 * k], plc[4 * k + 1], plc[4 * k + 2], plc[4 * k + 3]]);
     let mut pieces = Vec::with_capacity(n);
     for k in 0..n {
         let pcd = 4 * (n + 1) + 8 * k;
@@ -250,7 +251,7 @@ pub fn render(raw: &str) -> String {
         } else {
             seg
         };
-        row.push(cell.replace('\r', " ").replace('\n', " ").trim().to_string());
+        row.push(cell.replace(['\r', '\n'], " ").trim().to_string());
     }
     close(&mut rows, &mut row, &mut blocks);
     paragraphs(tail, &mut blocks);
@@ -332,13 +333,21 @@ impl<'a> Cfb<'a> {
                 .chunks_exact(4)
                 .map(|c| u32::from_le_bytes([c[0], c[1], c[2], c[3]]))
                 .collect();
-            fat_sectors.extend(ids[..ids.len() - 1].iter().copied().filter(|id| *id < MAX_SECTOR));
+            fat_sectors.extend(
+                ids[..ids.len() - 1]
+                    .iter()
+                    .copied()
+                    .filter(|id| *id < MAX_SECTOR),
+            );
             difat_sector = *ids.last().unwrap_or(&END_OF_CHAIN);
         }
         let mut fat: Vec<u32> = Vec::new();
         for id in &fat_sectors {
             let s = sector_bytes(*id).ok_or("FAT sector outside the file")?;
-            fat.extend(s.chunks_exact(4).map(|c| u32::from_le_bytes([c[0], c[1], c[2], c[3]])));
+            fat.extend(
+                s.chunks_exact(4)
+                    .map(|c| u32::from_le_bytes([c[0], c[1], c[2], c[3]])),
+            );
         }
         let chain = |start: u32, fat: &[u32]| -> Result<Vec<u8>, String> {
             let mut out = Vec::new();
@@ -398,7 +407,10 @@ impl<'a> Cfb<'a> {
     }
 
     fn stream(&self, name: &str) -> Option<Vec<u8>> {
-        let e = self.entries.iter().find(|e| e.kind == 2 && e.name == name)?;
+        let e = self
+            .entries
+            .iter()
+            .find(|e| e.kind == 2 && e.name == name)?;
         let size = usize::try_from(e.size).ok()?.min(self.data.len());
         let mut out = Vec::with_capacity(size);
         let (mut id, mut hops) = (e.start, 0usize);

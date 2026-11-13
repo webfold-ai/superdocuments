@@ -13,9 +13,21 @@ fn csv(field: &str) -> String {
 
 fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
-    let file = args.iter().find(|a| !a.starts_with("--") && args.iter().position(|b| b == *a).map_or(true, |i| i == 0 || args[i - 1] != "--out")).expect("usage: xlsx_dump FILE [--values] [--out DIR]");
+    let file = args
+        .iter()
+        .find(|a| {
+            !a.starts_with("--")
+                && args
+                    .iter()
+                    .position(|b| b == *a)
+                    .is_none_or(|i| i == 0 || args[i - 1] != "--out")
+        })
+        .expect("usage: xlsx_dump FILE [--values] [--out DIR]");
     let values = args.iter().any(|a| a == "--values");
-    let out_dir = args.iter().position(|a| a == "--out").and_then(|i| args.get(i + 1));
+    let out_dir = args
+        .iter()
+        .position(|a| a == "--out")
+        .and_then(|i| args.get(i + 1));
     let sheets = read_workbook_typed(&std::fs::read(file).expect("read")).expect("xlsx");
     for sheet in sheets {
         let mut text = String::new();

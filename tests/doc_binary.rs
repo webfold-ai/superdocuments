@@ -18,9 +18,13 @@ fn ole(streams: &[(&str, Vec<u8>)]) -> Vec<u8> {
     let dir_sectors = dir_entries.div_ceil(4);
     let mut next = 1 + dir_sectors; // first stream sector
     let mut fat: Vec<u32> = vec![0xFFFF_FFFD]; // sector 0 holds the FAT itself
-    // directory chain
+                                               // directory chain
     for k in 0..dir_sectors {
-        fat.push(if k + 1 == dir_sectors { 0xFFFF_FFFE } else { (2 + k) as u32 });
+        fat.push(if k + 1 == dir_sectors {
+            0xFFFF_FFFE
+        } else {
+            (2 + k) as u32
+        });
     }
     let mut starts = Vec::new();
     let mut padded: Vec<Vec<u8>> = Vec::new();
@@ -32,7 +36,11 @@ fn ole(streams: &[(&str, Vec<u8>)]) -> Vec<u8> {
         let sectors = d.len() / SECTOR;
         starts.push(next as u32);
         for k in 0..sectors {
-            fat.push(if k + 1 == sectors { 0xFFFF_FFFE } else { (next + k + 1) as u32 });
+            fat.push(if k + 1 == sectors {
+                0xFFFF_FFFE
+            } else {
+                (next + k + 1) as u32
+            });
         }
         next += sectors;
         padded.push(d);
@@ -115,14 +123,20 @@ fn word97(pieces: &[Piece], flags: u16, n_fib: u16) -> Vec<u8> {
         let (bytes, compressed, chars) = match p {
             Piece::Latin(s) => (cp1252(s), true, s.chars().count()),
             Piece::Wide(s) => (
-                s.encode_utf16().flat_map(u16::to_le_bytes).collect::<Vec<u8>>(),
+                s.encode_utf16()
+                    .flat_map(u16::to_le_bytes)
+                    .collect::<Vec<u8>>(),
                 false,
                 s.encode_utf16().count(),
             ),
         };
         let at = word.len() as u32;
         word.extend_from_slice(&bytes);
-        let fc = if compressed { (at * 2) | 0x4000_0000 } else { at };
+        let fc = if compressed {
+            (at * 2) | 0x4000_0000
+        } else {
+            at
+        };
         pcds.push((fc, chars as u32));
         cps.push(cps.last().unwrap() + chars as u32);
     }
@@ -134,7 +148,7 @@ fn word97(pieces: &[Piece], flags: u16, n_fib: u16) -> Vec<u8> {
     word[62..64].copy_from_slice(&22u16.to_le_bytes()); // cslw
     word[64 + 12..64 + 16].copy_from_slice(&ccp_text.to_le_bytes()); // ccpText
     word[152..154].copy_from_slice(&93u16.to_le_bytes()); // cbRgFcLcb
-    // Clx: Pcdt (0x02, lcb, PlcPcd)
+                                                          // Clx: Pcdt (0x02, lcb, PlcPcd)
     let n = pcds.len();
     let mut plc = Vec::new();
     for cp in &cps {
@@ -150,7 +164,11 @@ fn word97(pieces: &[Piece], flags: u16, n_fib: u16) -> Vec<u8> {
     clx.push(0x02);
     clx.extend_from_slice(&(plc.len() as u32).to_le_bytes());
     clx.extend_from_slice(&plc);
-    let table_name = if flags & 0x0200 != 0 { "1Table" } else { "0Table" };
+    let table_name = if flags & 0x0200 != 0 {
+        "1Table"
+    } else {
+        "0Table"
+    };
     let fc_clx_at = 154 + 33 * 8;
     word[fc_clx_at..fc_clx_at + 4].copy_from_slice(&0u32.to_le_bytes());
     word[fc_clx_at + 4..fc_clx_at + 8].copy_from_slice(&(clx.len() as u32).to_le_bytes());
@@ -199,7 +217,9 @@ fn field_instructions_are_dropped_and_results_kept() {
 #[test]
 fn table_cells_become_a_markdown_table() {
     let doc = word97(
-        &[Piece::Latin("Before\rName\u{7}Value\u{7}\u{7}Alpha\u{7}1\u{7}\u{7}After\r")],
+        &[Piece::Latin(
+            "Before\rName\u{7}Value\u{7}\u{7}Alpha\u{7}1\u{7}\u{7}After\r",
+        )],
         0,
         0x00C1,
     );
@@ -253,7 +273,9 @@ fn rtf_and_docx_saved_as_doc_are_read_by_content() {
 #[test]
 fn truncated_and_corrupted_files_error_without_panicking() {
     let doc = word97(
-        &[Piece::Latin("Body text of some length for the truncation sweep\r")],
+        &[Piece::Latin(
+            "Body text of some length for the truncation sweep\r",
+        )],
         0,
         0x00C1,
     );

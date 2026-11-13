@@ -29,9 +29,18 @@ fn docx_with_object(prog_id: &str) -> Vec<u8> {
 <w:p><w:r><w:t>Census and Statistics Act 1905</w:t></w:r></w:p></w:body></w:document>"##
     );
     zip(&[
-        ("[Content_Types].xml", r#"<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/xml"/></Types>"#),
-        ("_rels/.rels", r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>"#),
-        ("word/_rels/document.xml.rels", r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.wmf"/><Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/oleObject" Target="embeddings/oleObject1.bin"/></Relationships>"#),
+        (
+            "[Content_Types].xml",
+            r#"<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/xml"/></Types>"#,
+        ),
+        (
+            "_rels/.rels",
+            r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>"#,
+        ),
+        (
+            "word/_rels/document.xml.rels",
+            r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId8" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.wmf"/><Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/oleObject" Target="embeddings/oleObject1.bin"/></Relationships>"#,
+        ),
         ("word/document.xml", &document),
     ])
 }
@@ -39,7 +48,10 @@ fn docx_with_object(prog_id: &str) -> Vec<u8> {
 #[test]
 fn embedded_picture_object_leaves_no_placeholder_line() {
     let md = convert_bytes("docx", &docx_with_object("Word.Picture.8")).unwrap();
-    assert!(!md.contains("Embedded object"), "stray placeholder in {md:?}");
+    assert!(
+        !md.contains("Embedded object"),
+        "stray placeholder in {md:?}"
+    );
     assert!(md.contains("Census and Statistics Act 1905"), "{md:?}");
     assert!(!md.trim_start().starts_with("Embedded"), "{md:?}");
 }
@@ -48,7 +60,10 @@ fn embedded_picture_object_leaves_no_placeholder_line() {
 fn embedded_documents_keep_their_attribution() {
     for prog_id in ["Excel.Sheet.12", "Word.Document.8", "AcroExch.Document"] {
         let md = convert_bytes("docx", &docx_with_object(prog_id)).unwrap();
-        assert!(md.contains(&format!("Embedded object: {prog_id}")), "{prog_id}: {md:?}");
+        assert!(
+            md.contains(&format!("Embedded object: {prog_id}")),
+            "{prog_id}: {md:?}"
+        );
     }
 }
 
@@ -60,8 +75,14 @@ fn epub(chapter_body: &str) -> Vec<u8> {
     );
     zip(&[
         ("mimetype", "application/epub+zip"),
-        ("META-INF/container.xml", r#"<?xml version="1.0"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>"#),
-        ("OEBPS/content.opf", r#"<?xml version="1.0"?><package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="id"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Ordinance</dc:title><dc:identifier id="id">x</dc:identifier></metadata><manifest><item id="c1" href="c1.html" media-type="application/xhtml+xml"/></manifest><spine><itemref idref="c1"/></spine></package>"#),
+        (
+            "META-INF/container.xml",
+            r#"<?xml version="1.0"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>"#,
+        ),
+        (
+            "OEBPS/content.opf",
+            r#"<?xml version="1.0"?><package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="id"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>Ordinance</dc:title><dc:identifier id="id">x</dc:identifier></metadata><manifest><item id="c1" href="c1.html" media-type="application/xhtml+xml"/></manifest><spine><itemref idref="c1"/></spine></package>"#,
+        ),
         ("OEBPS/c1.html", &chapter),
     ])
 }
@@ -78,15 +99,28 @@ fn empty_anchors_in_an_epub_do_not_become_empty_links() {
     )
     .unwrap();
     assert!(!md.contains("[]("), "empty link in {md:?}");
-    assert!(md.contains("This Ordinance may be cited as the Census Ordinance 1980."), "{md:?}");
-    assert!(md.contains("Notes to the Ordinance."), "link text kept: {md:?}");
+    assert!(
+        md.contains("This Ordinance may be cited as the Census Ordinance 1980."),
+        "{md:?}"
+    );
+    assert!(
+        md.contains("Notes to the Ordinance."),
+        "link text kept: {md:?}"
+    );
     assert!(md.contains("After."), "{md:?}");
 }
 
 #[test]
 fn links_with_text_survive_in_an_epub() {
-    let md = convert_bytes("epub", &epub(r#"<p>See <a href="https://www.legislation.gov.au/">the Register</a>.</p>"#)).unwrap();
-    assert!(md.contains("[the Register](https://www.legislation.gov.au/)"), "{md:?}");
+    let md = convert_bytes(
+        "epub",
+        &epub(r#"<p>See <a href="https://www.legislation.gov.au/">the Register</a>.</p>"#),
+    )
+    .unwrap();
+    assert!(
+        md.contains("[the Register](https://www.legislation.gov.au/)"),
+        "{md:?}"
+    );
 }
 
 // ── XLSX: a cell shows what its number format says ──────────────────────────────────────────
@@ -100,8 +134,14 @@ fn workbook() -> Vec<u8> {
 <row r="2"><c r="A2" s="5"><v>46266</v></c><c r="B2" s="2"><v>-0.04</v></c><c r="C2"><v>100</v></c><c r="D2"><v>4.5</v></c></row>
 </sheetData></worksheet>"#;
     zip(&[
-        ("xl/workbook.xml", r#"<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Data1" sheetId="1" r:id="rId1"/></sheets></workbook>"#),
-        ("xl/_rels/workbook.xml.rels", r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>"#),
+        (
+            "xl/workbook.xml",
+            r#"<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Data1" sheetId="1" r:id="rId1"/></sheets></workbook>"#,
+        ),
+        (
+            "xl/_rels/workbook.xml.rels",
+            r#"<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>"#,
+        ),
         ("xl/styles.xml", styles),
         ("xl/worksheets/sheet1.xml", sheet),
     ])
@@ -111,7 +151,10 @@ fn workbook() -> Vec<u8> {
 fn cells_show_the_text_their_number_format_gives() {
     let md = convert_bytes("xlsx", &workbook()).unwrap();
     // row 1: mmm-yyyy date, "0.0" of 4.0999999999999996, General of 0.30000000000000004, #,##0.00, 0%
-    assert!(md.contains("| Sep-2026 | 4.1 | 0.3 | 1,234,567.89 | 26% |"), "{md}");
+    assert!(
+        md.contains("| Sep-2026 | 4.1 | 0.3 | 1,234,567.89 | 26% |"),
+        "{md}"
+    );
     // row 2: the locale-dependent built-in date format 14 keeps the ISO date; "0.0" of -0.04; General 100; General 4.5
     assert!(md.contains("| 2026-09-01 | -0.0 | 100 | 4.5 |"), "{md}");
 }

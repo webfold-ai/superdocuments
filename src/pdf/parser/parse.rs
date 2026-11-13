@@ -2417,12 +2417,10 @@ fn image_area(content: &[u8], images: &Table<String, u32>) -> f64 {
                             ctm = s;
                         }
                     }
-                    "Do" => {
-                        if name.as_ref().is_some_and(|n| images.get(n).is_some()) {
-                            let a = (ctm[0] * ctm[3] - ctm[1] * ctm[2]).abs();
-                            if a.is_finite() {
-                                area += a;
-                            }
+                    "Do" if name.as_ref().is_some_and(|n| images.get(n).is_some()) => {
+                        let a = (ctm[0] * ctm[3] - ctm[1] * ctm[2]).abs();
+                        if a.is_finite() {
+                            area += a;
                         }
                     }
                     _ => {}
@@ -2447,9 +2445,8 @@ impl Document {
         };
         let mut node = page;
         for _ in 0..16 {
-            if let Some(Some(Object::Array(b))) = node
-                .get(&"MediaBox".to_string())
-                .map(|o| self.resolve(o))
+            if let Some(Some(Object::Array(b))) =
+                node.get(&"MediaBox".to_string()).map(|o| self.resolve(o))
             {
                 let v: Vec<f64> = b.iter().filter_map(number).collect();
                 if let [x0, y0, x1, y1] = v[..] {

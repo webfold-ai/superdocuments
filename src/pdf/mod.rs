@@ -79,7 +79,6 @@ fn pages_and_geometry(bytes: &[u8]) -> io::Result<(Vec<String>, Vec<parser::Page
     })
 }
 
-
 /// Size, header, catalog and panic checks shared by the page-level entry points.
 fn parse_pages<T>(
     bytes: &[u8],

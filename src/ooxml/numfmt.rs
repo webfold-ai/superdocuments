@@ -266,7 +266,11 @@ fn digits15(value: f64) -> (Vec<u8>, i32) {
     }
     let s = format!("{abs:.14e}");
     let (mant, exp) = s.split_once('e').unwrap();
-    let digits: Vec<u8> = mant.bytes().filter(u8::is_ascii_digit).map(|b| b - b'0').collect();
+    let digits: Vec<u8> = mant
+        .bytes()
+        .filter(u8::is_ascii_digit)
+        .map(|b| b - b'0')
+        .collect();
     (digits, exp.parse::<i32>().unwrap() + 1)
 }
 
@@ -291,7 +295,7 @@ fn fixed(value: f64, decimals: usize) -> (String, String) {
     }
     // integer digits missing at the right (value larger than the 15 digits kept)
     if exp > digits.len() as i32 {
-        int.extend(std::iter::repeat(0).take((exp - digits.len() as i32) as usize));
+        int.extend(std::iter::repeat_n(0, (exp - digits.len() as i32) as usize));
     }
     let round_up = frac.get(decimals).is_some_and(|d| *d >= 5);
     frac.truncate(decimals);
@@ -357,7 +361,9 @@ fn general(value: f64) -> Option<String> {
 fn format_number(toks: &[Tok], value: f64) -> Option<String> {
     let percents = toks.iter().filter(|t| matches!(t, Tok::Percent)).count();
     // the single run of digit placeholders (with its separators)
-    let first = toks.iter().position(|t| matches!(t, Tok::Digit(_) | Tok::Point));
+    let first = toks
+        .iter()
+        .position(|t| matches!(t, Tok::Digit(_) | Tok::Point));
     let mut sign_prefix = "";
     let mut scaled = value;
     for _ in 0..percents {
@@ -378,12 +384,11 @@ fn format_number(toks: &[Tok], value: f64) -> Option<String> {
                     placed = true;
                 }
                 Tok::Digit(_) | Tok::Point | Tok::Comma => {}
-                Tok::General | Tok::Text => {
-                    if !placed {
-                        out.push_str(num);
-                        placed = true;
-                    }
+                Tok::General | Tok::Text if !placed => {
+                    out.push_str(num);
+                    placed = true;
                 }
+                Tok::General | Tok::Text => {}
                 _ => {}
             }
         }
@@ -431,17 +436,34 @@ fn format_number(toks: &[Tok], value: f64) -> Option<String> {
         };
     let int_digits: Vec<char> = int_part
         .iter()
-        .filter_map(|t| if let Tok::Digit(c) = t { Some(*c) } else { None })
+        .filter_map(|t| {
+            if let Tok::Digit(c) = t {
+                Some(*c)
+            } else {
+                None
+            }
+        })
         .collect();
     let frac_digits: Vec<char> = frac_part
         .iter()
-        .filter_map(|t| if let Tok::Digit(c) = t { Some(*c) } else { None })
+        .filter_map(|t| {
+            if let Tok::Digit(c) = t {
+                Some(*c)
+            } else {
+                None
+            }
+        })
         .collect();
     if int_digits.contains(&'?') || frac_digits.contains(&'?') {
         return None;
     }
     let grouping = {
-        let body = &int_part[..int_part.len() - int_part.iter().rev().take_while(|t| matches!(t, Tok::Comma)).count()];
+        let body = &int_part[..int_part.len()
+            - int_part
+                .iter()
+                .rev()
+                .take_while(|t| matches!(t, Tok::Comma))
+                .count()];
         body.iter().any(|t| matches!(t, Tok::Comma))
     };
     let mut v = scaled.abs();
@@ -486,9 +508,11 @@ fn format_date(toks: &[Tok], serial: f64, date1904: bool) -> Option<String> {
     let has_ampm = toks.iter().any(|t| matches!(t, Tok::Date('A', _)));
     let fractional_seconds = toks.windows(2).any(|w| {
         matches!(w[0], Tok::Date('s', _)) && matches!(&w[1], Tok::Lit(s) if s.starts_with('.'))
-    }) || toks
-        .windows(3)
-        .any(|w| matches!(w[0], Tok::Date('s', _)) && matches!(w[1], Tok::Point) && matches!(w[2], Tok::Digit('0')));
+    }) || toks.windows(3).any(|w| {
+        matches!(w[0], Tok::Date('s', _))
+            && matches!(w[1], Tok::Point)
+            && matches!(w[2], Tok::Digit('0'))
+    });
     if fractional_seconds {
         return None;
     }
@@ -536,7 +560,11 @@ fn format_date(toks: &[Tok], serial: f64, date1904: bool) -> Option<String> {
                 } else {
                     hour
                 };
-                out.push_str(&if *n == 1 { h.to_string() } else { format!("{h:02}") });
+                out.push_str(&if *n == 1 {
+                    h.to_string()
+                } else {
+                    format!("{h:02}")
+                });
                 after_hour = true;
             }
             Tok::Date('m', n) => {
@@ -545,7 +573,11 @@ fn format_date(toks: &[Tok], serial: f64, date1904: bool) -> Option<String> {
                     .find(|t| !matches!(t, Tok::Lit(_)))
                     .is_some_and(|t| matches!(t, Tok::Date('s', _)));
                 if (after_hour || next_is_seconds) && *n <= 2 {
-                    out.push_str(&if *n == 1 { minute.to_string() } else { format!("{minute:02}") });
+                    out.push_str(&if *n == 1 {
+                        minute.to_string()
+                    } else {
+                        format!("{minute:02}")
+                    });
                 } else {
                     let name = MONTHS[(month - 1) as usize];
                     match n {
@@ -559,7 +591,11 @@ fn format_date(toks: &[Tok], serial: f64, date1904: bool) -> Option<String> {
                 after_hour = false;
             }
             Tok::Date('s', n) => {
-                out.push_str(&if *n == 1 { second.to_string() } else { format!("{second:02}") });
+                out.push_str(&if *n == 1 {
+                    second.to_string()
+                } else {
+                    format!("{second:02}")
+                });
                 after_hour = false;
             }
             Tok::Date('A', n) => {
@@ -596,17 +632,21 @@ mod tests {
 
     #[test]
     fn general_shows_fifteen_significant_digits() {
-        assert_eq!(f(4.0999999999999996, "General").as_deref(), Some("4.1"));
+        // 4.1 and 4.0999999999999996 are the same double: the sheet XML stores the latter
+        assert_eq!(f(4.1, "General").as_deref(), Some("4.1"));
         assert_eq!(f(0.30000000000000004, "General").as_deref(), Some("0.3"));
         assert_eq!(f(100.0, "General").as_deref(), Some("100"));
         assert_eq!(f(-0.000123, "General").as_deref(), Some("-0.000123"));
-        assert_eq!(f(123456789012.0, "General").as_deref(), Some("123456789012"));
+        assert_eq!(
+            f(123456789012.0, "General").as_deref(),
+            Some("123456789012")
+        );
         assert_eq!(f(0.0, "General").as_deref(), Some("0"));
     }
 
     #[test]
     fn fixed_decimals_round_half_up_on_the_fifteen_digit_value() {
-        assert_eq!(f(4.0999999999999996, "0.0").as_deref(), Some("4.1"));
+        assert_eq!(f(4.1, "0.0").as_deref(), Some("4.1"));
         assert_eq!(f(2.675, "0.00").as_deref(), Some("2.68"));
         assert_eq!(f(1.005, "0.00").as_deref(), Some("1.01"));
         assert_eq!(f(0.5, "0").as_deref(), Some("1"));
@@ -644,9 +684,15 @@ mod tests {
         assert_eq!(f(46266.0, "mmm-yyyy").as_deref(), Some("Sep-2026"));
         assert_eq!(f(46266.0, "mmm-yy").as_deref(), Some("Sep-26"));
         assert_eq!(f(46266.0, "d/mm/yyyy").as_deref(), Some("1/09/2026"));
-        assert_eq!(f(46266.0, "dddd, d mmmm yyyy").as_deref(), Some("Tuesday, 1 September 2026"));
+        assert_eq!(
+            f(46266.0, "dddd, d mmmm yyyy").as_deref(),
+            Some("Tuesday, 1 September 2026")
+        );
         assert_eq!(f(46266.0, "yyyy-mm-dd").as_deref(), Some("2026-09-01"));
-        assert_eq!(f(45000.75, "d-mmm-yy h:mm AM/PM").as_deref(), Some("15-Mar-23 6:00 PM"));
+        assert_eq!(
+            f(45000.75, "d-mmm-yy h:mm AM/PM").as_deref(),
+            Some("15-Mar-23 6:00 PM")
+        );
         assert_eq!(f(0.5, "h:mm:ss").as_deref(), Some("12:00:00"));
         assert_eq!(f(1.5, "[h]:mm").as_deref(), Some("36:00"));
         assert_eq!(f(0.25, "mm:ss").as_deref(), Some("00:00"));

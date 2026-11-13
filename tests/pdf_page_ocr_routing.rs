@@ -169,9 +169,19 @@ fn mixed_document_ocrs_only_the_scanned_pages() {
     let tools = Toolchain::install("mixed", 5);
     let md = pdf::extract_file_with_ocr_options(&path, &OcrOptions::default()).unwrap();
     assert_eq!(tools.pages_recognised(), vec![2, 4], "{md:?}");
-    assert!(md.contains("OCR TEXT page 2") && md.contains("OCR TEXT page 4"), "{md:?}");
-    assert_eq!(md.matches("quick brown fox").count(), 10, "native pages 1 and 3 kept: {md:?}");
-    assert!(md.contains("Crest and short title") && !md.contains("OCR TEXT page 5"), "{md:?}");
+    assert!(
+        md.contains("OCR TEXT page 2") && md.contains("OCR TEXT page 4"),
+        "{md:?}"
+    );
+    assert_eq!(
+        md.matches("quick brown fox").count(),
+        10,
+        "native pages 1 and 3 kept: {md:?}"
+    );
+    assert!(
+        md.contains("Crest and short title") && !md.contains("OCR TEXT page 5"),
+        "{md:?}"
+    );
     let _ = std::fs::remove_file(path);
 }
 
@@ -214,7 +224,10 @@ fn real_scan_fixture_is_read_by_ocr() {
     let fixture = Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("tests/fixtures/au-register/census-amendment-ordinance-1981-p1.pdf");
     let native = pdf::extract_file(&fixture).unwrap();
-    assert!(native.contains("F2006B00784") && !native.contains("Householder"), "{native:?}");
+    assert!(
+        native.contains("F2006B00784") && !native.contains("Householder"),
+        "{native:?}"
+    );
     let options = OcrOptions {
         timeout: std::time::Duration::from_secs(900),
         ..OcrOptions::default()

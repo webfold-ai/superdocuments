@@ -378,7 +378,9 @@ pub(crate) fn worksheet_typed(
                     }
                 }
                 // Styled but empty rows are common and carry nothing.
-                "row" if row.iter().any(|c| !c.display.is_empty()) => rows.push(std::mem::take(&mut row)),
+                "row" if row.iter().any(|c| !c.display.is_empty()) => {
+                    rows.push(std::mem::take(&mut row))
+                }
                 _ => {}
             },
             Event::Eof => break,
