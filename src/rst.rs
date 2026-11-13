@@ -1015,114 +1015,102 @@ impl Reader {
         })
     }
 
+    /// A simple table as Pandoc 3.1.3 reads it. A table starts at a border line (runs of `=` set
+    /// apart by spaces, at least two runs). It is tried first with a header: the next line is the
+    /// header row, the line after it a border that sets the columns. Failing that it has no header and
+    /// the first border sets the columns. Either way the rows run to the first border line that is
+    /// followed by a blank line (or the end of the text): a border inside the rows is a row of text,
+    /// a blank line inside the rows belongs to the row above, and a table with no such closing border is
+    /// not a table (the lines are a paragraph). Pandoc does not stop at the first blank line after a
+    /// border that closes a table with a header: two tables with a paragraph between them are one table
+    /// when the first has no closing border of its own.
     fn simple_table(&mut self, lines: &[String], start: usize) -> Option<(Table, usize)> {
-        let border = &lines[start];
-        let mut cols: Vec<(usize, usize)> = Vec::new();
-        let chars: Vec<char> = border.chars().collect();
-        let mut i = 0;
-        while i < chars.len() {
-            if chars[i] == '=' || chars[i] == '-' {
-                let s = i;
-                while i < chars.len() && (chars[i] == '=' || chars[i] == '-') {
-                    i += 1;
-                }
-                cols.push((s, i));
-            } else {
-                i += 1;
+        let n = lines.len();
+        let closes_at = |from: usize| {
+            (from..n)
+                .find(|&f| is_simple_border(&lines[f]) && (f + 1 >= n || is_blank(&lines[f + 1])))
+        };
+        let headed = (start + 2 < n)
+            .then(|| border_columns(&lines[start + 2], &['=', '-']))
+            .flatten()
+            .and_then(|cols| {
+                closes_at(start + 3)
+                    .filter(|f| *f > start + 3)
+                    .map(|f| (cols, f))
+            });
+        let (cols, header, first_row, close) = match headed {
+            Some((cols, close)) => (cols, Some(start + 1), start + 3, close),
+            None => {
+                let cols = border_columns(&lines[start], &['='])?;
+                let close = closes_at(start + 1).filter(|f| *f > start + 1)?;
+                (cols, None, start + 1, close)
             }
-        }
-        if cols.is_empty() {
-            return None;
-        }
-        let mut borders = vec![start];
-        let mut j = start + 1;
-        while j < lines.len() {
-            if is_simple_border(&lines[j]) {
-                borders.push(j);
-                // The closing border is followed by a blank line or the end.
-                if (borders.len() >= 2 && j + 1 >= lines.len())
-                    || (j + 1 < lines.len() && is_blank(&lines[j + 1]) && borders.len() >= 2)
-                {
-                    break;
-                }
-            } else if is_blank(&lines[j]) && borders.len() == 1 {
-                return None;
-            }
-            j += 1;
-        }
-        if borders.len() < 2 {
-            return None;
-        }
-        let end = *borders.last()?;
-        let split = |l: &str, last: bool| -> Vec<String> {
+        };
+        // A column runs from the start of its border to the start of the next one (the gap belongs to
+        // the column on its left); the last column runs to the end of the line. Text is not trimmed
+        // on the left here: an indented cell is a block quote.
+        let split = |l: &str| -> Vec<String> {
             let ch: Vec<char> = l.chars().collect();
-            cols.iter()
-                .enumerate()
-                .map(|(ci, (a, b))| {
-                    let b = if ci + 1 == cols.len() && last {
-                        ch.len().max(*b)
-                    } else {
-                        *b
-                    };
-                    ch.iter()
-                        .skip(*a)
-                        .take(b.saturating_sub(*a))
+            (0..cols.len())
+                .map(|ci| {
+                    let from = cols[ci].0.min(ch.len());
+                    let to = cols
+                        .get(ci + 1)
+                        .map_or(ch.len(), |c| c.0)
+                        .clamp(from, ch.len());
+                    ch[from..to]
+                        .iter()
                         .collect::<String>()
-                        .trim()
+                        .trim_end()
                         .to_string()
                 })
                 .collect()
         };
-        let sep_at = if borders.len() >= 3 {
-            Some(borders[1])
-        } else {
-            None
+        let cell = |me: &mut Reader, raw: &str| -> Cell {
+            let text = raw.trim();
+            let inlines = me.inlines(text);
+            if !text.is_empty() && raw.starts_with(char::is_whitespace) {
+                Cell {
+                    blocks: vec![Block::Quote(vec![Block::Para(inlines)])],
+                    colspan: 1,
+                    rowspan: 1,
+                }
+            } else {
+                Cell::text(inlines)
+            }
         };
         let mut head: Vec<Vec<Cell>> = Vec::new();
-        let mut rows: Vec<Vec<Cell>> = Vec::new();
-        let mut cur: Option<Vec<String>> = None;
-        let mut in_head = sep_at.is_some();
-        let flush = |me: &mut Reader, cur: &mut Option<Vec<String>>, dest: &mut Vec<Vec<Cell>>| {
-            if let Some(r) = cur.take() {
-                dest.push(r.iter().map(|c| Cell::text(me.inlines(c))).collect());
-            }
-        };
-        for (li, l) in lines.iter().enumerate().take(end).skip(start + 1) {
-            if is_simple_border(l) {
-                if Some(li) == sep_at {
-                    flush(self, &mut cur, &mut head);
-                    in_head = false;
-                }
-                continue;
-            }
-            if is_blank(l) {
-                continue;
-            }
-            let cells = split(l, true);
-            let continuation = cells[0].is_empty() && cur.is_some() && cols.len() > 1;
-            if continuation {
-                if let Some(c) = cur.as_mut() {
-                    for (k, t) in cells.iter().enumerate() {
-                        if !t.is_empty() {
-                            c[k].push(' ');
-                            c[k].push_str(t);
+        if let Some(h) = header {
+            let raw = split(&lines[h]);
+            head.push(raw.iter().map(|c| cell(self, c)).collect());
+        }
+        // Rows: a line whose first column is blank (a blank line included) continues the row above.
+        let mut texts: Vec<Vec<String>> = Vec::new();
+        for l in &lines[first_row..close] {
+            let cells = split(l);
+            if cells[0].trim().is_empty() && cols.len() > 1 && !texts.is_empty() {
+                if let Some(row) = texts.last_mut() {
+                    for (k, t) in cells
+                        .iter()
+                        .enumerate()
+                        .filter(|(_, t)| !t.trim().is_empty())
+                    {
+                        if row[k].trim().is_empty() {
+                            row[k] = t.clone();
+                        } else {
+                            row[k].push(' ');
+                            row[k].push_str(t.trim());
                         }
                     }
                 }
             } else {
-                if in_head {
-                    flush(self, &mut cur, &mut head);
-                } else {
-                    flush(self, &mut cur, &mut rows);
-                }
-                cur = Some(cells);
+                texts.push(cells);
             }
         }
-        if in_head {
-            flush(self, &mut cur, &mut head);
-        } else {
-            flush(self, &mut cur, &mut rows);
-        }
+        let rows = texts
+            .iter()
+            .map(|r| r.iter().map(|c| cell(self, c)).collect())
+            .collect();
         Some((
             Table {
                 caption: Vec::new(),
@@ -1130,7 +1118,7 @@ impl Reader {
                 head,
                 rows,
             },
-            end + 1,
+            close + 1,
         ))
     }
 
@@ -1542,6 +1530,31 @@ fn is_simple_border(line: &str) -> bool {
     t.starts_with('=') && t.chars().all(|c| c == '=' || c == ' ') && t.contains(' ')
 }
 
+/// The `(start, end)` column of every run of border characters (`chars`) in a border line; `None`
+/// when the line holds anything else.
+fn border_columns(line: &str, chars: &[char]) -> Option<Vec<(usize, usize)>> {
+    let mut cols = Vec::new();
+    let mut run: Option<usize> = None;
+    let mut width = 0;
+    for (i, c) in line.trim_end().chars().enumerate() {
+        width = i + 1;
+        match (chars.contains(&c), run) {
+            (true, None) => run = Some(i),
+            (true, Some(_)) => {}
+            (false, Some(s)) if c == ' ' => {
+                cols.push((s, i));
+                run = None;
+            }
+            (false, None) if c == ' ' => {}
+            _ => return None,
+        }
+    }
+    if let Some(s) = run {
+        cols.push((s, width));
+    }
+    (!cols.is_empty()).then_some(cols)
+}
+
 fn is_quoted_literal(line: &str) -> bool {
     line.chars()
         .next()
@@ -1932,6 +1945,132 @@ mod tests {
             "{d:?}"
         );
         assert!(d.blocks.iter().any(|b| matches!(b, Block::Para(p) if matches!(p.first(), Some(Inline::Math { display: true, .. })))), "{d:?}");
+    }
+
+    /// `pandoc -f rst -t json` (3.1.3) of the input, read as `Para[text]` and
+    /// `Table{head=(cell|cell) body=(cell|cell)(..)}`; an indented cell is `>text`.
+    fn shape(s: &str) -> String {
+        let text = |i: &[Inline]| {
+            ast::inlines_text(i)
+                .split_whitespace()
+                .collect::<Vec<_>>()
+                .join(" ")
+        };
+        let cell = |c: &Cell| {
+            c.blocks
+                .iter()
+                .map(|b| match b {
+                    Block::Plain(i) | Block::Para(i) => text(i),
+                    Block::Quote(q) => match q.as_slice() {
+                        [Block::Plain(i) | Block::Para(i)] => format!(">{}", text(i)),
+                        _ => "?".into(),
+                    },
+                    _ => "?".into(),
+                })
+                .collect::<String>()
+        };
+        let row = |r: &Vec<Cell>| format!("({})", r.iter().map(cell).collect::<Vec<_>>().join("|"));
+        to_doc(s)
+            .blocks
+            .iter()
+            .map(|b| match b {
+                Block::Para(i) => format!("Para[{}]", text(i)),
+                Block::Table(t) => format!(
+                    "Table{{head={} body={}}}",
+                    t.head.iter().map(row).collect::<String>(),
+                    t.rows.iter().map(row).collect::<String>()
+                ),
+                _ => "?".into(),
+            })
+            .collect::<Vec<_>>()
+            .join(" ;; ")
+    }
+
+    // The expected strings below are what Pandoc 3.1.3 reads from the same input.
+
+    #[test]
+    fn a_simple_table_followed_by_text_is_a_table_and_a_paragraph() {
+        // pandoc: header A|B, one row, then the paragraph
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n=====  =====\n\nEnd.\n"),
+            "Table{head=(A|B) body=(one|two)} ;; Para[End.]"
+        );
+        // a table with no header: the first border sets the columns
+        assert_eq!(
+            shape("=====  =====\none    two\n=====  =====\n\nEnd.\n"),
+            "Table{head= body=(one|two)} ;; Para[End.]"
+        );
+        // more blank lines, or the end of the text, after the closing border
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n=====  =====\n\n\nEnd.\n"),
+            "Table{head=(A|B) body=(one|two)} ;; Para[End.]"
+        );
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n=====  ====="),
+            "Table{head=(A|B) body=(one|two)}"
+        );
+        // the table's own text may continue on the next lines (first column blank), or contain a
+        // blank line: both belong to the row above
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n       cont\n=====  =====\n\nEnd.\n"),
+            "Table{head=(A|B) body=(one|two cont)} ;; Para[End.]"
+        );
+        // a column ends where the next one starts: `Middle` is not cut at the border's width
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\nlonger-word two\n=====  =====\n\nEnd.\n"),
+            "Table{head=(A|B) body=(longer-|word two)} ;; Para[End.]"
+        );
+    }
+
+    #[test]
+    fn two_simple_tables_with_text_between_are_one_table_as_in_pandoc() {
+        // pandoc 3.1.3 reads the first table without a closing border of its own: the rows run to
+        // the first border followed by a blank line, here the end of the second table
+        assert_eq!(
+            shape(
+                "Intro.\n\n=====  =====\none    two\n=====  =====\n\nMiddle paragraph.\n\n=====  =====\nthree  four\n=====  =====\n\nEnd.\n"
+            ),
+            "Para[Intro.] ;; Table{head=(one|two) body=(|)(Middle|paragraph.)(=====|=====)(three|four)} ;; Para[End.]"
+        );
+        // with their own text rows the tables are two
+        assert_eq!(
+            shape(
+                "=====  =====\nA      B\n=====  =====\none    two\n=====  =====\n\n=====  =====\nx      y\n=====  =====\n\nEnd.\n"
+            ),
+            "Table{head=(A|B) body=(one|two)} ;; Table{head= body=(x|y)} ;; Para[End.]"
+        );
+    }
+
+    #[test]
+    fn a_border_that_does_not_close_a_simple_table_leaves_a_paragraph() {
+        // a one-column border closes nothing: pandoc reads the whole block as one paragraph
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n=====\n\nEnd.\n"),
+            "Para[===== ===== A B ===== ===== one two =====] ;; Para[End.]"
+        );
+        // no closing border at all, or text right after it with no blank line
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\nx\n\nEnd.\n"),
+            "Para[===== ===== A B ===== ===== x] ;; Para[End.]"
+        );
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n=====  =====\nnext\n"),
+            "Para[===== ===== A B ===== ===== one two ===== ===== next]"
+        );
+        // a border after a text line is part of that paragraph
+        assert_eq!(
+            shape("Intro\n=====  =====\none    two\n=====  =====\n\nEnd.\n"),
+            "Para[Intro ===== ===== one two =====  =====] ;; Para[End.]"
+                .replace("=====  =====]", "===== =====]")
+        );
+    }
+
+    #[test]
+    fn an_indented_simple_table_cell_is_a_block_quote() {
+        assert_eq!(
+            shape("=====  =====\nA      B\n=====  =====\none    two\n  three  four\n=====  =====\n\nEnd.\n"),
+            "Table{head=(A|B) body=(one|two)(>three|>four)} ;; Para[End.]"
+        );
     }
 
     #[test]
