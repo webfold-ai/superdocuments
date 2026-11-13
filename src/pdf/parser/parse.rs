@@ -1305,22 +1305,28 @@ impl Document {
 
     fn page_content(&self, page: &Dict, cache: &mut ContentCache) -> Vec<u8> {
         let mut bytes = Vec::new();
-        match page.get(&"Contents".to_string()) {
-            Some(Object::Ref(n, g)) => {
-                if let Some(b) = cache.stream(self, *n, *g) {
-                    bytes.extend_from_slice(&b);
-                }
-            }
-            Some(Object::Array(a)) => {
-                for r in a {
-                    if let Object::Ref(n, g) = r {
-                        if let Some(b) = cache.stream(self, *n, *g) {
-                            bytes.extend_from_slice(&b);
-                            bytes.push(b'\n');
-                        }
+        // `/Contents` is a stream or an array of streams (ISO 32000-1 7.7.3.3), and either may be reached
+        // through an indirect reference: Aspose.Pdf writes `/Contents 13 0 R` with `13 0 obj [14 0 R 15 0 R] endobj`.
+        let append_array = |a: &[Object], cache: &mut ContentCache, bytes: &mut Vec<u8>| {
+            for r in a {
+                if let Object::Ref(n, g) = r {
+                    if let Some(b) = cache.stream(self, *n, *g) {
+                        bytes.extend_from_slice(&b);
+                        bytes.push(b'\n');
                     }
                 }
             }
+        };
+        match page.get(&"Contents".to_string()) {
+            Some(Object::Ref(n, g)) => match self.ref_object(*n, *g) {
+                Some(Object::Array(a)) => append_array(a, cache, &mut bytes),
+                _ => {
+                    if let Some(b) = cache.stream(self, *n, *g) {
+                        bytes.extend_from_slice(&b);
+                    }
+                }
+            },
+            Some(Object::Array(a)) => append_array(a, cache, &mut bytes),
             _ => {}
         }
         bytes

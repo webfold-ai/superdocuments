@@ -505,6 +505,19 @@ fn odf_cell_value(tag: &BytesStart<'_>) -> String {
     String::new()
 }
 
+/// An EPUB as a document: spine order, metadata, footnotes, tables and the rest of the
+/// structure the HTML reader keeps. Falls back to the file-name order reader when the package
+/// has no usable spine.
+fn epub_document(data: &[u8]) -> Result<String, String> {
+    if let Ok(book) = crate::epub::read(data) {
+        if !crate::epub::spine(&book).is_empty() {
+            let doc = crate::epub::extract_doc(&book, data)?;
+            return Ok(crate::ast::to_markdown(&doc));
+        }
+    }
+    epub(data)
+}
+
 fn epub(data: &[u8]) -> Result<String, String> {
     let mut zip = archive(data)?;
     let mut chapters = Vec::new();
@@ -736,7 +749,10 @@ fn latex_markdown(
 ) -> String {
     use crate::latex::CitationSource;
     let mut out =
-        crate::latex::render_markdown(doc, &crate::latex::RenderOptions { bibliography: bib });
+        crate::latex::render_markdown(
+        doc,
+        &crate::latex::RenderOptions { bibliography: bib, pandoc: true },
+    );
     let Some(bib) = bib.filter(|_| doc.bibitems.is_empty()) else {
         return out;
     };
@@ -763,11 +779,7 @@ fn latex_markdown(
     if listed.is_empty() {
         return out;
     }
-    out.push_str(if doc.title.is_some() {
-        "\n## References\n\n"
-    } else {
-        "\n# References\n\n"
-    });
+    out.push_str("\n# References\n\n");
     for entry in listed {
         out.push_str(&format!(
             "- `{}` — {}\n",
@@ -895,17 +907,19 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         "docx" | "docm" => crate::ooxml::docx::convert(data),
         "pptx" => crate::ooxml::pptx::convert(data),
         "xlsx" | "xlsm" => xlsx(data),
-        "odt" | "odp" => odt(data),
+        "odt" => crate::odt::to_markdown(data),
+        "odp" => odt(data),
         "ods" => ods(data),
         "xls" => xls(data),
         "xlsb" => xlsb(data),
-        "epub" => epub(data),
+        "epub" => epub_document(data),
         "rtf" => crate::rtf::convert(data),
         "csv" => {
             let decoded = decode_csv(data)?;
             csv_rows(&decoded, csv_delimiter(&decoded)).map(|rows| markdown_table(&rows))
         }
-        "html" | "htm" => Ok(crate::html::to_markdown(data, "")),
+        "html" | "htm" | "xhtml" => Ok(crate::html::reader::to_markdown_document(data)),
+        "rst" | "rest" => Ok(crate::rst::to_markdown(data)),
         "txt" | "md" | "markdown" => Ok(String::from_utf8_lossy(data).into_owned()),
         "tex" | "latex" | "ltx" => latex(data),
         "bib" | "bibtex" => bib(data),
@@ -1445,7 +1459,7 @@ mod tests {
             "content.xml",
             "<office:document><text:h>Title</text:h><text:p>Body</text:p></office:document>",
         )]);
-        assert_eq!(convert_bytes("odt", &odf).unwrap(), "## Title\n\nBody");
+        assert_eq!(convert_bytes("odt", &odf).unwrap().trim(), "# Title\n\nBody");
         let sheet = package(&[("content.xml", "<office:document><table:table table:name=\"Data\"><table:table-row><table:table-cell office:value=\"42\"/></table:table-row></table:table></office:document>")]);
         assert!(convert_bytes("ods", &sheet).unwrap().contains("| 42 |"));
 

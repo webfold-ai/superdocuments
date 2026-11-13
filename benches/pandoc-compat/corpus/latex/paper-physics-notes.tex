@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,siunitx,graphicx}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\dd}{\mathrm{d}}
+\begin{document}
+\section{Maxwell's equations}
+In vacuum, with $\vect{E}$ the electric and $\vect{B}$ the magnetic field:
+\begin{align}
+\nabla\cdot\vect{E} &= \frac{\rho}{\varepsilon_0}, \label{eq:gauss}\\
+\nabla\times\vect{B} &= \mu_0\vect{J} + \mu_0\varepsilon_0\frac{\partial\vect{E}}{\partial t}. \label{eq:ampere}
+\end{align}
+Equation~\eqref{eq:gauss} is Gauss's law. A charge of \SI{1.6e-19}{\coulomb} produces at \SI{1}{\metre} a field of about \SI{1.4e-9}{\volt\per\metre}.
+\subsection{Units}
+\begin{tabular}{lll}
+\hline
+Quantity & Symbol & Unit \\
+\hline
+Charge & $q$ & C \\
+Field & $E$ & V/m \\
+\hline
+\end{tabular}
+\begin{figure}
+\centering
+\includegraphics[width=6cm]{field-lines}
+\caption{Field lines of a point charge.}
+\end{figure}
+\end{document}

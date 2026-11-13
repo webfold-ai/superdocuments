@@ -5,9 +5,15 @@
 //! `doc::html`, which is not part of the GitHub Transcode). Its block API is re-exported so
 //! Webfold can expose it unchanged: `to_blocks`, `render`, `Template`, `links`, `resolve`,
 //! `chunk_markdown`.
+//!
+//! `reader` is the other way to read HTML: a whole document, every element kept, mapped to the
+//! tree in `ast` (what `document::convert_bytes` uses for `.html` files). `extract` is for web
+//! pages, where navigation and boilerplate are dropped to find the article.
 
+mod dom;
 mod entities;
 pub mod extract;
+pub mod reader;
 
 pub use extract::{
     chunk_markdown, insert_with, links, render, resolve, to_blocks, Block, ChunkSeed, Template,
