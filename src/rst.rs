@@ -1040,7 +1040,9 @@ impl Reader {
             if is_simple_border(&lines[j]) {
                 borders.push(j);
                 // The closing border is followed by a blank line or the end.
-                if borders.len() >= 2 && (j + 1 >= lines.len() || is_blank(&lines[j + 1])) {
+                if (borders.len() >= 2 && j + 1 >= lines.len())
+                    || (j + 1 < lines.len() && is_blank(&lines[j + 1]) && borders.len() >= 2)
+                {
                     break;
                 }
             } else if is_blank(&lines[j]) && borders.len() == 1 {

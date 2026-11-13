@@ -1,0 +1,197 @@
+[
+  {
+    "DOI": "10.8087/bound.55",
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "IEEE Transactions on Software Engineering",
+    "id": "lovelace1843",
+    "issue": "5",
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "page": "238-320",
+    "title": "The art of computer programming",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "author": [
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1956
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/operator",
+    "title": "An axiomatic basis for computer programming",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/experiment",
+    "abstract": "Sparse kernel throughput ranking learning adaptive analysis prior memory density network workload.",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1953
+        ]
+      ]
+    },
+    "publisher": "University of Zurich",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1941
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "Go to statement considered harmful",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "container-title": "Proceedings of the bound symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2007
+        ]
+      ]
+    },
+    "page": "48-186",
+    "title": "An axiomatic basis for computer programming",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "edition": "3",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "publisher-place": "New York",
+    "title": "On computable numbers",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "hoare1969",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          1937
+        ]
+      ]
+    },
+    "page": "248-397",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "article-journal",
+    "volume": "27"
+  }
+]

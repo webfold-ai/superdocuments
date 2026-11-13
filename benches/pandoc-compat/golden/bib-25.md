@@ -1,0 +1,8 @@
+- `lovelace1843` — Ada Lovelace (1984). Can Programming Be Liberated from the von Neumann Style. *University of Cambridge*. <https://example.org/pipeline>
+- `hopper1952` — C. A. R. Hoare, John Jr. Smith and Hans Müller (1994). On Computable Numbers. *IEEE Transactions on Software Engineering* 59(1), 57–370. <https://doi.org/10.2998/function.87>
+- `knuth1984` — Hans Müller (1992). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Distribution Symposium*, 94–142.
+- `liskov1987` — Donald E. Knuth and John Jr. Smith (1991). Can Programming Be Liberated from the von Neumann Style. *University of Cambridge*.
+- `dijkstra1968` — C. A. R. Hoare and Margaret Hamilton (1975). The Art of Computer Programming. MIT Press.
+- `turing1936` — Margaret Hamilton, John Backus and Guido van Rossum (1936). On Computable Numbers. *Proceedings of the Token Symposium*, 76–170.
+- `lamport1978` — Leslie Lamport (1992). Can Programming Be Liberated from the von Neumann Style. Springer. <https://example.org/query>
+- `hoare1969` — Donald E. Knuth (1955). Data Abstraction and Hierarchy. *University of Zurich*.

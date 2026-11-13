@@ -50,7 +50,7 @@ def make_epub():
 class Convert(unittest.TestCase):
     def test_docx(self):
         md = sd.convert(fixture("office/basic.docx"), "docx")
-        self.assertIn("# Quarterly Report", md)
+        self.assertIn('title: "Quarterly Report"', md)
         self.assertIn("**Bold part**", md)
         self.assertIn("- First bullet", md)
         self.assertIn("| Name |", md)

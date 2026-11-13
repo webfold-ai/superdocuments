@@ -1,6 +1,16 @@
 /target/
 benches/pandoc-compat/outputs/
 __pycache__/
+# Citation benchmark: generated or third-party (fetched by cite/fetch_corpora.sh), never committed.
+benches/pandoc-compat/cite/outputs/
+benches/pandoc-compat/cite/outputs-*/
+benches/pandoc-compat/cite/oracle/
+benches/pandoc-compat/cite/oracle-*/
+benches/pandoc-compat/cite/styles/
+benches/pandoc-compat/cite/styles-heldout/
+benches/pandoc-compat/cite/suite/
+benches/pandoc-compat/cite/suite-src/
+benches/readme-charts/target/
 
 # bindings build output
 /superdocuments_bindings/dist/

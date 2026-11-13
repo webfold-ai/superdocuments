@@ -1,0 +1,211 @@
+[
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1988
+        ]
+      ]
+    },
+    "number": "TR-98",
+    "publisher": "Lab Agent",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "abstract": "Prior graph queue density agent baseline filter schema prior benchmark compiler cluster.",
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1941
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "On computable numbers",
+    "type": "thesis"
+  },
+  {
+    "abstract": "Corpus analysis analysis prior matrix throughput protocol kernel cache cluster tree domain.",
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "number": "TR-33",
+    "publisher": "Lab Query",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "DOI": "10.4191/convergence.19",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "container-title": "Communications of the ACM",
+    "id": "liskov1987",
+    "issue": "5",
+    "issued": {
+      "date-parts": [
+        [
+          1993
+        ]
+      ]
+    },
+    "page": "223-398",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "article-journal",
+    "volume": "46"
+  },
+  {
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      },
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "On computable numbers",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "container-title": "Proceedings of the experiment symposium",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1988
+        ]
+      ]
+    },
+    "page": "70-197",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1947
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "Data abstraction and hierarchy",
+    "type": "book"
+  },
+  {
+    "URL": "https://example.org/algorithm",
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "container-title": "Proceedings of the latency symposium",
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          1962
+        ]
+      ]
+    },
+    "page": "26-101",
+    "title": "An axiomatic basis for computer programming",
+    "type": "paper-conference"
+  }
+]

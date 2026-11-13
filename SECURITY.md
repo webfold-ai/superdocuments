@@ -9,7 +9,7 @@ Only the latest release line receives security fixes. At the time of writing tha
 Please report security problems privately. Do **not** open a public issue or pull request.
 
 - Use GitHub's private vulnerability reporting: <https://github.com/webfold-ai/superdocuments/security/advisories/new>, or
-- email the security team at **security@twn.systems**.
+- email the security team at **security@webfold.ai**.
 
 Include:
 

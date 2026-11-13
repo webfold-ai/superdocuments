@@ -1,0 +1,5 @@
+- `lovelace1843` — Leslie Lamport, Maria de la Cruz and Grace Hopper (1994). The Apollo Guidance Computer. *Proceedings of the Compiler Symposium*, 31–177.
+- `hopper1952` — Ada Lovelace (1970). Data Abstraction and Hierarchy. *\\urlhttps://example.org/cost*.
+- `knuth1984` — John Backus, Grace Hopper and Guido van Rossum (2015). The Art of Computer Programming. *Proceedings of the Baseline Symposium*, 96–179. <https://example.org/ranking>
+- `liskov1987` — Barbara Liskov, Flann O'Brien and C. A. R. Hoare (1962). The Apollo Guidance Computer. *Lab Encoder*.
+- `dijkstra1968` — Luis García (1945). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Stream Symposium*, 40–129.

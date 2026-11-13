@@ -24,19 +24,12 @@ $$
 
 The update is
 
-$$
-\begin{aligned}
-g_t &= \nabla_\theta \mathcal{L}(\theta_t),
-\end{aligned} \tag{2}
-$$
-
-$$
-\begin{aligned}
+$$\begin{aligned}
+g_t &= \nabla_\theta \mathcal{L}(\theta_t), \\
 \theta_{t+1} &= \theta_t - \eta g_t .
-\end{aligned}
-$$
+\end{aligned}$$
 
-**Theorem 1 (Convergence)**. *If $\eta$ is small, [(2)](#eq:grad) converges.*
+**Theorem 1** (Convergence). *If $\eta$ is small, [(2)](#eq:grad) converges.*
 
 - Encoder with $d = 512$.
 - Decoder:
@@ -44,13 +37,13 @@ $$
   1. attention,
   2. refinement.
 
-**Table 1:** Accuracy on two benchmarks.
-
 |  | TM-score |  |
 | --- | --- | --- |
 | Method | CASP14 | CAMEO |
 | Baseline | 0.71 | 0.80 |
 | FoldNet | **0.85** | **0.88** |
+
+: Accuracy on two benchmarks. {#tab:results}
 
 **Figure 1:** The architecture of FoldNet: ([a](#fig:enc)) encoder, ([b](#fig:dec)) decoder.
 

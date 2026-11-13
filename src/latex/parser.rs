@@ -629,9 +629,18 @@ impl Parser<'_> {
                 st.para.push(Inline::SmallCaps(inl));
                 None
             }
+            "textsuperscript" | "textsubscript" | "sout" | "st" => {
+                let inl = self.arg_inlines();
+                st.para.push(match name {
+                    "textsuperscript" => Inline::Sup(inl),
+                    "textsubscript" => Inline::Sub(inl),
+                    _ => Inline::Strike(inl),
+                });
+                None
+            }
             "underline" | "textrm" | "textsf" | "textup" | "textnormal" | "mbox" | "text"
-            | "textsuperscript" | "textsubscript" | "hbox" | "mathrm" | "mathbf" | "mathit"
-            | "mathsf" | "mathtt" | "mathcal" | "boldsymbol" | "fbox" => {
+            | "hbox" | "mathrm" | "mathbf" | "mathit" | "mathsf" | "mathtt" | "mathcal"
+            | "boldsymbol" | "fbox" => {
                 let inl = self.arg_inlines();
                 st.para.extend(inl);
                 None
@@ -2461,6 +2470,9 @@ pub(super) fn plain(inlines: &[Inline]) -> String {
             | Inline::Strong(v)
             | Inline::Mono(v)
             | Inline::SmallCaps(v)
+            | Inline::Sup(v)
+            | Inline::Sub(v)
+            | Inline::Strike(v)
             | Inline::Footnote(v) => s.push_str(&plain(v)),
             Inline::Link { text, .. } => s.push_str(&plain(text)),
             Inline::Math { tex, .. } => s.push_str(tex),

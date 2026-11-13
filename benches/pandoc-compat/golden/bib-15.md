@@ -1,0 +1,9 @@
+- `lovelace1843` — Edsger W. Dijkstra (1947). The Apollo Guidance Computer. *\\urlhttps://example.org/prior*.
+- `hopper1952` — John Jr. Smith (1972). Notes on the Analytical Engine. *University of Cambridge*. <https://example.org/prior>
+- `knuth1984` — Flann O'Brien and Grace Hopper (1955). On Computable Numbers. *\\urlhttps://example.org/network*.
+- `liskov1987` — Hans Müller and Guido van Rossum (2020). The Education of a Computer. *IEEE Transactions on Software Engineering* 2(11), 86–362. <https://doi.org/10.7751/compiler.14>
+- `dijkstra1968` — Edsger W. Dijkstra, C. A. R. Hoare and Guido van Rossum (2018). Time, Clocks, and the Ordering of Events. *Proceedings of the Stream Symposium*, 1–192.
+- `turing1936` — Maria de la Cruz and Alan M. Turing (1938). Go To Statement Considered Harmful. Springer.
+- `lamport1978` — Donald E. Knuth, Maria de la Cruz and John Jr. Smith (2020). On Computable Numbers. *\\urlhttps://example.org/structure*.
+- `hoare1969` — Barbara Liskov, John Backus and Alan M. Turing (2004). The Education of a Computer. MIT Press. <https://example.org/matrix>
+- `hamilton1969` — Guido van Rossum and Maria de la Cruz (2012). Notes on the Analytical Engine. *Lab Transform*.

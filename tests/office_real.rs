@@ -25,8 +25,11 @@ fn entity_references_are_kept_in_every_xml_format() {
     assert!(ods.contains("A & B"), "{ods}");
     assert!(ods.contains("C<D"), "{ods}");
     let odt = convert("basic.odt");
-    // ODT is written through the shared Markdown writer, which escapes `<` and `>`.
-    assert!(odt.contains("Tom & Jerry said x \\< y \\> z"), "{odt}");
+    // Pandoc-flavoured Markdown escapes `<` and `>`.
+    assert!(
+        odt.replace('\\', "").contains("Tom & Jerry said x < y > z"),
+        "{odt}"
+    );
 }
 
 #[test]
@@ -34,7 +37,8 @@ fn docx_structure_comes_from_styles_numbering_and_tables() {
     let md = convert("basic.docx");
     println!("{md}");
     assert!(
-        md.starts_with("# Quarterly Report\n\n# Overview\n\n"),
+        // The Title style is metadata, as Pandoc reads it.
+        md.starts_with("---\ntitle: \"Quarterly Report\"\n---\n\n# Overview\n\n"),
         "{md}"
     );
     assert!(md.contains("**Bold part** and *italic part*"), "{md}");
@@ -82,7 +86,8 @@ fn pptx_follows_presentation_order_and_reads_notes_and_tables() {
     );
     assert!(md.starts_with("## Slide 1: Second slide"), "{md}");
     assert!(md.contains("## Slide 2: Intro & Goals"), "{md}");
-    assert!(md.contains("Point <A>\n\nPoint B"), "{md}");
+    // the master's body style gives these paragraphs a bullet
+    assert!(md.contains("- Point <A>\n- Point B"), "{md}");
     assert!(md.contains("**Notes:** Speaker note here"), "{md}");
     assert!(md.contains("| H1 | H2 |"), "{md}");
     assert!(md.contains("| a | b |"), "{md}");
@@ -101,7 +106,8 @@ fn xlsx_uses_workbook_names_tab_order_dates_and_booleans() {
         "{md}"
     );
     assert!(
-        md.contains("| C<D | 2026-01-02 03:04:05 | 0.25 | FALSE |"),
+        // the cell's format code is `yyyy-mm-dd h:mm:ss`: one-digit hour, as the sheet shows it
+        md.contains("| C<D | 2026-01-02 3:04:05 | 0.25 | FALSE |"),
         "{md}"
     );
     assert!(md.contains("TRUE") && md.contains("FALSE"), "{md}");
@@ -158,6 +164,39 @@ fn rtf_merged_cell_written_through_cellx_edges_keeps_its_columns() {
     let md = convert("rich.rtf");
     assert!(md.contains("| Merged head |  | Third |"), "{md}");
     assert!(md.contains("| a | b | c |"), "{md}");
+}
+
+// ----- regressions found by webfold-bench/tests/formats-fidelity-v1 (fixtures written by python-pptx) -----
+
+/// Body text of a python-pptx slide has no bullet markup of its own: the bullet and its nesting come
+/// from the master's body style. The old reader printed every bullet as a plain paragraph.
+#[test]
+fn pptx_bullets_inherited_from_the_master_keep_their_nesting() {
+    let md = convert("inherited-bullets.pptx");
+    assert!(
+        md.contains("- Goals for the year\n    - Reduce churn\n    - Raise onboarding rate\n- Risks\n    - Supplier delay"),
+        "{md}"
+    );
+    assert!(
+        md.contains("## Slide 2: Timeline\n\n- Q1 planning\n- Q2 build\n- Q3 launch"),
+        "{md}"
+    );
+    let two = convert("two-column.pptx");
+    assert!(
+        two.contains("- Option A is cheaper\n- Option A ships in May\n- Option B is faster"),
+        "{two}"
+    );
+}
+
+/// A chart is a graphic frame whose text lives in its own part: its title and data were dropped.
+#[test]
+fn pptx_chart_title_and_data_are_read() {
+    let md = convert("chart.pptx");
+    assert!(md.contains("Chart: Quarterly revenue"), "{md}");
+    assert!(
+        md.contains("|  | Revenue |\n| --- | --- |\n| Q1 | 120 |\n| Q2 | 135 |\n| Q3 | 160 |"),
+        "{md}"
+    );
 }
 
 /// A valid Office package handed to the converter of another Office format is refused with an

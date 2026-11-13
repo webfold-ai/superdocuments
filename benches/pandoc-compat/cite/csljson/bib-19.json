@@ -1,0 +1,235 @@
+[
+  {
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      },
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "On computable numbers",
+    "type": "book"
+  },
+  {
+    "DOI": "10.3569/latency.66",
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "container-title": "Communications of the ACM",
+    "id": "hopper1952",
+    "issue": "8",
+    "issued": {
+      "date-parts": [
+        [
+          1979
+        ]
+      ]
+    },
+    "page": "289-314",
+    "title": "Go to statement considered harmful",
+    "type": "article-journal",
+    "volume": "45"
+  },
+  {
+    "DOI": "10.5661/experiment.46",
+    "abstract": "Lattice signal encoder metric algorithm function latency estimate vector metric adaptive density.",
+    "author": [
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "ACM Computing Surveys",
+    "id": "knuth1984",
+    "issue": "7",
+    "issued": {
+      "date-parts": [
+        [
+          1986
+        ]
+      ]
+    },
+    "page": "151-379",
+    "title": "On computable numbers",
+    "type": "article-journal",
+    "volume": "39"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "container-title": "Proceedings of the query symposium",
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1946
+        ]
+      ]
+    },
+    "page": "51-197",
+    "title": "The apollo guidance computer",
+    "type": "paper-conference"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1984
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/framework",
+    "title": "The apollo guidance computer",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "container-title": "Proceedings of the approach symposium",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1972
+        ]
+      ]
+    },
+    "page": "53-147",
+    "title": "Go to statement considered harmful",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Protocol trace block metric stream convergence estimate function sparse model objective filter.",
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          1966
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "Go to statement considered harmful",
+    "type": "book"
+  },
+  {
+    "abstract": "Graph layer retrieval bound heuristic vector scheduler batch network memory filter memory.",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "hoare1969",
+    "issue": "12",
+    "issued": {
+      "date-parts": [
+        [
+          1992
+        ]
+      ]
+    },
+    "page": "132-356",
+    "title": "The art of computer programming",
+    "type": "article-journal",
+    "volume": "44"
+  },
+  {
+    "URL": "https://example.org/benchmark",
+    "abstract": "Memory operator gradient bound cache throughput framework signal lattice framework token node.",
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      }
+    ],
+    "id": "hamilton1969",
+    "issued": {
+      "date-parts": [
+        [
+          1997
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/protocol",
+    "title": "The education of a computer",
+    "type": ""
+  },
+  {
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "backus1978",
+    "issued": {
+      "date-parts": [
+        [
+          1968
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "The education of a computer",
+    "type": "thesis"
+  }
+]

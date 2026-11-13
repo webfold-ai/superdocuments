@@ -29,9 +29,14 @@ pub fn to_doc_epub(html: &str) -> Doc {
 fn read(html: &str, epub: bool) -> Doc {
     let mut nodes = dom::parse(html);
     let mut meta = Meta::default();
-    let mut r = Reader::default();
+    let mut r = Reader {
+        epub,
+        ..Reader::default()
+    };
     Reader::collect_meta(&nodes, &mut meta);
     if epub {
+        // Pandoc leaves the title page out: its title and author are in the metadata.
+        drop_title_pages(&mut nodes);
         // Footnote bodies are taken out of the tree first so they are not also read in place.
         r.take_notes(&mut nodes);
     }
@@ -46,6 +51,20 @@ fn read(html: &str, epub: bool) -> Doc {
 /// Reads HTML bytes and writes Pandoc-flavoured Markdown.
 pub fn to_markdown_document(html: &[u8]) -> String {
     crate::ast::to_markdown(&to_doc(&String::from_utf8_lossy(html)))
+}
+
+fn drop_title_pages(nodes: &mut Vec<Node>) {
+    nodes.retain(|n| match n {
+        Node::Elem(e) => !e
+            .attr("epub:type")
+            .is_some_and(|t| t.split_whitespace().any(|w| w == "titlepage")),
+        _ => true,
+    });
+    for n in nodes.iter_mut() {
+        if let Node::Elem(e) = n {
+            drop_title_pages(&mut e.children);
+        }
+    }
 }
 
 fn find_body(nodes: &[Node]) -> Option<&Elem> {
@@ -64,6 +83,9 @@ fn find_body(nodes: &[Node]) -> Option<&Elem> {
 
 #[derive(Default)]
 struct Reader {
+    /// EPUB chapters turn notes into footnotes, so their back-links are dropped; an HTML document
+    /// keeps them as links, as Pandoc does.
+    epub: bool,
     notes: HashMap<String, Elem>,
     /// The inline run being built ends in a space (so the next one need not start with one).
     ends_space: bool,
@@ -634,7 +656,15 @@ impl Reader {
                 }
             }
             "a" => self.anchor(e, out),
-            "span" if e.has_class("math") => {
+            // MathJax-style `\(...\)` and `\[...\]` are TeX; a span whose content is already
+            // markup (Pandoc's own HTML writer without MathJax) stays the markup it is.
+            "span"
+                if e.has_class("math") && {
+                    let t = e.text();
+                    let t = t.trim();
+                    t.starts_with("\\(") || t.starts_with("\\[")
+                } =>
+            {
                 let raw = e.text();
                 let raw = raw.trim();
                 let display = e.has_class("display");
@@ -704,7 +734,7 @@ impl Reader {
             }
         }
         // Backlinks from a footnote body to its reference are not content.
-        if role == "doc-backlink" || e.has_class("footnote-back") {
+        if self.epub && (role == "doc-backlink" || e.has_class("footnote-back")) {
             return;
         }
         let inner = self.nested(e);
@@ -951,7 +981,7 @@ mod tests {
     fn html_documents_keep_footnote_links_as_pandoc_does() {
         // Pandoc's HTML reader keeps the reference as a link and the note list as a list.
         let out = md(NOTE_HTML);
-        assert!(out.contains("[^1^](#fn1)"), "{out}");
+        assert!(out.contains("[ ^1^](#fn1)"), "{out}");
         assert!(out.contains("$x^2$"), "{out}");
     }
 

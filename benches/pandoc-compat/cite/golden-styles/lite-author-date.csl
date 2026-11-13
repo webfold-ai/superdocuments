@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Written for superdocuments' golden tests; Apache-2.0, like the rest of the repository. -->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" initialize-with=". " name-as-sort-order="all" sort-separator=", ">
+  <info>
+    <title>Lite author-date</title>
+    <id>urn:superdocuments:lite-author-date</id>
+    <updated>2026-11-13T00:00:00+00:00</updated>
+  </info>
+  <macro name="author-short">
+    <names variable="author">
+      <name form="short" and="symbol" et-al-min="3" et-al-use-first="1"/>
+      <substitute>
+        <text variable="title" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-full">
+    <names variable="author">
+      <name and="symbol" delimiter-precedes-last="always"/>
+      <substitute>
+        <text variable="title" font-style="italic"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+  <macro name="locator">
+    <group delimiter=" ">
+      <label variable="locator" form="short"/>
+      <text variable="locator"/>
+    </group>
+  </macro>
+  <citation collapse="year" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
+    <sort>
+      <key macro="author-short"/>
+      <key macro="year"/>
+    </sort>
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <group delimiter=" ">
+          <text macro="author-short"/>
+          <text macro="year"/>
+        </group>
+        <text macro="locator"/>
+      </group>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="true" et-al-min="8" et-al-use-first="6" subsequent-author-substitute="&#8212;&#8212;&#8212;">
+    <sort>
+      <key macro="author-full"/>
+      <key macro="year"/>
+      <key variable="title"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=". ">
+        <text macro="author-full"/>
+        <group delimiter=" ">
+          <text macro="year" prefix="(" suffix=")"/>
+        </group>
+        <text variable="title" text-case="title"/>
+        <group delimiter=", ">
+          <text variable="container-title" font-style="italic"/>
+          <group delimiter=" ">
+            <text variable="volume" font-weight="bold"/>
+            <text variable="issue" prefix="(" suffix=")"/>
+          </group>
+          <text variable="page"/>
+          <text variable="publisher"/>
+          <text variable="DOI" prefix="https://doi.org/"/>
+        </group>
+      </group>
+    </layout>
+  </bibliography>
+</style>

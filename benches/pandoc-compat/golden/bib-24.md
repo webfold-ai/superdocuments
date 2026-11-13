@@ -1,0 +1,7 @@
+- `lovelace1843` — Leslie Lamport and Hans Müller (1969). The Apollo Guidance Computer. *Lab Function*.
+- `hopper1952` — Leslie Lamport, Edsger W. Dijkstra and Margaret Hamilton (2002). The Education of a Computer. *University of Zurich*.
+- `knuth1984` — Hans Müller, Luis García and Maria de la Cruz (2019). The Art of Computer Programming. *\\urlhttps://example.org/structure*. <https://example.org/policy>
+- `liskov1987` — Flann O'Brien, C. A. R. Hoare and Grace Hopper (1953). On Computable Numbers. *Proceedings of the Optimizer Symposium*, 43–145.
+- `dijkstra1968` — Leslie Lamport and Hans Müller (1965). Data Abstraction and Hierarchy. *University of Cambridge*.
+- `turing1936` — Guido van Rossum, John Jr. Smith and John Backus (1989). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Compiler Symposium*, 43–184.
+- `lamport1978` — Edsger W. Dijkstra and Barbara Liskov (2012). The Art of Computer Programming. *University of Oxford*.

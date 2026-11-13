@@ -404,9 +404,11 @@ impl Writer {
                     {
                         let _ = write!(out, "<{url}>");
                     } else {
+                        // `[^1^](..)` reads as a footnote reference; a space keeps it a link.
+                        let lead = if text.starts_with('^') { " " } else { "" };
                         let _ = write!(
                             out,
-                            "[{}]({}{})",
+                            "[{lead}{}]({}{})",
                             text,
                             escape_url(url),
                             title_suffix(title)

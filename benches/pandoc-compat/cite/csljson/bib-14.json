@@ -1,0 +1,145 @@
+[
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "edition": "3",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1999
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "title": "Notes on the analytical engine",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Lamport",
+        "given": "Leslie"
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "edition": "Second",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1953
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "Data abstraction and hierarchy",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "container-title": "Proceedings of the array symposium",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "62-190",
+    "title": "Go to statement considered harmful",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Feature network entropy benchmark algorithm function cluster trace block approach network encoder.",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      },
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      }
+    ],
+    "container-title": "Communications of the ACM",
+    "id": "liskov1987",
+    "issue": "11",
+    "issued": {
+      "date-parts": [
+        [
+          1949
+        ]
+      ]
+    },
+    "page": "159-344",
+    "title": "The apollo guidance computer",
+    "type": "article-journal",
+    "volume": "50"
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "number": "TR-87",
+    "publisher": "Lab Array",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1995
+        ]
+      ]
+    },
+    "number": "TR-47",
+    "publisher": "Lab Compiler",
+    "title": "On computable numbers",
+    "type": "report"
+  }
+]

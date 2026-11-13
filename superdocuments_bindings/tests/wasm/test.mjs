@@ -49,7 +49,7 @@ const ok = (name, fn) => { fn(); n += 1; };
 // ---- real documents ----
 ok("docx", () => {
   const md = sd.convert(fixture("office/basic.docx"), "docx");
-  assert.match(md, /# Quarterly Report/);
+  assert.match(md, /title: "Quarterly Report"/);
   assert.match(md, /\*\*Bold part\*\*/);
   assert.match(md, /- First bullet/);
 });

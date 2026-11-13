@@ -1,0 +1,109 @@
+[
+  {
+    "URL": "https://example.org/memory",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "number": "TR-38",
+    "publisher": "Lab Metric",
+    "title": "The art of computer programming",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "edition": "Second",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1939
+        ]
+      ]
+    },
+    "publisher": "Cambridge University Press",
+    "publisher-place": "London",
+    "title": "On computable numbers",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the array symposium",
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1969
+        ]
+      ]
+    },
+    "page": "14-120",
+    "title": "An axiomatic basis for computer programming",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://example.org/tree",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Hamilton",
+        "given": "Margaret"
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "publisher-place": "New York",
+    "title": "Notes on the analytical engine",
+    "type": "book"
+  }
+]

@@ -1,0 +1,10 @@
+- `lovelace1843` — Alan M. Turing and Barbara Liskov (2018). On Computable Numbers. MIT Press.
+- `hopper1952` — Guido van Rossum, Luis García and Ada Lovelace (1979). Go To Statement Considered Harmful. *Communications of the ACM* 45(8), 289–314. <https://doi.org/10.3569/latency.66>
+- `knuth1984` — Grace Hopper (1986). On Computable Numbers. *ACM Computing Surveys* 39(7), 151–379. <https://doi.org/10.5661/experiment.46>
+- `liskov1987` — Edsger W. Dijkstra (1946). The Apollo Guidance Computer. *Proceedings of the Query Symposium*, 51–197.
+- `dijkstra1968` — Maria de la Cruz and Luis García (1984). The Apollo Guidance Computer. *\\urlhttps://example.org/framework*.
+- `turing1936` — Hans Müller and Edsger W. Dijkstra (1972). Go To Statement Considered Harmful. *Proceedings of the Approach Symposium*, 53–147.
+- `lamport1978` — Flann O'Brien (1966). Go To Statement Considered Harmful. MIT Press.
+- `hoare1969` — Barbara Liskov (1992). The Art of Computer Programming. *Proceedings of the London Mathematical Society* 44(12), 132–356.
+- `hamilton1969` — Leslie Lamport (1997). The Education of a Computer. *\\urlhttps://example.org/protocol*. <https://example.org/benchmark>
+- `backus1978` — Ada Lovelace (1968). The Education of a Computer. *University of Cambridge*.
