@@ -244,6 +244,38 @@ fn skip_front_matter(s: &str) -> usize {
     0
 }
 
+/// Whether a line, up to three spaces in, opens a list item, a definition, a footnote definition or
+/// a block quote. Indented lines inside such a block are not an indented code block for the purpose
+/// of `parse_citations`, which does not track the nesting.
+fn opens_container(line: &str) -> bool {
+    let t = line.trim_start_matches(' ');
+    if line.len() - t.len() > 3 {
+        return false;
+    }
+    let mut chars = t.chars();
+    let first = chars.next();
+    let rest = chars.as_str();
+    let after_space = |r: &str| r.starts_with([' ', '\t']);
+    match first {
+        Some('-' | '*' | '+' | ':' | '~') => after_space(rest),
+        Some('>') => true,
+        Some('(') => rest
+            .split([' ', '\t'])
+            .next()
+            .is_some_and(|w| w.ends_with(')') && w.chars().count() <= 5),
+        Some('[') => rest.starts_with('^'),
+        Some('#') => rest.starts_with('.'),
+        Some(c) if c.is_alphanumeric() => {
+            let word = t.split([' ', '\t']).next().unwrap_or("");
+            let body = word.strip_suffix(['.', ')']).unwrap_or("");
+            !body.is_empty()
+                && (body.chars().all(|d| d.is_ascii_digit()) || body.chars().count() == 1)
+                && after_space(&t[word.len()..])
+        }
+        _ => false,
+    }
+}
+
 /// Every citation in the text, in order, outside code and the YAML header.
 pub fn parse_citations(s: &str) -> Vec<Found> {
     let mut out = Vec::new();
@@ -251,6 +283,10 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
     let mut i = skip_front_matter(s);
     let mut line_start = true;
     let mut fence: Option<String> = None;
+    // Indented code blocks, as far as they can be told apart without reading the block structure:
+    // four spaces or a tab after a blank line (or after another such line), outside any list,
+    // definition, footnote or quote. Pandoc reads no citations there.
+    let (mut prev_blank, mut in_code, mut container) = (true, false, false);
     while i < s.len() {
         let c = s[i..].chars().next().unwrap_or(' ');
         let cl = c.len_utf8();
@@ -269,6 +305,26 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                 fence = Some(t.chars().take(3).collect());
                 i = (line_end + 1).min(s.len());
                 continue;
+            }
+            if line.trim().is_empty() {
+                prev_blank = true;
+            } else {
+                let indented = line.starts_with("    ") || line.starts_with('\t');
+                if indented && !container && (prev_blank || in_code) {
+                    in_code = true;
+                    prev_blank = false;
+                    i = (line_end + 1).min(s.len());
+                    continue;
+                }
+                in_code = false;
+                if !indented {
+                    if opens_container(line) {
+                        container = true;
+                    } else if prev_blank && !line.starts_with(' ') {
+                        container = false;
+                    }
+                }
+                prev_blank = false;
             }
         }
         line_start = c == '\n';
@@ -310,7 +366,8 @@ pub fn parse_citations(s: &str) -> Vec<Found> {
                 if let Some(cl_idx) = close {
                     let inner = &s[i + 1..cl_idx];
                     let next = s[cl_idx + 1..].chars().next();
-                    if inner.contains('@') && next != Some('(') {
+                    // `[@a][ref]` is a reference link whose text is the in-text citation `@a`.
+                    if inner.contains('@') && next != Some('(') && next != Some('[') {
                         if let Some(c) = parse_bracketed(inner) {
                             out.push(Found {
                                 start: i,
@@ -438,6 +495,77 @@ mod tests {
         assert_eq!(
             (label.as_deref(), locator.as_deref(), rest.trim()),
             (Some("page"), Some("4"), "and more")
+        );
+    }
+
+    fn cited(s: &str) -> Vec<(String, bool)> {
+        parse_citations(s)
+            .iter()
+            .flat_map(|f| f.citation.items.iter())
+            .map(|i| (i.id.clone(), i.author_in_text))
+            .collect()
+    }
+
+    fn keys(s: &str) -> Vec<String> {
+        cited(s).into_iter().map(|(k, _)| k).collect()
+    }
+
+    // The expectations in the next three tests are what `pandoc --citeproc` (3.1.3) does with the
+    // same text.
+
+    #[test]
+    fn an_indented_code_block_holds_no_citations() {
+        let after = "\n\nAfter [@z].";
+        for code in [
+            "Para.\n\n    [@a] code",
+            "Para.\n\n\t[@a] code",
+            "Para.\n\n    code\n    [@a] more code",
+            "Para.\n\n    code\n\n    [@a] after a blank line",
+            "Para.\n\n    [@a] code\n    \n    [@b] more code",
+            "    [@a] the first line is code",
+            "- item\n\nPara.\n\n    [@a] code after the list",
+        ] {
+            assert_eq!(keys(&format!("{code}{after}")), ["z"], "{code}");
+        }
+    }
+
+    #[test]
+    fn indented_lines_that_are_not_code_keep_their_citations() {
+        for text in [
+            // A continuation paragraph of a list item.
+            "- item\n\n    Para [@a] continues the item.",
+            // A line that continues the paragraph above it.
+            "Para line one\n    [@a] continues it.",
+            // A definition list body.
+            "Term\n:   Def\n\n    Para [@a] in the definition.",
+            // Fewer than four spaces.
+            "Para.\n\n   [@a] three spaces",
+            "Para.\n\n  [@a] two spaces",
+        ] {
+            assert_eq!(keys(text), ["a"], "{text}");
+        }
+    }
+
+    #[test]
+    fn a_bracketed_citation_followed_by_a_bracket_is_the_text_of_a_link() {
+        for text in [
+            "A [@a][ref] b.\n\n[ref]: http://e",
+            "A [@a][] b.",
+            "A [@a][undefined] b.",
+            "A [@a][^1] b.\n\n[^1]: N",
+            "A [@a][text](http://u) b.",
+            "A [@a][ref][x] b.",
+        ] {
+            assert_eq!(cited(text), [("a".to_string(), true)], "{text}");
+        }
+        assert_eq!(
+            cited("A [@a][@b] c."),
+            [("a".to_string(), true), ("b".to_string(), false)]
+        );
+        // Not directly followed by a bracket: an ordinary citation.
+        assert_eq!(
+            cited("A [@a] [ref] b.\n\n[ref]: http://e"),
+            [("a".to_string(), false)]
         );
     }
 
