@@ -32,6 +32,7 @@ pub mod ascii_filters;
 mod decode;
 pub mod inflate;
 mod parse;
+pub use parse::PageGeometry;
 /// The loop-free PDF kernels of `proof/extract_pdf.rs`, compiled into the library unchanged: the
 /// production xref, object-stream and predictor code calls these same functions, and the proofs in
 /// `proof/PdfProofs.lean` are about them (`proof/regen.sh` extracts the same source).

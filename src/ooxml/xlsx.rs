@@ -6,11 +6,13 @@
 //! booleans as `TRUE`/`FALSE`, inline and rich-text strings as text with phonetic guides left
 //! out, errors as written, and a formula that was never calculated as `=formula`.
 //!
-//! A number is shown the way its format shows it when the format is one of the plain kinds: a fixed
-//! number of decimals, a thousands separator, a percentage, a currency symbol or other text
-//! around the number (`0.00`, `#,##0.0`, `0.0%`, `$#,##0.00`, `"EUR "0`). Any other format
-//! (scientific, fractions, scaling commas, conditions, text sections) leaves the number exactly
-//! as stored.
+//! A number is shown the way its format shows it. Plain formats (a fixed number of decimals, a
+//! thousands separator, a percentage, a currency symbol or other text around the number: `0.00`,
+//! `#,##0.0`, `0.0%`, `$#,##0.00`, `"EUR "0`) go through `format_number` below. Everything else
+//! `numfmt` can read (General, sections, date and time codes such as `mmm-yyyy`) is applied
+//! after Excel's rounding of a stored double to 15 digits. A format neither implements
+//! (scientific, fractions, conditions) leaves the number as stored and a date in ISO form.
+//! `read_typed` returns each cell's typed value next to its display.
 
 use std::collections::HashMap;
 
@@ -19,6 +21,7 @@ use quick_xml::Reader;
 
 use super::{attr_local, attrs_local, main_part, read_rels, rels_path_of, resolve};
 use crate::document::{archive, entry, push_ref, text};
+use crate::xlsx::{CellValue, TypedCell};
 
 /// The most cells a single worksheet may allocate. `r="XFD1048576"` asks for 17 billion.
 const MAX_CELLS: usize = 20_000_000;
@@ -28,11 +31,23 @@ pub(crate) struct Sheet {
     pub rows: Vec<Vec<String>>,
 }
 
+pub(crate) struct TypedSheet {
+    pub name: String,
+    pub rows: Vec<Vec<TypedCell>>,
+}
+
+/// Days since 1970-01-01 to (year, month, day), proleptic Gregorian.
+pub(super) fn civil_date(days: i64) -> (i64, u32, u32) {
+    civil(days)
+}
+
 /// How each cell style (`s` attribute) formats a number.
 #[derive(Default)]
 pub(crate) struct Formats {
     /// Per `cellXfs` index: `(is_date, has_date_part, has_time_part)`.
     xfs: Vec<(bool, bool, bool)>,
+    /// Per `cellXfs` index: the format code, when it is custom or a locale-independent built-in.
+    codes: Vec<Option<String>>,
     /// Per `cellXfs` index: the plain number format, when it has one.
     numbers: Vec<Option<NumberFormat>>,
     pub date1904: bool,
@@ -215,6 +230,7 @@ impl Formats {
         let mut buf = Vec::new();
         let mut custom: HashMap<u32, String> = HashMap::new();
         let mut xfs = Vec::new();
+        let mut codes = Vec::new();
         let mut numbers = Vec::new();
         let mut in_cell_xfs = false;
         loop {
@@ -245,6 +261,12 @@ impl Formats {
                                 .and_then(parse_number_format)
                         });
                         xfs.push(classified);
+                        codes.push(
+                            custom
+                                .get(&id)
+                                .cloned()
+                                .or_else(|| super::numfmt::builtin(id).map(str::to_owned)),
+                        );
                     }
                     _ => {}
                 },
@@ -256,9 +278,26 @@ impl Formats {
         }
         Ok(Self {
             xfs,
+            codes,
             numbers,
             date1904: false,
         })
+    }
+
+    /// What the cell style shows for a number; `None` when the style has no usable format code.
+    fn display(&self, style: Option<usize>, value: f64) -> Option<String> {
+        // A plain number format first; the other formats `numfmt` reads second.
+        if let Some(format) = self.number(style) {
+            if let Some(shown) = format_number(value, format) {
+                return Some(shown);
+            }
+        }
+        // No style (or style 0 with no code) is the General format.
+        let code = match style {
+            Some(s) => self.codes.get(s)?.as_deref()?,
+            None => "General",
+        };
+        super::numfmt::format_value(value, code, self.date1904)
     }
 
     fn number(&self, style: Option<usize>) -> Option<&NumberFormat> {
@@ -437,17 +476,30 @@ pub(crate) fn column(reference: &str) -> Option<usize> {
         .filter(|v| *v < 16_384)
 }
 
-/// The rows of one worksheet part.
+/// The rows of one worksheet part, as displayed (the tests compare against plain strings).
+#[cfg(test)]
 pub(crate) fn worksheet(
     xml: &[u8],
     strings: &[String],
     formats: &Formats,
 ) -> Result<Vec<Vec<String>>, String> {
+    Ok(worksheet_typed(xml, strings, formats)?
+        .into_iter()
+        .map(|row| row.into_iter().map(|c| c.display).collect())
+        .collect())
+}
+
+/// The rows of one worksheet part: each cell's display and typed value.
+pub(crate) fn worksheet_typed(
+    xml: &[u8],
+    strings: &[String],
+    formats: &Formats,
+) -> Result<Vec<Vec<TypedCell>>, String> {
     let mut reader = Reader::from_reader(xml);
     let mut buf = Vec::new();
-    let mut rows: Vec<Vec<String>> = Vec::new();
+    let mut rows: Vec<Vec<TypedCell>> = Vec::new();
     let mut allocated = 0usize;
-    let mut row: Vec<String> = Vec::new();
+    let mut row: Vec<TypedCell> = Vec::new();
     let mut kind = String::new();
     let mut style: Option<usize> = None;
     let mut col: Option<usize> = None;
@@ -511,20 +563,22 @@ pub(crate) fn worksheet(
                     in_c = false;
                     let cell =
                         cell_text(&kind, style, &value, &inline, &formula, strings, formats)?;
-                    if !cell.is_empty() {
+                    if !cell.display.is_empty() {
                         let at = col.unwrap_or(row.len());
                         if row.len() <= at {
                             allocated = allocated.saturating_add(at + 1 - row.len());
                             if allocated > MAX_CELLS {
                                 return Err("worksheet too large".into());
                             }
-                            row.resize(at + 1, String::new());
+                            row.resize(at + 1, TypedCell::empty());
                         }
                         row[at] = cell;
                     }
                 }
                 // Styled but empty rows are common and carry nothing.
-                "row" if row.iter().any(|c| !c.is_empty()) => rows.push(std::mem::take(&mut row)),
+                "row" if row.iter().any(|c| !c.display.is_empty()) => {
+                    rows.push(std::mem::take(&mut row))
+                }
                 _ => {}
             },
             Event::Eof => break,
@@ -543,49 +597,89 @@ fn cell_text(
     formula: &str,
     strings: &[String],
     formats: &Formats,
-) -> Result<String, String> {
+) -> Result<TypedCell, String> {
+    let text_cell = |t: String| TypedCell {
+        value: if t.is_empty() {
+            CellValue::Empty
+        } else {
+            CellValue::Text(t.clone())
+        },
+        display: t,
+    };
     Ok(match kind {
         "s" => {
             if value.trim().is_empty() {
-                String::new()
+                TypedCell::empty()
             } else {
                 let index = value
                     .trim()
                     .parse::<usize>()
                     .map_err(|_| "bad shared-string index")?;
-                strings
-                    .get(index)
-                    .cloned()
-                    .ok_or("shared-string index out of range")?
+                text_cell(
+                    strings
+                        .get(index)
+                        .cloned()
+                        .ok_or("shared-string index out of range")?,
+                )
             }
         }
-        "inlineStr" => inline.to_owned(),
+        "inlineStr" => text_cell(inline.to_owned()),
         "b" => match value.trim() {
-            "1" | "true" => "TRUE".to_owned(),
-            "0" | "false" => "FALSE".to_owned(),
-            _ => String::new(),
+            "1" | "true" => TypedCell {
+                display: "TRUE".to_owned(),
+                value: CellValue::Bool(true),
+            },
+            "0" | "false" => TypedCell {
+                display: "FALSE".to_owned(),
+                value: CellValue::Bool(false),
+            },
+            _ => TypedCell::empty(),
         },
-        "str" | "e" | "d" => value.to_owned(),
+        "e" => TypedCell {
+            display: value.to_owned(),
+            value: if value.is_empty() {
+                CellValue::Empty
+            } else {
+                CellValue::Error(value.to_owned())
+            },
+        },
+        "str" | "d" => text_cell(value.to_owned()),
         _ => {
             let raw = value.trim();
             if raw.is_empty() {
                 if formula.trim().is_empty() {
-                    String::new()
+                    TypedCell::empty()
                 } else {
-                    format!("={}", formula.trim())
+                    TypedCell {
+                        display: format!("={}", formula.trim()),
+                        value: CellValue::Formula(formula.trim().to_owned()),
+                    }
                 }
             } else {
                 let (is_date, date_part, time_part) = formats.of(style);
                 let number = raw.parse::<f64>().ok();
-                is_date
+                let iso = is_date
                     .then_some(number)
                     .flatten()
-                    .and_then(|n| serial_to_text(n, formats.date1904, date_part, time_part))
-                    .or_else(|| {
-                        let format = formats.number(style)?;
-                        format_number(number?, format)
-                    })
-                    .unwrap_or_else(|| raw.to_owned())
+                    .and_then(|n| serial_to_text(n, formats.date1904, date_part, time_part));
+                let shown = number.and_then(|n| formats.display(style, n));
+                match (number, iso) {
+                    (Some(serial), Some(iso)) => TypedCell {
+                        display: shown.unwrap_or_else(|| iso.clone()),
+                        value: CellValue::DateTime { serial, iso },
+                    },
+                    (Some(n), None) => TypedCell {
+                        display: shown.unwrap_or_else(|| raw.to_owned()),
+                        value: CellValue::Number {
+                            value: n,
+                            raw: raw.to_owned(),
+                        },
+                    },
+                    (None, _) => TypedCell {
+                        display: raw.to_owned(),
+                        value: CellValue::Text(raw.to_owned()),
+                    },
+                }
             }
         }
     })
@@ -593,6 +687,21 @@ fn cell_text(
 
 /// Worksheets in tab order with their real names.
 pub(crate) fn read(data: &[u8]) -> Result<Vec<Sheet>, String> {
+    Ok(read_typed(data)?
+        .into_iter()
+        .map(|sheet| Sheet {
+            name: sheet.name,
+            rows: sheet
+                .rows
+                .into_iter()
+                .map(|row| row.into_iter().map(|c| c.display).collect())
+                .collect(),
+        })
+        .collect())
+}
+
+/// Worksheets in tab order with typed cells.
+pub(crate) fn read_typed(data: &[u8]) -> Result<Vec<TypedSheet>, String> {
     let mut zip = archive(data)?;
     let workbook = main_part(&mut zip, "xl/workbook.xml").ok();
     let mut declared: Vec<(String, String)> = Vec::new(); // (name, part)
@@ -677,8 +786,8 @@ pub(crate) fn read(data: &[u8]) -> Result<Vec<Sheet>, String> {
     declared
         .into_iter()
         .map(|(name, part)| {
-            let rows = worksheet(&entry(&mut zip, &part)?, &strings, &formats)?;
-            Ok(Sheet { name, rows })
+            let rows = worksheet_typed(&entry(&mut zip, &part)?, &strings, &formats)?;
+            Ok(TypedSheet { name, rows })
         })
         .collect()
 }
@@ -765,7 +874,9 @@ mod tests {
                 "inlinex",
                 "=SUM(B2:B3)",
                 "",
-                "0.30000000000000004"
+                // General shows 15 significant digits, as Excel does; the stored text stays
+                // available through the typed API (`CellValue::Number::raw`)
+                "0.3"
             ]]
         );
     }
@@ -867,7 +978,9 @@ mod number_format_tests {
         let rows = worksheet(sheet, &[], &formats).unwrap();
         assert_eq!(
             rows[0],
-            ["12.5%", "1,234.50", "2023-03-15", "0.30000000000000004"]
+            // a General cell shows 15 significant digits, as Excel does (the stored text stays in
+            // `CellValue::Number::raw`)
+            ["12.5%", "1,234.50", "2023-03-15", "0.3"]
         );
     }
 }

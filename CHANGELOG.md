@@ -6,6 +6,10 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Added
 
+- `pdf::page_profile` (`page_ocr_verdicts`, `pages_needing_ocr`, `classify_page`), `Document::page_geometry` and `pdf::extract_bytes_with_ocr_options`: OCR is decided per page. A page with no alphanumeric text, or a scan whose only text is a stamp (images cover at least half the page and fewer than 0.4 alphanumeric characters per 1000 pt²), goes to OCR; the other pages of the same file keep their native text.
+- Legacy Word binary (`.doc`, `.dot`): `document::convert_bytes("doc", ..)` reads the main story's text natively (`src/doc.rs`), with named errors for encrypted files and non-Word content. `DocFormat::Doc`.
+- Spreadsheet number formats (`src/ooxml/numfmt.rs`) and `xlsx::read_workbook_typed` (`CellValue`, `TypedCell`, `TypedWorksheet`): cells show what their number format shows; typed values stay available.
+
 - Legacy `.xls` (BIFF) conversion through the in-repo `calamine/` crate, now a path dependency of the root crate (default features off). The output has the same Markdown shape as XLSX: one `## <sheet>` section per worksheet in tab order, error cells, booleans and formula results. `DocFormat::Xls` goes through `DocumentCache` and `convert_streaming`.
 
 - `document::extract_images` and `ExtractedImage` (`src/media.rs`): the pictures of DOCX, DOCM, PPTX, XLSX, XLSM, ODT, ODP, ODS and EPUB, with name, media type (from magic bytes), header size for PNG, JPEG, GIF and BMP, first referencing part and alt text. Limits and zip safety are described in the function's doc comment.
@@ -30,6 +34,9 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Fixed
 
+- XLSX: a stored double is shown to 15 significant digits like Excel (`4.0999999999999996` is `4.1`, `0.30000000000000004` is `0.3`), and dates with a custom format show as formatted (`Sep-2026`, not `2026-09-01`). This changes the Markdown for such cells; the stored text is in `CellValue::Number::raw`.
+- DOCX: an embedded picture object (`Word.Picture.8`, `Paint.Picture`, `PBrush`) no longer leaves an `Embedded object: Word.Picture.8` line; other embedded objects keep it.
+- PDF: a scanned page carrying only a stamp is OCRed instead of returning the stamp (see Added).
 - PDF native extraction: a page whose `/Contents` is an indirect reference to an array of content streams (`/Contents 13 0 R`, `13 0 obj [14 0 R 15 0 R] endobj`, as Aspose.Pdf 10.1.0 writes it) now yields its text. Before, such pages read as empty and callers fell back to OCR. On the 60 PDFs of the Federal Register's "Census and Statistics" titles, 34 returned under half of poppler's words before the fix and none after. Regression tests: `tests/pdf_contents_indirect_array.rs`.
 - `calamine` CFB reader: a truncated sector, a sector past the end of the file, a short directory entry, a header-driven allocation larger than the file, and a FAT chain that cycles or leaves the FAT now give errors instead of panics, aborts or endless loops. A BIFF dimensions record no longer reserves gigabytes up front.
 

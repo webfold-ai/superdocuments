@@ -103,7 +103,8 @@ fn xlsx_uses_workbook_names_tab_order_dates_and_booleans() {
         "{md}"
     );
     assert!(
-        md.contains("| C<D | 2026-01-02 03:04:05 | 0.25 | FALSE |"),
+        // the cell's format code is `yyyy-mm-dd h:mm:ss`: one-digit hour, as the sheet shows it
+        md.contains("| C<D | 2026-01-02 3:04:05 | 0.25 | FALSE |"),
         "{md}"
     );
     assert!(md.contains("TRUE") && md.contains("FALSE"), "{md}");

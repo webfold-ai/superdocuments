@@ -918,6 +918,7 @@ fn mathml(data: &[u8]) -> Result<String, String> {
 pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
     match extension.to_ascii_lowercase().as_str() {
         "docx" | "docm" => crate::ooxml::docx::convert(data),
+        "doc" | "dot" => crate::doc::convert(data),
         "pptx" => crate::ooxml::pptx::convert(data),
         "xlsx" | "xlsm" => xlsx(data),
         "odt" => crate::odt::to_markdown(data),
@@ -1092,6 +1093,8 @@ pub enum DocFormat {
     MathMl = 15,
     /// An arXiv e-print archive (`gz`, `tgz`, `tar`).
     ArxivSource = 16,
+    /// Legacy Word binary (`doc`, `dot`).
+    Doc = 17,
 }
 
 impl DocFormat {
@@ -1114,6 +1117,7 @@ impl DocFormat {
             "bib" | "bibtex" => Some(Self::Bib),
             "mml" | "mathml" => Some(Self::MathMl),
             "gz" | "tgz" | "tar" => Some(Self::ArxivSource),
+            "doc" | "dot" => Some(Self::Doc),
             _ => None,
         }
     }
