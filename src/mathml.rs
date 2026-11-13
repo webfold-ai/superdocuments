@@ -801,12 +801,10 @@ impl Converter {
             "munder" => {
                 if base_is_big {
                     format!("{}_{}", base.trim(), arg(&second))
+                } else if parts[1].attr("accentunder") == Some("true") {
+                    format!("\\underline{{{base}}}")
                 } else {
-                    if parts[1].attr("accentunder") == Some("true") {
-                        format!("\\underline{{{base}}}")
-                    } else {
-                        format!("\\underset{{{second}}}{{{base}}}")
-                    }
+                    format!("\\underset{{{second}}}{{{base}}}")
                 }
             }
             "mover" => {

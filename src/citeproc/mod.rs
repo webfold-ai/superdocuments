@@ -368,19 +368,6 @@ impl Processor {
         t
     }
 
-    /// For styles whose citations print no author (numeric styles): the names of the
-    /// bibliography layout, which is what an in-text citation then shows.
-    fn author_from_bibliography(&self, r: &Reference) -> Option<Toks> {
-        let bib = self.style.bibliography()?;
-        let layout = bib.find("layout")?;
-        let mut ctx = Ctx::new(&self.style, r, Mode::Bibliography);
-        ctx.item.author_only = true;
-        let _ = eval(layout, &mut ctx);
-        let cap = ctx.captured.take();
-        // In-text names read "A and B", not in sort order, with et al. as the style sets it.
-        cap
-    }
-
     fn render_citation(
         &self,
         c: &Citation,

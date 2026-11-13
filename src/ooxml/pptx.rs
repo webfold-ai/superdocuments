@@ -79,7 +79,8 @@ fn chart_markdown(xml: &[u8]) -> String {
     let mut reader = Reader::from_reader(xml);
     let mut buf = Vec::new();
     let (mut title, mut in_title, mut in_plot) = (String::new(), false, false);
-    let mut series: Vec<(String, Vec<(usize, String)>, Vec<(usize, String)>)> = Vec::new();
+    type Points = Vec<(usize, String)>;
+    let mut series: Vec<(String, Points, Points)> = Vec::new();
     let (mut part, mut point, mut in_v, mut in_t) = (Part::None, 0usize, false, false);
     loop {
         let Ok(event) = reader.read_event_into(&mut buf) else {

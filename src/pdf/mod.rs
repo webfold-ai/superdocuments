@@ -1194,7 +1194,7 @@ fn tesseract_ocr_pages(
             let _ = std::fs::remove_file(image);
         }
         for item in recognised {
-            let (number, page_seconds, text) = item.map_err(&fail)?;
+            let (number, page_seconds, text) = item.map_err(fail)?;
             recognize_seconds_total += page_seconds;
             observer("page_recognize", page_seconds, 1, text.len() as u64);
             if let Some(log_path) = options.config.log_path.as_deref() {

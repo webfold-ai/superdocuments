@@ -33,7 +33,7 @@ fn read(html: &str, epub: bool) -> Doc {
         epub,
         ..Reader::default()
     };
-    r.collect_meta(&nodes, &mut meta);
+    Reader::collect_meta(&nodes, &mut meta);
     if epub {
         // Pandoc leaves the title page out: its title and author are in the metadata.
         drop_title_pages(&mut nodes);
@@ -177,7 +177,7 @@ fn is_block_tag(tag: &str) -> bool {
 impl Reader {
     // ---- metadata and footnote collection -------------------------------------------------
 
-    fn collect_meta(&self, nodes: &[Node], meta: &mut Meta) {
+    fn collect_meta(nodes: &[Node], meta: &mut Meta) {
         for n in nodes {
             let Node::Elem(e) = n else { continue };
             match e.tag.as_str() {
@@ -203,7 +203,7 @@ impl Reader {
                         _ => {}
                     }
                 }
-                _ => self.collect_meta(&e.children, meta),
+                _ => Self::collect_meta(&e.children, meta),
             }
         }
     }
