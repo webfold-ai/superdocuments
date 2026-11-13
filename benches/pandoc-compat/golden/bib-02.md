@@ -1,0 +1,9 @@
+- `lovelace1843` — Barbara Liskov, Hans Müller and Edsger W. Dijkstra (2012). Notes on the Analytical Engine. *Proceedings of the Compiler Symposium*, 35–166.
+- `hopper1952` — John Jr. Smith, Maria de la Cruz and Ada Lovelace (1937). Go To Statement Considered Harmful. *Lab Model*.
+- `knuth1984` — Ada Lovelace, John Jr. Smith and John Backus (1969). Time, Clocks, and the Ordering of Events. *University of Oxford*.
+- `liskov1987` — John Backus, Donald E. Knuth and Hans Müller (2007). On Computable Numbers. *Lab Heuristic*. <https://example.org/benchmark>
+- `dijkstra1968` — Guido van Rossum and Alan M. Turing (1990). Notes on the Analytical Engine. *\\urlhttps://example.org/sparse*.
+- `turing1936` — Donald E. Knuth, Ada Lovelace and Maria de la Cruz (1962). Notes on the Analytical Engine. *\\urlhttps://example.org/retrieval*.
+- `lamport1978` — Hans Müller and Flann O'Brien (2010). On Computable Numbers. *University of Cambridge*.
+- `hoare1969` — Edsger W. Dijkstra (1973). The Art of Computer Programming. *\\urlhttps://example.org/filter*.
+- `hamilton1969` — Barbara Liskov, John Jr. Smith and Maria de la Cruz (1963). Time, Clocks, and the Ordering of Events. *\\urlhttps://example.org/function*. <https://example.org/density>

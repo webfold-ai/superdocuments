@@ -1,0 +1,8 @@
+- `lovelace1843` — Hans Müller and C. A. R. Hoare (1989). The Apollo Guidance Computer. *\\urlhttps://example.org/decoder*.
+- `hopper1952` — Flann O'Brien (2013). The Art of Computer Programming. Cambridge University Press. <https://example.org/structure>
+- `knuth1984` — Grace Hopper and Flann O'Brien (1963). The Education of a Computer. *IEEE Transactions on Software Engineering* 45(2), 135–397. <https://example.org/throughput>
+- `liskov1987` — Hans Müller and Barbara Liskov (2014). The Apollo Guidance Computer. Springer.
+- `dijkstra1968` — John Jr. Smith and John Backus (1973). The Art of Computer Programming. *\\urlhttps://example.org/ranking*.
+- `turing1936` — C. A. R. Hoare (2005). The Apollo Guidance Computer. *Proceedings of the London Mathematical Society* 33(2), 72–308. <https://example.org/trace>
+- `lamport1978` — Flann O'Brien (1965). An Axiomatic Basis for Computer Programming. *\\urlhttps://example.org/metric*.
+- `hoare1969` — Luis García (1986). The Apollo Guidance Computer. *Proceedings of the Node Symposium*, 30–177.

@@ -1,0 +1,118 @@
+[
+  {
+    "DOI": "10.2214/heuristic.97",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "lovelace1843",
+    "issue": "7",
+    "issued": {
+      "date-parts": [
+        [
+          1959
+        ]
+      ]
+    },
+    "page": "150-375",
+    "title": "The education of a computer",
+    "type": "article-journal",
+    "volume": "31"
+  },
+  {
+    "URL": "https://example.org/ranking",
+    "abstract": "Sequence network trace batch function agent tree domain corpus density throughput pipeline.",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      }
+    ],
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1996
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/algorithm",
+    "title": "Data abstraction and hierarchy",
+    "type": ""
+  },
+  {
+    "abstract": "Array ranking model vector encoder queue prior lattice stream baseline filter feature.",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "number": "TR-85",
+    "publisher": "Lab Parser",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          2000
+        ]
+      ]
+    },
+    "number": "TR-13",
+    "publisher": "Lab Estimate",
+    "title": "On computable numbers",
+    "type": "report"
+  },
+  {
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      }
+    ],
+    "container-title": "Proceedings of the feature symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          1971
+        ]
+      ]
+    },
+    "page": "63-156",
+    "title": "Go to statement considered harmful",
+    "type": "paper-conference"
+  }
+]

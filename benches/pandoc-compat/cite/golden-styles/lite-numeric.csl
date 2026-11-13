@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Written for superdocuments' golden tests; Apache-2.0, like the rest of the repository. -->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" initialize-with="." name-as-sort-order="first" sort-separator=" ">
+  <info>
+    <title>Lite numeric</title>
+    <id>urn:superdocuments:lite-numeric</id>
+    <updated>2026-11-13T00:00:00+00:00</updated>
+  </info>
+  <macro name="authors">
+    <names variable="author">
+      <name and="text" delimiter-precedes-last="never" et-al-min="4" et-al-use-first="2"/>
+    </names>
+  </macro>
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <group delimiter=", ">
+        <text variable="citation-number"/>
+        <group delimiter=" ">
+          <label variable="locator" form="short"/>
+          <text variable="locator"/>
+        </group>
+      </group>
+    </layout>
+  </citation>
+  <bibliography second-field-align="flush">
+    <layout>
+      <text variable="citation-number" prefix="[" suffix="]"/>
+      <group delimiter=", " suffix=".">
+        <text macro="authors"/>
+        <text variable="title" quotes="true"/>
+        <text variable="container-title" font-style="italic"/>
+        <group delimiter=" ">
+          <label variable="volume" form="short"/>
+          <text variable="volume"/>
+        </group>
+        <group delimiter=" ">
+          <label variable="page" form="short"/>
+          <text variable="page"/>
+        </group>
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </group>
+    </layout>
+  </bibliography>
+</style>

@@ -1,0 +1,7 @@
+- `lovelace1843` — Hans Müller (1948). Data Abstraction and Hierarchy. *University of Oxford*.
+- `hopper1952` — Barbara Liskov and John Jr. Smith (1936). Can Programming Be Liberated from the von Neumann Style. *Journal of the ACM* 11(7), 127–305. <https://doi.org/10.8852/decoder.67>
+- `knuth1984` — Ada Lovelace and C. A. R. Hoare (1970). Time, Clocks, and the Ordering of Events. *Proceedings of the London Mathematical Society* 42(8), 59–345. <https://doi.org/10.4721/scheduler.33>
+- `liskov1987` — Alan M. Turing (1994). The Art of Computer Programming. Springer. <https://example.org/workload>
+- `dijkstra1968` — John Jr. Smith and Grace Hopper (2022). The Education of a Computer. *Proceedings of the Convergence Symposium*, 61–101.
+- `turing1936` — C. A. R. Hoare, John Jr. Smith and Luis García (1941). An Axiomatic Basis for Computer Programming. Springer. <https://example.org/experiment>
+- `lamport1978` — Luis García and Guido van Rossum (2010). On Computable Numbers. Addison-Wesley.

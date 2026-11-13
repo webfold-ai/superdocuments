@@ -1,0 +1,179 @@
+[
+  {
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "publisher": "University of Oxford",
+    "title": "Data abstraction and hierarchy",
+    "type": "thesis"
+  },
+  {
+    "DOI": "10.8852/decoder.67",
+    "URL": "https://example.org/pipeline",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "container-title": "Journal of the ACM",
+    "id": "hopper1952",
+    "issue": "7",
+    "issued": {
+      "date-parts": [
+        [
+          1936
+        ]
+      ]
+    },
+    "page": "127-305",
+    "title": "Can programming be liberated from the von neumann style",
+    "type": "article-journal",
+    "volume": "11"
+  },
+  {
+    "DOI": "10.4721/scheduler.33",
+    "author": [
+      {
+        "family": "Lovelace",
+        "given": "Ada"
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      }
+    ],
+    "container-title": "Proceedings of the London Mathematical Society",
+    "id": "knuth1984",
+    "issue": "8",
+    "issued": {
+      "date-parts": [
+        [
+          1970
+        ]
+      ]
+    },
+    "page": "59-345",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "article-journal",
+    "volume": "42"
+  },
+  {
+    "URL": "https://example.org/workload",
+    "author": [
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "liskov1987",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "publisher-place": "Boston",
+    "title": "The art of computer programming",
+    "type": "book"
+  },
+  {
+    "abstract": "Encoder cluster segment framework policy feature corpus sparse metric convergence stream channel.",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "container-title": "Proceedings of the convergence symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "page": "61-101",
+    "title": "The education of a computer",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://example.org/experiment",
+    "author": [
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      },
+      {
+        "family": "García",
+        "given": "Luis"
+      }
+    ],
+    "edition": "Second",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1941
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "publisher-place": "New York",
+    "title": "An axiomatic basis for computer programming",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "family": "García",
+        "given": "Luis"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "edition": "2",
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2010
+        ]
+      ]
+    },
+    "publisher": "Addison-Wesley",
+    "publisher-place": "London",
+    "title": "On computable numbers",
+    "type": "book"
+  }
+]

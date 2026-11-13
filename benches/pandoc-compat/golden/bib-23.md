@@ -1,0 +1,7 @@
+- `lovelace1843` — Guido van Rossum and John Backus (1979). The Education of a Computer. *University of Cambridge*.
+- `hopper1952` — John Backus, Donald E. Knuth and Barbara Liskov (1958). Notes on the Analytical Engine. *Lab Estimate*. <https://example.org/convergence>
+- `knuth1984` — Edsger W. Dijkstra (1993). The Apollo Guidance Computer. *Journal of the ACM* 33(2), 39–369.
+- `liskov1987` — Barbara Liskov (1944). The Art of Computer Programming. *Lab Optimizer*.
+- `dijkstra1968` — Leslie Lamport, Hans Müller and Edsger W. Dijkstra (2017). The Education of a Computer. Addison-Wesley.
+- `turing1936` — Maria de la Cruz (1951). Notes on the Analytical Engine. MIT Press.
+- `lamport1978` — Alan M. Turing (1968). Time, Clocks, and the Ordering of Events. *\\urlhttps://example.org/solver*.

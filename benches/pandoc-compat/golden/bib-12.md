@@ -1,0 +1,4 @@
+- `lovelace1843` — Ada Lovelace and Margaret Hamilton (2015). Go To Statement Considered Harmful. MIT Press.
+- `hopper1952` — Flann O'Brien (2011). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Layer Symposium*, 72–147.
+- `knuth1984` — Flann O'Brien (1989). The Art of Computer Programming. *Journal of the ACM* 25(4), 182–319. <https://doi.org/10.9095/compiler.84>
+- `liskov1987` — Guido van Rossum and Maria de la Cruz (1954). Can Programming Be Liberated from the von Neumann Style. Cambridge University Press.

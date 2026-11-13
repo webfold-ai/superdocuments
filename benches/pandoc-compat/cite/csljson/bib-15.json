@@ -1,0 +1,235 @@
+[
+  {
+    "abstract": "Window query model approach transform solver compiler latency agent workload structure regression.",
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      }
+    ],
+    "id": "lovelace1843",
+    "issued": {
+      "date-parts": [
+        [
+          1947
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/prior",
+    "title": "The apollo guidance computer",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/prior",
+    "author": [
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "genre": "PhD thesis",
+    "id": "hopper1952",
+    "issued": {
+      "date-parts": [
+        [
+          1972
+        ]
+      ]
+    },
+    "publisher": "University of Cambridge",
+    "title": "Notes on the analytical engine",
+    "type": "thesis"
+  },
+  {
+    "author": [
+      {
+        "family": "O’Brien",
+        "given": "Flann"
+      },
+      {
+        "family": "Hopper",
+        "given": "Grace"
+      }
+    ],
+    "id": "knuth1984",
+    "issued": {
+      "date-parts": [
+        [
+          1955
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/network",
+    "title": "On computable numbers",
+    "type": ""
+  },
+  {
+    "DOI": "10.7751/compiler.14",
+    "author": [
+      {
+        "family": "Müller",
+        "given": "Hans"
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "IEEE Transactions on Software Engineering",
+    "id": "liskov1987",
+    "issue": "11",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "page": "86-362",
+    "title": "The education of a computer",
+    "type": "article-journal",
+    "volume": "2"
+  },
+  {
+    "author": [
+      {
+        "family": "Dijkstra",
+        "given": "Edsger W."
+      },
+      {
+        "family": "Hoare",
+        "given": "C. A. R."
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      }
+    ],
+    "container-title": "Proceedings of the stream symposium",
+    "id": "dijkstra1968",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "1-192",
+    "title": "Time, clocks, and the ordering of events",
+    "type": "paper-conference"
+  },
+  {
+    "abstract": "Ranking stream objective network heuristic ranking framework solver structure baseline policy decoder.",
+    "author": [
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "edition": "2",
+    "id": "turing1936",
+    "issued": {
+      "date-parts": [
+        [
+          1938
+        ]
+      ]
+    },
+    "publisher": "Springer",
+    "title": "Go to statement considered harmful",
+    "type": "book"
+  },
+  {
+    "abstract": "Protocol optimizer adaptive heuristic entropy algorithm model adaptive lattice pipeline regression stream.",
+    "author": [
+      {
+        "family": "Knuth",
+        "given": "Donald E."
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      },
+      {
+        "family": "Smith",
+        "given": "John Jr."
+      }
+    ],
+    "id": "lamport1978",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "note": "Accessed 2024",
+    "publisher": "https://example.org/structure",
+    "title": "On computable numbers",
+    "type": ""
+  },
+  {
+    "URL": "https://example.org/matrix",
+    "author": [
+      {
+        "family": "Liskov",
+        "given": "Barbara"
+      },
+      {
+        "family": "Backus",
+        "given": "John"
+      },
+      {
+        "family": "Turing",
+        "given": "Alan M."
+      }
+    ],
+    "id": "hoare1969",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "publisher": "MIT Press",
+    "title": "The education of a computer",
+    "type": "book"
+  },
+  {
+    "author": [
+      {
+        "dropping-particle": "van",
+        "family": "Rossum",
+        "given": "Guido"
+      },
+      {
+        "dropping-particle": "de la",
+        "family": "Cruz",
+        "given": "Maria"
+      }
+    ],
+    "id": "hamilton1969",
+    "issued": {
+      "date-parts": [
+        [
+          2012
+        ]
+      ]
+    },
+    "number": "TR-39",
+    "publisher": "Lab Transform",
+    "title": "Notes on the analytical engine",
+    "type": "report"
+  }
+]

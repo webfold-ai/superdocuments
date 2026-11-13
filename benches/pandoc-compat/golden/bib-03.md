@@ -1,0 +1,4 @@
+- `lovelace1843` — C. A. R. Hoare, Edsger W. Dijkstra and Hans Müller (1948). The Art of Computer Programming. *Lab Metric*. <https://example.org/memory>
+- `hopper1952` — John Jr. Smith, John Backus and C. A. R. Hoare (1939). On Computable Numbers. Cambridge University Press.
+- `knuth1984` — Ada Lovelace and Grace Hopper (1969). An Axiomatic Basis for Computer Programming. *Proceedings of the Array Symposium*, 14–120.
+- `liskov1987` — Ada Lovelace and Margaret Hamilton (2017). Notes on the Analytical Engine. MIT Press. <https://example.org/tree>

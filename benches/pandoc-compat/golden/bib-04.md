@@ -1,0 +1,8 @@
+- `lovelace1843` — Maria de la Cruz (2014). The Apollo Guidance Computer. *Lab Window*.
+- `hopper1952` — John Jr. Smith and Flann O'Brien (1945). Data Abstraction and Hierarchy. *Proceedings of the London Mathematical Society* 39(3), 257–308. <https://doi.org/10.6600/trace.17>
+- `knuth1984` — Donald E. Knuth and Alan M. Turing (1975). Can Programming Be Liberated from the von Neumann Style. *Lab Complexity*.
+- `liskov1987` — Guido van Rossum and Grace Hopper (1987). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Entropy Symposium*, 98–186.
+- `dijkstra1968` — Hans Müller, John Backus and Leslie Lamport (1937). Data Abstraction and Hierarchy. *Lab Matrix*.
+- `turing1936` — C. A. R. Hoare and Hans Müller (1994). An Axiomatic Basis for Computer Programming. *Journal of the ACM* 53(8), 203–390. <https://doi.org/10.4068/layer.20>
+- `lamport1978` — John Jr. Smith and John Backus (2024). On Computable Numbers. *Proceedings of the Schema Symposium*, 24–188.
+- `hoare1969` — Luis García, Donald E. Knuth and Maria de la Cruz (1969). On Computable Numbers. *Communications of the ACM* 44(6), 209–329.

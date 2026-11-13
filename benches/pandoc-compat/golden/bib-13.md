@@ -1,0 +1,7 @@
+- `lovelace1843` — John Jr. Smith and John Backus (1988). The Apollo Guidance Computer. *University of Zurich*.
+- `hopper1952` — Barbara Liskov (1946). Data Abstraction and Hierarchy. *\\urlhttps://example.org/retrieval*.
+- `knuth1984` — Hans Müller and C. A. R. Hoare (2024). The Art of Computer Programming. *\\urlhttps://example.org/block*.
+- `liskov1987` — Leslie Lamport, Grace Hopper and Donald E. Knuth (2007). Time, Clocks, and the Ordering of Events. *\\urlhttps://example.org/retrieval*.
+- `dijkstra1968` — John Jr. Smith and Barbara Liskov (2024). Notes on the Analytical Engine. *\\urlhttps://example.org/tree*. <https://example.org/sparse>
+- `turing1936` — John Jr. Smith (1987). The Education of a Computer. *\\urlhttps://example.org/heuristic*.
+- `lamport1978` — John Backus (1952). Can Programming Be Liberated from the von Neumann Style. *Proceedings of the Solver Symposium*, 66–128. <https://example.org/entropy>
