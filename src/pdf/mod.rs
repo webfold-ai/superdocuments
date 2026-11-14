@@ -1658,8 +1658,15 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "requires pdftoppm and tesseract on PATH"]
     fn tesseract_fallback_handles_raster_and_unsupported_filter_pdfs() {
+        // Like the other tests that need the OCR tools (graph.rs, tests/pdf_page_ocr_routing.rs): runs
+        // where `pdftoppm` and `tesseract` are installed and says so where they are not, instead of
+        // being ignored everywhere.
+        let tool = |name: &str| Command::new(name).arg("--version").output().is_ok();
+        if !(tool("pdftoppm") && tool("tesseract")) {
+            eprintln!("skipped: pdftoppm and tesseract are not installed");
+            return;
+        }
         let fixtures = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
         let scanned = extract_file_with_ocr(fixtures.join("scanned-text.pdf")).unwrap();
         let normalize = |text: &str| {

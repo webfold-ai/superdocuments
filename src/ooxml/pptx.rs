@@ -7,7 +7,7 @@
 //! slide layout's placeholder, then of the master's body style, level by level), tables as Markdown tables, hyperlinks, and the speaker notes. Footers, dates and
 //! slide-number placeholders are dropped.
 //!
-//! Chart titles are read. Not read: chart data, SmartArt, comments, and text that only the layout
+//! Chart titles and data and the text of SmartArt diagrams are read. Not read: comments, and text that only the layout
 //! or master carries.
 
 use std::collections::HashMap;
@@ -170,6 +170,52 @@ fn chart_markdown(xml: &[u8]) -> String {
         out.push_str(markdown_table(&table).trim_end());
     }
     out
+}
+
+/// The text of a SmartArt diagram's data model: one bullet per node (`dgm:pt` of type `node`, `asst`
+/// or `doc`), in the order the model lists them. Presentation, parent- and sibling-transition points
+/// carry layout, not text.
+fn diagram_markdown(xml: &[u8]) -> String {
+    let mut reader = Reader::from_reader(xml);
+    let mut buf = Vec::new();
+    let (mut in_node, mut in_t) = (false, false);
+    let mut current = String::new();
+    let mut items = Vec::new();
+    loop {
+        let Ok(event) = reader.read_event_into(&mut buf) else {
+            break;
+        };
+        match event {
+            Event::Start(ref tag) => match tag.local_name().as_ref() {
+                "pt" => {
+                    in_node = attr_local(tag, "type")
+                        .is_none_or(|t| !matches!(t.as_str(), "pres" | "parTrans" | "sibTrans"));
+                    current.clear();
+                }
+                "t" if in_node => in_t = true,
+                _ => {}
+            },
+            Event::End(tag) => match tag.local_name().as_ref() {
+                "pt" => {
+                    let text = current.split_whitespace().collect::<Vec<_>>().join(" ");
+                    if in_node && !text.is_empty() {
+                        items.push(format!("- {text}"));
+                    }
+                    in_node = false;
+                }
+                "t" => {
+                    in_t = false;
+                    current.push(' ');
+                }
+                _ => {}
+            },
+            Event::Text(value) if in_t => current.push_str(&text(value.as_ref())),
+            Event::Eof => break,
+            _ => {}
+        }
+        buf.clear();
+    }
+    items.join("\n")
 }
 
 /// `lvl3pPr` -> `Some(2)`.
@@ -407,6 +453,15 @@ impl<'a> Slide<'a> {
                     .find_map(|id| self.charts.get(id))
                 {
                     self.content.body.push((false, markdown.clone()));
+                }
+            }
+            // a SmartArt graphic frame: its text is in the diagram data part named by `r:dm`
+            "relIds" if !self.notes => {
+                if let Some(markdown) = attrs_local(tag, "dm")
+                    .iter()
+                    .find_map(|id| self.charts.get(id))
+                {
+                    self.content.body.push((true, markdown.clone()));
                 }
             }
             "tbl" => self.table = Some(Cells::default()),
@@ -717,12 +772,18 @@ pub(crate) fn convert(data: &[u8]) -> Result<String, String> {
             .map(|(id, path)| (id, super::media_name(&path).to_owned()))
             .collect();
         let inherited = inherited_bullets(&mut zip, part, &rels);
+        // charts and SmartArt diagrams, by the relationship id the slide uses for them
         let charts: HashMap<String, String> = rels
             .iter()
-            .filter(|r| r.kind == "chart" && !r.external)
+            .filter(|r| matches!(r.kind.as_str(), "chart" | "diagramData") && !r.external)
             .filter_map(|r| {
                 let xml = entry(&mut zip, &resolve(part, &r.target)?).ok()?;
-                Some((r.id.clone(), chart_markdown(&xml)))
+                let markdown = if r.kind == "chart" {
+                    chart_markdown(&xml)
+                } else {
+                    diagram_markdown(&xml)
+                };
+                Some((r.id.clone(), markdown))
             })
             .collect();
         let slide = read_part(

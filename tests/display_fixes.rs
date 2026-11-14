@@ -131,7 +131,7 @@ fn workbook() -> Vec<u8> {
 <cellXfs count="6"><xf numFmtId="0"/><xf numFmtId="164"/><xf numFmtId="165"/><xf numFmtId="166"/><xf numFmtId="9"/><xf numFmtId="14"/></cellXfs></styleSheet>"##;
     let sheet = r#"<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>
 <row r="1"><c r="A1" s="1"><v>46266</v></c><c r="B1" s="2"><v>4.0999999999999996</v></c><c r="C1"><v>0.30000000000000004</v></c><c r="D1" s="3"><v>1234567.891</v></c><c r="E1" s="4"><v>0.256</v></c></row>
-<row r="2"><c r="A2" s="5"><v>46266</v></c><c r="B2" s="2"><v>-0.4</v></c><c r="C2"><v>100</v></c><c r="D2"><v>4.5</v></c></row>
+<row r="2"><c r="A2" s="5"><v>46266</v></c><c r="B2" s="2"><v>-0.04</v></c><c r="C2"><v>100</v></c><c r="D2"><v>4.5</v></c></row>
 </sheetData></worksheet>"#;
     zip(&[
         (
@@ -155,6 +155,6 @@ fn cells_show_the_text_their_number_format_gives() {
         md.contains("| Sep-2026 | 4.1 | 0.3 | 1,234,567.89 | 26% |"),
         "{md}"
     );
-    // row 2: the locale-dependent built-in date format 14 keeps the ISO date; "0.0" of -0.4; General 100; General 4.5
-    assert!(md.contains("| 2026-09-01 | -0.4 | 100 | 4.5 |"), "{md}");
+    // row 2: the locale-dependent built-in date format 14 keeps the ISO date; "0.0" of -0.04 (Excel shows the minus of a negative number that rounds to zero); General 100; General 4.5
+    assert!(md.contains("| 2026-09-01 | -0.0 | 100 | 4.5 |"), "{md}");
 }

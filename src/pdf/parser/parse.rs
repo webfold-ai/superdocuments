@@ -786,6 +786,224 @@ fn table_candidates(lines: &[Line], h: &[(f64, f64, f64)], v: &[(f64, f64, f64)]
     out
 }
 
+/// The cells of a line: its runs split where the gap to the previous run is wider than two ems, as
+/// `(start x, end x, text)`. A word space is a quarter em and justified text stays under one em, so a
+/// gap this wide is a column gap (a tab in the Word source).
+fn wide_cells(l: &Line) -> Vec<(f64, f64, &str)> {
+    cells_apart(l, 2.0)
+}
+
+/// The cells of a line split where the gap to the previous run is wider than `ems` ems.
+fn cells_apart(l: &Line, ems: f64) -> Vec<(f64, f64, &str)> {
+    let gap = ems * l.size.max(1.0);
+    // (start x, end x, first byte, last byte) of each cell
+    let mut out: Vec<(f64, f64, usize, usize)> = Vec::new();
+    let len = l.text.len();
+    for (k, s) in l.segs.iter().enumerate() {
+        let at = s.2.min(len);
+        if k == 0 || s.0 - l.segs[k - 1].1 > gap {
+            if let Some(last) = out.last_mut() {
+                last.3 = at;
+            }
+            out.push((s.0, s.1, at, len));
+        } else if let Some(last) = out.last_mut() {
+            last.1 = last.1.max(s.1);
+        }
+    }
+    // Dot leaders end a cell: the text after them (an endnote table's second column) starts the next.
+    let mut split: Vec<(f64, f64, usize, usize)> = Vec::new();
+    for &(x0, x1, from, to) in &out {
+        let text = l.text.get(from..to).unwrap_or("");
+        let leader = text.find("....").map(|p| {
+            let run = text[p..].bytes().take_while(|b| *b == b'.').count();
+            from + p + run
+        });
+        let next = leader.and_then(|end| {
+            l.segs.iter().enumerate().find_map(|(k, s)| {
+                let upto = l.segs.get(k + 1).map_or(to, |n| n.2.min(to));
+                let own = l.text.get(s.2.min(upto)..upto).unwrap_or("");
+                (s.2 >= end && s.2 < to && !own.trim().is_empty()).then_some(s)
+            })
+        });
+        match next {
+            Some(seg) => {
+                let at = seg.2.min(len);
+                split.push((x0, x1.min(seg.0), from, at));
+                split.push((seg.0, x1.max(seg.1), at, to));
+            }
+            None => split.push((x0, x1, from, to)),
+        }
+    }
+    split
+        .into_iter()
+        .map(|(x0, x1, from, to)| {
+            let text = l.text.get(from..to.max(from)).unwrap_or("");
+            (x0, x1, text.trim().trim_end_matches('.').trim())
+        })
+        .collect()
+}
+
+/// A bare page number: one to four digits.
+fn is_page_number(t: &str) -> bool {
+    !t.is_empty() && t.len() <= 4 && t.chars().all(|c| c.is_ascii_digit())
+}
+
+/// A contents list: at least half of the lines that break into cells end in a page number.
+fn is_contents_list(region: &[&Line]) -> bool {
+    let rows: Vec<Vec<(f64, f64, &str)>> = region
+        .iter()
+        .map(|l| cells_apart(l, 0.9))
+        .filter(|c| c.len() >= 2)
+        .collect();
+    let numbered = rows
+        .iter()
+        .filter(|r| r.last().is_some_and(|c| is_page_number(c.2)))
+        .count();
+    numbered * 2 >= rows.len().max(1)
+}
+
+/// Candidate regions for the tables Word writes without drawing any rules: at least three lines that
+/// each hold cells set more than two ems apart, whose cells start at the same x down the block (the
+/// columns), with wrapped lines of a cell (a single run under one of the columns) between the rows. A
+/// contents list is not such a table: its entries end in a page number or run to one over dot leaders.
+fn word_table_candidates(lines: &[Line]) -> Vec<Cand> {
+    let mut out = Vec::new();
+    let n = lines.len();
+    let cells: Vec<Vec<(f64, f64, &str)>> = lines.iter().map(wide_cells).collect();
+    let mut i = 0;
+    while i < n {
+        if cells[i].len() < 2 || lines[i].text.starts_with('\u{0}') {
+            i += 1;
+            continue;
+        }
+        let start = i;
+        let mut rows = vec![i];
+        let mut last = i;
+        let mut j = i + 1;
+        while j < n {
+            let (pl, l) = (&lines[last], &lines[j]);
+            let size = pl.size.max(l.size).max(1.0);
+            let dy = pl.y - l.y;
+            if l.text.starts_with('\u{0}')
+                || !(dy > 0.0 && dy <= 2.5 * size)
+                || (pl.size - l.size).abs() > 0.15 * size
+            {
+                break;
+            }
+            if cells[j].len() >= 2 {
+                rows.push(j);
+            } else {
+                // a wrapped line of a cell: it starts under one of the rows' cells after the first
+                // (a hanging indent, `(a)` items, starts a little to its right)
+                let x0 = cells[j].first().map_or(0.0, |c| c.0);
+                let under = rows
+                    .iter()
+                    .any(|&r| cells[r].iter().skip(1).any(|c| x0 >= c.0 - 0.6 * size));
+                if !under {
+                    break;
+                }
+            }
+            last = j;
+            j += 1;
+        }
+        i = j;
+        if rows.len() < 3 {
+            continue;
+        }
+        let size = lines[start].size.max(1.0);
+        let tol = 0.6 * size;
+        // the columns: starts that repeat in at least half of the rows
+        let cols = repeating_positions(
+            rows.iter()
+                .flat_map(|&r| cells[r].iter().map(|c| c.0))
+                .collect(),
+            rows.len(),
+            tol,
+        );
+        if cols.len() < 2 {
+            continue;
+        }
+        let in_column = |x: f64| cols.iter().any(|c| (c - x).abs() <= tol);
+        let consistent = rows
+            .iter()
+            .filter(|&&r| cells[r].iter().all(|c| in_column(c.0)))
+            .count();
+        if consistent * 4 < rows.len() * 3 {
+            continue;
+        }
+        if is_contents_list(&lines[start..=last].iter().collect::<Vec<_>>()) {
+            continue;
+        }
+        let end = last;
+        let region: Vec<&Line> = lines[start..=end].iter().collect();
+        let (ytop, ybot) = (lines[start].y, lines[end].y);
+        // nothing else may sit in the block's y-span (another column of the page)
+        if lines
+            .iter()
+            .enumerate()
+            .any(|(k, l)| (k < start || k > end) && l.y <= ytop + 2.0 && l.y >= ybot - 2.0)
+        {
+            continue;
+        }
+        // row bands: from the line above a row's first line to the line above the next row's first
+        let mut rowys = Vec::new();
+        let firsts: Vec<usize> = rows.clone();
+        let pitch = if rows.len() > 1 {
+            (lines[firsts[0]].y - lines[end].y) / (end - start).max(1) as f64
+        } else {
+            size
+        };
+        rowys.push(lines[firsts[0]].y + pitch / 2.0);
+        for w in firsts.windows(2) {
+            rowys.push((lines[w[1]].y + lines[w[1] - 1].y) / 2.0);
+        }
+        rowys.push(lines[end].y - pitch / 2.0);
+        let mut colxs: Vec<f64> = cols.iter().map(|c| c - 3.0).collect();
+        let xmax = region
+            .iter()
+            .flat_map(|l| l.segs.iter().map(|s| s.1))
+            .fold(f64::MIN, f64::max);
+        colxs.push(xmax + 2.0);
+        if rowys.len() < 3 || (rowys.len() - 1) * (colxs.len() - 1) > MAX_GRID_CELLS {
+            continue;
+        }
+        let st = region_stats(lines, &rowys, &colxs, false);
+        out.push(Cand {
+            ytop: rowys[0],
+            ybot: *rowys.last().unwrap(),
+            feat: featurize(&st),
+            rowys,
+            colxs,
+            geo_ok: true,
+        });
+    }
+    // A single line of many short cells (the money columns of a printed form read as one line) is a row of
+    // a table of its own.
+    let covered: Vec<(f64, f64)> = out.iter().map(|c: &Cand| (c.ybot, c.ytop)).collect();
+    for l in lines {
+        let cs = cells_apart(l, 0.9);
+        if cs.len() < 6
+            || l.text.starts_with('\u{0}')
+            || covered.iter().any(|&(lo, hi)| l.y < hi && l.y > lo)
+            || cs.iter().map(|c| c.2.chars().count()).max().unwrap_or(0) > 12
+        {
+            continue;
+        }
+        let mut colxs: Vec<f64> = cs.iter().map(|c| c.0 - 3.0).collect();
+        colxs.push(cs.iter().map(|c| c.1).fold(f64::MIN, f64::max) + 2.0);
+        let rowys = vec![l.y + l.size, l.y - l.size];
+        out.push(Cand {
+            ytop: rowys[0],
+            ybot: rowys[1],
+            feat: 0,
+            rowys,
+            colxs,
+            geo_ok: true,
+        });
+    }
+    out
+}
+
 /// How many cells a line breaks into: its positioned runs, split where the gap to the previous run is
 /// wider than a column gap (a word space is about a quarter em).
 fn line_cells(l: &Line) -> usize {
@@ -800,6 +1018,58 @@ fn line_cells(l: &Line) -> usize {
         }
     }
     cells
+}
+
+/// Positions that repeat: the clusters (values within `tol` of their mean) that hold at least half of
+/// `rows` values.
+fn repeating_positions(mut xs: Vec<f64>, rows: usize, tol: f64) -> Vec<f64> {
+    xs.sort_by(|a, b| a.partial_cmp(b).unwrap());
+    let mut clusters: Vec<(f64, usize)> = Vec::new();
+    for x in xs {
+        match clusters.last_mut() {
+            Some(c) if x - c.0 / c.1 as f64 <= tol => {
+                c.0 += x;
+                c.1 += 1;
+            }
+            _ => clusters.push((x, 1)),
+        }
+    }
+    let need = rows.div_ceil(2);
+    clusters
+        .iter()
+        .filter(|c| c.1 >= need)
+        .map(|c| c.0 / c.1 as f64)
+        .collect()
+}
+
+/// Where on a cell `(start x, end x)` a column is read: its start, its end or its middle.
+type CellKey = fn(&(f64, f64)) -> f64;
+
+/// Do the cells of these rows (`(start x, end x)` per cell, one list per row) fall into columns? A column
+/// is a position that at least half of the rows share, as the start of a left-aligned cell, the end of
+/// a right-aligned one or the middle of a centred one. At least three quarters of the rows must have
+/// every cell in a column, and there must be at least two columns. Justified prose, whose gaps fall
+/// anywhere, has none.
+fn cells_form_columns(rows: &[Vec<(f64, f64)>], tol: f64) -> bool {
+    let columns = |key: CellKey| {
+        repeating_positions(rows.iter().flatten().map(key).collect(), rows.len(), tol)
+    };
+    let keys: [CellKey; 3] = [|c| c.0, |c| c.1, |c| (c.0 + c.1) / 2.0];
+    let cols: Vec<Vec<f64>> = keys.iter().map(|k| columns(*k)).collect();
+    if cols.iter().map(Vec::len).sum::<usize>() < 2 {
+        return false;
+    }
+    let consistent = rows
+        .iter()
+        .filter(|r| {
+            r.iter().all(|c| {
+                keys.iter()
+                    .zip(&cols)
+                    .any(|(k, cs)| cs.iter().any(|x| (x - k(c)).abs() <= tol))
+            })
+        })
+        .count();
+    consistent * 4 >= rows.len() * 3
 }
 
 /// Candidate regions from runs of at least three consecutive multi-cell lines (borderless tables).
@@ -819,6 +1089,16 @@ fn block_candidates(lines: &[Line]) -> Vec<Cand> {
             continue;
         }
         let region: Vec<&Line> = lines[start..i].iter().collect();
+        let cells: Vec<Vec<(f64, f64)>> = region
+            .iter()
+            .map(|l| cells_apart(l, 0.9).iter().map(|c| (c.0, c.1)).collect())
+            .collect();
+        if !cells_form_columns(&cells, 0.6 * lines[start].size.max(1.0)) {
+            continue;
+        }
+        if is_contents_list(&region) {
+            continue;
+        }
         let (Some(colxs), rowys) = (columns_from_gutters(&region), row_boundaries(&region)) else {
             continue;
         };
@@ -1009,6 +1289,16 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
     let mut i = 0;
     while i < lines.len() {
         let l = &lines[i];
+        // a line inside the span of a table already written is in that table (`emit_grid_table` takes
+        // every line of the span, not only those that follow the first one)
+        if cands
+            .iter()
+            .enumerate()
+            .any(|(ci, c)| emitted[ci] && l.y <= c.ytop + 2.0 && l.y >= c.ybot - 2.0)
+        {
+            i += 1;
+            continue;
+        }
         let hit = cands
             .iter()
             .enumerate()
@@ -1031,7 +1321,12 @@ fn emit_lines(out: &mut String, lines: &[Line], cands: &[Cand], body: f64) {
             i += 1;
             continue;
         }
-        let heading = is_heading(&l.text, l.size, l.bold, body);
+        // A contents entry (a title and its page number, set apart) is a line of a list, not a heading.
+        let contents_entry = {
+            let cells = cells_apart(l, 0.9);
+            cells.len() >= 2 && cells.last().is_some_and(|c| is_page_number(c.2))
+        };
+        let heading = is_heading(&l.text, l.size, l.bold, body) && !contents_entry;
         let in_table_next = |n: &Line| {
             cands
                 .iter()
@@ -1147,6 +1442,21 @@ fn continues_paragraph(cur: &Para, lines: &[Line], i: usize, geo: &[Geo], headin
     if !(dy > 0.0 && dy <= 1.7 * size) || (pl.size - l.size).abs() > 0.15 * size {
         return false;
     }
+    // Two lines that each hold cells set far apart (a key and its meaning in two columns, the rows of a
+    // list that is not ruled) are two rows, not a wrapped line. Justified text has gaps too, but nothing
+    // near two ems wide.
+    let widest_gap = |ln: &Line| {
+        ln.segs
+            .windows(2)
+            .map(|w| w[1].0 - w[0].1)
+            .fold(0.0, f64::max)
+    };
+    if widest_gap(pl) > 2.0 * size && widest_gap(l) > 2.0 * size {
+        return false;
+    }
+    if heading && wide_cells(l).len() >= 2 {
+        return false; // a header row of a table (`Column 1  Column 2`, `Item  Matter`) under a title
+    }
     if heading {
         // a wrapped title continues; a numbered section heading, or a heading line that ended a
         // sentence, starts a new heading
@@ -1258,13 +1568,23 @@ impl Document {
             .unwrap_or(0.0);
         for (lines, (h, v)) in &pdata {
             // generate candidates, then GATE by the seed (if given) or the geometric hand-read.
-            let cands: Vec<Cand> = table_candidates(lines, h, v)
+            let mut cands: Vec<Cand> = table_candidates(lines, h, v)
                 .into_iter()
                 .filter(|c| match seed {
                     Some(s) => s.classify_or(c.feat, c.geo_ok),
                     None => c.geo_ok,
                 })
                 .collect();
+            // Word tables without rules: they replace a smaller table that stops at the first wrapped
+            // line of a cell, and are left out where a table that does not lie within them was accepted.
+            for c in word_table_candidates(lines) {
+                let overlaps = |o: &Cand| c.ybot < o.ytop && c.ytop > o.ybot;
+                let inside = |o: &Cand| o.ybot >= c.ybot - 2.0 && o.ytop <= c.ytop + 2.0;
+                if cands.iter().all(|o| !overlaps(o) || inside(o)) {
+                    cands.retain(|o| !overlaps(o));
+                    cands.push(c);
+                }
+            }
             let mut out = String::new();
             emit_lines(&mut out, lines, &cands, body);
             out.push('\n'); // page break

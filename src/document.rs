@@ -193,7 +193,7 @@ fn decode_csv(data: &[u8]) -> Result<String, String> {
     if data.starts_with(&[0xff, 0xfe]) || data.starts_with(&[0xfe, 0xff]) {
         let little = data[0] == 0xff;
         let payload = &data[2..];
-        if payload.len() % 2 != 0 {
+        if payload.len() % 2 == 1 {
             return Err("odd UTF-16 CSV byte length".into());
         }
         let units: Vec<u16> = payload
@@ -307,7 +307,8 @@ fn xls_unchecked(data: &[u8]) -> Result<String, String> {
         if cells > XLS_MAX_CELLS {
             return Err("worksheet too large".into());
         }
-        sheets.push((name, xls_rows(&range, date1904)));
+        let rows = xls_rows(&book, &name, &range, date1904);
+        sheets.push((name, rows));
     }
     Ok(workbook_markdown(sheets))
 }
@@ -317,16 +318,22 @@ const XLS_MAX_CELLS: usize = 20_000_000;
 
 /// Rows as the XLSX reader builds them: a cell sits at its absolute column, rows with no
 /// content are dropped, and trailing empty cells are trimmed.
-fn xls_rows(range: &calamine::Range<calamine::Data>, date1904: bool) -> Vec<Vec<String>> {
-    // Row numbers are not needed: rows without content are dropped, as in the XLSX reader.
-    let Some((_, left)) = range.start() else {
+fn xls_rows(
+    book: &calamine::Xls<Cursor<&[u8]>>,
+    sheet: &str,
+    range: &calamine::Range<calamine::Data>,
+    date1904: bool,
+) -> Vec<Vec<String>> {
+    let Some((top, left)) = range.start() else {
         return Vec::new();
     };
-    let left = left as usize;
     let mut rows = Vec::new();
-    for cells in range.rows() {
-        let mut row: Vec<String> = vec![String::new(); left];
-        row.extend(cells.iter().map(|cell| xls_cell(cell, date1904)));
+    for (y, cells) in range.rows().enumerate() {
+        let mut row: Vec<String> = vec![String::new(); left as usize];
+        row.extend(cells.iter().enumerate().map(|(x, cell)| {
+            let at = (top.saturating_add(y as u32), left.saturating_add(x as u32));
+            xls_cell(cell, book.cell_number_format(sheet, at), date1904)
+        }));
         while row.last().is_some_and(String::is_empty) {
             row.pop();
         }
@@ -350,17 +357,32 @@ fn general_number(value: f64) -> String {
         .to_string()
 }
 
-/// One cell as the XLSX reader prints it.
-fn xls_cell(cell: &calamine::Data, date1904: bool) -> String {
+/// What a number shows under its cell's number format, read from the XF and FORMAT records exactly
+/// as the XLSX reader reads `cellXfs` and `numFmts`. `None` without a format, or one `numfmt` does
+/// not implement and the number is not a date.
+fn xls_number(value: f64, format: Option<(u16, Option<&str>)>, date1904: bool) -> Option<String> {
+    let (id, code) = format?;
+    crate::ooxml::xlsx::display_number(u32::from(id), code, value, date1904)
+}
+
+/// One cell as the XLSX reader prints it. `format` is the number format of a numeric cell.
+fn xls_cell(cell: &calamine::Data, format: Option<(u16, Option<&str>)>, date1904: bool) -> String {
     use calamine::Data;
     match cell {
         Data::Empty => String::new(),
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
         Data::Bool(value) => if *value { "TRUE" } else { "FALSE" }.to_owned(),
-        Data::Int(value) => value.to_string(),
-        Data::Float(value) => general_number(*value),
+        Data::Int(value) => {
+            xls_number(*value as f64, format, date1904).unwrap_or_else(|| value.to_string())
+        }
+        Data::Float(value) => {
+            xls_number(*value, format, date1904).unwrap_or_else(|| general_number(*value))
+        }
         Data::DateTime(value) => {
             let serial = value.as_f64();
+            if let Some(shown) = xls_number(serial, format, date1904) {
+                return shown;
+            }
             // Calamine reports only that a cell is a date or time format. A duration is a time of
             // day; a date-time with a fraction shows both, and a whole serial shows the date.
             let (date_part, time_part) = if value.is_duration() {
@@ -425,9 +447,13 @@ fn ods(data: &[u8]) -> Result<String, String> {
         String::new(),
     );
     let (mut in_cell, mut in_text) = (false, false);
-    // A cell whose start tag carries a typed value (`office:value`, `office:date-value`, ...) is
-    // already complete: its `text:p` child is only the formatted display text of the same value.
-    let mut seeded = false;
+    // A cell whose start tag carries a typed value (`office:value`, `office:date-value`, ...) has
+    // the formatted display text of the same value in its `text:p` children. The display text is
+    // what the document shows (`$1,234.50`, `12.5%`, `7 Nov 2026`) and wins; the typed value is
+    // what a cell without display text keeps.
+    let mut display = String::new();
+    // `table:number-columns-repeated` on a cell that has content: the cell appears that many times.
+    let mut cell_repeat = 1;
     loop {
         match reader
             .read_event_into(&mut buf)
@@ -443,7 +469,8 @@ fn ods(data: &[u8]) -> Result<String, String> {
             Event::Start(tag) if tag.name().as_ref().as_bytes() == b"table:table-cell" => {
                 in_cell = true;
                 cell = odf_cell_value(&tag);
-                seeded = !cell.is_empty();
+                display.clear();
+                cell_repeat = odf_repeat(&tag);
             }
             Event::Empty(tag) if tag.name().as_ref().as_bytes() == b"table:table-cell" => {
                 let repeat = odf_repeat(&tag);
@@ -453,19 +480,24 @@ fn ods(data: &[u8]) -> Result<String, String> {
             Event::Start(tag) if in_cell && tag.name().as_ref().as_bytes() == b"text:p" => {
                 in_text = true
             }
-            Event::Text(value) if in_cell && in_text && !seeded => {
-                cell.push_str(&text(value.as_ref()))
-            }
-            Event::GeneralRef(r) if in_cell && in_text && !seeded => push_ref(&mut cell, &r),
+            Event::Text(value) if in_cell && in_text => display.push_str(&text(value.as_ref())),
+            Event::GeneralRef(r) if in_cell && in_text => push_ref(&mut display, &r),
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"text:p" => {
                 in_text = false;
-                if !cell.ends_with(' ') {
-                    cell.push(' ');
+                if !display.ends_with(' ') {
+                    display.push(' ');
                 }
             }
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"table:table-cell" => {
-                row.push(cell.trim().to_string());
+                let shown = display.trim();
+                let value = if shown.is_empty() {
+                    cell.trim().to_string()
+                } else {
+                    shown.to_string()
+                };
+                row.extend(std::iter::repeat_n(value, cell_repeat));
                 cell.clear();
+                display.clear();
                 in_cell = false;
             }
             Event::End(tag) if tag.name().as_ref().as_bytes() == b"table:table-row" => {
@@ -929,7 +961,11 @@ pub fn convert_bytes(extension: &str, data: &[u8]) -> Result<String, String> {
         "pptx" => crate::ooxml::pptx::convert(data),
         "xlsx" | "xlsm" => xlsx(data),
         "odt" => crate::odt::to_markdown(data),
-        "odp" => odt(data),
+        "odp" => match crate::odp::to_markdown(data)? {
+            // a hand-made package without `office:presentation`: the generic text extraction
+            slides if slides.is_empty() => odt(data),
+            slides => Ok(slides),
+        },
         "ods" => ods(data),
         "xls" => xls(data),
         "xlsb" => xlsb(data),
@@ -1525,7 +1561,40 @@ mod tests {
              </table:table-row></table:table></office:document>",
         )]);
         let md = convert_bytes("ods", &sheet).unwrap();
-        assert!(md.contains("| 42 | Name | 7.5 |"), "got: {md}");
+        // the display text is shown once (7.50, as the sheet shows it, not 7.5 and not both)
+        assert!(md.contains("| 42 | Name | 7.50 |"), "got: {md}");
+    }
+
+    /// The display text of a typed cell is what the document shows: currency, percent and fixed
+    /// decimals keep their format (LibreOffice sc/qa testNumberFormats.ods printed the stored
+    /// number, `0.123456`, for cells shown as `123456` or `12.5%`); a typed cell without display
+    /// text keeps its stored value.
+    /// A cell with content and `table:number-columns-repeated` fills that many columns (odfpy
+    /// chinese_spreadsheet.ods: one `test` cell repeated three times was read as one column).
+    #[test]
+    fn ods_repeated_cell_with_content_is_repeated() {
+        let sheet = package(&[(
+            "content.xml",
+            "<office:document><table:table table:name=\"Data\"><table:table-row>\
+             <table:table-cell table:number-columns-repeated=\"3\" office:value-type=\"string\"><text:p>test</text:p></table:table-cell>\
+             </table:table-row></table:table></office:document>",
+        )]);
+        let md = convert_bytes("ods", &sheet).unwrap();
+        assert!(md.contains("| test | test | test |"), "got: {md}");
+    }
+
+    #[test]
+    fn ods_typed_cells_show_their_display_text() {
+        let sheet = package(&[(
+            "content.xml",
+            "<office:document><table:table table:name=\"Data\"><table:table-row>\
+             <table:table-cell office:value-type=\"currency\" office:value=\"1234.5\"><text:p>$1,234.50</text:p></table:table-cell>\
+             <table:table-cell office:value-type=\"percentage\" office:value=\"0.125\"><text:p>12.5%</text:p></table:table-cell>\
+             <table:table-cell office:value-type=\"float\" office:value=\"9\"/>\
+             </table:table-row></table:table></office:document>",
+        )]);
+        let md = convert_bytes("ods", &sheet).unwrap();
+        assert!(md.contains("| $1,234.50 | 12.5% | 9 |"), "got: {md}");
     }
 
     #[test]
