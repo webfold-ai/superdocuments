@@ -1,5 +1,5 @@
 [workspace]
-members = ["calamine"]
+members = ["calamine", "superdocuments_bindings"]
 # calamine/fuzz is a cargo-fuzz crate built on its own.
 exclude = ["calamine/fuzz"]
 

@@ -1,0 +1,27 @@
+[package]
+name = "superdocuments_bindings"
+version = "0.1.0"
+edition = "2021"
+description = "Python and WebAssembly (TypeScript) bindings for superdocuments: convert documents to Markdown from bytes, read XLSX worksheets."
+license = "Apache-2.0"
+repository = "https://github.com/webfold-ai/superdocuments"
+# The root crate it wraps needs 1.89 (zip, calamine, apeiron, wirefold), which covers PyO3 and
+# wasm-bindgen too.
+rust-version = "1.89"
+publish = false
+
+[lib]
+name = "superdocuments_bindings"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+superdocuments = { path = ".." }
+serde_json = "1"
+pyo3 = { version = "0.30", optional = true, features = ["abi3-py39"] }
+wasm-bindgen = { version = "0.2", optional = true }
+
+[features]
+# Build the `superdocuments` Python extension module (with maturin, or `cargo build --features python`).
+python = ["dep:pyo3"]
+# Build the WebAssembly module (`cargo build --target wasm32-unknown-unknown --features wasm`, then wasm-bindgen).
+wasm = ["dep:wasm-bindgen"]

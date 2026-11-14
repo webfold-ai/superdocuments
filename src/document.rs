@@ -578,6 +578,11 @@ fn epub(data: &[u8]) -> Result<String, String> {
         }
     }
     chapters.sort();
+    if chapters.is_empty() {
+        // The package reader already failed, so this is the last resort for a damaged book; a
+        // zip with no content document at all (an Office file, say) is not one.
+        return Err("not an EPUB file: no package document and no content documents".into());
+    }
     let mut out = String::new();
     for name in chapters {
         let html = String::from_utf8_lossy(&entry(&mut zip, &name)?).into_owned();

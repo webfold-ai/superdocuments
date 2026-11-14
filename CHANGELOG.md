@@ -7,6 +7,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Added
 
+- `superdocuments_bindings` workspace crate: Python (PyO3) and TypeScript/WebAssembly (wasm-bindgen) bindings for `convert`, `pdf_to_markdown`, `pdf_pages` and `worksheets`, tested against the built artifacts on the repository's own fixtures, including hostile input. No filesystem access and no OCR in the bindings. `apeiron` and `wirefold` pins move so the graph holds one apeiron that builds for `wasm32`.
 - `pdf::page_profile` (`page_ocr_verdicts`, `pages_needing_ocr`, `classify_page`), `Document::page_geometry` and `pdf::extract_bytes_with_ocr_options`: OCR is decided per page. A page with no alphanumeric text, or a scan whose only text is a stamp (images cover at least half the page and fewer than 0.4 alphanumeric characters per 1000 pt²), goes to OCR; the other pages of the same file keep their native text.
 - Legacy Word binary (`.doc`, `.dot`): `document::convert_bytes("doc", ..)` reads the main story's text natively (`src/doc.rs`), with named errors for encrypted files and non-Word content. `DocFormat::Doc`.
 - Spreadsheet number formats (`src/ooxml/numfmt.rs`) and `xlsx::read_workbook_typed` (`CellValue`, `TypedCell`, `TypedWorksheet`): cells show what their number format shows; typed values stay available.
@@ -31,6 +32,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Changed
 
+- A valid Office package handed to the converter of another format is now an error, not empty Markdown: a `.docx` converted as `xlsx`, `pptx` or `epub`, an `.xlsx` as `docx` or `pptx`, and so on. The DOCX, XLSX and PPTX readers check the root element of the package's main part (`document`, `workbook`, `presentation`); an XLSX with no worksheet, a package with no presentation part and no slides, and an EPUB zip with no package document and no content documents are errors.
 - Code: Clippy with warnings denied passes on Rust 1.89 (38 findings: dead `&& false` conditions removed, identical branches merged, three unused functions removed, a few char patterns and collapsible `if`s). No other behaviour changes.
 - Minimum supported Rust version is 1.89 (`rust-version`, CI, release and supply-chain workflows). The git dependencies `apeiron` and `wirefold` require 1.89, `calamine`, `zip` and `encoding_rs` require 1.88, so the previous 1.85 pin could not build.
 
