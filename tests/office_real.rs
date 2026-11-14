@@ -248,3 +248,12 @@ fn pptx_smartart_text_is_read() {
         assert!(md.contains(&format!("- {node}")), "{node}: {md}");
     }
 }
+
+/// An OPF `href` is a URL reference (`content_%E2%84%8D.xhtml`); the archive holds the decoded name
+/// (`content_ℍ.xhtml`). The reader failed the whole book with "missing spine entry" (W3C EPUBCheck
+/// test file epub3/04-ocf ocf-filename-duplicate-after-compatibility-normalization-valid.epub, BSD-3-Clause).
+#[test]
+fn epub_with_percent_encoded_spine_hrefs_converts() {
+    let md = convert("epub-percent-href.epub");
+    assert!(!md.trim().is_empty(), "{md:?}");
+}

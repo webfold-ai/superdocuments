@@ -267,9 +267,41 @@ pub fn manifest_get<'a>(book: &'a Book, id: &str) -> Option<&'a ManifestItem> {
 
 // ── internal: container + package parsing ──────────────────────────────
 
+/// `content_%E2%84%8D.xhtml` -> `content_ℍ.xhtml`. An OPF `href` is a URL reference: the archive
+/// holds the decoded name. `None` when the text holds no escape or the escapes are not UTF-8.
+fn percent_decoded(href: &str) -> Option<String> {
+    if !href.contains('%') {
+        return None;
+    }
+    let bytes = href.as_bytes();
+    let mut out = Vec::with_capacity(bytes.len());
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] == b'%' && i + 2 < bytes.len() {
+            if let Ok(hex) = std::str::from_utf8(&bytes[i + 1..i + 3]) {
+                if let Ok(b) = u8::from_str_radix(hex, 16) {
+                    out.push(b);
+                    i += 3;
+                    continue;
+                }
+            }
+        }
+        out.push(bytes[i]);
+        i += 1;
+    }
+    String::from_utf8(out).ok()
+}
+
 fn read_bounded_xhtml(zip: &mut ZipArchive<Cursor<&[u8]>>, name: &str) -> Result<Vec<u8>, String> {
+    // the name as written, then the decoded form of a URL reference
+    let decoded = percent_decoded(name);
+    let present = zip.by_name(name).is_ok();
+    let lookup = match (&decoded, present) {
+        (Some(d), false) => d.as_str(),
+        _ => name,
+    };
     let file = zip
-        .by_name(name)
+        .by_name(lookup)
         .map_err(|e| format!("missing spine entry {name:?}: {e}"))?;
     if file.size() > MAX_XHTML_BYTES {
         return Err(format!(
@@ -553,6 +585,17 @@ mod tests {
         let book = read(&zip_bytes).expect("read should still succeed");
         assert_eq!(book.spine.len(), 1, "ghost idref is dropped, ch1 kept");
         assert_eq!(book.spine[0].id, "ch1");
+    }
+
+    #[test]
+    fn percent_encoded_hrefs_find_their_archive_entry() {
+        assert_eq!(
+            percent_decoded("EPUB/content_%E2%84%8D.xhtml").as_deref(),
+            Some("EPUB/content_ℍ.xhtml")
+        );
+        assert_eq!(percent_decoded("a%20b%2").as_deref(), Some("a b%2"));
+        assert_eq!(percent_decoded("plain.xhtml"), None);
+        assert_eq!(percent_decoded("bad%FF.xhtml"), None);
     }
 
     #[test]
