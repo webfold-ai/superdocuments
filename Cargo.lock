@@ -91,7 +91,7 @@ dependencies = [
 [[package]]
 name = "apeiron"
 version = "0.1.0"
-source = "git+https://github.com/webfold-ai/apeiron?rev=1c3d4a1da565cde409f6f3cb343086aa6853eb9c#1c3d4a1da565cde409f6f3cb343086aa6853eb9c"
+source = "git+https://github.com/webfold-ai/apeiron?rev=85b404b8dc89903c5c588a2cd1d10bfa5b9e64bc#85b404b8dc89903c5c588a2cd1d10bfa5b9e64bc"
 dependencies = [
  "libc",
 ]
@@ -1506,7 +1506,7 @@ dependencies = [
 [[package]]
 name = "wirefold"
 version = "0.1.0"
-source = "git+https://github.com/webfold-ai/wirefold?rev=98df8bfb8051fb24ca43ce3ddc446641684ef8f9#98df8bfb8051fb24ca43ce3ddc446641684ef8f9"
+source = "git+https://github.com/webfold-ai/wirefold?rev=28d875794d4541eb952d23984be411348dc3f1c0#28d875794d4541eb952d23984be411348dc3f1c0"
 dependencies = [
  "apeiron",
 ]
