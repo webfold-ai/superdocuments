@@ -13,7 +13,7 @@ pip install numpy pyyaml tqdm pillow python-Levenshtein rapidfuzz beautifulsoup4
 for f in dataset/end2end_dataset.py metrics/cal_metric.py utils/data_preprocess.py; do
   curl -sL https://huggingface.co/datasets/baidu/MarathonDocBench/resolve/main/utils/mpdocbench_patch/$f -o $f; done
 
-/path/to/superdocuments-bench/ocr/target/release/marathondocbench subset --data DATA     # for a subset run
+/path/to/superdocuments/benches/ocr/target/release/marathondocbench subset --data DATA     # for a subset run
 # in configs/end2end.yaml: ground_truth.data_path -> DATA/MarathonDocBench.subset.json (or MarathonDocBench.json for all 100),
 #                          prediction.data_path    -> DATA/pred/<system>
 MPDOC_EVAL_NPROC=4 MPDOC_MATCH_TIMEOUT=1800 MPDOC_DOC_BUDGET=0 MPDOC_TEDS_NPROC=4 MPDOC_TEDS_TIMEOUT=300 \
