@@ -117,7 +117,22 @@ pub struct OcrOptions {
     /// Maximum pages to OCR (1..=2000). PDFs beyond this limit return an explicit truncation note.
     /// Pages are rendered and recognised in windows, so a long document costs time, not memory.
     pub max_pages: u32,
-    /// Maximum edge length of each rendered page in pixels.
+    /// Maximum edge length of each rendered page in pixels (the `pdftoppm -scale-to` bound).
+    ///
+    /// This is the OCR resolution knob, and it does **not** have one right value: the two ends of the
+    /// shipped corpus pull in opposite directions.
+    ///
+    /// - The synthetic scanned fixtures (large type, rasterised small then upscaled) measure best at
+    ///   ≈150 dpi: text-only F1 against each `.expected.txt`, `mixed-native-and-scanned.pdf`
+    ///   1 200 px → 0.841, 1 650 → 0.841, 2 200 → 0.800, 2 400 → 0.789, 3 000 → 0.734.
+    /// - The real Register scan (`tests/fixtures/au-register/census-amendment-ordinance-1981-p1.pdf`,
+    ///   one 3310×4680 CCITT page with the footer stamp as its only text) needs the headroom: at
+    ///   2 400 px it yields 1 613 alphanumeric characters, and 1 650 px drops below the 1 580 floor
+    ///   `tests/pdf_page_ocr_routing.rs::real_scan_fixture_is_read_by_ocr` asserts.
+    ///
+    /// So the default stays at 2 400 px, the point that satisfies the real scan, and a caller that only
+    /// has large-type scans should lower it: fewer pixels is strictly cheaper to rasterise and recognise.
+    /// Choosing it per page from the embedded image's own resolution is the next step, not a constant.
     pub max_image_dimension: u32,
     /// Shared wall-clock budget for rendering and OCR (1..=3600 s).
     pub timeout: Duration,
@@ -1479,6 +1494,63 @@ fn run(command: &mut Command) -> io::Result<String> {
 mod tests {
     use super::*;
     use std::process::Command;
+
+    /// A page rotated by an arbitrary angle (`cm` carries a 15° rotation, text matrices identity) is
+    /// placed rotated and then un-rotated into the page frame, so the lines come out in reading order
+    /// instead of interleaved on many `y` values. `pdftotext -layout` gets this page wrong; this is one
+    /// of the places the in-tree parser is ahead of the reference tool.
+    #[test]
+    fn rotated_page_extracts_in_reading_order() {
+        let got = extract_markdown(include_bytes!("../../tests/fixtures/rotated-15deg.pdf"))
+            .unwrap()
+            .replace('\n', " ");
+        let expected = std::fs::read_to_string(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/tests/fixtures/rotated-15deg.expected.txt"
+        ))
+        .unwrap();
+        let flat = |s: &str| {
+            s.split_whitespace()
+                .map(|w| {
+                    w.trim_matches(|c: char| !c.is_alphanumeric())
+                        .to_lowercase()
+                })
+                .filter(|w| !w.is_empty())
+                .collect::<Vec<_>>()
+        };
+        let (g, e) = (flat(&got), flat(&expected));
+        // the fixture's own words, in order, all present
+        let mut i = 0;
+        for word in &g {
+            if i < e.len() && *word == e[i] {
+                i += 1;
+            }
+        }
+        assert_eq!(
+            i,
+            e.len(),
+            "expected words not in order: got {g:?} expected {e:?}"
+        );
+    }
+
+    /// `/Encoding /WinAnsiEncoding` on a simple font is a *base encoding*: byte 0x97 is an em dash,
+    /// not the C1 control Latin-1 would call it. `borderless-table.pdf` is Helvetica + WinAnsi with
+    /// no `/ToUnicode`, which is the shape most Word/LaTeX/ReportLab output has.
+    #[test]
+    fn win_ansi_base_encoding_decodes_the_typographic_block() {
+        let got =
+            extract_markdown(include_bytes!("../../tests/fixtures/borderless-table.pdf")).unwrap();
+        assert!(
+            got.contains('\u{2014}'),
+            "em dash U+2014 expected in WinAnsi text, got {got:?}"
+        );
+        assert!(
+            !got.contains('\u{97}'),
+            "byte 0x97 must not decode as the C1 control U+0097: {got:?}"
+        );
+        // The rest of the page is unchanged by the base face.
+        assert!(got.contains("Cells are distinguished by alignment only"));
+    }
 
     fn pdf_with_stream(content: &[u8], filter: &str) -> Vec<u8> {
         let mut stream =
