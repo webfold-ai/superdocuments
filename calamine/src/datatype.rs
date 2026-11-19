@@ -571,7 +571,6 @@ pub trait DataType {
 
     /// Try converting data type into a float
     fn as_f64(&self) -> Option<f64>;
-
 }
 
 impl<'a> From<DataRef<'a>> for Data {
@@ -867,8 +866,6 @@ impl fmt::Display for ExcelDateTime {
         write!(f, "{}", self.value)
     }
 }
-
-
 
 #[cfg(test)]
 mod tests {

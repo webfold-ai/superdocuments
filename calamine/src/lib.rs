@@ -2185,4 +2185,3 @@ where
     let data = Data::deserialize(deserializer)?;
     Ok(data.as_f64().ok_or_else(|| data.to_string()))
 }
-

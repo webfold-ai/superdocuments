@@ -843,7 +843,6 @@ fn date_xls() {
             false
         )))
     );
-
 }
 
 #[test]
@@ -868,7 +867,6 @@ fn date_xls_1904() {
             true
         )))
     );
-
 }
 
 #[test]
@@ -893,7 +891,6 @@ fn date_xlsx() {
             false
         )))
     );
-
 }
 
 // Regression test: a custom number format whose `formatCode` contains
@@ -959,7 +956,6 @@ fn date_xlsx_1904() {
             true
         )))
     );
-
 }
 
 #[test]
@@ -979,7 +975,6 @@ fn date_xlsx_iso() {
         range.get_value((2, 0)),
         Some(&DateTimeIso("10:10:10".to_string()))
     );
-
 }
 
 #[test]
@@ -1003,7 +998,6 @@ fn date_ods() {
         range.get_value((3, 0)),
         Some(&DurationIso("PT10H10M10.123456S".to_string()))
     );
-
 }
 
 #[test]
@@ -1028,7 +1022,6 @@ fn date_xlsb() {
             false
         )))
     );
-
 }
 
 #[test]
@@ -1053,7 +1046,6 @@ fn date_xlsb_1904() {
             true
         )))
     );
-
 }
 
 #[test]
