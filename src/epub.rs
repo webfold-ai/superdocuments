@@ -31,7 +31,7 @@
 //! The id → item lookup is the hot path on every spine walk. `HashMap`
 //! pays the string hash twice (once in `Hash` and once in `Eq`) and
 //! owns the keys it stores. `apeiron::freq::Table<String, _>` is the table
-//! the rest of the substrate uses (`calamine/` in this workspace for XLSX
+//! the rest of the substrate uses (`sheetfold/` in this workspace for XLSX
 //! path/relationship caches, `apeiron::map::hashtrinity` for the fact registry), and
 //! the same `String: Coord` impl handles the OPF id strings. Manifest
 //! resolution is O(1) and the keys stay borrowed between the

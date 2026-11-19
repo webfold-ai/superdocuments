@@ -88,8 +88,8 @@ META-INF/        │ read(bytes)                        │
 ## Why the manifest is `apeiron::freq::Table<String, ManifestItem>`
 
 The id → item lookup runs once per spine entry. `apeiron::freq::Table<String, _>`
-is the table the local `calamine/` fork also uses for its XLSX and XLSB
-path caches and relationship indexes (`calamine/APEIRON-FORK.md`). No
+is the table the local `sheetfold/` fork also uses for its XLSX and XLSB
+path caches and relationship indexes (`sheetfold/APEIRON-FORK.md`). No
 benchmark comparing it with `HashMap` is recorded in this repository.
 
 `apeiron::freq::Table` also exposes a borrowed-key `get_at<Q: Locate<K>>(&self, q: Q)`

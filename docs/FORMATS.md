@@ -321,7 +321,7 @@ Parses RTF into blocks (paragraphs, list items and nested tables), hyperlinks, f
 
 ## Spreadsheets
 
-Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX a structured Worksheet type with rows of text. XLSX sheets carry the workbook's own names in tab order, and date, boolean and error cells are shown as a person reads them; other number formats are not applied. Legacy XLS is read only by the webfold adapter (calamine), not by the superdocuments crate, which returns an error for it.
+Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX a structured Worksheet type with rows of text. XLSX sheets carry the workbook's own names in tab order, and date, boolean and error cells are shown as a person reads them; other number formats are not applied. Legacy XLS is read only by the webfold adapter (sheetfold), not by the superdocuments crate, which returns an error for it.
 
 > **XLSX reader: in superdocuments PR 24, not yet in Webfold.** The rewritten XLSX reader (real sheet names, tab order, dates, booleans) is in superdocuments pull request 24, which is open and tested there. Webfold pins superdocuments at e0fb9a8, which has the older reader, so the Webfold command line and MCP server still name XLSX sheets 'Sheet N'. XLSB, ODS, CSV and legacy XLS are not changed by that pull request, apart from the ODS fix already merged.
 
@@ -332,7 +332,7 @@ Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX
 - **XLSB.** The binary workbook. Cell records are read for their cached values, and shared strings come from xl/sharedStrings.bin. Sheet names come from xl/workbook.bin when that part exists, matched to sheets by position (document.rs:741-846).
 - **ODS.** content.xml only. Each table:table becomes one section, named by its table:name attribute (document.rs:552-628).
 - **CSV.** UTF-8 (BOM removed) or UTF-16 with a byte-order mark. The delimiter is guessed from the first line among comma, semicolon and tab (document.rs:121-177). The webfold CLI and webfold's document module use their own CSV parser instead (webfold/src/document.rs:122-125).
-- **Legacy XLS.** superdocuments returns an error for xls (document.rs:857). webfold reads it with calamine::Xls and writes one section per worksheet (webfold/src/document.rs:118-121, 170-190).
+- **Legacy XLS.** superdocuments returns an error for xls (document.rs:857). webfold reads it with sheetfold::Xls and writes one section per worksheet (webfold/src/document.rs:118-121, 170-190).
 - **Worksheet values.** xlsx::read_workbook and xlsx::read_sheet return Worksheet values, with index in tab order, the workbook's sheet name, and cell text as rows. They share the reader with convert_bytes.
 
 ### Produces
@@ -366,7 +366,7 @@ Reads workbook cells into Markdown tables, one section per sheet, and gives XLSX
 | Shared strings are read from xl/sharedStrings.xml; a missing part gives an empty table | read from the code | superdocuments/src/document.rs:390-416, 483-486; superdocuments/src/xlsx.rs:64-90, 159-162 | shared_strings() collects the text of every t inside each si element. |
 | ODS repeat counts apply only to self-closing cells | read from the code | superdocuments/src/document.rs:577-584, 629-634 | number-columns-repeated is read only in the Empty arm, and the count is capped at 16,384 by odf_repeat. A repeated cell that has content is emitted once. |
 | XLSB sheet names come from workbook.bin record 156, matched to sheets by position | read from the code | superdocuments/src/document.rs:745-754, 839-842 | names.get(number - 1), falling back to 'Sheet N'. |
-| webfold reads legacy XLS through calamine::Xls and renders cells with calamine's Display | read from the code | webfold/src/document.rs:170-190; webfold/Cargo.toml:94-98, 221 | calamine is an optional dependency enabled by the default native feature. Data::Empty writes nothing. Merge data is not used. |
+| webfold reads legacy XLS through sheetfold::Xls and renders cells with sheetfold's Display | read from the code | webfold/src/document.rs:170-190; webfold/Cargo.toml:94-98, 221 | sheetfold is an optional dependency enabled by the default native feature. Data::Empty writes nothing. Merge data is not used. |
 | No webfold test names XLS | named test (not run for this document) | webfold/tests/ (search for xls) and webfold/src/document.rs | A search found no XLS test in tests/ or in any unit test in src/document.rs. The superdocuments test for an XLSB sheet uses an empty sheet part (document.rs:2065-2066). |
 | webfold's CSV renderer keeps line breaks as <br> and escapes pipes, and does not pad sparse tables | named test (not run for this document) | webfold/tests/document_review.rs:18-31, 49-59; webfold/src/document/table.rs:4-23, 43-49, 56-71 | Named tests multiline_cells_are_single_markdown_cells, lone_cr_is_a_record_boundary_and_limits_delimiter_detection and ragged_rows_do_not_expand_to_a_cartesian_grid. Not run. |
 | On 45 public mixed-format fixtures, webfold's median conversion time is about 27.7 microseconds | measured | webfold-website/src/lib/marketing/benchmarks.ts:46 (slug documents, Measured 2026) | Uncached, mixed formats; spreadsheets are not reported separately, so this is not an XLSX figure. |

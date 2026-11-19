@@ -6,7 +6,7 @@ on:
       - "**/*.toml"
       - "**/*.lock"
       - "src/**"
-      - "calamine/**"
+      - "sheetfold/**"
       - ".github/workflows/supply-chain.yml"
       - "deny.toml"
   push:

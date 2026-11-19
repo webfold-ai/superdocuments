@@ -5,7 +5,7 @@
 - Crates.io dependencies are locked in `Cargo.lock`. Build with `--locked`.
 - Git dependencies are pinned to full revisions in `Cargo.toml` and allowed by `deny.toml`:
   `apeiron` (`webfold-ai/apeiron`) and `wirefold` (`webfold-ai/wirefold`), and the optional `framefold` and `transcode`. See the README dependency table.
-- `calamine/` is a workspace member with its own `Cargo.toml`. It shares the root `Cargo.lock` and is not a dependency of the root crate.
+- `sheetfold/` is a workspace member with its own `Cargo.toml`. It shares the root `Cargo.lock` and the root crate depends on it by path (the legacy `.xls` reader in `src/document.rs`). Its package name is `sheetfold`, not `calamine`, so `cargo audit` does not compare it against upstream calamine's release advisories.
 
 ## Checks in CI
 

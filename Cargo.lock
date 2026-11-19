@@ -181,28 +181,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
-name = "calamine"
-version = "0.38.0"
-dependencies = [
- "apeiron",
- "atoi_simd",
- "byteorder",
- "codepage",
- "criterion",
- "encoding_rs",
- "env_logger",
- "fast-float2",
- "glob",
- "log",
- "quick-xml",
- "rstest",
- "serde",
- "serde_derive",
- "sha2",
- "zip",
-]
-
-[[package]]
 name = "cast"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1200,6 +1178,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "sheetfold"
+version = "0.36.1"
+dependencies = [
+ "apeiron",
+ "atoi_simd",
+ "byteorder",
+ "codepage",
+ "criterion",
+ "encoding_rs",
+ "env_logger",
+ "fast-float2",
+ "glob",
+ "log",
+ "quick-xml",
+ "rstest",
+ "serde",
+ "serde_derive",
+ "sha2",
+ "zip",
+]
+
+[[package]]
 name = "shlex"
 version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1234,12 +1234,12 @@ name = "superdocuments"
 version = "0.9.1"
 dependencies = [
  "apeiron",
- "calamine",
  "encoding_rs",
  "framefold",
  "quick-xml",
  "serde",
  "serde_json",
+ "sheetfold",
  "transcode",
  "wirefold",
  "zip",
@@ -1553,4 +1553,10 @@ dependencies = [
  "simd-adler32",
 ]
 
+[[patch.unused]]
+name = "guardfold"
+version = "0.1.0"
 
+[[patch.unused]]
+name = "modelfold"
+version = "0.1.0"

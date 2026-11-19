@@ -1,6 +1,6 @@
 //! Legacy Excel (`.xls`, BIFF) conversion. `lo-sheets.xls` was written by LibreOffice from a
 //! generated workbook; `lo-sheets.xlsx` is LibreOffice's round trip of that same `.xls`, so the two
-//! conversions must match. `date_1904.xls` and `date_1904.xlsx` are calamine's MIT-licensed test
+//! conversions must match. `date_1904.xls` and `date_1904.xlsx` are sheetfold's MIT-licensed test
 //! files (see tests/fixtures/xls/README.md).
 
 use std::fs;
