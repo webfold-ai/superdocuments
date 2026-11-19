@@ -112,9 +112,26 @@ impl Cfb {
         // load fat and dif sectors
         debug!("load difat {h:?}");
         let mut sector_id = h.difat_start;
+        // A DIFAT chain cannot visit more sectors than the file has. A chain that
+        // loops back on itself would otherwise grow `difat` without bound from a
+        // tiny file (RUSTSEC-2026-0436: a 512-byte file driving a multi-gigabyte
+        // allocation), so the walk is bounded by the sector count and an empty
+        // sector (which would make `pop` unwrap) ends it instead of panicking.
+        let mut difat_sectors = 0usize;
         while sector_id < RESERVED_SECTORS {
+            if difat_sectors >= maxid {
+                return Err(CfbError::Invalid {
+                    name: "difat chain",
+                    expected: "at most one sector per file sector",
+                    found: u16::MAX,
+                });
+            }
             difat.extend(to_u32(sectors.get(sector_id, reader)?));
-            sector_id = difat.pop().unwrap(); //TODO: check if in infinite loop
+            sector_id = match difat.pop() {
+                Some(next) => next,
+                None => break,
+            };
+            difat_sectors += 1;
         }
 
         // load the FATs
@@ -525,5 +542,53 @@ impl XlsEncoding {
 
     pub fn decode_all(&self, stream: &[u8]) -> String {
         self.encoding.decode(stream).0.into_owned()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A minimal, otherwise-valid 512-byte CFB header followed by `sectors` sectors,
+    /// with `difat_start` pointing into them. Only the fields `Header::from_reader`
+    /// validates are filled in.
+    fn header_with_difat_start(difat_start: u32, sectors: usize) -> Vec<u8> {
+        let mut buf = vec![0u8; 512 + sectors * 512];
+        buf[..8].copy_from_slice(b"\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1");
+        buf[24..26].copy_from_slice(&0x003Eu16.to_le_bytes()); // minor version
+        buf[26..28].copy_from_slice(&3u16.to_le_bytes()); // major version 3
+        buf[28..30].copy_from_slice(&0xFFFEu16.to_le_bytes()); // byte order
+        buf[30..32].copy_from_slice(&9u16.to_le_bytes()); // 2^9 = 512-byte sectors
+        buf[32..34].copy_from_slice(&6u16.to_le_bytes()); // minisector shift
+        buf[48..52].copy_from_slice(&ENDOFCHAIN.to_le_bytes()); // dir_start
+        buf[68..72].copy_from_slice(&difat_start.to_le_bytes());
+        buf
+    }
+
+    /// RUSTSEC-2026-0436 (2): a self-referential DIFAT chain used to grow `difat`
+    /// without bound from a tiny file. The walk is bounded by the sector count now,
+    /// so this must return an error promptly instead of allocating.
+    #[test]
+    fn self_referential_difat_chain_errors_instead_of_allocating() {
+        let mut buf = header_with_difat_start(0, 2);
+        // Sector 0's last entry points back at sector 0.
+        let sector0_end = 512 + 512;
+        buf[sector0_end - 4..sector0_end].copy_from_slice(&0u32.to_le_bytes());
+        let len = buf.len();
+        let mut reader = std::io::Cursor::new(buf);
+        let err = Cfb::new(&mut reader, len).expect_err("cyclic DIFAT must be an error");
+        assert!(matches!(err, CfbError::Invalid { .. }), "got {err:?}");
+    }
+
+    /// RUSTSEC-2026-0436 (1): a DIFAT sector that reads back empty used to make
+    /// `difat.pop().unwrap()` panic. It must end the walk instead.
+    #[test]
+    fn short_difat_sector_does_not_panic() {
+        // Point the DIFAT at a sector index past the end of the file.
+        let buf = header_with_difat_start(9, 1);
+        let len = buf.len();
+        let mut reader = std::io::Cursor::new(buf);
+        let err = Cfb::new(&mut reader, len).expect_err("no root directory to read");
+        assert!(!matches!(err, CfbError::Ole { .. }), "got {err:?}");
     }
 }

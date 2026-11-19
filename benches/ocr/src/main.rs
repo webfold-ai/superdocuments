@@ -1610,6 +1610,85 @@ mod candle_runner {
     const DEFAULT_MODEL_ID: &str = "Qwen/Qwen2.5-0.5B-Instruct";
     const MAX_NEW_TOKENS: usize = 256;
 
+    /// Fetch one file from the Hugging Face hub over plain HTTPS, cached on disk.
+    ///
+    /// `hf-hub` 1.0 is the other option, but it pulls the xet resumable-transfer
+    /// stack (quinn/h3 for QUIC, plus an older rustls and rustls-webpki) for what
+    /// this lane does exactly three times: GET a small file. That stack is what
+    /// RUSTSEC-2026-0523/0524/0538/0346-0349/0381/0382 flag, so the three GETs are
+    /// done here with the reqwest this crate already depends on.
+    ///
+    /// `HF_TOKEN` (or `HUGGING_FACE_HUB_TOKEN`) is sent on the request to
+    /// huggingface.co and deliberately NOT on the redirect to the CDN, which
+    /// serves from a signed URL that does not need it.
+    fn hf_download(repo: &str, file: &str) -> Result<PathBuf> {
+        let cache_root = std::env::var("SDB_OCR_MODEL_CACHE")
+            .map(PathBuf::from)
+            .or_else(|_| {
+                std::env::var("HOME")
+                    .map(|h| PathBuf::from(h).join(".cache/superdocuments-bench-ocr/hf"))
+                    .map_err(|_| anyhow!("neither SDB_OCR_MODEL_CACHE nor HOME is set"))
+            })?;
+        let dir = cache_root.join(repo);
+        let dest = dir.join(file);
+        if dest.exists() {
+            return Ok(dest);
+        }
+        std::fs::create_dir_all(&dir)
+            .map_err(|e| anyhow!("create {}: {e}", dir.display()))?;
+
+        let client = reqwest::blocking::Client::builder()
+            // Redirects are followed by hand below, so the bearer token is not
+            // forwarded to the CDN host.
+            .redirect(reqwest::redirect::Policy::none())
+            .build()
+            .map_err(|e| anyhow!("http client: {e}"))?;
+        let url = format!("https://huggingface.co/{repo}/resolve/main/{file}");
+        let token = std::env::var("HF_TOKEN")
+            .or_else(|_| std::env::var("HUGGING_FACE_HUB_TOKEN"))
+            .ok();
+
+        let mut request = client.get(&url);
+        if let Some(token) = token.as_deref() {
+            request = request.bearer_auth(token);
+        }
+        let mut response = request
+            .send()
+            .map_err(|e| anyhow!("GET {url}: {e}"))?;
+        let mut hops = 0;
+        while response.status().is_redirection() {
+            hops += 1;
+            if hops > 10 {
+                return Err(anyhow!("GET {url}: too many redirects"));
+            }
+            let next = response
+                .headers()
+                .get(reqwest::header::LOCATION)
+                .and_then(|v| v.to_str().ok())
+                .ok_or_else(|| anyhow!("GET {url}: redirect without a Location header"))?
+                .to_string();
+            response = client
+                .get(&next)
+                .send()
+                .map_err(|e| anyhow!("GET {next}: {e}"))?;
+        }
+        if !response.status().is_success() {
+            return Err(anyhow!(
+                "GET {url}: {} (set HF_TOKEN for gated repos)",
+                response.status()
+            ));
+        }
+        let bytes = response
+            .bytes()
+            .map_err(|e| anyhow!("read body of {url}: {e}"))?;
+        let tmp = dest.with_extension("part");
+        std::fs::write(&tmp, &bytes)
+            .map_err(|e| anyhow!("write {}: {e}", tmp.display()))?;
+        std::fs::rename(&tmp, &dest)
+            .map_err(|e| anyhow!("rename {} -> {}: {e}", tmp.display(), dest.display()))?;
+        Ok(dest)
+    }
+
     pub fn run(pdf_bytes: &[u8], iterations: u64, _timeout: Duration) -> Result<Sample> {
         let mut accum = Sample::default();
         let t_total = Instant::now();
@@ -1652,20 +1731,12 @@ mod candle_runner {
              <|im_start|>assistant\n"
         );
 
-        // Resolve weights + tokenizer via hf-hub. Cached under ~/.cache/huggingface
-        // so subsequent runs are offline.
-        let api = hf_hub::api::sync::Api::new().map_err(|e| anyhow!("hf-hub init failed: {e}"))?;
+        // Resolve weights + tokenizer from the hub, cached under
+        // ~/.cache/superdocuments-bench-ocr so subsequent runs are offline.
         let model_id = std::env::var("CANDLE_MODEL_ID").unwrap_or_else(|_| DEFAULT_MODEL_ID.into());
-        let repo = api.repo(hf_hub::Repo::model(model_id.clone()));
-        let model_path: PathBuf = repo
-            .get("model.safetensors")
-            .map_err(|e| anyhow!("download model.safetensors for {model_id}: {e}"))?;
-        let config_path: PathBuf = repo
-            .get("config.json")
-            .map_err(|e| anyhow!("download config.json for {model_id}: {e}"))?;
-        let tokenizer_path: PathBuf = repo
-            .get("tokenizer.json")
-            .map_err(|e| anyhow!("download tokenizer.json for {model_id}: {e}"))?;
+        let model_path: PathBuf = hf_download(&model_id, "model.safetensors")?;
+        let config_path: PathBuf = hf_download(&model_id, "config.json")?;
+        let tokenizer_path: PathBuf = hf_download(&model_id, "tokenizer.json")?;
 
         // CPU only — GPU path would need a CUDA-enabled candle build. The 0.5B
         // model fits in ~1 GB RAM and runs ~3-5 tok/s on a modern CPU.

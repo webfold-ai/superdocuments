@@ -844,17 +844,6 @@ fn date_xls() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]
@@ -880,17 +869,6 @@ fn date_xls_1904() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]
@@ -916,17 +894,6 @@ fn date_xlsx() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 // Regression test: a custom number format whose `formatCode` contains
@@ -993,17 +960,6 @@ fn date_xlsx_1904() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]
@@ -1024,26 +980,6 @@ fn date_xlsx_iso() {
         Some(&DateTimeIso("10:10:10".to_string()))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-        assert_eq!(range.get_value((0, 0)).unwrap().as_time(), None);
-        assert_eq!(range.get_value((0, 0)).unwrap().as_datetime(), None);
-
-        let time = chrono::NaiveTime::from_hms_opt(10, 10, 10).unwrap();
-        assert_eq!(range.get_value((2, 0)).unwrap().as_time(), Some(time));
-        assert_eq!(range.get_value((2, 0)).unwrap().as_date(), None);
-        assert_eq!(range.get_value((2, 0)).unwrap().as_datetime(), None);
-
-        let datetime = chrono::NaiveDateTime::new(date, time);
-        assert_eq!(
-            range.get_value((1, 0)).unwrap().as_datetime(),
-            Some(datetime)
-        );
-        assert_eq!(range.get_value((1, 0)).unwrap().as_time(), Some(time));
-        assert_eq!(range.get_value((1, 0)).unwrap().as_date(), Some(date));
-    }
 }
 
 #[test]
@@ -1068,30 +1004,6 @@ fn date_ods() {
         Some(&DurationIso("PT10H10M10.123456S".to_string()))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let time = chrono::NaiveTime::from_hms_opt(10, 10, 10).unwrap();
-        assert_eq!(range.get_value((2, 0)).unwrap().as_time(), Some(time));
-
-        let datetime = chrono::NaiveDateTime::new(date, time);
-        assert_eq!(
-            range.get_value((1, 0)).unwrap().as_datetime(),
-            Some(datetime)
-        );
-
-        let time = chrono::NaiveTime::from_hms_micro_opt(10, 10, 10, 123456).unwrap();
-        assert_eq!(range.get_value((3, 0)).unwrap().as_time(), Some(time));
-
-        let duration =
-            chrono::Duration::microseconds((10 * 60 * 60 + 10 * 60 + 10) * 1_000_000 + 123456);
-        assert_eq!(
-            range.get_value((3, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]
@@ -1117,17 +1029,6 @@ fn date_xlsb() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]
@@ -1153,17 +1054,6 @@ fn date_xlsb_1904() {
         )))
     );
 
-    #[cfg(feature = "chrono")]
-    {
-        let date = chrono::NaiveDate::from_ymd_opt(2021, 1, 1).unwrap();
-        assert_eq!(range.get_value((0, 0)).unwrap().as_date(), Some(date));
-
-        let duration = chrono::Duration::seconds(255 * 60 * 60 + 10 * 60 + 10);
-        assert_eq!(
-            range.get_value((2, 0)).unwrap().as_duration(),
-            Some(duration)
-        );
-    }
 }
 
 #[test]

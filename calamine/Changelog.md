@@ -6,6 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.38.0] - 2026-11-19 (fork: security backport)
+
+> This is the superdocuments fork of calamine, not upstream 0.38.0. The version is
+> bumped because RUSTSEC-2026-0436 is only cleared for `calamine >= 0.38.0`, and this
+> fork now carries that fix. Other upstream 0.37/0.38 changes are **not** merged.
+
+### Security
+
+- CFB/OLE2 parser hardening, backported from upstream (`tafia/calamine#762`,
+  commit `b8ec4f0`) — RUSTSEC-2026-0436, CVSS 7.5:
+  - the DIFAT chain walk is bounded by the file's sector count, so a crafted
+    self-referential chain can no longer drive an unbounded allocation (a 512-byte
+    file previously attempted a ~2 GB allocation);
+  - a DIFAT sector that reads back empty now ends the walk instead of panicking on
+    `pop().unwrap()`.
+  - Both have regression tests in `src/cfb.rs`; without the fix the first allocates
+    2 GB and aborts (`memory allocation of 1988100096 bytes failed`).
+
+### Removed
+
+- The optional `chrono` and `dates` features, and the `chrono`-typed helpers they
+  exposed (`Data::as_date/as_time/as_duration/as_datetime`,
+  `ExcelDateTime::as_duration/as_datetime`,
+  `serde::deserialize_as_date_or_none` and friends). `chrono` is unmaintained
+  (RUSTSEC-2026-0543) and nothing in this workspace enabled the feature; the removal
+  keeps one unmaintained crate out of every lockfile in the graph. The Excel-serial
+  conversions that do not return `chrono` types (`to_ymd`, `to_ymd_hms_milli`,
+  `as_f64`) are unchanged.
+
 ## [0.36.1] - 2026-07-27
 
 ### Fixed
