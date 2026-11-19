@@ -1,0 +1,83 @@
+# Smoke test stack for the OCR bench on Alpine.
+#
+# Brings up:
+#   - ai-gateway on :3100 (Traceloop Hub, vendored locally; see the ai-gateway repo)
+#   - mock_upstream on :9000 (ai-gateway/benches/fixtures/mock_upstream.py)
+#   - bench on :0 (one-shot, runs the OCR inference-stack targets against
+#     ai-gateway and exits; results land in ./results/)
+#
+# Usage from ocr/:
+#   docker compose -f docker-compose.alpine.yml up --abort-on-container-exit \
+#     --exit-code-from bench
+#
+# ai-gateway is run natively (cargo run --release --bin hub) in this compose
+# because its own Dockerfile needs private-git-deps SSH forward + a local `kleis`
+# build-context not available in this environment. The compose service binds
+# the host binary directly.
+
+services:
+  mock-upstream:
+    image: python:3.12-alpine
+    working_dir: /app
+    volumes:
+      - ../ai-gateway/benches/fixtures/mock_upstream.py:/app/mock_upstream.py:ro
+    command: ["python3", "/app/mock_upstream.py"]
+    ports:
+      - "127.0.0.1:9000:9000"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/health')"]
+      interval: 3s
+      timeout: 2s
+      retries: 5
+
+  ai-gateway:
+    # The ai-gateway binary is built outside Docker (its own private-git-deps
+    # make it inconvenient to dockerize here). We mount the release binary
+    # and run it natively on the host network.
+    image: alpine:3.20
+    working_dir: /app
+    command:
+      - /bin/sh
+      - -c
+      - |
+        set -eu
+        apk add --no-cache ca-certificates libgcc
+        exec /ai-gateway/hub \
+          --config /ai-gateway/benches/fixtures/bench-config.yaml \
+          --port 3100
+    volumes:
+      - ../ai-gateway/target/release/hub:/ai-gateway/hub:ro
+      - ../ai-gateway/benches/fixtures:/ai-gateway/benches/fixtures:ro
+    ports:
+      - "127.0.0.1:3100:3100"
+    depends_on:
+      mock-upstream:
+        condition: service_healthy
+
+  bench:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+    depends_on:
+      ai-gateway:
+        condition: service_started
+      mock-upstream:
+        condition: service_healthy
+    environment:
+      RUST_LOG: info
+      GUIDELLM_RUN: "0"
+    volumes:
+      - ./results:/bench/results
+      - ./ttft_raw:/bench/ttft_raw
+    command:
+      - --fixtures
+      - /bench/fixtures
+      - --out
+      - /bench/results/ocr-inference-2026-09-27.json
+      - --warmup
+      - "1"
+      - --samples
+      - "3"
+      - --iterations
+      - "2"
+    network_mode: host
