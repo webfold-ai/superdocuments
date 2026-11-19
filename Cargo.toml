@@ -1,7 +1,11 @@
 [workspace]
 members = ["calamine", "superdocuments_bindings"]
 # calamine/fuzz is a cargo-fuzz crate built on its own.
-exclude = ["calamine/fuzz"]
+# The bench harness crates under benches/ are their own workspaces with their own
+# lockfiles (they pin the superdocuments revision they measure, so they must not
+# inherit this workspace's lock); exclude them so `cargo` run inside them resolves
+# against their own manifests.
+exclude = ["calamine/fuzz", "benches/ocr", "benches/services/candle-serve"]
 
 [package]
 name = "superdocuments"

@@ -144,7 +144,7 @@ MarkItDown's number is dominated by Python startup in the one-shot-subprocess sh
 - Against pandoc 3.1.3 on 16 LaTeX and 5 BibTeX fixtures, structural counts agree except one starred figure environment; pandoc fails on three BibTeX inputs — [`benches/latex-vs-pandoc/`](benches/latex-vs-pandoc/).
 - `pdf::extract_images` image listings agree with poppler's `pdfimages` on the PDF fixtures — [`benches/pdf-images/`](benches/pdf-images/).
 
-OCR quality/latency against inference-stack targets (marker, docling, surya, liteparse, PaddleOCR-VL via gateways) is measured in the companion harness [`superdocuments-bench`](https://github.com/webfold-ai/superdocuments-bench) (private), on the same fixture substrate; its published runs will be quoted here with the same discipline as the table above.
+OCR quality/latency against inference-stack targets (marker, docling, surya, liteparse, PaddleOCR-VL via gateways) is measured by the in-tree harness [`benches/ocr/`](benches/ocr/) on the same fixture substrate (the harness was the standalone `superdocuments-bench` repo; it now lives here, with its history preserved); its published runs will be quoted here with the same discipline as the table above.
 
 ## Format matrix
 

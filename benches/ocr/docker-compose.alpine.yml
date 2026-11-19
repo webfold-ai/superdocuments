@@ -1,7 +1,7 @@
 # Smoke test stack for the OCR bench on Alpine.
 #
 # Brings up:
-#   - ai-gateway on :3100 (Traceloop Hub, vendored at /home/ctown/projects/ai-gateway)
+#   - ai-gateway on :3100 (Traceloop Hub, vendored locally; see the ai-gateway repo)
 #   - mock_upstream on :9000 (ai-gateway/benches/fixtures/mock_upstream.py)
 #   - bench on :0 (one-shot, runs the OCR inference-stack targets against
 #     ai-gateway and exits; results land in ./results/)

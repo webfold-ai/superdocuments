@@ -1,6 +1,6 @@
 # services/
 
-Sub HTTP services for `superdocuments-bench/ocr` inference targets that
+Sub HTTP services for the `ocr/` inference targets that
 don't ship their own server.
 
 | Service | Status | Drives target |
