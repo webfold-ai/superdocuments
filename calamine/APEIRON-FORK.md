@@ -1,20 +1,28 @@
 # Calamine with Apeiron workbook maps
 
-This local fork starts at Calamine `0af05f4f6030351e3b8a999ea0810c8618368776`
-(v0.36.1). It keeps Calamine's parser and public API. XLSX and XLSB ZIP part
-path caches and workbook relationship indexes use `apeiron::freq::Table` with borrowed
-`&str` lookups.
+This is **our** crate, not a vendored copy of upstream `calamine`. It keeps
+calamine's parser and public API, and its storage is the shared substrate: XLSX and
+XLSB ZIP part-path caches and workbook relationship indexes are
+`apeiron::freq::Table` with borrowed `&str` lookups, on `zip` 9 and `quick-xml`
+0.42. XLS and ODS readers are unchanged controls.
 
-Two deliberate deviations from that base, both recorded in `Changelog.md`:
+History: it was imported from `calamine-apeiron` (`claude/zip9`, `3ad21be`) as the
+`calamine/` workspace member, and has been re-based on the substrate revisions the
+rest of this workspace shares since.
 
-- It is versioned `0.38.0` because it carries the RUSTSEC-2026-0436 CFB/OLE2 hardening
-  backported from upstream (`b8ec4f0`, `tafia/calamine#762`) — the advisory is only
-  cleared for `calamine >= 0.38.0`. Other upstream 0.37/0.38 changes are NOT merged.
-- The optional `chrono`/`dates` features were removed (RUSTSEC-2026-0543: chrono is
-  unmaintained, and nothing here enabled the feature).
+Two things that need stating because they look like upstream's and are not:
 
-XLS and ODS readers are unchanged controls. This is an initial storage migration, not a
-rewrite of spreadsheet parsing or a claimed speedup.
+- **Version.** This tree is versioned `0.38.0` because RUSTSEC-2026-0436 is keyed to
+  the calamine release line and only clears at `>= 0.38.0`. That number is not a
+  claim that upstream's 0.37/0.38 API changes are here — they are not.
+- **The CFB/OLE2 fix** (`src/cfb.rs`) *is* upstream's `b8ec4f0` (`tafia/calamine#762`),
+  applied verbatim, with upstream's two crafted fixtures and tests now in
+  `tests/test.rs`. It is the one place where upstream's code was carried in whole,
+  so it is cited rather than paraphrased.
+
+The optional `chrono`/`dates` features were removed (RUSTSEC-2026-0543: chrono is
+unmaintained with no patched release, and nothing here enabled the feature while
+Cargo locked it into every audit). See `Changelog.md`.
 
 One addition to the XLS reader: `Xls::cell_number_format(sheet, (row, col))` returns the number format id
 and custom format code (XF and FORMAT records) of a numeric cell, so a caller can apply the same number

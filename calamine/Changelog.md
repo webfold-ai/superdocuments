@@ -6,34 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [0.38.0] - 2026-11-19 (fork: security backport)
-
-> This is the superdocuments fork of calamine, not upstream 0.38.0. The version is
-> bumped because RUSTSEC-2026-0436 is only cleared for `calamine >= 0.38.0`, and this
-> fork now carries that fix. Other upstream 0.37/0.38 changes are **not** merged.
+## [0.38.0] - 2026-11-19
 
 ### Security
 
-- CFB/OLE2 parser hardening, backported from upstream (`tafia/calamine#762`,
-  commit `b8ec4f0`) — RUSTSEC-2026-0436, CVSS 7.5:
-  - the DIFAT chain walk is bounded by the file's sector count, so a crafted
-    self-referential chain can no longer drive an unbounded allocation (a 512-byte
-    file previously attempted a ~2 GB allocation);
-  - a DIFAT sector that reads back empty now ends the walk instead of panicking on
-    `pop().unwrap()`.
-  - Both have regression tests in `src/cfb.rs`; without the fix the first allocates
-    2 GB and aborts (`memory allocation of 1988100096 bytes failed`).
+- CFB/OLE2 parser: a cyclic DIFAT chain is bounded by the file's sector count and
+  an empty DIFAT sector is an error rather than `pop().unwrap()`, so a small crafted
+  file can no longer drive an unbounded allocation or a panic. RUSTSEC-2026-0436.
+  The change is upstream's `b8ec4f0` (`tafia/calamine#762`), applied verbatim,
+  together with upstream's two crafted fixtures — `tests/cfb_difat_oom.xls` (512
+  bytes) and `tests/cfb_dir_short_chunk_panic.xls` — and their two tests, which
+  now run in this suite. Without the guard the first fixture allocates ~1.98 GB and
+  aborts (`memory allocation of 1979711488 bytes failed`); with it the workbook is
+  rejected.
+  The short-directory-chunk half of that patch was already present here
+  (`chunks_exact(128)` plus the trailing-partial-entry comment); it is now written
+  the way upstream writes it.
+
+### Changed
+
+- Version: this crate is the scope's own refactor of calamine (apeiron tables for
+  the XLSX/XLSB zip-path and relationship caches, `zip` 9, `quick-xml` 0.42), not a
+  vendored copy of upstream's tree. It is versioned `0.38.0` because RUSTSEC-2026-0436
+  is keyed to the calamine release line and only clears at `>= 0.38.0`; it does not
+  claim upstream's 0.37/0.38 API changes.
 
 ### Removed
 
-- The optional `chrono` and `dates` features, and the `chrono`-typed helpers they
-  exposed (`Data::as_date/as_time/as_duration/as_datetime`,
-  `ExcelDateTime::as_duration/as_datetime`,
-  `serde::deserialize_as_date_or_none` and friends). `chrono` is unmaintained
-  (RUSTSEC-2026-0543) and nothing in this workspace enabled the feature; the removal
-  keeps one unmaintained crate out of every lockfile in the graph. The Excel-serial
-  conversions that do not return `chrono` types (`to_ymd`, `to_ymd_hms_milli`,
-  `as_f64`) are unchanged.
+- The optional `chrono`/`dates` features and the `chrono`-typed helpers they exposed
+  (`Data::as_date/as_time/as_duration/as_datetime`,
+  `ExcelDateTime::as_duration/as_datetime`, the eight
+  `deserialize_as_*_or_{none,string}` serde helpers) and their tests. `chrono` is
+  unmaintained (RUSTSEC-2026-0543) with no patched release, and Cargo locks optional
+  dependencies whether or not a feature is enabled, so it sat in every audit of this
+  workspace while nothing enabled it. The Excel-serial conversions that do not return
+  `chrono` types (`to_ymd`, `to_ymd_hms_milli`, `as_f64`) are unchanged.
 
 ## [0.36.1] - 2026-07-27
 

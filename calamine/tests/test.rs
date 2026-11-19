@@ -3553,3 +3553,19 @@ fn xls_embedded_cross_sheet_chart_does_not_leak_cells() {
         Some(&Data::String("VALUE C6".to_string()))
     );
 }
+
+#[test]
+fn test_cfb_short_directory_chunk_does_not_panic() {
+    // Test that a compound file whose directory stream length is not a multiple
+    // of 128 doesn't panic. See upstream PR #762.
+    let xls: Xls<_> = wb("cfb_dir_short_chunk_panic.xls");
+    assert_eq!(xls.sheet_names(), vec!["Sheet1"]);
+}
+
+#[test]
+fn test_cfb_difat_chain_does_not_oom() {
+    // Test that a compound file with a cyclic DIFAT chain is rejected without
+    // unbounded allocation. See upstream PR #762.
+    let path = test_path("cfb_difat_oom.xls");
+    assert!(open_workbook::<Xls<_>, _>(path).is_err());
+}
