@@ -1,0 +1,37 @@
+[Unit]
+Description=superdocuments-bench-ocr (inference-stack OCR benchmark)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Run the OCR inference-stack bench once, write results to /var/log/superdocs-bench/.
+# Replace <UPSTREAM> with the local AI gateway / OpenAI-compat server URL (e.g.
+# http://localhost:3100/v1 when ai-gateway is on the same host).
+Environment=OPENAI_BASE_URL=<UPSTREAM>
+Environment=GUIDELLM_RUN=1
+Environment=GUIDELLM_REQUESTS=50
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/superdocuments-bench
+ExecStart=/opt/superdocuments-bench/bin/superdocuments-bench-ocr \
+  --fixtures /opt/superdocuments-bench/fixtures \
+  --out /var/log/superdocs-bench/ocr-inference-$(date +\%Y-\%m-\%d).json \
+  --warmup 1 --samples 3 --iterations 2 \
+  --ttft-requests 50
+StandardOutput=journal
+StandardError=journal
+User=ctown
+Group=ctown
+# Hard limits: the bench runs in <2 GiB RSS for the default OpenAI-compat path;
+# the candle path with the 0.5B model needs ~1.5 GiB. 4 GiB ceiling covers both.
+MemoryMax=4G
+CPUQuota=400%
+Nice=10
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+NoNewPrivileges=true
+ReadWritePaths=/var/log/superdocs-bench /opt/superdocuments-bench
+
+[Install]
+WantedBy=multi-user.target

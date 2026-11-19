@@ -1,0 +1,48 @@
+# syntax=docker/dockerfile:1.7
+# Alpine image for the OCR inference-stack bench.
+# - Builder stage: rust:alpine (musl libc, ~5 MB base)
+# - Runtime stage: alpine + the release binary + fixtures
+# - Final image size: ~50 MB (vs ~200 MB debian:slim, ~1 GB rust:1-slim)
+#
+# Build from the repo root:
+#   docker build -f ocr/Dockerfile.alpine -t superdocs-bench-ocr:alpine ocr
+# Run (mount results so they survive the container):
+#   docker run --rm -v $PWD/ocr/results:/bench/results superdocs-bench-ocr:alpine \
+#     --fixtures /bench/fixtures --out /bench/results/ocr.json --samples 3
+FROM rust:1.85-alpine AS builder
+WORKDIR /build
+
+# Build deps: protoc not needed (superdocuments is plain rust), but we still
+# need musl-dev, pkg-config, openssl-dev for transitive deps. Keep this layer
+# small and deterministic.
+RUN apk add --no-cache musl-dev pkgconfig openssl-dev
+
+# Cache deps separately from source for faster incremental rebuilds.
+COPY Cargo.toml Cargo.lock ./
+RUN mkdir -p src benches fixtures \
+    && echo "fn main() {}" > src/main.rs \
+    && cargo build --release --bin superdocuments-bench-ocr \
+    && rm -rf src benches fixtures
+
+COPY src ./src
+COPY fixtures ./fixtures
+# Re-touch the binary's mtime so cargo re-uses the cached deps but recompiles
+# only this crate's code.
+RUN cargo build --release --bin superdocuments-bench-ocr
+
+FROM alpine:3.20 AS runtime
+WORKDIR /bench
+RUN apk add --no-cache ca-certificates tini
+COPY --from=builder /build/target/release/superdocuments-bench-ocr /bench/
+COPY --from=builder /build/fixtures /bench/fixtures
+COPY docker-entrypoint.alpine.sh /bench/
+
+# Smoke entrypoint: against the mock upstream + ai-gateway compose stack
+# (defined in docker-compose.alpine.yml), guidellm is optional. If
+# GUIDELLM_RUN=1 is set, also run the TTFT/ITL lane.
+ENTRYPOINT ["/sbin/tini", "--", "/bench/docker-entrypoint.alpine.sh"]
+CMD ["--fixtures", "/bench/fixtures", "--out", "/bench/results/ocr.json"]
+
+# Results directory for `docker run -v $PWD/ocr/results:/bench/results`
+RUN mkdir -p /bench/results /bench/ttft_raw
+VOLUME ["/bench/results", "/bench/ttft_raw"]

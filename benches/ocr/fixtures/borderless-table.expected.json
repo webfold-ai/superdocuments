@@ -1,0 +1,1 @@
+{"markdown": "<!-- page 1 -->\n# Borderless Table Test\n\nCells are distinguished by alignment only — no visible borders. Markdown output should still recover rows and cells in order.\n\n| Item | Quantity | Price |\n| --- | --- | --- |\n| Document review | 2 | $617.25 |\n| Translation | 1 | $150.00 |\n", "source_label": "ocr"}

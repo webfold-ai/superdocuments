@@ -1,0 +1,42 @@
+# syntax=docker/dockerfile:1.7
+# Slim NVIDIA image for the OCR inference-stack bench, intended for a 3060
+# (sm_86 / Ampere) or any CUDA 12.x GPU host. Carries only the bench binary
+# and fixtures — model servers (sglang-ocr, vllm-ocr) live in separate
+# containers on the same compose network.
+#
+# Build (on this CPU host — the build is x86_64, no GPU needed):
+#   docker build -f ocr/Dockerfile.cuda-slim -t superdocs-bench-ocr:cuda-slim ocr
+#
+# Run (on a GPU host with nvidia-container-toolkit installed):
+#   docker compose -f ocr/docker-compose.gpu.yml up --abort-on-container-exit \
+#     --exit-code-from bench
+#
+# Final image size: ~250 MB (slim CUDA runtime, no compiler, no Cargo).
+# Build the binary locally first:
+#   cargo build --release --manifest-path ocr/Cargo.toml
+#
+# The image assumes the binary is at ./target/release/superdocuments-bench-ocr
+# relative to the build context (the ocr/ directory).
+
+FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04 AS runtime
+WORKDIR /bench
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        tini \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY target/release/superdocuments-bench-ocr /bench/
+COPY fixtures /bench/fixtures
+COPY docker-entrypoint.cuda-slim.sh /bench/
+
+RUN mkdir -p /bench/results /bench/ttft_raw
+VOLUME ["/bench/results", "/bench/ttft_raw"]
+
+ENTRYPOINT ["/usr/bin/tini", "--", "/bench/docker-entrypoint.cuda-slim.sh"]
+CMD ["--fixtures", "/bench/fixtures", "--out", "/bench/results/ocr.json"]
+
+# NVIDIA Container Runtime forwards the host GPU. `--gpus all` is the
+# explicit form (compose uses `deploy.resources.reservations.devices`).
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility

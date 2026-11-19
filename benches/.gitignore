@@ -1,0 +1,33 @@
+# Build artifacts
+/target/
+**/target/
+**/*.rs.bk
+
+# Cargo lockfiles generated locally — keep the committed one
+**/Cargo.lock.bak
+
+# Editor / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Python venvs / caches
+.venv/
+__pycache__/
+*.pyc
+
+# Local run artefacts (results, metrics dumps, generated fixtures)
+results/
+*.log
+*.prom
+
+# Downloaded on-demand benchmark subsets (OmniDocBench, ParseBench, getomni).
+# Use fixtures/fetch_public_benchmarks.sh to populate locally.
+**/fixtures/fetched/
+fixtures/fetched/
+
+# Stale download artefacts left over from previous runs.
+_stale/
+_docs.stale.dead/
+_fetched.stale.dead/

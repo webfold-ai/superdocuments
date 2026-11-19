@@ -1,0 +1,1 @@
+Scanned fixture: OCR works.
