@@ -1,7 +1,7 @@
 //! Native document-to-Markdown conversion over bounded ZIP/XML inputs.
 //!
 //! Migrated from Webfold's bounded native document parser. Legacy XLS is read by the
-//! in-repo `calamine` crate; parsing does not fetch or launch a browser.
+//! in-repo `sheetfold` crate; parsing does not fetch or launch a browser.
 
 pub use crate::media::{extract_images, ExtractedImage};
 
@@ -274,10 +274,10 @@ fn workbook_markdown(sheets: Vec<(String, Vec<Vec<String>>)>) -> String {
     out.trim_end().to_string()
 }
 
-/// Legacy Excel 97-2003 (BIFF8, and BIFF5 from older tools) through the `calamine` workspace
+/// Legacy Excel 97-2003 (BIFF8, and BIFF5 from older tools) through the `sheetfold` workspace
 /// member. Output has the same shape as [`xlsx`].
 fn xls(data: &[u8]) -> Result<String, String> {
-    // calamine still has panicking slice indexes in its BIFF record parser for some damaged files.
+    // sheetfold still has panicking slice indexes in its BIFF record parser for some damaged files.
     // A panic here must surface as an error for the caller, so the reader runs behind
     // `catch_unwind`. Nothing is shared across the boundary that a panic could leave inconsistent.
     std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| xls_unchecked(data)))
@@ -285,11 +285,11 @@ fn xls(data: &[u8]) -> Result<String, String> {
 }
 
 fn xls_unchecked(data: &[u8]) -> Result<String, String> {
-    use calamine::{Reader, SheetType, Xls};
+    use sheetfold::{Reader, SheetType, Xls};
     let mut book: Xls<Cursor<&[u8]>> =
         Reader::new(Cursor::new(data)).map_err(|e| format!("invalid XLS: {e}"))?;
     let date1904 = book.has_1904_epoch();
-    // calamine keeps its own sheets sorted by name; the workbook's tab order is in the metadata.
+    // sheetfold keeps its own sheets sorted by name; the workbook's tab order is in the metadata.
     let names: Vec<String> = book
         .sheets_metadata()
         .iter()
@@ -319,9 +319,9 @@ const XLS_MAX_CELLS: usize = 20_000_000;
 /// Rows as the XLSX reader builds them: a cell sits at its absolute column, rows with no
 /// content are dropped, and trailing empty cells are trimmed.
 fn xls_rows(
-    book: &calamine::Xls<Cursor<&[u8]>>,
+    book: &sheetfold::Xls<Cursor<&[u8]>>,
     sheet: &str,
-    range: &calamine::Range<calamine::Data>,
+    range: &sheetfold::Range<sheetfold::Data>,
     date1904: bool,
 ) -> Vec<Vec<String>> {
     let Some((top, left)) = range.start() else {
@@ -366,8 +366,8 @@ fn xls_number(value: f64, format: Option<(u16, Option<&str>)>, date1904: bool) -
 }
 
 /// One cell as the XLSX reader prints it. `format` is the number format of a numeric cell.
-fn xls_cell(cell: &calamine::Data, format: Option<(u16, Option<&str>)>, date1904: bool) -> String {
-    use calamine::Data;
+fn xls_cell(cell: &sheetfold::Data, format: Option<(u16, Option<&str>)>, date1904: bool) -> String {
+    use sheetfold::Data;
     match cell {
         Data::Empty => String::new(),
         Data::String(text) | Data::DateTimeIso(text) | Data::DurationIso(text) => text.clone(),
@@ -383,7 +383,7 @@ fn xls_cell(cell: &calamine::Data, format: Option<(u16, Option<&str>)>, date1904
             if let Some(shown) = xls_number(serial, format, date1904) {
                 return shown;
             }
-            // Calamine reports only that a cell is a date or time format. A duration is a time of
+            // Sheetfold reports only that a cell is a date or time format. A duration is a time of
             // day; a date-time with a fraction shows both, and a whole serial shows the date.
             let (date_part, time_part) = if value.is_duration() {
                 (false, true)

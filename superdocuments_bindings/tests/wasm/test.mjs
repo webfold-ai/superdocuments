@@ -72,7 +72,7 @@ ok("rtf", () => {
   assert.match(md, /\[the site\]\(https:\/\/example\.com\/a\?x=1&y=2\)/);
   assert.match(md, /Footnote body & text\./);
 });
-ok("legacy xls (the in-repo calamine crate, in wasm)", () => {
+ok("legacy xls (the in-repo sheetfold crate, in wasm)", () => {
   assert.match(sd.convert(fixture("xls/lo-sheets.xls"), "xls"), /\|/);
 });
 ok("epub built here", () => {

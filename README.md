@@ -12,7 +12,7 @@
 
 </div>
 
-`superdocuments` reads DOCX, DOCM, PPTX, XLSX, XLSM, XLS, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML, LaTeX, BibTeX and arXiv e-prints, and turns them into Markdown or structured Rust types — in process, with no GPU, no model downloads and no Python. PDF text extraction is native (with an optional OCR fallback through `pdftoppm` and `tesseract`); legacy binary `.xls` is read through the in-repo `calamine/` fork. It is the conversion engine behind [`webfold`](https://github.com/webfold-ai/webfold), which re-exports it.
+`superdocuments` reads DOCX, DOCM, PPTX, XLSX, XLSM, XLS, XLSB, ODT, ODP, ODS, EPUB, RTF, CSV, HTML, LaTeX, BibTeX and arXiv e-prints, and turns them into Markdown or structured Rust types — in process, with no GPU, no model downloads and no Python. PDF text extraction is native (with an optional OCR fallback through `pdftoppm` and `tesseract`); legacy binary `.xls` is read through the in-repo `sheetfold/` fork. It is the conversion engine behind [`webfold`](https://github.com/webfold-ai/webfold), which re-exports it.
 
 > **Status: research build (0.9.1).** Not production-ready. Interfaces, formats and results may change without notice while the crate is hardened toward a production release. Known gaps are listed [below](#known-gaps).
 
@@ -53,7 +53,7 @@ Document conversion in an agent or RAG pipeline usually means one of three shape
 
 ## What it does
 
-**Office and ODF documents** — DOCX/DOCM (headings, lists, bold/italic, hyperlinks, nested tables, footnotes and endnotes), PPTX (slides in presentation order, body, tables, speaker notes), XLSX/XLSM (sheet names in tab order, dates from number formats, rich strings), XLSB (cached cells and shared strings), legacy XLS (BIFF via the in-repo `calamine/` fork), ODT/ODP/ODS. `document::extract_images` returns the embedded pictures of all of the above with media type, size and alt text.
+**Office and ODF documents** — DOCX/DOCM (headings, lists, bold/italic, hyperlinks, nested tables, footnotes and endnotes), PPTX (slides in presentation order, body, tables, speaker notes), XLSX/XLSM (sheet names in tab order, dates from number formats, rich strings), XLSB (cached cells and shared strings), legacy XLS (BIFF via the in-repo `sheetfold/` fork), ODT/ODP/ODS. `document::extract_images` returns the embedded pictures of all of the above with media type, size and alt text.
 
 **PDF** — native in-process text extraction to Markdown (`pdf::extract_markdown`, page-wise or whole file), embedded-image listing and bytes (`pdf::extract_images`; JPEG unchanged, Flate re-encoded as PNG), outline, and a JSON geometry side-channel. Optional OCR fallback calls external `pdftoppm` + `tesseract` for scanned pages.
 
@@ -159,7 +159,7 @@ Full detail — what each path reads, what comes out, the evidence behind each c
 | PPTX | `convert_bytes`, `convert_streaming` | None public | `extract_images` returns the pictures, with the slide that places them. Markdown shows each as `![alt](media/<name>)` in its slide | No | Slides in presentation order (`sldIdLst`), numbered by position, under `## Slide N: Title`. Body paragraphs, explicit bullets, hyperlinks, tables and speaker notes; footers, dates and slide numbers dropped. Not read: charts, SmartArt, comments, bullets that only the layout supplies. Tested with python-pptx and LibreOffice; no PowerPoint-written file |
 | XLSX, XLSM | `convert_bytes`, `convert_streaming` | `xlsx::read_workbook`, `xlsx::read_sheet` return `Worksheet { index, name, rows }` | `extract_images` (pictures in drawings, then `xl/media`). Not in the Markdown | No | Sheets use the workbook's names in tab order (`Sheet N` only without a workbook part). Dates and times follow the cell's number format (1900 and 1904 epochs), booleans are `TRUE`/`FALSE`, inline and rich strings are read, uncalculated formulas show as `=formula`. Numbers are shown as their number format shows them: `General` and fixed decimals after Excel's rounding to 15 significant digits (`4.0999999999999996` shows `4.1`), thousands separators, percent, quoted/escaped literals, sections, and date and time codes (`mmm-yyyy` shows `Sep-2026`). Not implemented, and shown as stored (dates in ISO form): conditions, fractions, scientific notation, eras and the locale-dependent built-in formats (ids 14, 22, 27 to 36, 41 to 44, 50 to 58). `xlsx::read_workbook_typed` returns each cell's display text and typed value (`CellValue`: number with its stored text, date serial with its ISO form, ...). Not read: merged cells, hidden state, comments, charts. Tested with openpyxl and LibreOffice; no Excel-written file |
 | XLSB | `convert_bytes` | None public | Not extracted | No | Cached scalar cells and shared strings only; formulas and styles are not reconstructed (comment in `document.rs`). Sheet names read from `xl/workbook.bin` |
-| XLS (legacy) | `convert_bytes`, `convert_streaming` | None public | Not extracted | No | Same Markdown shape as XLSX: `## <sheet>` per worksheet in tab order, error cells as Excel error text (`#DIV/0!`), booleans, formula results (the stored value). Dates and times follow the cell's format as calamine classifies it. Charts and chart sheets are skipped, hidden sheets are kept. Tested with LibreOffice output (checked against its XLSX export) and calamine's BIFF fixtures; no Excel-written file |
+| XLS (legacy) | `convert_bytes`, `convert_streaming` | None public | Not extracted | No | Same Markdown shape as XLSX: `## <sheet>` per worksheet in tab order, error cells as Excel error text (`#DIV/0!`), booleans, formula results (the stored value). Dates and times follow the cell's format as sheetfold classifies it. Charts and chart sheets are skipped, hidden sheets are kept. Tested with LibreOffice output (checked against its XLSX export) and sheetfold's BIFF fixtures; no Excel-written file |
 | DOC, DOT (legacy Word) | `convert_bytes`, `convert_path` (`doc::convert`) | None public | Not extracted | No | The main story's text from the OLE compound file: Word 97-2003 piece table (8-bit and UTF-16 pieces), Word 6/95 by its text range, field results without field instructions, table cells as Markdown tables (a row ends at an empty cell mark, so a row whose last cells are empty can merge with the next). No styles, so no headings, lists or emphasis; headers, footers, footnotes, text boxes, comments and pictures are not read. Encrypted files and OLE files that are not Word documents give a named error. The content is sniffed: RTF and OOXML saved as `.doc` go to their readers. Tested on the Register's 21 `.doc` downloads (7 are OLE and use this reader, 14 are OOXML under a `.doc` name and go to the DOCX reader) against LibreOffice's text export |
 | ODT, ODP | `convert_bytes` (same reader for both) | None public | `extract_images` (`Pictures/`, alt from `svg:desc`). Not in the Markdown | No | `text:p` and `text:h` only; every heading becomes `##`. No list, table or image handling in the code. ODP slides are not separated |
 | ODS | `convert_bytes` | None public | `extract_images` (`Pictures/`). Not in the Markdown | No | One `## <table name>` section per sheet. Repeated empty columns are capped at 16,384. A cell that carries a typed value (`office:value`, `office:date-value`, ...) is read from the attribute alone; the display text in its `text:p` is ignored. Before this was fixed, such a cell came out twice (42 as 4242) |
@@ -190,11 +190,11 @@ Some dependencies are git repositories rather than crates.io packages. A clean b
 | `apeiron` | git, `webfold-ai/apeiron` | rev `1c3d4a1da565cde409f6f3cb343086aa6853eb9c` | Required | `apeiron::freq::Table` for the EPUB manifest index and the XLSX/XLSB path and relationship caches (zero-allocation `get_at(&str)`); `apeiron::map::hashtrinity::Table` is the hash map used by the cache, HTML extractor and PDF parser |
 | `framefold` | git, `Ptyktos/framefold` | rev `263c8e15baf1f301b0b21defb23ce1343d9f11ab` | Feature `framefold` (and `framefold-js`) | Re-exported as `frame_renderer` |
 | `transcode` | git, `Ptyktos/transcode` | rev `8e65c5afeb8adb9663511760b80e19156970207e` | Features `media-codecs`, `images` | Codec re-export as `media_codecs`; embedded PDF image decode and PNG encode |
-| `calamine` (local) | `calamine/` in this repository | version 0.36.1 | Required | Path dependency with default features off, for the legacy `.xls` reader (`document::xls`); see below |
+| `sheetfold` (local) | `sheetfold/` in this repository | version 0.36.1 | Required | Path dependency with default features off, for the legacy `.xls` reader (`document::xls`); see below |
 
 At run time, OCR also needs the external `pdftoppm` (Poppler) and `tesseract` programs. The legacy `pdf::to_markdown` adapter needs a `pdffold` executable (`PDFFOLD_BIN`, `PDFFOLD_MANIFEST` or `PATH`).
 
-**Repository name versus package name.** A git dependency is named by repository URL, but Cargo uses the package name declared in the manifest there. The `apeiron` package is built from the `webfold-ai/apeiron` repository. The GitHub repository `webfold-ai/superdocuments` publishes the package `superdocuments`. The `calamine/` directory is part of this workspace: an in-house spreadsheet reader forked from tafia/calamine (`calamine/APEIRON-FORK.md`), not the crates.io release.
+**Repository name versus package name.** A git dependency is named by repository URL, but Cargo uses the package name declared in the manifest there. The `apeiron` package is built from the `webfold-ai/apeiron` repository. The GitHub repository `webfold-ai/superdocuments` publishes the package `superdocuments`. The `sheetfold/` directory is part of this workspace: an in-house spreadsheet reader derived from tafia/calamine but re-based on this workspace's substrate (`sheetfold/APEIRON-FORK.md`). Its package is `sheetfold`, not `calamine`, so audits do not match it against upstream calamine's advisories.
 
 ## Cargo features
 
@@ -219,7 +219,7 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo fmt --all -- --check
 ```
 
-The minimum supported Rust version is 1.89 (`rust-version` in `Cargo.toml`). At the repository root these commands cover the `superdocuments` package; the `calamine/` workspace member is built only with `-p calamine` or `--workspace`.
+The minimum supported Rust version is 1.89 (`rust-version` in `Cargo.toml`). At the repository root these commands cover the `superdocuments` package; the `sheetfold/` workspace member is built only with `-p sheetfold` or `--workspace`.
 
 The README benchmark charts are regenerated from the published result tables with:
 
@@ -236,7 +236,7 @@ cd benches/readme-charts && cargo run   # writes docs/img/*.svg (charton)
 
 ## Licence
 
-The crate is licensed under the Apache License, Version 2.0 (`LICENSE`). The `calamine/` sub-crate is MIT (`calamine/Cargo.toml`), and its upstream authorship is retained there.
+The crate is licensed under the Apache License, Version 2.0 (`LICENSE`). The `sheetfold/` sub-crate is MIT (`sheetfold/Cargo.toml`), and its upstream authorship is retained there.
 
 ## Contributing and security
 

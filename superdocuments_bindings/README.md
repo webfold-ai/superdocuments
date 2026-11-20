@@ -37,7 +37,7 @@ node tests/wasm/test.mjs
 ```
 
 All of superdocuments builds for `wasm32-unknown-unknown` with default features, including PDF, the in-repo
-calamine (`.xls`) reader, zip and `encoding_rs`; nothing had to be left out. Two things differ from native:
+sheetfold (`.xls`) reader, zip and `encoding_rs`; nothing had to be left out. Two things differ from native:
 on `wasm32-unknown-unknown` a panic aborts, so the PDF parser's `catch_unwind` cannot turn a parser panic
 into an error (JavaScript sees a `WebAssembly.RuntimeError`; load a fresh instance after one), and the
 optional `framefold`, `transcode` (images) features are not part of the bindings.

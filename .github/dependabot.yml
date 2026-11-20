@@ -9,7 +9,7 @@ updates:
       rust-dependencies:
         patterns: ["*"]
   - package-ecosystem: cargo
-    directory: "/calamine"
+    directory: "/sheetfold"
     schedule:
       interval: weekly
   - package-ecosystem: github-actions

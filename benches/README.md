@@ -27,7 +27,7 @@ inherit the crate's workspace lock. They are listed in the root
 
 `webfold-bench/bench/document-vs-incumbents/` measures CPU document-conversion
 baselines against incumbent converters, and `webfold-bench/bench/STRUCTURED-CONVERSION.md`
-(Tracks A–D) publishes the HTML, document, calamine and document-cache runs. Those tracks
+(Tracks A–D) publishes the HTML, document, sheetfold and document-cache runs. Those tracks
 measure superdocuments code (webfold re-exports it), so this directory is their intended home. The `ocr/`
 bench complements it with **inference-stack** OCR: sglang/vllm-served
 PaddleOCR-VL / GLM-OCR, candle-native Rust VLMs, and the OpenAI-compat
@@ -47,7 +47,7 @@ This directory is one of the evidence homes in a small set. Each kind of content
 |---|---|---|
 | [`webfold`](https://github.com/Ptyktos/webfold) | Web acquisition: fetch, crawl, WARC, headless browser + CDP server, SERP/search, proxy, `webfold` CLI and `webfold-mcp` | Anything that touches the network, a browser or an archive |
 | [`superdocuments`](https://github.com/webfold-ai/superdocuments) | Conversion: HTML → Markdown (`to_blocks`/`render`/`Template`), DOCX/PPTX/XLSX/XLSB/ODF/EPUB/RTF/CSV, PDF parsing + OCR fallback, `DocumentGraph` — **and this `benches/` directory** | Any bytes → Markdown/structure code, and the conversion/OCR benchmark harnesses for it |
-| [`calamine-apeiron`](https://github.com/Ptyktos/calamine-apeiron) | Our calamine fork (Apeiron-backed workbook maps) | Spreadsheet-reader changes; used by webfold's XLS adapter |
+| [`calamine-apeiron`](https://github.com/Ptyktos/calamine-apeiron) | Our sheetfold fork (Apeiron-backed workbook maps) | Spreadsheet-reader changes; used by webfold's XLS adapter |
 | [`hashtrinity`](https://github.com/Ptyktos/hashtrinity), [`apeiron`](https://github.com/Ptyktos/apeiron) | Base data structures | One pinned revision shared by every crate above |
 | [`arxiv-search`](https://github.com/Ptyktos/arxiv-search), [`youtube-transcript-mcp`](https://github.com/Ptyktos/youtube-transcript-mcp) | Public MIT MCP servers for arXiv and YouTube sources | Source-specific retrieval; webfold may consume their `-core` crates, never the reverse |
 
