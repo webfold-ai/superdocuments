@@ -34,6 +34,7 @@ fn main() {
             ImageEncoding::Png => "png".to_string(),
             ImageEncoding::RawSamples => "raw".to_string(),
             ImageEncoding::Jpx => "jpx".to_string(),
+            ImageEncoding::Ccitt(p) => format!("ccitt(k={})", p.k),
             ImageEncoding::Unsupported(f) => format!("unsupported({f})"),
         };
         println!(

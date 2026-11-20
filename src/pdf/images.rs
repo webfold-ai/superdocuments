@@ -44,10 +44,24 @@ pub struct ImageInfo {
 pub enum ImageEncoding {
     Jpeg,
     Png,
+    /// CCITTFaxDecode (group 3 or 4): the *compressed* stream, unchanged, with the parameters needed
+    /// to wrap it in a TIFF. Leptonica, inside Tesseract, decodes G4 itself, so nothing here does.
+    Ccitt(CcittParams),
     /// Decoded samples; see `ImageInfo::color_space` and `bits_per_component`.
     RawSamples,
     Jpx,
     Unsupported(String),
+}
+
+/// The `/DecodeParms` of a CCITTFaxDecode stream, as a TIFF needs them.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CcittParams {
+    /// `K`: negative is group 4 (T.6), 0 is a single group-3 (T.4) strip, positive is mixed 2-D G3.
+    pub k: i64,
+    pub columns: u32,
+    pub rows: u32,
+    /// `/BlackIs1`: whether 1 bits mean black. Default false, i.e. 0 bits are black.
+    pub black_is_1: bool,
 }
 
 /// Lists the embedded image XObjects of a PDF, page by page.
@@ -275,6 +289,39 @@ fn image_info(doc: &Document, d: &Dict, raw: &[u8], page: usize, object: u32) ->
                 }
             }
         }
+        Some("CCITTFaxDecode") => {
+            let parms = match d
+                .get(&"DecodeParms".to_string())
+                .and_then(|o| doc.resolve(o))
+            {
+                Some(Object::Dict(p)) => p.clone(),
+                Some(Object::Array(items)) => match items.iter().find_map(|o| doc.resolve(o)) {
+                    Some(Object::Dict(p)) => p.clone(),
+                    _ => Dict::default(),
+                },
+                _ => Dict::default(),
+            };
+            let num = |key: &str, default: i64| -> i64 {
+                match parms.get(&key.to_string()) {
+                    Some(Object::Int(n)) => *n,
+                    Some(Object::Real(r)) => *r as i64,
+                    _ => default,
+                }
+            };
+            let flag = |key: &str, default: bool| -> bool {
+                match parms.get(&key.to_string()) {
+                    Some(Object::Bool(b)) => *b,
+                    _ => default,
+                }
+            };
+            info.encoding = ImageEncoding::Ccitt(CcittParams {
+                k: num("K", 0),
+                columns: u32::try_from(num("Columns", i64::from(width))).unwrap_or(width),
+                rows: u32::try_from(num("Rows", i64::from(height))).unwrap_or(height),
+                black_is_1: flag("BlackIs1", false),
+            });
+            info.data = raw.to_vec();
+        }
         Some("JPXDecode") => {
             info.encoding = ImageEncoding::Jpx;
             info.data = raw.to_vec();
@@ -362,6 +409,102 @@ fn adler32(data: &[u8]) -> u32 {
         b %= MOD;
     }
     (b << 16) | a
+}
+
+// ----- what Tesseract should read ---------------------------------------------------------------
+//
+// A scan is already an image in the file. Handing the embedded image to Tesseract at its own
+// resolution is both faster and better than rasterising the page and resampling that image: no
+// external renderer, no resampling, no loss. (Poppler used to do exactly that resampling, and it is
+// GPL, which this crate's licence allow-list forbids; see docs/SUPPLY-CHAIN.md.)
+
+/// The file to hand to Tesseract for one embedded image, and the extension it needs.
+///
+/// PNG and JPEG are written as they are; a CCITT group-3/4 stream is wrapped in a one-strip 1-bit
+/// TIFF, because Leptonica (inside Tesseract) decodes G3/G4 from TIFF and the stream is never decoded
+/// here; 8-bit grey or RGB samples are written as a binary PNM. Anything else has no path yet.
+pub fn tesseract_input(info: &ImageInfo) -> Option<(Vec<u8>, &'static str)> {
+    match &info.encoding {
+        ImageEncoding::Png => Some((info.data.clone(), "png")),
+        ImageEncoding::Jpeg => Some((info.data.clone(), "jpg")),
+        ImageEncoding::Ccitt(params) => Some((ccitt_tiff(params, &info.data), "tif")),
+        ImageEncoding::RawSamples => pnm(info),
+        ImageEncoding::Jpx | ImageEncoding::Unsupported(_) => None,
+    }
+}
+
+/// 8-bit grey or RGB samples as a binary PNM, which Leptonica reads directly.
+fn pnm(info: &ImageInfo) -> Option<(Vec<u8>, &'static str)> {
+    let channels = match info.color_space.as_str() {
+        "DeviceGray" => 1usize,
+        "DeviceRGB" => 3,
+        _ => return None,
+    };
+    if info.bits_per_component != 8 {
+        return None;
+    }
+    let expected = (info.width as usize)
+        .checked_mul(info.height as usize)?
+        .checked_mul(channels)?;
+    if info.data.len() < expected {
+        return None;
+    }
+    let mut out = Vec::with_capacity(expected + 32);
+    let magic = if channels == 1 { "P5" } else { "P6" };
+    out.extend_from_slice(format!("{magic}\n{} {}\n255\n", info.width, info.height).as_bytes());
+    out.extend_from_slice(&info.data[..expected]);
+    Some((out, "pnm"))
+}
+
+/// A one-strip, 1-bit TIFF around a CCITT G3/G4 stream. The stream is copied in unchanged; the tags
+/// are the ones a decoder needs to read it (compression, photometric polarity, strip geometry).
+fn ccitt_tiff(params: &CcittParams, data: &[u8]) -> Vec<u8> {
+    const HEADER: u32 = 8;
+    // tag, type (3 = SHORT, 4 = LONG), count, value
+    let mut entries: Vec<(u16, u16, u32, u32)> = vec![
+        (256, 4, 1, params.columns), // ImageWidth
+        (257, 4, 1, params.rows),    // ImageLength
+        (258, 3, 1, 1),              // BitsPerSample: bilevel
+        // 3 = CCITT T.4 (group 3), 4 = CCITT T.6 (group 4)
+        (259, 3, 1, if params.k < 0 { 4 } else { 3 }), // Compression
+        // WhiteIsZero (0) means 0 bits are white, i.e. 1 bits are black — PDF's /BlackIs1 true.
+        (262, 3, 1, u32::from(!params.black_is_1)), // PhotometricInterpretation
+        (266, 3, 1, 1),                             // FillOrder: most-significant bit first
+        (273, 4, 1, 0),                             // StripOffsets, patched below
+        (277, 3, 1, 1),                             // SamplesPerPixel
+        (278, 4, 1, params.rows),                   // RowsPerStrip: the whole image
+        (279, 4, 1, data.len() as u32),             // StripByteCounts
+        (284, 3, 1, 1),                             // PlanarConfiguration: chunky
+    ];
+    if params.k >= 0 {
+        // T4Options: bit 0 set means two-dimensional coding (K > 0), bit 2 means byte-aligned rows.
+        let options = if params.k > 0 { 1 } else { 0 };
+        entries.push((292, 4, 1, options));
+    }
+    entries.sort_by_key(|e| e.0);
+    let ifd_len = 2 + entries.len() * 12 + 4;
+    let strip_offset = HEADER + ifd_len as u32;
+    let mut out = Vec::with_capacity(strip_offset as usize + data.len());
+    out.extend_from_slice(b"II");
+    out.extend_from_slice(&42u16.to_le_bytes());
+    out.extend_from_slice(&HEADER.to_le_bytes());
+    out.extend_from_slice(&(entries.len() as u16).to_le_bytes());
+    for (tag, kind, count, value) in entries {
+        out.extend_from_slice(&tag.to_le_bytes());
+        out.extend_from_slice(&kind.to_le_bytes());
+        out.extend_from_slice(&count.to_le_bytes());
+        let value = if tag == 273 { strip_offset } else { value };
+        if kind == 3 && count == 1 {
+            // a single SHORT lives in the low half of the 4-byte value field
+            out.extend_from_slice(&(value as u16).to_le_bytes());
+            out.extend_from_slice(&0u16.to_le_bytes());
+        } else {
+            out.extend_from_slice(&value.to_le_bytes());
+        }
+    }
+    out.extend_from_slice(&0u32.to_le_bytes()); // no next IFD
+    out.extend_from_slice(data);
+    out
 }
 
 #[cfg(test)]

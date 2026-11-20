@@ -50,7 +50,7 @@ impl BBox {
 pub enum Source {
     /// In-process native PDF text extraction.
     Native { model: String },
-    /// OCR fallback (Poppler raster + Tesseract) inside `extract_file_with_ocr`.
+    /// OCR fallback (the page's embedded image handed to Tesseract) inside `extract_file_with_ocr`.
     Ocr {
         model: String,
         dpi: u32,
@@ -805,11 +805,12 @@ mod tests {
         if !path.exists() {
             return;
         }
-        // The scanned page needs OCR. Without Poppler and Tesseract on PATH the page-level contract
+        // The scanned page needs OCR. Only Tesseract is needed: the page's own embedded image is
+        // handed to it, so there is no renderer to find. Without Tesseract the page-level contract
         // cannot be exercised here; the native half is still checked by the pdf module's tests.
         let tool = |name: &str| std::process::Command::new(name).arg("-v").output().is_ok();
-        if !(tool("pdftoppm") && tool("tesseract")) {
-            eprintln!("skipped: pdftoppm and tesseract are needed for the scanned page");
+        if !tool("tesseract") {
+            eprintln!("skipped: tesseract is needed for the scanned page");
             return;
         }
         let g = from_pdf_path(path).expect("graph build");

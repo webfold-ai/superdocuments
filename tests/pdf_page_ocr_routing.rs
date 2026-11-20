@@ -6,10 +6,11 @@
 //! of real text per page, "Federal Register of Legislative Instruments F2006B00…". The native
 //! route used to return that line and nothing else; OCR only ran for pages with no text at all.
 //!
-//! The tests build small PDFs in memory. The end-to-end ones put `pdftoppm` and `tesseract`
-//! stand-ins on PATH, so what is checked is the routing (which pages are rendered, whose text
-//! reaches the output) and needs no OCR engine. `real_scan_fixture_is_read_by_ocr` uses the real
-//! tools and the real Register page when they are installed.
+//! The tests build small PDFs in memory. The end-to-end ones put a `tesseract` stand-in on PATH, so
+//! what is checked is the routing (which pages are recognised, whose text reaches the output) and
+//! needs no OCR engine. `pdftoppm` is installed as a tripwire: the OCR path hands Tesseract the
+//! page's own embedded image, so any call to a renderer fails the test. `real_scan_fixture_is_read_by_ocr`
+//! uses the real Tesseract and the real Register page when they are installed.
 
 use std::io::Write as _;
 use std::os::unix::fs::PermissionsExt;
@@ -31,8 +32,10 @@ struct Toolchain {
 }
 
 impl Toolchain {
-    /// `pdftoppm` writes one tiny file per page; `tesseract` answers "OCR TEXT page N" for page N.
-    fn install(name: &str, page_count: u32) -> Self {
+    /// `tesseract` answers "OCR TEXT page N" for page N, taking N from the image's file name.
+    /// `pdftoppm` is installed as a **tripwire**, not a stand-in: the OCR path must hand Tesseract the
+    /// page's own embedded image, so if anything calls a renderer this script records it and fails.
+    fn install(name: &str, _page_count: u32) -> Self {
         let dir = std::env::temp_dir().join(format!("sd-ocr-shim-{}-{name}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         std::fs::create_dir_all(&dir).unwrap();
@@ -45,20 +48,20 @@ impl Toolchain {
                 .unwrap();
             std::fs::set_permissions(&path, std::fs::Permissions::from_mode(0o755)).unwrap();
         };
-        // pdftoppm -f F -l L -scale-to D -png INPUT PREFIX
+        // A renderer must never be needed. Record the call and fail, so a regression is a red test
+        // rather than a silent return of Poppler (GPL) to the pipeline.
         write(
             "pdftoppm",
             format!(
-                "#!/bin/sh\nf=$2; l=$4; in=$8; prefix=$9\necho \"render $f-$l\" >> '{log}'\n\
-                 n=$f\nwhile [ $n -le $l ] && [ $n -le {page_count} ]; do printf x > \"$prefix-$n.png\"; n=$((n+1)); done\n",
+                "#!/bin/sh\necho \"RENDERER CALLED $*\" >> '{log}'\nexit 1\n",
                 log = log.display()
             ),
         );
-        // tesseract IMAGE BASE -l LANG --psm 3
+        // tesseract IMAGE BASE -l LANG --psm 3   (the image may be .png, .jpg, .tif or .pnm)
         write(
             "tesseract",
             format!(
-                "#!/bin/sh\nimg=$1; base=$2\nn=${{img##*-}}; n=${{n%.png}}; n=$((n+0))\n\
+                "#!/bin/sh\nimg=$1; base=$2\nn=${{img##*-}}; n=${{n%%.*}}; n=$((n+0))\n\
                  echo \"ocr $n omp=$OMP_THREAD_LIMIT\" >> '{log}'\nprintf 'OCR TEXT page %s' \"$n\" > \"$base.txt\"\n",
                 log = log.display()
             ),
@@ -77,6 +80,10 @@ impl Toolchain {
 
     fn pages_recognised(&self) -> Vec<u32> {
         let log = std::fs::read_to_string(&self.log).unwrap_or_default();
+        assert!(
+            !log.contains("RENDERER CALLED"),
+            "the OCR path must not need a renderer: {log}"
+        );
         let mut pages: Vec<u32> = log
             .lines()
             .filter_map(|l| l.strip_prefix("ocr "))
@@ -240,11 +247,16 @@ fn real_scan_fixture_is_read_by_ocr() {
     // Nothing the OCR reads is lost on the way to the output. The whole three-page ordinance gives 4855
     // alphanumeric characters (the 1980 and 1961 ordinances 8850 and 16707), identical before and after
     // the paragraph joining of the native parser, because a stamp-only page is routed to OCR and its
-    // native text is the one stamp line; this page gives 1613 with Tesseract 5.3.4 (2 % of slack for
-    // another engine version).
+    // native text is the one stamp line.
+    //
+    // This page measured 1613 with Tesseract 5.3.4 when the native stamp line was appended after the
+    // OCR text unconditionally. It now measures 1563 — the difference is that 50-character stamp line,
+    // which OCR read correctly ("Federal Register of Legislative Instruments F2006B00784" is in the
+    // output below) and which is therefore no longer duplicated. The 2 % slack is for another engine
+    // version, not for the de-duplication.
     let alphanumerics = md.chars().filter(|c| c.is_alphanumeric()).count();
     assert!(
-        alphanumerics >= 1580,
+        alphanumerics >= 1530,
         "{alphanumerics} alphanumerics: {md:?}"
     );
 }

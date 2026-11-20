@@ -1959,13 +1959,18 @@ struct Pen {
     /// A text object just opened on the line in progress: the previous run's end-x is not known to be
     /// exact across the break, so a font without widths gets a word space here.
     bt_break: bool,
-    /// The CTM in force at the last `BT` (translation and scale only): the recorded line positions are
-    /// moved into user space with it, the space the drawn rules are read in, so text drawn under
-    /// different `cm` translations (reportlab, most generators) sits where it does on the page.
-    bx: f64,
-    by: f64,
-    sx: f64,
-    sy: f64,
+    /// The CTM in force at the last `BT`, in full: `[a b c d e f]`. Text positions are moved into
+    /// user space with it, so text drawn under a different `cm` translation sits where it does on the
+    /// page — and so a page whose `cm` carries a rotation is placed rotated instead of flattened.
+    bt: [f64; 6],
+    /// `(cos θ, sin θ)` of the page's text rotation, applied *inverted* to every user-space point.
+    ///
+    /// A scanned page is routinely a few degrees off square and a landscape table is drawn rotated;
+    /// with the rotation left in, every glyph's `y` drifts along the baseline, so one line lands on
+    /// many `y` values and the row clustering interleaves it with its neighbours. Unrotating on the
+    /// way in keeps everything downstream (rows, columns, tables) axis-aligned and unchanged code.
+    /// θ is taken from the first `BT` that shows text: one page, one orientation.
+    unrot: Option<(f64, f64)>,
 }
 impl Pen {
     fn new() -> Pen {
@@ -1994,10 +1999,8 @@ impl Pen {
             last_sh: 0.0,
             last_sv: 0.0,
             bt_break: false,
-            bx: 0.0,
-            by: 0.0,
-            sx: 1.0,
-            sy: 1.0,
+            bt: [1.0, 0.0, 0.0, 1.0, 0.0, 0.0],
+            unrot: None,
         }
     }
     /// Flush the line, carrying its font size (heading signal), bold flag, baseline y, and segments.
@@ -2025,6 +2028,18 @@ impl Pen {
     ///   reposition's exact start) opens a space past a conservative threshold; one word's width error
     ///   is small, and long-run drift is never checked here (only the first glyph is).
     ///
+    /// A text-space point in the page frame: through the CTM at `BT`, then un-rotated by the page's
+    /// text rotation when it has one (see `unrot`). Identity for an unrotated page.
+    fn page_point(&self, x: f64, y: f64) -> (f64, f64) {
+        let m = &self.bt;
+        let ux = m[0] * x + m[2] * y + m[4];
+        let uy = m[1] * x + m[3] * y + m[5];
+        match self.unrot {
+            None => (ux, uy),
+            Some((cos, sin)) => (ux * cos + uy * sin, -ux * sin + uy * cos),
+        }
+    }
+
     /// A vertical move since the last glyph is a newline. The pen advances by each glyph's `/Widths`.
     fn show(&mut self, elems: &[Tok], font: Option<&CMap>) {
         let sh = self.fs * self.a * self.tz; // one em → user-space (horizontal)
@@ -2073,7 +2088,7 @@ impl Pen {
                     // A segment per positioned run (every Tj/TJ), flagged `big` if a column gap preceded
                     // it: the rules-grid path uses all positions, the text-column path only the big ones.
                     if first || self.cur_segs.is_empty() {
-                        let ux = self.bx + self.sx * self.x;
+                        let (ux, _) = self.page_point(self.x, self.y);
                         self.cur_segs.push((ux, ux, self.cur.len(), big));
                     }
                     pending = false;
@@ -2093,7 +2108,7 @@ impl Pen {
                     self.x += em * sh
                         + nch as f64 * self.tc * self.a * self.tz
                         + nsp as f64 * self.tw * self.a * self.tz;
-                    let uend = self.bx + self.sx * self.x;
+                    let (uend, _) = self.page_point(self.x, self.y);
                     if let Some(last) = self.cur_segs.last_mut() {
                         last.1 = uend;
                     } // the run's end-x (its extent)
@@ -2104,7 +2119,7 @@ impl Pen {
                     } // bold fraction
                     self.end_x = self.x;
                     self.last_y = self.y;
-                    self.cur_y = self.by + self.sy * self.y;
+                    self.cur_y = self.page_point(self.x, self.y).1;
                     self.started = true;
                 }
                 _ => {}
@@ -2211,10 +2226,12 @@ fn extract_text(
                     }
                     p.bt_break = p.started;
                     text_ctm = ctm;
-                    p.bx = ctm[4];
-                    p.by = ctm[5];
-                    p.sx = if ctm[0].abs() > 1e-9 { ctm[0] } else { 1.0 };
-                    p.sy = if ctm[3].abs() > 1e-9 { ctm[3] } else { 1.0 };
+                    p.bt = ctm;
+                    if p.unrot.is_none() && (ctm[1].abs() > 1e-9 || ctm[2].abs() > 1e-9) {
+                        // The baseline direction of the text this CTM will draw.
+                        let theta = ctm[1].atan2(ctm[0]);
+                        p.unrot = Some((theta.cos(), theta.sin()));
+                    }
                     p.x = 0.0;
                     p.y = 0.0;
                     p.lx = 0.0;
@@ -2331,7 +2348,7 @@ fn extract_text(
                                 text: format!("\u{0}{}", obj),
                                 size: 0.0,
                                 bold: false,
-                                y: p.by + p.sy * p.y,
+                                y: p.page_point(p.x, p.y).1,
                                 segs: Vec::new(),
                             });
                             p.started = false;
@@ -2354,11 +2371,64 @@ fn extract_text(
 
 use super::Table;
 
+/// cp1252's 0x80–0x9F block: the only range where `/WinAnsiEncoding` differs from Latin-1. Every
+/// other byte is its own code point, which the Latin-1 fallback already handles.
+const WIN_ANSI_HIGH: [(u32, &str); 27] = [
+    (0x80, "\u{20AC}"),
+    (0x82, "\u{201A}"),
+    (0x83, "\u{0192}"),
+    (0x84, "\u{201E}"),
+    (0x85, "\u{2026}"),
+    (0x86, "\u{2020}"),
+    (0x87, "\u{2021}"),
+    (0x88, "\u{02C6}"),
+    (0x89, "\u{2030}"),
+    (0x8A, "\u{0160}"),
+    (0x8B, "\u{2039}"),
+    (0x8C, "\u{0152}"),
+    (0x8E, "\u{017D}"),
+    (0x91, "\u{2018}"),
+    (0x92, "\u{2019}"),
+    (0x93, "\u{201C}"),
+    (0x94, "\u{201D}"),
+    (0x95, "\u{2022}"),
+    (0x96, "\u{2013}"),
+    (0x97, "\u{2014}"),
+    (0x98, "\u{02DC}"),
+    (0x99, "\u{2122}"),
+    (0x9A, "\u{0161}"),
+    (0x9B, "\u{203A}"),
+    (0x9C, "\u{0153}"),
+    (0x9E, "\u{017E}"),
+    (0x9F, "\u{0178}"),
+];
+
+/// `/StandardEncoding`'s departures from Latin-1 that matter for extraction: the quote glyphs (where
+/// 0x27/0x60 are `quoteright`/`quoteleft`) and the punctuation at 0xA4–0xD0. The accent glyphs in
+/// that block are combining marks in this encoding and are left to the fallback on purpose.
+const STANDARD_DIFF: [(u32, &str); 10] = [
+    (0x27, "\u{2019}"),
+    (0x60, "\u{2018}"),
+    (0xA4, "\u{2044}"),
+    (0xA6, "\u{0192}"),
+    (0xAA, "\u{201C}"),
+    (0xB1, "\u{2013}"),
+    (0xB7, "\u{2022}"),
+    (0xBA, "\u{201D}"),
+    (0xBC, "\u{2026}"),
+    (0xD0, "\u{2014}"),
+];
+
 /// A font's code→unicode decode: two Map faces (the `/ToUnicode` cmap and the `/Encoding /Differences`
 /// glyph map) + the code byte-width. Decode is `get` per code (O(1)): ToUnicode first, then Encoding.
 pub struct CMap {
     map: Table<u32, String>,
     enc: Table<u32, String>,
+    /// The `/Encoding` **base face**, the third map and the one under `enc`: a `/WinAnsiEncoding` or
+    /// `/StandardEncoding` name is the table a code decodes through when neither `/ToUnicode` nor
+    /// `/Differences` speaks for it. Built once per font from the same `put`/`get` table as the other
+    /// two, so the decode stays one `get` per code.
+    base: Table<u32, String>,
     width: usize,
     /// code → glyph advance (1000-em units), the `/Widths` Map face — built once, `get` per code.
     /// This is what makes a run's **end-x** real, so the inter-run gap (the edge) can be read.
@@ -2383,13 +2453,18 @@ impl CMap {
                 }
             }
             i += w;
-            match self.map.get(&code).or_else(|| self.enc.get(&code)) {
+            match self
+                .map
+                .get(&code)
+                .or_else(|| self.enc.get(&code))
+                .or_else(|| self.base.get(&code))
+            {
                 Some(s) => out.push_str(s),
                 None => {
                     if w == 1 && code >= 0x20 {
-                        out.push(code as u8 as char);
+                        out.push(code as u8 as char); // fallback: Latin-1 (printable only)
                     }
-                } // fallback: Latin-1 (printable only)
+                }
             }
         }
         out
@@ -2666,6 +2741,9 @@ fn parse_cmap(bytes: &[u8]) -> CMap {
     CMap {
         map,
         enc: Table::new(),
+        // A `/ToUnicode` CMap is authoritative for every code it names; the base face only decides
+        // the codes it does not, and this constructor is only reached when there is a ToUnicode.
+        base: Table::new(),
         width,
         adv: Table::new(),
         dw: 500,
@@ -2702,6 +2780,7 @@ impl Document {
                         .unwrap_or(CMap {
                             map: Table::new(),
                             enc: Table::new(),
+                            base: Table::new(),
                             width: 1,
                             adv: Table::new(),
                             dw: 500,
@@ -2715,6 +2794,11 @@ impl Document {
                         }
                         // /Encoding /Differences is the second Map face (code → glyph name → unicode)
                         cm.enc = self.encoding_map(font);
+                        // ... and the /Encoding *name* is the base face under both (cp1252 etc.).
+                        // Only simple fonts have one; a Type0 font's codes are CIDs, not bytes.
+                        if !type0 {
+                            cm.base = self.base_encoding(font);
+                        }
                         // /Widths (+ /FirstChar) → the advance Map face (code → width), for the edge read
                         self.load_widths(font, &mut cm);
                         cm.bold = self.font_is_bold(font); // BaseFont name / descriptor — the heading signal
@@ -2745,6 +2829,25 @@ impl Document {
                     }
                 }
             }
+        }
+        m
+    }
+
+    /// The font's base encoding as a map face: `/Encoding /WinAnsiEncoding` (cp1252) or
+    /// `/StandardEncoding` laid out code → unicode. `/MacRomanEncoding` is a different table and is
+    /// deliberately left to the Latin-1 fallback rather than guessed at.
+    fn base_encoding(&self, font: &Dict) -> Table<u32, String> {
+        let mut m = Table::new();
+        let Some(Object::Name(name)) = font.get(&"Encoding".to_string()) else {
+            return m;
+        };
+        let pairs: &[(u32, &str)] = match name.as_str() {
+            "WinAnsiEncoding" => &WIN_ANSI_HIGH,
+            "StandardEncoding" => &STANDARD_DIFF,
+            _ => return m,
+        };
+        for (code, s) in pairs {
+            m.put(*code, s.to_string());
         }
         m
     }

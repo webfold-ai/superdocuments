@@ -1,3 +1,26 @@
+## [Unreleased]
+
+### Changed
+
+- **OCR no longer needs Poppler.** `pdftoppm` (GPL) is gone from the OCR path: a scanned page is an
+  image XObject in the file, so it is handed to Tesseract at its **native resolution** — PNG and JPEG
+  unchanged, a CCITT G3/G4 stream wrapped in a one-strip 1-bit TIFF (Leptonica decodes it), 8-bit
+  grey/RGB samples as a binary PNM. Measured against the old `pdftoppm -scale-to 2400` path on the
+  shipped scanned fixtures, text-only F1 against each `.expected.txt`:
+
+  | fixture | before | after | before ms | after ms |
+  |---|---:|---:|---:|---:|
+  | `scanned-text.pdf` | 1.000 | 1.000 | 897 | 346 |
+  | `scanned-fuzzy.pdf` | 0.900 | **1.000** | 1 160 | 699 |
+  | `mixed-native-and-scanned.pdf` | 0.800 | **0.973** | 2 156 | 680 |
+
+  Faster because there is no renderer process, no PNG round-trip and no resampling; better because
+  Tesseract sees the scan's own pixels instead of a 2 400 px rescale.
+- `ImageEncoding::Ccitt` carries a CCITT G3/G4 stream with its `/DecodeParms`, and
+  `images::tesseract_input` says which of the four forms Tesseract gets; `OcrOptions::max_image_dimension`
+  no longer resamples (still range-checked, still set by webfold) and the JSONL `flamegraph` event is
+  gone with the render stages it timed.
+
 # Changelog
 
 All notable changes to this project are recorded here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).

@@ -21,14 +21,11 @@ pub mod transcode_populator;
 
 /// Bound parser input before scanning attacker-controlled bytes.
 pub const MAX_PDF_BYTES: usize = 256 * 1024 * 1024;
-const MAX_OCR_TOTAL_BYTES: usize = 16 * 1024 * 1024;
 const MAX_OCR_RENDER_BYTES: u64 = 512 * 1024 * 1024;
 /// Most pages one call may OCR. They are rendered in windows, so this bounds time, not memory.
 const MAX_OCR_PAGES: u32 = 2_000;
 /// Longest wall-clock budget accepted.
 const MAX_OCR_TIMEOUT: Duration = Duration::from_secs(3_600);
-/// Pages rendered at once, whatever the budget allows.
-const MAX_OCR_WINDOW: u32 = 25;
 
 /// Read and parse a PDF file without spawning a process.
 pub fn extract_file(path: impl AsRef<Path>) -> io::Result<String> {
@@ -109,7 +106,7 @@ fn parse_pages<T>(
     parsed.map_err(|message| io::Error::new(io::ErrorKind::InvalidData, message))
 }
 
-/// Runtime limits for the optional Poppler + Tesseract OCR fallback.
+/// Runtime limits for the optional Tesseract OCR fallback.
 #[derive(Clone, Debug)]
 pub struct OcrOptions {
     /// Tesseract language codes, e.g. `eng` or `eng+deu`.
@@ -117,7 +114,10 @@ pub struct OcrOptions {
     /// Maximum pages to OCR (1..=2000). PDFs beyond this limit return an explicit truncation note.
     /// Pages are rendered and recognised in windows, so a long document costs time, not memory.
     pub max_pages: u32,
-    /// Maximum edge length of each rendered page in pixels.
+    /// **No longer used.** It bounded the longest edge of a rendered page when Poppler rasterised
+    /// one; the OCR path now hands Tesseract the page's own embedded image at its native resolution,
+    /// which needs no scale. Kept (and range-checked) so callers that set it — `webfold`'s
+    /// `WEBFOLD_OCR_MAX_DIM` among them — keep building; it will be removed in the next minor.
     pub max_image_dimension: u32,
     /// Shared wall-clock budget for rendering and OCR (1..=3600 s).
     pub timeout: Duration,
@@ -557,8 +557,7 @@ struct RequestOutcome;
 
 /// One JSONL line per request. Written from a small inline encoder to avoid a `serde_json`
 /// dependency for what is six numbers and three booleans. Fields are stable; new ones go on
-/// the end. `event` is `request_started`, `request_finished`, or `flamegraph` (one per phase,
-/// for `flamegraph --flamechart` consumers that expect stage timings).
+/// the end. `event` is `request_started` or `request_finished`.
 #[derive(Debug)]
 enum LogEvent<'a> {
     Started {
@@ -566,7 +565,6 @@ enum LogEvent<'a> {
         bytes: u64,
         languages: &'a str,
         max_pages: u32,
-        max_image_dimension: u32,
         timeout_ms: u64,
     },
     Finished {
@@ -581,11 +579,6 @@ enum LogEvent<'a> {
         recognize_ms: u64,
         inflight: u32,
     },
-    Flame {
-        stage: &'a str,
-        elapsed_us: u64,
-        pages: u32,
-    },
 }
 
 fn write_log_line(path: &Path, event: LogEvent<'_>) -> io::Result<()> {
@@ -597,7 +590,6 @@ fn write_log_line(path: &Path, event: LogEvent<'_>) -> io::Result<()> {
     match &event {
         LogEvent::Started { .. } => line.push_str("request_started"),
         LogEvent::Finished { .. } => line.push_str("request_finished"),
-        LogEvent::Flame { .. } => line.push_str("flamegraph"),
     }
     line.push('"');
 
@@ -607,18 +599,12 @@ fn write_log_line(path: &Path, event: LogEvent<'_>) -> io::Result<()> {
             bytes,
             languages,
             max_pages,
-            max_image_dimension,
             timeout_ms,
         } => {
             push_str_value(&mut line, "path", &input_path.display().to_string());
             push_u64(&mut line, "bytes", bytes);
             push_str_value(&mut line, "languages", languages);
             push_u64(&mut line, "max_pages", u64::from(max_pages));
-            push_u64(
-                &mut line,
-                "max_image_dimension",
-                u64::from(max_image_dimension),
-            );
             push_u64(&mut line, "timeout_ms", timeout_ms);
         }
         LogEvent::Finished {
@@ -643,15 +629,6 @@ fn write_log_line(path: &Path, event: LogEvent<'_>) -> io::Result<()> {
             push_u64(&mut line, "render_ms", render_ms);
             push_u64(&mut line, "recognize_ms", recognize_ms);
             push_u64(&mut line, "inflight", u64::from(inflight));
-        }
-        LogEvent::Flame {
-            stage,
-            elapsed_us,
-            pages,
-        } => {
-            push_str_value(&mut line, "stage", stage);
-            push_u64(&mut line, "elapsed_us", elapsed_us);
-            push_u64(&mut line, "pages", u64::from(pages));
         }
     }
     line.push_str("}\n");
@@ -726,10 +703,12 @@ impl OcrOptions {
                 "OCR page limit must be 1..=2000",
             ));
         }
+
         if !(256..=4_000).contains(&self.max_image_dimension) {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
-                "OCR image dimension must be 256..=4000",
+                "max_image_dimension must be in 256..=4000 (unused since the embedded image is read \
+                 at native resolution, but still checked)",
             ));
         }
         if !(1..=16).contains(&self.workers) {
@@ -749,8 +728,9 @@ impl OcrOptions {
 }
 
 /// Extract native PDF text first; when the PDF has no readable text layer, OCR it
-/// with `pdftoppm` and `tesseract` from `PATH`. Install Poppler utilities and
-/// Tesseract (plus the requested language data) to enable this fallback.
+/// with `tesseract` from `PATH`, handing it each scanned page's own embedded image at native
+/// resolution (no page renderer is involved). Install Tesseract (plus the requested language data)
+/// to enable this fallback.
 pub fn extract_file_with_ocr(path: impl AsRef<Path>) -> io::Result<String> {
     extract_file_with_ocr_options(path, &OcrOptions::default())
 }
@@ -795,7 +775,6 @@ fn run_with_ocr(
                 bytes: input_bytes,
                 languages: &options.languages,
                 max_pages: options.max_pages,
-                max_image_dimension: options.max_image_dimension,
                 timeout_ms: options.timeout.as_millis() as u64,
             },
         );
@@ -982,7 +961,7 @@ fn extract_file_with_ocr_inner(
     }
 }
 
-/// Force OCR for every page using the installed Poppler and Tesseract executables.
+/// Force OCR for every page using the installed Tesseract executable.
 pub fn tesseract_ocr(path: impl AsRef<Path>, options: &OcrOptions) -> io::Result<String> {
     tesseract_ocr_with_observer(path, options, |_, _, _, _| {})
 }
@@ -1024,29 +1003,23 @@ fn format_ocr_pages(ocr: &OcrPages, max_pages: u32) -> String {
     output
 }
 
-/// Pages rendered per `pdftoppm` call: as many as the render budget allows at this image size, at most [`MAX_OCR_WINDOW`].
-fn ocr_window(options: &OcrOptions) -> u32 {
-    let per_page = u64::from(options.max_image_dimension).pow(2) * 4;
-    ((MAX_OCR_RENDER_BYTES / per_page).max(1) as u32).min(MAX_OCR_WINDOW)
-}
-
-/// The 1-based page windows `(first, last)` covering `1..=max_pages`.
-fn ocr_windows(max_pages: u32, window: u32) -> Vec<(u32, u32)> {
-    let window = window.max(1);
-    let mut out = Vec::new();
-    let mut first = 1;
-    while first <= max_pages {
-        let last = (first + window - 1).min(max_pages);
-        out.push((first, last));
-        first = last + 1;
-    }
-    out
-}
-
 /// `tesseract_ocr_with_observer` restricted to the listed 1-based pages (`None` = every page).
 ///
 /// Pages are rendered a window at a time, recognised (by up to `options.workers` Tesseract processes at once)
 /// and their images deleted before the next window, so the render budget bounds a window, not the document.
+/// Recognise the requested pages by handing Tesseract the page's **own embedded image**.
+///
+/// Nothing is rasterised and no external renderer is involved. A page that was scanned is an image
+/// XObject in the file: it is written out in whatever form Tesseract's own decoder reads (PNG, JPEG,
+/// or a CCITT G3/G4 stream wrapped in a one-strip TIFF) and passed at its **native resolution**, which
+/// is both faster than rendering the page and strictly better for OCR than resampling that image down.
+///
+/// Poppler's `pdftoppm` did exactly that resampling; it is GPL, which this crate's licence allow-list
+/// forbids, and it was the last external dependency of the OCR path.
+///
+/// A page with no image, with more than one, or whose image is in a form nothing here can hand over
+/// (JPEG 2000, an undecodable filter) contributes no OCR text. That is not a silent loss: the caller
+/// keeps the page's native text, which is the whole reason those pages are not the OCR path's job.
 fn tesseract_ocr_pages(
     path: impl AsRef<Path>,
     options: &OcrOptions,
@@ -1069,213 +1042,110 @@ fn tesseract_ocr_pages(
         error
     };
     let deadline = Instant::now() + options.timeout;
+    let bytes = std::fs::read(input)?;
+    let page_count = crate::pdf::page_profile::page_ocr_verdicts(&bytes)
+        .map_err(io::Error::other)?
+        .len() as u32;
+    let truncated = page_count > options.max_pages;
+    let wanted = |n: u32| only.is_none_or(|only| only.contains(&n));
+    let images = crate::pdf::images::extract_images(&bytes).map_err(io::Error::other)?;
+
     let temp = OcrTempDir::create()?;
-    let window = ocr_window(options);
-    let selected = |n: u32| only.is_none_or(|only| only.contains(&n));
-    let last_wanted = only.and_then(|only| only.iter().copied().max());
-
-    let mut collected: Vec<(u32, String)> = Vec::new();
-    let mut collected_bytes = 0usize;
-    let (mut render_seconds, mut recognize_seconds_total) = (0.0f64, 0.0f64);
-    let (mut rendered_pages, mut rendered_bytes_total, mut pages_kept) = (0u64, 0u64, 0u64);
-    // The last window came back full, so the document may run on past `max_pages`.
-    let mut limit_reached = false;
-    let mut document_ended = false;
-
-    for (first, last) in ocr_windows(options.max_pages, window) {
-        if only.is_some() && !(first..=last).any(selected) {
-            // nothing wanted here: no need to render it; the document may still continue
-            limit_reached = last == options.max_pages;
-            if last_wanted.is_some_and(|m| m <= last) {
-                break;
-            }
+    // One image per page is the scan shape: write it out for Tesseract. Pages with none, or with
+    // several, are left to their native text (see the doc comment).
+    let mut pages: Vec<(u32, std::path::PathBuf)> = Vec::new();
+    let mut written_bytes = 0u64;
+    for number in 1..=page_count.min(options.max_pages) {
+        if !wanted(number) {
             continue;
         }
-        let prefix = temp.0.join("page");
-        let mut render = Command::new("pdftoppm");
-        render
-            .args(["-f"])
-            .arg(first.to_string())
-            .arg("-l")
-            .arg(last.to_string())
-            .arg("-scale-to")
-            .arg(options.max_image_dimension.to_string())
-            .arg("-png")
-            .arg(input)
-            .arg(&prefix);
-        let render_started = Instant::now();
-        let render_outcome = run_bounded(&mut render, deadline);
-        render_seconds += render_started.elapsed().as_secs_f64();
-        if let Err(error) = render_outcome {
-            return Err(fail(error));
-        }
-
-        let mut pages = Vec::new();
-        for entry in std::fs::read_dir(&temp.0)? {
-            let path = entry?.path();
-            if path.extension().and_then(|s| s.to_str()) != Some("png") {
-                continue;
-            }
-            let Some(number) = path
-                .file_stem()
-                .and_then(|s| s.to_str())
-                .and_then(|s| s.strip_prefix("page-"))
-                .and_then(|s| s.parse::<u32>().ok())
-            else {
-                continue;
-            };
-            pages.push((number, path));
-        }
-        pages.sort_by_key(|(number, _)| *number);
-        let rendered_in_window = pages.len() as u32;
-        limit_reached = rendered_in_window == last - first + 1 && last == options.max_pages;
-        document_ended = rendered_in_window < last - first + 1;
-        pages.retain(|(number, _)| selected(*number));
-        let window_bytes = pages.iter().try_fold(0u64, |total, (_, path)| {
-            path.metadata()
-                .map(|metadata| total.saturating_add(metadata.len()))
-        })?;
-        if window_bytes > MAX_OCR_RENDER_BYTES {
+        let on_page: Vec<&crate::pdf::images::ImageInfo> = images
+            .iter()
+            .filter(|info| info.page as u32 + 1 == number)
+            .collect();
+        let [image] = on_page.as_slice() else {
+            continue;
+        };
+        let Some((data, extension)) = crate::pdf::images::tesseract_input(image) else {
+            continue;
+        };
+        written_bytes = written_bytes.saturating_add(data.len() as u64);
+        if written_bytes > MAX_OCR_RENDER_BYTES {
             return Err(fail(io::Error::new(
                 io::ErrorKind::InvalidData,
-                "rendered PDF pages exceed the disk-space limit",
+                "embedded images exceed the disk-space limit",
             )));
         }
-        rendered_pages += pages.len() as u64;
-        rendered_bytes_total = rendered_bytes_total.saturating_add(window_bytes);
+        let file = temp.0.join(format!("page-{number}.{extension}"));
+        std::fs::write(&file, &data)?;
+        observer("page_image", 0.0, 1, data.len() as u64);
+        pages.push((number, file));
+    }
 
-        // recognise the window, `workers` pages at a time; results come back in page order
-        let languages = options.languages.as_str();
-        let workers = options.workers.max(1) as usize;
-        let tmp = temp.0.as_path();
-        let recognised: Vec<io::Result<(u32, f64, String)>> = pages
-            .chunks(workers)
-            .flat_map(|batch| {
-                thread::scope(|scope| {
-                    let handles: Vec<_> = batch
-                        .iter()
-                        .map(|(number, image)| {
-                            scope.spawn(move || {
-                                let base = tmp.join(format!("ocr-{number}"));
-                                let mut ocr = Command::new("tesseract");
-                                ocr.arg(image)
-                                    .arg(&base)
-                                    .arg("-l")
-                                    .arg(languages)
-                                    .args(["--psm", "3"]);
-                                // One OpenMP thread per Tesseract unless the caller chose otherwise: its
-                                // threads spin, and on a busy or CPU-limited host (a container that sees
-                                // every core of the machine) a single page can take minutes instead of
-                                // seconds. Parallelism across pages is `workers`.
-                                if workers > 1 || std::env::var_os("OMP_THREAD_LIMIT").is_none() {
-                                    ocr.env("OMP_THREAD_LIMIT", "1");
-                                }
-                                let started = Instant::now();
-                                run_bounded(&mut ocr, deadline)?;
-                                let seconds = started.elapsed().as_secs_f64();
-                                let text =
-                                    read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
-                                let _ = std::fs::remove_file(base.with_extension("txt"));
-                                Ok((*number, seconds, text))
-                            })
+    // recognise the pages, `workers` at a time; results come back in page order
+    let languages = options.languages.as_str();
+    let workers = options.workers.max(1) as usize;
+    let tmp = temp.0.as_path();
+    let recognised: Vec<io::Result<(u32, f64, String)>> = pages
+        .chunks(workers)
+        .flat_map(|batch| {
+            thread::scope(|scope| {
+                let handles: Vec<_> = batch
+                    .iter()
+                    .map(|(number, image)| {
+                        scope.spawn(move || {
+                            let base = tmp.join(format!("ocr-{number}"));
+                            let mut ocr = Command::new("tesseract");
+                            ocr.arg(image)
+                                .arg(&base)
+                                .arg("-l")
+                                .arg(languages)
+                                .args(["--psm", "3"]);
+                            // One OpenMP thread per Tesseract unless the caller chose otherwise: its
+                            // threads spin, and on a busy or CPU-limited host (a container that sees
+                            // every core of the machine) a single page can take minutes instead of
+                            // seconds. Parallelism across pages is `workers`.
+                            if workers > 1 || std::env::var_os("OMP_THREAD_LIMIT").is_none() {
+                                ocr.env("OMP_THREAD_LIMIT", "1");
+                            }
+                            let started = Instant::now();
+                            run_bounded(&mut ocr, deadline)?;
+                            let seconds = started.elapsed().as_secs_f64();
+                            let text =
+                                read_bounded_text(base.with_extension("txt"), 4 * 1024 * 1024)?;
+                            let _ = std::fs::remove_file(base.with_extension("txt"));
+                            Ok((*number, seconds, text))
                         })
-                        .collect();
-                    handles
-                        .into_iter()
-                        .map(|h| {
-                            h.join()
-                                .unwrap_or_else(|_| Err(io::Error::other("OCR worker panicked")))
-                        })
-                        .collect::<Vec<_>>()
-                })
+                    })
+                    .collect();
+                handles
+                    .into_iter()
+                    .map(|h| {
+                        h.join()
+                            .unwrap_or_else(|_| Err(io::Error::other("OCR worker panicked")))
+                    })
+                    .collect::<Vec<_>>()
             })
-            .collect();
-        for (_, image) in &pages {
-            let _ = std::fs::remove_file(image);
-        }
-        for item in recognised {
-            let (number, page_seconds, text) = item.map_err(fail)?;
-            recognize_seconds_total += page_seconds;
-            observer("page_recognize", page_seconds, 1, text.len() as u64);
-            if let Some(log_path) = options.config.log_path.as_deref() {
-                let _ = write_log_line(
-                    log_path,
-                    LogEvent::Flame {
-                        stage: "page_recognize",
-                        elapsed_us: (page_seconds * 1_000_000.0) as u64,
-                        pages: 1,
-                    },
-                );
-            }
-            if !text.trim().is_empty() {
-                if collected_bytes.saturating_add(text.len()) > MAX_OCR_TOTAL_BYTES {
-                    return Err(fail(io::Error::new(
-                        io::ErrorKind::InvalidData,
-                        "total OCR output exceeds size limit",
-                    )));
-                }
-                collected_bytes += text.len();
-                collected.push((number, text.trim().to_string()));
-                pages_kept += 1;
-            }
-        }
-        if document_ended || last_wanted.is_some_and(|m| m <= last) {
-            break;
-        }
-    }
+        })
+        .collect();
 
-    let selected_beyond_render = only.is_some_and(|only| {
-        limit_reached && !document_ended && only.iter().any(|n| *n > options.max_pages)
-    });
-    if collected.is_empty() && rendered_pages == 0 && selected_beyond_render {
-        // Every requested page lies past the cap: report truncation, keep the caller's native text.
-        if let Some(metrics) = options.config.metrics.as_ref() {
-            metrics.record_outcome(true, true);
-        }
-        return Ok(OcrPages {
-            pages: Vec::new(),
-            truncated: true,
-        });
-    }
-    if rendered_pages == 0 {
-        return Err(fail(io::Error::new(
-            io::ErrorKind::InvalidData,
-            "Poppler rendered no PDF pages",
-        )));
+    let mut recognised_pages: Vec<(u32, String)> = Vec::new();
+    let mut recognize_seconds_total = 0.0f64;
+    for item in recognised {
+        let (number, page_seconds, text) = item.map_err(fail)?;
+        recognize_seconds_total += page_seconds;
+        observer("page_recognize", page_seconds, 1, text.len() as u64);
+        recognised_pages.push((number, text));
     }
     observer(
-        "render_done",
-        render_seconds,
-        rendered_pages,
-        rendered_bytes_total,
+        "recognize_done",
+        recognize_seconds_total,
+        recognised_pages.len() as u64,
+        0,
     );
-    if let Some(log_path) = options.config.log_path.as_deref() {
-        let _ = write_log_line(
-            log_path,
-            LogEvent::Flame {
-                stage: "render",
-                elapsed_us: (render_seconds * 1_000_000.0) as u64,
-                pages: rendered_pages as u32,
-            },
-        );
-    }
-    observer("recognize_done", recognize_seconds_total, pages_kept, 0);
-    if let Some(log_path) = options.config.log_path.as_deref() {
-        let _ = write_log_line(
-            log_path,
-            LogEvent::Flame {
-                stage: "recognize",
-                elapsed_us: (recognize_seconds_total * 1_000_000.0) as u64,
-                pages: pages_kept as u32,
-            },
-        );
-    }
-    let truncated = limit_reached && !document_ended;
-    if let Some(metrics) = options.config.metrics.as_ref() {
-        metrics.record_outcome(true, truncated);
-    }
+    recognised_pages.sort_by_key(|(number, _)| *number);
     Ok(OcrPages {
-        pages: collected,
+        pages: recognised_pages,
         truncated,
     })
 }
@@ -1314,14 +1184,27 @@ fn merge_native_and_ocr(
             // Not routed to OCR, or OCR read nothing: the native text stays as it is.
             native.trim().to_string()
         } else if has_embedded_text(native) {
-            // A scan with a stamp: the OCR text is the page, the stamp stays after it (it can be
-            // the only record of a document identifier) without its image placeholders.
+            // A scan with a stamp: the OCR text is the page, and the stamp stays after it when OCR
+            // did not already read it — the stamp can be the only record of a document identifier,
+            // and OCR mangles identifiers (the Register page's `F2006B00784` survives this way).
+            // When OCR did read the stamp — a one-line header over a margined scan — keeping it
+            // would put the same line on the page twice and cost precision, so it is dropped.
             let stamp: Vec<&str> = native
                 .lines()
                 .map(str::trim_end)
                 .filter(|line| !line.trim_start().starts_with("![]("))
                 .collect();
-            format!("{ocr_text}\n\n{}", stamp.join("\n").trim())
+            let stamp = stamp.join("\n");
+            let stamp = stamp.trim();
+            let already_read = {
+                let wanted = alnum_lower(stamp);
+                !wanted.is_empty() && alnum_lower(ocr_text).contains(&wanted)
+            };
+            if stamp.is_empty() || already_read {
+                ocr_text.to_string()
+            } else {
+                format!("{ocr_text}\n\n{stamp}")
+            }
         } else {
             ocr_text.to_string()
         };
@@ -1340,6 +1223,15 @@ fn merge_native_and_ocr(
         ));
     }
     Ok(out)
+}
+
+/// The alphanumeric characters of `s`, lowercased: the form two text lines are compared in when one
+/// is asking whether the other already contains it (case, punctuation and spacing are not signal).
+fn alnum_lower(s: &str) -> String {
+    s.chars()
+        .filter(|c| c.is_alphanumeric())
+        .flat_map(char::to_lowercase)
+        .collect()
 }
 
 fn has_embedded_text(markdown: &str) -> bool {
@@ -1480,6 +1372,63 @@ mod tests {
     use super::*;
     use std::process::Command;
 
+    /// A page rotated by an arbitrary angle (`cm` carries a 15° rotation, text matrices identity) is
+    /// placed rotated and then un-rotated into the page frame, so the lines come out in reading order
+    /// instead of interleaved on many `y` values. `pdftotext -layout` gets this page wrong; this is one
+    /// of the places the in-tree parser is ahead of the reference tool.
+    #[test]
+    fn rotated_page_extracts_in_reading_order() {
+        let got = extract_markdown(include_bytes!("../../tests/fixtures/rotated-15deg.pdf"))
+            .unwrap()
+            .replace('\n', " ");
+        let expected = std::fs::read_to_string(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/tests/fixtures/rotated-15deg.expected.txt"
+        ))
+        .unwrap();
+        let flat = |s: &str| {
+            s.split_whitespace()
+                .map(|w| {
+                    w.trim_matches(|c: char| !c.is_alphanumeric())
+                        .to_lowercase()
+                })
+                .filter(|w| !w.is_empty())
+                .collect::<Vec<_>>()
+        };
+        let (g, e) = (flat(&got), flat(&expected));
+        // the fixture's own words, in order, all present
+        let mut i = 0;
+        for word in &g {
+            if i < e.len() && *word == e[i] {
+                i += 1;
+            }
+        }
+        assert_eq!(
+            i,
+            e.len(),
+            "expected words not in order: got {g:?} expected {e:?}"
+        );
+    }
+
+    /// `/Encoding /WinAnsiEncoding` on a simple font is a *base encoding*: byte 0x97 is an em dash,
+    /// not the C1 control Latin-1 would call it. `borderless-table.pdf` is Helvetica + WinAnsi with
+    /// no `/ToUnicode`, which is the shape most Word/LaTeX/ReportLab output has.
+    #[test]
+    fn win_ansi_base_encoding_decodes_the_typographic_block() {
+        let got =
+            extract_markdown(include_bytes!("../../tests/fixtures/borderless-table.pdf")).unwrap();
+        assert!(
+            got.contains('\u{2014}'),
+            "em dash U+2014 expected in WinAnsi text, got {got:?}"
+        );
+        assert!(
+            !got.contains('\u{97}'),
+            "byte 0x97 must not decode as the C1 control U+0097: {got:?}"
+        );
+        // The rest of the page is unchanged by the base face.
+        assert!(got.contains("Cells are distinguished by alignment only"));
+    }
+
     fn pdf_with_stream(content: &[u8], filter: &str) -> Vec<u8> {
         let mut stream =
             format!("<< /Length {} {} >> stream\n", content.len(), filter).into_bytes();
@@ -1565,34 +1514,6 @@ mod tests {
     }
 
     #[test]
-    fn ocr_windows_cover_the_page_range_without_gaps_or_overlap() {
-        assert_eq!(ocr_windows(1, 25), [(1, 1)]);
-        assert_eq!(ocr_windows(25, 25), [(1, 25)]);
-        assert_eq!(ocr_windows(26, 25), [(1, 25), (26, 26)]);
-        assert_eq!(ocr_windows(103, 40), [(1, 40), (41, 80), (81, 103)]);
-        let all = ocr_windows(2000, 22);
-        assert_eq!(all.first(), Some(&(1, 22)));
-        assert_eq!(all.last().map(|w| w.1), Some(2000));
-        assert!(all.windows(2).all(|w| w[1].0 == w[0].1 + 1));
-    }
-
-    #[test]
-    fn the_render_window_fits_the_render_budget() {
-        for dim in [256u32, 1_800, 2_400, 4_000] {
-            let options = OcrOptions {
-                max_image_dimension: dim,
-                ..Default::default()
-            };
-            let w = u64::from(ocr_window(&options));
-            assert!(w >= 1 && w <= u64::from(MAX_OCR_WINDOW));
-            assert!(
-                w == 1 || w * u64::from(dim) * u64::from(dim) * 4 <= MAX_OCR_RENDER_BYTES,
-                "dim {dim} window {w}"
-            );
-        }
-    }
-
-    #[test]
     fn options_allow_long_documents_and_reject_nonsense() {
         let long = OcrOptions {
             max_pages: 300,
@@ -1659,12 +1580,12 @@ mod tests {
 
     #[test]
     fn tesseract_fallback_handles_raster_and_unsupported_filter_pdfs() {
-        // Like the other tests that need the OCR tools (graph.rs, tests/pdf_page_ocr_routing.rs): runs
-        // where `pdftoppm` and `tesseract` are installed and says so where they are not, instead of
-        // being ignored everywhere.
+        // Like the other tests that need Tesseract (graph.rs, tests/pdf_page_ocr_routing.rs): runs
+        // where it is installed and says so where it is not, instead of being ignored everywhere.
+        // No renderer is needed: the page's embedded image goes to Tesseract as it is.
         let tool = |name: &str| Command::new(name).arg("--version").output().is_ok();
-        if !(tool("pdftoppm") && tool("tesseract")) {
-            eprintln!("skipped: pdftoppm and tesseract are not installed");
+        if !tool("tesseract") {
+            eprintln!("skipped: tesseract is not installed");
             return;
         }
         let fixtures = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures");
@@ -1698,14 +1619,13 @@ mod tests {
             options.validate().unwrap_err().kind(),
             io::ErrorKind::InvalidInput
         );
-        // many large pages are fine: they are rendered a window at a time, and a window fits the render budget
+        // a long document is fine: nothing is rendered, only the pages' own images are written out,
+        // and their total is bounded by MAX_OCR_RENDER_BYTES
         let large_pages = OcrOptions {
             max_pages: 100,
-            max_image_dimension: 4_000,
             ..OcrOptions::default()
         };
         assert!(large_pages.validate().is_ok());
-        assert!(u64::from(ocr_window(&large_pages)) * 4_000 * 4_000 * 4 <= MAX_OCR_RENDER_BYTES);
         let too_many = OcrOptions {
             max_pages: MAX_OCR_PAGES + 1,
             ..OcrOptions::default()
@@ -1772,7 +1692,7 @@ mod tests {
 
     #[test]
     fn ocr_metrics_record_render_and_recognize_when_observer_fires() {
-        // Directly exercise the observer plumbing without spawning pdftoppm/tesseract.
+        // Directly exercise the observer plumbing without spawning tesseract.
         // The observer is what wires `record_render` / `record_recognize` from real
         // per-phase timings; if it regresses the metrics path is silent.
         let metrics = OcrMetrics::new();
