@@ -21,6 +21,15 @@ use std::io;
 pub const SCANNED_MIN_IMAGE_COVERAGE: f64 = 0.5;
 /// A scanned page's native text is "sparse" below this many alphanumeric characters per 1000 pt².
 pub const SCANNED_MAX_CHARS_PER_1000_PT2: f64 = 0.4;
+/// Below this many alphanumeric characters, a page's native text is a stamp, header or page number
+/// rather than content ("Fuzzy Scanned Page" is 16). The ceiling is deliberately low: the `/Stamp`
+/// fixture text in `tests/pdf_page_rule.rs` is 54 characters and pages carrying it stay out of OCR
+/// unless their image really does dominate the page.
+pub const STAMP_MAX_CHARS: usize = 32;
+/// A scan placed with margins covers less of the MediaBox than [`SCANNED_MIN_IMAGE_COVERAGE`]; a
+/// quarter of the page painted by an image is already more than any crest or logo, which is a few
+/// percent. Deliberately above the 7 %-ish crest case and below the 49 % page the rule keeps out.
+pub const MARGINED_SCAN_MIN_IMAGE_COVERAGE: f64 = 0.25;
 
 /// Why a page was routed to OCR.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -60,9 +69,12 @@ pub fn classify_page(text_chars: usize, geometry: &PageGeometry) -> Option<OcrRe
         return Some(OcrReason::NoText);
     }
     let density = text_density(text_chars, geometry);
-    (geometry.image_coverage >= SCANNED_MIN_IMAGE_COVERAGE
-        && density < SCANNED_MAX_CHARS_PER_1000_PT2)
-        .then_some(OcrReason::ScannedImage)
+    let dominates = geometry.image_coverage >= SCANNED_MIN_IMAGE_COVERAGE
+        && density < SCANNED_MAX_CHARS_PER_1000_PT2;
+    // A scan placed with margins: a quarter of the page is an image and the only text is a stamp.
+    let margined = geometry.image_coverage >= MARGINED_SCAN_MIN_IMAGE_COVERAGE
+        && text_chars <= STAMP_MAX_CHARS;
+    (dominates || margined).then_some(OcrReason::ScannedImage)
 }
 
 fn text_density(text_chars: usize, geometry: &PageGeometry) -> f64 {

@@ -53,3 +53,50 @@ fn media_box_is_inherited_from_the_pages_node() {
     // 54 alphanumerics on A4 (501 pt^2/1000): 0.11 per 1000 pt^2
     assert!(v[0].text_density < 0.2, "{v:?}");
 }
+
+/// A scan placed with margins: the raster covers a third of the page and the only native text is a
+/// one-line header. The 50 % bar does not fire and the density bar does not fire either, so this used
+/// to be read as born-digital text and its body was never OCR'd (`scanned-fuzzy.pdf`, F1 0.375
+/// against its expected text while a bare `pdftoppm | tesseract` run scored 0.900).
+#[test]
+fn margined_scan_with_a_stamp_is_routed_to_ocr() {
+    use superdocuments::pdf::page_profile::{page_ocr_verdicts, OcrReason};
+    let text = dense_text();
+    let pdf = build(&[
+        // a third of the page is an image; nine characters of native text
+        page(Some((400, 400)), Some("Scan stamp")),
+        // same coverage, but 54 characters: the stamp ceiling keeps this out of OCR
+        page(Some((400, 400)), Some(STAMP)),
+        // a crest (a few percent) with the same short text stays out too
+        page(Some((60, 60)), Some("Scan stamp")),
+        // and a full text layer over the same image is still born-digital
+        page(Some((400, 400)), Some(&text)),
+    ]);
+    let v = page_ocr_verdicts(&pdf).unwrap();
+    let reasons: Vec<Option<OcrReason>> = v.iter().map(|p| p.reason).collect();
+    assert_eq!(
+        reasons,
+        vec![Some(OcrReason::ScannedImage), None, None, None,],
+        "{v:#?}"
+    );
+    assert!(
+        v[0].image_coverage > 0.25 && v[0].image_coverage < 0.5,
+        "the margined case must sit under the domination bar: {v:?}"
+    );
+}
+
+/// The shipped fixture, through the public entry point: the page that was read as text is routed.
+#[test]
+fn scanned_fuzzy_fixture_is_routed_to_ocr() {
+    let bytes = std::fs::read(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/tests/fixtures/scanned-fuzzy.pdf"
+    ))
+    .unwrap();
+    let verdicts = superdocuments::pdf::page_profile::page_ocr_verdicts(&bytes).unwrap();
+    assert_eq!(verdicts.len(), 1, "{verdicts:#?}");
+    assert_eq!(
+        superdocuments::pdf::page_profile::pages_needing_ocr(&bytes).unwrap(),
+        vec![1]
+    );
+}

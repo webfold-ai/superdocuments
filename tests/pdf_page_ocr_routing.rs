@@ -240,11 +240,16 @@ fn real_scan_fixture_is_read_by_ocr() {
     // Nothing the OCR reads is lost on the way to the output. The whole three-page ordinance gives 4855
     // alphanumeric characters (the 1980 and 1961 ordinances 8850 and 16707), identical before and after
     // the paragraph joining of the native parser, because a stamp-only page is routed to OCR and its
-    // native text is the one stamp line; this page gives 1613 with Tesseract 5.3.4 (2 % of slack for
-    // another engine version).
+    // native text is the one stamp line.
+    //
+    // This page measured 1613 with Tesseract 5.3.4 when the native stamp line was appended after the
+    // OCR text unconditionally. It now measures 1563 — the difference is that 50-character stamp line,
+    // which OCR read correctly ("Federal Register of Legislative Instruments F2006B00784" is in the
+    // output below) and which is therefore no longer duplicated. The 2 % slack is for another engine
+    // version, not for the de-duplication.
     let alphanumerics = md.chars().filter(|c| c.is_alphanumeric()).count();
     assert!(
-        alphanumerics >= 1580,
+        alphanumerics >= 1530,
         "{alphanumerics} alphanumerics: {md:?}"
     );
 }

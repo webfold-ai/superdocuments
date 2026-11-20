@@ -1329,14 +1329,27 @@ fn merge_native_and_ocr(
             // Not routed to OCR, or OCR read nothing: the native text stays as it is.
             native.trim().to_string()
         } else if has_embedded_text(native) {
-            // A scan with a stamp: the OCR text is the page, the stamp stays after it (it can be
-            // the only record of a document identifier) without its image placeholders.
+            // A scan with a stamp: the OCR text is the page, and the stamp stays after it when OCR
+            // did not already read it — the stamp can be the only record of a document identifier,
+            // and OCR mangles identifiers (the Register page's `F2006B00784` survives this way).
+            // When OCR did read the stamp — a one-line header over a margined scan — keeping it
+            // would put the same line on the page twice and cost precision, so it is dropped.
             let stamp: Vec<&str> = native
                 .lines()
                 .map(str::trim_end)
                 .filter(|line| !line.trim_start().starts_with("![]("))
                 .collect();
-            format!("{ocr_text}\n\n{}", stamp.join("\n").trim())
+            let stamp = stamp.join("\n");
+            let stamp = stamp.trim();
+            let already_read = {
+                let wanted = alnum_lower(stamp);
+                !wanted.is_empty() && alnum_lower(ocr_text).contains(&wanted)
+            };
+            if stamp.is_empty() || already_read {
+                ocr_text.to_string()
+            } else {
+                format!("{ocr_text}\n\n{stamp}")
+            }
         } else {
             ocr_text.to_string()
         };
@@ -1355,6 +1368,15 @@ fn merge_native_and_ocr(
         ));
     }
     Ok(out)
+}
+
+/// The alphanumeric characters of `s`, lowercased: the form two text lines are compared in when one
+/// is asking whether the other already contains it (case, punctuation and spacing are not signal).
+fn alnum_lower(s: &str) -> String {
+    s.chars()
+        .filter(|c| c.is_alphanumeric())
+        .flat_map(char::to_lowercase)
+        .collect()
 }
 
 fn has_embedded_text(markdown: &str) -> bool {
