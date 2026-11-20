@@ -26,7 +26,7 @@ This page describes `superdocuments` 0.9.0 as it is in the source. Every stateme
 2. HTML and EPUB chapters go through `html::to_blocks` and `html::render` (`src/html/extract.rs`), a single pass over the bytes with a tag stack that drops chrome subtrees.
 3. `convert_streaming` writes CSV straight to the sink. Every other extension, DOCX, PPTX and XLSX included, falls back to `convert_bytes` and writes the resulting string once: those readers need the styles, numbering and relationship parts before the first line, and a single implementation keeps the streamed output identical to `convert_bytes`.
 4. PDF: `pdf::extract_markdown` checks the size cap and the `%PDF-` header, then calls the in-tree parser (`pdf::parser::Document::parse`, then `markdown_pages`) inside `catch_unwind`.
-5. PDF with OCR: `extract_file_with_ocr_options` runs the native extraction first. If no page has text, the whole document is OCR'd. If some pages have text and some do not, only the empty pages are OCR'd and spliced in page order, each page prefixed with `<!-- page N -->`. OCR renders pages with `pdftoppm` and recognises them with `tesseract`, both found on `PATH`.
+5. PDF with OCR: `extract_file_with_ocr_options` runs the native extraction first. If no page has text, the whole document is OCR'd. If some pages have text and some do not, only the empty pages are OCR'd and spliced in page order, each page prefixed with `<!-- page N -->`. OCR hands each page's embedded image (PNG, JPEG, or a CCITT G3/G4 stream wrapped in a TIFF) to `tesseract` on `PATH` at its native resolution: no page renderer is involved.
 
 ## Key modules
 
