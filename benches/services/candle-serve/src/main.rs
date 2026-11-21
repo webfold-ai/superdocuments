@@ -1,5 +1,5 @@
 //! `candle-serve` — minimal OpenAI-compat HTTP server backed by Qwen2 via
-//! `candle-transformers` 0.9.
+//! `candle-transformers` 0.11.
 //!
 //! Endpoints implemented:
 //!   GET  /v1/models            -> { data: [{ id, object }], object }
