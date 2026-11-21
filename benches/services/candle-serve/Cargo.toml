@@ -16,9 +16,9 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # Candle + Qwen2 + tokenizers + safetensors + hf-hub. CPU-only by default;
 # candle 0.9's Qwen2 model is the full-precision forward path, not the GGUF
 # path (which has a different constructor signature).
-candle-core = "0.9"
-candle-nn = "0.9"
-candle-transformers = "0.9"
+candle-core = "0.11"
+candle-nn = "0.11"
+candle-transformers = "0.11"
 tokenizers = "0.21"
 hf-hub = "0.3"
 safetensors = "0.5"
