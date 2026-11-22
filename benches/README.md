@@ -58,7 +58,7 @@ This directory is one of the evidence homes in a small set. Each kind of content
 - [`spbench`](https://github.com/Ptyktos/spbench) — the runner behind the conversion tracks (`webfold-structured/run.sh`) and persona-driven CDP task benchmarks
 - [`faultbox`](https://github.com/Ptyktos/faultbox) — fault injection: toxiproxy-compatible TCP chaos proxy plus process/container/VM chaos, used for the failure mode of every layer
 - [`hashtrinity-bench`](https://github.com/Ptyktos/hashtrinity-bench) — base data structures (tables, maps, signature hashing)
-- [`sangdb-bench`](https://github.com/Ptyktos/sangdb-bench) — sangdb store, ontology CRDT, replication, ClickBench-style analytics
+- [`iotadb-bench`](https://github.com/webfold-ai/iotadb-bench) — iotadb store, ontology CRDT, replication, ClickBench-style analytics
 - [`relayfold-bench`](https://github.com/Ptyktos/relayfold-bench) — proxy load and latency vs nginx and others
 - [`memorybench`](https://github.com/Ptyktos/memorybench) — memory, retrieval, long-context
 - [`web-search-bench`](https://github.com/Ptyktos/web-search-bench) — web search and deep-research federation (WANDR, WideSearch, DeepSearchQA, Find-All Company, webarena, …)
