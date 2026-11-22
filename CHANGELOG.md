@@ -80,7 +80,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 
 ### Changed
 
-- `wirefold` and `apeiron` move to `98df8bfb8051` and `1c3d4a1da565`, the revisions the rest of the webfold graph (sangdb, transport, relayfold, servelet) is built on, so a consumer resolves one copy of each. No API or output change in this crate.
+- `wirefold` and `apeiron` move to `98df8bfb8051` and `1c3d4a1da565`, the revisions the rest of the webfold graph (iotadb, transport, relayfold, servelet) is built on, so a consumer resolves one copy of each. No API or output change in this crate.
 
 ## [0.9.0] - 2026-11-09
 
