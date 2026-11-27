@@ -17,7 +17,7 @@ candle = ["dep:candle-core", "dep:candle-nn", "dep:candle-transformers", "dep:to
 # main when the bench moved in, so the measured crate is the crate that ships beside it.
 # For local iteration against a sibling checkout, override with
 # `[patch."https://github.com/webfold-ai/superdocuments"]`.
-superdocuments = { git = "https://github.com/webfold-ai/superdocuments", rev = "ea1dbe5714a3923136c1dd61e3e4ae4051e13147" }
+superdocuments = { git = "https://github.com/webfold-ai/superdocuments", branch = "main" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["raw_value"] }
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "blocking"] }
