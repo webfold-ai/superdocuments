@@ -26,11 +26,11 @@ media-codecs = ["dep:transcode"]
 images = ["dep:transcode"]
 
 [dependencies]
-framefold = { git = "https://github.com/Ptyktos/framefold", rev = "263c8e15baf1f301b0b21defb23ce1343d9f11ab", default-features = false, optional = true }
+framefold = { git = "https://github.com/Ptyktos/framefold", default-features = false, optional = true, branch = "master" }
 quick-xml = "0.42"
 encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
-wirefold = { version = "0.1.0", git = "https://github.com/webfold-ai/wirefold", rev = "98df8bfb8051fb24ca43ce3ddc446641684ef8f9", default-features = false, features = ["syntax"] }
+wirefold = { version = "0.1.0", git = "https://github.com/webfold-ai/wirefold", default-features = false, features = ["syntax"], branch = "main" }
 # The O(1) borrowed-key table (`apeiron::freq::Table`, zero-allocation `get_at(&str)`) used for the EPUB
 # manifest index and the XLSX/XLSB path and relationship caches in `sheetfold/`.
 apeiron = { version = "0.1.0", git = "https://github.com/webfold-ai/apeiron", rev = "1c3d4a1da565cde409f6f3cb343086aa6853eb9c" }
